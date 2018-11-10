@@ -64,7 +64,7 @@ jobs:
   test-job:
     <<: *defaults
     environment:
-      CC_TEST_REPORTER_ID: abc
+      CC_TEST_REPORTER_ID: de1dd499aa47f47e03c811b848134442d267f451ac39e2bf6b242c7ad0fd8e28
     steps:
       - checkout
 
