@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getValidationResult should still convert 1`] = `
+[AppValidationError: objName
+{
+  "a1": " ff ",
+  "a2" [31m[1][0m: "a"
+}
+[31m
+[1] "a2" length must be at least 2 characters long[0m]
+`;
