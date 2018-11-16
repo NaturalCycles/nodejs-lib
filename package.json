@@ -43,6 +43,8 @@
     "!src/**/*.test.ts",
     "!src/**/__snapshots__"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
