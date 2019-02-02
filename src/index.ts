@@ -24,8 +24,8 @@ import {
   utcOffsetSchema,
   verSchema,
 } from './validation/joi/joi.shared.schemas'
-import { joiValidationService, ValidationResult } from './validation/joi/joi.validation.service'
-import { AppValidationError } from './validation/joi/validation.error'
+import { JoiValidationError } from './validation/joi/joi.validation.error'
+import { JoiValidationResult, joiValidationService } from './validation/joi/joi.validation.service'
 
 export {
   GotOptions,
@@ -35,8 +35,8 @@ export {
   LUXON_ISO_DATE_FORMAT,
   localDateUtil,
   localTimeUtil,
-  AppValidationError,
-  ValidationResult,
+  JoiValidationError,
+  JoiValidationResult,
   joiValidationService,
   Joi,
   ExtendedJoi,

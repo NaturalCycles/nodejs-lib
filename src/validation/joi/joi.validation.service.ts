@@ -1,10 +1,10 @@
 import { SchemaLike, ValidationError, ValidationOptions } from 'joi'
 import { Joi } from './joi.extensions'
-import { AppValidationError } from './validation.error'
+import { JoiValidationError } from './joi.validation.error'
 
-export interface ValidationResult<T = any> {
+export interface JoiValidationResult<T = any> {
   value: T
-  error?: AppValidationError
+  error?: JoiValidationError
 }
 
 const defaultOptions: ValidationOptions = {
@@ -37,13 +37,18 @@ class JoiValidationService {
     objectName?: string,
     options: ValidationOptions = {},
   ): T {
-    const r = Joi.validate(value, schema, { ...defaultOptions, ...options })
+    const { value: returnValue, error } = Joi.validate(value, schema, {
+      ...defaultOptions,
+      ...options,
+    })
 
-    if (r.error) {
-      throw new AppValidationError(this.validationErrorToString(r.error, objectName))
+    if (error) {
+      throw new JoiValidationError(this.validationErrorToString(error, objectName), {
+        joiValidationErrorItems: error.details,
+      })
     }
 
-    return r.value
+    return returnValue
   }
 
   /**
@@ -56,15 +61,20 @@ class JoiValidationService {
     schema: SchemaLike,
     objectName?: string,
     options: ValidationOptions = {},
-  ): ValidationResult<T> {
-    const r = Joi.validate(value, schema, { ...defaultOptions, ...options })
+  ): JoiValidationResult<T> {
+    const { value: returnValue, error } = Joi.validate(value, schema, {
+      ...defaultOptions,
+      ...options,
+    })
 
-    const vr: ValidationResult<T> = {
-      value: r.value,
+    const vr: JoiValidationResult<T> = {
+      value: returnValue,
     }
 
-    if (r.error) {
-      vr.error = new AppValidationError(this.validationErrorToString(r.error, objectName))
+    if (error) {
+      vr.error = new JoiValidationError(this.validationErrorToString(error, objectName), {
+        joiValidationErrorItems: error.details,
+      })
     }
 
     return vr

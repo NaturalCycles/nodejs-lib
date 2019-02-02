@@ -1,6 +1,6 @@
 import { stringSchema } from './joi.shared.schemas'
+import { JoiValidationError } from './joi.validation.error'
 import { joiValidationService } from './joi.validation.service'
-import { AppValidationError } from './validation.error'
 
 const schema = {
   a1: stringSchema.min(2).max(5),
@@ -30,7 +30,7 @@ const validValues: any[] = [
 
 test('should fail on invalid values', () => {
   invalidValues.forEach(v => {
-    expect(() => joiValidationService.validate(v, schema)).toThrow(AppValidationError)
+    expect(() => joiValidationService.validate(v, schema)).toThrowErrorMatchingSnapshot()
   })
 })
 
@@ -66,7 +66,7 @@ test('getValidationResult should still convert', async () => {
   }
   const vr = joiValidationService.getValidationResult(v, schema, 'objName')
   expect(vr.value.a1).toBe('ff')
-  expect(vr.error).toBeInstanceOf(AppValidationError)
+  expect(vr.error).toBeInstanceOf(JoiValidationError)
   expect(vr.error).toMatchSnapshot()
 })
 
@@ -77,6 +77,15 @@ test('getValidationResult valid', async () => {
 
 test('validationErrorToString', async () => {
   expect(joiValidationService.validationErrorToString(undefined as any)).toBeUndefined()
+})
+
+test('error should contain errorItems', async () => {
+  const v = {
+    a1: ' ff ', // to be converted
+    a2: 'a', // invalid!
+  }
+  const { error } = joiValidationService.getValidationResult(v, schema, 'objName')
+  expect(error!.data).toMatchSnapshot()
 })
 
 // optional

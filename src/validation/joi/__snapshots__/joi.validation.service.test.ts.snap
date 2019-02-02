@@ -1,11 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`error should contain errorItems 1`] = `
+Object {
+  "joiValidationErrorItems": Array [
+    Object {
+      "context": Object {
+        "encoding": undefined,
+        "key": "a2",
+        "label": "a2",
+        "limit": 2,
+        "value": "a",
+      },
+      "message": "\\"a2\\" length must be at least 2 characters long",
+      "path": Array [
+        "a2",
+      ],
+      "type": "string.min",
+    },
+  ],
+}
+`;
+
 exports[`getValidationResult should still convert 1`] = `
-[AppValidationError: objName
+[JoiValidationError: objName
 {
   "a1": " ff ",
   "a2" [31m[1][0m: "a"
 }
 [31m
 [1] "a2" length must be at least 2 characters long[0m]
+`;
+
+exports[`should fail on invalid values 1`] = `"\\"value\\" is required"`;
+
+exports[`should fail on invalid values 2`] = `
+"{
+  [41m\\"value\\"[0m[31m [1]: -- missing --[0m
+}
+[31m
+[1] \\"value\\" must be an object[0m"
+`;
+
+exports[`should fail on invalid values 3`] = `"\\"value\\" must be an object"`;
+
+exports[`should fail on invalid values 4`] = `"\\"value\\" must be an object"`;
+
+exports[`should fail on invalid values 5`] = `"\\"value\\" must be an object"`;
+
+exports[`should fail on invalid values 6`] = `"\\"value\\" must be an object"`;
+
+exports[`should fail on invalid values 7`] = `
+"{
+  \\"a1\\" [31m[1][0m: \\"a\\"
+}
+[31m
+[1] \\"a1\\" length must be at least 2 characters long[0m"
+`;
+
+exports[`should fail on invalid values 8`] = `
+"{
+  \\"a1\\" [31m[1][0m: \\"a12345\\"
+}
+[31m
+[1] \\"a1\\" length must be less than or equal to 5 characters long[0m"
 `;
