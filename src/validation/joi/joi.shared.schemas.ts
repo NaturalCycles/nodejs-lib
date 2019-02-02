@@ -21,6 +21,19 @@ export const idSchema = stringSchema
   .min(6)
   .max(64)
 
+/**
+ * `_` should NOT be allowed to be able to use slug-ids as part of natural ids with `_` separator.
+ */
+export const SLUG_PATTERN = /^[a-z0-9-]*$/
+
+/**
+ * "Slug" - a valid URL, filename, etc.
+ */
+export const slugSchema = stringSchema
+  .regex(SLUG_PATTERN)
+  .min(1)
+  .max(255)
+
 // 16725225600 is 2500-01-01
 export const unixTimestampSchema = numberSchema
   .integer()
