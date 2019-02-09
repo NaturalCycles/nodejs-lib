@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.1.0...v2.2.0) (2019-02-09)
+
+
+### Features
+
+* upgrade deps, processSharedUtil ([26e49cb](https://github.com/NaturalCycles/nodejs-lib/commit/26e49cb))
+
 # [2.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.0.0...v2.1.0) (2019-02-02)
 
 

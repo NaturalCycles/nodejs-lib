@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "scripts": {
     "build": "del ./dist && tsc",
     "build-prod": "del ./dist && tsc -p tsconfig.prod.json"
