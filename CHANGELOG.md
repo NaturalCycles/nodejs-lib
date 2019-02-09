@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.0.0...v2.1.0) (2019-02-02)
+
+
+### Features
+
+* slugSchema, slug pattern ([f897db6](https://github.com/NaturalCycles/nodejs-lib/commit/f897db6))
+
 # [2.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v1.0.1...v2.0.0) (2019-02-02)
 
 
