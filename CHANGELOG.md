@@ -1,3 +1,15 @@
+# [2.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.2.0...v2.3.0) (2019-02-09)
+
+
+### Bug Fixes
+
+* use [@naturalcycles](https://github.com/naturalcycles)/semantic-release, bump js-lib dep ([5217e38](https://github.com/NaturalCycles/nodejs-lib/commit/5217e38))
+
+
+### Features
+
+* zipSharedUtil ([7d84a14](https://github.com/NaturalCycles/nodejs-lib/commit/7d84a14))
+
 # [2.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.1.0...v2.2.0) (2019-02-09)
 
 
