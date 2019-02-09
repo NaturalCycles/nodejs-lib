@@ -6,7 +6,7 @@
     "build-prod": "del ./dist && tsc -p tsconfig.prod.json"
   },
   "dependencies": {
-    "@types/debug": "^0.0.31",
+    "@types/debug": "^4.1.0",
     "@types/got": "^9.2.0",
     "@types/joi": "^14.0.0",
     "debug": "^4.1.0"

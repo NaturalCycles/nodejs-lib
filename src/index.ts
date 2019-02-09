@@ -2,6 +2,7 @@ import { GotOptions, GotResponse, gotService } from './service/got.service'
 import { getDebug } from './util/debug'
 import { localDateUtil, LUXON_ISO_DATE_FORMAT } from './util/localDate.util'
 import { localTimeUtil } from './util/localTime.util'
+import { processSharedUtil } from './util/process.shared.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   anyObjectSchema,
@@ -59,4 +60,5 @@ export {
   userAgentSchema,
   utcOffsetSchema,
   ipAddressSchema,
+  processSharedUtil,
 }
