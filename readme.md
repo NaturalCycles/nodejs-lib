@@ -1,6 +1,6 @@
 ## @naturalcycles/nodejs-lib
 
-> Standard library for nodejs
+> Standard library for Node.js
 
 [![npm](https://img.shields.io/npm/v/@naturalcycles/nodejs-lib/latest.svg)](https://www.npmjs.com/package/@naturalcycles/nodejs-lib)
 [![](https://circleci.com/gh/NaturalCycles/nodejs-lib.svg?style=shield&circle-token=cbb20b471eb9c1d5ed975e28c2a79a45671d78ea)](https://circleci.com/gh/NaturalCycles/nodejs-lib)
@@ -9,8 +9,6 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Features
-
-
 
 - ... there's more...
 
@@ -23,3 +21,7 @@
 
 # Packaging
 
+- `engines.node >= 10.13`: Latest Node.js LTS
+- `main: dist/index.js`: commonjs, es2018
+- `types: dist/index.d.ts`: typescript types
+- `/src` folder with source `*.ts` files included
