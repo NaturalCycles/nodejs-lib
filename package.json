@@ -12,14 +12,14 @@
     "debug": "^4.1.0"
   },
   "peerDependencies": {
-    "@naturalcycles/js-lib": "^2.0.0",
+    "@naturalcycles/js-lib": ">=2",
     "got": "^9.3.1",
     "joi": "^14.0.4"
   },
   "devDependencies": {
     "@naturalcycles/js-lib": "^2.0.1",
     "@naturalcycles/semantic-release": "^1.0.0",
-    "@naturalcycles/shared-module": "^1.0.25",
+    "@naturalcycles/shared-module": "^2.1.1",
     "@types/jest": "^23.3.5",
     "@types/node": "^10.0.0",
     "jest": "^23.6.0",
@@ -36,7 +36,6 @@
   "files": [
     "dist",
     "src",
-    "!src/scripts",
     "!src/test",
     "!src/**/*.test.ts",
     "!src/**/__snapshots__"
