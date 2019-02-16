@@ -1,3 +1,20 @@
+# [3.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.3.0...v3.0.0) (2019-02-16)
+
+
+### Code Refactoring
+
+* moving things around ([6169c65](https://github.com/NaturalCycles/nodejs-lib/commit/6169c65))
+
+
+### Features
+
+* joi dateStringCalendarAccuracy (credit to [@oskojo](https://github.com/oskojo)) ([6464267](https://github.com/NaturalCycles/nodejs-lib/commit/6464267))
+
+
+### BREAKING CHANGES
+
+* Not exporting GotService, getDebug, localDateUtil anymore (they're "in progress", not production ready yet).
+
 # [2.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.2.0...v2.3.0) (2019-02-09)
 
 
