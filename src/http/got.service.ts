@@ -1,18 +1,7 @@
-import { GotJSONOptions } from 'got'
 import * as got from 'got'
-import * as http from 'http'
-import { getDebug } from '../util/debug'
+import { getDebug } from '../log/debug'
+import { GotOptions, GotResponse } from './got.model'
 const debug = getDebug(__filename)
-
-export interface GotOptions extends GotJSONOptions {}
-
-export interface GotResponse<T = string> extends http.IncomingMessage {
-  body: T
-  url: string
-  requestUrl: string
-  fromCache: boolean
-  redirectUrls?: string[]
-}
 
 class GotService {
   /**
