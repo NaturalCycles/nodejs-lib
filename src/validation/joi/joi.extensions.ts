@@ -40,6 +40,7 @@ function dateStringExtension (joi: typeof JoiLib): Extension {
       dateString: 'needs to be a date string (yyyy-mm-dd)',
       dateStringMin: 'needs to be not earlier than {{min}}',
       dateStringMax: 'needs to be not later than {{max}}',
+      dateStringCalendarAccuracy: 'needs to be a calendar accurate date',
     },
     rules: [
       {
@@ -73,6 +74,8 @@ function dateStringExtension (joi: typeof JoiLib): Extension {
             err = 'string.dateStringMin'
           } else if (max && v > max) {
             err = 'string.dateStringMax'
+          } else if (!DateTime.fromFormat(v, LUXON_ISO_DATE_FORMAT).isValid) {
+            err = 'string.dateStringCalendarAccuracy'
           }
 
           if (err) {

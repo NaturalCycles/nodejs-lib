@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { LUXON_ISO_DATE_FORMAT } from '../..'
+import { LUXON_ISO_DATE_FORMAT } from '../../util/localDate.util'
 import { Joi } from './joi.extensions'
 import { stringSchema } from './joi.shared.schemas'
 import { joiValidationService } from './joi.validation.service'
