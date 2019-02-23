@@ -13,6 +13,5 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true
   },
-
-  "exclude": ["dist", "src/scripts", "src/@linked"]
+  "include": ["src"]
 }
