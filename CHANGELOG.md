@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v3.0.0...v3.0.1) (2019-02-23)
+
+
+### Bug Fixes
+
+* instanceof JoiValidationError ([f6be36e](https://github.com/NaturalCycles/nodejs-lib/commit/f6be36e))
+
 # [3.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v2.3.0...v3.0.0) (2019-02-16)
 
 
