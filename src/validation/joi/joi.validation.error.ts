@@ -1,5 +1,4 @@
-import { AppError } from '@naturalcycles/js-lib'
-import { ErrorData } from '@naturalcycles/js-lib'
+import { AppError, ErrorData } from '@naturalcycles/js-lib'
 import { ValidationErrorItem } from 'joi'
 
 export interface JoiValidationErrorData extends ErrorData {

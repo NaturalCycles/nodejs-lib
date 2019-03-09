@@ -1,5 +1,5 @@
 import { processSharedUtil } from './infra/process.shared.util'
-import { zipSharedUtil } from './util/zip.shared.util'
+import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   anyObjectSchema,
@@ -23,7 +23,12 @@ import {
   verSchema,
 } from './validation/joi/joi.shared.schemas'
 import { JoiValidationError } from './validation/joi/joi.validation.error'
-import { JoiValidationResult, joiValidationService } from './validation/joi/joi.validation.service'
+import {
+  getValidationResult,
+  JoiValidationResult,
+  validate,
+  validationErrorToString,
+} from './validation/joi/joi.validation.util'
 
 export {
   // todo: in progress, not exported yet
@@ -36,7 +41,9 @@ export {
   // localTimeUtil,
   JoiValidationError,
   JoiValidationResult,
-  joiValidationService,
+  validate,
+  getValidationResult,
+  validationErrorToString,
   Joi,
   ExtendedJoi,
   booleanSchema,
@@ -59,5 +66,8 @@ export {
   utcOffsetSchema,
   ipAddressSchema,
   processSharedUtil,
-  zipSharedUtil,
+  zipBuffer,
+  unzipBuffer,
+  zipString,
+  unzipToString,
 }

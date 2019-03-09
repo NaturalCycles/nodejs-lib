@@ -1,22 +1,22 @@
-import { zipSharedUtil } from './zip.shared.util'
+import { unzipBuffer, unzipToString, zipBuffer, zipString } from './zip.util'
 
 test('zip/unzip', async () => {
   const s = 'abcd1234$%^'
 
   // String
-  let zippedBuf = await zipSharedUtil.zipString(s)
-  const unzippedStr = await zipSharedUtil.unzipToString(zippedBuf)
+  let zippedBuf = await zipString(s)
+  const unzippedStr = await unzipToString(zippedBuf)
   expect(unzippedStr).toBe(s)
 
   const sBuf = Buffer.from(s)
-  zippedBuf = await zipSharedUtil.zip(sBuf)
-  const unzippedBuf = await zipSharedUtil.unzip(zippedBuf)
+  zippedBuf = await zipBuffer(sBuf)
+  const unzippedBuf = await unzipBuffer(zippedBuf)
   expect(unzippedBuf).toEqual(sBuf)
 })
 
 test('compatible with java impl', async () => {
   const s = 'aa'
-  const zippedBuf = await zipSharedUtil.zipString(s)
+  const zippedBuf = await zipString(s)
   const bytes: number[] = []
   zippedBuf.forEach(c => bytes.push(c))
   // console.log(bytes)

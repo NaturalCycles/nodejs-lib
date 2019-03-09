@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
-import { LUXON_ISO_DATE_FORMAT } from '../../util/localDate.util'
+import { LUXON_ISO_DATE_FORMAT } from '../../util/time.util'
 import { Joi } from './joi.extensions'
 import { stringSchema } from './joi.shared.schemas'
-import { joiValidationService } from './joi.validation.service'
+import { validate } from './joi.validation.util'
 
 test('dateString', async () => {
   const schema = {
@@ -82,7 +82,7 @@ test('dividable', async () => {
 function shouldBeInvalid (schema: any, values: any[]) {
   values.forEach(v => {
     try {
-      joiValidationService.validate(v, schema)
+      validate(v, schema)
       console.log('value', v)
       fail('expected to fail on invalid value (see console)')
     } catch {}
@@ -92,7 +92,7 @@ function shouldBeInvalid (schema: any, values: any[]) {
 function shouldBeValid (schema: any, values: any[]) {
   values.forEach(v => {
     try {
-      joiValidationService.validate(v, schema)
+      validate(v, schema)
     } catch (err) {
       console.log('value', v)
       throw err

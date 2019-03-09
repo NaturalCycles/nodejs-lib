@@ -1,7 +1,7 @@
 import { Extension, State, StringSchema, ValidationOptions } from 'joi'
 import * as JoiLib from 'joi'
 import { DateTime } from 'luxon'
-import { LUXON_ISO_DATE_FORMAT } from '../../util/localDate.util'
+import { LUXON_ISO_DATE_FORMAT } from '../../util/time.util'
 
 export const Joi: ExtendedJoi = JoiLib.defaults(schema => {
   if (schema.schemaType === 'string') {

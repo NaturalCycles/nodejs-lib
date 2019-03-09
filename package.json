@@ -12,12 +12,12 @@
     "debug": "^4.1.0"
   },
   "peerDependencies": {
-    "@naturalcycles/js-lib": ">=2",
+    "@naturalcycles/js-lib": ">=4",
     "got": "^9.3.1",
     "joi": "^14.0.4"
   },
   "devDependencies": {
-    "@naturalcycles/js-lib": "^3.0.0",
+    "@naturalcycles/js-lib": "^4.0.0",
     "@naturalcycles/semantic-release": "^1.0.0",
     "@naturalcycles/shared-module": "^3.0.0",
     "@types/jest": "^24.0.6",
