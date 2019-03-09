@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v3.0.1...v4.0.0) (2019-03-09)
+
+
+### Code Refactoring
+
+* "flatten" util classes into functions ([aa93bbe](https://github.com/NaturalCycles/nodejs-lib/commit/aa93bbe))
+
+
+### BREAKING CHANGES
+
+* similar to js-lib, functions are exported directly, not wrapped into "util classes" anymore.
+
 ## [3.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v3.0.0...v3.0.1) (2019-02-23)
 
 
