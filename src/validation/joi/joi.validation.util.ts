@@ -21,7 +21,13 @@ const defaultOptions: ValidationOptions = {
   allowUnknown: true,
   stripUnknown: {
     objects: true,
-    arrays: true, // let's be very careful with that! https://github.com/hapijs/joi/issues/658
+    // true: it will SILENTLY strip invalid values from arrays. Very dangerous! Can lead to data loss!
+    // false: it will THROW validation error if any of array items is invalid
+    // Q: is it invalid if it has unknown properties?
+    // A: no, unknown properties are just stripped (in both 'false' and 'true' states), array is still valid
+    // Q: will it strip or keep unknown properties in array items?..
+    // A: strip
+    arrays: false, // let's be very careful with that! https://github.com/hapijs/joi/issues/658
   },
   presence: 'required',
 }

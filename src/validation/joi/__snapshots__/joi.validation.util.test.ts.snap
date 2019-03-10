@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`array items with invalid props 1`] = `
+Object {
+  "joiValidationErrorItems": Array [
+    Object {
+      "context": Object {
+        "key": "a1",
+        "label": "a1",
+        "value": 5,
+      },
+      "message": "\\"a1\\" must be a string",
+      "path": Array [
+        "a",
+        0,
+        "a1",
+      ],
+      "type": "string.base",
+    },
+  ],
+}
+`;
+
+exports[`array with invalid items 1`] = `
+Object {
+  "joiValidationErrorItems": Array [
+    Object {
+      "context": Object {
+        "key": 1,
+        "label": 1,
+        "value": "",
+      },
+      "message": "\\"1\\" must be an object",
+      "path": Array [
+        "a",
+        1,
+      ],
+      "type": "object.base",
+    },
+  ],
+}
+`;
+
 exports[`error should contain errorItems 1`] = `
 Object {
   "joiValidationErrorItems": Array [
