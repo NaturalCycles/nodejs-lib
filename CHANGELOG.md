@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v4.0.0...v4.0.1) (2019-03-10)
+
+
+### Bug Fixes
+
+* joi stripUnknown.arrays=false (very important!) ([b874766](https://github.com/NaturalCycles/nodejs-lib/commit/b874766))
+
 # [4.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v3.0.1...v4.0.0) (2019-03-09)
 
 
