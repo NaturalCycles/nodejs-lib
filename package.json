@@ -19,9 +19,9 @@
   "devDependencies": {
     "@naturalcycles/js-lib": "^4.0.0",
     "@naturalcycles/semantic-release": "^1.0.0",
-    "@naturalcycles/shared-module": "^3.0.0",
+    "@naturalcycles/shared-module": "^5.11.0",
     "@types/jest": "^24.0.6",
-    "@types/node": "^10.0.0",
+    "@types/node": "^11.13.4",
     "jest": "^24.1.0",
     "jest-junit": "^6.2.1",
     "joi": "^14.0.4",
