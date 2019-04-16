@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.0.1...v4.1.0) (2019-04-16)
+
+
+### Features
+
+* **validation:** truncate long validation message ([6e70bb1](https://github.com/NaturalCycles/nodejs-lib/commit/6e70bb1))
+
 ## [4.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v4.0.0...v4.0.1) (2019-03-10)
 
 
