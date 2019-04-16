@@ -88,11 +88,27 @@ export function getValidationResult<T> (
 
 export function validationErrorToString (err: ValidationError, objectName?: string): string {
   if (!err) return undefined as any
-  let msg = ''
-  if (objectName) msg += objectName + '\n'
+  const tokens: string[] = []
+  if (objectName) tokens.push(objectName)
 
   // Strip colors in production (for e.g Sentry reporting)
   const stripColors = process.env.NODE_ENV === 'production'
-  msg += (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
-  return msg
+  const annotation: string = (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
+
+  if (annotation.length > 5000) {
+    // Annotation message is too big and will be replaced by stringified `error.details` instead
+    tokens.push(
+      annotation.substr(0, 500),
+      `... ${Math.ceil(annotation.length / 1024)} KB message truncated`,
+    )
+
+    // Up to 5 `details`
+    tokens.push(...err.details.slice(0, 5).map(i => `${i.message} @ .${i.path.join('.')}`))
+
+    if (err.details.length > 5) tokens.push(`... ${err.details.length} errors`)
+  } else {
+    tokens.push(annotation)
+  }
+
+  return tokens.join('\n')
 }

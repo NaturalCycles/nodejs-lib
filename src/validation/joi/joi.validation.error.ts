@@ -1,6 +1,16 @@
 import { AppError, ErrorData } from '@naturalcycles/js-lib'
 import { ValidationErrorItem } from 'joi'
 
+/**
+ * Example of ValidationErrorItem:
+ *
+ * {
+ *   message: '"temperature" must be larger than or equal to 33',
+ *   path: [ 'entries', 10, 'temperature' ],
+ *   type: 'number.min',
+ *   context: { limit: 33, value: 30, key: 'temperature', label: 'temperature' }
+ * }
+ */
 export interface JoiValidationErrorData extends ErrorData {
   joiValidationErrorItems: ValidationErrorItem[]
 }

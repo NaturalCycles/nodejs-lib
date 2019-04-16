@@ -72,6 +72,19 @@ exports[`getValidationResult should still convert 1`] = `
 [1] "a2" length must be at least 2 characters long[0m]
 `;
 
+exports[`long message string 1`] = `
+"[
+  {
+    \\"a\\" [31m[1, 10, 100, 1000, 101, 102, 103, 104, 105, 106, 107, 108, 109, 11, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 12, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 13, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 14, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 15, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 16, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 17, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 18, 180, 181, 182, 183, 184, 185, 186, 
+... 37 KB message truncated
+\\"a\\" must be a string @ .0.a
+\\"a\\" must be a string @ .1.a
+\\"a\\" must be a string @ .2.a
+\\"a\\" must be a string @ .3.a
+\\"a\\" must be a string @ .4.a
+... 1000 errors"
+`;
+
 exports[`should fail on invalid values 1`] = `"\\"value\\" is required"`;
 
 exports[`should fail on invalid values 2`] = `

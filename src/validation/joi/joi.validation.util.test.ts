@@ -153,3 +153,17 @@ test('array items with invalid props', async () => {
 
 // optional
 // default values
+
+test('long message string', () => {
+  const objSchema = arraySchema.items(
+    objectSchema({
+      a: stringSchema,
+    }),
+  )
+
+  const longObject = Array(1000).fill({ a: 5 })
+
+  const { error } = getValidationResult(longObject, objSchema)
+  // console.log(error!.message, error!.message.length)
+  expect(error!.message).toMatchSnapshot()
+})
