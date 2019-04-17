@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.1.0...v4.2.0) (2019-04-17)
+
+
+### Features
+
+* JoiValidationError.objectName, objectId ([92aa2ef](https://github.com/NaturalCycles/nodejs-lib/commit/92aa2ef))
+
 # [4.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.0.1...v4.1.0) (2019-04-16)
 
 

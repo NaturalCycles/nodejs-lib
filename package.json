@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "dependencies": {
     "@types/joi": "^14.0.0"
   },
