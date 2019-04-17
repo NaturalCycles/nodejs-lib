@@ -6,6 +6,7 @@
  * "Converts" mean e.g trims all strings from leading/trailing spaces.
  */
 
+import { isObject } from '@naturalcycles/js-lib'
 import { SchemaLike, ValidationError, ValidationOptions } from 'joi'
 import { Joi } from './joi.extensions'
 import { JoiValidationError } from './joi.validation.error'
@@ -49,9 +50,7 @@ export function validate<T> (
   })
 
   if (error) {
-    throw new JoiValidationError(validationErrorToString(error, objectName), {
-      joiValidationErrorItems: error.details,
-    })
+    throw createError(value, error, objectName)
   }
 
   return returnValue
@@ -78,18 +77,23 @@ export function getValidationResult<T> (
   }
 
   if (error) {
-    vr.error = new JoiValidationError(validationErrorToString(error, objectName), {
-      joiValidationErrorItems: error.details,
-    })
+    vr.error = createError(value, error, objectName)
   }
 
   return vr
 }
 
-export function validationErrorToString (err: ValidationError, objectName?: string): string {
+function createError (value: any, err: ValidationError, objectName?: string): JoiValidationError {
   if (!err) return undefined as any
   const tokens: string[] = []
-  if (objectName) tokens.push(objectName)
+
+  const objectId = isObject(value) ? (value['id'] as string) : undefined
+
+  if (objectId || objectName) {
+    objectName = objectName || (value && value.constructor && value.constructor.name)
+
+    tokens.push([objectName, objectId].filter(i => i).join('.'))
+  }
 
   // Strip colors in production (for e.g Sentry reporting)
   const stripColors = process.env.NODE_ENV === 'production'
@@ -110,5 +114,11 @@ export function validationErrorToString (err: ValidationError, objectName?: stri
     tokens.push(annotation)
   }
 
-  return tokens.join('\n')
+  const msg = tokens.join('\n')
+
+  return new JoiValidationError(msg, {
+    joiValidationErrorItems: err.details,
+    ...(objectName && { joiValidationObjectName: objectName }),
+    ...(objectId && { joiValidationObjectId: objectId }),
+  })
 }

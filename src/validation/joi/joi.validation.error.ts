@@ -13,6 +13,8 @@ import { ValidationErrorItem } from 'joi'
  */
 export interface JoiValidationErrorData extends ErrorData {
   joiValidationErrorItems: ValidationErrorItem[]
+  joiValidationObjectName?: string
+  joiValidationObjectId?: string
 }
 
 export class JoiValidationError extends AppError<JoiValidationErrorData> {

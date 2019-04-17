@@ -1,9 +1,9 @@
 import { arraySchema, objectSchema, stringSchema } from './joi.shared.schemas'
 import { JoiValidationError } from './joi.validation.error'
-import { getValidationResult, validate, validationErrorToString } from './joi.validation.util'
+import { getValidationResult, validate } from './joi.validation.util'
 
-interface Obj1 {
-  a1: string
+class Obj1 {
+  a1!: string
   a2?: string
 }
 
@@ -90,10 +90,6 @@ test('getValidationResult valid', async () => {
   expect(vr.error).toBeUndefined()
 })
 
-test('validationErrorToString', async () => {
-  expect(validationErrorToString(undefined as any)).toBeUndefined()
-})
-
 test('error should contain errorItems', async () => {
   const v = {
     a1: ' ff ', // to be converted
@@ -155,15 +151,39 @@ test('array items with invalid props', async () => {
 // default values
 
 test('long message string', () => {
-  const objSchema = arraySchema.items(
-    objectSchema({
-      a: stringSchema,
-    }),
-  )
+  const objSchema = arraySchema.items(obj1Schema)
 
-  const longObject = Array(1000).fill({ a: 5 })
+  const longObject = Array(1000).fill({ a1: 5 })
 
   const { error } = getValidationResult(longObject, objSchema)
   // console.log(error!.message, error!.message.length)
   expect(error!.message).toMatchSnapshot()
+})
+
+test('should include id in the error message', () => {
+  const obj = {
+    id: 'someId',
+  }
+
+  const obj1 = Object.assign(new Obj1(), {
+    id: 'someId',
+  })
+
+  // No objectName, with id
+  let { error } = getValidationResult(obj, obj1Schema)
+  // console.log(error)
+  expect(error!.message).toMatchSnapshot()
+  expect(error!.data).toMatchSnapshot()
+
+  // ObjectName, with id
+  ;({ error } = getValidationResult(obj, obj1Schema, 'ObjName'))
+  // console.log(error)
+  expect(error!.message).toMatchSnapshot()
+  expect(error!.data).toMatchSnapshot()
+
+  // No objectName, with id, constructor name
+  ;({ error } = getValidationResult(obj1, obj1Schema))
+  // console.log(error)
+  expect(error!.message).toMatchSnapshot()
+  expect(error!.data).toMatchSnapshot()
 })
