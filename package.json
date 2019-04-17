@@ -1,19 +1,11 @@
 {
   "name": "@naturalcycles/nodejs-lib",
   "version": "4.1.0",
-  "scripts": {
-    "build": "del ./dist && tsc",
-    "build-prod": "del ./dist && tsc -p tsconfig.prod.json"
-  },
   "dependencies": {
-    "@types/debug": "^4.1.0",
-    "@types/got": "^9.2.0",
-    "@types/joi": "^14.0.0",
-    "debug": "^4.1.0"
+    "@types/joi": "^14.0.0"
   },
   "peerDependencies": {
     "@naturalcycles/js-lib": ">=4",
-    "got": "^9.3.1",
     "joi": "^14.0.4"
   },
   "devDependencies": {
@@ -38,7 +30,8 @@
     "src",
     "!src/test",
     "!src/**/*.test.ts",
-    "!src/**/__snapshots__"
+    "!src/**/__snapshots__",
+    "!src/**/__exclude"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

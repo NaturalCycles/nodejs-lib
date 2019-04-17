@@ -27,15 +27,10 @@ import {
   getValidationResult,
   JoiValidationResult,
   validate,
-  validationErrorToString,
 } from './validation/joi/joi.validation.util'
 
 export {
   // todo: in progress, not exported yet
-  // GotOptions,
-  // GotResponse,
-  // gotService,
-  // getDebug,
   // LUXON_ISO_DATE_FORMAT,
   // localDateUtil,
   // localTimeUtil,
@@ -43,7 +38,6 @@ export {
   JoiValidationResult,
   validate,
   getValidationResult,
-  validationErrorToString,
   Joi,
   ExtendedJoi,
   booleanSchema,
