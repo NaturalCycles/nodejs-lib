@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v5.0.0...v5.0.1) (2019-04-30)
+
+
+### Bug Fixes
+
+* publish types ([2e768a2](https://github.com/NaturalCycles/nodejs-lib/commit/2e768a2))
+
 # [5.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.2.0...v5.0.0) (2019-04-30)
 
 
