@@ -1,3 +1,20 @@
+# [5.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.2.0...v5.0.0) (2019-04-30)
+
+
+### Bug Fixes
+
+* ci ([d2d5f46](https://github.com/NaturalCycles/nodejs-lib/commit/d2d5f46))
+
+
+### Features
+
+* upgrade joi@14 to @hapi/joi@15 ([68a5802](https://github.com/NaturalCycles/nodejs-lib/commit/68a5802))
+
+
+### BREAKING CHANGES
+
+* ^^^
+
 # [4.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v4.1.0...v4.2.0) (2019-04-17)
 
 
