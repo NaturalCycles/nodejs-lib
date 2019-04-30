@@ -1,4 +1,4 @@
-import { SchemaMap } from 'joi'
+import { SchemaMap } from '@hapi/joi'
 import { Joi } from './joi.extensions'
 
 // Should all booleans be optional as a convention? So undefined will be just treated as false?

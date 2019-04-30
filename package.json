@@ -2,13 +2,14 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "4.2.0",
   "dependencies": {
-    "@types/joi": "^14.0.0"
+    "@types/hapi__joi": "^15.0.1"
   },
   "peerDependencies": {
-    "@naturalcycles/js-lib": ">=4",
-    "joi": "^14.0.4"
+    "@hapi/joi": "^15.0.0",
+    "@naturalcycles/js-lib": ">=4"
   },
   "devDependencies": {
+    "@hapi/joi": "^15.0.1",
     "@naturalcycles/js-lib": "^4.0.0",
     "@naturalcycles/semantic-release": "^1.0.0",
     "@naturalcycles/shared-module": "^5.11.0",
@@ -16,12 +17,10 @@
     "@types/node": "^11.13.4",
     "jest": "^24.1.0",
     "jest-junit": "^6.2.1",
-    "joi": "^14.0.4",
     "lru-cache": "^5.1.1",
     "luxon": "^1.4.3",
     "prettier": "^1.14.3",
     "ts-jest": "^24.0.0",
-    "ts-node": "^8.0.2",
     "tslint": "^5.11.0",
     "typescript": "^3.0.0"
   },

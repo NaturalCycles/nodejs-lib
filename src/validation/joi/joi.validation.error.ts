@@ -1,5 +1,5 @@
+import { ValidationErrorItem } from '@hapi/joi'
 import { AppError, ErrorData } from '@naturalcycles/js-lib'
-import { ValidationErrorItem } from 'joi'
 
 /**
  * Example of ValidationErrorItem:

@@ -1,5 +1,5 @@
-import { Extension, State, StringSchema, ValidationOptions } from 'joi'
-import * as JoiLib from 'joi'
+import { Extension, State, StringSchema, ValidationOptions } from '@hapi/joi'
+import * as JoiLib from '@hapi/joi'
 import { DateTime } from 'luxon'
 import { LUXON_ISO_DATE_FORMAT } from '../../util/time.util'
 
