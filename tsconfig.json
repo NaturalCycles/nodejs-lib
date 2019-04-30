@@ -1,17 +1,8 @@
 {
+  "extends": "@naturalcycles/shared-module/cfg/tsconfig.json",
   "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "lib": ["dom", "es2018"],
-    "sourceMap": true,
-    "declaration": true,
-    "outDir": "./dist",
-    "strict": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "moduleResolution": "node",
-    "rootDir": "./src",
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["**/__exclude", "**/@linked"]
 }
