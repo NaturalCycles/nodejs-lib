@@ -1,5 +1,5 @@
 {
-  "extends": "@naturalcycles/shared-module/cfg/tsconfig.json",
+  "extends": "@naturalcycles/dev-lib/cfg/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist"
   },

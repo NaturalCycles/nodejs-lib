@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@hapi/joi": "^15.0.1",
+    "@naturalcycles/dev-lib": "^6.1.0",
     "@naturalcycles/js-lib": "^4.0.0",
     "@naturalcycles/semantic-release": "^1.0.0",
-    "@naturalcycles/shared-module": "^5.11.0",
     "@types/jest": "^24.0.6",
     "@types/node": "^11.13.4",
     "jest": "^24.1.0",

@@ -464,6 +464,40 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
+"@naturalcycles/dev-lib@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-6.1.0.tgz#e11d41c6ef2a0a46864ec6d8a827e59fe153e442"
+  integrity sha512-WGhShfwsX9ym9TfOKMTGytJDvAv+Xw9b23+OOd6ZWRoEe98zbDYdwmE62Zfi9Oh4kNcpry8KTI6g/i1vqjcwlw==
+  dependencies:
+    "@commitlint/cli" "^7.2.1"
+    "@commitlint/config-conventional" "^7.1.2"
+    "@naturalcycles/fs-lib" "^2.0.0"
+    "@naturalcycles/js-lib" "^4.5.0"
+    "@types/fs-extra" "^5.0.4"
+    "@types/yargs" "^13.0.0"
+    ansi-colors "^3.2.4"
+    command-exists "^1.2.8"
+    execa "^1.0.0"
+    fs-extra "^7.0.0"
+    husky "^2.1.0"
+    lint-staged "^8.0.4"
+    lru-cache "^5.1.1"
+    ts-node "^8.1.0"
+    yargs "^13.2.0"
+
+"@naturalcycles/fs-lib@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/fs-lib/-/fs-lib-2.0.0.tgz#92c4edc7a8e4786e366abedb8169b31feec49f3d"
+  integrity sha512-T7ZnBMxYSaI9KrV17MR/34tERdN6Glrc6pp3/UqS5KAD97D4nhkcYn+6vUNnjiNWnTvb7W+ZgG5lx4KOb/AAxA==
+  dependencies:
+    "@naturalcycles/promise-lib" "^2.1.2"
+    ansi-colors "^3.2.4"
+    cp-file "^7.0.0"
+    fs-extra "^7.0.1"
+    globby "^9.1.0"
+    move-file "^1.2.0"
+    yargs "^13.2.2"
+
 "@naturalcycles/js-lib@^4.0.0", "@naturalcycles/js-lib@^4.5.0":
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-4.7.0.tgz#cf19dc4b68b3d2c95ccf2155f4903f2a05601d85"
@@ -485,27 +519,6 @@
     "@semantic-release/changelog" "^3.0.1"
     "@semantic-release/git" "^7.0.5"
     semantic-release "^15.10.8"
-
-"@naturalcycles/shared-module@^5.11.0":
-  version "5.17.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/shared-module/-/shared-module-5.17.0.tgz#4a23c7f7bbea477d5163251a60af9762c306ea5d"
-  integrity sha512-lDjCEyPeGe46mwW+r3/DbB92/Rne2KMui4xKyODYBGQKrTjQB/xlbIz+OWb6HpB28jW2FIQAlKJLNPb9TuVIQQ==
-  dependencies:
-    "@commitlint/cli" "^7.2.1"
-    "@commitlint/config-conventional" "^7.1.2"
-    "@naturalcycles/js-lib" "^4.5.0"
-    "@types/fs-extra" "^5.0.4"
-    "@types/yargs" "^13.0.0"
-    ansi-colors "^3.2.4"
-    command-exists "^1.2.8"
-    execa "^1.0.0"
-    fs-extra "^7.0.0"
-    husky "^2.1.0"
-    kpy "^1.8.0"
-    lint-staged "^8.0.4"
-    lru-cache "^5.1.1"
-    ts-node "^8.1.0"
-    yargs "^13.2.0"
 
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
@@ -2955,9 +2968,9 @@ humanize-ms@^1.2.1:
     ms "^2.0.0"
 
 husky@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-2.1.0.tgz#f486dd063596ad3aad4bbbcd8673ca5bface3caa"
-  integrity sha512-FHsqdIJPmQX/89Xg/761RMFCPSNNG2eiQMxChGP081NTohHexEuu/4nYh5m4TcFKq4xm+DqaGp8J/EUnkzL1Aw==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-2.2.0.tgz#4dda4370ba0f145b6594be4a4e4e4d4c82a6f2d5"
+  integrity sha512-lG33E7zq6v//H/DQIojPEi1ZL9ebPFt3MxUMD8MR0lrS2ljEPiuUUxlziKIs/o9EafF0chL7bAtLQkcPvXmdnA==
   dependencies:
     cosmiconfig "^5.2.0"
     execa "^1.0.0"
@@ -4001,19 +4014,6 @@ kleur@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
-
-kpy@^1.8.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/kpy/-/kpy-1.9.0.tgz#3591888c50268a469a2ac2b88780d226526e0daa"
-  integrity sha512-ANvWNzAG59cC/4c2Sdpz8wL/J+MJQ1XUQCkIvjofOh1w/UVPu6oEHXw7KB48rxtC9iMRQ4VJdVVgw9LwAIr2LQ==
-  dependencies:
-    "@naturalcycles/promise-lib" "^2.1.2"
-    ansi-colors "^3.2.4"
-    cp-file "^7.0.0"
-    fs-extra "^7.0.1"
-    globby "^9.1.0"
-    move-file "^1.2.0"
-    yargs "^13.2.2"
 
 latest-version@^3.0.0:
   version "3.1.0"
