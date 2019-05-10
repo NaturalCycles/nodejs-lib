@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.0.2...v5.1.0) (2019-05-10)
+
+
+### Features
+
+* requireEnvKeys ([814bc99](https://github.com/NaturalCycles/nodejs-lib/commit/814bc99))
+
 ## [5.0.2](https://github.com/NaturalCycles/nodejs-lib/compare/v5.0.1...v5.0.2) (2019-05-03)
 
 

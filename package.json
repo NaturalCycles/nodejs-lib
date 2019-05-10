@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "5.0.2",
+  "version": "5.1.0",
   "dependencies": {
     "@types/hapi__joi": "^15.0.1",
     "luxon": "^1.13.2"
