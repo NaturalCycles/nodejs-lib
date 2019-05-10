@@ -1,4 +1,5 @@
 import { processSharedUtil } from './infra/process.shared.util'
+import { requireEnvKeys } from './util/env.util'
 import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
@@ -64,4 +65,5 @@ export {
   unzipBuffer,
   zipString,
   unzipToString,
+  requireEnvKeys,
 }
