@@ -1,5 +1,6 @@
 import { processSharedUtil } from './infra/process.shared.util'
 import { requireEnvKeys } from './util/env.util'
+import { LRUMemoCache } from './util/lruMemoCache'
 import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
@@ -66,4 +67,5 @@ export {
   zipString,
   unzipToString,
   requireEnvKeys,
+  LRUMemoCache,
 }

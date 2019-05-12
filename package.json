@@ -2,20 +2,22 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "5.1.0",
   "dependencies": {
+    "@naturalcycles/js-lib": "^6.0.0",
     "@types/hapi__joi": "^15.0.1",
+    "@types/lru-cache": "^5.1.0",
+    "lru-cache": "^5.1.1",
     "luxon": "^1.13.2"
   },
   "peerDependencies": {
-    "@hapi/joi": "^15.0.0",
-    "@naturalcycles/js-lib": ">=5"
+    "@hapi/joi": "^15.0.0"
   },
   "devDependencies": {
     "@hapi/joi": "^15.0.2",
     "@naturalcycles/dev-lib": "^7.4.0",
-    "@naturalcycles/js-lib": "^5.0.1",
     "@naturalcycles/semantic-release": "^1.0.0",
     "@types/node": "^12.0.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "weak": "^1.0.1"
   },
   "files": [
     "dist",
