@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.1.0...v5.2.0) (2019-05-12)
+
+
+### Features
+
+* LRUMemoCache (ex-[@memo](https://github.com/memo)Cache in js-lib) ([6da651b](https://github.com/NaturalCycles/nodejs-lib/commit/6da651b))
+
 # [5.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.0.2...v5.1.0) (2019-05-10)
 
 
