@@ -6,7 +6,7 @@
  * "Converts" mean e.g trims all strings from leading/trailing spaces.
  */
 
-import { SchemaLike, ValidationError, ValidationOptions } from '@hapi/joi'
+import { AnySchema, ValidationError, ValidationOptions } from '@hapi/joi'
 import { isObject } from '@naturalcycles/js-lib'
 import { Joi } from './joi.extensions'
 import { JoiValidationError } from './joi.validation.error'
@@ -37,20 +37,19 @@ const defaultOptions: ValidationOptions = {
  * Validates with Joi.
  * Throws AppValidationError if invalid.
  * Returns *converted* value.
+ *
+ * If `schema` is undefined - returns value as is.
  */
 export function validate<T> (
   value: T,
-  schema: SchemaLike,
+  schema?: AnySchema,
   objectName?: string,
   options: ValidationOptions = {},
 ): T {
-  const { value: returnValue, error } = Joi.validate(value, schema, {
-    ...defaultOptions,
-    ...options,
-  })
+  const { value: returnValue, error } = getValidationResult(value, schema, objectName, options)
 
   if (error) {
-    throw createError(value, error, objectName)
+    throw error
   }
 
   return returnValue
@@ -60,13 +59,17 @@ export function validate<T> (
  * Validates with Joi.
  * Returns ValidationResult with converted value and error (if any).
  * Does not throw.
+ *
+ * If `schema` is undefined - returns value as is.
  */
 export function getValidationResult<T> (
   value: T,
-  schema: SchemaLike,
+  schema?: AnySchema,
   objectName?: string,
   options: ValidationOptions = {},
 ): JoiValidationResult<T> {
+  if (!schema) return { value }
+
   const { value: returnValue, error } = Joi.validate(value, schema, {
     ...defaultOptions,
     ...options,

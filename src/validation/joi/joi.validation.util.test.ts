@@ -187,3 +187,14 @@ test('should include id in the error message', () => {
   expect(error!.message).toMatchSnapshot()
   expect(error!.data).toMatchSnapshot()
 })
+
+test('should return value on undefined schema', () => {
+  const obj = {
+    id: 'someId',
+  }
+
+  expect(validate(obj)).toBe(obj)
+  const { value, error } = getValidationResult(obj)
+  expect(value).toBe(obj)
+  expect(error).toBeUndefined()
+})
