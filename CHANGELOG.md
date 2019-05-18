@@ -1,3 +1,15 @@
+# [6.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.3.0...v6.0.0) (2019-05-18)
+
+
+### Features
+
+* joi typed schemas ([5145082](https://github.com/NaturalCycles/nodejs-lib/commit/5145082))
+
+
+### BREAKING CHANGES
+
+* arraySchema is a function now (was: a variable)
+
 # [5.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.2.0...v5.3.0) (2019-05-17)
 
 
