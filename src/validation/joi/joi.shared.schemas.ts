@@ -1,15 +1,23 @@
-import { SchemaMap } from '@hapi/joi'
 import { Joi } from './joi.extensions'
+import { AnySchemaT, ArraySchemaTyped, BooleanSchemaTyped, ObjectSchemaTyped } from './joi.model'
 
 // Should all booleans be optional as a convention? So undefined will be just treated as false?
-export const booleanSchema = Joi.boolean()
+export const booleanSchema = Joi.boolean() as BooleanSchemaTyped
 export const stringSchema = Joi.string()
 export const numberSchema = Joi.number()
 export const integerSchema = Joi.number().integer()
 export const dateStringSchema = stringSchema.dateString()
-export const arraySchema = Joi.array()
 export const binarySchema = Joi.binary()
-export const objectSchema = (schema?: SchemaMap) => Joi.object(schema)
+
+export function arraySchema<T> (items?: AnySchemaT<T>): ArraySchemaTyped<T> {
+  return items ? Joi.array().items(items) : Joi.array()
+}
+
+export function objectSchema<T> (
+  schema?: { [key in keyof T]: AnySchemaT<T[key]> },
+): ObjectSchemaTyped<T> {
+  return Joi.object(schema)
+}
 
 export const anySchema = Joi.any()
 export const anyObjectSchema = Joi.object().options({ stripUnknown: false })

@@ -1,4 +1,11 @@
-import { arraySchema, objectSchema, stringSchema } from './joi.shared.schemas'
+import {
+  arraySchema,
+  booleanSchema,
+  integerSchema,
+  numberSchema,
+  objectSchema,
+  stringSchema,
+} from './joi.shared.schemas'
 import { JoiValidationError } from './joi.validation.error'
 import { getValidationResult, validate } from './joi.validation.util'
 
@@ -7,7 +14,7 @@ class Obj1 {
   a2?: string
 }
 
-const obj1Schema = objectSchema({
+const obj1Schema = objectSchema<Obj1>({
   a1: stringSchema.min(2).max(5),
   a2: stringSchema.min(2).optional(),
 })
@@ -17,9 +24,9 @@ interface Obj2 {
   a: Obj1[]
 }
 
-const obj2Schema = objectSchema({
+const obj2Schema = objectSchema<Obj2>({
   s1: stringSchema.optional(),
-  a: arraySchema.items(obj1Schema),
+  a: arraySchema<Obj1>(obj1Schema),
 })
 
 const invalidValues: any[] = [
@@ -151,7 +158,7 @@ test('array items with invalid props', async () => {
 // default values
 
 test('long message string', () => {
-  const objSchema = arraySchema.items(obj1Schema)
+  const objSchema = arraySchema<Obj1>(obj1Schema)
 
   const longObject = Array(1000).fill({ a1: 5 })
 
@@ -197,4 +204,65 @@ test('should return value on undefined schema', () => {
   const { value, error } = getValidationResult(obj)
   expect(value).toBe(obj)
   expect(error).toBeUndefined()
+})
+
+test('should convert empty string to undefined and strip', () => {
+  const schema = objectSchema<Obj1>({
+    a1: stringSchema.optional(),
+    a2: stringSchema.optional(),
+  })
+
+  const obj1: Obj1 = {
+    a1: 'asd ',
+    a2: '',
+  }
+
+  const obj1mod = validate(obj1, schema)
+  // console.log(obj1mod)
+  expect(obj1mod).toEqual({
+    a1: 'asd',
+  })
+})
+
+test('should convert null to undefined and strip', () => {
+  const schema = objectSchema<Obj1>({
+    a1: stringSchema.optional(),
+    a2: stringSchema.optional(),
+  })
+
+  const obj1: Obj1 = {
+    a1: 'asd ',
+    a2: null as any,
+  }
+
+  const obj1mod = validate(obj1, schema)
+  // console.log(obj1mod)
+  expect(obj1mod).toEqual({
+    a1: 'asd',
+  })
+
+  expect(validate(undefined, booleanSchema.optional())).toBeUndefined()
+  expect(validate(null, numberSchema.optional())).toBeUndefined()
+  expect(validate(null, integerSchema.optional())).toBeUndefined()
+  expect(validate(null, arraySchema().optional())).toBeUndefined()
+})
+
+test('default to empty array', () => {
+  expect(validate(undefined, arraySchema().optional())).toBeUndefined()
+  expect(
+    validate(
+      undefined,
+      arraySchema()
+        .optional()
+        .default([]),
+    ),
+  ).toEqual([])
+  expect(
+    validate(
+      null,
+      arraySchema()
+        .optional()
+        .default([]),
+    ),
+  ).toEqual([])
 })

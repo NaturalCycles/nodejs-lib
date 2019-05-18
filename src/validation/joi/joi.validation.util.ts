@@ -6,9 +6,10 @@
  * "Converts" mean e.g trims all strings from leading/trailing spaces.
  */
 
-import { AnySchema, ValidationError, ValidationOptions } from '@hapi/joi'
+import { ValidationError, ValidationOptions } from '@hapi/joi'
 import { isObject } from '@naturalcycles/js-lib'
 import { Joi } from './joi.extensions'
+import { AnySchemaT } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 
 export interface JoiValidationResult<T = any> {
@@ -42,7 +43,7 @@ const defaultOptions: ValidationOptions = {
  */
 export function validate<T> (
   value: T,
-  schema?: AnySchema,
+  schema?: AnySchemaT<T>,
   objectName?: string,
   options: ValidationOptions = {},
 ): T {
@@ -64,7 +65,7 @@ export function validate<T> (
  */
 export function getValidationResult<T> (
   value: T,
-  schema?: AnySchema,
+  schema?: AnySchemaT<T>,
   objectName?: string,
   options: ValidationOptions = {},
 ): JoiValidationResult<T> {
