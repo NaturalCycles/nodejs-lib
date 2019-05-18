@@ -9,13 +9,13 @@ export const integerSchema = Joi.number().integer()
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 
-export function arraySchema<T> (items?: AnySchemaT<T>): ArraySchemaTyped<T> {
+export function arraySchema<T> (items?: AnySchemaT<T, T>): ArraySchemaTyped<T> {
   return items ? Joi.array().items(items) : Joi.array()
 }
 
-export function objectSchema<T> (
-  schema?: { [key in keyof T]: AnySchemaT<T[key]> },
-): ObjectSchemaTyped<T> {
+export function objectSchema<IN, OUT = IN> (
+  schema?: { [key in keyof IN]: AnySchemaT<IN[key]> },
+): ObjectSchemaTyped<IN, OUT> {
   return Joi.object(schema)
 }
 

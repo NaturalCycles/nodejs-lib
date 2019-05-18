@@ -12,20 +12,24 @@ import {
   StringSchema,
 } from '@hapi/joi'
 
-export type SchemaTyped<T> =
-  | AnySchemaT<T>
-  | ArraySchemaTyped<T>
-  | AlternativesSchemaTyped<T>
+export type SchemaTyped<IN, OUT = IN> =
+  | AnySchemaT<IN, OUT>
+  | ArraySchemaTyped<IN>
+  | AlternativesSchemaTyped<IN>
   | BinarySchemaTyped
   | BooleanSchemaTyped
-  | DateSchemaTyped<T>
-  | FunctionSchemaTyped<T>
+  | DateSchemaTyped<IN>
+  | FunctionSchemaTyped<IN>
   | NumberSchemaTyped
-  | ObjectSchemaTyped<T>
+  | ObjectSchemaTyped<IN, OUT>
   | StringSchemaTyped
-  | LazySchemaTyped<T>
+  | LazySchemaTyped<IN>
 
-export interface AnySchemaT<T> extends AnySchema {}
+/**
+ * IN - value before validation/conversion
+ * OUT - value after validation/conversion (can be different due to conversion, stripping, etc)
+ */
+export interface AnySchemaT<IN, OUT = IN> extends AnySchema {}
 
 export interface ArraySchemaTyped<T> extends ArraySchema, AnySchemaT<T[]> {}
 export interface AlternativesSchemaTyped<T> extends AlternativesSchema {}
@@ -34,6 +38,6 @@ export interface BooleanSchemaTyped extends BooleanSchema, AnySchemaT<boolean> {
 export interface DateSchemaTyped<T> extends DateSchema {}
 export interface FunctionSchemaTyped<T> extends FunctionSchema {}
 export interface NumberSchemaTyped extends NumberSchema, AnySchemaT<number> {}
-export interface ObjectSchemaTyped<T> extends ObjectSchema, AnySchemaT<T> {}
+export interface ObjectSchemaTyped<IN, OUT> extends ObjectSchema, AnySchemaT<IN, OUT> {}
 export interface StringSchemaTyped extends StringSchema, AnySchemaT<string> {}
 export interface LazySchemaTyped<T> extends LazySchema {}

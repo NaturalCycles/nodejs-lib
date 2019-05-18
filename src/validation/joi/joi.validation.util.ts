@@ -41,13 +41,18 @@ const defaultOptions: ValidationOptions = {
  *
  * If `schema` is undefined - returns value as is.
  */
-export function validate<T> (
-  value: T,
-  schema?: AnySchemaT<T>,
+export function validate<IN, OUT = IN> (
+  value: IN,
+  schema?: AnySchemaT<IN, OUT>,
   objectName?: string,
   options: ValidationOptions = {},
-): T {
-  const { value: returnValue, error } = getValidationResult(value, schema, objectName, options)
+): OUT {
+  const { value: returnValue, error } = getValidationResult<IN, OUT>(
+    value,
+    schema,
+    objectName,
+    options,
+  )
 
   if (error) {
     throw error
@@ -63,21 +68,21 @@ export function validate<T> (
  *
  * If `schema` is undefined - returns value as is.
  */
-export function getValidationResult<T> (
-  value: T,
-  schema?: AnySchemaT<T>,
+export function getValidationResult<IN, OUT = IN> (
+  value: IN,
+  schema?: AnySchemaT<IN, OUT>,
   objectName?: string,
   options: ValidationOptions = {},
-): JoiValidationResult<T> {
-  if (!schema) return { value }
+): JoiValidationResult<OUT> {
+  if (!schema) return { value } as any
 
   const { value: returnValue, error } = Joi.validate(value, schema, {
     ...defaultOptions,
     ...options,
   })
 
-  const vr: JoiValidationResult<T> = {
-    value: returnValue,
+  const vr: JoiValidationResult<OUT> = {
+    value: (returnValue as any) as OUT,
   }
 
   if (error) {
