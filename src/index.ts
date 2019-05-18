@@ -1,4 +1,13 @@
 import { processSharedUtil } from './infra/process.shared.util'
+import {
+  base64ToBuffer,
+  base64ToString,
+  bufferToBase64,
+  hash,
+  md5,
+  stringToBase64,
+} from './security/hash.util'
+import { stringId } from './security/id.util'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
@@ -68,4 +77,11 @@ export {
   unzipToString,
   requireEnvKeys,
   LRUMemoCache,
+  stringId,
+  md5,
+  hash,
+  stringToBase64,
+  base64ToString,
+  bufferToBase64,
+  base64ToBuffer,
 }
