@@ -1,3 +1,11 @@
+# [6.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.0.0...v6.1.0) (2019-05-18)
+
+
+### Features
+
+* joi typings with IN and OUT types ([8ab6ccf](https://github.com/NaturalCycles/nodejs-lib/commit/8ab6ccf))
+* stringId(), hashUtil (md5, ...) ([8110084](https://github.com/NaturalCycles/nodejs-lib/commit/8110084))
+
 # [6.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v5.3.0...v6.0.0) (2019-05-18)
 
 
