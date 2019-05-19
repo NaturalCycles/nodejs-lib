@@ -266,3 +266,8 @@ test('default to empty array', () => {
     ),
   ).toEqual([])
 })
+
+// Checking that partial schema is allowed (not all keys of Obj1 are required)
+const _partialSchema = objectSchema<Obj1>({
+  a2: stringSchema,
+})

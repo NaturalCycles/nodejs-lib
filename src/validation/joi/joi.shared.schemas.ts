@@ -14,7 +14,7 @@ export function arraySchema<T> (items?: AnySchemaT<T, T>): ArraySchemaTyped<T> {
 }
 
 export function objectSchema<IN, OUT = IN> (
-  schema?: { [key in keyof IN]: AnySchemaT<IN[key]> },
+  schema?: { [key in keyof Partial<IN>]: AnySchemaT<IN[key]> },
 ): ObjectSchemaTyped<IN, OUT> {
   return Joi.object(schema)
 }
