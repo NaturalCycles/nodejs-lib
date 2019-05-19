@@ -467,15 +467,15 @@
     glob-to-regexp "^0.3.0"
 
 "@naturalcycles/dev-lib@^7.4.0":
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-7.6.0.tgz#483a942d2ed248398ffc8fb5b5b50e4ff88f0b2d"
-  integrity sha512-pgS1HlfidPM04DKjP9rMrfSqTEq8FR8AnZJTZ1A73AttsA5FmzOT4bIhyf5i43AQtbUlQbBrk2FToUTqzU0fDA==
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-7.9.0.tgz#b1cd3192a5f5ed4356f2ffcd8e62448724d74874"
+  integrity sha512-ok9SViqIkGhYb5JEI0O1AEjDvGunx89D8uOQbmwqMYnf7GwF3Y/rqBuEZJwei5f3zssV8HVGGd6LU5FSFxFKgQ==
   dependencies:
     "@commitlint/cli" "^7.6.1"
     "@commitlint/config-conventional" "^7.6.0"
     "@naturalcycles/fs-lib" "^2.0.0"
-    "@naturalcycles/js-lib" "^6.1.0"
-    "@types/fs-extra" "^5.0.4"
+    "@naturalcycles/js-lib" "^7.0.0"
+    "@types/fs-extra" "^7.0.0"
     "@types/jest" "^24.0.6"
     "@types/node" "^12.0.0"
     "@types/yargs" "^13.0.0"
@@ -508,12 +508,10 @@
     move-file "^1.2.0"
     yargs "^13.2.2"
 
-"@naturalcycles/js-lib@^6.0.0", "@naturalcycles/js-lib@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-6.1.0.tgz#d49731c08d9dda2339009a435372ffc1cc4c76e2"
-  integrity sha512-oinDX6J0h/2v6J+HISj3iz1QJmmkRzCZabv8OgdOpAZ3KSojaGDF+yLzVYHt0nEpiQiC79YkmNmK+eLZl1fwiA==
-  dependencies:
-    "@types/luxon" "^1.12.0"
+"@naturalcycles/js-lib@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-7.0.0.tgz#f9b4f8ea7b20fafa8e1256d38ee67678fc69a899"
+  integrity sha512-cnnO3xM7xNKPjTHzBiuWzdkQSEx07xQpJVi0g+5beJg1W3KTbEZJTWQVLEaKQfmrWnLa+gatSAKxB5ZWhtZGxQ==
 
 "@naturalcycles/promise-lib@^2.1.2":
   version "2.2.0"
@@ -528,6 +526,13 @@
     "@semantic-release/changelog" "^3.0.1"
     "@semantic-release/git" "^7.0.5"
     semantic-release "^15.10.8"
+
+"@naturalcycles/time-lib@^1.0.0":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/time-lib/-/time-lib-1.0.3.tgz#512f5bd2b2ef405bb7639881b6aeca2a6c22b215"
+  integrity sha512-MIuSl+IKY+oEQcoNYRXEsvww5uUrh0E7cjMsQxESsrXXxG787GEmrTwlxOElw1f3BtdztL/z7/8FBkkOYZZlgg==
+  dependencies:
+    dayjs "^1.8.14"
 
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
@@ -727,10 +732,10 @@
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
-"@types/fs-extra@^5.0.4":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-5.1.0.tgz#2a325ef97901504a3828718c390d34b8426a10a1"
-  integrity sha512-AInn5+UBFIK9FK5xc9yP5e3TQSPNNgjHByqYcj9g5elVBnDQcQL7PlO1CIRy2gWlbwK7UPYqi7vRvFA44dCmYQ==
+"@types/fs-extra@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-7.0.0.tgz#9c4ad9e1339e7448a76698829def1f159c1b636c"
+  integrity sha512-ndoMMbGyuToTy4qB6Lex/inR98nPiNHacsgMPvy+zqMLgSxbt8VtWpDArpGp69h1fEDQHn1KB+9DWD++wgbwYA==
   dependencies:
     "@types/node" "*"
 
@@ -786,11 +791,6 @@
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@types/lru-cache/-/lru-cache-5.1.0.tgz#57f228f2b80c046b4a1bd5cac031f81f207f4f03"
   integrity sha512-RaE0B+14ToE4l6UqdarKPnXwVDuigfFv+5j9Dze/Nqr23yyuqdNvzcZi3xB+3Agvi5R4EOgAksfv3lXX4vBt9w==
-
-"@types/luxon@^1.12.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.13.0.tgz#e92338702d0b1b96e8d5ea6fe39d9938891aacd0"
-  integrity sha512-XmDiRVoJWgVdqX9x1a/GU4p9bSgZY7q8SOyMLs3fx1AdQcxLYAPIt/jfZm2e+PBVRWuEx1FqYNJ37kBZ53TMqA==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -1935,6 +1935,11 @@ dateformat@^3.0.0:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
+
+dayjs@^1.8.14:
+  version "1.8.14"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.14.tgz#43e4f62830c2c3342c3fcd25934dc9162dbe6f38"
+  integrity sha512-AVhDmRTe541iWirnoeFSSDDGvCT6HWaNQ4z2WmmzXMGZj6ph6ydao2teKq/eUtR43GPJXlYFD+C/SotG1P9wUQ==
 
 debug@3.1.0:
   version "3.1.0"
@@ -4499,11 +4504,6 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
-
-luxon@^1.13.2:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.13.2.tgz#2866c7a7591441aea0004e8cf80d5ca6d917017a"
-  integrity sha512-U7i2AE+/VWeB8PZZkIeEcxJCZvBA8LegCHufaIFYx3qRQdw2UJw3fuaL/Fqi9Q+2MeFYu+gYqIzr5hWOvAMHBQ==
 
 macos-release@^2.2.0:
   version "2.2.0"

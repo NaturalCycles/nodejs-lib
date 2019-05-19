@@ -2,11 +2,11 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "6.1.0",
   "dependencies": {
-    "@naturalcycles/js-lib": "^6.0.0",
+    "@naturalcycles/js-lib": "^7.0.0",
+    "@naturalcycles/time-lib": "^1.0.0",
     "@types/hapi__joi": "^15.0.1",
     "@types/lru-cache": "^5.1.0",
     "lru-cache": "^5.1.1",
-    "luxon": "^1.13.2",
     "nanoid": "^2.0.2"
   },
   "peerDependencies": {

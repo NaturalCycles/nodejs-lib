@@ -1,7 +1,6 @@
 import { Extension, State, ValidationOptions } from '@hapi/joi'
 import * as JoiLib from '@hapi/joi'
-import { DateTime } from 'luxon'
-import { LUXON_ISO_DATE_FORMAT } from '../../util/time.util'
+import { dayjs } from '@naturalcycles/time-lib'
 
 export interface DateStringExtension {
   dateString (min?: string, max?: string): this
@@ -36,14 +35,14 @@ export function dateStringExtension (joi: typeof JoiLib): Extension {
 
           // Today allows +-14 hours gap to account for different timezones
           if (max === 'today') {
-            max = DateTime.utc()
-              .plus({ hours: 14 })
-              .toFormat(LUXON_ISO_DATE_FORMAT)
+            max = dayjs()
+              .add(14, 'hour')
+              .toISODate()
           }
           if (min === 'today') {
-            min = DateTime.utc()
-              .minus({ hours: 14 })
-              .toFormat(LUXON_ISO_DATE_FORMAT)
+            min = dayjs()
+              .subtract(14, 'hour')
+              .toISODate()
           }
           // console.log('min/max', min, max)
 
@@ -54,7 +53,7 @@ export function dateStringExtension (joi: typeof JoiLib): Extension {
             err = 'string.dateStringMin'
           } else if (max && v > max) {
             err = 'string.dateStringMax'
-          } else if (!DateTime.fromFormat(v, LUXON_ISO_DATE_FORMAT).isValid) {
+          } else if (!dayjs(v).isValid()) {
             err = 'string.dateStringCalendarAccuracy'
           }
 

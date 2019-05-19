@@ -1,5 +1,4 @@
-import { DateTime } from 'luxon'
-import { LUXON_ISO_DATE_FORMAT } from '../../util/time.util'
+import { dayjs } from '@naturalcycles/time-lib'
 import { Joi } from './joi.extensions'
 import { stringSchema } from './joi.shared.schemas'
 import { validate } from './joi.validation.util'
@@ -51,23 +50,23 @@ test('dateString min/max today', async () => {
 
   // Today allows +-14 hours gap to account for different timezones
   // testing -1day or +1day is not reliable (cause it can either fit or not fit withing +-14 hours window, so non-deterministic)
-  const today = DateTime.utc()
-  const todayMinus10hours = today.minus({ hours: 10 })
-  const todayMinus2 = today.minus({ days: 2 })
-  const todayPlus10hours = today.plus({ hours: 10 })
-  const todayPlus2 = today.plus({ days: 2 })
+  const today = dayjs()
+  const todayMinus10hours = today.subtract(10, 'hour')
+  const todayMinus2 = today.subtract(2, 'day')
+  const todayPlus10hours = today.add(10, 'hour')
+  const todayPlus2 = today.add(2, 'day')
 
   shouldBeInvalid(schema, [
     { a1: '1971-01-01' },
     { a1: '2450-06-19' },
-    { a1: todayMinus2.toFormat(LUXON_ISO_DATE_FORMAT) },
-    { a1: todayPlus2.toFormat(LUXON_ISO_DATE_FORMAT) },
+    { a1: todayMinus2.toISODate() },
+    { a1: todayPlus2.toISODate() },
   ])
 
   shouldBeValid(schema, [
-    { a1: today.toFormat(LUXON_ISO_DATE_FORMAT) },
-    { a1: todayMinus10hours.toFormat(LUXON_ISO_DATE_FORMAT) },
-    { a1: todayPlus10hours.toFormat(LUXON_ISO_DATE_FORMAT) },
+    { a1: today.toISODate() },
+    { a1: todayMinus10hours.toISODate() },
+    { a1: todayPlus10hours.toISODate() },
   ])
 })
 
