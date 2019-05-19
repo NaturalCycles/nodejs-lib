@@ -1,3 +1,10 @@
+# [6.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.2.0...v6.3.0) (2019-05-19)
+
+
+### Features
+
+* export alphabets ([905da7e](https://github.com/NaturalCycles/nodejs-lib/commit/905da7e))
+
 # [6.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.1.0...v6.2.0) (2019-05-19)
 
 
