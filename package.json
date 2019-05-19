@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "dependencies": {
     "@naturalcycles/js-lib": "^7.0.0",
     "@naturalcycles/time-lib": "^1.0.0",

@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.1.0...v6.2.0) (2019-05-19)
+
+
+### Features
+
+* swap luxon to dayjs ([207ffdb](https://github.com/NaturalCycles/nodejs-lib/commit/207ffdb))
+
 # [6.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.0.0...v6.1.0) (2019-05-18)
 
 
