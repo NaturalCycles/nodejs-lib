@@ -1,3 +1,10 @@
+## [6.3.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.3.0...v6.3.1) (2019-05-19)
+
+
+### Bug Fixes
+
+* objectSchema to allow partial schemas ([2c55a6e](https://github.com/NaturalCycles/nodejs-lib/commit/2c55a6e))
+
 # [6.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.2.0...v6.3.0) (2019-05-19)
 
 
