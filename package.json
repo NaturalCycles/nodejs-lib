@@ -2,6 +2,7 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "6.3.1",
   "dependencies": {
+    "@hapi/joi": "^15.0.2",
     "@naturalcycles/js-lib": "^7.0.0",
     "@naturalcycles/time-lib": "^1.0.0",
     "@types/hapi__joi": "^15.0.1",
@@ -9,11 +10,7 @@
     "lru-cache": "^5.1.1",
     "nanoid": "^2.0.2"
   },
-  "peerDependencies": {
-    "@hapi/joi": "^15.0.0"
-  },
   "devDependencies": {
-    "@hapi/joi": "^15.0.2",
     "@naturalcycles/dev-lib": "^7.4.0",
     "@naturalcycles/semantic-release": "^1.0.0",
     "@types/node": "^12.0.0",
