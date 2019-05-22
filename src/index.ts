@@ -21,6 +21,15 @@ import { LRUMemoCache } from './util/lruMemoCache'
 import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
+  AnySchemaTyped,
+  ArraySchemaTyped,
+  BooleanSchemaTyped,
+  NumberSchemaTyped,
+  ObjectSchemaTyped,
+  SchemaTyped,
+  StringSchemaTyped,
+} from './validation/joi/joi.model'
+import {
   anyObjectSchema,
   anySchema,
   arraySchema,
@@ -49,10 +58,6 @@ import {
 } from './validation/joi/joi.validation.util'
 
 export {
-  // todo: in progress, not exported yet
-  // LUXON_ISO_DATE_FORMAT,
-  // localDateUtil,
-  // localTimeUtil,
   JoiValidationError,
   JoiValidationResult,
   validate,
@@ -69,6 +74,13 @@ export {
   objectSchema,
   anySchema,
   anyObjectSchema,
+  SchemaTyped,
+  AnySchemaTyped,
+  ArraySchemaTyped,
+  BooleanSchemaTyped,
+  NumberSchemaTyped,
+  ObjectSchemaTyped,
+  StringSchemaTyped,
   idSchema,
   unixTimestampSchema,
   verSchema,

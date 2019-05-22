@@ -9,7 +9,7 @@
 import { ValidationError, ValidationOptions } from '@hapi/joi'
 import { isObject } from '@naturalcycles/js-lib'
 import { Joi } from './joi.extensions'
-import { AnySchemaT } from './joi.model'
+import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 
 export interface JoiValidationResult<T = any> {
@@ -43,7 +43,7 @@ const defaultOptions: ValidationOptions = {
  */
 export function validate<IN, OUT = IN> (
   value: IN,
-  schema?: AnySchemaT<IN, OUT>,
+  schema?: AnySchemaTyped<IN, OUT>,
   objectName?: string,
   options: ValidationOptions = {},
 ): OUT {
@@ -70,7 +70,7 @@ export function validate<IN, OUT = IN> (
  */
 export function getValidationResult<IN, OUT = IN> (
   value: IN,
-  schema?: AnySchemaT<IN, OUT>,
+  schema?: AnySchemaTyped<IN, OUT>,
   objectName?: string,
   options: ValidationOptions = {},
 ): JoiValidationResult<OUT> {

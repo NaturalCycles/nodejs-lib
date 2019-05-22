@@ -2,7 +2,7 @@ import { NumberSchema, StringSchema } from '@hapi/joi'
 import * as JoiLib from '@hapi/joi'
 import { DateStringExtension, dateStringExtension } from './dateString.extension'
 import { DividableExtension, dividableExtension } from './dividable.extension'
-import { AnySchemaT } from './joi.model'
+import { AnySchemaTyped } from './joi.model'
 
 export const Joi: ExtendedJoi = JoiLib.defaults(schema => {
   // hack to prevent infinite recursion due to .empty('') where '' is a stringSchema itself
@@ -27,9 +27,9 @@ export interface ExtendedJoi extends JoiLib.Root {
 export interface ExtendedStringSchema
   extends StringSchema,
     DateStringExtension,
-    AnySchemaT<string> {}
+    AnySchemaTyped<string> {}
 
 export interface ExtendedNumberSchema
   extends NumberSchema,
     DividableExtension,
-    AnySchemaT<number> {}
+    AnySchemaTyped<number> {}
