@@ -1,3 +1,10 @@
+## [6.4.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.4.0...v6.4.1) (2019-05-22)
+
+
+### Bug Fixes
+
+* export more joi models ([f33dff4](https://github.com/NaturalCycles/nodejs-lib/commit/f33dff4))
+
 # [6.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.3.1...v6.4.0) (2019-05-20)
 
 
