@@ -1,3 +1,10 @@
+# [6.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.4.1...v6.5.0) (2019-05-22)
+
+
+### Features
+
+* urlSchema ([773b9ba](https://github.com/NaturalCycles/nodejs-lib/commit/773b9ba))
+
 ## [6.4.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.4.0...v6.4.1) (2019-05-22)
 
 
