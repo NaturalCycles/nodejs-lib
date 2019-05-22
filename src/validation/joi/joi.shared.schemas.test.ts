@@ -1,4 +1,4 @@
-import { semVerSchema } from './joi.shared.schemas'
+import { semVerSchema, urlSchema } from './joi.shared.schemas'
 import { validate } from './joi.validation.util'
 
 test('semVerSchema', async () => {
@@ -15,4 +15,17 @@ test('semVerSchema', async () => {
   ;['1.0.0', '1.5.3', '2.9.4', '3.0.14', '0.0.14'].forEach(v => {
     validate(v, semVerSchema)
   })
+})
+
+test('urlSchema', () => {
+  const schema = urlSchema()
+  const schemaAllowHttp = urlSchema(['https', 'http'])
+
+  expect(() => validate('abc', schema)).toThrow()
+
+  validate('https://example.com', schema)
+  expect(() => validate('http://example.com', schema)).toThrow()
+
+  validate('https://example.com', schemaAllowHttp)
+  validate('http://example.com', schemaAllowHttp)
 })

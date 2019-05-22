@@ -4,6 +4,7 @@ import {
   ArraySchemaTyped,
   BooleanSchemaTyped,
   ObjectSchemaTyped,
+  StringSchemaTyped,
 } from './joi.model'
 
 // Should all booleans be optional as a convention? So undefined will be just treated as false?
@@ -13,6 +14,8 @@ export const numberSchema = Joi.number()
 export const integerSchema = Joi.number().integer()
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
+export const urlSchema = (scheme: string | string[] = 'https') =>
+  Joi.string().uri({ scheme }) as StringSchemaTyped
 
 export function arraySchema<T> (items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T> {
   return items ? Joi.array().items(items) : Joi.array()
