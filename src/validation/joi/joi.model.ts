@@ -38,6 +38,6 @@ export interface BooleanSchemaTyped extends BooleanSchema, AnySchemaTyped<boolea
 export interface DateSchemaTyped<T> extends DateSchema {}
 export interface FunctionSchemaTyped<T> extends FunctionSchema {}
 export interface NumberSchemaTyped extends NumberSchema, AnySchemaTyped<number> {}
-export interface ObjectSchemaTyped<IN, OUT> extends ObjectSchema, AnySchemaTyped<IN, OUT> {}
+export interface ObjectSchemaTyped<IN, OUT = IN> extends ObjectSchema, AnySchemaTyped<IN, OUT> {}
 export interface StringSchemaTyped extends StringSchema, AnySchemaTyped<string> {}
 export interface LazySchemaTyped<T> extends LazySchema {}
