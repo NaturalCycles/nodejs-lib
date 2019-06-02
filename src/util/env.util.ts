@@ -23,6 +23,6 @@ export function requireEnvKeys<T extends readonly string[]> (
       r[k] = v
       return r
     },
-    {} as ReturnType<typeof requireEnvKeys>,
+    {} as { [k in ValuesOf<T>]: string },
   )
 }
