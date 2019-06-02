@@ -1,3 +1,10 @@
+## [6.5.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.5.0...v6.5.1) (2019-06-02)
+
+
+### Bug Fixes
+
+* types ([faea24b](https://github.com/NaturalCycles/nodejs-lib/commit/faea24b))
+
 # [6.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.4.1...v6.5.0) (2019-05-22)
 
 
