@@ -92,6 +92,27 @@ export function getValidationResult<IN, OUT = IN> (
   return vr
 }
 
+/**
+ * Convenience function that returns true if !error.
+ */
+export function isValid<IN, OUT = IN> (value: IN, schema?: AnySchemaTyped<IN, OUT>): boolean {
+  if (!schema) return { value } as any
+
+  const { error } = Joi.validate(value, schema, defaultOptions)
+  return !error
+}
+
+export function undefinedIfInvalid<IN, OUT = IN> (
+  value: IN,
+  schema?: AnySchemaTyped<IN, OUT>,
+): OUT | undefined {
+  if (!schema) return { value } as any
+
+  const { value: returnValue, error } = Joi.validate(value, schema, defaultOptions)
+
+  return error ? undefined : (returnValue as any)
+}
+
 function createError (value: any, err: ValidationError, objectName?: string): JoiValidationError {
   if (!err) return undefined as any
   const tokens: string[] = []

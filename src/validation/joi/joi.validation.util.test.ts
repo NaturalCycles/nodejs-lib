@@ -7,7 +7,7 @@ import {
   stringSchema,
 } from './joi.shared.schemas'
 import { JoiValidationError } from './joi.validation.error'
-import { getValidationResult, validate } from './joi.validation.util'
+import { getValidationResult, isValid, undefinedIfInvalid, validate } from './joi.validation.util'
 
 class Obj1 {
   a1!: string
@@ -270,4 +270,14 @@ test('default to empty array', () => {
 // Checking that partial schema is allowed (not all keys of Obj1 are required)
 const _partialSchema = objectSchema<Obj1>({
   a2: stringSchema,
+})
+
+test('isValid', () => {
+  expect(isValid('asd', stringSchema)).toBe(true)
+  expect(isValid(56, stringSchema)).toBe(false)
+})
+
+test('undefinedIfInvalid', () => {
+  expect(undefinedIfInvalid('asd', stringSchema)).toBe('asd')
+  expect(undefinedIfInvalid(56, stringSchema)).toBeUndefined()
 })

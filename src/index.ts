@@ -54,7 +54,9 @@ import {
 import { JoiValidationError } from './validation/joi/joi.validation.error'
 import {
   getValidationResult,
+  isValid,
   JoiValidationResult,
+  undefinedIfInvalid,
   validate,
 } from './validation/joi/joi.validation.util'
 
@@ -63,6 +65,8 @@ export {
   JoiValidationResult,
   validate,
   getValidationResult,
+  isValid,
+  undefinedIfInvalid,
   Joi,
   ExtendedJoi,
   booleanSchema,
