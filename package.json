@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "6.5.1",
+  "version": "6.6.0",
   "dependencies": {
     "@hapi/joi": "^15.0.2",
     "@naturalcycles/js-lib": "^7.0.0",

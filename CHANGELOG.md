@@ -1,3 +1,10 @@
+# [6.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.5.1...v6.6.0) (2019-07-08)
+
+
+### Features
+
+* **joi:** isValid, undefinedIfInvalid ([ecea173](https://github.com/NaturalCycles/nodejs-lib/commit/ecea173))
+
 ## [6.5.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.5.0...v6.5.1) (2019-06-02)
 
 
