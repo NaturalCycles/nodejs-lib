@@ -1,3 +1,10 @@
+# [6.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.6.0...v6.7.0) (2019-07-16)
+
+
+### Features
+
+* deps ([e9f09f4](https://github.com/NaturalCycles/nodejs-lib/commit/e9f09f4))
+
 # [6.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.5.1...v6.6.0) (2019-07-08)
 
 
