@@ -1,3 +1,10 @@
+# [6.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.7.0...v6.8.0) (2019-07-21)
+
+
+### Features
+
+* convert() ([5e99e0d](https://github.com/NaturalCycles/nodejs-lib/commit/5e99e0d))
+
 # [6.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.6.0...v6.7.0) (2019-07-16)
 
 
