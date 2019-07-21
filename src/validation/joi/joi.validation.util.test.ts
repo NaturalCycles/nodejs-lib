@@ -7,7 +7,13 @@ import {
   stringSchema,
 } from './joi.shared.schemas'
 import { JoiValidationError } from './joi.validation.error'
-import { getValidationResult, isValid, undefinedIfInvalid, validate } from './joi.validation.util'
+import {
+  convert,
+  getValidationResult,
+  isValid,
+  undefinedIfInvalid,
+  validate,
+} from './joi.validation.util'
 
 class Obj1 {
   a1!: string
@@ -224,6 +230,10 @@ test('should convert empty string to undefined and strip', () => {
   })
 })
 
+test('empty string is not valid stringSchema', () => {
+  expect(isValid('', stringSchema)).toBe(false)
+})
+
 test('should convert null to undefined and strip', () => {
   const schema = objectSchema<Obj1>({
     a1: stringSchema.optional(),
@@ -280,4 +290,14 @@ test('isValid', () => {
 test('undefinedIfInvalid', () => {
   expect(undefinedIfInvalid('asd', stringSchema)).toBe('asd')
   expect(undefinedIfInvalid(56, stringSchema)).toBeUndefined()
+})
+
+test('convert', () => {
+  expect(convert(undefined)).toBeUndefined()
+  expect(convert(undefined, stringSchema)).toBeUndefined()
+  expect(convert('', stringSchema)).toBeUndefined()
+  expect(convert('', stringSchema.optional())).toBeUndefined()
+  expect(convert('a', stringSchema)).toBe('a')
+  expect(convert(' a', stringSchema)).toBe('a')
+  expect(convert(' a b  ', stringSchema)).toBe('a b')
 })

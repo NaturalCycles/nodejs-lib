@@ -113,6 +113,16 @@ export function undefinedIfInvalid<IN, OUT = IN> (
   return error ? undefined : (returnValue as any)
 }
 
+/**
+ * Will do joi-convertation, regardless of error/validity of value.
+ * @returns converted value
+ */
+export function convert<IN, OUT = IN> (value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
+  if (!schema) return value as any
+  const { value: returnValue } = Joi.validate(value, schema, defaultOptions)
+  return returnValue as any
+}
+
 function createError (value: any, err: ValidationError, objectName?: string): JoiValidationError {
   if (!err) return undefined as any
   const tokens: string[] = []
