@@ -7,6 +7,7 @@
     "@naturalcycles/time-lib": "^1.0.0",
     "@types/hapi__joi": "^15.0.1",
     "@types/lru-cache": "^5.1.0",
+    "debug": "^4.1.1",
     "lru-cache": "^5.1.1",
     "nanoid": "^2.0.2"
   },
@@ -37,7 +38,7 @@
   "engines": {
     "node": ">=10.13"
   },
-  "description": "",
+  "description": "Standard library for Node.js",
   "author": "Natural Cycles Team",
   "license": "MIT"
 }

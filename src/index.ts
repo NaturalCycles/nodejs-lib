@@ -1,4 +1,5 @@
 import { processSharedUtil } from './infra/process.shared.util'
+import { Debug, IDebug, IDebugger } from './log/debug'
 import {
   base64ToBuffer,
   base64ToString,
@@ -118,4 +119,7 @@ export {
   base64ToString,
   bufferToBase64,
   base64ToBuffer,
+  IDebug,
+  IDebugger,
+  Debug,
 }
