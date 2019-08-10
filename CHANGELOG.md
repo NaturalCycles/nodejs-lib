@@ -1,3 +1,10 @@
+## [6.9.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.0...v6.9.1) (2019-08-10)
+
+
+### Bug Fixes
+
+* Debug bind to console (for colors) ([47ea977](https://github.com/NaturalCycles/nodejs-lib/commit/47ea977))
+
 # [6.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.8.0...v6.9.0) (2019-08-10)
 
 
