@@ -30,3 +30,6 @@ export interface IDebugger {
 }
 
 export const Debug = require('debug') as IDebug
+
+// This inables colors for objects:
+Debug.log = console.log.bind(console)
