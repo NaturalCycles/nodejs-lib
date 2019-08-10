@@ -1,3 +1,10 @@
+# [6.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.8.0...v6.9.0) (2019-08-10)
+
+
+### Features
+
+* export Debug ([2986b42](https://github.com/NaturalCycles/nodejs-lib/commit/2986b42))
+
 # [6.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.7.0...v6.8.0) (2019-07-21)
 
 
