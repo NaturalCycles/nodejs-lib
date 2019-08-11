@@ -31,9 +31,12 @@ export const anySchema = Joi.any()
 export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
 
 // 1g498efj5sder3324zer
+/**
+ * [a-z0-9_]*
+ * 6-16 length
+ */
 export const idSchema = stringSchema
-  .alphanum()
-  .lowercase()
+  .regex(/^[a-z0-9_]*$/)
   .min(6)
   .max(64)
 
