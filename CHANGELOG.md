@@ -1,3 +1,10 @@
+## [6.9.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.1...v6.9.2) (2019-08-11)
+
+
+### Bug Fixes
+
+* idSchema to allow '_' ([99bfa59](https://github.com/NaturalCycles/nodejs-lib/commit/99bfa59))
+
 ## [6.9.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.0...v6.9.1) (2019-08-10)
 
 
