@@ -20,6 +20,7 @@ export interface DebugFormatters {
 export interface IDebugger {
   // (formatter: any, ...args: any[]): void;
   (...args: any[]): void
+  info: (...args: any[]) => void // alias to just log()
   warn: (...args: any[]) => void
   error: (...args: any[]) => void
 
@@ -37,6 +38,7 @@ OriginalDebug.log = console.log.bind(console)
 
 export const Debug = ((namespace: string) => {
   const instance = OriginalDebug(namespace)
+  instance.info = instance.bind(instance)
 
   const instanceWarn = OriginalDebug([namespace, 'warn'].join(':'))
   instanceWarn.log = console.warn.bind(console)

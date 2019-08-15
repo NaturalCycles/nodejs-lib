@@ -24,6 +24,7 @@ test('debug', () => {
   expect(log.enabled).toBe(true)
 
   log('hello log', obj)
+  log.info('hello log', obj)
   log.warn('hello log', obj)
   log.error('hello log', obj)
 
