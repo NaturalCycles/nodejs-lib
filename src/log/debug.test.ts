@@ -1,4 +1,4 @@
-import { Debug } from './debug'
+import { Debug, DebugLogLevel } from './debug'
 
 const log = Debug('nodejs-lib')
 
@@ -27,6 +27,9 @@ test('debug', () => {
   log.info('hello log', obj)
   log.warn('hello log', obj)
   log.error('hello log', obj)
+
+  const level = DebugLogLevel.warn
+  log[level]('hello level')
 
   log(err)
   log.warn(err)

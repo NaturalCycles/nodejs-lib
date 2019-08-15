@@ -32,6 +32,12 @@ export interface IDebugger {
   // extend: (namespace: string, delimiter?: string) => IDebugger
 }
 
+export enum DebugLogLevel {
+  info = 'info',
+  warn = 'warn',
+  error = 'error',
+}
+
 const OriginalDebug = require('debug') as IDebug
 // This enables colors for objects:
 OriginalDebug.log = console.log.bind(console)
