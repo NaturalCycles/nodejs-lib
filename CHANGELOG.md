@@ -1,3 +1,10 @@
+# [6.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.10.0...v6.11.0) (2019-08-15)
+
+
+### Features
+
+* log.info() alias to log() ([fa9cd71](https://github.com/NaturalCycles/nodejs-lib/commit/fa9cd71))
+
 # [6.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.2...v6.10.0) (2019-08-15)
 
 
