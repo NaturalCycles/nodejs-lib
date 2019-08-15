@@ -20,16 +20,39 @@ export interface DebugFormatters {
 export interface IDebugger {
   // (formatter: any, ...args: any[]): void;
   (...args: any[]): void
+  warn: (...args: any[]) => void
+  error: (...args: any[]) => void
 
   color: string
   enabled: boolean
   log: (...args: any[]) => any
   namespace: string
   destroy: () => boolean
-  extend: (namespace: string, delimiter?: string) => IDebugger
+  // extend: (namespace: string, delimiter?: string) => IDebugger
 }
 
-export const Debug = require('debug') as IDebug
+const OriginalDebug = require('debug') as IDebug
+// This enables colors for objects:
+OriginalDebug.log = console.log.bind(console)
 
-// This inables colors for objects:
-Debug.log = console.log.bind(console)
+export const Debug = ((namespace: string) => {
+  const instance = OriginalDebug(namespace)
+
+  const instanceWarn = OriginalDebug([namespace, 'warn'].join(':'))
+  instanceWarn.log = console.warn.bind(console)
+  instance.warn = instanceWarn.bind(instanceWarn)
+
+  const instanceError = OriginalDebug([namespace, 'error'].join(':'))
+  instanceError.log = console.error.bind(console)
+  instance.error = instanceError.bind(instanceError)
+
+  return instance
+}) as IDebug
+Debug.coerce = OriginalDebug.coerce.bind(OriginalDebug)
+Debug.disable = OriginalDebug.disable.bind(OriginalDebug)
+Debug.enable = OriginalDebug.enable.bind(OriginalDebug)
+Debug.enabled = OriginalDebug.enabled.bind(OriginalDebug)
+Debug.log = OriginalDebug.log.bind(OriginalDebug)
+Debug.names = OriginalDebug.names
+Debug.skips = OriginalDebug.skips
+Debug.formatters = OriginalDebug.formatters
