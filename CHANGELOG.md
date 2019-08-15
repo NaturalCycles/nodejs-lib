@@ -1,3 +1,10 @@
+# [6.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.2...v6.10.0) (2019-08-15)
+
+
+### Features
+
+* log.warn, log.error ([a947833](https://github.com/NaturalCycles/nodejs-lib/commit/a947833))
+
 ## [6.9.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.9.1...v6.9.2) (2019-08-11)
 
 
