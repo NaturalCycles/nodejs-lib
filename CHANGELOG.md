@@ -1,3 +1,10 @@
+## [6.11.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.11.0...v6.11.1) (2019-08-15)
+
+
+### Bug Fixes
+
+* DebugLogLevel enum ([6989304](https://github.com/NaturalCycles/nodejs-lib/commit/6989304))
+
 # [6.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.10.0...v6.11.0) (2019-08-15)
 
 
