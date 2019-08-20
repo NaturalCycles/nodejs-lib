@@ -9,7 +9,8 @@
     "@types/lru-cache": "^5.1.0",
     "debug": "^4.1.1",
     "lru-cache": "^5.1.1",
-    "nanoid": "^2.0.2"
+    "nanoid": "^2.0.2",
+    "rxjs": "^6.5.2"
   },
   "devDependencies": {
     "@naturalcycles/dev-lib": "^7.4.0",
