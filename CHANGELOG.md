@@ -1,3 +1,10 @@
+# [6.13.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.12.0...v6.13.0) (2019-08-20)
+
+
+### Features
+
+* PausableObservable ([5d40132](https://github.com/NaturalCycles/nodejs-lib/commit/5d40132))
+
 # [6.12.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.11.1...v6.12.0) (2019-08-20)
 
 
