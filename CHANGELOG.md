@@ -1,3 +1,10 @@
+## [6.16.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.0...v6.16.1) (2019-08-24)
+
+
+### Bug Fixes
+
+* loadSecretsFromEnv ensures dotenv.config() ([c268005](https://github.com/NaturalCycles/nodejs-lib/commit/c268005))
+
 # [6.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.15.1...v6.16.0) (2019-08-24)
 
 
