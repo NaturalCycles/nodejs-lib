@@ -466,20 +466,22 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/dev-lib@^7.4.0":
-  version "7.16.2"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-7.16.2.tgz#11099f94bf43c3f6762eef2736bd03e14680cecc"
-  integrity sha512-zUJFL1La/bZ6UIKnMa7BIAInRrMwFSRhKpiJqYH3B0NEgVFto1YCfnWD7zDbAqE1skRlxiuoCiDdBK+NDoqk5g==
+  version "7.17.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-7.17.0.tgz#476993b9e3e370a792141a2b9cfb84f560bd2656"
+  integrity sha512-O7v1pLGkvhLOOQFoGGBJT09ifOkTJk7AHTTDYyuRyx3dk39NtgT7CvLMtxjhdcZgklaAW7qu+Yp81zU5gzoLiQ==
   dependencies:
     "@commitlint/cli" "^8.0.0"
     "@commitlint/config-conventional" "^8.0.0"
     "@naturalcycles/fs-lib" "^2.0.0"
     "@naturalcycles/js-lib" "^8.0.0"
+    "@types/dotenv" "^6.1.1"
     "@types/fs-extra" "^8.0.0"
     "@types/jest" "^24.0.6"
     "@types/node" "^12.0.0"
     "@types/yargs" "^13.0.0"
-    ansi-colors "^4.1.1"
+    chalk "^2.4.2"
     command-exists "^1.2.8"
+    dotenv "^8.1.0"
     execa "^2.0.3"
     fs-extra "^8.0.0"
     husky "^3.0.0"
@@ -492,7 +494,7 @@
     ts-node "^8.1.0"
     tslint "^5.11.0"
     typescript "^3.4.5"
-    yargs "^13.2.4"
+    yargs "^14.0.0"
 
 "@naturalcycles/fs-lib@^2.0.0":
   version "2.4.1"
@@ -509,16 +511,16 @@
     yargs "^14.0.0"
 
 "@naturalcycles/js-lib@^8.0.0", "@naturalcycles/js-lib@^8.4.0":
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.5.1.tgz#19a75fa1a6b8e94e3e4199c8ff745ea546fa2454"
-  integrity sha512-xgYnC/9cTgHZ6OyC8zjYZsoiB1p5SfCQt70bidQp4Yi5rfLo2/O80iIiB0lBAKyIsFfat9+8ANmRS7zkPwPv2w==
+  version "8.6.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.6.1.tgz#a9576f39648ee6e8615ae11ac6a8774c729d170f"
+  integrity sha512-NHYkPt0GBuE71JBjDu2IQKzBLLWGqUjpZlqi9IbJV3O93j10wVZb6qSPb0OMKKo94UsN4jNmt3zTOAeIlbPO5A==
   dependencies:
     type-fest "^0.7.1"
 
 "@naturalcycles/time-lib@^1.0.0":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/time-lib/-/time-lib-1.4.3.tgz#ad3e63f4442ba55eee04f315243b72036e42e84f"
-  integrity sha512-eWRQQqREwEkFa9i1/VBkkL0QoFjPgRz2AfITFvFTboAb2Zmtm13AfEAFpuMy4HUh3HNO+3kX5M5hw6FvtKXqzw==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/time-lib/-/time-lib-1.5.0.tgz#3b80ff2310b8efc3279ad6aad3dc1134dcf15a6c"
+  integrity sha512-oPX+etA74zP2ffm5ojv1uAI8LhCFz7c5JtY7SNR4DoXaYO77+RyPq3Z9ef6tXawMySziCX9Sm2/evGqT7K2tsA==
   dependencies:
     dayjs "^1.8.14"
 
@@ -582,6 +584,13 @@
   integrity sha512-CeBpmX1J8kWLcDEnI3Cl2Eo6RfbGvzUctA+CjZUhOKDFbLfcr7fc4usEqLNWetrlJd7RhAkyYe2czXop4fICpw==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/dotenv@^6.1.1":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-6.1.1.tgz#f7ce1cc4fe34f0a4373ba99fefa437b0bec54b46"
+  integrity sha512-ftQl3DtBvqHl9L16tpqqzA4YzCSXZfi7g8cQceTz5rOlYtk/IZbFjAv3mLOQlNIgOaylCQWQoBdDQHPgEBJPHg==
+  dependencies:
+    "@types/node" "*"
 
 "@types/events@*":
   version "3.0.0"
@@ -1569,6 +1578,11 @@ dot-prop@^3.0.0:
   integrity sha1-G3CK8JSknJoOfbyteQq6U52sEXc=
   dependencies:
     is-obj "^1.0.0"
+
+dotenv@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
+  integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -3466,9 +3480,9 @@ minimist@~0.0.1:
   integrity sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
 
 minipass@^2.2.1, minipass@^2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.3.5.tgz#cacebe492022497f656b0f0f51e2682a9ed2d848"
-  integrity sha512-Gi1W4k059gyRbyVUZQ4mEqLm0YIUiGYfvxhF6SIlk3ui1WVxMTGfGdQ2SInh3PDrRTVvPKgULkpJtT4RH10+VA==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/minipass/-/minipass-2.4.0.tgz#38f0af94f42fb6f34d3d7d82a90e2c99cd3ff485"
+  integrity sha512-6PmOuSP4NnZXzs2z6rbwzLJu/c5gdzYg1mRI/WIYdx45iiX7T+a4esOzavD6V/KmBzAaopFSTZPZcUx73bqKWA==
   dependencies:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
@@ -5280,7 +5294,7 @@ yargs-parser@^13.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs@^13.2.4, yargs@^13.3.0:
+yargs@^13.3.0:
   version "13.3.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.3.0.tgz#4c657a55e07e5f2cf947f8a366567c04a0dedc83"
   integrity sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==

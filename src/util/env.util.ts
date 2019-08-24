@@ -1,4 +1,5 @@
 import { ValuesOf } from '@naturalcycles/js-lib'
+import 'dotenv/config' // ensure .env is read before requiring keys
 
 /*
 type ObjectWithKeysOf<T extends readonly string[]> = {
