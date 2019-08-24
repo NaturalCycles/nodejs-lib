@@ -1,3 +1,10 @@
+## [6.16.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.1...v6.16.2) (2019-08-24)
+
+
+### Bug Fixes
+
+* log secret object keys (not values) ([fa4e730](https://github.com/NaturalCycles/nodejs-lib/commit/fa4e730))
+
 ## [6.16.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.0...v6.16.1) (2019-08-24)
 
 
