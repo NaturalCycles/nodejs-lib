@@ -1,3 +1,10 @@
+## [6.15.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.15.0...v6.15.1) (2019-08-24)
+
+
+### Bug Fixes
+
+* don't lazy-load secrets ([e5d87a6](https://github.com/NaturalCycles/nodejs-lib/commit/e5d87a6))
+
 # [6.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.14.0...v6.15.0) (2019-08-24)
 
 
