@@ -3,6 +3,8 @@
 > Standard library for Node.js
 
 [![npm](https://img.shields.io/npm/v/@naturalcycles/nodejs-lib/latest.svg)](https://www.npmjs.com/package/@naturalcycles/nodejs-lib)
+[![publish size](https://badgen.net/packagephobia/publish/@naturalcycles/nodejs-lib)](https://packagephobia.now.sh/result?p=@naturalcycles/nodejs-lib)
+[![install size](https://badgen.net/packagephobia/install/@naturalcycles/nodejs-lib)](https://packagephobia.now.sh/result?p=@naturalcycles/nodejs-lib)
 [![](https://circleci.com/gh/NaturalCycles/nodejs-lib.svg?style=shield&circle-token=cbb20b471eb9c1d5ed975e28c2a79a45671d78ea)](https://circleci.com/gh/NaturalCycles/nodejs-lib)
 [![Maintainability](https://api.codeclimate.com/v1/badges/119a3b4735c4ed81cf84/maintainability)](https://codeclimate.com/github/NaturalCycles/nodejs-lib/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/119a3b4735c4ed81cf84/test_coverage)](https://codeclimate.com/github/NaturalCycles/nodejs-lib/test_coverage)
