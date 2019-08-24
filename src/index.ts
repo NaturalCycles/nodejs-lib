@@ -17,7 +17,7 @@ import {
   ALPHABET_UPPERCASE,
   stringId,
 } from './security/id.util'
-import { loadSecrets, secret, secretMap, secretOptional } from './security/secret.util'
+import { getSecretMap, loadSecrets, secret, secretOptional } from './security/secret.util'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -129,7 +129,7 @@ export {
   PausableObservable,
   streamToObservable,
   runScript,
-  secretMap,
+  getSecretMap,
   loadSecrets,
   secret,
   secretOptional,

@@ -1,39 +1,33 @@
 import { base64ToString, Debug } from '..'
 
+let loaded = false
 const log = Debug('nc:nodejs-lib:secret')
 
-export const secretMap: Record<string, string> = init()
+const secretMap: Record<string, string> = {}
 
 /**
+ * Loads plaintext secrets from process.env, removes them, stores locally.
  * Make sure to call this function early on server startup, so secrets are removed from process.env
  */
-export function loadSecrets (): void {}
+export function loadSecrets (): void {
+  if (loaded) return
 
-/**
- * Loads plaintext secrets from process.env, removes them, stores locally
- */
-function init (): Record<string, string> {
-  const map = Object.keys(process.env)
+  Object.keys(process.env)
     .filter(k => k.toUpperCase().startsWith('SECRET_'))
-    .reduce(
-      (map, k) => {
-        map[k.toUpperCase()] = process.env[k]!
-        delete process.env[k]
-        return map
-      },
-      {} as Record<string, string>,
-    )
+    .forEach(k => {
+      secretMap[k.toUpperCase()] = process.env[k]!
+      delete process.env[k]
+    })
 
-  log(`${Object.keys(map).length} secrets loaded from process.env`)
-
-  return map
+  loaded = true
+  log(`${Object.keys(secretMap).length} secrets loaded from process.env`)
 }
 
 /**
  * json secrets are always base64'd
  */
 export function secret<T = string> (k: string, json = false): T {
-  const v = secretMap[k.toUpperCase()]
+  const v = secretOptional(k)
   if (!v) {
     throw new Error(`process.env.${k.toUpperCase()} not found!`)
   }
@@ -46,5 +40,17 @@ export function secret<T = string> (k: string, json = false): T {
 }
 
 export function secretOptional (k: string): string | undefined {
+  requireLoaded()
   return secretMap[k.toUpperCase()]
+}
+
+export function getSecretMap (): Record<string, string> {
+  requireLoaded()
+  return secretMap
+}
+
+function requireLoaded (): void {
+  if (!loaded) {
+    throw new Error(`Secrets were not loaded! Call loadSecrets() before accessing secrets.`)
+  }
 }

@@ -8,12 +8,15 @@ process.env = {
 }
 
 // order is important, secret.util should be loaded after the mocks
-import { loadSecrets, secret, secretMap, secretOptional } from './secret.util'
+import { getSecretMap, loadSecrets, secret, secretOptional } from './secret.util'
 
 test('secret', async () => {
+  expect(() => secret('SECRET_A')).toThrow('not loaded')
+  expect(() => getSecretMap()).toThrow('not loaded')
+
   loadSecrets()
 
-  expect(secretMap).toEqual({
+  expect(getSecretMap()).toEqual({
     SECRET_A: 'VALUE A',
     SECRET_B: 'VALUE B',
     SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',
