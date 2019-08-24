@@ -1,3 +1,10 @@
+# [6.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.14.0...v6.15.0) (2019-08-24)
+
+
+### Features
+
+* secret.util ([cb0e4dc](https://github.com/NaturalCycles/nodejs-lib/commit/cb0e4dc))
+
 # [6.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.13.0...v6.14.0) (2019-08-24)
 
 
