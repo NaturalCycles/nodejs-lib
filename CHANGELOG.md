@@ -1,3 +1,10 @@
+# [6.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.13.0...v6.14.0) (2019-08-24)
+
+
+### Features
+
+* runScript, requireEnvKeys do 'dotenv/config' ([c20164b](https://github.com/NaturalCycles/nodejs-lib/commit/c20164b))
+
 # [6.13.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.12.0...v6.13.0) (2019-08-20)
 
 
