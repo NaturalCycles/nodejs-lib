@@ -15,15 +15,21 @@ const secretMap: Record<string, string> = {}
 export function loadSecretsFromEnv (): void {
   require('dotenv').config() // ensure .env is loaded
 
+  const secrets: Record<string, string> = {}
   Object.keys(process.env)
     .filter(k => k.toUpperCase().startsWith('SECRET_'))
     .forEach(k => {
+      secrets[k.toUpperCase()] = process.env[k]!
       secretMap[k.toUpperCase()] = process.env[k]!
       delete process.env[k]
     })
 
   loaded = true
-  log(`${Object.keys(secretMap).length} secret(s) loaded from process.env`)
+  log(
+    `${Object.keys(secrets).length} secret(s) loaded from process.env: ${Object.keys(secrets).join(
+      ', ',
+    )}`,
+  )
 }
 
 /**
@@ -58,7 +64,11 @@ export function loadSecretsFromJsonFile (filePath: string, SECRET_ENCRYPTION_KEY
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
 
   loaded = true
-  log(`${Object.keys(secrets).length} secret(s) loaded from ${filePath}`)
+  log(
+    `${Object.keys(secrets).length} secret(s) loaded from ${filePath}: ${Object.keys(secrets)
+      .map(s => s.toUpperCase())
+      .join(', ')}`,
+  )
 }
 
 /**
@@ -93,7 +103,11 @@ export function getSecretMap (): Record<string, string> {
 export function setSecretMap (map: Record<string, string>): void {
   Object.keys(secretMap).forEach(k => delete secretMap[k])
   Object.entries(map).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
-  log(`setSecretMap set ${Object.keys(secretMap).length} secret(s)`)
+  log(
+    `setSecretMap set ${Object.keys(secretMap).length} secret(s): ${Object.keys(map)
+      .map(s => s.toUpperCase())
+      .join(', ')}`,
+  )
 }
 
 function requireLoaded (): void {
