@@ -13,6 +13,8 @@ const secretMap: Record<string, string> = {}
  * Does NOT delete previous secrets from secretMap.
  */
 export function loadSecretsFromEnv (): void {
+  require('dotenv').config() // ensure .env is loaded
+
   Object.keys(process.env)
     .filter(k => k.toUpperCase().startsWith('SECRET_'))
     .forEach(k => {
