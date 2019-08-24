@@ -1,6 +1,12 @@
 import { processSharedUtil } from './infra/process.shared.util'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
+  decryptRandomIVBuffer,
+  encryptRandomIVBuffer,
+  generateSecretKey,
+  generateSecretKeyBase64,
+} from './security/crypto.util'
+import {
   base64ToBuffer,
   base64ToString,
   bufferToBase64,
@@ -17,7 +23,15 @@ import {
   ALPHABET_UPPERCASE,
   stringId,
 } from './security/id.util'
-import { getSecretMap, loadSecrets, secret, secretOptional } from './security/secret.util'
+import {
+  getSecretMap,
+  loadSecretsFromEnv,
+  loadSecretsFromJsonFile,
+  removeSecretsFromEnv,
+  secret,
+  secretOptional,
+  setSecretMap,
+} from './security/secret.util'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -130,7 +144,14 @@ export {
   streamToObservable,
   runScript,
   getSecretMap,
-  loadSecrets,
+  setSecretMap,
+  loadSecretsFromEnv,
+  loadSecretsFromJsonFile,
+  removeSecretsFromEnv,
   secret,
   secretOptional,
+  encryptRandomIVBuffer,
+  decryptRandomIVBuffer,
+  generateSecretKey,
+  generateSecretKeyBase64,
 }

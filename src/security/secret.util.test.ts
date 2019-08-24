@@ -7,14 +7,22 @@ process.env = {
   SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',
 }
 
+import { secretsJsonEncPath, secretsJsonPath, TEST_ENC_KEY } from '../test/test.cnst'
 // order is important, secret.util should be loaded after the mocks
-import { getSecretMap, loadSecrets, secret, secretOptional } from './secret.util'
+import {
+  getSecretMap,
+  loadSecretsFromEnv,
+  loadSecretsFromJsonFile,
+  secret,
+  secretOptional,
+  setSecretMap,
+} from './secret.util'
 
 test('secret', async () => {
   expect(() => secret('SECRET_A')).toThrow('not loaded')
   expect(() => getSecretMap()).toThrow('not loaded')
 
-  loadSecrets()
+  loadSecretsFromEnv()
 
   expect(getSecretMap()).toEqual({
     SECRET_A: 'VALUE A',
@@ -32,4 +40,21 @@ test('secret', async () => {
   expect(secret('SECRET_J', true)).toEqual({
     hello: 'secret world',
   })
+
+  setSecretMap({ a: 'b' }) // should clear all other secrets! should uppercase keys
+  expect(secretOptional('SECRET_A')).toBeUndefined()
+  expect(secret('A')).toBe('b')
+  expect(secret('a')).toBe('b')
+})
+
+test('loadSecretsFromJsonFile', async () => {
+  setSecretMap({}) // reset
+
+  loadSecretsFromJsonFile(secretsJsonPath)
+  expect(secret('very')).toBe('secretuous')
+
+  setSecretMap({}) // reset
+
+  loadSecretsFromJsonFile(secretsJsonEncPath, TEST_ENC_KEY)
+  expect(secret('very')).toBe('secretuous')
 })
