@@ -1,3 +1,10 @@
+# [6.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.15.1...v6.16.0) (2019-08-24)
+
+
+### Features
+
+* crypto.util (originally from secret-lib) ([5a44ecb](https://github.com/NaturalCycles/nodejs-lib/commit/5a44ecb))
+
 ## [6.15.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.15.0...v6.15.1) (2019-08-24)
 
 
