@@ -1,3 +1,10 @@
+# [6.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.2...v6.17.0) (2019-08-25)
+
+
+### Features
+
+* log.debug level ([9a41b15](https://github.com/NaturalCycles/nodejs-lib/commit/9a41b15))
+
 ## [6.16.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.1...v6.16.2) (2019-08-24)
 
 
