@@ -24,6 +24,8 @@ test('secret', async () => {
 
   loadSecretsFromEnv()
 
+  expect(process.env.SECRET_A).toBeUndefined() // should be erased
+
   expect(getSecretMap()).toEqual({
     SECRET_A: 'VALUE A',
     SECRET_B: 'VALUE B',

@@ -20,6 +20,7 @@ export interface DebugFormatters {
 export interface IDebugger {
   // (formatter: any, ...args: any[]): void;
   (...args: any[]): void
+  debug: (...args: any[]) => void
   info: (...args: any[]) => void // alias to just log()
   warn: (...args: any[]) => void
   error: (...args: any[]) => void
@@ -33,6 +34,7 @@ export interface IDebugger {
 }
 
 export enum DebugLogLevel {
+  debug = 'debug',
   info = 'info',
   warn = 'warn',
   error = 'error',
@@ -45,6 +47,10 @@ OriginalDebug.log = console.log.bind(console)
 export const Debug = ((namespace: string) => {
   const instance = OriginalDebug(namespace)
   instance.info = instance.bind(instance)
+
+  const instanceDebug = OriginalDebug([namespace, 'debug'].join(':'))
+  instanceDebug.log = console.debug.bind(console)
+  instance.debug = instanceDebug.bind(instanceDebug)
 
   const instanceWarn = OriginalDebug([namespace, 'warn'].join(':'))
   instanceWarn.log = console.warn.bind(console)

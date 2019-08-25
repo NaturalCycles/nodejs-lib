@@ -25,6 +25,7 @@ test('debug', () => {
 
   log('hello log', obj)
   log.info('hello log', obj)
+  log.debug('hello log', obj)
   log.warn('hello log', obj)
   log.error('hello log', obj)
 
@@ -32,6 +33,7 @@ test('debug', () => {
   log[level]('hello level')
 
   log(err)
+  log.debug(err)
   log.warn(err)
   log.error(err)
 })
