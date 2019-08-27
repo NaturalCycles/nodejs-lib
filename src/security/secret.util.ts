@@ -75,21 +75,18 @@ export function loadSecretsFromJsonFile (filePath: string, SECRET_ENCRYPTION_KEY
  * json secrets are always base64'd
  */
 export function secret<T = string> (k: string, json = false): T {
-  const v = secretOptional(k)
+  const v = secretOptional(k, json)
   if (!v) {
     throw new Error(`secret(${k.toUpperCase()}) not found!`)
-  }
-
-  if (json) {
-    return JSON.parse(base64ToString(v))
   }
 
   return v as any
 }
 
-export function secretOptional (k: string): string | undefined {
+export function secretOptional<T = string> (k: string, json = false): T | undefined {
   requireLoaded()
-  return secretMap[k.toUpperCase()]
+  const v = secretMap[k.toUpperCase()]
+  return v && json ? JSON.parse(base64ToString(v)) : v
 }
 
 export function getSecretMap (): Record<string, string> {
