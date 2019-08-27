@@ -1,3 +1,10 @@
+## [6.17.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.0...v6.17.1) (2019-08-27)
+
+
+### Bug Fixes
+
+* secretOptional json support ([c8f12a0](https://github.com/NaturalCycles/nodejs-lib/commit/c8f12a0))
+
 # [6.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.16.2...v6.17.0) (2019-08-25)
 
 
