@@ -1,3 +1,10 @@
+## [6.17.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.1...v6.17.2) (2019-09-10)
+
+
+### Bug Fixes
+
+* emailSchema to only do basic validation (no tld) ([e6ca0a9](https://github.com/NaturalCycles/nodejs-lib/commit/e6ca0a9))
+
 ## [6.17.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.0...v6.17.1) (2019-08-27)
 
 
