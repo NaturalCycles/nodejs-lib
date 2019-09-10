@@ -1,5 +1,5 @@
-import { semVerSchema, urlSchema } from './joi.shared.schemas'
-import { validate } from './joi.validation.util'
+import { emailSchema, semVerSchema, urlSchema } from './joi.shared.schemas'
+import { isValid, validate } from './joi.validation.util'
 
 test('semVerSchema', async () => {
   // invalid
@@ -28,4 +28,10 @@ test('urlSchema', () => {
 
   validate('https://example.com', schemaAllowHttp)
   validate('http://example.com', schemaAllowHttp)
+})
+
+test('emailSchema should only do simple validation', () => {
+  expect(isValid('#$%', emailSchema)).toBe(false)
+  expect(isValid('test@gmail.com', emailSchema)).toBe(true)
+  expect(isValid('test@gmail.con', emailSchema)).toBe(true)
 })

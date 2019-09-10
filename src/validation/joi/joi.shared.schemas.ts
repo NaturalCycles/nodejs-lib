@@ -66,7 +66,11 @@ export const verSchema = numberSchema
   .min(1)
   .max(100)
 
-export const emailSchema = stringSchema.email().lowercase()
+export const emailSchema = stringSchema
+  .email({
+    tlds: false,
+  })
+  .lowercase()
 
 /**
  * Pattern is simplified for our use, it's not a canonical SemVer.
