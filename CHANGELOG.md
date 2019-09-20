@@ -1,3 +1,10 @@
+# [6.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.2...v6.18.0) (2019-09-20)
+
+
+### Features
+
+* export memoryUsage, memoryUsageFull ([edab56e](https://github.com/NaturalCycles/nodejs-lib/commit/edab56e))
+
 ## [6.17.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.1...v6.17.2) (2019-09-10)
 
 
