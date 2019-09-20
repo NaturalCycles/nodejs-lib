@@ -1,32 +1,42 @@
 import * as os from 'os'
 
-function mb(b: number): number {
+export function mb(b: number): number {
   return Math.round(b / (1024 * 1024))
+}
+
+export function memoryUsage() {
+  const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
+  return {
+    rss: mb(rss),
+    heapTotal: mb(heapTotal),
+    heapUsed: mb(heapUsed),
+    external: mb(external),
+  }
+}
+
+export function memoryUsageFull() {
+  const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
+  const totalMem = os.totalmem()
+  const freeMem = os.freemem()
+  return {
+    rss: mb(rss),
+    heapTotal: mb(heapTotal),
+    heapUsed: mb(heapUsed),
+    external: mb(external),
+    totalMem: mb(totalMem),
+    freeMem: mb(freeMem),
+    usedMem: mb(totalMem - freeMem),
+  }
 }
 
 class ProcessSharedUtil {
   private timer!: NodeJS.Timer
 
-  memoryUsage(): any {
-    const m = process.memoryUsage()
-    const totalMem = os.totalmem()
-    const freeMem = os.freemem()
-    return {
-      rss: mb(m.rss),
-      heapTotal: mb(m.heapTotal),
-      heapUsed: mb(m.heapUsed),
-      external: mb((m as any).external),
-      totalMem: mb(totalMem),
-      freeMem: mb(freeMem),
-      usedMem: mb(totalMem - freeMem),
-    }
-  }
-
   startMemoryTimer(ms: number): void {
-    console.log(this.memoryUsage())
+    console.log(memoryUsage())
 
     this.timer = setInterval(() => {
-      console.log(this.memoryUsage())
+      console.log(memoryUsage())
     }, ms)
   }
 

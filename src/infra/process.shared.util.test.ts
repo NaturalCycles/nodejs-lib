@@ -1,4 +1,4 @@
-import { processSharedUtil } from './process.shared.util'
+import { memoryUsage, processSharedUtil } from './process.shared.util'
 
 test('cpuInfo', async () => {
   const c = processSharedUtil.cpuInfo()
@@ -7,7 +7,7 @@ test('cpuInfo', async () => {
 })
 
 test('memoryUsage', async () => {
-  const c = processSharedUtil.memoryUsage()
+  const c = memoryUsage()
   // console.log(c)
   expect(c).toHaveProperty('heapUsed')
 })
