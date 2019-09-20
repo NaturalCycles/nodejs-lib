@@ -15,6 +15,6 @@ export const ALPHABET_ALPHANUMERIC = [ALPHABET_NUMBER, ALPHABET_LOWERCASE, ALPHA
  * Generate cryptographically-secure string id.
  * Powered by `nanoid`.
  */
-export function stringId (length = 16, alphabet = ALPHABET_ALPHANUMERIC_LOWERCASE): string {
+export function stringId(length = 16, alphabet = ALPHABET_ALPHANUMERIC_LOWERCASE): string {
   return nanoidGenerate(alphabet, length)
 }

@@ -5,8 +5,8 @@ import { publish } from 'rxjs/operators'
  * Extends Observable, similar to ReadableStream's .pause() and .resume().
  */
 export interface PausableObservable<T> extends Observable<T> {
-  pause (): void
-  resume (): void
+  pause(): void
+  resume(): void
 }
 
 /**
@@ -14,7 +14,7 @@ export interface PausableObservable<T> extends Observable<T> {
  *
  * Based on  https://github.com/Reactive-Extensions/rx-node/blob/master/index.js
  */
-export function streamToObservable<T = any> (
+export function streamToObservable<T = any>(
   stream: NodeJS.ReadableStream,
   finishEventName = 'end',
   dataEventName = 'data',

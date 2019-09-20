@@ -12,7 +12,7 @@
  * - No need to add `.then(() => process.exit()` (e.g to close DB connections)
  * - No need to add `.catch(err => { console.error(err); process.exit(1) })`
  */
-export function runScript (fn: (...args: any[]) => Promise<any>): void {
+export function runScript(fn: (...args: any[]) => Promise<any>): void {
   fn()
     .then(() => process.exit(0))
     .catch(err => {

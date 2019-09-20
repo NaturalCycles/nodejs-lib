@@ -1,13 +1,13 @@
 import * as os from 'os'
 
-function mb (b: number): number {
+function mb(b: number): number {
   return Math.round(b / (1024 * 1024))
 }
 
 class ProcessSharedUtil {
   private timer!: NodeJS.Timer
 
-  memoryUsage (): any {
+  memoryUsage(): any {
     const m = process.memoryUsage()
     const totalMem = os.totalmem()
     const freeMem = os.freemem()
@@ -22,7 +22,7 @@ class ProcessSharedUtil {
     }
   }
 
-  startMemoryTimer (ms: number): void {
+  startMemoryTimer(ms: number): void {
     console.log(this.memoryUsage())
 
     this.timer = setInterval(() => {
@@ -30,11 +30,11 @@ class ProcessSharedUtil {
     }, ms)
   }
 
-  stopMemoryTimer (afterMs = 0): void {
+  stopMemoryTimer(afterMs = 0): void {
     setTimeout(() => clearInterval(this.timer), afterMs)
   }
 
-  cpuAvg (): any {
+  cpuAvg(): any {
     const avg = os.loadavg()
     return {
       avg1: avg[0].toFixed(2),
@@ -43,7 +43,7 @@ class ProcessSharedUtil {
     }
   }
 
-  cpuInfo (): any {
+  cpuInfo(): any {
     const c = (os.cpus() || [undefined])[0]
     return {
       count: os.cpus().length,
@@ -52,7 +52,7 @@ class ProcessSharedUtil {
     }
   }
 
-  async cpuPercent (ms: number): Promise<any> {
+  async cpuPercent(ms: number): Promise<any> {
     const stats1 = this.getCPUInfo()
     const startIdle = stats1.idle
     const startTotal = stats1.total
@@ -72,7 +72,7 @@ class ProcessSharedUtil {
     })
   }
 
-  private getCPUInfo () {
+  private getCPUInfo() {
     return os.cpus().reduce(
       (r, cpu) => {
         r['idle'] += cpu.times.idle

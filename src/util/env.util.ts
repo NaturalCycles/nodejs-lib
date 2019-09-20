@@ -14,7 +14,7 @@ type ObjectWithKeysOf<T extends readonly string[]> = {
  *
  * Will throw if any of the passed keys is not defined.
  */
-export function requireEnvKeys<T extends readonly string[]> (
+export function requireEnvKeys<T extends readonly string[]>(
   ...keys: T
 ): { [k in ValuesOf<T>]: string } {
   return keys.reduce(

@@ -41,7 +41,7 @@ const defaultOptions: ValidationOptions = {
  *
  * If `schema` is undefined - returns value as is.
  */
-export function validate<IN, OUT = IN> (
+export function validate<IN, OUT = IN>(
   value: IN,
   schema?: AnySchemaTyped<IN, OUT>,
   objectName?: string,
@@ -68,7 +68,7 @@ export function validate<IN, OUT = IN> (
  *
  * If `schema` is undefined - returns value as is.
  */
-export function getValidationResult<IN, OUT = IN> (
+export function getValidationResult<IN, OUT = IN>(
   value: IN,
   schema?: AnySchemaTyped<IN, OUT>,
   objectName?: string,
@@ -95,14 +95,14 @@ export function getValidationResult<IN, OUT = IN> (
 /**
  * Convenience function that returns true if !error.
  */
-export function isValid<IN, OUT = IN> (value: IN, schema?: AnySchemaTyped<IN, OUT>): boolean {
+export function isValid<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): boolean {
   if (!schema) return { value } as any
 
   const { error } = Joi.validate(value, schema, defaultOptions)
   return !error
 }
 
-export function undefinedIfInvalid<IN, OUT = IN> (
+export function undefinedIfInvalid<IN, OUT = IN>(
   value: IN,
   schema?: AnySchemaTyped<IN, OUT>,
 ): OUT | undefined {
@@ -117,13 +117,13 @@ export function undefinedIfInvalid<IN, OUT = IN> (
  * Will do joi-convertation, regardless of error/validity of value.
  * @returns converted value
  */
-export function convert<IN, OUT = IN> (value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
+export function convert<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
   if (!schema) return value as any
   const { value: returnValue } = Joi.validate(value, schema, defaultOptions)
   return returnValue as any
 }
 
-function createError (value: any, err: ValidationError, objectName?: string): JoiValidationError {
+function createError(value: any, err: ValidationError, objectName?: string): JoiValidationError {
   if (!err) return undefined as any
   const tokens: string[] = []
 

@@ -12,7 +12,7 @@ const secretMap: Record<string, string> = {}
  *
  * Does NOT delete previous secrets from secretMap.
  */
-export function loadSecretsFromEnv (): void {
+export function loadSecretsFromEnv(): void {
   require('dotenv').config() // ensure .env is loaded
 
   const secrets: Record<string, string> = {}
@@ -35,7 +35,7 @@ export function loadSecretsFromEnv (): void {
 /**
  * Removes process.env.SECRET_*
  */
-export function removeSecretsFromEnv (): void {
+export function removeSecretsFromEnv(): void {
   Object.keys(process.env)
     .filter(k => k.toUpperCase().startsWith('SECRET_'))
     .forEach(k => delete process.env[k])
@@ -46,7 +46,7 @@ export function removeSecretsFromEnv (): void {
  *
  * If SECRET_ENCRYPTION_KEY argument is passed - will decrypt the contents of the file first, before parsing it as JSON.
  */
-export function loadSecretsFromJsonFile (filePath: string, SECRET_ENCRYPTION_KEY?: string): void {
+export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?: string): void {
   if (!fs.existsSync(filePath)) {
     throw new Error(`loadSecretsFromPlainJsonFile() cannot load from path: ${filePath}`)
   }
@@ -74,7 +74,7 @@ export function loadSecretsFromJsonFile (filePath: string, SECRET_ENCRYPTION_KEY
 /**
  * json secrets are always base64'd
  */
-export function secret<T = string> (k: string, json = false): T {
+export function secret<T = string>(k: string, json = false): T {
   const v = secretOptional(k, json)
   if (!v) {
     throw new Error(`secret(${k.toUpperCase()}) not found!`)
@@ -83,13 +83,13 @@ export function secret<T = string> (k: string, json = false): T {
   return v as any
 }
 
-export function secretOptional<T = string> (k: string, json = false): T | undefined {
+export function secretOptional<T = string>(k: string, json = false): T | undefined {
   requireLoaded()
   const v = secretMap[k.toUpperCase()]
   return v && json ? JSON.parse(base64ToString(v)) : v
 }
 
-export function getSecretMap (): Record<string, string> {
+export function getSecretMap(): Record<string, string> {
   requireLoaded()
   return secretMap
 }
@@ -97,7 +97,7 @@ export function getSecretMap (): Record<string, string> {
 /**
  * REPLACES secretMap with new map.
  */
-export function setSecretMap (map: Record<string, string>): void {
+export function setSecretMap(map: Record<string, string>): void {
   Object.keys(secretMap).forEach(k => delete secretMap[k])
   Object.entries(map).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
   log(
@@ -107,7 +107,7 @@ export function setSecretMap (map: Record<string, string>): void {
   )
 }
 
-function requireLoaded (): void {
+function requireLoaded(): void {
   if (!loaded) {
     throw new Error(`Secrets were not loaded! Call loadSecrets() before accessing secrets.`)
   }

@@ -17,11 +17,11 @@ export const binarySchema = Joi.binary()
 export const urlSchema = (scheme: string | string[] = 'https') =>
   Joi.string().uri({ scheme }) as StringSchemaTyped
 
-export function arraySchema<T> (items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T> {
+export function arraySchema<T>(items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T> {
   return items ? Joi.array().items(items) : Joi.array()
 }
 
-export function objectSchema<IN, OUT = IN> (
+export function objectSchema<IN, OUT = IN>(
   schema?: { [key in keyof Partial<IN>]: AnySchemaTyped<IN[key]> },
 ): ObjectSchemaTyped<IN, OUT> {
   return Joi.object(schema)

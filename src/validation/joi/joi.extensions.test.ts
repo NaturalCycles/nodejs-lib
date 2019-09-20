@@ -78,7 +78,7 @@ test('dividable', async () => {
   shouldBeValid(schema, [3, 6, 9, 27])
 })
 
-function shouldBeInvalid (schema: any, values: any[]) {
+function shouldBeInvalid(schema: any, values: any[]) {
   values.forEach(v => {
     try {
       validate(v, schema)
@@ -88,7 +88,7 @@ function shouldBeInvalid (schema: any, values: any[]) {
   })
 }
 
-function shouldBeValid (schema: any, values: any[]) {
+function shouldBeValid(schema: any, values: any[]) {
   values.forEach(v => {
     try {
       validate(v, schema)

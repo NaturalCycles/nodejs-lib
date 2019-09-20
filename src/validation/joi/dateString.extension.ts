@@ -3,7 +3,7 @@ import * as JoiLib from '@hapi/joi'
 import { dayjs } from '@naturalcycles/time-lib'
 
 export interface DateStringExtension {
-  dateString (min?: string, max?: string): this
+  dateString(min?: string, max?: string): this
 }
 
 export interface DateStringParams {
@@ -11,7 +11,7 @@ export interface DateStringParams {
   max?: string
 }
 
-export function dateStringExtension (joi: typeof JoiLib): Extension {
+export function dateStringExtension(joi: typeof JoiLib): Extension {
   return {
     base: joi.string(),
     name: 'string',
@@ -28,7 +28,7 @@ export function dateStringExtension (joi: typeof JoiLib): Extension {
           min: joi.string().optional(),
           max: joi.string().optional(),
         },
-        validate (params: DateStringParams, v: any, state: State, options: ValidationOptions) {
+        validate(params: DateStringParams, v: any, state: State, options: ValidationOptions) {
           let err: string | undefined
           let min = params.min
           let max = params.max

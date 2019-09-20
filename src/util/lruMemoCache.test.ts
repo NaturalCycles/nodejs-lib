@@ -2,12 +2,12 @@ import { memo } from '@naturalcycles/js-lib'
 import { LRUMemoCache } from './lruMemoCache'
 
 class A {
-  func (n: number): void {
+  func(n: number): void {
     console.log(`func ${n}`)
   }
 
   @memo({ cacheFactory: () => new LRUMemoCache({ maxAge: 100, max: 100 }) })
-  a (a1: number, a2: number): number {
+  a(a1: number, a2: number): number {
     const n = a1 * a2
     this.func(n)
     return n

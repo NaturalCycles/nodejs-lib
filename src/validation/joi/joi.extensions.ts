@@ -20,8 +20,8 @@ export const Joi: ExtendedJoi = JoiLib.defaults(schema => {
   .extend((joi: typeof JoiLib) => dividableExtension(joi))
 
 export interface ExtendedJoi extends JoiLib.Root {
-  string (): ExtendedStringSchema
-  number (): ExtendedNumberSchema
+  string(): ExtendedStringSchema
+  number(): ExtendedNumberSchema
 }
 
 export interface ExtendedStringSchema
