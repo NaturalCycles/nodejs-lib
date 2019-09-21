@@ -1,3 +1,10 @@
+## [6.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.18.0...v6.18.1) (2019-09-21)
+
+
+### Bug Fixes
+
+* changed default emailSchema behavior to DO tlds ([50751b2](https://github.com/NaturalCycles/nodejs-lib/commit/50751b2))
+
 # [6.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.17.2...v6.18.0) (2019-09-20)
 
 
