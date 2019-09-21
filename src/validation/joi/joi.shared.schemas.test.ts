@@ -1,4 +1,4 @@
-import { emailSchema, semVerSchema, urlSchema } from './joi.shared.schemas'
+import { emailSchema, semVerSchema, stringSchema, urlSchema } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
 test('semVerSchema', async () => {
@@ -30,8 +30,19 @@ test('urlSchema', () => {
   validate('http://example.com', schemaAllowHttp)
 })
 
-test('emailSchema should only do simple validation', () => {
+test('emailSchema should do TLD validation by default', () => {
   expect(isValid('#$%', emailSchema)).toBe(false)
   expect(isValid('test@gmail.com', emailSchema)).toBe(true)
-  expect(isValid('test@gmail.con', emailSchema)).toBe(true)
+  expect(isValid('test@gmail.con', emailSchema)).toBe(false)
+})
+
+test('possibility to disable TLD email validation', () => {
+  const schema = stringSchema.email({ tlds: false }).lowercase()
+  expect(isValid('#$%', schema)).toBe(false)
+  expect(isValid('test@gmail.com', schema)).toBe(true)
+  expect(isValid('test@gmail.con', schema)).toBe(true)
+})
+
+test('emailSchema should lowercase', () => {
+  expect(validate('test@GMAIL.cOm', emailSchema)).toBe('test@gmail.com')
 })
