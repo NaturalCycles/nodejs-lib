@@ -1,3 +1,10 @@
+# [6.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.18.1...v6.19.0) (2019-09-24)
+
+
+### Features
+
+* stringIdAsync, stringIdUnsafe, export nanoid ([7e66202](https://github.com/NaturalCycles/nodejs-lib/commit/7e66202))
+
 ## [6.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.18.0...v6.18.1) (2019-09-21)
 
 
