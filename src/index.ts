@@ -21,7 +21,10 @@ import {
   ALPHABET_LOWERCASE,
   ALPHABET_NUMBER,
   ALPHABET_UPPERCASE,
+  nanoid,
   stringId,
+  stringIdAsync,
+  stringIdUnsafe,
 } from './security/id.util'
 import {
   getSecretMap,
@@ -124,6 +127,9 @@ export {
   requireEnvKeys,
   LRUMemoCache,
   stringId,
+  stringIdAsync,
+  stringIdUnsafe,
+  nanoid,
   ALPHABET_NUMBER,
   ALPHABET_LOWERCASE,
   ALPHABET_UPPERCASE,

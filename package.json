@@ -8,6 +8,7 @@
     "@types/dotenv": "^6.1.1",
     "@types/hapi__joi": "^15.0.1",
     "@types/lru-cache": "^5.1.0",
+    "@types/nanoid": "^2.0.0",
     "debug": "^4.1.1",
     "dotenv": "^8.1.0",
     "lru-cache": "^5.1.1",
