@@ -1,3 +1,10 @@
+## [6.19.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.19.0...v6.19.1) (2019-09-25)
+
+
+### Bug Fixes
+
+* let Debug to bind to console.log later ([7533e2b](https://github.com/NaturalCycles/nodejs-lib/commit/7533e2b))
+
 # [6.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.18.1...v6.19.0) (2019-09-24)
 
 
