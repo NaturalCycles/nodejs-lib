@@ -2,7 +2,9 @@ import * as fs from 'fs-extra'
 import { base64ToString, Debug, decryptRandomIVBuffer } from '..'
 
 let loaded = false
-const log = Debug('nc:nodejs-lib:secret')
+
+// it's wrapped to be able to pipe console.* to Stackdriver
+const getLog = () => Debug('nc:nodejs-lib:secret')
 
 const secretMap: Record<string, string> = {}
 
@@ -25,7 +27,7 @@ export function loadSecretsFromEnv(): void {
     })
 
   loaded = true
-  log(
+  getLog()(
     `${Object.keys(secrets).length} secret(s) loaded from process.env: ${Object.keys(secrets).join(
       ', ',
     )}`,
@@ -64,7 +66,7 @@ export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
 
   loaded = true
-  log(
+  getLog()(
     `${Object.keys(secrets).length} secret(s) loaded from ${filePath}: ${Object.keys(secrets)
       .map(s => s.toUpperCase())
       .join(', ')}`,
@@ -100,7 +102,7 @@ export function getSecretMap(): Record<string, string> {
 export function setSecretMap(map: Record<string, string>): void {
   Object.keys(secretMap).forEach(k => delete secretMap[k])
   Object.entries(map).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
-  log(
+  getLog()(
     `setSecretMap set ${Object.keys(secretMap).length} secret(s): ${Object.keys(map)
       .map(s => s.toUpperCase())
       .join(', ')}`,

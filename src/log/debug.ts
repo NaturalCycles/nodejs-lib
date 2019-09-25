@@ -41,11 +41,10 @@ export enum DebugLogLevel {
 }
 
 const OriginalDebug = require('debug') as IDebug
-// This enables colors for objects:
-OriginalDebug.log = console.log.bind(console)
 
 export const Debug = ((namespace: string) => {
   const instance = OriginalDebug(namespace)
+  instance.log = console.log.bind(console) // this enables colors for objects
   instance.info = instance.bind(instance)
 
   const instanceDebug = OriginalDebug([namespace, 'debug'].join(':'))
