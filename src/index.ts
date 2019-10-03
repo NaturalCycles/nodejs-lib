@@ -35,6 +35,8 @@ import {
   secretOptional,
   setSecretMap,
 } from './security/secret.util'
+import { SlackSharedService } from './slack/slack.shared.service'
+import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -163,4 +165,7 @@ export {
   mb,
   memoryUsage,
   memoryUsageFull,
+  SlackSharedService,
+  SlackSharedServiceCfg,
+  SlackMessage,
 }

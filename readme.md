@@ -20,6 +20,7 @@
 - hash.util
 - process.util (cpu, memory, etc)
 - lruMemoCache (implementation of MemoCache based on lru-cache)
+- SlackService
 
 # What should go in this lib
 
