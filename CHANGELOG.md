@@ -1,3 +1,11 @@
+# [6.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.19.1...v6.20.0) (2019-10-03)
+
+
+### Features
+
+* execCommand, execShell (move from dev-lib here) ([f87c80c](https://github.com/NaturalCycles/nodejs-lib/commit/f87c80c))
+* SlackSharedService ([f31856c](https://github.com/NaturalCycles/nodejs-lib/commit/f31856c))
+
 ## [6.19.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.19.0...v6.19.1) (2019-09-25)
 
 
