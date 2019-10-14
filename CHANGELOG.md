@@ -1,3 +1,10 @@
+# [6.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.20.0...v6.21.0) (2019-10-14)
+
+
+### Features
+
+* update execa ([28e47ab](https://github.com/NaturalCycles/nodejs-lib/commit/28e47ab))
+
 # [6.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.19.1...v6.20.0) (2019-10-03)
 
 
