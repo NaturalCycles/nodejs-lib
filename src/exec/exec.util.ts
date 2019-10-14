@@ -37,13 +37,14 @@ export async function execCommand(
     }
 
     if (err) {
-      if (err.exitCodeName === 'ENOENT') {
-        console.log(`Error: ENOENT (no such file or directory): ${cmd}`)
-        process.exit(1)
-      } else if (err.exitCode) {
+      console.log(`${cmd} error ${err.exitCode}`)
+
+      if (err.originalMessage) {
+        console.log(err.originalMessage)
+      }
+
+      if (err.exitCode) {
         process.exit(err.exitCode)
-      } else if (err.exitCodeName) {
-        console.log(`Error: ${err.exitCodeName}`)
       }
     }
 

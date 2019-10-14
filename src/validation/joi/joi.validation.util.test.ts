@@ -1,3 +1,4 @@
+import { Joi } from './joi.extensions'
 import {
   arraySchema,
   booleanSchema,
@@ -300,4 +301,14 @@ test('convert', () => {
   expect(convert('a', stringSchema)).toBe('a')
   expect(convert(' a', stringSchema)).toBe('a')
   expect(convert(' a b  ', stringSchema)).toBe('a b')
+})
+
+// todo
+test.skip('arraySchema should strip undefined/null values by default', () => {
+  // const schema = arraySchema(stringSchema)
+  const schema = Joi.array()
+    .sparse(true)
+    .items(stringSchema.optional())
+
+  expect(validate(['s', undefined, 's2', null], schema)).toEqual(['s', 's2'])
 })
