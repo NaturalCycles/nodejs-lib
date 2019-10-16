@@ -1,3 +1,10 @@
+## [6.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.1...v6.21.2) (2019-10-16)
+
+
+### Bug Fixes
+
+* bump deps, should fix execa/joi issues ([ef13b3b](https://github.com/NaturalCycles/nodejs-lib/commit/ef13b3b))
+
 ## [6.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.0...v6.21.1) (2019-10-16)
 
 
