@@ -1,3 +1,10 @@
+## [6.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.0...v6.21.1) (2019-10-16)
+
+
+### Bug Fixes
+
+* execWithArgs, execCommand, preferLocal=false ([f595bf8](https://github.com/NaturalCycles/nodejs-lib/commit/f595bf8))
+
 # [6.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.20.0...v6.21.0) (2019-10-14)
 
 
