@@ -25,6 +25,9 @@
     "jest": "^24.8.0",
     "weak": "^1.0.1"
   },
+  "resolutions": {
+    "@types/hapi__joi": "15.0.4"
+  },
   "files": [
     "dist",
     "src",
