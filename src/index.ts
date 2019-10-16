@@ -1,4 +1,4 @@
-import { execCommand, execShell } from './exec/exec.util'
+import { execCommand, execWithArgs } from './exec/exec.util'
 import { mb, memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
@@ -170,5 +170,5 @@ export {
   SlackSharedServiceCfg,
   SlackMessage,
   execCommand,
-  execShell,
+  execWithArgs,
 }

@@ -15,12 +15,24 @@ export async function proxyCommand(
 ): Promise<void> {
   const [, , ...processArgs] = process.argv
 
-  await execCommand(cmd, [...args, ...processArgs], {
+  await execWithArgs(cmd, [...args, ...processArgs], {
     ...opt,
   })
 }
 
-export async function execCommand(
+export async function execCommand(cmd: string, opt: ExecaOptions = {}): Promise<void> {
+  logExec(cmd, [], opt)
+
+  await execa
+    .command(cmd, {
+      stdio: 'inherit',
+      // preferLocal: true,
+      ...opt,
+    })
+    .catch(err => handleError(err, cmd, opt))
+}
+
+export async function execWithArgs(
   cmd: string,
   args: string[] = [],
   opt: ExecaOptions = {},
@@ -29,37 +41,29 @@ export async function execCommand(
 
   await execa(cmd, args, {
     stdio: 'inherit',
-    preferLocal: true,
+    // preferLocal: true,
     ...opt,
-  }).catch(err => {
-    if (opt.noProcessExit) {
-      throw err || new Error(`execCommand failed: ${cmd}`)
-    }
-
-    if (err) {
-      console.log(`${cmd} error ${err.exitCode}`)
-
-      if (err.originalMessage) {
-        console.log(err.originalMessage)
-      }
-
-      if (err.exitCode) {
-        process.exit(err.exitCode)
-      }
-    }
-
-    process.exit(1)
-  })
+  }).catch(err => handleError(err, cmd, opt))
 }
 
-/**
- * Convenience method that calls execCommand with `shell: true` option.
- */
-export async function execShell(cmd: string, opt: ExecaOptions = {}): Promise<void> {
-  await execCommand(cmd, [], {
-    shell: true,
-    ...opt,
-  })
+function handleError(err: execa.ExecaError, cmd: string, opt: ExecaOptions = {}): void {
+  if (opt.noProcessExit) {
+    throw err || new Error(`execCommand failed: ${cmd}`)
+  }
+
+  if (err) {
+    console.log(`${cmd} error ${err.exitCode}`)
+
+    if (err.originalMessage) {
+      console.log(err.originalMessage)
+    }
+
+    if (err.exitCode) {
+      process.exit(err.exitCode)
+    }
+  }
+
+  process.exit(1)
 }
 
 export function logExec(cmd: string, args: string[] = [], opt: ExecaOptions = {}): void {

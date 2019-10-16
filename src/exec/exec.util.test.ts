@@ -5,7 +5,7 @@ beforeEach(() => {
 })
 
 test('execCommand ok', async () => {
-  await execCommand('ls > /dev/null', [], {
+  await execCommand('ls > /dev/null', {
     shell: true,
   })
 })
