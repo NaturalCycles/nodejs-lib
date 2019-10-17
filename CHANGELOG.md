@@ -1,3 +1,10 @@
+## [6.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.2...v6.21.3) (2019-10-17)
+
+
+### Bug Fixes
+
+* bring back execShell ([4b0813e](https://github.com/NaturalCycles/nodejs-lib/commit/4b0813e))
+
 ## [6.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.1...v6.21.2) (2019-10-16)
 
 
