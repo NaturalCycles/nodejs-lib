@@ -1,4 +1,4 @@
-import { execCommand } from './exec.util'
+import { execCommand, execShell } from './exec.util'
 
 beforeEach(() => {
   jest.restoreAllMocks()
@@ -8,6 +8,8 @@ test('execCommand ok', async () => {
   await execCommand('ls > /dev/null', {
     shell: true,
   })
+
+  await execShell('ls > /dev/null')
 })
 
 test('execCommand error, exit', async () => {

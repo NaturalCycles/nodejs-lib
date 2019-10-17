@@ -46,6 +46,13 @@ export async function execWithArgs(
   }).catch(err => handleError(err, cmd, opt))
 }
 
+export async function execShell(cmd: string, opt: ExecaOptions = {}): Promise<void> {
+  await execCommand(cmd, {
+    shell: true,
+    ...opt,
+  })
+}
+
 function handleError(err: execa.ExecaError, cmd: string, opt: ExecaOptions = {}): void {
   if (opt.noProcessExit) {
     throw err || new Error(`execCommand failed: ${cmd}`)
