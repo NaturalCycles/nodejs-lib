@@ -1,3 +1,10 @@
+# [6.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.22.0...v6.23.0) (2019-10-18)
+
+
+### Features
+
+* streamToArray, readableFrom, pMap collectResults ([2fa6e88](https://github.com/NaturalCycles/nodejs-lib/commit/2fa6e88))
+
 # [6.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.3...v6.22.0) (2019-10-18)
 
 
