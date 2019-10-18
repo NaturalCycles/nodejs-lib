@@ -38,10 +38,15 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
+import { pMapStream, PMapStreamOptions } from './stream/pMapStream'
+import {
+  PausableObservable,
+  streamToObservable,
+  StreamToObservableOptions,
+} from './stream/streamToObservable'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
-import { PausableObservable, streamToObservable } from './util/stream.util'
 import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
@@ -150,6 +155,7 @@ export {
   Debug,
   DebugLogLevel,
   PausableObservable,
+  StreamToObservableOptions,
   streamToObservable,
   runScript,
   getSecretMap,
@@ -172,4 +178,6 @@ export {
   execCommand,
   execShell,
   execWithArgs,
+  pMapStream,
+  PMapStreamOptions,
 }

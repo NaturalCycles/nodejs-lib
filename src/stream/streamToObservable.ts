@@ -9,6 +9,18 @@ export interface PausableObservable<T> extends Observable<T> {
   resume(): void
 }
 
+export interface StreamToObservableOptions {
+  /**
+   * @default 'data'
+   */
+  dataEventName?: string
+
+  /**
+   * @default 'end'
+   */
+  finishEventName?: string
+}
+
 /**
  * Converts Node.js ReadableStream to RxJS Observable.
  *
@@ -16,9 +28,10 @@ export interface PausableObservable<T> extends Observable<T> {
  */
 export function streamToObservable<T = any>(
   stream: NodeJS.ReadableStream,
-  finishEventName = 'end',
-  dataEventName = 'data',
+  opt: StreamToObservableOptions = {},
 ): PausableObservable<T> {
+  const { dataEventName = 'data', finishEventName = 'end' } = opt
+
   stream.pause()
 
   const obs = new Observable<T>(observer => {
@@ -27,17 +40,17 @@ export function streamToObservable<T = any>(
     const endHandler = () => observer.complete()
 
     stream
-      .addListener(dataEventName, dataHandler)
-      .addListener('error', errorHandler)
-      .addListener(finishEventName, endHandler)
+      .on(dataEventName, dataHandler)
+      .on('error', errorHandler)
+      .on(finishEventName, endHandler)
 
     stream.resume()
 
     return () => {
       stream
-        .removeListener(dataEventName, dataHandler)
-        .removeListener('error', errorHandler)
-        .removeListener(finishEventName, endHandler)
+        .off(dataEventName, dataHandler)
+        .off('error', errorHandler)
+        .off(finishEventName, endHandler)
     }
   })
 
