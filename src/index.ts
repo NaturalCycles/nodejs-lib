@@ -39,6 +39,8 @@ import {
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
 import { pMapStream, PMapStreamOptions } from './stream/pMapStream'
+import { readableFrom } from './stream/readableFrom'
+import { streamToArray } from './stream/streamToArray'
 import {
   PausableObservable,
   streamToObservable,
@@ -180,4 +182,6 @@ export {
   execWithArgs,
   pMapStream,
   PMapStreamOptions,
+  streamToArray,
+  readableFrom,
 }
