@@ -1,3 +1,10 @@
+## [6.23.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.23.0...v6.23.1) (2019-10-18)
+
+
+### Bug Fixes
+
+* export PMapStreamMapper ([f7e5a33](https://github.com/NaturalCycles/nodejs-lib/commit/f7e5a33))
+
 # [6.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.22.0...v6.23.0) (2019-10-18)
 
 
