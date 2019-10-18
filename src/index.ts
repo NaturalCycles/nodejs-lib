@@ -38,7 +38,7 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
-import { pMapStream, PMapStreamOptions } from './stream/pMapStream'
+import { pMapStream, PMapStreamMapper, PMapStreamOptions } from './stream/pMapStream'
 import { readableFrom } from './stream/readableFrom'
 import { streamToArray } from './stream/streamToArray'
 import {
@@ -182,6 +182,7 @@ export {
   execWithArgs,
   pMapStream,
   PMapStreamOptions,
+  PMapStreamMapper,
   streamToArray,
   readableFrom,
 }
