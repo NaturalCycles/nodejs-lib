@@ -1,3 +1,10 @@
+# [6.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.3...v6.22.0) (2019-10-18)
+
+
+### Features
+
+* pMapStream, StreamToObservableOptions ([7b7dd1d](https://github.com/NaturalCycles/nodejs-lib/commit/7b7dd1d))
+
 ## [6.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v6.21.2...v6.21.3) (2019-10-17)
 
 
