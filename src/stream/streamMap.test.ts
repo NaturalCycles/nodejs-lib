@@ -59,3 +59,22 @@ test('streamMap exception stopOnError=false', async () => {
   expect(err.results).toEqual(data.filter(r => r.id !== '3'))
   expect(readable.destroyed).toBe(true)
 })
+
+test('streamMap exception skipErrors=true', async () => {
+  const data = _range(1, 5).map(n => ({ id: String(n) }))
+
+  const readable = readableFrom(data)
+
+  expect(
+    await streamMap(
+      readable,
+      async item => {
+        if (item.id === '3') throw new Error('my error')
+        return item
+      },
+      { skipErrors: true, collectResults: true },
+    ),
+  ).toEqual(data.filter(r => r.id !== '3'))
+
+  expect(readable.destroyed).toBe(true)
+})

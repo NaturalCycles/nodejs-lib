@@ -25,6 +25,12 @@ export interface StreamMapOptions {
    * @default true
    */
   stopOnError?: boolean
+
+  /**
+   * If true - will ignore errors and return results from successful operations.
+   * @default false
+   */
+  skipErrors?: boolean
 }
 
 /**
@@ -39,7 +45,8 @@ export async function streamMap<IN = any, OUT = any>(
   mapper: StreamMapper<IN, OUT>,
   opt: StreamMapOptions = {},
 ): Promise<OUT[]> {
-  const { collectResults = false, concurrency = 10, stopOnError = true } = opt
+  const { collectResults = false, concurrency = 10, stopOnError = true, skipErrors = false } = opt
+
   let index = 0
   const results: OUT[] = []
   const errors: Error[] = []
@@ -55,11 +62,11 @@ export async function streamMap<IN = any, OUT = any>(
             final(cb) {
               cb()
               stream.destroy()
-              if (!stopOnError && errors.length) {
-                reject(new AggregatedError(errors, results))
-              } else {
-                resolve(results)
+              if (!stopOnError && !skipErrors && errors.length) {
+                return reject(new AggregatedError(errors, results))
               }
+
+              resolve(results)
             },
           },
           async (chunk: IN, _encoding, cb) => {
@@ -70,14 +77,14 @@ export async function streamMap<IN = any, OUT = any>(
               if (collectResults) results.push(res)
               cb()
             } catch (err) {
-              if (stopOnError) {
+              if (!stopOnError || skipErrors) {
+                errors.push(err)
+                cb()
+              } else {
                 isRejected = true
                 // cb(err)
                 stream.destroy()
                 reject(err)
-              } else {
-                errors.push(err)
-                cb()
               }
             }
           },
