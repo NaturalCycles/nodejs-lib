@@ -1,3 +1,10 @@
+# [6.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.2...v6.25.0) (2019-10-19)
+
+
+### Features
+
+* streamMap skipErrors option ([55bbc21](https://github.com/NaturalCycles/nodejs-lib/commit/55bbc21))
+
 ## [6.24.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.1...v6.24.2) (2019-10-19)
 
 
