@@ -21,6 +21,7 @@ test('streamMap collectResults=true', async () => {
 
   const res = await streamMap(readable, async item => item, { collectResults: true })
   expect(res).toEqual(data)
+  expect(readable.destroyed).toBe(true)
 })
 
 test('streamMap exception', async () => {
@@ -34,6 +35,8 @@ test('streamMap exception', async () => {
       return item
     }),
   ).rejects.toThrow('my error')
+
+  expect(readable.destroyed).toBe(true)
 })
 
 test('streamMap exception stopOnError=false', async () => {
@@ -54,4 +57,5 @@ test('streamMap exception stopOnError=false', async () => {
   expect(err).toMatchSnapshot()
   expect(err.errors).toMatchSnapshot()
   expect(err.results).toEqual(data.filter(r => r.id !== '3'))
+  expect(readable.destroyed).toBe(true)
 })

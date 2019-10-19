@@ -1,4 +1,5 @@
 import { AggregatedError } from '@naturalcycles/js-lib'
+import { Readable } from 'stream'
 import * as through2Concurrent from 'through2-concurrent'
 
 export type StreamMapper<IN, OUT> = (input: IN, index: number) => PromiseLike<OUT>
@@ -34,7 +35,7 @@ export interface StreamMapOptions {
  * Only works in objectMode (due to through2Concurrent)
  */
 export async function streamMap<IN = any, OUT = any>(
-  stream: NodeJS.ReadableStream,
+  stream: Readable,
   mapper: StreamMapper<IN, OUT>,
   opt: StreamMapOptions = {},
 ): Promise<OUT[]> {
@@ -50,13 +51,15 @@ export async function streamMap<IN = any, OUT = any>(
         through2Concurrent.obj(
           {
             maxConcurrency: concurrency,
+            // autoDestroy: true,
             final(cb) {
+              cb()
+              stream.destroy()
               if (!stopOnError && errors.length) {
                 reject(new AggregatedError(errors, results))
               } else {
                 resolve(results)
               }
-              cb()
             },
           },
           async (chunk: IN, _encoding, cb) => {
@@ -69,7 +72,8 @@ export async function streamMap<IN = any, OUT = any>(
             } catch (err) {
               if (stopOnError) {
                 isRejected = true
-                cb(err)
+                // cb(err)
+                stream.destroy()
                 reject(err)
               } else {
                 errors.push(err)
