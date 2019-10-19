@@ -1,3 +1,10 @@
+# [6.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.23.1...v6.24.0) (2019-10-19)
+
+
+### Features
+
+* pMapStream>streamMap, implement stopOnError ([948514a](https://github.com/NaturalCycles/nodejs-lib/commit/948514a))
+
 ## [6.23.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.23.0...v6.23.1) (2019-10-18)
 
 
