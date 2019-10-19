@@ -1,3 +1,10 @@
+## [6.24.2](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.1...v6.24.2) (2019-10-19)
+
+
+### Bug Fixes
+
+* use Readable instead of ReadableStream ([38baf4a](https://github.com/NaturalCycles/nodejs-lib/commit/38baf4a))
+
 ## [6.24.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.0...v6.24.1) (2019-10-19)
 
 
