@@ -1,3 +1,10 @@
+## [6.24.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.0...v6.24.1) (2019-10-19)
+
+
+### Bug Fixes
+
+* don't throw unhandled error from streamMap ([dc372df](https://github.com/NaturalCycles/nodejs-lib/commit/dc372df))
+
 # [6.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.23.1...v6.24.0) (2019-10-19)
 
 
