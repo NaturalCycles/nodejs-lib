@@ -1,24 +1,24 @@
 import { _range } from '@naturalcycles/js-lib'
-import { pMapStream, readableFrom } from '../index'
+import { readableFrom, streamMap } from '../index'
 
-test('pMapStream simple', async () => {
+test('streamMap simple', async () => {
   const data = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
   const items: any[] = []
-  const res = await pMapStream(readable, async item => {
+  const res = await streamMap(readable, async item => {
     items.push(item)
   })
   expect(res).toEqual([])
   expect(items).toEqual(data)
 })
 
-test('pMapStream returnResults=true', async () => {
+test('streamMap returnResults=true', async () => {
   const data = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
-  const res = await pMapStream(readable, async item => item, { collectResults: true })
+  const res = await streamMap(readable, async item => item, { collectResults: true })
   expect(res).toEqual(data)
 })
