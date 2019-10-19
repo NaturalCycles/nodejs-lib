@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`streamMap exception stopOnError=false 1`] = `
+[AggregatedError: 1 errors:
+1. my error]
+`;
+
+exports[`streamMap exception stopOnError=false 2`] = `
+Array [
+  [Error: my error],
+]
+`;

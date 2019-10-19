@@ -45,38 +45,42 @@ export async function streamMap<IN = any, OUT = any>(
   let isRejected = false
 
   return new Promise<OUT[]>((resolve, reject) => {
-    stream.pipe(
-      through2Concurrent.obj(
-        {
-          maxConcurrency: concurrency,
-          final(cb) {
-            if (!stopOnError && errors.length) {
-              reject(new AggregatedError(errors, results))
-            } else {
-              resolve(results)
-            }
-            cb()
+    stream
+      .pipe(
+        through2Concurrent.obj(
+          {
+            maxConcurrency: concurrency,
+            final(cb) {
+              if (!stopOnError && errors.length) {
+                reject(new AggregatedError(errors, results))
+              } else {
+                resolve(results)
+              }
+              cb()
+            },
           },
-        },
-        async (chunk: IN, _encoding, cb) => {
-          if (isRejected) return cb()
+          async (chunk: IN, _encoding, cb) => {
+            if (isRejected) return cb()
 
-          try {
-            const res = await mapper(chunk, index++)
-            if (collectResults) results.push(res)
-            cb()
-          } catch (err) {
-            if (stopOnError) {
-              isRejected = true
-              cb(err)
-              reject(err)
-            } else {
-              errors.push(err)
-              cb(err)
+            try {
+              const res = await mapper(chunk, index++)
+              if (collectResults) results.push(res)
+              cb()
+            } catch (err) {
+              if (stopOnError) {
+                isRejected = true
+                cb(err)
+                reject(err)
+              } else {
+                errors.push(err)
+                cb()
+              }
             }
-          }
-        },
-      ),
-    )
+          },
+        ),
+      )
+      .on('error', err => {
+        // console.log('onError', err)
+      })
   })
 }
