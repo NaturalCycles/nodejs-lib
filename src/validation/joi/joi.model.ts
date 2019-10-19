@@ -6,7 +6,6 @@ import {
   BooleanSchema,
   DateSchema,
   FunctionSchema,
-  LazySchema,
   NumberSchema,
   ObjectSchema,
   StringSchema,
@@ -23,7 +22,6 @@ export type SchemaTyped<IN, OUT = IN> =
   | NumberSchemaTyped
   | ObjectSchemaTyped<IN, OUT>
   | StringSchemaTyped
-  | LazySchemaTyped<IN>
 
 /**
  * IN - value before validation/conversion
@@ -40,4 +38,3 @@ export interface FunctionSchemaTyped<T> extends FunctionSchema {}
 export interface NumberSchemaTyped extends NumberSchema, AnySchemaTyped<number> {}
 export interface ObjectSchemaTyped<IN, OUT = IN> extends ObjectSchema, AnySchemaTyped<IN, OUT> {}
 export interface StringSchemaTyped extends StringSchema, AnySchemaTyped<string> {}
-export interface LazySchemaTyped<T> extends LazySchema {}

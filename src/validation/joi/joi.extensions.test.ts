@@ -1,5 +1,4 @@
 import { dayjs } from '@naturalcycles/time-lib'
-import { Joi } from './joi.extensions'
 import { stringSchema } from './joi.shared.schemas'
 import { validate } from './joi.validation.util'
 
@@ -70,13 +69,13 @@ test('dateString min/max today', async () => {
   ])
 })
 
-test('dividable', async () => {
-  const schema = Joi.number().dividable(3)
-
-  shouldBeInvalid(schema, [undefined, null, '', 'abc', 1, 2, 4, 5])
-
-  shouldBeValid(schema, [3, 6, 9, 27])
-})
+// test('dividable', async () => {
+//   const schema = Joi.number().dividable(3)
+//
+//   shouldBeInvalid(schema, [undefined, null, '', 'abc', 1, 2, 4, 5])
+//
+//   shouldBeValid(schema, [3, 6, 9, 27])
+// })
 
 function shouldBeInvalid(schema: any, values: any[]) {
   values.forEach(v => {
