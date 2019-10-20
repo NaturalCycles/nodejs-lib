@@ -1,5 +1,9 @@
+import { SimpleMovingAverage } from '@naturalcycles/js-lib'
+import { since } from '@naturalcycles/time-lib'
 import { Observable, Subject } from 'rxjs'
 import * as through2Concurrent from 'through2-concurrent'
+import { inspect } from 'util'
+import { Debug, mb } from '..'
 import { ReadableTyped } from './stream.model'
 
 export type StreamMapper<IN, OUT> = (input: IN, index: number) => OUT | PromiseLike<OUT>
@@ -47,6 +51,25 @@ export interface StreamToObservableOptions<IN, OUT> {
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
   onError?: (err: Error) => any
+
+  /**
+   * If true - will log progress in a format like:
+   * {read: 10, processed: 4, errors: 0, heapUsed: 47, rps:4, rpsTotal: 3}
+   */
+  logProgress?: boolean
+
+  /**
+   * Interval in milliseconds to print progress stats
+   * @default 300
+   */
+  logProgressInterval?: number
+}
+
+const log = Debug('nc:nodejs-lib:stream')
+
+const inspectOpt: NodeJS.InspectOptions = {
+  colors: true,
+  breakLength: 100,
 }
 
 /**
@@ -68,6 +91,8 @@ export function streamToObservable<IN, OUT = IN>(
     skipErrors = false,
     logErrors = true,
     onError,
+    logProgress = false,
+    logProgressInterval = 300,
   } = opt
 
   // Default to "pass through mapper"
@@ -75,6 +100,14 @@ export function streamToObservable<IN, OUT = IN>(
 
   let index = 0
   let isRejected = false
+  let read = 0
+  let processed = 0
+  let errors = 0
+  const started = Date.now()
+  let processedLastSecond = 0
+  let lastSecondStarted = Date.now()
+  const sma = new SimpleMovingAverage(10) // over last 10 seconds
+  const interval = logProgress ? setInterval(logStats, logProgressInterval) : undefined
 
   const subj = new Subject<OUT>()
 
@@ -85,6 +118,10 @@ export function streamToObservable<IN, OUT = IN>(
           maxConcurrency: concurrency,
           // autoDestroy: true,
           final(cb) {
+            if (interval) {
+              clearInterval(interval)
+              logStats(true)
+            }
             cb()
             stream.destroy()
 
@@ -92,13 +129,17 @@ export function streamToObservable<IN, OUT = IN>(
           },
         },
         async (chunk: IN, _encoding, cb) => {
+          read++
           if (isRejected) return cb()
 
           try {
             const res = await mapper(chunk, index++)
+            processedLastSecond++
+            processed++
             if (res !== undefined || emitUndefinedResults) subj.next(res)
             cb()
           } catch (err) {
+            errors++
             callOnError(err)
             cb()
           }
@@ -107,7 +148,6 @@ export function streamToObservable<IN, OUT = IN>(
     )
     .on('error', err => {
       callOnError(err)
-      // console.log('onError', err)
     })
 
   return subj
@@ -117,7 +157,7 @@ export function streamToObservable<IN, OUT = IN>(
   function callOnError(err: Error): void {
     if (skipErrors) {
       if (logErrors) {
-        console.error(err)
+        log.error(err)
       }
 
       if (onError) {
@@ -127,8 +167,39 @@ export function streamToObservable<IN, OUT = IN>(
       }
     } else {
       isRejected = true
+      clearInterval(interval!)
       stream.destroy()
       subj.error(err)
+    }
+  }
+
+  function logStats(final = false): void {
+    const now = Date.now()
+    const lastRPS = processedLastSecond / ((now - lastSecondStarted) / 1000) || 0
+    const rpsTotal = Math.round(processed / ((now - started) / 1000))
+    lastSecondStarted = now
+    processedLastSecond = 0
+
+    const rps10 = Math.round(sma.push(lastRPS))
+
+    console.log(
+      inspect(
+        {
+          read,
+          processed,
+          errors,
+          heapUsed: mb(process.memoryUsage().heapUsed),
+          rps10,
+          rpsTotal,
+        },
+        inspectOpt,
+      ),
+    )
+
+    if (final) {
+      console.log(
+        `stream took ${since(started)} to process ${processed} items with total RPS of ${rpsTotal}`,
+      )
     }
   }
 }
