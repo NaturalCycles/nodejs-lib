@@ -39,6 +39,7 @@ import {
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
 import { readableFrom } from './stream/readableFrom'
+import { ReadableTyped } from './stream/stream.model'
 import { streamMap } from './stream/streamMap'
 import { streamToArray } from './stream/streamToArray'
 import { streamToObservable } from './stream/streamToObservable'
@@ -177,4 +178,5 @@ export {
   streamToArray,
   streamMap,
   readableFrom,
+  ReadableTyped,
 }

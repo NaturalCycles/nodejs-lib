@@ -7,11 +7,11 @@ interface Item {
 }
 
 test('streamToArray obj', async () => {
-  const data = _range(1, 4).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
-  const r = await streamToArray<Item>(readable)
+  const r = await streamToArray(readable)
   // console.log(r)
   expect(r).toEqual(data)
   expect(readable.destroyed).toBe(true)

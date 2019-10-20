@@ -7,23 +7,23 @@ interface Item {
 }
 
 test('streamToObservable simple', async () => {
-  const data = _range(1, 4).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
-  const res = await streamToObservable<Item, Item>(readable)
+  const res = await streamToObservable(readable)
     .pipe(toArray())
     .toPromise()
   expect(res).toEqual(data)
 })
 
 test('streamToObservable with mapper that returns undefined', async () => {
-  const data = _range(1, 4).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
   const items: Item[] = []
-  const res = await streamToObservable<Item, void>(readable, {
+  const res = await streamToObservable(readable, {
     mapper: async item => {
       items.push(item)
     },
@@ -36,12 +36,12 @@ test('streamToObservable with mapper that returns undefined', async () => {
 })
 
 test('streamToObservable with mapper ignoring Observable', async () => {
-  const data = _range(1, 4).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
   const items: Item[] = []
-  await streamToObservable<Item, void>(readable, {
+  await streamToObservable(readable, {
     mapper: async item => {
       items.push(item)
     },
@@ -51,11 +51,11 @@ test('streamToObservable with mapper ignoring Observable', async () => {
 })
 
 test('streamToObservable with mapper that maps to different type', async () => {
-  const data = _range(1, 4).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
-  const res = await streamToObservable<Item, string>(readable, {
+  const res = await streamToObservable(readable, {
     mapper: async item => item.id,
   })
     .pipe(toArray())
@@ -66,12 +66,12 @@ test('streamToObservable with mapper that maps to different type', async () => {
 })
 
 test('streamToObservable exception', async () => {
-  const data = _range(1, 5).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
   await expect(
-    streamToObservable<Item, Item>(readable, {
+    streamToObservable(readable, {
       mapper: async item => {
         if (item.id === '3') throw new Error('my error')
         return item
@@ -83,11 +83,11 @@ test('streamToObservable exception', async () => {
 })
 
 test('streamToObservable exception skipErrors=true', async () => {
-  const data = _range(1, 5).map(n => ({ id: String(n) }))
+  const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))
 
   const readable = readableFrom(data)
 
-  const items = await streamToObservable<Item, Item>(readable, {
+  const items = await streamToObservable(readable, {
     mapper: async item => {
       if (item.id === '3') throw new Error('my error')
       return item

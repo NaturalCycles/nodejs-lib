@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs'
-import { Readable } from 'stream'
 import * as through2Concurrent from 'through2-concurrent'
+import { ReadableTyped } from './stream.model'
 
 export type StreamMapper<IN, OUT> = (input: IN, index: number) => OUT | PromiseLike<OUT>
 
@@ -58,8 +58,8 @@ export interface StreamToObservableOptions<IN, OUT> {
  *
  * Concurrency defaults to 10.
  */
-export function streamToObservable<IN, OUT>(
-  stream: Readable,
+export function streamToObservable<IN, OUT = IN>(
+  stream: ReadableTyped<IN>,
   opt: StreamToObservableOptions<IN, OUT> = {},
 ): Observable<OUT> {
   const {

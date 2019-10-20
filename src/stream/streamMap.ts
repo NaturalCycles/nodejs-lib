@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { ReadableTyped } from './stream.model'
 import { streamToObservable, StreamToObservableOptions } from './streamToObservable'
 
 /**
@@ -6,9 +6,9 @@ import { streamToObservable, StreamToObservableOptions } from './streamToObserva
  *
  * It's a simplified version of streamToObservable.
  */
-export async function streamMap<IN = any>(
-  stream: Readable,
+export async function streamMap<IN>(
+  stream: ReadableTyped<IN>,
   opt: StreamToObservableOptions<IN, any> = {},
 ): Promise<void> {
-  await streamToObservable<IN, any>(stream, opt).toPromise()
+  await streamToObservable(stream, opt).toPromise()
 }
