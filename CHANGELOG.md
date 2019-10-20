@@ -1,3 +1,10 @@
+# [6.26.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.25.0...v6.26.0) (2019-10-20)
+
+
+### Features
+
+* streamMap>streamToObservable ([c9511a3](https://github.com/NaturalCycles/nodejs-lib/commit/c9511a3))
+
 # [6.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.24.2...v6.25.0) (2019-10-19)
 
 
