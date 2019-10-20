@@ -42,7 +42,11 @@ import { readableFrom } from './stream/readableFrom'
 import { ReadableTyped } from './stream/stream.model'
 import { streamMap } from './stream/streamMap'
 import { streamToArray } from './stream/streamToArray'
-import { streamToObservable } from './stream/streamToObservable'
+import {
+  StreamMapper,
+  streamToObservable,
+  StreamToObservableOptions,
+} from './stream/streamToObservable'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -175,6 +179,8 @@ export {
   execShell,
   execWithArgs,
   streamToObservable,
+  StreamMapper,
+  StreamToObservableOptions,
   streamToArray,
   streamMap,
   readableFrom,
