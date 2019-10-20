@@ -1,31 +1,15 @@
-import { Readable, Writable } from 'stream'
+import { toArray } from 'rxjs/operators'
+import { Readable } from 'stream'
+import { streamToObservable, StreamToObservableOptions } from './streamToObservable'
 
 /**
  * Reads stream, resolves promise with array of stream results in the end.
  */
-export async function streamToArray<OUT = any>(
+export async function streamToArray<T = any>(
   stream: Readable,
-  objectMode = true,
-): Promise<OUT[]> {
-  const results: OUT[] = []
-
-  return new Promise<OUT[]>((resolve, reject) => {
-    stream
-      .pipe(
-        new Writable({
-          objectMode,
-          write(chunk, _encoding, cb): void {
-            // console.log(_encoding)
-            results.push(chunk)
-            cb()
-          },
-          final(cb): void {
-            cb()
-            stream.destroy()
-            resolve(results)
-          },
-        }),
-      )
-      .on('error', err => reject(err))
-  })
+  opt: StreamToObservableOptions<T, T> = {},
+): Promise<T[]> {
+  return await streamToObservable<T, T>(stream, opt)
+    .pipe(toArray())
+    .toPromise()
 }

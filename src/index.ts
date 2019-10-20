@@ -39,13 +39,8 @@ import {
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
 import { readableFrom } from './stream/readableFrom'
-import { streamMap, StreamMapOptions, StreamMapper } from './stream/streamMap'
 import { streamToArray } from './stream/streamToArray'
-import {
-  PausableObservable,
-  streamToObservable,
-  StreamToObservableOptions,
-} from './stream/streamToObservable'
+import { streamToObservable } from './stream/streamToObservable'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -156,8 +151,6 @@ export {
   IDebugger,
   Debug,
   DebugLogLevel,
-  PausableObservable,
-  StreamToObservableOptions,
   streamToObservable,
   runScript,
   getSecretMap,
@@ -180,9 +173,6 @@ export {
   execCommand,
   execShell,
   execWithArgs,
-  streamMap,
-  StreamMapOptions,
-  StreamMapper,
   streamToArray,
   readableFrom,
 }

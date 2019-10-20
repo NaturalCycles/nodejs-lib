@@ -1,61 +1,134 @@
-import { Observable } from 'rxjs'
-import { publish } from 'rxjs/operators'
+import { Observable, Subject } from 'rxjs'
+import { Readable } from 'stream'
+import * as through2Concurrent from 'through2-concurrent'
 
-/**
- * Extends Observable, similar to ReadableStream's .pause() and .resume().
- */
-export interface PausableObservable<T> extends Observable<T> {
-  pause(): void
-  resume(): void
+export type StreamMapper<IN, OUT> = (input: IN, index: number) => OUT | PromiseLike<OUT>
+
+export interface StreamToObservableOptions<IN, OUT> {
+  /**
+   * If NOT defined - will default to "pass through mapper", will set `collectResults=true`, will push each stream item
+   * to the returning Observable.
+   *
+   * If defined - will pass each item through it, allowing to "map" it to another value.
+   * `collectResults` will default to `false`, so, if you need to pass results through you need to set it to `true.
+   * Otherwise `mapper` function has a `forEach` semantics (not `map` semantics).
+   *
+   * @default to "pass through mapper".
+   */
+  mapper?: StreamMapper<IN, OUT>
+
+  /**
+   * If true - it will emit (push to Observable) results that === `undefined`.
+   * If false - will NOT emit them. Will still emit `complete` in the end.
+   * @default false
+   */
+  emitUndefinedResults?: boolean
+
+  /**
+   * Number of concurrently pending promises returned by `mapper`.
+   *
+   * @default 10
+   */
+  concurrency?: number
+
+  /**
+   * If true - will ignore errors, won't emit any results from them. Will still emit `complete` after all input is processed.
+   * @default false
+   */
+  skipErrors?: boolean
+
+  /**
+   * @default true
+   */
+  logErrors?: boolean
+
+  /**
+   * If defined - will be called on every error happening in the stream.
+   * Called BEFORE observable will emit error (unless skipErrors is set to true).
+   */
+  onError?: (err: Error) => any
 }
 
-export interface StreamToObservableOptions {
-  /**
-   * @default 'data'
-   */
-  dataEventName?: string
-
-  /**
-   * @default 'end'
-   */
-  finishEventName?: string
-}
-
 /**
- * Converts Node.js ReadableStream to RxJS Observable.
+ * Like pMap, but for streams.
+ * Main feature is concurrency control and convenient Promise interface.
+ * Using this allows native stream .pipe() to work and use backpressure.
  *
- * Based on  https://github.com/Reactive-Extensions/rx-node/blob/master/index.js
+ * Only works in objectMode (due to through2Concurrent).
+ *
+ * Concurrency defaults to 10.
  */
-export function streamToObservable<T = any>(
-  stream: NodeJS.ReadableStream,
-  opt: StreamToObservableOptions = {},
-): PausableObservable<T> {
-  const { dataEventName = 'data', finishEventName = 'end' } = opt
+export function streamToObservable<IN, OUT>(
+  stream: Readable,
+  opt: StreamToObservableOptions<IN, OUT> = {},
+): Observable<OUT> {
+  const {
+    emitUndefinedResults = false,
+    concurrency = 10,
+    skipErrors = false,
+    logErrors = true,
+    onError,
+  } = opt
 
-  stream.pause()
+  // Default to "pass through mapper"
+  const mapper: StreamMapper<IN, OUT> = opt.mapper || (item => (item as any) as OUT)
 
-  const obs = new Observable<T>(observer => {
-    const dataHandler = (data: T) => observer.next(data)
-    const errorHandler = (err: any) => observer.error(err)
-    const endHandler = () => observer.complete()
+  let index = 0
+  let isRejected = false
 
-    stream
-      .on(dataEventName, dataHandler)
-      .on('error', errorHandler)
-      .on(finishEventName, endHandler)
+  const subj = new Subject<OUT>()
 
-    stream.resume()
+  stream
+    .pipe(
+      through2Concurrent.obj(
+        {
+          maxConcurrency: concurrency,
+          // autoDestroy: true,
+          final(cb) {
+            cb()
+            stream.destroy()
 
-    return () => {
-      stream
-        .off(dataEventName, dataHandler)
-        .off('error', errorHandler)
-        .off(finishEventName, endHandler)
+            subj.complete()
+          },
+        },
+        async (chunk: IN, _encoding, cb) => {
+          if (isRejected) return cb()
+
+          try {
+            const res = await mapper(chunk, index++)
+            if (res !== undefined || emitUndefinedResults) subj.next(res)
+            cb()
+          } catch (err) {
+            callOnError(err)
+            cb()
+          }
+        },
+      ),
+    )
+    .on('error', err => {
+      callOnError(err)
+      // console.log('onError', err)
+    })
+
+  return subj
+
+  //
+
+  function callOnError(err: Error): void {
+    if (skipErrors) {
+      if (logErrors) {
+        console.error(err)
+      }
+
+      if (onError) {
+        try {
+          onError(err)
+        } catch (_ignored) {}
+      }
+    } else {
+      isRejected = true
+      stream.destroy()
+      subj.error(err)
     }
-  })
-
-  const obs2 = publish<T>()(obs).refCount() as PausableObservable<T>
-  obs2.pause = () => stream.pause()
-  obs2.resume = () => stream.resume()
-  return obs2
+  }
 }
