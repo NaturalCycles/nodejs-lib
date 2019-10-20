@@ -1,3 +1,10 @@
+# [6.28.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.27.0...v6.28.0) (2019-10-20)
+
+
+### Features
+
+* ReadableTyped<T> ([1796ebb](https://github.com/NaturalCycles/nodejs-lib/commit/1796ebb))
+
 # [6.27.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.26.0...v6.27.0) (2019-10-20)
 
 
