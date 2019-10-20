@@ -1,3 +1,10 @@
+# [6.29.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.28.1...v6.29.0) (2019-10-20)
+
+
+### Features
+
+* StreamToObservableOptions.logProgress ([283be58](https://github.com/NaturalCycles/nodejs-lib/commit/283be58))
+
 ## [6.28.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.28.0...v6.28.1) (2019-10-20)
 
 
