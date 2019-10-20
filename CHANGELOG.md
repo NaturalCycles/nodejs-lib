@@ -1,3 +1,10 @@
+## [6.28.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.28.0...v6.28.1) (2019-10-20)
+
+
+### Bug Fixes
+
+* exports ([2a36f01](https://github.com/NaturalCycles/nodejs-lib/commit/2a36f01))
+
 # [6.28.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.27.0...v6.28.0) (2019-10-20)
 
 
