@@ -5,11 +5,11 @@ import { streamToObservable, StreamToObservableOptions } from './streamToObserva
 /**
  * Reads stream, resolves promise with array of stream results in the end.
  */
-export async function streamToArray<T = any>(
+export async function streamToArray<IN = any, OUT = IN>(
   stream: Readable,
-  opt: StreamToObservableOptions<T, T> = {},
-): Promise<T[]> {
-  return await streamToObservable<T, T>(stream, opt)
+  opt: StreamToObservableOptions<IN, OUT> = {},
+): Promise<OUT[]> {
+  return await streamToObservable<IN, OUT>(stream, opt)
     .pipe(toArray())
     .toPromise()
 }
