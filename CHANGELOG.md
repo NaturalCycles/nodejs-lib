@@ -1,3 +1,15 @@
+# [6.27.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.26.0...v6.27.0) (2019-10-20)
+
+
+### Bug Fixes
+
+* improve typing of streamToArray ([8e5cb01](https://github.com/NaturalCycles/nodejs-lib/commit/8e5cb01))
+
+
+### Features
+
+* streamMap, that returns `Promise<void>` ([f893e7e](https://github.com/NaturalCycles/nodejs-lib/commit/f893e7e))
+
 # [6.26.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.25.0...v6.26.0) (2019-10-20)
 
 
