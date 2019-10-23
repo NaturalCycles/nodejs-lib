@@ -1,3 +1,10 @@
+## [6.29.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.29.0...v6.29.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* joi validation error truncated at 500 (not 5000) chars ([cd6ef4f](https://github.com/NaturalCycles/nodejs-lib/commit/cd6ef4f00eaae60001369886e3a8144377e23d5c))
+
 # [6.29.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.28.1...v6.29.0) (2019-10-20)
 
 
