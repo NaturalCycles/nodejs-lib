@@ -140,10 +140,10 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
 
   const annotation: string = (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
 
-  if (annotation.length > 500) {
+  if (annotation.length > 1000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
     tokens.push(
-      annotation.substr(0, 500),
+      annotation.substr(0, 1000),
       `... ${Math.ceil(annotation.length / 1024)} KB message truncated`,
     )
 
