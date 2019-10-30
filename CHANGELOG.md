@@ -1,3 +1,10 @@
+## [6.30.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.30.0...v6.30.1) (2019-10-30)
+
+
+### Bug Fixes
+
+* remove @types/dotenv ([7540196](https://github.com/NaturalCycles/nodejs-lib/commit/7540196eb2688ff15f84d7ea9eba51cec44ff68a))
+
 # [6.30.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.29.1...v6.30.0) (2019-10-30)
 
 
