@@ -513,21 +513,21 @@
     yargs "^14.0.0"
 
 "@naturalcycles/js-lib@^8.0.0", "@naturalcycles/js-lib@^8.4.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.8.0.tgz#ce8a3589be764d1bf83f9dc485729263c0ac0184"
-  integrity sha512-cwV1//caAuG+cgWL6/oc6Iv6g7IwPUbDChwmpNt9eQX3aAUyjVEjXzGgLBqP8sxbL4eS4HfL97cZCJYsepu0eQ==
+  version "8.8.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.8.1.tgz#774ea3bc3399272eb79792eb63d8171c7730adac"
+  integrity sha512-SHldIoN0QUqJ7GMjy9H4vI0jzeMDb/ZcNVChCZZfP5lK1og8m/fUC2xMlU8c8395bgSoOwtq1P42NDnhY6cpeA==
   dependencies:
     type-fest "^0.8.0"
 
 "@naturalcycles/nodejs-lib@^6.20.0":
-  version "6.29.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.29.1.tgz#cb23d342fb1bfd2c925e5c059e6b26846cd570b4"
-  integrity sha512-JTy7hPSZC+ba24ImxTRFi6YXKthBoHFuZqFsFouwM8Xhh3KpYQepz4S1/A8fzPHQq95rbfZOGYTcvyca1epflw==
+  version "6.30.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.30.0.tgz#0b0845f6a496ecf2ec7545373ddea0924c84fc2a"
+  integrity sha512-zcwEopUIwp6jHL8dH9iLjSb4H0/dNGj0/qLn4Kk+uqlaSk0ln2rG2hmteMtVs3yNFR6twWPFuhueAiNsX/eGhA==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"
     "@naturalcycles/time-lib" "^1.0.0"
-    "@types/dotenv" "^6.1.1"
+    "@types/dotenv" "^8.2.0"
     "@types/got" "^9.6.7"
     "@types/hapi__joi" "^15.0.1"
     "@types/lru-cache" "^5.1.0"
@@ -724,9 +724,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@^12.0.0", "@types/node@^12.0.2":
-  version "12.12.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.0.tgz#ff3201972d6dc851a9275308a17b9b5094e68057"
-  integrity sha512-6N8Sa5AaENRtJnpKXZgvc119PKxT1Lk9VPy4kfT8JF23tIe1qDfaGkBR2DRKJFIA7NptMz+fps//C6aLi1Uoug==
+  version "12.12.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.3.tgz#ebfe83507ac506bc3486314a8aa395be66af8d23"
+  integrity sha512-opgSsy+cEF9N8MgaVPnWVtdJ3o4mV2aMHvDq7thkQUFt0EuOHJon4rQpJfhjmNHB+ikl0Cd6WhWIErOyQ+f7tw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
