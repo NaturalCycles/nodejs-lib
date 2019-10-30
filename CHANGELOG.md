@@ -1,3 +1,10 @@
+# [6.30.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.29.1...v6.30.0) (2019-10-30)
+
+
+### Features
+
+* **joi:** truncate after 1000, not 500 chars ([379b775](https://github.com/NaturalCycles/nodejs-lib/commit/379b775c85472dfd8cc32b2f6005a8000e3d3999))
+
 ## [6.29.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.29.0...v6.29.1) (2019-10-23)
 
 
