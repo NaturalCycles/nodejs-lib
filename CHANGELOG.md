@@ -1,3 +1,10 @@
+# [6.31.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.30.1...v6.31.0) (2019-10-31)
+
+
+### Features
+
+* WritableTyped, TransformTyped ([e47c694](https://github.com/NaturalCycles/nodejs-lib/commit/e47c6948ffe87d657d24af4c1a322f6b5aa510a8))
+
 ## [6.30.1](https://github.com/NaturalCycles/nodejs-lib/compare/v6.30.0...v6.30.1) (2019-10-30)
 
 
