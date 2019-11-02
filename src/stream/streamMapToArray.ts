@@ -8,9 +8,9 @@ import { transformPushToArray } from './transform/transformPushToArray'
  * Map stream items to array of results (in memory).
  * Warning! All results are stored in memory (no backpressure).
  */
-export async function streamMapToArray<IN, OUT>(
+export async function streamMapToArray<IN, OUT = IN>(
   stream: ReadableTyped<IN>,
-  mapper: Mapper<IN, OUT>,
+  mapper: Mapper<IN, OUT> = item => item as any,
   opt?: TransformMapOptions,
 ): Promise<OUT[]> {
   const res: OUT[] = []
