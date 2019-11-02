@@ -38,9 +38,11 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
+import { fromNDJsonStringTransform, toNDJsonStringTransform } from './stream/ndjson.util'
 import { observableToStream } from './stream/observableToStream'
 import { readableFrom } from './stream/readableFrom'
 import { ReadableTyped, TransformTyped, WritableTyped } from './stream/stream.model'
+import { _pipeline } from './stream/stream.util'
 import { streamMap } from './stream/streamMap'
 import { streamToArray } from './stream/streamToArray'
 import {
@@ -48,6 +50,7 @@ import {
   streamToObservable,
   StreamToObservableOptions,
 } from './stream/streamToObservable'
+import { streamToString } from './stream/streamToString'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -189,4 +192,8 @@ export {
   ReadableTyped,
   WritableTyped,
   TransformTyped,
+  _pipeline,
+  streamToString,
+  toNDJsonStringTransform,
+  fromNDJsonStringTransform,
 }
