@@ -1,3 +1,10 @@
+## [7.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.0.0...v7.0.1) (2019-11-02)
+
+
+### Bug Fixes
+
+* streamToString>streamJoinToString, streamMap>streamMapToArray ([02bdd73](https://github.com/NaturalCycles/nodejs-lib/commit/02bdd738820209090f204787d5b92bc14349fdb5))
+
 # [7.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.34.0...v7.0.0) (2019-11-02)
 
 
