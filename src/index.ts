@@ -43,6 +43,7 @@ import { observableToStream } from './stream/observableToStream'
 import { readableFrom } from './stream/readableFrom'
 import { ReadableTyped, TransformTyped, WritableTyped } from './stream/stream.model'
 import { _pipeline } from './stream/stream.util'
+import { streamBuffer } from './stream/streamBuffer'
 import { streamMap } from './stream/streamMap'
 import { streamToArray } from './stream/streamToArray'
 import {
@@ -51,6 +52,7 @@ import {
   StreamToObservableOptions,
 } from './stream/streamToObservable'
 import { streamToString } from './stream/streamToString'
+import { _through } from './stream/through'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -196,4 +198,6 @@ export {
   streamToString,
   toNDJsonStringTransform,
   fromNDJsonStringTransform,
+  _through,
+  streamBuffer,
 }
