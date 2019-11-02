@@ -38,21 +38,37 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
-import { fromNDJsonStringTransform, toNDJsonStringTransform } from './stream/ndjson.util'
-import { observableToStream } from './stream/observableToStream'
-import { readableFrom } from './stream/readableFrom'
-import { ReadableTyped, TransformTyped, WritableTyped } from './stream/stream.model'
-import { _pipeline } from './stream/stream.util'
-import { streamBuffer } from './stream/streamBuffer'
-import { streamMap } from './stream/streamMap'
-import { streamToArray } from './stream/streamToArray'
+import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
+import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
 import {
-  StreamMapper,
-  streamToObservable,
-  StreamToObservableOptions,
-} from './stream/streamToObservable'
+  pipelineFromNDJsonFile,
+  PipelineFromNDJsonFileOptions,
+} from './stream/ndjson/pipelineFromNDJsonFile'
+import {
+  pipelineToNDJsonFile,
+  PipelineToNDJsonFileOptions,
+} from './stream/ndjson/pipelineToNDJsonFile'
+import { streamToNDJsonFile } from './stream/ndjson/streamToNDJsonFile'
+import { transformJsonParse, TransformJsonParseOptions } from './stream/ndjson/transformJsonParse'
+import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
+import { _pipeline } from './stream/pipeline/pipeline'
+import { pipelineForEach } from './stream/pipeline/pipelineForEach'
+import { pipelineToArray } from './stream/pipeline/pipelineToArray'
+import { readableFromArray } from './stream/readable/readableFromArray'
+import { observableToStream } from './stream/rxjs/observableToStream'
+import { streamToObservable } from './stream/rxjs/streamToObservable'
+import { ReadableTyped, TransformOpt, TransformTyped, WritableTyped } from './stream/stream.model'
+import { streamForEach } from './stream/streamForEach'
+import { streamMap } from './stream/streamMap'
 import { streamToString } from './stream/streamToString'
-import { _through } from './stream/through'
+import { transformBuffer } from './stream/transform/transformBuffer'
+import { transformConcurrent } from './stream/transform/transformConcurrent'
+import { transformFilter } from './stream/transform/transformFilter'
+import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
+import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
+import { transformPushToArray } from './stream/transform/transformPushToArray'
+import { transformSplit } from './stream/transform/transformSplit'
+import { transformToArray } from './stream/transform/transformToArray'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -185,19 +201,37 @@ export {
   execShell,
   execWithArgs,
   observableToStream,
-  streamToObservable,
-  StreamMapper,
-  StreamToObservableOptions,
-  streamToArray,
-  streamMap,
-  readableFrom,
+  readableFromArray,
   ReadableTyped,
   WritableTyped,
   TransformTyped,
   _pipeline,
   streamToString,
-  toNDJsonStringTransform,
-  fromNDJsonStringTransform,
-  _through,
-  streamBuffer,
+  transformBuffer,
+  ndJsonFileRead,
+  ndJsonFileWrite,
+  pipelineFromNDJsonFile,
+  PipelineFromNDJsonFileOptions,
+  PipelineToNDJsonFileOptions,
+  pipelineToNDJsonFile,
+  streamToNDJsonFile,
+  TransformJsonParseOptions,
+  transformJsonParse,
+  TransformToNDJsonOptions,
+  transformToNDJson,
+  pipelineForEach,
+  pipelineToArray,
+  streamToObservable,
+  transformConcurrent,
+  transformFilter,
+  TransformMapOptions,
+  transformMap,
+  MultiMapper,
+  transformMapMulti,
+  transformPushToArray,
+  transformSplit,
+  transformToArray,
+  TransformOpt,
+  streamForEach,
+  streamMap,
 }

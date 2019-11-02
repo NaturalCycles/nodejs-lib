@@ -1,10 +1,10 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFrom } from './readableFrom'
+import { readableFromArray } from './readable/readableFromArray'
 import { streamToString } from './streamToString'
 
-test('streamToString', async () => {
+test('pipelineToString', async () => {
   const data: string[] = _range(1, 4).map(n => String(n))
-  const readable = readableFrom(data, false)
+  const readable = readableFromArray(data, false)
 
   const out = await streamToString(readable, '_')
   // console.log(out)

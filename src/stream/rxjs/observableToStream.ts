@@ -1,10 +1,14 @@
 import { Observable } from 'rxjs'
 import { Readable } from 'stream'
-import { ReadableTyped } from './stream.model'
+import { ReadableTyped, TransformOpt } from '../stream.model'
 
-export function observableToStream<T>(obs: Observable<T>): ReadableTyped<T> {
+export function observableToStream<T>(
+  obs: Observable<T>,
+  opt: TransformOpt = {},
+): ReadableTyped<T> {
   const readable: ReadableTyped<T> = new Readable({
     objectMode: true,
+    ...opt,
     read() {},
   })
 

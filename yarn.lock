@@ -512,16 +512,16 @@
     yargs "^14.0.0"
 
 "@naturalcycles/js-lib@^8.0.0", "@naturalcycles/js-lib@^8.4.0":
-  version "8.8.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.8.1.tgz#774ea3bc3399272eb79792eb63d8171c7730adac"
-  integrity sha512-SHldIoN0QUqJ7GMjy9H4vI0jzeMDb/ZcNVChCZZfP5lK1og8m/fUC2xMlU8c8395bgSoOwtq1P42NDnhY6cpeA==
+  version "8.9.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.9.0.tgz#802cdc34cb1f59895958dbed9565c832e50b2dd6"
+  integrity sha512-3lWviRyGxucrH8Z1A2j7mO4hIy+qJkt2+IOac3WkLVaxpXNYCe7f+yrliSNo5tbNts6r2oH11VCj/uEI1r6J0w==
   dependencies:
     type-fest "^0.8.0"
 
 "@naturalcycles/nodejs-lib@^6.20.0":
-  version "6.31.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.31.0.tgz#3d8bf64d5859e7775091d012852b3dbcf76e376f"
-  integrity sha512-7Lei731oRWRfa6sDP01sQZ8dCBNcWAsezK3mr0Ftyo9bNjpjn8uYSfW/m6p3V+lzMoTAl9kQGdsnZVhQ81OSUQ==
+  version "6.34.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-6.34.0.tgz#9906cc89ace9a19feb7ac1106c039863581c4aae"
+  integrity sha512-N0KBeeqXz3TjljyPW27D2xlGShZ1M3m0sfxYMKskP9Ln6hQbGmbcoqSuPGEXC401c+qMzhP5MX3x479iEuTxfA==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"
@@ -531,6 +531,7 @@
     "@types/lru-cache" "^5.1.0"
     "@types/nanoid" "^2.0.0"
     "@types/through2-concurrent" "^2.0.0"
+    binary-split "^1.0.5"
     chalk "^2.4.2"
     debug "^4.1.1"
     dotenv "^8.1.0"
@@ -5265,9 +5266,9 @@ typescript@^3.4.5:
   integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
 
 uglify-js@^3.1.4:
-  version "3.6.6"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.6.tgz#7ec28c92c7131c6a096b69cd48722600cc534207"
-  integrity sha512-q3Zusqd028P8MdbarqL0I1snTZ7+IbIWiKUXVZyXMVdOSxOG2FFqLXyGlgYSqYu46SR7tR3Sk0xqN1VtvxGWnQ==
+  version "3.6.7"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.6.7.tgz#15f49211df6b8a01ee91322bbe46fa33223175dc"
+  integrity sha512-4sXQDzmdnoXiO+xvmTzQsfIiwrjUCSA95rSP4SEd8tDb51W2TiDOlL76Hl+Kw0Ie42PSItCW8/t6pBNCF2R48A==
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"

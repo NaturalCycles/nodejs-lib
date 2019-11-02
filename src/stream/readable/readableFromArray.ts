@@ -1,10 +1,10 @@
 import { Readable } from 'stream'
-import { ReadableTyped } from './stream.model'
+import { ReadableTyped } from '../stream.model'
 
 /**
  * Polyfill of Readable.from(), that available in Node 12+
  */
-export function readableFrom<T>(items: T[], objectMode = true): ReadableTyped<T> {
+export function readableFromArray<T>(items: T[], objectMode = true): ReadableTyped<T> {
   const readable = new Readable({
     objectMode,
     read() {},

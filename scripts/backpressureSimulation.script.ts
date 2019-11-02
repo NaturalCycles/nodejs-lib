@@ -7,7 +7,8 @@ yarn tsn ./scripts/backpressureSimulation.script.ts
 import { pDelay } from '@naturalcycles/js-lib'
 import { timer } from 'rxjs'
 import { map, take } from 'rxjs/operators'
-import { Debug, observableToStream, runScript, streamToObservable } from '../src'
+import { Debug, observableToStream, runScript } from '../src'
+import { streamForEach } from '../src/stream/streamForEach'
 
 Debug.enable('*')
 
@@ -29,11 +30,14 @@ runScript(async () => {
   )
   const readable = observableToStream(source$)
 
-  await streamToObservable(readable, {
-    concurrency,
-    logProgress: true,
-    mapper: async item => {
+  await streamForEach(
+    readable,
+    async _item => {
       await pDelay(processDelay)
     },
-  }).toPromise()
+    {
+      concurrency,
+      logProgressInterval: 300,
+    },
+  )
 })

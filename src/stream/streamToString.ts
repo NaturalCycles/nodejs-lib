@@ -1,22 +1,14 @@
-import { Readable, Transform } from 'stream'
+import { pipelineToArray } from './pipeline/pipelineToArray'
+import { ReadableTyped } from './stream.model'
 
-export async function streamToString(stream: Readable, joinOn = ''): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    const chunks: any[] = []
+export async function streamToString(
+  stream: ReadableTyped<string | Buffer>,
+  joinOn = '',
+): Promise<string> {
+  const chunks = await pipelineToArray<string | Buffer>([stream], { objectMode: false })
 
-    stream
-      .pipe(
-        new Transform({
-          transform(chunk, _encoding, cb) {
-            chunks.push(chunk)
-            cb()
-          },
-          final(cb) {
-            cb()
-            resolve(chunks.join(joinOn))
-          },
-        }),
-      )
-      .on('error', err => reject(err))
-  })
+  return chunks
+    .filter(Boolean)
+    .map(String)
+    .join(joinOn)
 }

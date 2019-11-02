@@ -1,14 +1,20 @@
+import { Mapper } from '@naturalcycles/js-lib'
+import { _pipeline } from './pipeline/pipeline'
 import { ReadableTyped } from './stream.model'
-import { streamToObservable, StreamToObservableOptions } from './streamToObservable'
+import { transformMap, TransformMapOptions } from './transform/transformMap'
+import { transformPushToArray } from './transform/transformPushToArray'
 
 /**
- * Reads stream, calls a mapper function for each item. Resolves promise when all items are done and processed.
- *
- * It's a simplified version of streamToObservable.
+ * Run Mapper for each of the stream items, respecting backpressure. Returns array of mapped items.
  */
-export async function streamMap<IN>(
+export async function streamMap<IN, OUT>(
   stream: ReadableTyped<IN>,
-  opt: StreamToObservableOptions<IN, any> = {},
-): Promise<void> {
-  await streamToObservable(stream, opt).toPromise()
+  mapper: Mapper<IN, OUT>,
+  opt?: TransformMapOptions,
+): Promise<OUT[]> {
+  const res: OUT[] = []
+
+  await _pipeline([stream, transformMap(mapper, opt), transformPushToArray(res)])
+
+  return res
 }
