@@ -1,3 +1,10 @@
+# [6.34.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.33.0...v6.34.0) (2019-11-02)
+
+
+### Features
+
+* streamBuffer(), _through ([9214fde](https://github.com/NaturalCycles/nodejs-lib/commit/9214fde2ffbcbd5fdda737a859df40067d659da6))
+
 # [6.33.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.32.0...v6.33.0) (2019-11-02)
 
 
