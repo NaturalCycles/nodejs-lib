@@ -1,3 +1,15 @@
+# [7.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.34.0...v7.0.0) (2019-11-02)
+
+
+### Features
+
+* new set of Stream functions ([e543f77](https://github.com/NaturalCycles/nodejs-lib/commit/e543f778ddae752e95f87927bd2f07a900db32ad))
+
+
+### BREAKING CHANGES
+
+* ^^^
+
 # [6.34.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.33.0...v6.34.0) (2019-11-02)
 
 
