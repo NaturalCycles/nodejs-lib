@@ -68,6 +68,7 @@ import { transformMap, TransformMapOptions } from './stream/transform/transformM
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
 import { transformPushToArray } from './stream/transform/transformPushToArray'
 import { transformSplit } from './stream/transform/transformSplit'
+import { transformTap } from './stream/transform/transformTap'
 import { transformToArray } from './stream/transform/transformToArray'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
@@ -231,6 +232,7 @@ export {
   transformPushToArray,
   transformSplit,
   transformToArray,
+  transformTap,
   TransformOpt,
   streamForEach,
   streamMapToArray,
