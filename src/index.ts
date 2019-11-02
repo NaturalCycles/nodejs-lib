@@ -59,8 +59,8 @@ import { observableToStream } from './stream/rxjs/observableToStream'
 import { streamToObservable } from './stream/rxjs/streamToObservable'
 import { ReadableTyped, TransformOpt, TransformTyped, WritableTyped } from './stream/stream.model'
 import { streamForEach } from './stream/streamForEach'
-import { streamMap } from './stream/streamMap'
-import { streamToString } from './stream/streamToString'
+import { streamJoinToString } from './stream/streamJoinToString'
+import { streamMapToArray } from './stream/streamMapToArray'
 import { transformBuffer } from './stream/transform/transformBuffer'
 import { transformConcurrent } from './stream/transform/transformConcurrent'
 import { transformFilter } from './stream/transform/transformFilter'
@@ -206,7 +206,7 @@ export {
   WritableTyped,
   TransformTyped,
   _pipeline,
-  streamToString,
+  streamJoinToString,
   transformBuffer,
   ndJsonFileRead,
   ndJsonFileWrite,
@@ -233,5 +233,5 @@ export {
   transformToArray,
   TransformOpt,
   streamForEach,
-  streamMap,
+  streamMapToArray,
 }

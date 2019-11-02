@@ -1,7 +1,6 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFrom } from '@naturalcycles/nodejs-lib'
+import { readableFromArray, transformPushToArray } from '../..'
 import { tmpDir } from '../../test/paths.cnst'
-import { transformPushToArray } from '../transform/transformPushToArray'
 import { ndJsonFileRead } from './ndJsonFileRead'
 import { ndJsonFileWrite } from './ndJsonFileWrite'
 import { pipelineFromNDJsonFile } from './pipelineFromNDJsonFile'
@@ -18,7 +17,7 @@ test('ndjson write/read', async () => {
   const items: Item[] = _range(1, 6).map(num => ({
     id: 'id' + num,
   }))
-  const readable = readableFrom(items)
+  const readable = readableFromArray(items)
   const filePath = `${tmpDir}/ndjson/test.jsonl`
 
   await pipelineToNDJsonFile([readable], { filePath })
@@ -33,7 +32,7 @@ test('ndjson write/read gzip', async () => {
   const items: Item[] = _range(1, 6).map(num => ({
     id: 'id' + num,
   }))
-  const readable = readableFrom(items)
+  const readable = readableFromArray(items)
   const filePath = `${tmpDir}/ndjson/test.jsonl.gz`
 
   await streamToNDJsonFile(readable, { filePath, gzip: true })

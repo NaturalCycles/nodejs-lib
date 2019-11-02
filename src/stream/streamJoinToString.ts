@@ -1,7 +1,7 @@
 import { pipelineToArray } from './pipeline/pipelineToArray'
 import { ReadableTyped } from './stream.model'
 
-export async function streamToString(
+export async function streamJoinToString(
   stream: ReadableTyped<string | Buffer>,
   joinOn = '',
 ): Promise<string> {

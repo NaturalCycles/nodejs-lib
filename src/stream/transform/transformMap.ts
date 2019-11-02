@@ -11,7 +11,7 @@ import { inspect } from 'util'
 import { Debug, mb } from '../..'
 import { TransformTyped } from '../stream.model'
 
-export interface TransformMapOptions<IN = any, OUT = any> {
+export interface TransformMapOptions<OUT = any> {
   /**
    * @default true
    */
@@ -89,7 +89,7 @@ function notNullPredicate(item: any): boolean {
  */
 export function transformMap<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT>,
-  opt: TransformMapOptions<IN, OUT> = {},
+  opt: TransformMapOptions<OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {
     concurrency = 16,

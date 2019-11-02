@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray } from '../readable/readableFromArray'
+import { readableFromArray } from '../..'
 import { pipelineToArray } from './pipelineToArray'
 
 interface Item {

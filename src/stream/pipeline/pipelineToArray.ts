@@ -1,5 +1,5 @@
+import { transformPushToArray } from '../..'
 import { TransformOpt } from '../stream.model'
-import { transformPushToArray } from '../transform/transformPushToArray'
 import { _pipeline } from './pipeline'
 
 /**

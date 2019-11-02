@@ -5,9 +5,10 @@ import { transformMap, TransformMapOptions } from './transform/transformMap'
 import { transformPushToArray } from './transform/transformPushToArray'
 
 /**
- * Run Mapper for each of the stream items, respecting backpressure. Returns array of mapped items.
+ * Map stream items to array of results (in memory).
+ * Warning! All results are stored in memory (no backpressure).
  */
-export async function streamMap<IN, OUT>(
+export async function streamMapToArray<IN, OUT>(
   stream: ReadableTyped<IN>,
   mapper: Mapper<IN, OUT>,
   opt?: TransformMapOptions,
