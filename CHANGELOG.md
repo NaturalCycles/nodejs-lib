@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.0.1...v7.1.0) (2019-11-02)
+
+
+### Features
+
+* transformTap ([ba73162](https://github.com/NaturalCycles/nodejs-lib/commit/ba731628f4448155ab310f8fb30b73301221fd13))
+
 ## [7.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.0.0...v7.0.1) (2019-11-02)
 
 
