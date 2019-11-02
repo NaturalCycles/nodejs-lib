@@ -1,3 +1,10 @@
+## [7.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.1.0...v7.1.1) (2019-11-02)
+
+
+### Bug Fixes
+
+* streamMapToArray mapper defaults to passthrough ([ca3eebc](https://github.com/NaturalCycles/nodejs-lib/commit/ca3eebc921670710a7823a4e2cd7f05978f103dd))
+
 # [7.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.0.1...v7.1.0) (2019-11-02)
 
 
