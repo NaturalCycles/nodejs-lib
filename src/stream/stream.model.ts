@@ -4,4 +4,4 @@ export interface ReadableTyped<T> extends Readable {}
 
 export interface WritableTyped<T> extends Writable {}
 
-export interface TransformTyped<T> extends Transform {}
+export interface TransformTyped<IN, OUT = IN> extends Transform {}
