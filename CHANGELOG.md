@@ -1,3 +1,10 @@
+# [6.32.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.31.0...v6.32.0) (2019-11-02)
+
+
+### Features
+
+* TransformTyped<IN, OUT> ([e787a81](https://github.com/NaturalCycles/nodejs-lib/commit/e787a81839f07572cbf27a2db30abd90a8658a6c))
+
 # [6.31.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.30.1...v6.31.0) (2019-10-31)
 
 
