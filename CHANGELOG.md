@@ -1,3 +1,10 @@
+# [6.33.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.32.0...v6.33.0) (2019-11-02)
+
+
+### Features
+
+* toNDJsonStringTransform, streamToString, _pipeline ([3716898](https://github.com/NaturalCycles/nodejs-lib/commit/37168985ce5cc00e84b5fb51918d59437c4221ef))
+
 # [6.32.0](https://github.com/NaturalCycles/nodejs-lib/compare/v6.31.0...v6.32.0) (2019-11-02)
 
 
