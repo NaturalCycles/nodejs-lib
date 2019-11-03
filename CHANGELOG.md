@@ -1,3 +1,10 @@
+## [7.6.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.6.0...v7.6.1) (2019-11-03)
+
+
+### Bug Fixes
+
+* NDJson allow empty creation ([7448f1a](https://github.com/NaturalCycles/nodejs-lib/commit/7448f1a948fbe4d422520e41a644a16738243bad))
+
 # [7.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.5.0...v7.6.0) (2019-11-03)
 
 
