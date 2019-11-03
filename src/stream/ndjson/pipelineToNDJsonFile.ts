@@ -1,3 +1,4 @@
+import { AppError } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { createGzip, ZlibOptions } from 'zlib'
 import { _pipeline } from '../..'
@@ -5,6 +6,12 @@ import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson
 
 export interface PipelineToNDJsonFileOptions extends TransformToNDJsonOptions {
   filePath: string
+
+  /**
+   * @default false
+   * If true - will fail if output file already exists.
+   */
+  protectFromOverwrite?: boolean
 
   /**
    * @default false
@@ -26,7 +33,11 @@ export async function pipelineToNDJsonFile(
   streams: (NodeJS.ReadableStream | NodeJS.WritableStream)[],
   opt: PipelineToNDJsonFileOptions,
 ): Promise<void> {
-  const { filePath, gzip } = opt
+  const { filePath, gzip, protectFromOverwrite = false } = opt
+
+  if (protectFromOverwrite && (await fs.pathExists(filePath))) {
+    throw new AppError(`pipelineToNDJsonFile: output file exists: ${filePath}`)
+  }
 
   await fs.ensureFile(filePath)
 

@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray, transformPushToArray } from '../..'
+import { readableFromArray, writablePushToArray } from '../..'
 import { tmpDir } from '../../test/paths.cnst'
 import { ndJsonFileRead } from './ndJsonFileRead'
 import { ndJsonFileWrite } from './ndJsonFileWrite'
@@ -23,7 +23,7 @@ test('ndjson write/read', async () => {
   await pipelineToNDJsonFile([readable], { filePath })
 
   const items2: Item[] = []
-  await pipelineFromNDJsonFile([transformPushToArray(items2)], { filePath })
+  await pipelineFromNDJsonFile([writablePushToArray(items2)], { filePath })
 
   expect(items2).toEqual(items)
 })
@@ -38,7 +38,7 @@ test('ndjson write/read gzip', async () => {
   await streamToNDJsonFile(readable, { filePath, gzip: true })
 
   const items2: Item[] = []
-  await pipelineFromNDJsonFile([transformPushToArray(items2)], { filePath, gzip: true })
+  await pipelineFromNDJsonFile([writablePushToArray(items2)], { filePath, gzip: true })
 
   expect(items2).toEqual(items)
 })

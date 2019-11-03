@@ -11,4 +11,9 @@ export interface TransformOpt {
    * @default true
    */
   objectMode?: boolean
+
+  /**
+   * @default 16
+   */
+  highWaterMark?: number
 }

@@ -2,7 +2,7 @@ import { Mapper } from '@naturalcycles/js-lib'
 import { _pipeline } from './pipeline/pipeline'
 import { ReadableTyped } from './stream.model'
 import { transformMap, TransformMapOptions } from './transform/transformMap'
-import { transformPushToArray } from './transform/transformPushToArray'
+import { writablePushToArray } from './writable/writablePushToArray'
 
 /**
  * Map stream items to array of results (in memory).
@@ -15,7 +15,7 @@ export async function streamMapToArray<IN, OUT = IN>(
 ): Promise<OUT[]> {
   const res: OUT[] = []
 
-  await _pipeline([stream, transformMap(mapper, opt), transformPushToArray(res)])
+  await _pipeline([stream, transformMap(mapper, opt), writablePushToArray(res)])
 
   return res
 }

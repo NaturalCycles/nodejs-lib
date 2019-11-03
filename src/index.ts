@@ -64,13 +64,15 @@ import { streamMapToArray } from './stream/streamMapToArray'
 import { transformBuffer } from './stream/transform/transformBuffer'
 import { transformConcurrent } from './stream/transform/transformConcurrent'
 import { transformFilter } from './stream/transform/transformFilter'
-import { transformForEach } from './stream/transform/transformForEach'
+import { transformLogProgress } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
-import { transformPushToArray } from './stream/transform/transformPushToArray'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
 import { transformToArray } from './stream/transform/transformToArray'
+import { writableForEach } from './stream/writable/writableForEach'
+import { writablePushToArray } from './stream/writable/writablePushToArray'
+import { writableVoid } from './stream/writable/writableVoid'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -228,14 +230,16 @@ export {
   transformFilter,
   TransformMapOptions,
   transformMap,
-  transformForEach,
+  writableForEach,
   MultiMapper,
   transformMapMulti,
-  transformPushToArray,
+  writablePushToArray,
   transformSplit,
   transformToArray,
   transformTap,
   TransformOpt,
+  transformLogProgress,
   streamForEach,
   streamMapToArray,
+  writableVoid,
 }

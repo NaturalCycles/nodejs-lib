@@ -1,4 +1,4 @@
-import { transformPushToArray } from '../..'
+import { writablePushToArray } from '../..'
 import { TransformOpt } from '../stream.model'
 import { _pipeline } from './pipeline'
 
@@ -12,7 +12,7 @@ export async function pipelineToArray<OUT = any>(
 ): Promise<OUT[]> {
   const res: OUT[] = []
 
-  await _pipeline([...streams, transformPushToArray<OUT>(res, opt)])
+  await _pipeline([...streams, writablePushToArray<OUT>(res, opt)])
 
   return res
 }

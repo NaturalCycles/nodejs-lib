@@ -120,9 +120,13 @@ export function transformMap<IN = any, OUT = IN>(
       // autoDestroy: true,
       final(cb) {
         // console.log('final')
+
+        if (logProgressInterval || logProgressCount) {
+          logStats(true)
+        }
+
         if (interval) {
           clearInterval(interval)
-          logStats(true)
         }
 
         if (collectedErrors.length) {

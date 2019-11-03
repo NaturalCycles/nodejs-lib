@@ -1,13 +1,13 @@
 import { Mapper, passNothingPredicate } from '@naturalcycles/js-lib'
-import { TransformTyped } from '../stream.model'
-import { transformMap, TransformMapOptions } from './transformMap'
+import { transformMap, TransformMapOptions } from '../..'
+import { WritableTyped } from '../stream.model'
 
 /**
  * Just an alias to transformMap that declares OUT as void.
  */
-export function transformForEach<IN = any>(
+export function writableForEach<IN = any>(
   mapper: Mapper<IN, any>,
   opt: TransformMapOptions = {},
-): TransformTyped<IN, void> {
+): WritableTyped<IN> {
   return transformMap<IN, void>(mapper, { ...opt, predicate: passNothingPredicate })
 }
