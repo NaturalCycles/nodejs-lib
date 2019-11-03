@@ -1,3 +1,11 @@
+# [7.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.4.0...v7.5.0) (2019-11-03)
+
+
+### Features
+
+* export color shortcut functions ([7d5b53b](https://github.com/NaturalCycles/nodejs-lib/commit/7d5b53bac897f25b83b8248bbfe22c9541cb381c))
+* NDJson pipeline log stats ([f9b2abf](https://github.com/NaturalCycles/nodejs-lib/commit/f9b2abf6a3c406752ab85988f979c762c3bb0122))
+
 # [7.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.3.0...v7.4.0) (2019-11-03)
 
 
