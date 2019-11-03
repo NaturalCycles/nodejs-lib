@@ -6,6 +6,7 @@ import c from 'chalk'
 export type ColorFn = (...args: (string | number)[]) => string
 
 export const white = c.white as ColorFn
+export const boldWhite = c.bold.white as ColorFn
 export const dimWhite = c.dim.white as ColorFn
 export const grey = c.grey as ColorFn
 export const yellow = c.yellow as ColorFn

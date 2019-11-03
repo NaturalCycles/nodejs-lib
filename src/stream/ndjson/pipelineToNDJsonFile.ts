@@ -1,9 +1,8 @@
 import { AppError } from '@naturalcycles/js-lib'
-import { since } from '@naturalcycles/time-lib'
 import * as fs from 'fs-extra'
 import { createGzip, ZlibOptions } from 'zlib'
-import { _pipeline, hb, transformTap } from '../..'
-import { dimWhite } from '../../log/colors'
+import { _pipeline, grey, transformTap } from '../..'
+import { NDJsonStats } from './ndjson.model'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
 
 export interface PipelineToNDJsonFileOptions extends TransformToNDJsonOptions {
@@ -34,7 +33,7 @@ export interface PipelineToNDJsonFileOptions extends TransformToNDJsonOptions {
 export async function pipelineToNDJsonFile(
   streams: (NodeJS.ReadableStream | NodeJS.WritableStream)[],
   opt: PipelineToNDJsonFileOptions,
-): Promise<void> {
+): Promise<NDJsonStats> {
   const { filePath, gzip, protectFromOverwrite = false } = opt
 
   if (protectFromOverwrite && (await fs.pathExists(filePath))) {
@@ -42,32 +41,29 @@ export async function pipelineToNDJsonFile(
   }
 
   const started = Date.now()
-  let count = 0
+  let rows = 0
 
   await fs.ensureFile(filePath)
 
+  console.log(`>> ${grey(filePath)} started...`)
+
   await _pipeline([
     ...streams,
-    transformTap(() => count++),
+    transformTap(() => rows++),
     transformToNDJson(opt),
     ...(gzip ? [createGzip(opt.zlibOptions)] : []), // optional gzip
     fs.createWriteStream(filePath),
   ])
 
-  const { size } = await fs.stat(filePath)
+  const { size: sizeBytes } = await fs.stat(filePath)
 
-  const tookMillis = Date.now() - started || 1 // cast 0 to 1 to avoid NaN
-  const rpsTotal = Math.round(count / (tookMillis / 1000))
-  const bpsTotal = size === 0 ? 0 : Math.round(size / (tookMillis / 1000))
+  const stats = NDJsonStats.create({
+    tookMillis: Date.now() - started,
+    rows,
+    sizeBytes,
+  })
 
-  console.log(
-    [
-      `pipelineToNDJsonFile finished writing ${dimWhite(count)} rows in ${dimWhite(
-        since(started),
-      )}, avg ${dimWhite(rpsTotal + ' rows/sec')}`,
-      `${filePath}: ${dimWhite(hb(size))}, avg ${dimWhite(hb(size / count) + '/row')}, ${dimWhite(
-        hb(bpsTotal) + '/sec',
-      )}`,
-    ].join('\n'),
-  )
+  console.log(`>> ${grey(filePath)}\n` + stats.toPretty())
+
+  return stats
 }

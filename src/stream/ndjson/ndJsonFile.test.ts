@@ -18,12 +18,16 @@ test('ndjson write/read', async () => {
   const readable = readableFromArray(items)
   const filePath = `${tmpDir}/ndjson/test.jsonl`
 
-  await pipelineToNDJsonFile([readable], { filePath })
+  const statsWrite = await pipelineToNDJsonFile([readable], { filePath })
 
   const items2: Item[] = []
-  await pipelineFromNDJsonFile([writablePushToArray(items2)], { filePath })
+  const statsRead = await pipelineFromNDJsonFile([writablePushToArray(items2)], { filePath })
 
   expect(items2).toEqual(items)
+
+  const statsTotal = statsWrite.add(statsRead)
+
+  console.log(statsTotal.toPretty('total'))
 })
 
 test('ndjson write/read gzip', async () => {

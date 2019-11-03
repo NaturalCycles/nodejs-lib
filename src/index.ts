@@ -1,7 +1,7 @@
 import { execCommand, execShell, execWithArgs } from './exec/exec.util'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
-import { dimGreen, dimWhite, dimYellow, green, grey, white, yellow } from './log/colors'
+import { boldWhite, dimGreen, dimWhite, dimYellow, green, grey, white, yellow } from './log/colors'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
   decryptRandomIVBuffer,
@@ -40,6 +40,7 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
+import { NDJsonStats } from './stream/ndjson/ndjson.model'
 import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
 import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
 import {
@@ -222,6 +223,7 @@ export {
   PipelineFromNDJsonFileOptions,
   PipelineToNDJsonFileOptions,
   pipelineToNDJsonFile,
+  NDJsonStats,
   streamToNDJsonFile,
   TransformJsonParseOptions,
   transformJsonParse,
@@ -247,6 +249,7 @@ export {
   streamMapToArray,
   writableVoid,
   white,
+  boldWhite,
   dimWhite,
   grey,
   yellow,
