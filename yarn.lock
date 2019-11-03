@@ -512,16 +512,16 @@
     yargs "^14.0.0"
 
 "@naturalcycles/js-lib@^8.0.0", "@naturalcycles/js-lib@^8.4.0":
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.9.0.tgz#802cdc34cb1f59895958dbed9565c832e50b2dd6"
-  integrity sha512-3lWviRyGxucrH8Z1A2j7mO4hIy+qJkt2+IOac3WkLVaxpXNYCe7f+yrliSNo5tbNts6r2oH11VCj/uEI1r6J0w==
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-8.11.0.tgz#7e0d54bd866d7860d8da50c7d33b78d33f7b1ff8"
+  integrity sha512-nH79VF8v8h0xJukobP3HO+gI/mfZcwPhyTVBeuiO8R148s82rW7VJNsFZN43afayslA2+NMxK4imBUwKnA//yw==
   dependencies:
     type-fest "^0.8.0"
 
 "@naturalcycles/nodejs-lib@^7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-7.0.0.tgz#6732075291eecf68d3b409f9ce1fbd22d97de6d7"
-  integrity sha512-GpDbOnFvQTpdNlg5819AXr/T6qDO25Kai8YHybzEse2FZpgEgsmFQ+bG8tm73tGZcYy39uC/hu+t7PV0ZoBCGQ==
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-7.1.1.tgz#e70d34e5eaa233ed275457e894c8e303651c0ae3"
+  integrity sha512-ZyD5jTZb+OYCmnALqIoSseCObso49N5wE06GuRNvZQCiUC9p/FZAzQ2mcf7FkCBPkoJ2F76U8IAxfCl/484iPQ==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"

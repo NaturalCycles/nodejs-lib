@@ -64,6 +64,7 @@ import { streamMapToArray } from './stream/streamMapToArray'
 import { transformBuffer } from './stream/transform/transformBuffer'
 import { transformConcurrent } from './stream/transform/transformConcurrent'
 import { transformFilter } from './stream/transform/transformFilter'
+import { transformForEach } from './stream/transform/transformForEach'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
 import { transformPushToArray } from './stream/transform/transformPushToArray'
@@ -227,6 +228,7 @@ export {
   transformFilter,
   TransformMapOptions,
   transformMap,
+  transformForEach,
   MultiMapper,
   transformMapMulti,
   transformPushToArray,
