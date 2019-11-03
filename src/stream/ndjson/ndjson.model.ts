@@ -1,15 +1,15 @@
 import { ms } from '@naturalcycles/time-lib'
 import { dimWhite, hb } from '../..'
-import { boldWhite } from '../../log/colors'
+import { boldWhite } from '../..'
 
 export class NDJsonStats {
-  static create(o: Partial<NDJsonStats>): NDJsonStats {
+  static create(o: Partial<NDJsonStats> = {}): NDJsonStats {
     return Object.assign(new NDJsonStats(), o)
   }
 
-  tookMillis!: number
-  rows!: number
-  sizeBytes!: number
+  tookMillis = 0
+  rows = 0
+  sizeBytes = 0
 
   get rpsTotal(): number {
     return Math.round(this.rows / ((this.tookMillis || 1) / 1000))
