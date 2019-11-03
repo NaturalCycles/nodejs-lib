@@ -3,6 +3,7 @@ import { since } from '@naturalcycles/time-lib'
 import * as fs from 'fs-extra'
 import { createGzip, ZlibOptions } from 'zlib'
 import { _pipeline, hb, transformTap } from '../..'
+import { dimWhite } from '../../log/colors'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
 
 export interface PipelineToNDJsonFileOptions extends TransformToNDJsonOptions {
@@ -55,10 +56,18 @@ export async function pipelineToNDJsonFile(
 
   const { size } = await fs.stat(filePath)
 
+  const tookMillis = Date.now() - started || 1 // cast 0 to 1 to avoid NaN
+  const rpsTotal = Math.round(count / (tookMillis / 1000))
+  const bpsTotal = size === 0 ? 0 : Math.round(size / (tookMillis / 1000))
+
   console.log(
     [
-      `pipelineToNDJsonFile finished writing ${count} rows in ${since(started)}`,
-      `${filePath}: ${hb(size)}, avg ${hb(size / count)}/row`,
+      `pipelineToNDJsonFile finished writing ${dimWhite(count)} rows in ${dimWhite(
+        since(started),
+      )}, avg ${dimWhite(rpsTotal + ' rows/sec')}`,
+      `${filePath}: ${dimWhite(hb(size))}, avg ${dimWhite(hb(size / count) + '/row')}, ${dimWhite(
+        hb(bpsTotal) + '/sec',
+      )}`,
     ].join('\n'),
   )
 }
