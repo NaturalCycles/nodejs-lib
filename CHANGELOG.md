@@ -1,3 +1,10 @@
+# [7.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.3.0...v7.4.0) (2019-11-03)
+
+
+### Features
+
+* hb, kb ([21b7d00](https://github.com/NaturalCycles/nodejs-lib/commit/21b7d007e18ee8f90f91edecbfee425190649299))
+
 # [7.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.2.0...v7.3.0) (2019-11-03)
 
 
