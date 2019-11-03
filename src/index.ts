@@ -1,5 +1,6 @@
 import { execCommand, execShell, execWithArgs } from './exec/exec.util'
-import { mb, memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
+import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
+import { hb, kb, mb } from './infra/size.util'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
   decryptRandomIVBuffer,
@@ -196,6 +197,8 @@ export {
   generateSecretKey,
   generateSecretKeyBase64,
   mb,
+  kb,
+  hb,
   memoryUsage,
   memoryUsageFull,
   SlackSharedService,

@@ -11,8 +11,6 @@ interface Item {
   id: string
 }
 
-// todo: read/write whole
-
 test('ndjson write/read', async () => {
   const items: Item[] = _range(1, 6).map(num => ({
     id: 'id' + num,

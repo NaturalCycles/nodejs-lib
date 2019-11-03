@@ -1,7 +1,8 @@
 import { AppError } from '@naturalcycles/js-lib'
+import { since } from '@naturalcycles/time-lib'
 import * as fs from 'fs-extra'
 import { createGzip, ZlibOptions } from 'zlib'
-import { _pipeline } from '../..'
+import { _pipeline, hb, transformTap } from '../..'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
 
 export interface PipelineToNDJsonFileOptions extends TransformToNDJsonOptions {
@@ -39,12 +40,25 @@ export async function pipelineToNDJsonFile(
     throw new AppError(`pipelineToNDJsonFile: output file exists: ${filePath}`)
   }
 
+  const started = Date.now()
+  let count = 0
+
   await fs.ensureFile(filePath)
 
   await _pipeline([
     ...streams,
+    transformTap(() => count++),
     transformToNDJson(opt),
     ...(gzip ? [createGzip(opt.zlibOptions)] : []), // optional gzip
     fs.createWriteStream(filePath),
   ])
+
+  const { size } = await fs.stat(filePath)
+
+  console.log(
+    [
+      `pipelineToNDJsonFile finished writing ${count} rows in ${since(started)}`,
+      `${filePath}: ${hb(size)}, avg ${hb(size / count)}/row`,
+    ].join('\n'),
+  )
 }

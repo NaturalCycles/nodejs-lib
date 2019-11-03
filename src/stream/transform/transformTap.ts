@@ -13,32 +13,17 @@ export function transformTap<IN>(
 ): TransformTyped<IN, IN> {
   let index = 0
 
-  // return through2.obj( (chunk: IN, _encoding, cb) => {
-  //   // try {
-  //   //   fn(chunk, index++)
-  //   // } catch (err) {
-  //   //   console.error(err)
-  //   // }
-  //   console.log('tap', chunk)
-  //
-  //   // cb(null, chunk) // pass through the item
-  //   cb(null, chunk)
-  // }, (cb) => {
-  //   console.log('tap flush')
-  //   cb()
-  // })
-
   return new Transform({
     objectMode: true,
     ...opt,
     async transform(chunk: IN, _encoding, cb) {
+      // console.log('tap', chunk)
+
       try {
         await fn(chunk, index++)
       } catch {}
-      console.log('tap inside', chunk)
 
       cb(null, chunk) // pass through the item
-      // cb(null) // pass through the item
     },
   })
 }
