@@ -1,3 +1,10 @@
+# [7.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.1.1...v7.2.0) (2019-11-03)
+
+
+### Features
+
+* transformForEach ([f162bba](https://github.com/NaturalCycles/nodejs-lib/commit/f162bbafa819177df883f52581546fcfe31f7401))
+
 ## [7.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.1.0...v7.1.1) (2019-11-02)
 
 
