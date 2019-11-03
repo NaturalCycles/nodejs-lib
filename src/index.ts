@@ -1,6 +1,7 @@
 import { execCommand, execShell, execWithArgs } from './exec/exec.util'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
+import { dimGreen, dimWhite, dimYellow, green, grey, white, yellow } from './log/colors'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
   decryptRandomIVBuffer,
@@ -245,4 +246,11 @@ export {
   streamForEach,
   streamMapToArray,
   writableVoid,
+  white,
+  dimWhite,
+  grey,
+  yellow,
+  dimYellow,
+  green,
+  dimGreen,
 }
