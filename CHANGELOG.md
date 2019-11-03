@@ -1,3 +1,10 @@
+# [7.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.5.0...v7.6.0) (2019-11-03)
+
+
+### Features
+
+* NDJsonStats and better logging/stats ([864293b](https://github.com/NaturalCycles/nodejs-lib/commit/864293b0902a1ced9a7b003311e94b37f60429dc))
+
 # [7.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.4.0...v7.5.0) (2019-11-03)
 
 
