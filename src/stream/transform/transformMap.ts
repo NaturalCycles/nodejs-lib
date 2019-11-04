@@ -1,14 +1,6 @@
-import {
-  AggregatedError,
-  ErrorMode,
-  Mapper,
-  Predicate,
-  SimpleMovingAverage,
-} from '@naturalcycles/js-lib'
-import { since } from '@naturalcycles/time-lib'
+import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import * as through2Concurrent from 'through2-concurrent'
-import { inspect } from 'util'
-import { Debug, dimWhite, mb, yellow } from '../..'
+import { Debug, yellow } from '../..'
 import { TransformTyped } from '../stream.model'
 
 export interface TransformMapOptions<OUT = any> {
@@ -51,12 +43,6 @@ export interface TransformMapOptions<OUT = any> {
   onError?: (err: Error) => any
 
   /**
-   * Log progress event Nth record that is _processed_ (went through mapper).
-   * @default 100
-   */
-  logEvery?: number
-
-  /**
    * Progress metric
    * @default `stream`
    */
@@ -64,11 +50,6 @@ export interface TransformMapOptions<OUT = any> {
 }
 
 const log = Debug('nc:nodejs-lib:stream')
-
-const inspectOpt: NodeJS.InspectOptions = {
-  colors: true,
-  breakLength: 100,
-}
 
 function notNullPredicate(item: any): boolean {
   return item !== undefined && item !== null
@@ -94,21 +75,14 @@ export function transformMap<IN = any, OUT = IN>(
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     logErrors,
     onError,
-    logEvery,
     metric = 'stream',
   } = opt
   const objectMode = opt.objectMode !== false // default to true
 
   let index = 0
   let isRejected = false
-  let read = 0
-  let processed = 0
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
-  const started = Date.now()
-  let processedLastSecond = 0
-  let lastSecondStarted = Date.now()
-  const sma = new SimpleMovingAverage(10) // over last 10 seconds
 
   return (objectMode ? through2Concurrent.obj : through2Concurrent)(
     {
@@ -117,9 +91,7 @@ export function transformMap<IN = any, OUT = IN>(
       final(cb) {
         // console.log('final')
 
-        if (logEvery) {
-          logStats(true)
-        }
+        logErrorStats()
 
         if (collectedErrors.length) {
           // emit Aggregated error
@@ -132,7 +104,6 @@ export function transformMap<IN = any, OUT = IN>(
     },
     async (chunk: IN, _encoding, cb) => {
       // console.log({chunk, _encoding})
-      read++
 
       // Stop processing if THROW_IMMEDIATELY mode is used
       if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
@@ -140,12 +111,6 @@ export function transformMap<IN = any, OUT = IN>(
       try {
         const currentIndex = index++ // because we need to pass it to 2 functions - mapper and predicate
         const res = await mapper(chunk, currentIndex)
-        processedLastSecond++
-        processed++
-
-        if (logEvery && processed % logEvery === 0) {
-          logStats()
-        }
 
         if (await predicate(res, currentIndex)) {
           // Tell input stream that we're done processing AND emit result to output
@@ -160,6 +125,8 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (logErrors) {
           log.error(err)
+
+          logErrorStats()
         }
 
         if (onError) {
@@ -184,35 +151,9 @@ export function transformMap<IN = any, OUT = IN>(
     },
   )
 
-  function logStats(final = false): void {
-    const now = Date.now()
-    const lastRPS = processedLastSecond / ((now - lastSecondStarted) / 1000) || 0
-    const rpsTotal = Math.round(processed / ((now - started) / 1000))
-    lastSecondStarted = now
-    processedLastSecond = 0
+  function logErrorStats(): void {
+    if (!errors) return
 
-    const rps10 = Math.round(sma.push(lastRPS))
-
-    console.log(
-      inspect(
-        {
-          read,
-          processed,
-          errors,
-          heapUsed: mb(process.memoryUsage().heapUsed),
-          rps10,
-          rpsTotal,
-        },
-        inspectOpt,
-      ),
-    )
-
-    if (final) {
-      console.log(
-        `${dimWhite(metric)} took ${yellow(since(started))} to process ${yellow(
-          processed,
-        )} rows with total RPS of ${yellow(rpsTotal)}`,
-      )
-    }
+    console.log(`${metric} errors: ${yellow(errors)}`)
   }
 }
