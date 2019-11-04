@@ -1,3 +1,10 @@
+## [7.9.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.1...v7.9.2) (2019-11-04)
+
+
+### Bug Fixes
+
+* export TransformLogProgressOptions ([7a44578](https://github.com/NaturalCycles/nodejs-lib/commit/7a4457814bebf7fc62c34310c546ed143e356045))
+
 ## [7.9.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.0...v7.9.1) (2019-11-04)
 
 
