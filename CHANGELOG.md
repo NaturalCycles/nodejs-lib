@@ -1,3 +1,10 @@
+# [7.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.6.1...v7.7.0) (2019-11-04)
+
+
+### Features
+
+* remove logProgressInterval, logProgressCount > logEvery ([108b32f](https://github.com/NaturalCycles/nodejs-lib/commit/108b32f39c4925455e69f1a6d506d77ee4025c13))
+
 ## [7.6.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.6.0...v7.6.1) (2019-11-03)
 
 
