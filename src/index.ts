@@ -67,7 +67,10 @@ import { streamMapToArray } from './stream/streamMapToArray'
 import { transformBuffer } from './stream/transform/transformBuffer'
 import { transformConcurrent } from './stream/transform/transformConcurrent'
 import { transformFilter } from './stream/transform/transformFilter'
-import { transformLogProgress } from './stream/transform/transformLogProgress'
+import {
+  transformLogProgress,
+  TransformLogProgressOptions,
+} from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
 import { transformSplit } from './stream/transform/transformSplit'
@@ -245,6 +248,7 @@ export {
   transformTap,
   TransformOpt,
   transformLogProgress,
+  TransformLogProgressOptions,
   streamForEach,
   streamMapToArray,
   writableVoid,
