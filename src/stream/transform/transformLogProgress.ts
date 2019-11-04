@@ -25,6 +25,12 @@ export interface TransformLogProgressOptions extends TransformOpt {
   heapTotal?: boolean
 
   /**
+   * Log "rows per second"
+   * @default true
+   */
+  logRPS?: boolean
+
+  /**
    * @default true
    * Set to false to disable logging progress
    */
@@ -51,6 +57,7 @@ export function transformLogProgress<IN = any>(
   const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100 } = opt
   const logProgress = opt.logProgress !== false // true by default
   const logHeapUsed = opt.heapUsed !== false // true by default
+  const logRPS = opt.logRPS !== false // true by default
 
   const started = Date.now()
   let lastSecondStarted = Date.now()
@@ -98,8 +105,12 @@ export function transformLogProgress<IN = any>(
           [metric]: progress,
           ...(logHeapUsed ? { heapUsed: mb(heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: mb(heapTotal) } : {}),
-          rps10,
-          rpsTotal,
+          ...(logRPS
+            ? {
+                rps10,
+                rpsTotal,
+              }
+            : {}),
         },
         inspectOpt,
       ),
