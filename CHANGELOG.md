@@ -1,3 +1,10 @@
+# [7.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.7.0...v7.8.0) (2019-11-04)
+
+
+### Features
+
+* remove progress logging from transformMap ([9e8eafd](https://github.com/NaturalCycles/nodejs-lib/commit/9e8eafd7ebb7fc4e3e0e9bb9bbe273cb70e2b63a))
+
 # [7.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.6.1...v7.7.0) (2019-11-04)
 
 
