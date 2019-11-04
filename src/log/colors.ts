@@ -1,4 +1,4 @@
-import c from 'chalk'
+const c = require('chalk')
 
 // The point of re-exporting is:
 // 1. Fix typings to allow to pass `number` (very common case)
