@@ -8,7 +8,7 @@ import {
 import { since } from '@naturalcycles/time-lib'
 import * as through2Concurrent from 'through2-concurrent'
 import { inspect } from 'util'
-import { Debug, mb } from '../..'
+import { Debug, dimWhite, mb, yellow } from '../..'
 import { TransformTyped } from '../stream.model'
 
 export interface TransformMapOptions<OUT = any> {
@@ -51,19 +51,16 @@ export interface TransformMapOptions<OUT = any> {
   onError?: (err: Error) => any
 
   /**
-   * Interval in milliseconds to print progress stats
-   *
-   * If defined - will log progress in a format like:
-   * {read: 10, processed: 4, errors: 0, heapUsed: 47, rps:4, rpsTotal: 3}
-   *
-   * @default undefined
+   * Log progress event Nth record that is _processed_ (went through mapper).
+   * @default 100
    */
-  logProgressInterval?: number
+  logEvery?: number
 
   /**
-   * Log progress event Nth record that is _processed_ (went through mapper).
+   * Progress metric
+   * @default `stream`
    */
-  logProgressCount?: number
+  metric?: string
 }
 
 const log = Debug('nc:nodejs-lib:stream')
@@ -97,8 +94,8 @@ export function transformMap<IN = any, OUT = IN>(
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     logErrors,
     onError,
-    logProgressCount,
-    logProgressInterval,
+    logEvery,
+    metric = 'stream',
   } = opt
   const objectMode = opt.objectMode !== false // default to true
 
@@ -112,7 +109,6 @@ export function transformMap<IN = any, OUT = IN>(
   let processedLastSecond = 0
   let lastSecondStarted = Date.now()
   const sma = new SimpleMovingAverage(10) // over last 10 seconds
-  const interval = logProgressInterval ? setInterval(logStats, logProgressInterval) : undefined
 
   return (objectMode ? through2Concurrent.obj : through2Concurrent)(
     {
@@ -121,12 +117,8 @@ export function transformMap<IN = any, OUT = IN>(
       final(cb) {
         // console.log('final')
 
-        if (logProgressInterval || logProgressCount) {
+        if (logEvery) {
           logStats(true)
-        }
-
-        if (interval) {
-          clearInterval(interval)
         }
 
         if (collectedErrors.length) {
@@ -151,7 +143,7 @@ export function transformMap<IN = any, OUT = IN>(
         processedLastSecond++
         processed++
 
-        if (logProgressCount && processed % logProgressCount === 0) {
+        if (logEvery && processed % logEvery === 0) {
           logStats()
         }
 
@@ -178,7 +170,6 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isRejected = true
-          clearInterval(interval!)
           // Emit error immediately
           return cb(err)
         }
@@ -218,7 +209,9 @@ export function transformMap<IN = any, OUT = IN>(
 
     if (final) {
       console.log(
-        `stream took ${since(started)} to process ${processed} items with total RPS of ${rpsTotal}`,
+        `${dimWhite(metric)} took ${yellow(since(started))} to process ${yellow(
+          processed,
+        )} rows with total RPS of ${yellow(rpsTotal)}`,
       )
     }
   }

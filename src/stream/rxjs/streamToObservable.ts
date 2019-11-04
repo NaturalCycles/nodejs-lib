@@ -1,7 +1,7 @@
 import { Observable, Subject } from 'rxjs'
-import { _pipeline } from '../..'
+import { _pipeline, writableForEach } from '../..'
+import { TransformMapOptions } from '../..'
 import { ReadableTyped } from '../stream.model'
-import { transformMap, TransformMapOptions } from '../transform/transformMap'
 
 export function streamToObservable<T>(
   stream: ReadableTyped<T>,
@@ -9,7 +9,7 @@ export function streamToObservable<T>(
 ): Observable<T> {
   const subj = new Subject<T>()
 
-  void _pipeline([stream, transformMap<T, void>(r => subj.next(r), opt)]).then(
+  void _pipeline([stream, writableForEach<T>(r => subj.next(r), opt)]).then(
     () => subj.complete(),
     err => subj.error(err),
   )

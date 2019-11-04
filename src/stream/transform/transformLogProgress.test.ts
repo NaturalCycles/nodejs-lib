@@ -1,7 +1,7 @@
 import { timer } from 'rxjs'
 import { take } from 'rxjs/operators'
 import { _pipeline, observableToStream } from '../..'
-import { writableVoid } from '../writable/writableVoid'
+import { writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'
 
 test('transformLogProgress', async () => {
@@ -11,7 +11,7 @@ test('transformLogProgress', async () => {
 
   await _pipeline([
     readable,
-    transformLogProgress({ logProgressCount: 5 }),
+    transformLogProgress({ logEvery: 5 }),
     // transformLogProgress({logProgressInterval: 10}),
     writableVoid(),
   ])

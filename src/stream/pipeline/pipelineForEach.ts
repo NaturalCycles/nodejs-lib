@@ -1,5 +1,5 @@
-import { Mapper, passNothingPredicate } from '@naturalcycles/js-lib'
-import { transformMap, TransformMapOptions } from '../..'
+import { Mapper } from '@naturalcycles/js-lib'
+import { TransformMapOptions, writableForEach } from '../..'
 import { _pipeline } from './pipeline'
 
 /**
@@ -10,5 +10,5 @@ export async function pipelineForEach<IN>(
   mapper: Mapper<IN, any>,
   opt?: TransformMapOptions,
 ): Promise<void> {
-  await _pipeline([...streams, transformMap(mapper, { ...opt, predicate: passNothingPredicate })])
+  await _pipeline([...streams, writableForEach(mapper, opt)])
 }

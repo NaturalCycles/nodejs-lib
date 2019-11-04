@@ -7,6 +7,14 @@ export class NDJsonStats {
     return Object.assign(new NDJsonStats(), o)
   }
 
+  static empty(): NDJsonStats {
+    return new NDJsonStats()
+  }
+
+  static createCombined(stats: NDJsonStats[]): NDJsonStats {
+    return stats.reduce((statsTotal, stats) => statsTotal.add(stats), new NDJsonStats())
+  }
+
   tookMillis = 0
   rows = 0
   sizeBytes = 0

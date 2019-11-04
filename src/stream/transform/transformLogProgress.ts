@@ -1,7 +1,7 @@
 import { since } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect } from 'util'
-import { mb } from '../..'
+import { dimWhite, mb } from '../..'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions extends TransformOpt {
@@ -24,19 +24,10 @@ export interface TransformLogProgressOptions extends TransformOpt {
   heapTotal?: boolean
 
   /**
-   * Interval in milliseconds to print progress stats
-   *
-   * If defined - will log progress in a format like:
-   * {read: 10, processed: 4, errors: 0, heapUsed: 47, rps:4, rpsTotal: 3}
-   *
-   * @default undefined
-   */
-  logProgressInterval?: number
-
-  /**
    * Log progress event Nth record that is _processed_ (went through mapper).
+   * @default 100
    */
-  logProgressCount?: number
+  logEvery?: number
 }
 
 const inspectOpt: NodeJS.InspectOptions = {
@@ -50,17 +41,11 @@ const inspectOpt: NodeJS.InspectOptions = {
 export function transformLogProgress<IN = any>(
   opt: TransformLogProgressOptions = {},
 ): TransformTyped<IN, IN> {
-  const {
-    metric = 'progress',
-    heapTotal: logHeapTotal = false,
-    logProgressInterval,
-    logProgressCount,
-  } = opt
+  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100 } = opt
   const logHeapUsed = opt.heapUsed !== false // true by default
 
   const started = Date.now()
   let progress = 0
-  const interval = logProgressInterval ? setInterval(logStats, logProgressInterval) : undefined
 
   logStats() // initial
 
@@ -70,19 +55,15 @@ export function transformLogProgress<IN = any>(
     transform(chunk: IN, _encoding, cb) {
       progress++
 
-      if (logProgressCount && progress % logProgressCount === 0) {
+      if (logEvery && progress % logEvery === 0) {
         logStats()
       }
 
       cb(null, chunk) // pass-through
     },
     final(cb) {
-      if (logProgressInterval || logProgressCount) {
+      if (logEvery) {
         logStats(true)
-      }
-
-      if (interval) {
-        clearInterval(interval)
       }
 
       cb()
@@ -104,7 +85,7 @@ export function transformLogProgress<IN = any>(
     )
 
     if (final) {
-      console.log(`stream finished in ${since(started)}`)
+      console.log(`${dimWhite(metric)} finished in ${dimWhite(since(started))}`)
     }
   }
 }
