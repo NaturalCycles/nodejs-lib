@@ -1,3 +1,10 @@
+# [7.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.8.0...v7.9.0) (2019-11-04)
+
+
+### Features
+
+* transformLogProgress logRPS option ([3be8952](https://github.com/NaturalCycles/nodejs-lib/commit/3be8952808371dd8c540ad1d9aee3215ab6067bf))
+
 # [7.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.7.0...v7.8.0) (2019-11-04)
 
 
