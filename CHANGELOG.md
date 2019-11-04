@@ -1,3 +1,10 @@
+## [7.9.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.0...v7.9.1) (2019-11-04)
+
+
+### Bug Fixes
+
+* hopefully fix typings error ([e7b8a57](https://github.com/NaturalCycles/nodejs-lib/commit/e7b8a5740561eec4f536f2d18b7b6426b521c433))
+
 # [7.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.8.0...v7.9.0) (2019-11-04)
 
 
