@@ -1,3 +1,10 @@
+# [7.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.2...v7.10.0) (2019-11-05)
+
+
+### Features
+
+* runScript with uncaughtException logger and memoryInterval ([ce4bfd6](https://github.com/NaturalCycles/nodejs-lib/commit/ce4bfd68cc39f62650beda44006bc83230c0b652))
+
 ## [7.9.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.1...v7.9.2) (2019-11-04)
 
 
