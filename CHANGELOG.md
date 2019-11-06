@@ -1,3 +1,10 @@
+# [7.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.10.0...v7.11.0) (2019-11-06)
+
+
+### Features
+
+* transformLimit ([24a757d](https://github.com/NaturalCycles/nodejs-lib/commit/24a757d47b43c08febf0cb866032cc4ed178f274))
+
 # [7.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.9.2...v7.10.0) (2019-11-05)
 
 
