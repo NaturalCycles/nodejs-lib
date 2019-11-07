@@ -1,3 +1,10 @@
+## [7.11.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.0...v7.11.1) (2019-11-07)
+
+
+### Bug Fixes
+
+* force forEach mapper to return void ([53716f0](https://github.com/NaturalCycles/nodejs-lib/commit/53716f0c4fab2da853161f29c26cbd4171c8c1f5))
+
 # [7.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.10.0...v7.11.0) (2019-11-06)
 
 
