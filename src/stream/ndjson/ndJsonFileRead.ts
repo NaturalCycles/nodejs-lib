@@ -9,7 +9,7 @@ export async function ndJsonFileRead<OUT = any>(
 ): Promise<OUT[]> {
   const res: OUT[] = []
 
-  await pipelineFromNDJsonFile([writableForEach(r => res.push(r))], opt)
+  await pipelineFromNDJsonFile([writableForEach(r => void res.push(r))], opt)
 
   return res
 }
