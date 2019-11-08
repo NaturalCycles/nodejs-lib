@@ -1,3 +1,10 @@
+## [7.11.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.1...v7.11.2) (2019-11-08)
+
+
+### Bug Fixes
+
+* transformMap to log errors by default ([edafdb2](https://github.com/NaturalCycles/nodejs-lib/commit/edafdb2f25a9ad8ae57fb581ef3fff0cacde227e))
+
 ## [7.11.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.0...v7.11.1) (2019-11-07)
 
 
