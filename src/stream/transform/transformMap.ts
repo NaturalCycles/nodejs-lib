@@ -1,6 +1,6 @@
 import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import * as through2Concurrent from 'through2-concurrent'
-import { Debug, yellow } from '../..'
+import { yellow } from '../..'
 import { TransformTyped } from '../stream.model'
 
 export interface TransformMapOptions<OUT = any> {
@@ -32,11 +32,6 @@ export interface TransformMapOptions<OUT = any> {
   errorMode?: ErrorMode
 
   /**
-   * @default true
-   */
-  logErrors?: boolean
-
-  /**
    * If defined - will be called on every error happening in the stream.
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
@@ -48,8 +43,6 @@ export interface TransformMapOptions<OUT = any> {
    */
   metric?: string
 }
-
-const log = Debug('nc:nodejs-lib:stream')
 
 function notNullPredicate(item: any): boolean {
   return item !== undefined && item !== null
@@ -73,11 +66,10 @@ export function transformMap<IN = any, OUT = IN>(
     concurrency = 16,
     predicate = notNullPredicate,
     errorMode = ErrorMode.THROW_IMMEDIATELY,
-    logErrors,
     onError,
     metric = 'stream',
   } = opt
-  const objectMode = opt.objectMode !== false // default to true
+  const objectMode = opt.objectMode !== false // default true
 
   let index = 0
   let isRejected = false
@@ -120,14 +112,11 @@ export function transformMap<IN = any, OUT = IN>(
           cb()
         }
       } catch (err) {
-        // console.log(err)
+        console.error(err)
+
         errors++
 
-        if (logErrors) {
-          log.error(err)
-
-          logErrorStats()
-        }
+        logErrorStats()
 
         if (onError) {
           try {
