@@ -39,6 +39,8 @@ export function transformToNDJson<IN = any>(
         }
         cb(null, JSON.stringify(chunk) + separator)
       } catch (err) {
+        console.error(err)
+
         if (strict) {
           cb(err) // emit error
         } else {

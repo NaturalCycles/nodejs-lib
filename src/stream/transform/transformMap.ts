@@ -83,7 +83,7 @@ export function transformMap<IN = any, OUT = IN>(
       final(cb) {
         // console.log('final')
 
-        logErrorStats()
+        logErrorStats(true)
 
         if (collectedErrors.length) {
           // emit Aggregated error
@@ -140,9 +140,9 @@ export function transformMap<IN = any, OUT = IN>(
     },
   )
 
-  function logErrorStats(): void {
+  function logErrorStats(final = false): void {
     if (!errors) return
 
-    console.log(`${metric} errors: ${yellow(errors)}`)
+    console.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
   }
 }

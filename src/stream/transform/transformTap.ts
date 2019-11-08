@@ -21,7 +21,10 @@ export function transformTap<IN>(
 
       try {
         await fn(chunk, index++)
-      } catch {}
+      } catch (err) {
+        console.error(err)
+        // suppressed error
+      }
 
       cb(null, chunk) // pass through the item
     },
