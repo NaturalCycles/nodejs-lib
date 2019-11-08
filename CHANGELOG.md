@@ -1,3 +1,10 @@
+## [7.11.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.2...v7.11.3) (2019-11-08)
+
+
+### Bug Fixes
+
+* better stream error handling/logging ([d506386](https://github.com/NaturalCycles/nodejs-lib/commit/d50638662daa5c53ab22f8903ce167c677eaf311))
+
 ## [7.11.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.1...v7.11.2) (2019-11-08)
 
 
