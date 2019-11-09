@@ -1,5 +1,5 @@
-import c from 'chalk'
 import * as execa from 'execa'
+import { grey } from '..'
 
 export interface ExecaOptions extends execa.Options {
   /**
@@ -80,5 +80,5 @@ export function logExec(cmd: string, args: string[] = [], opt: ExecaOptions = {}
     ...args,
   ].join(' ')
 
-  console.log(c.grey(cmdline))
+  console.log(grey(cmdline))
 }
