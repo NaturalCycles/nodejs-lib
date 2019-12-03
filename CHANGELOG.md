@@ -1,3 +1,16 @@
+# [7.12.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.3...v7.12.0) (2019-12-03)
+
+
+### Bug Fixes
+
+* chalk export ([87a05c2](https://github.com/NaturalCycles/nodejs-lib/commit/87a05c2c29ea9a0864ca845cccaba9abd6403887))
+
+
+### Features
+
+* gzip/gunzip in addition to zip/unzip ([d9fde2b](https://github.com/NaturalCycles/nodejs-lib/commit/d9fde2b1435186f6687c1cbcf4bbd2336b226ce7))
+* update and export chalk ([3c71613](https://github.com/NaturalCycles/nodejs-lib/commit/3c71613ee7705f4edc7949e6000a5eef98f5174a))
+
 ## [7.11.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.2...v7.11.3) (2019-11-08)
 
 
