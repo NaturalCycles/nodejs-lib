@@ -1,6 +1,7 @@
+import { Chalk } from 'chalk'
 import * as c from 'chalk'
 
-export const chalk = c
+export const chalk = c as Chalk
 
 // The point of re-exporting is:
 // 1. Fix typings to allow to pass `number` (very common case)
