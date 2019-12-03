@@ -93,7 +93,16 @@ import { writableVoid } from './stream/writable/writableVoid'
 import { requireEnvKeys } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
-import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
+import {
+  gunzipBuffer,
+  gunzipToString,
+  gzipBuffer,
+  gzipString,
+  unzipBuffer,
+  unzipToString,
+  zipBuffer,
+  zipString,
+} from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   AnySchemaTyped,
@@ -175,9 +184,13 @@ export {
   urlSchema,
   processSharedUtil,
   zipBuffer,
+  gzipBuffer,
   unzipBuffer,
+  gunzipBuffer,
   zipString,
+  gzipString,
   unzipToString,
+  gunzipToString,
   requireEnvKeys,
   LRUMemoCache,
   stringId,
