@@ -1,4 +1,4 @@
-import { requireEnvKeys } from '../index'
+import { requireEnvKeys, requireFileToExist } from '../index'
 
 test('requireEnvKeys', () => {
   expect(() => requireEnvKeys('NON_EXISTING')).toThrow()
@@ -16,4 +16,11 @@ test('requireEnvKeys', () => {
     AAAA: 'aaaa',
     CCCC: 'cccc',
   })
+})
+
+test('requireFileToExist', async () => {
+  // should not throw
+  await requireFileToExist(`${__dirname}/env.util.ts`)
+
+  await expect(requireFileToExist(`${__dirname}/non-existing`)).rejects.toThrow()
 })

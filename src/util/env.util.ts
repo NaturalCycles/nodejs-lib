@@ -1,4 +1,6 @@
 import { ValuesOf } from '@naturalcycles/js-lib'
+import * as fs from 'fs-extra'
+
 import 'dotenv/config' // ensure .env is read before requiring keys
 
 /*
@@ -23,4 +25,10 @@ export function requireEnvKeys<T extends readonly string[]>(
     r[k] = v
     return r
   }, {} as { [k in ValuesOf<T>]: string })
+}
+
+export async function requireFileToExist(filePath: string): Promise<void> {
+  if (!(await fs.pathExists(filePath))) {
+    throw new Error(`Required file should exist: ${filePath}`)
+  }
 }

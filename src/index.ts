@@ -90,7 +90,7 @@ import { transformToArray } from './stream/transform/transformToArray'
 import { writableForEach } from './stream/writable/writableForEach'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
-import { requireEnvKeys } from './util/env.util'
+import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
 import {
@@ -192,6 +192,7 @@ export {
   unzipToString,
   gunzipToString,
   requireEnvKeys,
+  requireFileToExist,
   LRUMemoCache,
   stringId,
   stringIdAsync,
