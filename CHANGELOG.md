@@ -1,3 +1,10 @@
+## [7.12.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.12.0...v7.12.1) (2019-12-05)
+
+
+### Bug Fixes
+
+* trying it fix circ dep in execUtil/colors ([da26fd5](https://github.com/NaturalCycles/nodejs-lib/commit/da26fd535fafd9b65c079c06ba87bcf9476c0bce))
+
 # [7.12.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.11.3...v7.12.0) (2019-12-03)
 
 
