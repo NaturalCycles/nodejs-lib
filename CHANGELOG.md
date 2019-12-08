@@ -1,3 +1,11 @@
+# [7.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.13.0...v7.14.0) (2019-12-08)
+
+
+### Features
+
+* got@10 ([ac80a33](https://github.com/NaturalCycles/nodejs-lib/commit/ac80a339a3524a8a825d2a53f841ead55c87a039))
+* transformLogProgress extra() ([cb54e8c](https://github.com/NaturalCycles/nodejs-lib/commit/cb54e8cd371c06a1b535ead343114c342b10e67b))
+
 # [7.13.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.12.1...v7.13.0) (2019-12-05)
 
 
