@@ -1,6 +1,6 @@
 import { anyToErrorObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
-import * as got from 'got'
+import got from 'got'
 import { Debug, DebugLogLevel } from '..'
 import {
   SlackAttachmentField,
@@ -69,8 +69,7 @@ export class SlackSharedService<CTX = any> {
 
     await got
       .post(webhookUrl, {
-        json: true,
-        body,
+        json: body,
       })
       .catch(ignored => {}) // ignore, cause slack is weirdly returning non-json text "ok" response
   }
