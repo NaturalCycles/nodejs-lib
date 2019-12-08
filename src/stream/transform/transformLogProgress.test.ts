@@ -11,7 +11,18 @@ test('transformLogProgress', async () => {
 
   await _pipeline([
     readable,
-    transformLogProgress({ logEvery: 5 }),
+    transformLogProgress({
+      logEvery: 5,
+      extra: (r, index) => {
+        // console.log(r, index)
+
+        if (index % 10 === 0) return {}
+
+        return {
+          aaa: index,
+        }
+      },
+    }),
     // transformLogProgress({logProgressInterval: 10}),
     writableVoid(),
   ])

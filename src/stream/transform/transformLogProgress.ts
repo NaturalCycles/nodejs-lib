@@ -5,7 +5,7 @@ import { inspect } from 'util'
 import { boldWhite, mb, yellow } from '../..'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
-export interface TransformLogProgressOptions extends TransformOpt {
+export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   /**
    * Progress metric
    * @default `progress`
@@ -41,6 +41,11 @@ export interface TransformLogProgressOptions extends TransformOpt {
    * @default 100
    */
   logEvery?: number
+
+  /**
+   * Function to return extra properties to the "progress object".
+   */
+  extra?: (chunk: IN, index: number) => object
 }
 
 const inspectOpt: NodeJS.InspectOptions = {
@@ -54,7 +59,7 @@ const inspectOpt: NodeJS.InspectOptions = {
 export function transformLogProgress<IN = any>(
   opt: TransformLogProgressOptions = {},
 ): TransformTyped<IN, IN> {
-  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100 } = opt
+  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100, extra } = opt
   const logProgress = opt.logProgress !== false // true by default
   const logHeapUsed = opt.heapUsed !== false // true by default
   const logRPS = opt.logRPS !== false // true by default
@@ -75,19 +80,19 @@ export function transformLogProgress<IN = any>(
       processedLastSecond++
 
       if (logProgress && progress % logEvery === 0) {
-        logStats()
+        logStats(chunk)
       }
 
       cb(null, chunk) // pass-through
     },
     final(cb) {
-      logStats(true)
+      logStats(undefined, true)
 
       cb()
     },
   })
 
-  function logStats(final = false): void {
+  function logStats(chunk?: IN, final = false): void {
     if (!logProgress) return
     const { heapUsed, heapTotal } = process.memoryUsage()
 
@@ -103,6 +108,7 @@ export function transformLogProgress<IN = any>(
       inspect(
         {
           [metric]: progress,
+          ...(extra && !final ? extra(chunk, progress) : {}),
           ...(logHeapUsed ? { heapUsed: mb(heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: mb(heapTotal) } : {}),
           ...(logRPS
