@@ -1,3 +1,10 @@
+## [7.14.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.14.0...v7.14.1) (2019-12-30)
+
+
+### Bug Fixes
+
+* export transformThrough ([73c5b42](https://github.com/NaturalCycles/nodejs-lib/commit/73c5b42211c57f0465430d8a090ceb11b283dcce))
+
 # [7.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.13.0...v7.14.0) (2019-12-08)
 
 
