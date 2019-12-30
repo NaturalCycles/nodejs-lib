@@ -86,6 +86,7 @@ import { transformMap, TransformMapOptions } from './stream/transform/transformM
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
+import { transformThrough } from './stream/transform/transformThrough'
 import { transformToArray } from './stream/transform/transformToArray'
 import { writableForEach } from './stream/writable/writableForEach'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
@@ -257,6 +258,7 @@ export {
   transformJsonParse,
   TransformToNDJsonOptions,
   transformToNDJson,
+  transformThrough,
   pipelineForEach,
   pipelineToArray,
   streamToObservable,

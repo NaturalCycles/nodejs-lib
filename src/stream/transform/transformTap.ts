@@ -1,3 +1,4 @@
+import { Mapper } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
@@ -8,7 +9,7 @@ import { TransformOpt, TransformTyped } from '../stream.model'
  * Can also act as a counter, since `index` is passed to `fn`
  */
 export function transformTap<IN>(
-  fn: (item: IN, index: number) => any,
+  fn: Mapper<IN, any>,
   opt: TransformOpt = {},
 ): TransformTyped<IN, IN> {
   let index = 0
