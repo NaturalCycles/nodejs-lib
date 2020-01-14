@@ -67,6 +67,7 @@ import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/tra
 import { _pipeline } from './stream/pipeline/pipeline'
 import { pipelineForEach } from './stream/pipeline/pipelineForEach'
 import { pipelineToArray } from './stream/pipeline/pipelineToArray'
+import { readableCreate } from './stream/readable/readableCreate'
 import { readableFromArray } from './stream/readable/readableFromArray'
 import { observableToStream } from './stream/rxjs/observableToStream'
 import { streamToObservable } from './stream/rxjs/streamToObservable'
@@ -89,6 +90,7 @@ import { transformTap } from './stream/transform/transformTap'
 import { transformThrough } from './stream/transform/transformThrough'
 import { transformToArray } from './stream/transform/transformToArray'
 import { writableForEach } from './stream/writable/writableForEach'
+import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
@@ -239,6 +241,7 @@ export {
   execShell,
   execWithArgs,
   observableToStream,
+  readableCreate,
   readableFromArray,
   ReadableTyped,
   WritableTyped,
@@ -280,6 +283,7 @@ export {
   streamForEach,
   streamMapToArray,
   writableVoid,
+  writableFork,
   chalk,
   white,
   boldWhite,

@@ -42,6 +42,16 @@ export interface TransformMapOptions<OUT = any> {
    * @default `stream`
    */
   metric?: string
+
+  /**
+   * If defined - called BEFORE `final()` callback is called.
+   */
+  beforeFinal?: () => any
+
+  /**
+   * If defined - called AFTER final chunk was processed.
+   */
+  afterFinal?: () => any
 }
 
 function notNullPredicate(item: any): boolean {
@@ -67,6 +77,8 @@ export function transformMap<IN = any, OUT = IN>(
     predicate = notNullPredicate,
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     onError,
+    beforeFinal,
+    afterFinal,
     metric = 'stream',
   } = opt
   const objectMode = opt.objectMode !== false // default true
@@ -80,10 +92,12 @@ export function transformMap<IN = any, OUT = IN>(
     {
       maxConcurrency: concurrency,
       // autoDestroy: true,
-      final(cb) {
-        // console.log('final')
+      async final(cb) {
+        // console.log('transformMap final')
 
         logErrorStats(true)
+
+        await beforeFinal?.() // call beforeFinal if defined
 
         if (collectedErrors.length) {
           // emit Aggregated error
@@ -92,6 +106,8 @@ export function transformMap<IN = any, OUT = IN>(
           // emit no error
           cb()
         }
+
+        afterFinal?.() // call afterFinal if defined (optional invokation operator)
       },
     },
     async (chunk: IN, _encoding, cb) => {
