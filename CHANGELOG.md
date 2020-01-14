@@ -1,3 +1,10 @@
+# [7.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.14.1...v7.15.0) (2020-01-14)
+
+
+### Features
+
+* writableFork, readableCreate ([0cfca98](https://github.com/NaturalCycles/nodejs-lib/commit/0cfca98561cba2a72bcd3f54455fd97980342c53))
+
 ## [7.14.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.14.0...v7.14.1) (2019-12-30)
 
 
