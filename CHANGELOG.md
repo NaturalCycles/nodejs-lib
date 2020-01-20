@@ -1,3 +1,10 @@
+# [7.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.15.0...v7.16.0) (2020-01-20)
+
+
+### Features
+
+* csvParse, csvStringify, transformToCSV ([501bde0](https://github.com/NaturalCycles/nodejs-lib/commit/501bde0c7250bdb92863be06465d49610b294dbb))
+
 # [7.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.14.1...v7.15.0) (2020-01-14)
 
 
