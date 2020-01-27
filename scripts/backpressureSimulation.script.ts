@@ -8,12 +8,12 @@ import { pDelay } from '@naturalcycles/js-lib'
 import { timer } from 'rxjs'
 import { map, take } from 'rxjs/operators'
 import {
-  _pipeline,
   Debug,
   observableToStream,
   runScript,
   transformLogProgress,
   writableForEach,
+  _pipeline,
 } from '../src'
 
 Debug.enable('*')

@@ -1,5 +1,5 @@
-import { _range, AggregatedError, ErrorMode, Mapper } from '@naturalcycles/js-lib'
-import { _pipeline, readableFromArray } from '../..'
+import { AggregatedError, ErrorMode, Mapper, _range } from '@naturalcycles/js-lib'
+import { readableFromArray, writablePushToArray, _pipeline } from '../..'
 import { transformMap } from './transformMap'
 
 interface Item {
@@ -22,6 +22,42 @@ test('transformMap simple', async () => {
 
   expect(data2).toEqual(data)
   // expect(readable.destroyed).toBe(true)
+})
+
+test('transformMap with mapping', async () => {
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
+  const data2: Item[] = []
+
+  await _pipeline([
+    readableFromArray(data),
+    transformMap(r => ({
+      id: r.id + '!',
+    })),
+    writablePushToArray(data2),
+  ])
+
+  expect(data2).toEqual(data.map(r => ({ id: r.id + '!' })))
+})
+
+test('transformMap emit array as multiple items', async () => {
+  const data = _range(1, 4)
+  const data2: number[] = []
+
+  await _pipeline([
+    readableFromArray(data),
+    transformMap(n => [n * 2, n * 2 + 1]),
+    writablePushToArray(data2),
+  ])
+
+  const expected: number[] = []
+  data.forEach(n => {
+    expected.push(n * 2)
+    expected.push(n * 2 + 1)
+  })
+
+  // console.log(data2)
+
+  expect(data2).toEqual(expected)
 })
 
 test('transformMap objectMode=false', async () => {

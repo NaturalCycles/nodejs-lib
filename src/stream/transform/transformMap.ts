@@ -1,4 +1,5 @@
-import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
+import { AggregatedError, ErrorMode, Mapper, pFilter, Predicate } from '@naturalcycles/js-lib'
+import { Transform } from 'stream'
 import * as through2Concurrent from 'through2-concurrent'
 import { yellow } from '../..'
 import { TransformTyped } from '../stream.model'
@@ -67,6 +68,8 @@ function notNullPredicate(item: any): boolean {
  * Only works in objectMode (due to through2Concurrent).
  *
  * Concurrency defaults to 16.
+ *
+ * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
 export function transformMap<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT>,
@@ -110,22 +113,28 @@ export function transformMap<IN = any, OUT = IN>(
         afterFinal?.() // call afterFinal if defined (optional invokation operator)
       },
     },
-    async (chunk: IN, _encoding, cb) => {
+    async function transformMapFn(this: Transform, chunk: IN, _encoding: any, cb: Function) {
       // console.log({chunk, _encoding})
 
       // Stop processing if THROW_IMMEDIATELY mode is used
       if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
 
       try {
-        const currentIndex = index++ // because we need to pass it to 2 functions - mapper and predicate
+        const currentIndex = index++ // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
         const res = await mapper(chunk, currentIndex)
+        const passedResults = await pFilter(
+          Array.isArray(res) ? res : [res],
+          async r => await predicate(r, currentIndex),
+        )
 
-        if (await predicate(res, currentIndex)) {
-          // Tell input stream that we're done processing AND emit result to output
-          cb(null, res)
+        if (passedResults.length === 0) {
+          cb() // 0 results
         } else {
-          // Tell input stream that we're done processing, but emit nothing to output
-          cb()
+          passedResults.forEach(r => {
+            this.push(r)
+            // cb(null, r)
+          })
+          cb() // done processing
         }
       } catch (err) {
         console.error(err)
