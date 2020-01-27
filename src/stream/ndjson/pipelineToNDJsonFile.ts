@@ -1,7 +1,7 @@
 import { AppError } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { createGzip, ZlibOptions } from 'zlib'
-import { _pipeline, grey, transformTap } from '../..'
+import { grey, transformTap, _pipeline } from '../..'
 import { NDJsonStats } from './ndjson.model'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
 

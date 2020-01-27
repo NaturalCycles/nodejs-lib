@@ -1,6 +1,6 @@
 import { timer } from 'rxjs'
 import { take } from 'rxjs/operators'
-import { _pipeline, observableToStream } from '../..'
+import { observableToStream, _pipeline } from '../..'
 import { writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'
 

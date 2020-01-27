@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { _pipeline, transformMap, writablePushToArray } from '../..'
+import { transformMap, writablePushToArray, _pipeline } from '../..'
 import { readableCreate } from '../..'
 import { writableFork } from './writableFork'
 

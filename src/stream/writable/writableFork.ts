@@ -1,5 +1,5 @@
 import { Writable } from 'stream'
-import { _pipeline, readableCreate, ReadableTyped } from '../..'
+import { readableCreate, ReadableTyped, _pipeline } from '../..'
 import { TransformOpt, WritableTyped } from '../stream.model'
 
 /**

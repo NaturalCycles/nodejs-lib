@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { _pipeline, readableFromArray, writablePushToArray } from '../..'
+import { readableFromArray, writablePushToArray, _pipeline } from '../..'
 import { transformToCSV } from './transformToCSV'
 
 test('transformToCSV', async () => {

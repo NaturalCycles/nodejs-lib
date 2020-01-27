@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs'
-import { _pipeline, writableForEach } from '../..'
+import { writableForEach, _pipeline } from '../..'
 import { TransformMapOptions } from '../..'
 import { ReadableTyped } from '../stream.model'
 

@@ -1,6 +1,6 @@
 import { _range } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
-import { _pipeline, writableForEach } from '..'
+import { writableForEach, _pipeline } from '..'
 import { readableFromArray } from './readable/readableFromArray'
 
 function errorTransformUnhandled() {
