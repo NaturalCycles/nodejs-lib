@@ -1,3 +1,10 @@
+# [7.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.16.0...v7.17.0) (2020-01-27)
+
+
+### Features
+
+* support transformMap to return [] and emit multiple results ([3feaf4b](https://github.com/NaturalCycles/nodejs-lib/commit/3feaf4b5b67ed5d14413a228a67faf15796cce79))
+
 # [7.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.15.0...v7.16.0) (2020-01-20)
 
 
