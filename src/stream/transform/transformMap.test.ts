@@ -45,7 +45,7 @@ test('transformMap emit array as multiple items', async () => {
 
   await _pipeline([
     readableFromArray(data),
-    transformMap(n => [n * 2, n * 2 + 1]),
+    transformMap(n => [n * 2, n * 2 + 1], { flattenArrayOutput: true }),
     writablePushToArray(data2),
   ])
 

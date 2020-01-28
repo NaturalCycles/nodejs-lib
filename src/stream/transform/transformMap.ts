@@ -11,6 +11,12 @@ export interface TransformMapOptions<OUT = any> {
   objectMode?: boolean
 
   /**
+   * @default false
+   * Set true to support "multiMap" - possibility to return [] and emit 1 result for each item in the array.
+   */
+  flattenArrayOutput?: boolean
+
+  /**
    * Predicate to filter outgoing results (after mapper).
    * Allows to not emit all results.
    *
@@ -79,6 +85,7 @@ export function transformMap<IN = any, OUT = IN>(
     concurrency = 16,
     predicate = notNullPredicate,
     errorMode = ErrorMode.THROW_IMMEDIATELY,
+    flattenArrayOutput,
     onError,
     beforeFinal,
     afterFinal,
@@ -123,7 +130,7 @@ export function transformMap<IN = any, OUT = IN>(
         const currentIndex = index++ // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
         const res = await mapper(chunk, currentIndex)
         const passedResults = await pFilter(
-          Array.isArray(res) ? res : [res],
+          flattenArrayOutput && Array.isArray(res) ? res : [res],
           async r => await predicate(r, currentIndex),
         )
 
