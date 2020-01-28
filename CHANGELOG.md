@@ -1,3 +1,10 @@
+# [7.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.17.0...v7.18.0) (2020-01-28)
+
+
+### Features
+
+* flattenArrayOutput TransformMap option ([3fd777c](https://github.com/NaturalCycles/nodejs-lib/commit/3fd777cbe01e495130139b1bc82ac4b5296903cc))
+
 # [7.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.16.0...v7.17.0) (2020-01-27)
 
 
