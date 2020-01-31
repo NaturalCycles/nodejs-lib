@@ -1,3 +1,10 @@
+## [7.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.18.0...v7.18.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* exec to log error properly ([f11d93c](https://github.com/NaturalCycles/nodejs-lib/commit/f11d93ca2a577ff7b829cc2a4791d7b340729511))
+
 # [7.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.17.0...v7.18.0) (2020-01-28)
 
 
