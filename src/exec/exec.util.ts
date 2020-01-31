@@ -59,11 +59,13 @@ function handleError(err: execa.ExecaError, cmd: string, opt: ExecaOptions = {})
   }
 
   if (err) {
-    console.log(`${cmd} error ${err.exitCode}`)
+    console.log(`${cmd} error:`)
 
     if (err.originalMessage) {
       console.log(err.originalMessage)
     }
+
+    console.error(err)
 
     if (err.exitCode) {
       process.exit(err.exitCode)
