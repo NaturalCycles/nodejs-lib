@@ -88,6 +88,10 @@ import {
 } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
+import {
+  transformMultiThreaded,
+  TransformMultiThreadedOptions,
+} from './stream/transform/transformMultiThreaded'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
 import { transformThrough } from './stream/transform/transformThrough'
@@ -300,4 +304,6 @@ export {
   csvStringify,
   transformToCSV,
   TransformToCSVOptions,
+  TransformMultiThreadedOptions,
+  transformMultiThreaded,
 }
