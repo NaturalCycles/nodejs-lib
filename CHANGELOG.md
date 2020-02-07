@@ -1,3 +1,10 @@
+# [7.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.18.1...v7.19.0) (2020-02-07)
+
+
+### Features
+
+* transformMultiThreaded (experimental) ([dcca436](https://github.com/NaturalCycles/nodejs-lib/commit/dcca436cfbc8f5e6faa42d4987d9e5e6fd896ed5))
+
 ## [7.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.18.0...v7.18.1) (2020-01-31)
 
 
