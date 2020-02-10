@@ -1,31 +1,8 @@
 import { DeferredPromise, pDeferredPromise, _range } from '@naturalcycles/js-lib'
 import * as through2Concurrent from 'through2-concurrent'
 import { Worker } from 'worker_threads'
-import { TransformOpt, TransformTyped } from '../stream.model'
-
-export interface WorkerInput<IN = any> {
-  /**
-   * Index of the chunk received (global), which identifies the message. Starts with 0.
-   */
-  index: number
-
-  /**
-   * Input chunk data.
-   */
-  payload: IN
-}
-
-export interface WorkerOutput<OUT = any> {
-  /**
-   * Index of the chunk received (global), which identifies the message. Starts with 0.
-   */
-  index: number
-
-  /**
-   * Output of the worker.
-   */
-  payload: OUT
-}
+import { TransformOpt, TransformTyped } from '../../stream.model'
+import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 
 export interface TransformMultiThreadedOptions extends TransformOpt {
   /**
@@ -43,6 +20,8 @@ export interface TransformMultiThreadedOptions extends TransformOpt {
    */
   workerData?: object
 }
+
+const workerProxyFilePath = `${__dirname}/workerClassProxy.js`
 
 /**
  * Spawns a pool of Workers (threads).
@@ -63,9 +42,10 @@ export function transformMultiThreaded<IN, OUT>(
   const workers = _range(0, poolSize).map(workerIndex => {
     workerDonePromises.push(pDeferredPromise())
 
-    const worker = new Worker(workerFile, {
+    const worker = new Worker(workerProxyFilePath, {
       workerData: {
         workerIndex,
+        workerFile, // pass it, so workerProxy can require() it
         ...workerData,
       },
     })

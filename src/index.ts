@@ -88,14 +88,16 @@ import {
 } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
-import {
-  transformMultiThreaded,
-  TransformMultiThreadedOptions,
-} from './stream/transform/transformMultiThreaded'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
 import { transformThrough } from './stream/transform/transformThrough'
 import { transformToArray } from './stream/transform/transformToArray'
+import { BaseWorkerClass, WorkerClassInterface } from './stream/transform/worker/baseWorkerClass'
+import {
+  transformMultiThreaded,
+  TransformMultiThreadedOptions,
+} from './stream/transform/worker/transformMultiThreaded'
+import { WorkerInput, WorkerOutput } from './stream/transform/worker/transformMultiThreaded.model'
 import { writableForEach } from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
@@ -306,4 +308,8 @@ export {
   TransformToCSVOptions,
   TransformMultiThreadedOptions,
   transformMultiThreaded,
+  WorkerClassInterface,
+  BaseWorkerClass,
+  WorkerInput,
+  WorkerOutput,
 }

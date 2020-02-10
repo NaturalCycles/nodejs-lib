@@ -1,13 +1,13 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray, writablePushToArray, _pipeline } from '../..'
-import { testDir } from '../../test/paths.cnst'
+import { readableFromArray, writablePushToArray, _pipeline } from '../../..'
+import { testDir } from '../../../test/paths.cnst'
 import { transformMultiThreaded } from './transformMultiThreaded'
 
 test('transformMultiThreaded', async () => {
-  const items = _range(1, 101).map(i => ({ id: i }))
+  const items = _range(1, 11).map(i => ({ id: i }))
   const items2: any[] = []
 
-  const workerFile = `${testDir}/testWorker.js`
+  const workerFile = `${testDir}/testWorker.ts`
 
   await _pipeline([
     readableFromArray(items),
@@ -16,5 +16,5 @@ test('transformMultiThreaded', async () => {
   ])
 
   // console.log(items2)
-  // expect(items2.sort((a, b) => (a.id < b.id ? -1 : 1))).toEqual(items)
-})
+  expect(items2.sort((a, b) => (a.id < b.id ? -1 : 1))).toEqual(items)
+}, 40000)
