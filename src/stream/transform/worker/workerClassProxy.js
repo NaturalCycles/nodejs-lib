@@ -26,6 +26,9 @@ parentPort.on('message', async msg => {
   }
 
   // console.log(`message received by worker ${index}: `, msg)
-  const out = await worker.process(msg)
-  parentPort.postMessage(out)
+  const out = await worker.process(msg.payload, msg.index)
+  parentPort.postMessage({
+    index: msg.index,
+    payload: out,
+  })
 })
