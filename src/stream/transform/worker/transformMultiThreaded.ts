@@ -16,6 +16,11 @@ export interface TransformMultiThreadedOptions extends TransformOpt {
   poolSize?: number
 
   /**
+   * @default to poolSize
+   */
+  concurrency?: number
+
+  /**
    * Passed to the Worker as `workerData` property (initial data).
    */
   workerData?: object
@@ -33,6 +38,7 @@ export function transformMultiThreaded<IN, OUT>(
   opt: TransformMultiThreadedOptions,
 ): TransformTyped<IN, OUT> {
   const { workerFile, poolSize = 2, workerData } = opt
+  const maxConcurrency = opt.concurrency || poolSize
   const objectMode = opt.objectMode !== false // default true
 
   const workerDonePromises: DeferredPromise<Error | undefined>[] = []
@@ -75,7 +81,7 @@ export function transformMultiThreaded<IN, OUT>(
 
   return (objectMode ? through2Concurrent.obj : through2Concurrent)(
     {
-      maxConcurrency: poolSize,
+      maxConcurrency,
       async final(cb) {
         try {
           // Push null (complete) to all sub-streams
