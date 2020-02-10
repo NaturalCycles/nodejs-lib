@@ -1,8 +1,6 @@
 const { parentPort, workerData } = require('worker_threads')
 
-const index = workerData
-
-console.log(`testWorker.js ${index} created`)
+console.log(`testWorker.js created`, { workerData })
 
 // console.log(process.env)
 
@@ -15,6 +13,10 @@ parentPort.on('message', msg => {
     }
 
     // console.log(`message received by worker ${index}: `, msg)
-    parentPort.postMessage(msg)
-  }, 500)
+    const { index, payload } = msg
+    parentPort.postMessage({
+      index,
+      payload, // echo back
+    })
+  }, 200)
 })
