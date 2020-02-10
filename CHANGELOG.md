@@ -1,3 +1,10 @@
+## [7.20.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.1...v7.20.2) (2020-02-10)
+
+
+### Bug Fixes
+
+* TransformMultiThreadedOptions.concurrency ([91cda47](https://github.com/NaturalCycles/nodejs-lib/commit/91cda479eda923e24f25f762bae3ba142e926086))
+
 ## [7.20.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.0...v7.20.1) (2020-02-10)
 
 
