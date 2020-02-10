@@ -1,3 +1,11 @@
+# [7.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.19.0...v7.20.0) (2020-02-10)
+
+
+### Features
+
+* improve multiThreadedWorker interface ([b4ceb62](https://github.com/NaturalCycles/nodejs-lib/commit/b4ceb62af0ea28125e620dc21040547d10942560))
+* transformMultiThreaded with backpressure and concurrency ([d74cbb5](https://github.com/NaturalCycles/nodejs-lib/commit/d74cbb59a0df7fb623ada51a8d1d43f1bf77a61d))
+
 # [7.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.18.1...v7.19.0) (2020-02-07)
 
 
