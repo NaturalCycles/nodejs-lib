@@ -1,3 +1,10 @@
+## [7.20.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.2...v7.20.3) (2020-02-10)
+
+
+### Bug Fixes
+
+* TransformMultiThreadedOptions.highWaterMark ([a029f65](https://github.com/NaturalCycles/nodejs-lib/commit/a029f652f92ae5325a417b973ab3228f30940f95))
+
 ## [7.20.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.1...v7.20.2) (2020-02-10)
 
 
