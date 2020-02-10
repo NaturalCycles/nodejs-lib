@@ -1,3 +1,10 @@
+## [7.20.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.0...v7.20.1) (2020-02-10)
+
+
+### Bug Fixes
+
+* simplify WorkerClass interface ([19a5627](https://github.com/NaturalCycles/nodejs-lib/commit/19a56278e2eedb66ecd14b44b41db7f54eb32501))
+
 # [7.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.19.0...v7.20.0) (2020-02-10)
 
 
