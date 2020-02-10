@@ -21,6 +21,11 @@ export interface TransformMultiThreadedOptions extends TransformOpt {
   concurrency?: number
 
   /**
+   * @default to Math.max(16, concurrency x 2)
+   */
+  highWaterMark?: number
+
+  /**
    * Passed to the Worker as `workerData` property (initial data).
    */
   workerData?: object
@@ -39,6 +44,7 @@ export function transformMultiThreaded<IN, OUT>(
 ): TransformTyped<IN, OUT> {
   const { workerFile, poolSize = 2, workerData } = opt
   const maxConcurrency = opt.concurrency || poolSize
+  const highWaterMark = Math.max(16, maxConcurrency)
   const objectMode = opt.objectMode !== false // default true
 
   const workerDonePromises: DeferredPromise<Error | undefined>[] = []
@@ -82,6 +88,7 @@ export function transformMultiThreaded<IN, OUT>(
   return (objectMode ? through2Concurrent.obj : through2Concurrent)(
     {
       maxConcurrency,
+      highWaterMark,
       async final(cb) {
         try {
           // Push null (complete) to all sub-streams
