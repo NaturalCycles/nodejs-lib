@@ -1,8 +1,8 @@
 import { SimpleMovingAverage } from '@naturalcycles/js-lib'
-import { since } from '@naturalcycles/time-lib'
+import { dayjs, since } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect } from 'util'
-import { boldWhite, mb, yellow } from '../..'
+import { boldWhite, dimGrey, mb, white, yellow } from '../..'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
@@ -70,6 +70,7 @@ export function transformLogProgress<IN = any>(
   const logHeapUsed = opt.heapUsed !== false // true by default
   const logRss = opt.rss !== false // true by default
   const logRPS = opt.logRPS !== false // true by default
+  const logEvery10 = logEvery * 10
 
   const started = Date.now()
   let lastSecondStarted = Date.now()
@@ -87,7 +88,7 @@ export function transformLogProgress<IN = any>(
       processedLastSecond++
 
       if (logProgress && progress % logEvery === 0) {
-        logStats(chunk)
+        logStats(chunk, false, progress % logEvery10 === 0)
       }
 
       cb(null, chunk) // pass-through
@@ -99,7 +100,7 @@ export function transformLogProgress<IN = any>(
     },
   })
 
-  function logStats(chunk?: IN, final = false): void {
+  function logStats(chunk?: IN, final = false, tenx = false): void {
     if (!logProgress) return
     const { rss, heapUsed, heapTotal } = process.memoryUsage()
 
@@ -130,7 +131,13 @@ export function transformLogProgress<IN = any>(
       ),
     )
 
-    if (final) {
+    if (tenx) {
+      console.log(
+        `${dimGrey(dayjs().toPretty())} ${white(metric)} took ${yellow(
+          since(started),
+        )} so far to process ${yellow(progress)} rows`,
+      )
+    } else if (final) {
       console.log(
         `${boldWhite(metric)} took ${yellow(since(started))} to process ${yellow(
           progress,

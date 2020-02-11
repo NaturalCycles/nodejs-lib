@@ -23,7 +23,7 @@ interface Item {
 }
 
 // Backpressure is used when processDelay / concurrency > sourceDelay, so it'll cause source read throttling
-const sourceCount = 100
+const sourceCount = 500
 const sourceDelay = 100
 const processDelay = 300
 const concurrency = 2
