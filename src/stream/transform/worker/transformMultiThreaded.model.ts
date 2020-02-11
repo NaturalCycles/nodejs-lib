@@ -27,3 +27,19 @@ export interface WorkerOutput<OUT = any> {
    */
   error?: Error
 }
+
+export interface BaseWorkerData {
+  workerFile: string
+
+  /**
+   * @default worker
+   */
+  metric: string
+
+  workerIndex: number
+
+  /**
+   * @default 1000
+   */
+  logEvery: number
+}

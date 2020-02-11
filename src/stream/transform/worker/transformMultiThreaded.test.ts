@@ -11,7 +11,11 @@ test('transformMultiThreaded', async () => {
 
   await _pipeline([
     readableFromArray(items),
-    transformMultiThreaded({ workerFile, poolSize: 4, workerData: { hello: 'lalala' } }),
+    transformMultiThreaded({
+      workerFile,
+      poolSize: 4,
+      workerData: { hello: 'lalala', logEvery: 2 },
+    }),
     writablePushToArray(items2),
   ])
 
