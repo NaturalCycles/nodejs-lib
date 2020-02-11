@@ -26,9 +26,19 @@ parentPort.on('message', async msg => {
   }
 
   // console.log(`message received by worker ${index}: `, msg)
-  const out = await worker.process(msg.payload, msg.index)
-  parentPort.postMessage({
-    index: msg.index,
-    payload: out,
-  })
+
+  try {
+    const out = await worker.process(msg.payload, msg.index)
+    if (out.error) throw out.error
+
+    parentPort.postMessage({
+      index: msg.index,
+      payload: out,
+    })
+  } catch (err) {
+    parentPort.postMessage({
+      index: msg.index,
+      error: err,
+    })
+  }
 })

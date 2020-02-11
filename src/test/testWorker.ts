@@ -1,8 +1,12 @@
 import { pDelay } from '@naturalcycles/js-lib'
 import { BaseWorkerClass } from '..'
 
-export class WorkerClass extends BaseWorkerClass {
-  async process(msg: any): Promise<any> {
+export class WorkerClass extends BaseWorkerClass<any, any, any> {
+  async process(msg: any, index: number): Promise<any> {
+    if (index >= 10) {
+      throw new Error(`error from worker#${this.workerData.workerIndex}`)
+    }
+
     await pDelay(200)
     return msg // echo
   }

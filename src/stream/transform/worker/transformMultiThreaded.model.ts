@@ -20,4 +20,10 @@ export interface WorkerOutput<OUT = any> {
    * Output of the worker.
    */
   payload: OUT
+
+  /**
+   * Returned if WorkerClass.process returned an error (rejected Promise).
+   * Payload is undefined in such case, so error should be checked first.
+   */
+  error?: Error
 }

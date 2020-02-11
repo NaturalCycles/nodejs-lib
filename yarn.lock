@@ -513,9 +513,9 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/dev-lib@^9.0.0":
-  version "9.7.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-9.7.1.tgz#9c0497639ce24902f62307244cbfa787fc084c0b"
-  integrity sha512-AfIceBqDdcGchJY8/FXMcwOB2LVHyh9rBI96H5DQVJDOTo7/QiyxNXK+4kqc+tHJLsKDOmyS82fKY1cyPet8jg==
+  version "9.8.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-9.8.0.tgz#e0a463f23ea5a9d156de5c6e5d974cbf7dbce570"
+  integrity sha512-oogPMhcu4II3YDC8iuySFsr0OHJ0DwIX7VYbkWWzrevuT9+RzGB3tvQ49MHc3pziA2KF3gc40Kug4TJupo8RyQ==
   dependencies:
     "@commitlint/cli" "^8.0.0"
     "@commitlint/config-conventional" "^8.0.0"
@@ -565,9 +565,9 @@
   integrity sha512-owhU+Cj+gRREWkSnpVmahQE74pu983tYLvyRrj4RgZTJAvU0mv05SnU7h8TEARMXmw++4KMMtCbV4WAuMMKvmA==
 
 "@naturalcycles/nodejs-lib@^7.0.0":
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-7.19.0.tgz#14ecd2e8697ea58d8d215365d0e535ccb7c02498"
-  integrity sha512-7JmQOMk2rlxt8hZWVRwxSlbIV0yzv0UdLnDJYzcGWdAR0462S0pgD5T46pX5KizKEnvVyzsicCuW3vETR+22qg==
+  version "7.20.3"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-7.20.3.tgz#b769481869c9fe0efe3cabfbfae4acd4a153a9db"
+  integrity sha512-ROW9ZYO0cQCGKibYpJf1IKd1lAJlUKXN//tGrTqfmwlKvOFqA+fQ+0G1CklwEzL/BMdXbeKHlwY54uBdGJz1ZQ==
   dependencies:
     "@hapi/joi" "^15.0.2"
     "@naturalcycles/js-lib" "^8.0.0"
@@ -2366,9 +2366,9 @@ html-escaper@^2.0.0:
   integrity sha512-a4u9BeERWGu/S8JiWEAQcdrg9v4QArtP9keViQjGMdff20fBdd8waotXaNmODqBe6uZ3Nafi7K/ho4gCQHV3Ig==
 
 http-cache-semantics@^4.0.0:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.0.3.tgz#495704773277eeef6e43f9ab2c2c7d259dda25c5"
-  integrity sha512-TcIMG3qeVLgDr1TEd2XvHaTnMPwYQUQMIBLy+5pLSDKYFc7UIqj39w8EGzZkaxoLv/l2K8HaI0t5AVA+YYgUew==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.0.4.tgz#13eeb612424bb113d52172c28a13109c46fa85d7"
+  integrity sha512-Z2EICWNJou7Tr9Bd2M2UqDJq3A9F2ePG9w3lIpjoyuSyXFP9QbniJVu3XQYytuw5ebmG7dXSXO9PgAjJG8DDKA==
 
 http-signature@~1.2.0:
   version "1.2.0"

@@ -47,6 +47,12 @@ export function transformMultiThreaded<IN, OUT>(
   const highWaterMark = Math.max(16, maxConcurrency)
   const objectMode = opt.objectMode !== false // default true
 
+  console.log({
+    poolSize,
+    maxConcurrency,
+    highWaterMark,
+  })
+
   const workerDonePromises: DeferredPromise<Error | undefined>[] = []
   const messageDonePromises: Record<number, DeferredPromise<OUT>> = {}
   let index = -1 // input chunk index, will start from 0
@@ -79,7 +85,11 @@ export function transformMultiThreaded<IN, OUT>(
       // console.log(`Message from Worker ${workerIndex}:`, out)
       // console.log(Object.keys(messageDonePromises))
       // tr.push(out.payload)
-      messageDonePromises[out.index].resolve(out.payload)
+      if (out.error) {
+        messageDonePromises[out.index].reject(out.error)
+      } else {
+        messageDonePromises[out.index].resolve(out.payload)
+      }
     })
 
     return worker
@@ -117,15 +127,22 @@ export function transformMultiThreaded<IN, OUT>(
         payload: chunk,
       } as WorkerInput)
 
-      // awaiting for result
-      const out = await messageDonePromises[currentIndex]
-      // console.log('awaited!')
+      try {
+        // awaiting for result
+        const out = await messageDonePromises[currentIndex]
+        // console.log('awaited!')
+        // return the result
+        cb(null, out)
+      } catch (err) {
+        // Currently we only support ErrorMode.SUPPRESS
+        // Error is logged and output continues
+        console.error(err)
+
+        cb() // emit nothing in case of an error
+      }
 
       // clean up
       delete messageDonePromises[currentIndex]
-
-      // return the result
-      cb(null, out)
     },
   )
 }
