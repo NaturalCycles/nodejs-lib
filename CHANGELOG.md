@@ -1,3 +1,14 @@
+# [7.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.3...v7.21.0) (2020-02-11)
+
+
+### Features
+
+* catch errors from workers, log them ([66810d1](https://github.com/NaturalCycles/nodejs-lib/commit/66810d1e46b638c3520c7010cea79e0e3364956f))
+* export more colors ([7d0d05e](https://github.com/NaturalCycles/nodejs-lib/commit/7d0d05e5c7a542e6947b6d3063f4e5c3c671b311))
+* transformLogProgress to log intermediate results ([6b2a68b](https://github.com/NaturalCycles/nodejs-lib/commit/6b2a68ba5fe2f611e072384ef0bd71ffaa2e8cc7))
+* transformLogProgress will log rss by default ([35ebd60](https://github.com/NaturalCycles/nodejs-lib/commit/35ebd603e11c1dcc06b15b905fd5c6b40850de43))
+* workers to log progress ([136f8e8](https://github.com/NaturalCycles/nodejs-lib/commit/136f8e856cb0b599b887769208f37399a56c1e99))
+
 ## [7.20.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.2...v7.20.3) (2020-02-10)
 
 
