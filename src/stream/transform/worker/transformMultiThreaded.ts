@@ -73,7 +73,7 @@ export function transformMultiThreaded<IN, OUT>(
 
     worker.on('error', err => {
       console.error(`Worker ${workerIndex} error`, err)
-      workerDonePromises[workerIndex].resolve(err)
+      workerDonePromises[workerIndex].reject(err)
     })
 
     worker.on('exit', _exitCode => {

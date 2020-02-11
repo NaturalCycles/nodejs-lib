@@ -25,6 +25,12 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   heapTotal?: boolean
 
   /**
+   * Include `rss` in log.
+   * @default true
+   */
+  rss?: boolean
+
+  /**
    * Log "rows per second"
    * @default true
    */
@@ -62,6 +68,7 @@ export function transformLogProgress<IN = any>(
   const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100, extra } = opt
   const logProgress = opt.logProgress !== false // true by default
   const logHeapUsed = opt.heapUsed !== false // true by default
+  const logRss = opt.rss !== false // true by default
   const logRPS = opt.logRPS !== false // true by default
 
   const started = Date.now()
@@ -94,7 +101,7 @@ export function transformLogProgress<IN = any>(
 
   function logStats(chunk?: IN, final = false): void {
     if (!logProgress) return
-    const { heapUsed, heapTotal } = process.memoryUsage()
+    const { rss, heapUsed, heapTotal } = process.memoryUsage()
 
     const now = Date.now()
     const lastRPS = processedLastSecond / ((now - lastSecondStarted) / 1000) || 0
@@ -111,6 +118,7 @@ export function transformLogProgress<IN = any>(
           ...(extra && !final ? extra(chunk, progress) : {}),
           ...(logHeapUsed ? { heapUsed: mb(heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: mb(heapTotal) } : {}),
+          ...(logRss ? { rss: mb(rss) } : {}),
           ...(logRPS
             ? {
                 rps10,
