@@ -4,9 +4,13 @@ import { execCommand, execShell, execWithArgs } from './exec/exec.util'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
 import {
+  boldGreen,
+  boldGrey,
   boldWhite,
+  boldYellow,
   chalk,
   dimGreen,
+  dimGrey,
   dimWhite,
   dimYellow,
   green,
@@ -302,6 +306,10 @@ export {
   dimYellow,
   green,
   dimGreen,
+  dimGrey,
+  boldGrey,
+  boldYellow,
+  boldGreen,
   csvParse,
   csvStringify,
   transformToCSV,
