@@ -36,7 +36,6 @@ parentPort.on('message', async msg => {
 
   try {
     const out = await worker.process(msg.payload, msg.index)
-    if (out.error) throw out.error
 
     parentPort.postMessage({
       index: msg.index,
