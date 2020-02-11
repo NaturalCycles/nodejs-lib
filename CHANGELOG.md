@@ -1,3 +1,10 @@
+## [7.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.0...v7.21.1) (2020-02-11)
+
+
+### Bug Fixes
+
+* worker error handling ([287fa4e](https://github.com/NaturalCycles/nodejs-lib/commit/287fa4e41598fb45971fb6358734f688685e8b1f))
+
 # [7.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.20.3...v7.21.0) (2020-02-11)
 
 
