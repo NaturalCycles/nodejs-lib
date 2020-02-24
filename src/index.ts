@@ -151,7 +151,7 @@ import {
   utcOffsetSchema,
   verSchema,
 } from './validation/joi/joi.shared.schemas'
-import { JoiValidationError } from './validation/joi/joi.validation.error'
+import { JoiValidationError, JoiValidationErrorData } from './validation/joi/joi.validation.error'
 import {
   convert,
   getValidationResult,
@@ -162,6 +162,7 @@ import {
 } from './validation/joi/joi.validation.util'
 
 export {
+  JoiValidationErrorData,
   JoiValidationError,
   JoiValidationResult,
   validate,
