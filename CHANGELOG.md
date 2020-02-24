@@ -1,3 +1,10 @@
+## [7.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.1...v7.21.2) (2020-02-24)
+
+
+### Bug Fixes
+
+* export JoiValidationErrorData ([3020a47](https://github.com/NaturalCycles/nodejs-lib/commit/3020a47b9540982014fb41f83aeb01de5bd16559))
+
 ## [7.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.0...v7.21.1) (2020-02-11)
 
 
