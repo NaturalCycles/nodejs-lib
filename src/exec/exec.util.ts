@@ -1,5 +1,5 @@
 import * as execa from 'execa'
-import { grey } from '../log/colors'
+import { dimGrey, grey } from '../log/colors'
 
 export interface ExecaOptions extends execa.Options {
   /**
@@ -59,13 +59,13 @@ function handleError(err: execa.ExecaError, cmd: string, opt: ExecaOptions = {})
   }
 
   if (err) {
-    console.log(`${cmd} error:`)
-
     if (err.originalMessage) {
-      console.log(err.originalMessage)
+      console.log(dimGrey(err.originalMessage))
+    } else if (err.shortMessage) {
+      console.log(dimGrey(err.shortMessage))
+    } else {
+      console.error(err)
     }
-
-    console.error(err)
 
     if (err.exitCode) {
       process.exit(err.exitCode)
