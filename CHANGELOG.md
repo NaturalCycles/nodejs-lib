@@ -1,3 +1,10 @@
+## [7.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.2...v7.21.3) (2020-02-25)
+
+
+### Bug Fixes
+
+* execUtil to print more compact error (shortMessage) ([ffea744](https://github.com/NaturalCycles/nodejs-lib/commit/ffea744dac2f708b56191e10006c759d76ea606c))
+
 ## [7.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.1...v7.21.2) (2020-02-24)
 
 
