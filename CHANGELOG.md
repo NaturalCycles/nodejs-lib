@@ -1,3 +1,10 @@
+# [7.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.3...v7.22.0) (2020-03-01)
+
+
+### Features
+
+* deps ([277cea1](https://github.com/NaturalCycles/nodejs-lib/commit/277cea162e56450dda14ba48c37b9e5698e42fe7))
+
 ## [7.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.2...v7.21.3) (2020-02-25)
 
 
