@@ -1,6 +1,6 @@
 import { csvParse } from './csv/csvParse'
 import { csvStringify } from './csv/csvStringify'
-import { execCommand, execShell, execWithArgs } from './exec/exec.util'
+import { ExecaOptions, execCommand, execShell, execWithArgs } from './exec/exec.util'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
 import {
@@ -251,6 +251,7 @@ export {
   SlackSharedService,
   SlackSharedServiceCfg,
   SlackMessage,
+  ExecaOptions,
   execCommand,
   execShell,
   execWithArgs,
