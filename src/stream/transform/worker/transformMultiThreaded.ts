@@ -1,4 +1,4 @@
-import { DeferredPromise, pDeferredPromise, _range } from '@naturalcycles/js-lib'
+import { DeferredPromise, pDefer, _range } from '@naturalcycles/js-lib'
 import * as through2Concurrent from 'through2-concurrent'
 import { Worker } from 'worker_threads'
 import { TransformOpt, TransformTyped } from '../../stream.model'
@@ -58,7 +58,7 @@ export function transformMultiThreaded<IN, OUT>(
   let index = -1 // input chunk index, will start from 0
 
   const workers = _range(0, poolSize).map(workerIndex => {
-    workerDonePromises.push(pDeferredPromise())
+    workerDonePromises.push(pDefer())
 
     const worker = new Worker(workerProxyFilePath, {
       workerData: {
@@ -119,7 +119,7 @@ export function transformMultiThreaded<IN, OUT>(
       const currentIndex = ++index
 
       // Create the unresolved promise (to avait)
-      messageDonePromises[currentIndex] = pDeferredPromise<OUT>()
+      messageDonePromises[currentIndex] = pDefer<OUT>()
 
       const worker = workers[currentIndex % poolSize] // round-robin
       worker.postMessage({
