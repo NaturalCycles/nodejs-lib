@@ -1,3 +1,10 @@
+## [7.22.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.22.0...v7.22.1) (2020-03-01)
+
+
+### Bug Fixes
+
+* export ExecaOptions ([3e05163](https://github.com/NaturalCycles/nodejs-lib/commit/3e051632d3b66ae2a1ca7edc7cc8148d22ba19a7))
+
 # [7.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.21.3...v7.22.0) (2020-03-01)
 
 
