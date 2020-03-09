@@ -12,7 +12,7 @@ test('transformLogProgress', async () => {
   await _pipeline([
     readable,
     transformLogProgress({
-      logEvery: 5,
+      logEvery: 2,
       extra: (r, index) => {
         // console.log(r, index)
 

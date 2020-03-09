@@ -132,10 +132,15 @@ export function transformLogProgress<IN = any>(
     )
 
     if (tenx) {
+      let perHour: number | string = Math.round((progress * 1000 * 60 * 60) / (now - started))
+      if (perHour > 900) {
+        perHour = Math.round(perHour / 1000) + 'K'
+      }
+
       console.log(
         `${dimGrey(dayjs().toPretty())} ${white(metric)} took ${yellow(
           since(started),
-        )} so far to process ${yellow(progress)} rows`,
+        )} so far to process ${yellow(progress)} rows, ~${yellow(perHour)}/hour`,
       )
     } else if (final) {
       console.log(
