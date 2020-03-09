@@ -132,7 +132,7 @@ export function transformLogProgress<IN = any>(
     )
 
     if (tenx) {
-      let perHour: number | string = Math.round((progress * 1000 * 60 * 60) / (now - started))
+      let perHour: number | string = Math.round((progress * 1000 * 60 * 60) / (now - started)) || 0
       if (perHour > 900) {
         perHour = Math.round(perHour / 1000) + 'K'
       }
