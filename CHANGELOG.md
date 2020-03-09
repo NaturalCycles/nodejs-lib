@@ -1,3 +1,15 @@
+# [7.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.22.1...v7.23.0) (2020-03-09)
+
+
+### Bug Fixes
+
+* avoid NaN ([fcda77d](https://github.com/NaturalCycles/nodejs-lib/commit/fcda77de4477acd1fedcbee901b9835463c9c91d))
+
+
+### Features
+
+* transformLogProcess to log ~xK/hour ([1eb75c6](https://github.com/NaturalCycles/nodejs-lib/commit/1eb75c6a3a7e90171606c1d817bdbfa3fc518295))
+
 ## [7.22.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.22.0...v7.22.1) (2020-03-01)
 
 
