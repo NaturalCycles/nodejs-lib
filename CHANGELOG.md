@@ -1,3 +1,10 @@
+## [7.23.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.23.0...v7.23.1) (2020-03-16)
+
+
+### Bug Fixes
+
+* bump js-lib ([0893401](https://github.com/NaturalCycles/nodejs-lib/commit/0893401d2d24a5cda7bd867dc9878b578972a7ba))
+
 # [7.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.22.1...v7.23.0) (2020-03-09)
 
 
