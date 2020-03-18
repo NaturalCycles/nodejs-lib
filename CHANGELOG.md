@@ -1,3 +1,10 @@
+# [7.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.24.0...v7.25.0) (2020-03-18)
+
+
+### Features
+
+* tableDiff ([783130b](https://github.com/NaturalCycles/nodejs-lib/commit/783130b2b70db9f7ebc31b0369694d8959b0a254))
+
 # [7.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.23.1...v7.24.0) (2020-03-18)
 
 
