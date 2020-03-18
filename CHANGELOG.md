@@ -1,3 +1,10 @@
+# [7.26.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.25.0...v7.26.0) (2020-03-18)
+
+
+### Features
+
+* TableDiffOptions.aTitle, bTitle ([b2a7392](https://github.com/NaturalCycles/nodejs-lib/commit/b2a7392e6c64e1ba700300a4b474bc5182bec049))
+
 # [7.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.24.0...v7.25.0) (2020-03-18)
 
 
