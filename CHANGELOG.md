@@ -1,3 +1,10 @@
+# [7.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.23.1...v7.24.0) (2020-03-18)
+
+
+### Features
+
+* logProgress allow to log external and arrayBuffers ([e366e77](https://github.com/NaturalCycles/nodejs-lib/commit/e366e7751a3e28ac44686594104f9524c221d9a6))
+
 ## [7.23.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.23.0...v7.23.1) (2020-03-16)
 
 
