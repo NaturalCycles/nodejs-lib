@@ -31,6 +31,18 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   rss?: boolean
 
   /**
+   * Include `external` in log.
+   * @default false
+   */
+  external?: boolean
+
+  /**
+   * Include `arrayBuffers` in log.
+   * @default false
+   */
+  arrayBuffers?: boolean
+
+  /**
    * Log "rows per second"
    * @default true
    */
@@ -102,7 +114,7 @@ export function transformLogProgress<IN = any>(
 
   function logStats(chunk?: IN, final = false, tenx = false): void {
     if (!logProgress) return
-    const { rss, heapUsed, heapTotal } = process.memoryUsage()
+    const mem = process.memoryUsage()
 
     const now = Date.now()
     const lastRPS = processedLastSecond / ((now - lastSecondStarted) / 1000) || 0
@@ -117,9 +129,11 @@ export function transformLogProgress<IN = any>(
         {
           [metric]: progress,
           ...(extra && !final ? extra(chunk, progress) : {}),
-          ...(logHeapUsed ? { heapUsed: mb(heapUsed) } : {}),
-          ...(logHeapTotal ? { heapTotal: mb(heapTotal) } : {}),
-          ...(logRss ? { rss: mb(rss) } : {}),
+          ...(logHeapUsed ? { heapUsed: mb(mem.heapUsed) } : {}),
+          ...(logHeapTotal ? { heapTotal: mb(mem.heapTotal) } : {}),
+          ...(logRss ? { rss: mb(mem.rss) } : {}),
+          ...(opt.external ? { external: mb(mem.external) } : {}),
+          ...(opt.arrayBuffers ? { arrayBuffers: mb(mem.arrayBuffers) } : {}),
           ...(logRPS
             ? {
                 rps10,
