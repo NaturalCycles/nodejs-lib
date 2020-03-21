@@ -1,3 +1,4 @@
+import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
   arraySchema,
@@ -256,6 +257,16 @@ test('should convert null to undefined and strip', () => {
   expect(validate(null, numberSchema.optional())).toBeUndefined()
   expect(validate(null, integerSchema.optional())).toBeUndefined()
   expect(validate(null, arraySchema().optional())).toBeUndefined()
+})
+
+test('null is not a valid value when required', () => {
+  testValidation(stringSchema, ['a'], ['', null, undefined, 5])
+  testValidation(numberSchema, [5, 0], ['', null, undefined, 'a'])
+  testValidation(
+    booleanSchema,
+    [true, false, 'true', 'false'],
+    ['', null, undefined, 'a', 'tr', 'fa', 0, -1],
+  )
 })
 
 test('default to empty array', () => {

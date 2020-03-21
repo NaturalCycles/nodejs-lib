@@ -8,7 +8,6 @@
 
 import { ValidationError, ValidationOptions } from '@hapi/joi'
 import { isObject } from '@naturalcycles/js-lib'
-import { Joi } from './joi.extensions'
 import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 
@@ -35,6 +34,9 @@ const defaultOptions: ValidationOptions = {
     arrays: false, // let's be very careful with that! https://github.com/hapijs/joi/issues/658
   },
   presence: 'required',
+  // errors: {
+  //   stack: true,
+  // }
 }
 
 /**
@@ -79,7 +81,7 @@ export function getValidationResult<IN, OUT = IN>(
 ): JoiValidationResult<OUT> {
   if (!schema) return { value } as any
 
-  const { value: returnValue, error } = Joi.validate(value, schema, {
+  const { value: returnValue, error } = schema.validate(value, {
     ...defaultOptions,
     ...options,
   })
@@ -101,7 +103,7 @@ export function getValidationResult<IN, OUT = IN>(
 export function isValid<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): boolean {
   if (!schema) return { value } as any
 
-  const { error } = Joi.validate(value, schema, defaultOptions)
+  const { error } = schema.validate(value, defaultOptions)
   return !error
 }
 
@@ -111,7 +113,7 @@ export function undefinedIfInvalid<IN, OUT = IN>(
 ): OUT | undefined {
   if (!schema) return { value } as any
 
-  const { value: returnValue, error } = Joi.validate(value, schema, defaultOptions)
+  const { value: returnValue, error } = schema.validate(value, defaultOptions)
 
   return error ? undefined : (returnValue as any)
 }
@@ -122,7 +124,7 @@ export function undefinedIfInvalid<IN, OUT = IN>(
  */
 export function convert<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
   if (!schema) return value as any
-  const { value: returnValue } = Joi.validate(value, schema, defaultOptions)
+  const { value: returnValue } = schema.validate(value, defaultOptions)
   return returnValue as any
 }
 
@@ -135,10 +137,10 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   if (objectId || objectName) {
     objectName = objectName || value?.constructor?.name
 
-    tokens.push([objectName, objectId].filter(i => i).join('.'))
+    tokens.push([objectName, objectId].filter(Boolean).join('.'))
   }
 
-  const annotation: string = (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
+  const annotation = err.annotate(stripColors)
 
   if (annotation.length > 1000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
