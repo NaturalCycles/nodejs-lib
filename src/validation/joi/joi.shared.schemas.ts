@@ -80,8 +80,10 @@ export const semVerSchema = stringSchema.regex(SEM_VER_PATTERN)
 
 export const userAgentSchema = stringSchema.min(10).max(400)
 
-export const utcOffsetSchema = numberSchema.min(-14 * 60).max(14 * 60)
-// .dividable(15)
+export const utcOffsetSchema = numberSchema
+  .min(-14 * 60)
+  .max(14 * 60)
+  .dividable(15)
 
 // todo: we used to have format as "192.168.0.1/192.168.0.2" (slash with provided X-Forwarded-For value)
 // maybe it'll break this validation

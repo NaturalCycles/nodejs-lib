@@ -34,6 +34,9 @@ const defaultOptions: ValidationOptions = {
     arrays: false, // let's be very careful with that! https://github.com/hapijs/joi/issues/658
   },
   presence: 'required',
+  // errors: {
+  //   stack: true,
+  // }
 }
 
 /**
@@ -134,10 +137,10 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   if (objectId || objectName) {
     objectName = objectName || value?.constructor?.name
 
-    tokens.push([objectName, objectId].filter(i => i).join('.'))
+    tokens.push([objectName, objectId].filter(Boolean).join('.'))
   }
 
-  const annotation: string = (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
+  const annotation = err.annotate(stripColors)
 
   if (annotation.length > 1000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
