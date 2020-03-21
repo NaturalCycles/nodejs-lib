@@ -2,6 +2,11 @@ import { Predicate } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
+/**
+ * Note, that currently it's NOT concurrent! (concurrency = 1)
+ * So, it's recommended to use transformMap instead, that is both concurrent and has
+ * filtering feature by default.
+ */
 export function transformFilter<IN = any>(
   predicate: Predicate<IN>,
   opt: TransformOpt = {},
