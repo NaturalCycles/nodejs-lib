@@ -48,23 +48,13 @@ export const SLUG_PATTERN = /^[a-z0-9-]*$/
 /**
  * "Slug" - a valid URL, filename, etc.
  */
-export const slugSchema = stringSchema
-  .regex(SLUG_PATTERN)
-  .min(1)
-  .max(255)
+export const slugSchema = stringSchema.regex(SLUG_PATTERN).min(1).max(255)
 
 // 16725225600 is 2500-01-01
-export const unixTimestampSchema = numberSchema
-  .integer()
-  .min(0)
-  .max(16725225600)
+export const unixTimestampSchema = numberSchema.integer().min(0).max(16725225600)
 
 // 2
-export const verSchema = numberSchema
-  .optional()
-  .integer()
-  .min(1)
-  .max(100)
+export const verSchema = numberSchema.optional().integer().min(1).max(100)
 
 /**
  * Be careful, by default emailSchema does TLD validation. To disable it - use `stringSchema.email({tld: false}).lowercase()`

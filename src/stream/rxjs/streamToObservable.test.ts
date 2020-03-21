@@ -12,9 +12,7 @@ test('streamToObservable simple', async () => {
 
   const readable = readableFromArray(data)
 
-  const res = await streamToObservable(readable)
-    .pipe(toArray())
-    .toPromise()
+  const res = await streamToObservable(readable).pipe(toArray()).toPromise()
   expect(res).toEqual(data)
 })
 

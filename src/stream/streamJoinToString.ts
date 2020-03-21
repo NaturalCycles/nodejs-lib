@@ -7,8 +7,5 @@ export async function streamJoinToString(
 ): Promise<string> {
   const chunks = await pipelineToArray<string | Buffer>([stream], { objectMode: false })
 
-  return chunks
-    .filter(Boolean)
-    .map(String)
-    .join(joinOn)
+  return chunks.filter(Boolean).map(String).join(joinOn)
 }

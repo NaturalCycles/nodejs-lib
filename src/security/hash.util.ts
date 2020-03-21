@@ -5,10 +5,7 @@ export function md5(s: string | Buffer): string {
 }
 
 export function hash(s: string | Buffer, algorithm: string): string {
-  return crypto
-    .createHash(algorithm)
-    .update(s)
-    .digest('hex')
+  return crypto.createHash(algorithm).update(s).digest('hex')
 }
 
 export function stringToBase64(s: string): string {

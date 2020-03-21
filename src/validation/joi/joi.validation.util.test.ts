@@ -271,22 +271,8 @@ test('null is not a valid value when required', () => {
 
 test('default to empty array', () => {
   expect(validate(undefined, arraySchema().optional())).toBeUndefined()
-  expect(
-    validate(
-      undefined,
-      arraySchema()
-        .optional()
-        .default([]),
-    ),
-  ).toEqual([])
-  expect(
-    validate(
-      null,
-      arraySchema()
-        .optional()
-        .default([]),
-    ),
-  ).toEqual([])
+  expect(validate(undefined, arraySchema().optional().default([]))).toEqual([])
+  expect(validate(null, arraySchema().optional().default([]))).toEqual([])
 })
 
 // Checking that partial schema is allowed (not all keys of Obj1 are required)
@@ -317,9 +303,7 @@ test('convert', () => {
 // todo
 test.skip('arraySchema should strip undefined/null values by default', () => {
   // const schema = arraySchema(stringSchema)
-  const schema = Joi.array()
-    .sparse(true)
-    .items(stringSchema.optional())
+  const schema = Joi.array().sparse(true).items(stringSchema.optional())
 
   expect(validate(['s', undefined, 's2', null], schema)).toEqual(['s', 's2'])
 })
