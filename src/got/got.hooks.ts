@@ -25,7 +25,7 @@ import {
 export function getGot(opt: GetGotOptions = {}): Got {
   return got.extend({
     hooks: {
-      beforeError: [gotErrorHook()],
+      beforeError: [gotErrorHook(opt)],
       beforeRequest: [gotBeforeRequestHook(opt)],
       afterResponse: [gotAfterResponseHook(opt)],
     },
