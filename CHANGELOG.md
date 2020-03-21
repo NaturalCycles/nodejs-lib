@@ -1,3 +1,15 @@
+# [8.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.27.1...v8.0.0) (2020-03-21)
+
+
+### Features
+
+* update to joi17 ([#1](https://github.com/NaturalCycles/nodejs-lib/issues/1)) ([550783f](https://github.com/NaturalCycles/nodejs-lib/commit/550783fa307cf0375ee6de6c379bebc06f4fc7e5))
+
+
+### BREAKING CHANGES
+
+* joi17 is used instead of joi15. It brings a big set of breaking changes by itself (despite the fact that all tests are passing now in this lib).
+
 ## [7.27.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.27.0...v7.27.1) (2020-03-21)
 
 
