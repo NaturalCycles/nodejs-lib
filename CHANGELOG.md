@@ -1,3 +1,12 @@
+# [7.27.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.26.1...v7.27.0) (2020-03-21)
+
+
+### Features
+
+* export more colors ([52b320e](https://github.com/NaturalCycles/nodejs-lib/commit/52b320e1107a69aa6ee1af0614b85ccc0b086f31))
+* getGot() with useful default hooks ([0912157](https://github.com/NaturalCycles/nodejs-lib/commit/09121579f40e497b300a2f984855ad0adb893a92))
+* inspectIfPossible() ([8651859](https://github.com/NaturalCycles/nodejs-lib/commit/865185996bba70d51bcff46c97f43b21975a8401))
+
 ## [7.26.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.26.0...v7.26.1) (2020-03-19)
 
 
