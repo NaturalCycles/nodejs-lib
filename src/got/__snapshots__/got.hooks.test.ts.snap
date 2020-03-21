@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gotErrorHook 1`] = `
+"422 GET http://a.com/err?q=1 in 0 ms
+{
+  message: 'Reference already exists',
+  documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference'
+}"
+`;

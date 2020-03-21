@@ -2,20 +2,42 @@ import { csvParse } from './csv/csvParse'
 import { csvStringify } from './csv/csvStringify'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
 import { ExecaOptions, execCommand, execShell, execWithArgs } from './exec/exec.util'
+import { getGot } from './got/got.hooks'
+import {
+  GetGotOptions,
+  GotAfterResponseHookOptions,
+  GotBeforeRequestHookOptions,
+  GotErrorHookOptions,
+  GotRequestContext,
+} from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
 import {
+  blue,
+  boldBlue,
+  boldCyan,
   boldGreen,
   boldGrey,
+  boldMagenta,
+  boldRed,
   boldWhite,
   boldYellow,
   chalk,
+  cyan,
+  dimBlue,
+  dimCyan,
   dimGreen,
   dimGrey,
+  dimMagenta,
+  dimRed,
   dimWhite,
   dimYellow,
   green,
   grey,
+  inverseWhite,
+  inverseYellow,
+  magenta,
+  red,
   white,
   yellow,
 } from './log/colors'
@@ -107,6 +129,7 @@ import { writableForEach } from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
+import { inspectIfPossible, InspectIfPossibleOptions } from './string/string.util'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
@@ -303,16 +326,30 @@ export {
   chalk,
   white,
   boldWhite,
+  inverseWhite,
   dimWhite,
   grey,
   yellow,
   dimYellow,
+  inverseYellow,
   green,
   dimGreen,
   dimGrey,
   boldGrey,
   boldYellow,
   boldGreen,
+  red,
+  dimRed,
+  boldRed,
+  blue,
+  dimBlue,
+  boldBlue,
+  magenta,
+  dimMagenta,
+  boldMagenta,
+  cyan,
+  dimCyan,
+  boldCyan,
   csvParse,
   csvStringify,
   transformToCSV,
@@ -325,4 +362,12 @@ export {
   WorkerOutput,
   TableDiffOptions,
   tableDiff,
+  inspectIfPossible,
+  InspectIfPossibleOptions,
+  getGot,
+  GetGotOptions,
+  GotErrorHookOptions,
+  GotBeforeRequestHookOptions,
+  GotAfterResponseHookOptions,
+  GotRequestContext,
 }
