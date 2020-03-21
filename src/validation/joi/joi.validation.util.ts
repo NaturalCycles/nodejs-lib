@@ -16,6 +16,9 @@ export interface JoiValidationResult<T = any> {
   error?: JoiValidationError
 }
 
+// Strip colors in production (for e.g Sentry reporting)
+const stripColors = process.env.NODE_ENV === 'production'
+
 const defaultOptions: ValidationOptions = {
   abortEarly: false,
   convert: true,
@@ -129,19 +132,17 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   const objectId = isObject(value) ? (value['id'] as string) : undefined
 
   if (objectId || objectName) {
-    objectName = objectName || (value && value.constructor && value.constructor.name)
+    objectName = objectName || value?.constructor?.name
 
     tokens.push([objectName, objectId].filter(i => i).join('.'))
   }
 
-  // Strip colors in production (for e.g Sentry reporting)
-  const stripColors = process.env.NODE_ENV === 'production'
   const annotation: string = (err.annotate as any)(stripColors) // typings are not up-to-date, hence "as any"
 
-  if (annotation.length > 5000) {
+  if (annotation.length > 1000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
     tokens.push(
-      annotation.substr(0, 500),
+      annotation.substr(0, 1000),
       `... ${Math.ceil(annotation.length / 1024)} KB message truncated`,
     )
 

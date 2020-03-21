@@ -1,5 +1,5 @@
-import c from 'chalk'
 import * as execa from 'execa'
+import { dimGrey, grey } from '../log/colors'
 
 export interface ExecaOptions extends execa.Options {
   /**
@@ -59,10 +59,12 @@ function handleError(err: execa.ExecaError, cmd: string, opt: ExecaOptions = {})
   }
 
   if (err) {
-    console.log(`${cmd} error ${err.exitCode}`)
-
     if (err.originalMessage) {
-      console.log(err.originalMessage)
+      console.log(dimGrey(err.originalMessage))
+    } else if (err.shortMessage) {
+      console.log(dimGrey(err.shortMessage))
+    } else {
+      console.error(err)
     }
 
     if (err.exitCode) {
@@ -80,5 +82,5 @@ export function logExec(cmd: string, args: string[] = [], opt: ExecaOptions = {}
     ...args,
   ].join(' ')
 
-  console.log(c.grey(cmdline))
+  console.log(grey(cmdline))
 }

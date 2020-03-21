@@ -1,4 +1,4 @@
-import { execCommand, execShell } from './exec.util'
+import { execCommand, execShell } from './..'
 
 beforeEach(() => {
   jest.restoreAllMocks()

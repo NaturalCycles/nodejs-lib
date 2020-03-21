@@ -1,6 +1,6 @@
 import { anyToErrorObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
-import * as got from 'got'
+import got from 'got'
 import { Debug, DebugLogLevel } from '..'
 import {
   SlackAttachmentField,
@@ -11,13 +11,13 @@ import {
 const GAE = !!process.env.GAE_INSTANCE
 
 const DEFAULTS = (): SlackMessage => ({
-  username: 'backend-lib',
+  username: 'bot',
   channel: '#log',
   icon_emoji: ':spider_web:',
   text: 'no text',
 })
 
-const log = Debug('nc:backend-lib:slack')
+const log = Debug('nc:nodejs-lib:slack')
 
 export class SlackSharedService<CTX = any> {
   constructor(private slackServiceCfg: SlackSharedServiceCfg) {}
@@ -69,8 +69,7 @@ export class SlackSharedService<CTX = any> {
 
     await got
       .post(webhookUrl, {
-        json: true,
-        body,
+        json: body,
       })
       .catch(ignored => {}) // ignore, cause slack is weirdly returning non-json text "ok" response
   }

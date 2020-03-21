@@ -1,8 +1,5 @@
 import * as os from 'os'
-
-export function mb(b: number): number {
-  return Math.round(b / (1024 * 1024))
-}
+import { mb } from './size.util'
 
 export function memoryUsage() {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()

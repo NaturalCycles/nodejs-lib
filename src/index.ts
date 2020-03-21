@@ -1,5 +1,46 @@
-import { execCommand, execShell, execWithArgs } from './exec/exec.util'
-import { mb, memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
+import { csvParse } from './csv/csvParse'
+import { csvStringify } from './csv/csvStringify'
+import { tableDiff, TableDiffOptions } from './diff/tableDiff'
+import { ExecaOptions, execCommand, execShell, execWithArgs } from './exec/exec.util'
+import { getGot } from './got/got.hooks'
+import {
+  GetGotOptions,
+  GotAfterResponseHookOptions,
+  GotBeforeRequestHookOptions,
+  GotErrorHookOptions,
+  GotRequestContext,
+} from './got/got.model'
+import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
+import { hb, kb, mb } from './infra/size.util'
+import {
+  blue,
+  boldBlue,
+  boldCyan,
+  boldGreen,
+  boldGrey,
+  boldMagenta,
+  boldRed,
+  boldWhite,
+  boldYellow,
+  chalk,
+  cyan,
+  dimBlue,
+  dimCyan,
+  dimGreen,
+  dimGrey,
+  dimMagenta,
+  dimRed,
+  dimWhite,
+  dimYellow,
+  green,
+  grey,
+  inverseWhite,
+  inverseYellow,
+  magenta,
+  red,
+  white,
+  yellow,
+} from './log/colors'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
   decryptRandomIVBuffer,
@@ -38,18 +79,70 @@ import {
 } from './security/secret.util'
 import { SlackSharedService } from './slack/slack.shared.service'
 import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
-import { readableFrom } from './stream/readableFrom'
-import { streamMap, StreamMapOptions, StreamMapper } from './stream/streamMap'
-import { streamToArray } from './stream/streamToArray'
+import { transformToCSV, TransformToCSVOptions } from './stream/csv/transformToCSV'
+import { NDJsonStats } from './stream/ndjson/ndjson.model'
+import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
+import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
 import {
-  PausableObservable,
-  streamToObservable,
-  StreamToObservableOptions,
-} from './stream/streamToObservable'
-import { requireEnvKeys } from './util/env.util'
+  pipelineFromNDJsonFile,
+  PipelineFromNDJsonFileOptions,
+} from './stream/ndjson/pipelineFromNDJsonFile'
+import {
+  pipelineToNDJsonFile,
+  PipelineToNDJsonFileOptions,
+} from './stream/ndjson/pipelineToNDJsonFile'
+import { streamToNDJsonFile } from './stream/ndjson/streamToNDJsonFile'
+import { transformJsonParse, TransformJsonParseOptions } from './stream/ndjson/transformJsonParse'
+import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
+import { _pipeline } from './stream/pipeline/pipeline'
+import { pipelineForEach } from './stream/pipeline/pipelineForEach'
+import { pipelineToArray } from './stream/pipeline/pipelineToArray'
+import { readableCreate } from './stream/readable/readableCreate'
+import { readableFromArray } from './stream/readable/readableFromArray'
+import { observableToStream } from './stream/rxjs/observableToStream'
+import { streamToObservable } from './stream/rxjs/streamToObservable'
+import { ReadableTyped, TransformOpt, TransformTyped, WritableTyped } from './stream/stream.model'
+import { streamForEach } from './stream/streamForEach'
+import { streamJoinToString } from './stream/streamJoinToString'
+import { streamMapToArray } from './stream/streamMapToArray'
+import { transformBuffer } from './stream/transform/transformBuffer'
+import { transformConcurrent } from './stream/transform/transformConcurrent'
+import { transformFilter } from './stream/transform/transformFilter'
+import { transformLimit } from './stream/transform/transformLimit'
+import {
+  transformLogProgress,
+  TransformLogProgressOptions,
+} from './stream/transform/transformLogProgress'
+import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
+import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
+import { transformSplit } from './stream/transform/transformSplit'
+import { transformTap } from './stream/transform/transformTap'
+import { transformThrough } from './stream/transform/transformThrough'
+import { transformToArray } from './stream/transform/transformToArray'
+import { BaseWorkerClass, WorkerClassInterface } from './stream/transform/worker/baseWorkerClass'
+import {
+  transformMultiThreaded,
+  TransformMultiThreadedOptions,
+} from './stream/transform/worker/transformMultiThreaded'
+import { WorkerInput, WorkerOutput } from './stream/transform/worker/transformMultiThreaded.model'
+import { writableForEach } from './stream/writable/writableForEach'
+import { writableFork } from './stream/writable/writableFork'
+import { writablePushToArray } from './stream/writable/writablePushToArray'
+import { writableVoid } from './stream/writable/writableVoid'
+import { inspectIfPossible, InspectIfPossibleOptions } from './string/string.util'
+import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import { runScript } from './util/script.util'
-import { unzipBuffer, unzipToString, zipBuffer, zipString } from './util/zip.util'
+import {
+  gunzipBuffer,
+  gunzipToString,
+  gzipBuffer,
+  gzipString,
+  unzipBuffer,
+  unzipToString,
+  zipBuffer,
+  zipString,
+} from './util/zip.util'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   AnySchemaTyped,
@@ -73,8 +166,8 @@ import {
   ipAddressSchema,
   numberSchema,
   objectSchema,
-  SEM_VER_PATTERN,
   semVerSchema,
+  SEM_VER_PATTERN,
   stringSchema,
   unixTimestampSchema,
   urlSchema,
@@ -82,7 +175,7 @@ import {
   utcOffsetSchema,
   verSchema,
 } from './validation/joi/joi.shared.schemas'
-import { JoiValidationError } from './validation/joi/joi.validation.error'
+import { JoiValidationError, JoiValidationErrorData } from './validation/joi/joi.validation.error'
 import {
   convert,
   getValidationResult,
@@ -93,6 +186,7 @@ import {
 } from './validation/joi/joi.validation.util'
 
 export {
+  JoiValidationErrorData,
   JoiValidationError,
   JoiValidationResult,
   validate,
@@ -131,10 +225,15 @@ export {
   urlSchema,
   processSharedUtil,
   zipBuffer,
+  gzipBuffer,
   unzipBuffer,
+  gunzipBuffer,
   zipString,
+  gzipString,
   unzipToString,
+  gunzipToString,
   requireEnvKeys,
+  requireFileToExist,
   LRUMemoCache,
   stringId,
   stringIdAsync,
@@ -156,9 +255,6 @@ export {
   IDebugger,
   Debug,
   DebugLogLevel,
-  PausableObservable,
-  StreamToObservableOptions,
-  streamToObservable,
   runScript,
   getSecretMap,
   setSecretMap,
@@ -172,17 +268,106 @@ export {
   generateSecretKey,
   generateSecretKeyBase64,
   mb,
+  kb,
+  hb,
   memoryUsage,
   memoryUsageFull,
   SlackSharedService,
   SlackSharedServiceCfg,
   SlackMessage,
+  ExecaOptions,
   execCommand,
   execShell,
   execWithArgs,
-  streamMap,
-  StreamMapOptions,
-  StreamMapper,
-  streamToArray,
-  readableFrom,
+  observableToStream,
+  readableCreate,
+  readableFromArray,
+  ReadableTyped,
+  WritableTyped,
+  TransformTyped,
+  _pipeline,
+  streamJoinToString,
+  transformBuffer,
+  ndJsonFileRead,
+  ndJsonFileWrite,
+  pipelineFromNDJsonFile,
+  PipelineFromNDJsonFileOptions,
+  PipelineToNDJsonFileOptions,
+  pipelineToNDJsonFile,
+  NDJsonStats,
+  streamToNDJsonFile,
+  TransformJsonParseOptions,
+  transformJsonParse,
+  TransformToNDJsonOptions,
+  transformToNDJson,
+  transformThrough,
+  pipelineForEach,
+  pipelineToArray,
+  streamToObservable,
+  transformConcurrent,
+  transformFilter,
+  TransformMapOptions,
+  transformMap,
+  writableForEach,
+  MultiMapper,
+  transformMapMulti,
+  writablePushToArray,
+  transformSplit,
+  transformToArray,
+  transformTap,
+  TransformOpt,
+  transformLogProgress,
+  TransformLogProgressOptions,
+  transformLimit,
+  streamForEach,
+  streamMapToArray,
+  writableVoid,
+  writableFork,
+  chalk,
+  white,
+  boldWhite,
+  inverseWhite,
+  dimWhite,
+  grey,
+  yellow,
+  dimYellow,
+  inverseYellow,
+  green,
+  dimGreen,
+  dimGrey,
+  boldGrey,
+  boldYellow,
+  boldGreen,
+  red,
+  dimRed,
+  boldRed,
+  blue,
+  dimBlue,
+  boldBlue,
+  magenta,
+  dimMagenta,
+  boldMagenta,
+  cyan,
+  dimCyan,
+  boldCyan,
+  csvParse,
+  csvStringify,
+  transformToCSV,
+  TransformToCSVOptions,
+  TransformMultiThreadedOptions,
+  transformMultiThreaded,
+  WorkerClassInterface,
+  BaseWorkerClass,
+  WorkerInput,
+  WorkerOutput,
+  TableDiffOptions,
+  tableDiff,
+  inspectIfPossible,
+  InspectIfPossibleOptions,
+  getGot,
+  GetGotOptions,
+  GotErrorHookOptions,
+  GotBeforeRequestHookOptions,
+  GotAfterResponseHookOptions,
+  GotRequestContext,
 }
