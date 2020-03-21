@@ -1,3 +1,10 @@
+## [7.27.1](https://github.com/NaturalCycles/nodejs-lib/compare/v7.27.0...v7.27.1) (2020-03-21)
+
+
+### Bug Fixes
+
+* getGot missing opt ([7ad6189](https://github.com/NaturalCycles/nodejs-lib/commit/7ad61891883e6b8cdd2f92fd55875cd14087b1bc))
+
 # [7.27.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.26.1...v7.27.0) (2020-03-21)
 
 
