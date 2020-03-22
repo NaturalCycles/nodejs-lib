@@ -1,3 +1,10 @@
+## [8.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v8.0.0...v8.0.1) (2020-03-22)
+
+
+### Bug Fixes
+
+* userAgentSchema min ([f73e34b](https://github.com/NaturalCycles/nodejs-lib/commit/f73e34bcf6056683658695d9d2e3d3b55db46923))
+
 # [8.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v7.27.1...v8.0.0) (2020-03-21)
 
 
