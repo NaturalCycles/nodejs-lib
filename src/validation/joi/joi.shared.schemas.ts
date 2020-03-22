@@ -68,7 +68,9 @@ export const SEM_VER_PATTERN = /^[0-9]+\.[0-9]+\.[0-9]+$/
 export const semVerSchema = stringSchema.regex(SEM_VER_PATTERN)
 // todo: .error(() => 'should be SemVer')
 
-export const userAgentSchema = stringSchema.min(10).max(400)
+export const userAgentSchema = stringSchema
+  .min(5) // I've seen UA of `Android` (7 characters)
+  .max(400)
 
 export const utcOffsetSchema = numberSchema
   .min(-14 * 60)
