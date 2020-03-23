@@ -5,6 +5,7 @@ import { createGzip, createUnzip } from 'zlib'
 import {
   requireFileToExist,
   transformJsonParse,
+  transformLimit,
   transformLogProgress,
   TransformLogProgressOptions,
   transformMap,
@@ -24,6 +25,7 @@ export interface NDJSONMapOptions<OUT = any>
   inputFilePath: string
   outputFilePath: string
   mapperFilePath: string
+  limit?: number
 }
 
 /**
@@ -31,7 +33,7 @@ export interface NDJSONMapOptions<OUT = any>
  * Zips output file automatically, if it ends with `.gz`.
  */
 export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>): Promise<void> {
-  const { inputFilePath, outputFilePath, mapperFilePath } = opt
+  const { inputFilePath, outputFilePath, mapperFilePath, logEvery, limit } = opt
 
   await requireFileToExist(inputFilePath)
   await requireFileToExist(mapperFilePath)
@@ -65,11 +67,12 @@ export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>)
     ...transformUnzip,
     transformSplit(), // splits by \n
     transformJsonParse(),
+    transformLimit(limit),
     transformMap(mapper, {
       flattenArrayOutput: true,
       ...opt,
     }),
-    transformLogProgress({ logEvery: 1000 }),
+    transformLogProgress({ logEvery }),
     transformToNDJson(),
     ...transformZip,
     createWriteStream(outputFilePath),

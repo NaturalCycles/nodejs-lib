@@ -10,6 +10,7 @@ runScript(async () => {
     out: outputFilePath,
     mapper: mapperFilePath,
     logEvery,
+    limit,
   } = yargs.options({
     in: {
       type: 'string',
@@ -30,6 +31,9 @@ runScript(async () => {
       type: 'number',
       default: 1000,
     },
+    limit: {
+      type: 'number',
+    },
   }).argv
 
   await ndjsonMap({
@@ -37,5 +41,6 @@ runScript(async () => {
     outputFilePath,
     mapperFilePath,
     logEvery,
+    limit,
   })
 })
