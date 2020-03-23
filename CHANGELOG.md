@@ -1,3 +1,11 @@
+# [8.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.0.1...v8.1.0) (2020-03-23)
+
+
+### Features
+
+* ndjson-map CLI ([59f985e](https://github.com/NaturalCycles/nodejs-lib/commit/59f985eac843df2a4c187eec3d1a78aad48145f9))
+* TransformLogProgress.rssMinusHeap ([44a231d](https://github.com/NaturalCycles/nodejs-lib/commit/44a231db659f6e1ec4c25844fa9850f39059952e))
+
 ## [8.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v8.0.0...v8.0.1) (2020-03-22)
 
 
