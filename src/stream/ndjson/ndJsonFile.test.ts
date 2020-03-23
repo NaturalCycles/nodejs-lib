@@ -16,7 +16,7 @@ test('ndjson write/read', async () => {
     id: 'id' + num,
   }))
   const readable = readableFromArray(items)
-  const filePath = `${tmpDir}/ndjson/test.jsonl`
+  const filePath = `${tmpDir}/ndjson/test.ndjson`
 
   const statsWrite = await pipelineToNDJsonFile([readable], { filePath })
 
@@ -35,7 +35,7 @@ test('ndjson write/read gzip', async () => {
     id: 'id' + num,
   }))
   const readable = readableFromArray(items)
-  const filePath = `${tmpDir}/ndjson/test.jsonl.gz`
+  const filePath = `${tmpDir}/ndjson/test.ndjson.gz`
 
   await streamToNDJsonFile(readable, { filePath, gzip: true })
 
@@ -49,7 +49,7 @@ test('ndjson write/read whole', async () => {
   const items: Item[] = _range(1, 6).map(num => ({
     id: 'id' + num,
   }))
-  const filePath = `${tmpDir}/ndjson/test.jsonl`
+  const filePath = `${tmpDir}/ndjson/test.ndjson`
   await ndJsonFileWrite(items, { filePath })
   const items2 = await ndJsonFileRead<Item>({ filePath })
   expect(items2).toEqual(items)

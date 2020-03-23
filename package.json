@@ -1,6 +1,9 @@
 {
   "name": "@naturalcycles/nodejs-lib",
   "version": "8.0.1",
+  "scripts": {
+    "ndjson-map-debug": "tsn ./src/bin/ndjson-map.ts --in ./tmp/ndjsonMapIn.ndjson --out ./tmp/ndjsonMapOut.ndjson --mapper ./src/test/ndjson/ndjsonMapper.ts"
+  },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@naturalcycles/js-lib": "^10.0.0",
@@ -21,14 +24,19 @@
     "lru-cache": "^5.1.1",
     "nanoid": "^2.0.2",
     "rxjs": "^6.5.2",
-    "through2-concurrent": "^2.0.0"
+    "through2-concurrent": "^2.0.0",
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
     "@naturalcycles/dev-lib": "^10.2.0",
     "@naturalcycles/test-lib": "^1.0.3",
     "@types/node": "^13.1.1",
+    "@types/yargs": "^15.0.4",
     "jest": "^25.1.0",
     "nock": "^12.0.3"
+  },
+  "bin": {
+    "ndjson-map": "dist/bin/ndjson-map.js"
   },
   "files": [
     "dist",
@@ -48,7 +56,7 @@
     "url": "https://github.com/NaturalCycles/nodejs-lib"
   },
   "engines": {
-    "node": ">=10.13"
+    "node": ">=12.13"
   },
   "description": "Standard library for Node.js",
   "author": "Natural Cycles Team",
