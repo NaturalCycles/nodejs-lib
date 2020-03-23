@@ -1,3 +1,10 @@
+## [8.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v8.1.0...v8.1.1) (2020-03-23)
+
+
+### Bug Fixes
+
+* ndjson-map zip/unzip ([9374dfd](https://github.com/NaturalCycles/nodejs-lib/commit/9374dfdfdba9831490c52b7d6e53f7282fee9c45))
+
 # [8.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.0.1...v8.1.0) (2020-03-23)
 
 
