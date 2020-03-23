@@ -1,3 +1,10 @@
+# [8.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.1.1...v8.2.0) (2020-03-23)
+
+
+### Features
+
+* ndjson-map --limit ([8269004](https://github.com/NaturalCycles/nodejs-lib/commit/826900403e009a6d6c367658e9253f44746bb0d5))
+
 ## [8.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v8.1.0...v8.1.1) (2020-03-23)
 
 

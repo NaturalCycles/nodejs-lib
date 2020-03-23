@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "8.1.1",
+  "version": "8.2.0",
   "scripts": {
     "ndjson-map-debug": "tsn ./src/bin/ndjson-map.ts --in ./tmp/ndjsonMapIn.ndjson --out ./tmp/ndjsonMapOut.ndjson --mapper ./src/test/ndjson/ndjsonMapper.ts"
   },
