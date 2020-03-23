@@ -43,6 +43,13 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   arrayBuffers?: boolean
 
   /**
+   * Log (rss - heapTotal)
+   * For convenience of debugging "out-of-heap" memory size.
+   * @default false
+   */
+  rssMinusHeap?: boolean
+
+  /**
    * Log "rows per second"
    * @default true
    */
@@ -68,7 +75,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
 
 const inspectOpt: NodeJS.InspectOptions = {
   colors: true,
-  breakLength: 100,
+  breakLength: 200,
 }
 
 /**
@@ -132,8 +139,9 @@ export function transformLogProgress<IN = any>(
           ...(logHeapUsed ? { heapUsed: mb(mem.heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: mb(mem.heapTotal) } : {}),
           ...(logRss ? { rss: mb(mem.rss) } : {}),
+          ...(opt.rssMinusHeap ? { rssMinusHeap: mb(mem.rss - mem.heapTotal) } : {}),
           ...(opt.external ? { external: mb(mem.external) } : {}),
-          ...(opt.arrayBuffers ? { arrayBuffers: mb(mem.arrayBuffers) } : {}),
+          ...(opt.arrayBuffers ? { arrayBuffers: mb(mem.arrayBuffers || 0) } : {}),
           ...(logRPS
             ? {
                 rps10,
