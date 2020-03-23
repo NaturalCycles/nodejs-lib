@@ -57,8 +57,8 @@ export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>)
     throw new Error(`Mapper file should export "mapper" function`)
   }
 
-  const transformUnzip = inputFilePath.endsWith('.gz') ? [createGzip()] : []
-  const transformZip = outputFilePath.endsWith('.gz') ? [createUnzip()] : []
+  const transformUnzip = inputFilePath.endsWith('.gz') ? [createUnzip()] : []
+  const transformZip = outputFilePath.endsWith('.gz') ? [createGzip()] : []
 
   await _pipeline([
     createReadStream(inputFilePath),

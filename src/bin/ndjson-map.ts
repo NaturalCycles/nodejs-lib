@@ -14,16 +14,16 @@ runScript(async () => {
     in: {
       type: 'string',
       demandOption: true,
-      descr: 'Input ndjson file path',
+      desc: 'Input ndjson file path',
     },
     out: {
       type: 'string',
-      descr: 'Output ndjson file path',
+      desc: 'Output ndjson file path',
       demandOption: true,
     },
     mapper: {
       type: 'string',
-      descr: 'Mapper file path',
+      desc: 'Mapper file path',
       demandOption: true,
     },
     logEvery: {

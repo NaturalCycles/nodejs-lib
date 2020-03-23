@@ -21,6 +21,7 @@ runScript(async () => {
     await _pipeline([
       readableFromArray(_range(1, 101).map(n => ({ id: `id_${n}`, even: n % 2 === 0 }))),
       transformToNDJson(),
+      // createGzip(),
       createWriteStream(inputFilePath),
     ])
   }
