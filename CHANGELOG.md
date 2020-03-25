@@ -1,3 +1,16 @@
+# [8.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.2.0...v8.3.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* joi no colors if !!process.env.GAE ([5160300](https://github.com/NaturalCycles/nodejs-lib/commit/5160300c73041086404bd885b5d618ac144cb9c2))
+
+
+### Features
+
+* runScript with env.SLACK_ON_FAILURE ([b52fb06](https://github.com/NaturalCycles/nodejs-lib/commit/b52fb0695de30f7925eda981c190421c58994a2c))
+* slack-this CLI ([3803773](https://github.com/NaturalCycles/nodejs-lib/commit/3803773ecabc6c48bbd9c7060cb875225452c484))
+
 # [8.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.1.1...v8.2.0) (2020-03-23)
 
 
