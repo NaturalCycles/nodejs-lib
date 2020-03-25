@@ -17,7 +17,7 @@ export interface JoiValidationResult<T = any> {
 }
 
 // Strip colors in production (for e.g Sentry reporting)
-const stripColors = process.env.NODE_ENV === 'production'
+const stripColors = process.env.NODE_ENV === 'production' || !!process.env.GAE_INSTANCE
 
 const defaultOptions: ValidationOptions = {
   abortEarly: false,
