@@ -1,3 +1,4 @@
+import { StringMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { base64ToString, Debug, decryptRandomIVBuffer } from '..'
 
@@ -6,7 +7,7 @@ let loaded = false
 // it's wrapped to be able to pipe console.* to Stackdriver
 const getLog = () => Debug('nc:nodejs-lib:secret')
 
-const secretMap: Record<string, string> = {}
+const secretMap: StringMap = {}
 
 /**
  * Loads plaintext secrets from process.env, removes them, stores locally.
@@ -17,7 +18,7 @@ const secretMap: Record<string, string> = {}
 export function loadSecretsFromEnv(): void {
   require('dotenv').config() // ensure .env is loaded
 
-  const secrets: Record<string, string> = {}
+  const secrets: StringMap = {}
   Object.keys(process.env)
     .filter(k => k.toUpperCase().startsWith('SECRET_'))
     .forEach(k => {
@@ -53,7 +54,7 @@ export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?
     throw new Error(`loadSecretsFromPlainJsonFile() cannot load from path: ${filePath}`)
   }
 
-  let secrets: Record<string, string>
+  let secrets: StringMap
 
   if (SECRET_ENCRYPTION_KEY) {
     const buf = fs.readFileSync(filePath)
@@ -91,7 +92,7 @@ export function secretOptional<T = string>(k: string, json = false): T | undefin
   return v && json ? JSON.parse(base64ToString(v)) : v
 }
 
-export function getSecretMap(): Record<string, string> {
+export function getSecretMap(): StringMap {
   requireLoaded()
   return secretMap
 }
@@ -99,7 +100,7 @@ export function getSecretMap(): Record<string, string> {
 /**
  * REPLACES secretMap with new map.
  */
-export function setSecretMap(map: Record<string, string>): void {
+export function setSecretMap(map: StringMap): void {
   Object.keys(secretMap).forEach(k => delete secretMap[k])
   Object.entries(map).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
   getLog()(

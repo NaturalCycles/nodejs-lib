@@ -1,18 +1,46 @@
+import { StringMap } from '@naturalcycles/js-lib'
 import { DebugLogLevel } from '..'
 
 export interface SlackMessage {
+  /**
+   * @default bot
+   */
   username?: string
+
   channel?: string
   icon_url?: string
+
+  /**
+   * @default :spider_web:
+   */
   icon_emoji?: string
-  text: string
+
+  /**
+   * You can throw anything at it, it'll handle it appropriately:
+   * String - as is
+   * Object - pass via util.inspect()
+   * Error - print the stack nicely
+   */
+  text: any
+
   level?: DebugLogLevel
   attachments?: SlackMessageAttachment[]
 
   /**
    * Keys-values will be rendered as MessageAttachment with Fields
    */
-  kv?: Record<string, any>
+  kv?: StringMap<any>
+
+  /**
+   * If specified - adds @name1, @name2 in the end of the message
+   */
+  mentions?: string[]
+
+  /**
+   * @default false
+   * By default it ignores possible errors from slack
+   */
+  throwOnError?: boolean
 }
 
 export interface SlackAttachmentField {
@@ -57,5 +85,5 @@ export interface SlackSharedServiceCfg {
    * key: DebugLogLevel
    * value: channel name to send message to
    */
-  channelByLevel?: Record<string, string | undefined>
+  channelByLevel?: StringMap
 }

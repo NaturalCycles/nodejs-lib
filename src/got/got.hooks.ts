@@ -7,7 +7,7 @@ import got, {
   GotError,
   HTTPError,
 } from 'got'
-import { dimGrey, grey, inspectIfPossible, red, yellow } from '..'
+import { dimGrey, grey, inspectAny, red, yellow } from '..'
 import {
   GetGotOptions,
   GotAfterResponseHookOptions,
@@ -65,7 +65,7 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
       const { started } = context as GotRequestContext
 
       // Auto-detect and prettify JSON response (if any)
-      const body = inspectIfPossible(err.response.body, {
+      const body = inspectAny(err.response.body, {
         maxLen: maxResponseLength,
         colors: false,
       })
@@ -120,7 +120,7 @@ export function gotAfterResponseHook(opt: GotAfterResponseHookOptions = {}): Aft
 
     // Error responses are not logged, cause they're included in Error message already
     if (opt.logResponse && success) {
-      console.log(inspectIfPossible(resp.body, { maxLen: opt.maxResponseLength }))
+      console.log(inspectAny(resp.body, { maxLen: opt.maxResponseLength }))
     }
 
     return resp

@@ -1,4 +1,4 @@
-import { mockTime } from '@naturalcycles/test-lib'
+import { mockTime } from '@naturalcycles/dev-lib'
 import * as nock from 'nock'
 import { getGot } from './got.hooks'
 

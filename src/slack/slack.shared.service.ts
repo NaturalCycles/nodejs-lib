@@ -1,7 +1,7 @@
-import { anyToErrorObject } from '@naturalcycles/js-lib'
+import { anyToErrorObject, StringMap } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
-import { Debug, DebugLogLevel } from '..'
+import { Debug, DebugLogLevel, inspectAny } from '..'
 import {
   SlackAttachmentField,
   SlackMessage,
@@ -48,30 +48,43 @@ export class SlackSharedService<CTX = any> {
     )
   }
 
-  async sendMsg(_msg: SlackMessage, ctx?: CTX): Promise<void> {
+  async sendMsg(msg: SlackMessage, ctx?: CTX): Promise<void> {
     const { webhookUrl } = this.slackServiceCfg
 
-    log[_msg.level || DebugLogLevel.info](...[_msg.text, _msg.kv, _msg.attachments].filter(Boolean))
+    log[msg.level || DebugLogLevel.info](
+      ...[msg.text, msg.kv, msg.attachments, msg.mentions].filter(Boolean),
+    )
 
     if (!webhookUrl) return
 
-    this.processKV(_msg)
+    this.processKV(msg)
 
     const body: SlackMessage = {
       ...DEFAULTS(),
       ...this.slackServiceCfg.defaults,
-      ..._msg,
+      ...msg,
     }
 
-    body.channel = (this.slackServiceCfg.channelByLevel || {})[_msg.level!] || body.channel
+    body.channel = (this.slackServiceCfg.channelByLevel || {})[msg.level!] || body.channel
 
     await this.decorateMsg(body, ctx)
+
+    body.text = inspectAny(body.text, {
+      colors: false,
+    })
+
+    if (msg.mentions?.length) {
+      body.text += '\n' + msg.mentions.map(s => `<@${s}>`).join(' ')
+    }
 
     await got
       .post(webhookUrl, {
         json: body,
       })
-      .catch(ignored => {}) // ignore, cause slack is weirdly returning non-json text "ok" response
+      .catch(err => {
+        // ignore (unless throwOnError is set), cause slack is weirdly returning non-json text "ok" response
+        if (msg.throwOnError) throw err
+      })
   }
 
   /**
@@ -93,7 +106,7 @@ export class SlackSharedService<CTX = any> {
     msg.text = [tokens.filter(Boolean).join(': '), msg.text].join('\n')
   }
 
-  kvToFields(kv: Record<string, any>): SlackAttachmentField[] {
+  kvToFields(kv: StringMap<any>): SlackAttachmentField[] {
     return Object.entries(kv).map(([k, v]) => ({
       title: k,
       value: String(v),

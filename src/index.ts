@@ -129,10 +129,10 @@ import { writableForEach } from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
-import { inspectIfPossible, InspectIfPossibleOptions } from './string/string.util'
+import { inspectAny, InspectIfPossibleOptions, jsonParseIfPossible } from './string/string.util'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
-import { runScript } from './util/script.util'
+import { runScript } from './util/runScript'
 import {
   gunzipBuffer,
   gunzipToString,
@@ -362,8 +362,9 @@ export {
   WorkerOutput,
   TableDiffOptions,
   tableDiff,
-  inspectIfPossible,
+  inspectAny,
   InspectIfPossibleOptions,
+  jsonParseIfPossible,
   getGot,
   GetGotOptions,
   GotErrorHookOptions,

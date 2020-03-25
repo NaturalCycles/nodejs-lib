@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`inspectAny 1`] = `
+Map {
+  undefined => "undefined",
+  null => "null",
+  true => "true",
+  false => "false",
+  NaN => "NaN",
+  Infinity => "Infinity",
+  "" => "empty_string",
+  " " => "empty_string",
+  "ho ho ho" => "ho ho ho",
+  "{" => "{",
+  "{\\"a\\": \\"a1\\"}" => "{ a: 'a1' }",
+  "[5, null, \\"s\\"]" => "[ 5, null, 's' ]",
+  Array [
+    5,
+    null,
+    "s",
+  ] => "[ 5, null, 's' ]",
+  15 => "15",
+  Array [
+    1,
+    2,
+    3,
+  ] => "[ 1, 2, 3 ]",
+  Object {
+    "a": "a1",
+    "b": "b1",
+    "c": Object {
+      "d": 25,
+      "e": undefined,
+    },
+  } => "{ a: 'a1', b: 'b1', c: { d: 25, e: undefined } }",
+  Object {
+    "documentation_url": "https://developer.github.com/v3/git/refs/#create-a-reference",
+    "message": "Reference already exists",
+  } => "{
+  message: 'Reference already exists',
+  documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference'
+}",
+  [Function] => "[Function: abc]",
+  /i am regex, who are you\\?/ => "/i am regex, who are you?/",
+  Map {
+    "a" => "b",
+  } => "Map { 'a' => 'b' }",
+  Set {
+    "a",
+    "b",
+    "c",
+  } => "Set { 'a', 'b', 'c' }",
+  [Error: some err msg] => "Error: some err msg",
+  [AppError: app error] => "AppError: app error
+{ k1: 'v1' }",
+  Symbol(a_am_symbol) => "Symbol(a_am_symbol)",
+  1984-06-21T00:00:00.000Z => "1984-06-21T00:00:00.000Z",
+}
+`;
+
+exports[`jsonParseIfPossible 1`] = `
+Map {
+  undefined => undefined,
+  null => null,
+  true => true,
+  false => false,
+  NaN => NaN,
+  Infinity => Infinity,
+  "" => "",
+  " " => " ",
+  "ho ho ho" => "ho ho ho",
+  "{" => "{",
+  "{\\"a\\": \\"a1\\"}" => Object {
+    "a": "a1",
+  },
+  "[5, null, \\"s\\"]" => Array [
+    5,
+    null,
+    "s",
+  ],
+  Array [
+    5,
+    null,
+    "s",
+  ] => Array [
+    5,
+    null,
+    "s",
+  ],
+  15 => 15,
+  Array [
+    1,
+    2,
+    3,
+  ] => Array [
+    1,
+    2,
+    3,
+  ],
+  Object {
+    "a": "a1",
+    "b": "b1",
+    "c": Object {
+      "d": 25,
+      "e": undefined,
+    },
+  } => Object {
+    "a": "a1",
+    "b": "b1",
+    "c": Object {
+      "d": 25,
+      "e": undefined,
+    },
+  },
+  Object {
+    "documentation_url": "https://developer.github.com/v3/git/refs/#create-a-reference",
+    "message": "Reference already exists",
+  } => Object {
+    "documentation_url": "https://developer.github.com/v3/git/refs/#create-a-reference",
+    "message": "Reference already exists",
+  },
+  [Function] => [Function],
+  /i am regex, who are you\\?/ => /i am regex, who are you\\?/,
+  Map {
+    "a" => "b",
+  } => Map {
+    "a" => "b",
+  },
+  Set {
+    "a",
+    "b",
+    "c",
+  } => Set {
+    "a",
+    "b",
+    "c",
+  },
+  [Error: some err msg] => [Error: some err msg],
+  [AppError: app error] => [AppError: app error],
+  Symbol(a_am_symbol) => Symbol(a_am_symbol),
+  1984-06-21T00:00:00.000Z => 1984-06-21T00:00:00.000Z,
+}
+`;

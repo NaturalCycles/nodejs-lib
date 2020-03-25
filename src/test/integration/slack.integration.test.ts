@@ -63,6 +63,7 @@ test('attachments', async () => {
 test('kv', async () => {
   await slackService.sendMsg({
     text: 'hello kv',
+    mentions: ['kirill'],
     kv: {
       a: 'a1',
       b: 'b1',
