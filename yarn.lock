@@ -577,9 +577,9 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/dev-lib@^10.2.0":
-  version "10.9.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.9.0.tgz#1d010b6b5760e13ac9c044883ffe41143ea34604"
-  integrity sha512-PpldjvsGaHxasIo0KdQFMrUhzxG/eL2Wm1gVMzKUMGo0KYpNulZDlSYhIUFwMBoDGX/DoK5zlImM/GnvcgrPfA==
+  version "10.10.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.10.0.tgz#fafbf207b67f44ea8eafb83fdceda3b4bac51c79"
+  integrity sha512-SIMOqaQ5DinzsD6yOLdWbAZ+bdgTFXdaePTnJ7SJBm7+yXyxS+75o6KYbpa0lhhRb/UaRJWYkwEquCtSxcIAOQ==
   dependencies:
     "@commitlint/cli" "^8.0.0"
     "@commitlint/config-conventional" "^8.0.0"

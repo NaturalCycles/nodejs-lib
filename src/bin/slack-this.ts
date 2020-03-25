@@ -27,15 +27,13 @@ runScript(async () => {
 
   const slack = new SlackSharedService({
     webhookUrl: SLACK_WEBHOOK_URL,
-    defaults: {
-      channel,
-      username,
-      icon_emoji: emoji,
-    },
   })
 
   await slack.sendMsg({
     text: msg,
+    channel,
+    username,
+    icon_emoji: emoji,
     throwOnError: true,
   })
 })

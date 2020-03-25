@@ -51,31 +51,39 @@ export class SlackSharedService<CTX = any> {
   async sendMsg(msg: SlackMessage, ctx?: CTX): Promise<void> {
     const { webhookUrl } = this.slackServiceCfg
 
-    log[msg.level || DebugLogLevel.info](
-      ...[msg.text, msg.kv, msg.attachments, msg.mentions].filter(Boolean),
-    )
+    if (!msg.noLog) {
+      log[msg.level || DebugLogLevel.info](
+        ...[msg.text, msg.kv, msg.attachments, msg.mentions].filter(Boolean),
+      )
+    }
 
     if (!webhookUrl) return
 
     this.processKV(msg)
 
+    let text = inspectAny(msg.text, {
+      colors: false,
+    })
+
+    // Wrap in markdown-text-block if it's anything but plain String
+    if (typeof msg.text !== 'string') {
+      text = '```' + text + '```'
+    }
+
+    if (msg.mentions?.length) {
+      text += '\n' + msg.mentions.map(s => `<@${s}>`).join(' ')
+    }
+
     const body: SlackMessage = {
       ...DEFAULTS(),
       ...this.slackServiceCfg.defaults,
       ...msg,
+      text,
     }
 
     body.channel = (this.slackServiceCfg.channelByLevel || {})[msg.level!] || body.channel
 
     await this.decorateMsg(body, ctx)
-
-    body.text = inspectAny(body.text, {
-      colors: false,
-    })
-
-    if (msg.mentions?.length) {
-      body.text += '\n' + msg.mentions.map(s => `<@${s}>`).join(' ')
-    }
 
     await got
       .post(webhookUrl, {

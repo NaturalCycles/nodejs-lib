@@ -41,6 +41,12 @@ export interface SlackMessage {
    * By default it ignores possible errors from slack
    */
   throwOnError?: boolean
+
+  /**
+   * @default false
+   * Skips logging message
+   */
+  noLog?: boolean
 }
 
 export interface SlackAttachmentField {

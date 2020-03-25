@@ -16,7 +16,6 @@ export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
 
 /**
  * Transforms ANY to human-readable string (via util.inspect mainly).
- * Attempts to parse object as JSON.
  * Safe (no error throwing).
  *
  * Enforces max length (default to 1000, pass 0 to skip it).
@@ -30,11 +29,6 @@ export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
  */
 export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string {
   let s: string
-
-  // Attempt to JSON.parse() it
-  if (typeof obj === 'string') {
-    obj = jsonParseIfPossible(obj)
-  }
 
   if (obj instanceof Error) {
     // Stack includes message
