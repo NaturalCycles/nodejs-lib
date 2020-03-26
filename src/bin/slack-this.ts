@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { requireEnvKeys, runScript, SlackSharedService } from '..'
+import { runScript, SlackSharedService } from '..'
 
 runScript(async () => {
-  const { channel, msg, username, emoji } = yargs.options({
+  const { channel, msg, username, emoji, webhook: webhookUrl } = yargs.options({
     channel: {
       type: 'string',
       demandOption: true,
@@ -21,12 +21,19 @@ runScript(async () => {
       type: 'string',
       default: ':spider_web:',
     },
+    webhook: {
+      type: 'string',
+      default: process.env.SLACK_WEBHOOK_URL,
+    },
   }).argv
 
-  const { SLACK_WEBHOOK_URL } = requireEnvKeys('SLACK_WEBHOOK_URL')
+  if (!webhookUrl) {
+    console.log(`Slack webhook is required, either via env.SLACK_WEBHOOK_URL or --webhook `)
+    process.exit(1)
+  }
 
   const slack = new SlackSharedService({
-    webhookUrl: SLACK_WEBHOOK_URL,
+    webhookUrl,
   })
 
   await slack.sendMsg({
