@@ -1,3 +1,10 @@
+# [8.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.4.0...v8.5.0) (2020-03-26)
+
+
+### Features
+
+* slack-this allow to override hook via --webhook ([6964688](https://github.com/NaturalCycles/nodejs-lib/commit/6964688a170baffab8f4b40e0f5722de3a87cc40))
+
 # [8.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.3.0...v8.4.0) (2020-03-26)
 
 
