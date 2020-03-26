@@ -1,3 +1,10 @@
+# [8.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.3.0...v8.4.0) (2020-03-26)
+
+
+### Features
+
+* runScript slackOnSuccess ([0f31df1](https://github.com/NaturalCycles/nodejs-lib/commit/0f31df1e7c2b54062918ec672774f9bc468a0928))
+
 # [8.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.2.0...v8.3.0) (2020-03-25)
 
 
