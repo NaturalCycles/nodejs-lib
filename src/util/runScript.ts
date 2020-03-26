@@ -1,11 +1,22 @@
-import { dimGrey, mb, SlackSharedService, yellow } from '..'
+import { substringAfterLast } from '@naturalcycles/js-lib'
+import { dimGrey, inspectAny, SlackSharedService, yellow } from '..'
 
 export interface RunScriptOptions {
   /**
-   * If defined (milliseconds) - will do a setInterval with a timer that will log heapUsed.
+   * Set it to a channel name (e.g 'backend', without #), so it will report to slack on runScript failure.
+   * Requires env.SLACK_WEBHOOK_URL to be set.
+   * Overrides env.SLACK_ON_FAILURE
    */
-  memoryInterval?: number
+  slackOnFailure?: string | false
+
+  /**
+   * Set it to a channel name (e.g 'backend') to report to slack on runScript success.
+   * It will include the value returned to runScript.
+   */
+  slackOnSuccess?: string | false
 }
+
+const { SLACK_WEBHOOK_URL } = process.env
 
 /**
  * Use it in your top-level scripts like this:
@@ -30,42 +41,81 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
     console.error('unhandledRejection', err)
   })
 
-  const { memoryInterval } = opt
-
-  if (memoryInterval) {
-    setInterval(logMemory, memoryInterval)
-  }
-
   void (async () => {
     try {
-      await fn()
+      const res = await fn()
+
+      if (opt.slackOnSuccess) {
+        await onSuccess(res, opt)
+      }
+
       setImmediate(() => process.exit(0))
     } catch (err) {
       console.error('runScript failed:', err)
 
-      onFailure(err)
+      onFailure(err, opt)
 
       process.exitCode = 1
     }
   })()
 }
 
-function onFailure(err: Error): void {
-  const { SLACK_ON_FAILURE, SLACK_WEBHOOK_URL } = process.env
+async function onSuccess(res: any, opt: RunScriptOptions): Promise<void> {
+  const { slackOnSuccess: channel } = opt
 
-  if (!SLACK_ON_FAILURE) return
+  if (!channel) return
+
+  if (!SLACK_WEBHOOK_URL) {
+    return console.warn(yellow(`env.SLACK_WEBHOOK_URL is missing, unable to slack on success`))
+  }
+
+  let text: string
+
+  if (res) {
+    text = inspectAny(res, {
+      colors: false,
+    })
+
+    // Wrap in markdown-text-block if it's anything but plain String
+    if (typeof res !== 'string') {
+      text = '```' + text + '```'
+    }
+  } else {
+    text = '```empty response```'
+  }
+
+  text = `\`${substringAfterLast(__filename, '/')}\` completed successfully\n\n${text}`
+
+  await new SlackSharedService({
+    webhookUrl: SLACK_WEBHOOK_URL,
+  })
+    .sendMsg({
+      text,
+      channel,
+      noLog: true, // cause we logged the error already
+      throwOnError: true,
+    })
+    .then(() => {
+      console.log(dimGrey(`slacked the result to channel: ${channel}`))
+    })
+    .catch(_err => {
+      console.log(yellow(`failed to slack the result to channel: ${channel}`))
+      console.error(_err)
+    })
+}
+
+function onFailure(err: Error, opt: RunScriptOptions): void {
+  const channel = process.env.SLACK_ON_FAILURE || opt.slackOnFailure
+
+  if (!channel) return
 
   if (!SLACK_WEBHOOK_URL) {
     return console.warn(yellow(`env.SLACK_WEBHOOK_URL is missing, unable to slack on failure`))
   }
 
-  const slack = new SlackSharedService({
+  void new SlackSharedService({
     webhookUrl: SLACK_WEBHOOK_URL,
   })
-
-  const channel = SLACK_ON_FAILURE
-
-  void slack
     .sendMsg({
       text: err,
       channel,
@@ -79,11 +129,4 @@ function onFailure(err: Error): void {
       console.log(yellow(`failed to slack the error to channel: ${channel}`))
       console.error(_err)
     })
-}
-
-function logMemory(): void {
-  const { heapUsed } = process.memoryUsage()
-  console.log({
-    heapUsed: mb(heapUsed),
-  })
 }
