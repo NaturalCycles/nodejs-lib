@@ -1,6 +1,6 @@
-import nanoidAsyncGenerate = require('nanoid/async/generate')
-import nanoidGenerate = require('nanoid/generate')
-import nanoidNonSecureGenerate = require('nanoid/non-secure/generate')
+import { customAlphabet } from 'nanoid'
+import { customAlphabet as customAlphabetAsync } from 'nanoid/async'
+import { customAlphabet as customAlphabetNonSecure } from 'nanoid/non-secure'
 
 export const ALPHABET_NUMBER = '0123456789'
 export const ALPHABET_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
@@ -16,19 +16,16 @@ export const ALPHABET_ALPHANUMERIC = [ALPHABET_NUMBER, ALPHABET_LOWERCASE, ALPHA
  * Powered by `nanoid`.
  */
 export function stringId(length = 16, alphabet = ALPHABET_ALPHANUMERIC_LOWERCASE): string {
-  return nanoidGenerate(alphabet, length)
+  return customAlphabet(alphabet, length)()
 }
 
 export async function stringIdAsync(
   length = 16,
   alphabet = ALPHABET_ALPHANUMERIC_LOWERCASE,
 ): Promise<string> {
-  return await nanoidAsyncGenerate(alphabet, length)
+  return await customAlphabetAsync(alphabet, length)()
 }
 
 export function stringIdUnsafe(length = 16, alphabet = ALPHABET_ALPHANUMERIC_LOWERCASE): string {
-  return nanoidNonSecureGenerate(alphabet, length)
+  return customAlphabetNonSecure(alphabet, length)()
 }
-
-// re-export nanoid
-export const nanoid = require('nanoid')
