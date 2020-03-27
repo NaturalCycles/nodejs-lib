@@ -1,3 +1,10 @@
+# [8.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.5.0...v8.6.0) (2020-03-27)
+
+
+### Features
+
+* bump to nanoid@3 ([0c89107](https://github.com/NaturalCycles/nodejs-lib/commit/0c89107e70b00a6b3b4ecff7a717a3daecf795af))
+
 # [8.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.4.0...v8.5.0) (2020-03-26)
 
 
