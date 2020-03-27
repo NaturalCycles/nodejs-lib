@@ -28,7 +28,7 @@ runScript(async () => {
   }).argv
 
   if (!webhookUrl) {
-    console.log(`Slack webhook is required, either via env.SLACK_WEBHOOK_URL or --webhook `)
+    console.log(`Slack webhook is required, either via env.SLACK_WEBHOOK_URL or --webhook`)
     process.exit(1)
   }
 
