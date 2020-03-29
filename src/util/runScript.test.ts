@@ -5,7 +5,7 @@ test('runScript', async () => {
   const processExit = jest.spyOn(process, 'exit').mockImplementation()
   const consoleError = jest.spyOn(console, 'error').mockImplementation()
   runScript(async () => {})
-  await pDelay() // because runScript is not actually async
+  await pDelay(100) // because runScript is not actually async (100ms is needed for test-leaks)
   expect(processExit).toHaveBeenCalledTimes(1)
   expect(processExit).toHaveBeenCalledWith(0)
   expect(process.exitCode).toBeUndefined()
