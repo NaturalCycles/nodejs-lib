@@ -1,5 +1,5 @@
 import { StringMap } from '@naturalcycles/js-lib'
-import * as fs from 'fs-extra'
+import * as fs from 'fs'
 import { base64ToString, Debug, decryptRandomIVBuffer } from '..'
 
 let loaded = false
@@ -61,7 +61,7 @@ export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?
     const plain = decryptRandomIVBuffer(buf, SECRET_ENCRYPTION_KEY).toString('utf8')
     secrets = JSON.parse(plain)
   } else {
-    secrets = fs.readJsonSync(filePath)
+    secrets = JSON.parse(fs.readFileSync(filePath, 'utf8'))
   }
 
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))

@@ -1,4 +1,4 @@
-import { expectResults, mockAllKindsOfThings } from '@naturalcycles/dev-lib'
+import { expectResults, mockAllKindsOfThings } from '@naturalcycles/dev-lib/dist/testing'
 import { _range } from '@naturalcycles/js-lib'
 import { inspectAny } from '../index'
 import { jsonParseIfPossible } from './string.util'

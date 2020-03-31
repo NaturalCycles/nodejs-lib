@@ -577,21 +577,20 @@
     rimraf "^2.5.2"
 
 "@naturalcycles/dev-lib@^10.2.0":
-  version "10.11.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.11.1.tgz#028295e803f3e3a0fadd6a2f60fd7325d95d86e4"
-  integrity sha512-/4qUUVc2tJYiw8wlibe7ygIGSvUAgWQ8qQOqFRrRsiKxxEyecWM4//ZMrMuHHte0UnttnMn8ZweGGbIBC+qhUQ==
+  version "10.13.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.13.0.tgz#9555965369642c3ea5400aa448359a61fc514cc3"
+  integrity sha512-yl/sDw5gm2sP5C7Te0Ej9wlxsVYKt3Nrjv6GBeiueFgy9zX8bMTSLvjSEP6z9oXryiwxjNX2Sz7758Te2g171Q==
   dependencies:
     "@commitlint/cli" "^8.0.0"
     "@commitlint/config-conventional" "^8.0.0"
     "@naturalcycles/fs-lib" "^2.0.0"
     "@naturalcycles/js-lib" "^10.0.0"
-    "@naturalcycles/nodejs-lib" "^8.0.0"
+    "@naturalcycles/nodejs-lib" "^9.0.0"
     "@naturalcycles/time-lib" "^1.5.0"
     "@types/fs-extra" "^8.0.0"
     "@types/jest" "^25.1.0"
     "@types/node" "^13.1.1"
     "@types/yargs" "^15.0.0"
-    chalk "^3.0.0"
     command-exists "^1.2.8"
     dotenv "^8.1.0"
     execa "^4.0.0"
@@ -629,10 +628,10 @@
   resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-10.1.0.tgz#4a35d3db6b4e7da4f6d37a8e5b00a0521bd38457"
   integrity sha512-66uYnYCF4BIRAvgCqEv7XTX6mFgsgHtgqddBPkJkqKo6D7DAqPGbdaZq8duvhkddtmHHCeXJhbWPsrqSgQj6IQ==
 
-"@naturalcycles/nodejs-lib@^8.0.0":
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-8.6.0.tgz#99d69636e4e74ad0496b61e3ca3e59fc69d2580b"
-  integrity sha512-ENxt+2r4igbOFPXvpm4Cgh4+Xm1apWeoAbFrrLeZXqjRpbzYooEs9JI1jZPj4Q2c5wo25JRvi2vKgP44BXNYkQ==
+"@naturalcycles/nodejs-lib@^9.0.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-9.1.0.tgz#45ba98f10e8974e3b1acdb4bc5f323826064b9eb"
+  integrity sha512-XbxVCZUbbHSt33sMEnVT4hY/4Z03aEQ4WQKNH0j+dMk/KzLhnfFSvcMQc98LkywghZgjCpZlPwqgzonlBJxf1g==
   dependencies:
     "@hapi/joi" "^17.1.1"
     "@naturalcycles/js-lib" "^10.0.0"
@@ -651,7 +650,6 @@
     got "^10.0.2"
     lru-cache "^5.1.1"
     nanoid "^3.0.0"
-    rxjs "^6.5.2"
     through2-concurrent "^2.0.0"
     yargs "^15.3.1"
 
@@ -4599,7 +4597,7 @@ run-parallel@^1.1.9:
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
   integrity sha512-DEqnSRTDw/Tc3FXf49zedI638Z9onwUotBMiUFKmrO2sdFKIbXamXGQ3Axd4qgphxKB4kw/qP1w5kTxnfU1B9Q==
 
-rxjs@^6.3.3, rxjs@^6.5.2:
+rxjs@^6.3.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
