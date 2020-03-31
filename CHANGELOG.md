@@ -1,3 +1,10 @@
+# [8.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.6.0...v8.7.0) (2020-03-31)
+
+
+### Features
+
+* remove rxjs ([be05392](https://github.com/NaturalCycles/nodejs-lib/commit/be0539296b21af40fbdd2e9dce9271b6cfd89868))
+
 # [8.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.5.0...v8.6.0) (2020-03-27)
 
 
