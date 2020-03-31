@@ -1,3 +1,10 @@
+## [9.1.2](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.1...v9.1.2) (2020-03-31)
+
+
+### Bug Fixes
+
+* got error formatting ([72f314c](https://github.com/NaturalCycles/nodejs-lib/commit/72f314ce1b6a8de6777466bca6db38ca0f62c9bf))
+
 ## [9.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.0...v9.1.1) (2020-03-31)
 
 
