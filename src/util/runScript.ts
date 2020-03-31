@@ -1,5 +1,7 @@
 import { substringAfterLast } from '@naturalcycles/js-lib'
-import { dimGrey, inspectAny, SlackSharedService, yellow } from '..'
+import { inspectAny } from '..'
+import { dimGrey, yellow } from '../colors'
+import { SlackSharedService } from '../slack/slack.shared.service'
 
 export interface RunScriptOptions {
   /**

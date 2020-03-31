@@ -1,7 +1,8 @@
 import * as fs from 'fs-extra'
 import { createUnzip, ZlibOptions } from 'zlib'
-import { dimWhite, grey, hb, transformTap, _pipeline } from '../..'
+import { hb, transformTap, _pipeline } from '../..'
 import { transformSplit } from '../..'
+import { dimWhite, grey } from '../../colors'
 import { NDJsonStats } from './ndjson.model'
 import { transformJsonParse, TransformJsonParseOptions } from './transformJsonParse'
 

@@ -29,6 +29,16 @@
   tested.
 - Only generic and broad purpose functions, no domain or project-specific code.
 
+# Exports
+
+- `/` root
+- `/bin` cli
+  - yargs
+- `/exec`
+  - execa
+- `/colors`
+  - only chalk
+
 # Packaging
 
 - `engines.node`: Latest Node.js LTS

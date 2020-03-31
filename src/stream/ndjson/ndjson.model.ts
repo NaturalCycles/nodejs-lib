@@ -1,6 +1,6 @@
 import { ms } from '@naturalcycles/time-lib'
-import { dimWhite, hb } from '../..'
-import { boldWhite } from '../..'
+import { hb } from '../..'
+import { boldWhite, dimWhite } from '../../colors'
 
 export class NDJsonStats {
   static create(o: Partial<NDJsonStats> = {}): NDJsonStats {

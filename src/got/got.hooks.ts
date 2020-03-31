@@ -7,7 +7,8 @@ import got, {
   GotError,
   HTTPError,
 } from 'got'
-import { dimGrey, grey, inspectAny, jsonParseIfPossible, red, yellow } from '..'
+import { inspectAny, jsonParseIfPossible } from '..'
+import { dimGrey, grey, red, yellow } from '../colors'
 import {
   GetGotOptions,
   GotAfterResponseHookOptions,

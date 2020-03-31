@@ -2,7 +2,8 @@ import { SimpleMovingAverage } from '@naturalcycles/js-lib'
 import { dayjs, since } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect } from 'util'
-import { boldWhite, dimGrey, mb, white, yellow } from '../..'
+import { mb } from '../..'
+import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions<IN = any> extends TransformOpt {

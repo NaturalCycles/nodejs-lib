@@ -1,7 +1,6 @@
 import { csvParse } from './csv/csvParse'
 import { csvStringify } from './csv/csvStringify'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
-import { ExecaOptions, execCommand, execShell, execWithArgs } from './exec/exec.util'
 import { getGot } from './got/got.hooks'
 import {
   GetGotOptions,
@@ -12,35 +11,6 @@ import {
 } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { hb, kb, mb } from './infra/size.util'
-import {
-  blue,
-  boldBlue,
-  boldCyan,
-  boldGreen,
-  boldGrey,
-  boldMagenta,
-  boldRed,
-  boldWhite,
-  boldYellow,
-  chalk,
-  cyan,
-  dimBlue,
-  dimCyan,
-  dimGreen,
-  dimGrey,
-  dimMagenta,
-  dimRed,
-  dimWhite,
-  dimYellow,
-  green,
-  grey,
-  inverseWhite,
-  inverseYellow,
-  magenta,
-  red,
-  white,
-  yellow,
-} from './log/colors'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
   decryptRandomIVBuffer,
@@ -271,10 +241,6 @@ export {
   SlackSharedService,
   SlackSharedServiceCfg,
   SlackMessage,
-  ExecaOptions,
-  execCommand,
-  execShell,
-  execWithArgs,
   readableCreate,
   readableFromArray,
   ReadableTyped,
@@ -317,33 +283,6 @@ export {
   streamMapToArray,
   writableVoid,
   writableFork,
-  chalk,
-  white,
-  boldWhite,
-  inverseWhite,
-  dimWhite,
-  grey,
-  yellow,
-  dimYellow,
-  inverseYellow,
-  green,
-  dimGreen,
-  dimGrey,
-  boldGrey,
-  boldYellow,
-  boldGreen,
-  red,
-  dimRed,
-  boldRed,
-  blue,
-  dimBlue,
-  boldBlue,
-  magenta,
-  dimMagenta,
-  boldMagenta,
-  cyan,
-  dimCyan,
-  boldCyan,
   csvParse,
   csvStringify,
   transformToCSV,

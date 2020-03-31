@@ -1,5 +1,5 @@
 import * as execa from 'execa'
-import { dimGrey, grey } from '../log/colors'
+import { dimGrey, grey } from '../colors'
 
 export interface ExecaOptions extends execa.Options {
   /**

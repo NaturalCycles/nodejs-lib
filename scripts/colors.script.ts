@@ -1,10 +1,11 @@
 /*
 
-yarn tsn ./scripts/colors.script.ts
+yarn tsn colors.script.ts
 
  */
 
-import { chalk, runScript } from '../src'
+import { runScript } from '../src'
+import { chalk } from '../src/colors'
 
 const s = 'Hello World! 1 2 3 4 5ms'
 
