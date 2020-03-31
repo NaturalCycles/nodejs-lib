@@ -1,3 +1,10 @@
+# [9.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v9.0.0...v9.1.0) (2020-03-31)
+
+
+### Features
+
+* export runScript separately as /script ([5284983](https://github.com/NaturalCycles/nodejs-lib/commit/528498355ee9b94774f52b0da96466f763b0001b))
+
 # [9.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.7.0...v9.0.0) (2020-03-31)
 
 
