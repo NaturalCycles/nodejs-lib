@@ -96,7 +96,7 @@ import { writableForEach } from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
-import { inspectAny, InspectIfPossibleOptions, jsonParseIfPossible } from './string/string.util'
+import { inspectAny, InspectIfPossibleOptions } from './string/string.util'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import {
@@ -295,7 +295,6 @@ export {
   tableDiff,
   inspectAny,
   InspectIfPossibleOptions,
-  jsonParseIfPossible,
   getGot,
   GetGotOptions,
   GotErrorHookOptions,

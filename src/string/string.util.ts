@@ -1,9 +1,9 @@
-import { AppError } from '@naturalcycles/js-lib'
+import { AppError, isErrorObject } from '@naturalcycles/js-lib'
 import { inspect } from 'util'
 
 export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
   /**
-   * @default 1000
+   * @default 10_000
    */
   maxLen?: number
 
@@ -18,7 +18,9 @@ export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
  * Transforms ANY to human-readable string (via util.inspect mainly).
  * Safe (no error throwing).
  *
- * Enforces max length (default to 1000, pass 0 to skip it).
+ * Correclty prints Errors, AppErrors, ErrorObjects: error.message + \n + inspect(error.data)
+ *
+ * Enforces max length (default to 10_000, pass 0 to skip it).
  *
  * Logs numbers as-is, e.g: `6`.
  * Logs strings as-is (without single quotes around, unlike default util.inspect behavior).
@@ -35,8 +37,14 @@ export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string
     s = (!opt.noErrorStack && obj.stack) || [obj?.name, obj.message].filter(Boolean).join(': ')
 
     if (obj instanceof AppError) {
-      s = [s, inspectAny(obj.data, opt)].join('\n')
+      s = [s, Object.keys(obj.data).length > 0 && inspectAny(obj.data, opt)]
+        .filter(Boolean)
+        .join('\n')
     }
+  } else if (isErrorObject(obj)) {
+    s = [obj.message, Object.keys(obj.data).length > 0 && inspectAny(obj.data, opt)]
+      .filter(Boolean)
+      .join('\n')
   } else if (typeof obj === 'string') {
     s = obj.trim() || 'empty_string'
   } else {
@@ -53,18 +61,4 @@ export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string
   }
 
   return s
-}
-
-/**
- * Attempts to parse object as JSON.
- * Returns original object if JSON parse failed (silently).
- */
-export function jsonParseIfPossible(obj: any): any {
-  if (typeof obj === 'string' && obj) {
-    try {
-      return JSON.parse(obj)
-    } catch {}
-  }
-
-  return obj
 }

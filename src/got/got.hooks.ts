@@ -1,3 +1,4 @@
+import { HttpErrorResponse, isHttpErrorResponse, jsonParseIfPossible } from '@naturalcycles/js-lib'
 import { since } from '@naturalcycles/time-lib'
 import got, {
   AfterResponseHook,
@@ -7,7 +8,7 @@ import got, {
   GotError,
   HTTPError,
 } from 'got'
-import { inspectAny, jsonParseIfPossible } from '..'
+import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
 import {
   GetGotOptions,
@@ -57,7 +58,7 @@ export function getGot(opt: GetGotOptions = {}): Got {
  * 4. Includes time spent (gotBeforeRequestHook must also be enabled).
  */
 export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
-  const { maxResponseLength = 1000 } = opt
+  const { maxResponseLength = 10000 } = opt
 
   return err => {
     if (err instanceof HTTPError) {
@@ -66,7 +67,14 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
       const { started } = context as GotRequestContext
 
       // Auto-detect and prettify JSON response (if any)
-      const body = inspectAny(jsonParseIfPossible(err.response.body), {
+      let body = jsonParseIfPossible(err.response.body)
+
+      // Detect HttpErrorResponse
+      if (isHttpErrorResponse(body)) {
+        body = (body as HttpErrorResponse).error
+      }
+
+      body = inspectAny(body, {
         maxLen: maxResponseLength,
         colors: false,
       })

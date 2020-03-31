@@ -28,7 +28,7 @@ export interface GotMaxResponseLength {
   /**
    * Max length of response object before it's truncated.
    *
-   * @default 1000
+   * @default 10_000
    */
   maxResponseLength?: number
 }
