@@ -6,12 +6,12 @@ SLACK_ON_FAILURE=test yarn tsn runScriptFailure.script.ts
  */
 
 import { AppError, pDelay } from '@naturalcycles/js-lib'
-import { runScript } from '../src'
+import { runScriptWithSlack } from '../src/script/runScriptWithSlack'
 
 // const slackOnSuccess = 'test'
 const slackOnSuccess = false
 
-runScript(
+runScriptWithSlack(
   async () => {
     await pDelay(300)
 

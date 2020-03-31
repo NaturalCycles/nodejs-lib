@@ -1,5 +1,5 @@
 import { pDelay } from '@naturalcycles/js-lib'
-import { runScript } from './runScript'
+import { runScript } from '.'
 
 const detectLeaks = process.argv.some(a => a.includes('detectLeaks'))
 

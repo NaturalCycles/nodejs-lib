@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { runScript } from '..'
+import { runScript } from '../script'
 import { ndjsonMap } from '../stream/ndjson/ndjsonMap'
 
 runScript(async () => {

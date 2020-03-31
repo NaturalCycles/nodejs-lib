@@ -34,6 +34,8 @@
 - `/` root
 - `/bin` cli
   - yargs
+- `/script`
+  - exports `runScript` lightweight function (0 deps)
 - `/exec`
   - execa
 - `/colors`

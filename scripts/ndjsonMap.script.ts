@@ -7,7 +7,8 @@ yarn tsn ./scripts/ndjsonMap.script.ts
 import { _range } from '@naturalcycles/js-lib'
 import { createWriteStream } from 'fs'
 import * as fs from 'fs'
-import { readableFromArray, runScript, transformToNDJson, _pipeline } from '../src'
+import { readableFromArray, transformToNDJson, _pipeline } from '../src'
+import { runScript } from '../src/script'
 import { ndjsonMap } from '../src/stream/ndjson/ndjsonMap'
 import { testDir, tmpDir } from '../src/test/paths.cnst'
 

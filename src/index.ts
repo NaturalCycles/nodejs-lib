@@ -99,7 +99,6 @@ import { writableVoid } from './stream/writable/writableVoid'
 import { inspectAny, InspectIfPossibleOptions, jsonParseIfPossible } from './string/string.util'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
-import { runScript } from './util/runScript'
 import {
   gunzipBuffer,
   gunzipToString,
@@ -221,7 +220,6 @@ export {
   IDebugger,
   Debug,
   DebugLogLevel,
-  runScript,
   getSecretMap,
   setSecretMap,
   loadSecretsFromEnv,

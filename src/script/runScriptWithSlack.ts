@@ -1,7 +1,7 @@
 import { substringAfterLast } from '@naturalcycles/js-lib'
 import { inspectAny } from '..'
+import { SlackSharedService } from '..'
 import { dimGrey, yellow } from '../colors'
-import { SlackSharedService } from '../slack/slack.shared.service'
 
 export interface RunScriptOptions {
   /**
@@ -35,7 +35,7 @@ const { SLACK_WEBHOOK_URL } = process.env
  * - No need to add `.catch(err => { console.error(err); process.exit(1) })`
  * - Supports automatic failure reporting to Slack (!)
  */
-export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
+export function runScriptWithSlack(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
   process.on('uncaughtException', err => {
     console.error('uncaughtException', err)
   })

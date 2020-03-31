@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { runScript, SlackSharedService } from '..'
+import { SlackSharedService } from '..'
+import { runScript } from '../script'
 
 runScript(async () => {
   const { channel, msg, username, emoji, webhook: webhookUrl } = yargs.options({
