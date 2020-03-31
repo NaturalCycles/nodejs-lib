@@ -1,13 +1,10 @@
-import { timer } from 'rxjs'
-import { take } from 'rxjs/operators'
-import { observableToStream, _pipeline } from '../..'
+import { pDelay, _range } from '@naturalcycles/js-lib'
+import { readableFromArray, _pipeline } from '../..'
 import { writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'
 
 test('transformLogProgress', async () => {
-  const source$ = timer(0, 10).pipe(take(21))
-  const readable = observableToStream(source$)
-  // const readable = readableFromArray(_range(0, 100))
+  const readable = readableFromArray(_range(0, 11), i => pDelay(10, i))
 
   await _pipeline([
     readable,

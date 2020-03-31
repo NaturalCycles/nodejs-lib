@@ -98,8 +98,6 @@ import { pipelineForEach } from './stream/pipeline/pipelineForEach'
 import { pipelineToArray } from './stream/pipeline/pipelineToArray'
 import { readableCreate } from './stream/readable/readableCreate'
 import { readableFromArray } from './stream/readable/readableFromArray'
-import { observableToStream } from './stream/rxjs/observableToStream'
-import { streamToObservable } from './stream/rxjs/streamToObservable'
 import { ReadableTyped, TransformOpt, TransformTyped, WritableTyped } from './stream/stream.model'
 import { streamForEach } from './stream/streamForEach'
 import { streamJoinToString } from './stream/streamJoinToString'
@@ -277,7 +275,6 @@ export {
   execCommand,
   execShell,
   execWithArgs,
-  observableToStream,
   readableCreate,
   readableFromArray,
   ReadableTyped,
@@ -301,7 +298,6 @@ export {
   transformThrough,
   pipelineForEach,
   pipelineToArray,
-  streamToObservable,
   transformConcurrent,
   transformFilter,
   TransformMapOptions,

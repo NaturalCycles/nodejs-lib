@@ -1,15 +1,38 @@
-import { Readable } from 'stream'
+import { Mapper, passthroughMapper, pMap } from '@naturalcycles/js-lib'
+import { Readable, ReadableOptions } from 'stream'
 import { ReadableTyped } from '../stream.model'
 
 /**
- * Polyfill of Readable.from(), that available in Node 12+
+ * Create Readable from Array.
+ * Supports a `mapper` function (async) that you can use to e.g create a timer-emitting-readable.
+ *
+ * For simple cases use Readable.from(...) (Node.js 12+)
  */
-export function readableFromArray<T>(items: T[], objectMode = true): ReadableTyped<T> {
+export function readableFromArray<IN, OUT>(
+  items: IN[],
+  mapper: Mapper<IN, OUT> = passthroughMapper,
+  opt?: ReadableOptions,
+): ReadableTyped<OUT> {
   const readable = new Readable({
-    objectMode,
+    objectMode: true,
+    ...opt,
     read() {},
   })
-  items.forEach(item => readable.push(item))
-  readable.push(null)
+
+  void pMap(
+    items,
+    async (item, index) => {
+      readable.push(await mapper(item, index))
+    },
+    { concurrency: 1 },
+  )
+    .then(() => {
+      readable.push(null) // done
+    })
+    .catch(err => {
+      console.error(err)
+      readable.push(err)
+    })
+
   return readable
 }

@@ -1,4 +1,5 @@
 import { AggregatedError, ErrorMode, Mapper, _range } from '@naturalcycles/js-lib'
+import { Readable } from 'stream'
 import { readableFromArray, writablePushToArray, _pipeline } from '../..'
 import { transformMap } from './transformMap'
 
@@ -14,7 +15,7 @@ const mapperError3: Mapper<Item, Item> = item => {
 
 test('transformMap simple', async () => {
   const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
-  const readable = readableFromArray(data)
+  const readable = Readable.from(data)
 
   const data2: Item[] = []
 
@@ -62,7 +63,7 @@ test('transformMap emit array as multiple items', async () => {
 
 test('transformMap objectMode=false', async () => {
   const data: string[] = _range(1, 4).map(n => String(n))
-  const readable = readableFromArray(data, false)
+  const readable = Readable.from(data)
 
   const data2: string[] = []
 

@@ -1,15 +1,13 @@
 /*
 
-yarn tsn ./scripts/backpressureSimulation.script.ts
+yarn tsn backpressureSimulation.script.ts
 
  */
 
-import { pDelay } from '@naturalcycles/js-lib'
-import { timer } from 'rxjs'
-import { map, take } from 'rxjs/operators'
+import { pDelay, _range } from '@naturalcycles/js-lib'
 import {
   Debug,
-  observableToStream,
+  readableFromArray,
   runScript,
   transformLogProgress,
   writableForEach,
@@ -30,11 +28,11 @@ const concurrency = 2
 
 runScript(async () => {
   // emits: 0, 1, 2, 3 after 100ms each
-  const source$ = timer(0, sourceDelay).pipe(
-    take(sourceCount),
-    map(i => ({ id: String(i) } as Item)),
+  const readable = readableFromArray(_range(0, sourceCount), i =>
+    pDelay(sourceDelay, {
+      id: String(i),
+    } as Item),
   )
-  const readable = observableToStream(source$)
 
   await _pipeline([
     readable,

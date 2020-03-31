@@ -23,7 +23,6 @@
     "got": "^10.0.2",
     "lru-cache": "^5.1.1",
     "nanoid": "^3.0.0",
-    "rxjs": "^6.5.2",
     "through2-concurrent": "^2.0.0",
     "yargs": "^15.3.1"
   },
