@@ -1,3 +1,15 @@
+# [9.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.7.0...v9.0.0) (2020-03-31)
+
+
+### Features
+
+* export /exec, /colors separately ([10ecb00](https://github.com/NaturalCycles/nodejs-lib/commit/10ecb00d8558ddb5a97e16801c6ba96fa6d9d652))
+
+
+### BREAKING CHANGES
+
+* ^^^
+
 # [8.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v8.6.0...v8.7.0) (2020-03-31)
 
 
