@@ -1,3 +1,10 @@
+## [9.1.3](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.2...v9.1.3) (2020-04-02)
+
+
+### Bug Fixes
+
+* chalk@4 ([7df3202](https://github.com/NaturalCycles/nodejs-lib/commit/7df32028704fb02c3cb473b073e60f02293a074f))
+
 ## [9.1.2](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.1...v9.1.2) (2020-03-31)
 
 
