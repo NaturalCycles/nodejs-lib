@@ -13,7 +13,7 @@
     "@types/lru-cache": "^5.1.0",
     "@types/through2-concurrent": "^2.0.0",
     "binary-split": "^1.0.5",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "csv-parse": "^4.8.5",
     "csv-stringify": "^5.3.6",
     "debug": "^4.1.1",
