@@ -1,3 +1,10 @@
+## [9.1.4](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.3...v9.1.4) (2020-04-13)
+
+
+### Bug Fixes
+
+* deps ([387e912](https://github.com/NaturalCycles/nodejs-lib/commit/387e9124adebce5a8b611637a4d96ca3bdbd9cf6))
+
 ## [9.1.3](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.2...v9.1.3) (2020-04-02)
 
 
