@@ -1,3 +1,15 @@
+# [10.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.4...v10.0.0) (2020-04-13)
+
+
+### Features
+
+* kb, mb, hb moved away to js-lib ([04936a6](https://github.com/NaturalCycles/nodejs-lib/commit/04936a6ad4f094cdfcd8542627ac65f5286e3e76))
+
+
+### BREAKING CHANGES
+
+* ^^^
+
 ## [9.1.4](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.3...v9.1.4) (2020-04-13)
 
 
