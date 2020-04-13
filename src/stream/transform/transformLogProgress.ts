@@ -1,5 +1,5 @@
-import { SimpleMovingAverage } from '@naturalcycles/js-lib'
-import { dayjs, since } from '@naturalcycles/time-lib'
+import { SimpleMovingAverage, since } from '@naturalcycles/js-lib'
+import { dayjs } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect } from 'util'
 import { mb } from '../..'

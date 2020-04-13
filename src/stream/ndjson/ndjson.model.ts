@@ -1,4 +1,4 @@
-import { ms } from '@naturalcycles/time-lib'
+import { ms } from '@naturalcycles/js-lib'
 import { hb } from '../..'
 import { boldWhite, dimWhite } from '../../colors'
 

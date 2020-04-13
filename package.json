@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "@naturalcycles/js-lib": "^10.0.0",
-    "@naturalcycles/time-lib": "^1.0.0",
+    "@naturalcycles/js-lib": "^11.0.0",
+    "@naturalcycles/time-lib": "^2.0.0",
     "@types/hapi__joi": "^16.0.1",
     "@types/lru-cache": "^5.1.0",
     "@types/through2-concurrent": "^2.0.0",
