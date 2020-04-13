@@ -1,5 +1,5 @@
+import { mb } from '@naturalcycles/js-lib'
 import * as os from 'os'
-import { mb } from './size.util'
 
 export function memoryUsage() {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()

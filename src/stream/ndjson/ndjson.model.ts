@@ -1,5 +1,4 @@
-import { ms } from '@naturalcycles/js-lib'
-import { hb } from '../..'
+import { hb, ms } from '@naturalcycles/js-lib'
 import { boldWhite, dimWhite } from '../../colors'
 
 export class NDJsonStats {

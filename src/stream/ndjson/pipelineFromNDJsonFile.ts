@@ -1,6 +1,7 @@
+import { hb } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { createUnzip, ZlibOptions } from 'zlib'
-import { hb, transformTap, _pipeline } from '../..'
+import { transformTap, _pipeline } from '../..'
 import { transformSplit } from '../..'
 import { dimWhite, grey } from '../../colors'
 import { NDJsonStats } from './ndjson.model'
