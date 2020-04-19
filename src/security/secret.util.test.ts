@@ -26,7 +26,7 @@ test('secret', async () => {
 
   expect(process.env.SECRET_A).toBeUndefined() // should be erased
 
-  expect(getSecretMap()).toEqual({
+  expect(getSecretMap()).toMatchObject({
     SECRET_A: 'VALUE A',
     SECRET_B: 'VALUE B',
     SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',

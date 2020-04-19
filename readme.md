@@ -21,19 +21,14 @@
 - process.util (cpu, memory, etc)
 - lruMemoCache (implementation of MemoCache based on lru-cache)
 - SlackService
-
-# What should go in this lib
-
-- Only battle-tested code with solid proven APIs that are not supposed to change.
-- Only fully unit-tested code with coverage close to 100%. All the branches should absolutely be
-  tested.
-- Only generic and broad purpose functions, no domain or project-specific code.
+- [Secrets](./doc/secrets.md)
 
 # Exports
 
 - `/` root
 - `/bin` cli
   - yargs
+  - globby
 - `/script`
   - exports `runScript` lightweight function (0 deps)
 - `/exec`
@@ -44,6 +39,6 @@
 # Packaging
 
 - `engines.node`: Latest Node.js LTS
-- `main: dist/index.js`: commonjs, es2018
+- `main: dist/index.js`: commonjs, es2019
 - `types: dist/index.d.ts`: typescript types
 - `/src` folder with source `*.ts` files included

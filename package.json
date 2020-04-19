@@ -3,7 +3,10 @@
   "version": "10.0.1",
   "scripts": {
     "ndjson-map-debug": "tsn ./src/bin/ndjson-map.ts --in ./tmp/ndjsonMapIn.ndjson --out ./tmp/ndjsonMapOut.ndjson --mapper ./src/test/ndjson/ndjsonMapper.ts",
-    "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'"
+    "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
+    "secrets-gen-key-debug": "tsn ./src/bin/secrets-gen-key.ts",
+    "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
+    "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -20,6 +23,7 @@
     "dotenv": "^8.1.0",
     "execa": "^4.0.0",
     "fs-extra": "^9.0.0",
+    "globby": "^11.0.0",
     "got": "^10.0.2",
     "lru-cache": "^5.1.1",
     "nanoid": "^3.0.0",
@@ -37,7 +41,10 @@
   },
   "bin": {
     "ndjson-map": "dist/bin/ndjson-map.js",
-    "slack-this": "dist/bin/slack-this.js"
+    "slack-this": "dist/bin/slack-this.js",
+    "secrets-gen-key": "dist/bin/secrets-gen-key.js",
+    "secrets-encrypt": "dist/bin/secrets-encrypt.js",
+    "secrets-decrypt": "dist/bin/secrets-decrypt.js"
   },
   "files": [
     "dist",
@@ -57,7 +64,7 @@
     "url": "https://github.com/NaturalCycles/nodejs-lib"
   },
   "engines": {
-    "node": ">=12.13"
+    "node": ">=12.13.1"
   },
   "description": "Standard library for Node.js",
   "author": "Natural Cycles Team",
