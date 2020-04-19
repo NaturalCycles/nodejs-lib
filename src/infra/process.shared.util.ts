@@ -1,13 +1,13 @@
-import { mb } from '@naturalcycles/js-lib'
+import { _mb } from '@naturalcycles/js-lib'
 import * as os from 'os'
 
 export function memoryUsage() {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
   return {
-    rss: mb(rss),
-    heapTotal: mb(heapTotal),
-    heapUsed: mb(heapUsed),
-    external: mb(external),
+    rss: _mb(rss),
+    heapTotal: _mb(heapTotal),
+    heapUsed: _mb(heapUsed),
+    external: _mb(external),
   }
 }
 
@@ -16,13 +16,13 @@ export function memoryUsageFull() {
   const totalMem = os.totalmem()
   const freeMem = os.freemem()
   return {
-    rss: mb(rss),
-    heapTotal: mb(heapTotal),
-    heapUsed: mb(heapUsed),
-    external: mb(external),
-    totalMem: mb(totalMem),
-    freeMem: mb(freeMem),
-    usedMem: mb(totalMem - freeMem),
+    rss: _mb(rss),
+    heapTotal: _mb(heapTotal),
+    heapUsed: _mb(heapUsed),
+    external: _mb(external),
+    totalMem: _mb(totalMem),
+    freeMem: _mb(freeMem),
+    usedMem: _mb(totalMem - freeMem),
   }
 }
 

@@ -1,4 +1,4 @@
-import { anyToErrorObject, StringMap } from '@naturalcycles/js-lib'
+import { StringMap, _anyToErrorObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
 import { Debug, DebugLogLevel, inspectAny } from '..'
@@ -38,7 +38,7 @@ export class SlackSharedService<CTX = any> {
    * Send error.
    */
   async error(_err: any, opts: Partial<SlackMessage> = {}, ctx?: CTX): Promise<void> {
-    const err = anyToErrorObject(_err)
+    const err = _anyToErrorObject(_err)
     const text = err.stack || err.message
     await this.sendMsg(
       {

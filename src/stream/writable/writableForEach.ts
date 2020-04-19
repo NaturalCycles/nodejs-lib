@@ -1,4 +1,4 @@
-import { Mapper, passNothingPredicate } from '@naturalcycles/js-lib'
+import { Mapper, _passNothingPredicate } from '@naturalcycles/js-lib'
 import { transformMap, TransformMapOptions } from '../..'
 import { WritableTyped } from '../stream.model'
 
@@ -9,5 +9,5 @@ export function writableForEach<IN = any>(
   mapper: Mapper<IN, void>,
   opt: TransformMapOptions = {},
 ): WritableTyped<IN> {
-  return transformMap<IN, void>(mapper, { ...opt, predicate: passNothingPredicate })
+  return transformMap<IN, void>(mapper, { ...opt, predicate: _passNothingPredicate })
 }

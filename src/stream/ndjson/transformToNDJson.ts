@@ -1,4 +1,4 @@
-import { sortObjectDeep } from '@naturalcycles/js-lib'
+import { _sortObjectDeep } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import { TransformTyped } from '../stream.model'
 
@@ -35,7 +35,7 @@ export function transformToNDJson<IN = any>(
     transform(chunk: IN, _encoding, cb) {
       try {
         if (sortObjects) {
-          chunk = sortObjectDeep(chunk as any)
+          chunk = _sortObjectDeep(chunk as any)
         }
         cb(null, JSON.stringify(chunk) + separator)
       } catch (err) {

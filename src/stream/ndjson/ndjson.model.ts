@@ -1,4 +1,4 @@
-import { hb, ms } from '@naturalcycles/js-lib'
+import { _hb, _ms } from '@naturalcycles/js-lib'
 import { boldWhite, dimWhite } from '../../colors'
 
 export class NDJsonStats {
@@ -43,11 +43,11 @@ export class NDJsonStats {
   toPretty(name?: string): string {
     return [
       `Processed ${name ? boldWhite(name) + ': ' : ''}${dimWhite(this.rows)} rows, ${dimWhite(
-        hb(this.sizeBytes),
-      )} in ${dimWhite(ms(this.tookMillis))}`,
+        _hb(this.sizeBytes),
+      )} in ${dimWhite(_ms(this.tookMillis))}`,
       `${dimWhite(this.rpsTotal + ' rows/sec')}`,
-      `${dimWhite(hb(this.avgBytesPerRow) + '/row')}`,
-      `${dimWhite(hb(this.bpsTotal) + '/sec')}`,
+      `${dimWhite(_hb(this.avgBytesPerRow) + '/row')}`,
+      `${dimWhite(_hb(this.bpsTotal) + '/sec')}`,
     ].join(', ')
   }
 }

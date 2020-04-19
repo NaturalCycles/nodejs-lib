@@ -7,7 +7,7 @@
  */
 
 import { ValidationError, ValidationOptions } from '@hapi/joi'
-import { isObject } from '@naturalcycles/js-lib'
+import { _isObject } from '@naturalcycles/js-lib'
 import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 
@@ -134,7 +134,7 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   if (!err) return undefined as any
   const tokens: string[] = []
 
-  const objectId = isObject(value) ? (value['id'] as string) : undefined
+  const objectId = _isObject(value) ? (value['id'] as string) : undefined
 
   if (objectId || objectName) {
     objectName = objectName || value?.constructor?.name

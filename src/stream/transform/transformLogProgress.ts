@@ -1,4 +1,4 @@
-import { mb, SimpleMovingAverage, since } from '@naturalcycles/js-lib'
+import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect } from 'util'
@@ -136,12 +136,12 @@ export function transformLogProgress<IN = any>(
         {
           [metric]: progress,
           ...(extra && !final ? extra(chunk, progress) : {}),
-          ...(logHeapUsed ? { heapUsed: mb(mem.heapUsed) } : {}),
-          ...(logHeapTotal ? { heapTotal: mb(mem.heapTotal) } : {}),
-          ...(logRss ? { rss: mb(mem.rss) } : {}),
-          ...(opt.rssMinusHeap ? { rssMinusHeap: mb(mem.rss - mem.heapTotal) } : {}),
-          ...(opt.external ? { external: mb(mem.external) } : {}),
-          ...(opt.arrayBuffers ? { arrayBuffers: mb(mem.arrayBuffers || 0) } : {}),
+          ...(logHeapUsed ? { heapUsed: _mb(mem.heapUsed) } : {}),
+          ...(logHeapTotal ? { heapTotal: _mb(mem.heapTotal) } : {}),
+          ...(logRss ? { rss: _mb(mem.rss) } : {}),
+          ...(opt.rssMinusHeap ? { rssMinusHeap: _mb(mem.rss - mem.heapTotal) } : {}),
+          ...(opt.external ? { external: _mb(mem.external) } : {}),
+          ...(opt.arrayBuffers ? { arrayBuffers: _mb(mem.arrayBuffers || 0) } : {}),
           ...(logRPS
             ? {
                 rps10,
@@ -161,12 +161,12 @@ export function transformLogProgress<IN = any>(
 
       console.log(
         `${dimGrey(dayjs().toPretty())} ${white(metric)} took ${yellow(
-          since(started),
+          _since(started),
         )} so far to process ${yellow(progress)} rows, ~${yellow(perHour)}/hour`,
       )
     } else if (final) {
       console.log(
-        `${boldWhite(metric)} took ${yellow(since(started))} to process ${yellow(
+        `${boldWhite(metric)} took ${yellow(_since(started))} to process ${yellow(
           progress,
         )} rows with total RPS of ${yellow(rpsTotal)}`,
       )

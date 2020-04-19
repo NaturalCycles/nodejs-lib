@@ -1,4 +1,4 @@
-import { AppError, isErrorObject } from '@naturalcycles/js-lib'
+import { AppError, _isErrorObject } from '@naturalcycles/js-lib'
 import { inspect } from 'util'
 
 export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
@@ -41,7 +41,7 @@ export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string
         .filter(Boolean)
         .join('\n')
     }
-  } else if (isErrorObject(obj)) {
+  } else if (_isErrorObject(obj)) {
     s = [obj.message, Object.keys(obj.data).length > 0 && inspectAny(obj.data, opt)]
       .filter(Boolean)
       .join('\n')

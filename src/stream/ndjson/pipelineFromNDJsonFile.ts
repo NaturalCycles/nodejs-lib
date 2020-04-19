@@ -1,4 +1,4 @@
-import { hb } from '@naturalcycles/js-lib'
+import { _hb } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { createUnzip, ZlibOptions } from 'zlib'
 import { transformTap, _pipeline } from '../..'
@@ -40,7 +40,7 @@ export async function pipelineFromNDJsonFile(
 
   const { size: sizeBytes } = await fs.stat(filePath)
 
-  console.log(`<< ${grey(filePath)} ${dimWhite(hb(sizeBytes))} started...`)
+  console.log(`<< ${grey(filePath)} ${dimWhite(_hb(sizeBytes))} started...`)
 
   await _pipeline([
     fs.createReadStream(filePath),

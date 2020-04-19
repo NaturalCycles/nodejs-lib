@@ -1,8 +1,8 @@
 import {
   HttpErrorResponse,
-  isHttpErrorResponse,
-  jsonParseIfPossible,
-  since,
+  _isHttpErrorResponse,
+  _jsonParseIfPossible,
+  _since,
 } from '@naturalcycles/js-lib'
 import got, {
   AfterResponseHook,
@@ -71,10 +71,10 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
       const { started } = context as GotRequestContext
 
       // Auto-detect and prettify JSON response (if any)
-      let body = jsonParseIfPossible(err.response.body)
+      let body = _jsonParseIfPossible(err.response.body)
 
       // Detect HttpErrorResponse
-      if (isHttpErrorResponse(body)) {
+      if (_isHttpErrorResponse(body)) {
         body = (body as HttpErrorResponse).error
       }
 
@@ -84,7 +84,7 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
       })
 
       err.message = [
-        [statusCode, method, url, started && `in ${since(started)}`].filter(Boolean).join(' '),
+        [statusCode, method, url, started && `in ${_since(started)}`].filter(Boolean).join(' '),
         body,
       ]
         .filter(Boolean)
@@ -123,7 +123,7 @@ export function gotAfterResponseHook(opt: GotAfterResponseHookOptions = {}): Aft
           coloredHttpCode(resp.statusCode),
           dimGrey(resp.request.options.method),
           grey(resp.request.options.url),
-          started && dimGrey('in ' + since(started)),
+          started && dimGrey('in ' + _since(started)),
         ]
           .filter(Boolean)
           .join(' '),
@@ -133,7 +133,7 @@ export function gotAfterResponseHook(opt: GotAfterResponseHookOptions = {}): Aft
 
     // Error responses are not logged, cause they're included in Error message already
     if (opt.logResponse && success) {
-      console.log(inspectAny(jsonParseIfPossible(resp.body), { maxLen: opt.maxResponseLength }))
+      console.log(inspectAny(_jsonParseIfPossible(resp.body), { maxLen: opt.maxResponseLength }))
     }
 
     return resp

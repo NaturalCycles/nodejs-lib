@@ -1,5 +1,5 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
-import { anyToErrorObject, _range } from '@naturalcycles/js-lib'
+import { _anyToErrorObject, _range } from '@naturalcycles/js-lib'
 import * as nock from 'nock'
 import { arraySchema, getValidationResult, integerSchema, objectSchema } from '..'
 import { getGot } from './got.hooks'
@@ -23,7 +23,7 @@ const items = _range(0, 100).map(id => ({ id }))
 const itemsSchema = arraySchema(objectSchema({ id: integerSchema.max(98) }))
 const { error: validationError } = getValidationResult(items, itemsSchema)
 validationError!.data = { ...validationError!.data, httpStatusCode: 400 }
-const joiErrorBackendResp = { error: anyToErrorObject(validationError) }
+const joiErrorBackendResp = { error: _anyToErrorObject(validationError) }
 
 nock(/.*/)
   .persist()

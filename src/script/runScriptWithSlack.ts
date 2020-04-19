@@ -1,4 +1,4 @@
-import { substringAfterLast } from '@naturalcycles/js-lib'
+import { _substringAfterLast } from '@naturalcycles/js-lib'
 import { inspectAny } from '..'
 import { SlackSharedService } from '..'
 import { dimGrey, yellow } from '../colors'
@@ -86,7 +86,7 @@ async function onSuccess(res: any, opt: RunScriptOptions): Promise<void> {
     text = '```empty response```'
   }
 
-  text = `\`${substringAfterLast(__filename, '/')}\` completed successfully\n\n${text}`
+  text = `\`${_substringAfterLast(__filename, '/')}\` completed successfully\n\n${text}`
 
   await new SlackSharedService({
     webhookUrl: SLACK_WEBHOOK_URL,
