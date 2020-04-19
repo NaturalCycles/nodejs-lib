@@ -1,3 +1,10 @@
+# [10.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.0.1...v10.1.0) (2020-04-19)
+
+
+### Features
+
+* secrets-decrypt, secrets-encrypt, s-gen-key ([f3f34d9](https://github.com/NaturalCycles/nodejs-lib/commit/f3f34d93197f38295dfe628ffaa51dcbcf6d1da0))
+
 ## [10.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.0.0...v10.0.1) (2020-04-19)
 
 
