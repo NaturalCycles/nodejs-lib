@@ -1,3 +1,11 @@
+## [10.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.0.0...v10.0.1) (2020-04-19)
+
+
+### Bug Fixes
+
+* adopt js-lib@12 ([ffe8396](https://github.com/NaturalCycles/nodejs-lib/commit/ffe8396bc18fd057acbf6050d4237da65f038f2c))
+* slack send method to accept `any` ([2103862](https://github.com/NaturalCycles/nodejs-lib/commit/21038626730aa03f460aa8869c87be2a879fa049))
+
 # [10.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v9.1.4...v10.0.0) (2020-04-13)
 
 
