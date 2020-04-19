@@ -23,7 +23,7 @@ export class SlackSharedService<CTX = any> {
   constructor(private slackServiceCfg: SlackSharedServiceCfg) {}
 
   // Convenience method
-  async send(text: string, ctx?: CTX): Promise<void> {
+  async send(text: any, ctx?: CTX): Promise<void> {
     await this.sendMsg(
       {
         text,
@@ -31,6 +31,8 @@ export class SlackSharedService<CTX = any> {
       ctx,
     )
   }
+
+  // todo: log method that allows many input objects, like console.log()
 
   /**
    * Send error.
