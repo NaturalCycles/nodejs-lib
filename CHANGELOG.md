@@ -1,3 +1,10 @@
+## [10.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.1.0...v10.1.1) (2020-04-20)
+
+
+### Bug Fixes
+
+* deps, got@11 (under test) ([d83f615](https://github.com/NaturalCycles/nodejs-lib/commit/d83f6152b04acdab32fe532f32b8a0607e800e22))
+
 # [10.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.0.1...v10.1.0) (2020-04-19)
 
 
