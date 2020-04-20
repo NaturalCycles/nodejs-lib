@@ -4,14 +4,7 @@ import {
   _jsonParseIfPossible,
   _since,
 } from '@naturalcycles/js-lib'
-import got, {
-  AfterResponseHook,
-  BeforeErrorHook,
-  BeforeRequestHook,
-  Got,
-  GotError,
-  HTTPError,
-} from 'got'
+import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
 import {
@@ -89,8 +82,6 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
       ]
         .filter(Boolean)
         .join('\n')
-    } else if (err instanceof GotError) {
-      // todo: provide example, handle it
     }
 
     return err
