@@ -1,3 +1,10 @@
+# [10.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.1.1...v10.2.0) (2020-04-21)
+
+
+### Features
+
+* RunScriptOptions ([60d59d1](https://github.com/NaturalCycles/nodejs-lib/commit/60d59d1ee9c0bc30b1ae0c07ea9f29372fe83c49))
+
 ## [10.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.1.0...v10.1.1) (2020-04-20)
 
 
