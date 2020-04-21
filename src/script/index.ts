@@ -1,3 +1,12 @@
+export interface RunScriptOptions {
+  /**
+   * @default false
+   * Set to true to NOT call process.exit(0) after function is completed.
+   * Currently it exists because of `jest --maxWorkers=1` behavior. To be investigated more..
+   */
+  noExit?: boolean
+}
+
 /**
  * Use it in your top-level scripts like this:
  *
@@ -14,7 +23,7 @@
  *
  * This function is kept light, dependency-free, exported separately.
  */
-export function runScript(fn: (...args: any[]) => any): void {
+export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
   process.on('uncaughtException', err => {
     console.error('uncaughtException', err)
   })
@@ -26,7 +35,9 @@ export function runScript(fn: (...args: any[]) => any): void {
     try {
       await fn()
 
-      setImmediate(() => process.exit(0))
+      if (!opt.noExit) {
+        setImmediate(() => process.exit(0))
+      }
     } catch (err) {
       console.error('runScript failed:', err)
       process.exitCode = 1
