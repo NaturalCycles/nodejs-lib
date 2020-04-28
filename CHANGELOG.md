@@ -1,3 +1,10 @@
+# [10.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.2.1...v10.3.0) (2020-04-28)
+
+
+### Features
+
+* ndjson-map limitInput/output logEveryInput/output ([5bd4c02](https://github.com/NaturalCycles/nodejs-lib/commit/5bd4c02bd0c123d752efe26895da859726c99fee))
+
 ## [10.2.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.2.0...v10.2.1) (2020-04-22)
 
 
