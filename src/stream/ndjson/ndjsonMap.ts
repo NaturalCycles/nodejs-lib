@@ -7,7 +7,6 @@ import {
   transformJsonParse,
   transformLimit,
   transformLogProgress,
-  TransformLogProgressOptions,
   transformMap,
   TransformMapOptions,
   transformSplit,
@@ -19,13 +18,22 @@ interface NDJSONMapperFile<IN = any, OUT = any> {
   mapper: Mapper<IN, OUT>
 }
 
-export interface NDJSONMapOptions<OUT = any>
-  extends TransformMapOptions<OUT>,
-    TransformLogProgressOptions {
+export interface NDJSONMapOptions<OUT = any> extends TransformMapOptions<OUT> {
   inputFilePath: string
   outputFilePath: string
   mapperFilePath: string
-  limit?: number
+  limitInput?: number
+  limitOutput?: number
+
+  /**
+   * @default 100
+   */
+  logEveryInput?: number
+
+  /**
+   * @default 0 (disabled)
+   */
+  logEveryOutput?: number
 }
 
 /**
@@ -33,7 +41,15 @@ export interface NDJSONMapOptions<OUT = any>
  * Zips output file automatically, if it ends with `.gz`.
  */
 export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>): Promise<void> {
-  const { inputFilePath, outputFilePath, mapperFilePath, logEvery, limit } = opt
+  const {
+    inputFilePath,
+    outputFilePath,
+    mapperFilePath,
+    logEveryInput,
+    logEveryOutput = 0,
+    limitInput,
+    limitOutput,
+  } = opt
 
   await requireFileToExist(inputFilePath)
   await requireFileToExist(mapperFilePath)
@@ -67,12 +83,14 @@ export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>)
     ...transformUnzip,
     transformSplit(), // splits by \n
     transformJsonParse(),
-    transformLimit(limit),
+    transformLimit(limitInput),
+    transformLogProgress({ metric: 'read', logEvery: logEveryInput }),
     transformMap(mapper, {
       flattenArrayOutput: true,
       ...opt,
     }),
-    transformLogProgress({ logEvery }),
+    transformLimit(limitOutput),
+    transformLogProgress({ metric: 'saved', logEvery: logEveryOutput }),
     transformToNDJson(),
     ...transformZip,
     createWriteStream(outputFilePath),

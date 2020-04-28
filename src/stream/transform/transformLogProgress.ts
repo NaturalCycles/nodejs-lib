@@ -64,6 +64,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   /**
    * Log progress event Nth record that is _processed_ (went through mapper).
    * @default 100
+   * Set to 0 to disable logging.
    */
   logEvery?: number
 
@@ -85,7 +86,7 @@ export function transformLogProgress<IN = any>(
   opt: TransformLogProgressOptions = {},
 ): TransformTyped<IN, IN> {
   const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100, extra } = opt
-  const logProgress = opt.logProgress !== false // true by default
+  const logProgress = opt.logProgress !== false && logEvery !== 0 // true by default
   const logHeapUsed = opt.heapUsed !== false // true by default
   const logRss = opt.rss !== false // true by default
   const logRPS = opt.logRPS !== false // true by default

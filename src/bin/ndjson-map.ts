@@ -9,8 +9,10 @@ runScript(async () => {
     in: inputFilePath,
     out: outputFilePath,
     mapper: mapperFilePath,
-    logEvery,
-    limit,
+    logEveryInput,
+    logEveryOutput,
+    limitInput,
+    limitOutput,
   } = yargs.options({
     in: {
       type: 'string',
@@ -27,11 +29,18 @@ runScript(async () => {
       desc: 'Mapper file path',
       demandOption: true,
     },
-    logEvery: {
+    logEveryInput: {
       type: 'number',
       default: 1000,
     },
-    limit: {
+    logEveryOutput: {
+      type: 'number',
+      default: 0,
+    },
+    limitInput: {
+      type: 'number',
+    },
+    limitOutput: {
       type: 'number',
     },
   }).argv
@@ -40,7 +49,9 @@ runScript(async () => {
     inputFilePath,
     outputFilePath,
     mapperFilePath,
-    logEvery,
-    limit,
+    logEveryInput,
+    logEveryOutput,
+    limitInput,
+    limitOutput,
   })
 })
