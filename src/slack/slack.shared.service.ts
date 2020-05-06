@@ -90,9 +90,10 @@ export class SlackSharedService<CTX = any> {
     await got
       .post(webhookUrl, {
         json: body,
+        responseType: 'text',
       })
       .catch(err => {
-        // ignore (unless throwOnError is set), cause slack is weirdly returning non-json text "ok" response
+        // ignore (unless throwOnError is set)
         if (msg.throwOnError) throw err
       })
   }
