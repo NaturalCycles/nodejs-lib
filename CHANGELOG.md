@@ -1,3 +1,16 @@
+# [10.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.3.0...v10.4.0) (2020-05-06)
+
+
+### Bug Fixes
+
+* **slack:** responseType=text (as it should be) ([bbfc1b6](https://github.com/NaturalCycles/nodejs-lib/commit/bbfc1b69adb38a0faf0fb7748b908ccdde66f81f))
+* deps ([bd04cc9](https://github.com/NaturalCycles/nodejs-lib/commit/bd04cc99919abb4b378b60b5afa493d8d21c0d6a))
+
+
+### Features
+
+* **slack:** special treatment of arrays, .log(...things: any[]) ([7f4fb5d](https://github.com/NaturalCycles/nodejs-lib/commit/7f4fb5dbe1a8a9e5edf7390eab8fb89fa6cfa881))
+
 # [10.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.2.1...v10.3.0) (2020-04-28)
 
 
