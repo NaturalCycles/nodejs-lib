@@ -3,6 +3,20 @@ import { DebugLogLevel } from '..'
 
 export interface SlackMessage {
   /**
+   * The only *required* field.
+   * Should be called `item` instead, cause it can have different types, not just text (see further).
+   *
+   * You can throw anything at it, it'll handle it appropriately:
+   * String - as is
+   * Object - pass via util.inspect()
+   * Array - will pass each item via util.inspect() and join with \n
+   * Error - print the stack nicely
+   *
+   * If you don't want the default Array behavior - you can pre-util.inspect() it yourself to your liking.
+   */
+  text: any
+
+  /**
    * @default bot
    */
   username?: string
@@ -14,14 +28,6 @@ export interface SlackMessage {
    * @default :spider_web:
    */
   icon_emoji?: string
-
-  /**
-   * You can throw anything at it, it'll handle it appropriately:
-   * String - as is
-   * Object - pass via util.inspect()
-   * Error - print the stack nicely
-   */
-  text: any
 
   level?: DebugLogLevel
   attachments?: SlackMessageAttachment[]

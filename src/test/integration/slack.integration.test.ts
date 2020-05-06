@@ -71,3 +71,7 @@ test('kv', async () => {
     },
   })
 })
+
+test('array', async () => {
+  await slackService.log('a', 'b', { c: 'c' }, null)
+})

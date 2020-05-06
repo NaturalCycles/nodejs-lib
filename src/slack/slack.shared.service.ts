@@ -1,7 +1,7 @@
 import { StringMap, _anyToErrorObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
-import { Debug, DebugLogLevel, inspectAny } from '..'
+import { Debug, DebugLogLevel, inspectAny, InspectAnyOptions } from '..'
 import {
   SlackAttachmentField,
   SlackMessage,
@@ -16,6 +16,10 @@ const DEFAULTS = (): SlackMessage => ({
   icon_emoji: ':spider_web:',
   text: 'no text',
 })
+
+const inspectOpt: InspectAnyOptions = {
+  colors: false,
+}
 
 const log = Debug('nc:nodejs-lib:slack')
 
@@ -32,7 +36,18 @@ export class SlackSharedService<CTX = any> {
     )
   }
 
-  // todo: log method that allows many input objects, like console.log()
+  /**
+   * Allows to "log" many things at once, similar to `console.log(one, two, three).
+   *
+   * Context object is not supported there.
+   *
+   * Shortcut to `.sendMsg()`
+   */
+  async log(...things: any[]): Promise<void> {
+    await this.sendMsg({
+      text: things,
+    })
+  }
 
   /**
    * Send error.
@@ -63,9 +78,14 @@ export class SlackSharedService<CTX = any> {
 
     this.processKV(msg)
 
-    let text = inspectAny(msg.text, {
-      colors: false,
-    })
+    let text = msg.text
+
+    // Array has a special treatment here
+    if (Array.isArray(msg.text)) {
+      text = (text as any[]).map(t => inspectAny(t, inspectOpt)).join('\n')
+    } else {
+      text = inspectAny(msg.text, inspectOpt)
+    }
 
     // Wrap in markdown-text-block if it's anything but plain String
     if (typeof msg.text !== 'string') {

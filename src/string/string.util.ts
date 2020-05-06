@@ -1,7 +1,7 @@
 import { AppError, _isErrorObject } from '@naturalcycles/js-lib'
 import { inspect } from 'util'
 
-export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
+export interface InspectAnyOptions extends NodeJS.InspectOptions {
   /**
    * @default 10_000
    */
@@ -29,7 +29,7 @@ export interface InspectIfPossibleOptions extends NodeJS.InspectOptions {
  * Returns 'empty_string' if empty string is passed.
  * Returns 'undefined' if undefined is passed (default util.inspect behavior).
  */
-export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string {
+export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
   let s: string
 
   if (obj instanceof Error) {
@@ -55,6 +55,7 @@ export function inspectAny(obj: any, opt: InspectIfPossibleOptions = {}): string
     })
   }
 
+  // todo: think about maybe removing it in favor of maxStringLength/maxArrayLength built-in options
   // Handle maxLen
   if (opt.maxLen && s.length > opt.maxLen) {
     s = s.substr(0, opt.maxLen) + `... ${Math.ceil(s.length / 1024)} KB message truncated`
