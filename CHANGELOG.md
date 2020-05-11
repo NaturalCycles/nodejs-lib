@@ -1,3 +1,10 @@
+## [10.4.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.0...v10.4.1) (2020-05-11)
+
+
+### Bug Fixes
+
+* deps, export Got type ([fc29a2c](https://github.com/NaturalCycles/nodejs-lib/commit/fc29a2c96382ac73a31b1f18e7956b4c1e4d6b09))
+
 # [10.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.3.0...v10.4.0) (2020-05-06)
 
 
