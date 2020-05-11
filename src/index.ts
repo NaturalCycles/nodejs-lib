@@ -1,3 +1,4 @@
+import type { Got } from 'got'
 import { csvParse } from './csv/csvParse'
 import { csvStringify } from './csv/csvStringify'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
@@ -293,6 +294,7 @@ export {
   tableDiff,
   inspectAny,
   InspectAnyOptions,
+  Got,
   getGot,
   GetGotOptions,
   GotErrorHookOptions,

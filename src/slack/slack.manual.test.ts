@@ -1,5 +1,5 @@
-import { requireEnvKeys } from '../..'
-import { SlackSharedService } from '../../slack/slack.shared.service'
+import { requireEnvKeys } from '../index'
+import { SlackSharedService } from './slack.shared.service'
 require('dotenv').config()
 
 const { SLACK_WEBHOOK_URL } = requireEnvKeys('SLACK_WEBHOOK_URL')

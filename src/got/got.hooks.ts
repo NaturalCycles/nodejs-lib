@@ -1,9 +1,4 @@
-import {
-  HttpErrorResponse,
-  _isHttpErrorResponse,
-  _jsonParseIfPossible,
-  _since,
-} from '@naturalcycles/js-lib'
+import { _isHttpErrorResponse, _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
@@ -68,7 +63,7 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
 
       // Detect HttpErrorResponse
       if (_isHttpErrorResponse(body)) {
-        body = (body as HttpErrorResponse).error
+        body = body.error
       }
 
       body = inspectAny(body, {
