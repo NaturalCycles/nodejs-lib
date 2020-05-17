@@ -1,15 +1,11 @@
-export interface GetGotOptions extends GotBeforeRequestHookOptions, GotAfterResponseHookOptions {}
+import type { Options } from 'got'
 
-export interface GotErrorHookOptions extends GotMaxResponseLength {}
-
-export interface GotBeforeRequestHookOptions {
+export interface GetGotOptions extends Options {
   /**
    * @default false
    */
   logStart?: boolean
-}
 
-export interface GotAfterResponseHookOptions extends GotMaxResponseLength {
   /**
    * Log when request is finished.
    * @default false
@@ -22,9 +18,7 @@ export interface GotAfterResponseHookOptions extends GotMaxResponseLength {
    * @default false
    */
   logResponse?: boolean
-}
 
-export interface GotMaxResponseLength {
   /**
    * Max length of response object before it's truncated.
    *

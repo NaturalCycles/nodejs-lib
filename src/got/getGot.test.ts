@@ -2,7 +2,7 @@ import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { _anyToErrorObject, _range } from '@naturalcycles/js-lib'
 import * as nock from 'nock'
 import { arraySchema, getValidationResult, integerSchema, objectSchema } from '..'
-import { getGot } from './got.hooks'
+import { getGot } from './getGot'
 
 beforeAll(() => {
   mockTime()

@@ -2,14 +2,8 @@ import type { Got } from 'got'
 import { csvParse } from './csv/csvParse'
 import { csvStringify } from './csv/csvStringify'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
-import { getGot } from './got/got.hooks'
-import {
-  GetGotOptions,
-  GotAfterResponseHookOptions,
-  GotBeforeRequestHookOptions,
-  GotErrorHookOptions,
-  GotRequestContext,
-} from './got/got.model'
+import { getGot } from './got/getGot'
+import { GetGotOptions } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
@@ -297,8 +291,4 @@ export {
   Got,
   getGot,
   GetGotOptions,
-  GotErrorHookOptions,
-  GotBeforeRequestHookOptions,
-  GotAfterResponseHookOptions,
-  GotRequestContext,
 }

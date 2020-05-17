@@ -2,13 +2,7 @@ import { _isHttpErrorResponse, _jsonParseIfPossible, _since } from '@naturalcycl
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
-import {
-  GetGotOptions,
-  GotAfterResponseHookOptions,
-  GotBeforeRequestHookOptions,
-  GotErrorHookOptions,
-  GotRequestContext,
-} from './got.model'
+import { GetGotOptions, GotRequestContext } from './got.model'
 
 /**
  * Returns instance of Got with "reasonable defaults":
@@ -18,10 +12,24 @@ import {
  */
 export function getGot(opt: GetGotOptions = {}): Got {
   return got.extend({
+    ...opt,
     hooks: {
-      beforeError: [gotErrorHook(opt)],
-      beforeRequest: [gotBeforeRequestHook(opt)],
-      afterResponse: [gotAfterResponseHook(opt)],
+      ...opt.hooks,
+      beforeError: [
+        ...(opt.hooks?.beforeError || []),
+        // User hooks go BEFORE
+        gotErrorHook(opt),
+      ],
+      beforeRequest: [
+        gotBeforeRequestHook(opt),
+        // User hooks go AFTER
+        ...(opt.hooks?.beforeRequest || []),
+      ],
+      afterResponse: [
+        ...(opt.hooks?.afterResponse || []),
+        // User hooks go BEFORE
+        gotAfterResponseHook(opt),
+      ],
     },
   })
 }
@@ -49,7 +57,7 @@ export function getGot(opt: GetGotOptions = {}): Got {
  * 3. Auto-detects and parses JSON response body (limited length).
  * 4. Includes time spent (gotBeforeRequestHook must also be enabled).
  */
-export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
+export function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
   const { maxResponseLength = 10000 } = opt
 
   return err => {
@@ -83,7 +91,7 @@ export function gotErrorHook(opt: GotErrorHookOptions = {}): BeforeErrorHook {
   }
 }
 
-export function gotBeforeRequestHook(opt: GotBeforeRequestHookOptions = {}): BeforeRequestHook {
+export function gotBeforeRequestHook(opt: GetGotOptions = {}): BeforeRequestHook {
   return options => {
     options.context = {
       ...options.context,
@@ -96,7 +104,7 @@ export function gotBeforeRequestHook(opt: GotBeforeRequestHookOptions = {}): Bef
   }
 }
 
-export function gotAfterResponseHook(opt: GotAfterResponseHookOptions = {}): AfterResponseHook {
+export function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
   return resp => {
     const success = resp.statusCode >= 200 && resp.statusCode < 400
 
