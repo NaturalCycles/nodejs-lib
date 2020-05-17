@@ -1,3 +1,10 @@
+## [10.4.3](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.2...v10.4.3) (2020-05-17)
+
+
+### Bug Fixes
+
+* GetGotOptions now extend got.Options ([285a89e](https://github.com/NaturalCycles/nodejs-lib/commit/285a89e3d449858b0fb2153292888e17466ce865))
+
 ## [10.4.2](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.1...v10.4.2) (2020-05-11)
 
 
