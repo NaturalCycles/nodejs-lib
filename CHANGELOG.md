@@ -1,3 +1,10 @@
+# [10.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.3...v10.5.0) (2020-06-01)
+
+
+### Features
+
+* GetGotOptions.logWithPrefixUrl, logWithSearchParams ([62b8b90](https://github.com/NaturalCycles/nodejs-lib/commit/62b8b90b79174bcd93cbd9b094234fd915790ab3))
+
 ## [10.4.3](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.2...v10.4.3) (2020-05-17)
 
 
