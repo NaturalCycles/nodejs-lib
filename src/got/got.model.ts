@@ -20,6 +20,18 @@ export interface GetGotOptions extends Options {
   logResponse?: boolean
 
   /**
+   * @default true
+   * Set to false to exclude `prefixUrl` from logs (both success and error)
+   */
+  logWithPrefixUrl?: boolean
+
+  /**
+   * @default true
+   * Set to false to strip searchParams from url when logging (both success and error)
+   */
+  logWithSearchParams?: boolean
+
+  /**
    * Max length of response object before it's truncated.
    *
    * @default 10_000

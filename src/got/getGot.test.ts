@@ -58,15 +58,40 @@ test('gotErrorHook', async () => {
   ).rejects.toThrowErrorMatchingSnapshot()
 })
 
-test.skip('actual error', async () => {
-  await _got.get('http://a.com/err', {
-    searchParams: { q: 1 },
-  })
-})
-
 test('backend error', async () => {
   await expect(
     _got.get('http://a.com/backendErr', {
+      searchParams: { q: 1 },
+    }),
+  ).rejects.toThrowErrorMatchingSnapshot()
+})
+
+test('logWithSearchParams=false', async () => {
+  const g = getGot({
+    logStart: true,
+    logFinished: true,
+    logResponse: true,
+    logWithSearchParams: false,
+  })
+
+  await expect(
+    g.get('http://a.com/err', {
+      searchParams: { q: 1 },
+    }),
+  ).rejects.toThrowErrorMatchingSnapshot()
+})
+
+test('logWithPrefixUrl=false', async () => {
+  const g = getGot({
+    logStart: true,
+    logFinished: true,
+    logResponse: true,
+    prefixUrl: 'http://a.com',
+    logWithPrefixUrl: false,
+  })
+
+  await expect(
+    g.get('err', {
       searchParams: { q: 1 },
     }),
   ).rejects.toThrowErrorMatchingSnapshot()

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`backend error 1`] = `
-"400 GET http://a.com/backendErr?q=1 in 0 ms
+"400 GET http://a.com/backendErr?q=1
 [
   {
     \\"id\\": 0
@@ -157,7 +157,23 @@ exports[`backend error 1`] = `
 `;
 
 exports[`gotErrorHook 1`] = `
-"422 GET http://a.com/err?q=1 in 0 ms
+"422 GET http://a.com/err?q=1
+{
+  message: 'Reference already exists',
+  documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference'
+}"
+`;
+
+exports[`logWithPrefixUrl=false 1`] = `
+"422 GET err?q=1
+{
+  message: 'Reference already exists',
+  documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference'
+}"
+`;
+
+exports[`logWithSearchParams=false 1`] = `
+"422 GET http://a.com/err
 {
   message: 'Reference already exists',
   documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference'

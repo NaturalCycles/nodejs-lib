@@ -1,5 +1,6 @@
-import { _isHttpErrorResponse, _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
+import { _isHttpErrorResponse, _jsonParseIfPossible, _since, _split } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
+import { URL } from 'url'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
 import { GetGotOptions, GotRequestContext } from './got.model'
@@ -56,15 +57,19 @@ export function getGot(opt: GetGotOptions = {}): Got {
  * 2. Includes response.body in the error message (limited length).
  * 3. Auto-detects and parses JSON response body (limited length).
  * 4. Includes time spent (gotBeforeRequestHook must also be enabled).
+ * UPD: excluded now to allow automatic Sentry error grouping
+ *
+ * todo (try): Return error as familiar/convenient js-lib's HttpError (not got's HTTPError)
  */
-export function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
+function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
   const { maxResponseLength = 10000 } = opt
 
   return err => {
     if (err instanceof HTTPError) {
       const { statusCode } = err.response
-      const { method, url, context } = err.options
-      const { started } = context as GotRequestContext
+      const { method, url, prefixUrl } = err.options
+      const shortUrl = getShortUrl(opt, url, prefixUrl)
+      // const { started } = context as GotRequestContext
 
       // Auto-detect and prettify JSON response (if any)
       let body = _jsonParseIfPossible(err.response.body)
@@ -79,10 +84,8 @@ export function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
         colors: false,
       })
 
-      err.message = [
-        [statusCode, method, url, started && `in ${_since(started)}`].filter(Boolean).join(' '),
-        body,
-      ]
+      // timings are not part of err.message to allow automatic error grouping in Sentry
+      err.message = [[statusCode, method, shortUrl].filter(Boolean).join(' '), body]
         .filter(Boolean)
         .join('\n')
     }
@@ -91,7 +94,7 @@ export function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
   }
 }
 
-export function gotBeforeRequestHook(opt: GetGotOptions = {}): BeforeRequestHook {
+function gotBeforeRequestHook(opt: GetGotOptions): BeforeRequestHook {
   return options => {
     options.context = {
       ...options.context,
@@ -99,24 +102,27 @@ export function gotBeforeRequestHook(opt: GetGotOptions = {}): BeforeRequestHook
     } as GotRequestContext
 
     if (opt.logStart) {
-      console.log([dimGrey(' >>'), dimGrey(options.method), grey(options.url)].join(' '))
+      const shortUrl = getShortUrl(opt, options.url, options.prefixUrl)
+      console.log([dimGrey(' >>'), dimGrey(options.method), grey(shortUrl)].join(' '))
     }
   }
 }
 
-export function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
+function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
   return resp => {
     const success = resp.statusCode >= 200 && resp.statusCode < 400
 
     if (opt.logFinished) {
       const { started } = resp.request.options.context as GotRequestContext
+      const { url, prefixUrl, method } = resp.request.options
+      const shortUrl = getShortUrl(opt, url, prefixUrl)
 
       console.log(
         [
           dimGrey(' <<'),
           coloredHttpCode(resp.statusCode),
-          dimGrey(resp.request.options.method),
-          grey(resp.request.options.url),
+          dimGrey(method),
+          grey(shortUrl),
           started && dimGrey('in ' + _since(started)),
         ]
           .filter(Boolean)
@@ -138,4 +144,18 @@ function coloredHttpCode(statusCode: number): string {
   if (statusCode < 400) return dimGrey(statusCode) // default
   if (statusCode < 500) return yellow(statusCode)
   return red(statusCode)
+}
+
+function getShortUrl(opt: GetGotOptions, url: URL, prefixUrl?: string): string {
+  let shortUrl = url.toString()
+
+  if (opt.logWithSearchParams === false) {
+    ;[shortUrl] = shortUrl.split('?')
+  }
+
+  if (opt.logWithPrefixUrl === false && prefixUrl && shortUrl.startsWith(prefixUrl)) {
+    shortUrl = shortUrl.substr(prefixUrl.length)
+  }
+
+  return shortUrl
 }
