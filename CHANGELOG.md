@@ -1,3 +1,10 @@
+# [10.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.5.0...v10.6.0) (2020-06-22)
+
+
+### Features
+
+* TransformMapOptions.onError to pass input as 2nd argument ([5d6983b](https://github.com/NaturalCycles/nodejs-lib/commit/5d6983b6f7d8827c2dddc6e5a86c5c7ee49ca0f2))
+
 # [10.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.4.3...v10.5.0) (2020-06-01)
 
 
