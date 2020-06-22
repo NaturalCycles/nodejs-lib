@@ -8,7 +8,7 @@ import { _pipeline } from './pipeline'
 export async function pipelineForEach<IN>(
   streams: (NodeJS.ReadableStream | NodeJS.WritableStream)[],
   mapper: Mapper<IN, void>,
-  opt?: TransformMapOptions,
+  opt?: TransformMapOptions<IN, void>,
 ): Promise<void> {
   await _pipeline([...streams, writableForEach(mapper, opt)])
 }

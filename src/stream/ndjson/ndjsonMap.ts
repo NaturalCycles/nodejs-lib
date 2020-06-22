@@ -18,7 +18,7 @@ interface NDJSONMapperFile<IN = any, OUT = any> {
   mapper: Mapper<IN, OUT>
 }
 
-export interface NDJSONMapOptions<OUT = any> extends TransformMapOptions<OUT> {
+export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOptions<IN, OUT> {
   inputFilePath: string
   outputFilePath: string
   mapperFilePath: string
@@ -40,7 +40,9 @@ export interface NDJSONMapOptions<OUT = any> extends TransformMapOptions<OUT> {
  * Unzips input file automatically, if it ends with `.gz`.
  * Zips output file automatically, if it ends with `.gz`.
  */
-export async function ndjsonMap<IN = any, OUT = any>(opt: NDJSONMapOptions<OUT>): Promise<void> {
+export async function ndjsonMap<IN = any, OUT = any>(
+  opt: NDJSONMapOptions<IN, OUT>,
+): Promise<void> {
   const {
     inputFilePath,
     outputFilePath,

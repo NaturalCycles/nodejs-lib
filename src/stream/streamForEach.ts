@@ -10,7 +10,7 @@ import { TransformMapOptions } from './transform/transformMap'
 export async function streamForEach<IN>(
   stream: ReadableTyped<IN>,
   mapper: Mapper<IN, void>,
-  opt?: TransformMapOptions,
+  opt?: TransformMapOptions<IN, void>,
 ): Promise<void> {
   await _pipeline([stream, writableForEach(mapper, opt)])
 }

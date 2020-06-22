@@ -7,7 +7,7 @@ import { WritableTyped } from '../stream.model'
  */
 export function writableForEach<IN = any>(
   mapper: Mapper<IN, void>,
-  opt: TransformMapOptions = {},
+  opt: TransformMapOptions<IN, void> = {},
 ): WritableTyped<IN> {
   return transformMap<IN, void>(mapper, { ...opt, predicate: _passNothingPredicate })
 }

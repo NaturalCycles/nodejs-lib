@@ -11,7 +11,7 @@ import { writablePushToArray } from './writable/writablePushToArray'
 export async function streamMapToArray<IN, OUT = IN>(
   stream: ReadableTyped<IN>,
   mapper: Mapper<IN, OUT> = item => item as any,
-  opt?: TransformMapOptions,
+  opt?: TransformMapOptions<IN, OUT>,
 ): Promise<OUT[]> {
   const res: OUT[] = []
 

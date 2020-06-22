@@ -4,7 +4,7 @@ import * as through2Concurrent from 'through2-concurrent'
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
 
-export interface TransformMapOptions<OUT = any> {
+export interface TransformMapOptions<IN = any, OUT = IN> {
   /**
    * @default true
    */
@@ -42,7 +42,7 @@ export interface TransformMapOptions<OUT = any> {
    * If defined - will be called on every error happening in the stream.
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
-  onError?: (err: Error) => any
+  onError?: (err: Error, input: IN) => any
 
   /**
    * Progress metric
@@ -79,7 +79,7 @@ function notNullPredicate(item: any): boolean {
  */
 export function transformMap<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT>,
-  opt: TransformMapOptions<OUT> = {},
+  opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {
     concurrency = 16,
@@ -152,7 +152,7 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (onError) {
           try {
-            onError(err)
+            onError(err, chunk)
           } catch {}
         }
 
