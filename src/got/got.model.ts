@@ -39,7 +39,7 @@ export interface GetGotOptions extends Options {
   maxResponseLength?: number
 }
 
-export interface GotRequestContext {
+export interface GotRequestContext extends Record<string, any> {
   /**
    * Millisecond-timestamp of when the request was started. To be able to count "time spent".
    */

@@ -1,4 +1,4 @@
-import { _isHttpErrorResponse, _jsonParseIfPossible, _since, _split } from '@naturalcycles/js-lib'
+import { _isHttpErrorResponse, _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { URL } from 'url'
 import { inspectAny } from '..'
