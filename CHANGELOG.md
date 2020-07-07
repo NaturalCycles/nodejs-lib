@@ -1,3 +1,10 @@
+## [10.6.1](https://github.com/NaturalCycles/nodejs-lib/compare/v10.6.0...v10.6.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* deps ([608963a](https://github.com/NaturalCycles/nodejs-lib/commit/608963aa949cbc6691c16bd8c8ced0a553e5b688))
+
 # [10.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.5.0...v10.6.0) (2020-06-22)
 
 
