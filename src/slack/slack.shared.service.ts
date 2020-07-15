@@ -1,9 +1,12 @@
 import { StringMap, _anyToErrorObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
+import * as FormData from 'form-data'
 import got from 'got'
 import { Debug, DebugLogLevel, inspectAny, InspectAnyOptions } from '..'
 import {
   SlackAttachmentField,
+  SlackFileUploadMessage,
+  SlackFileUploadOptions,
   SlackMessage,
   SlackSharedServiceCfg,
 } from './slack.shared.service.model'
@@ -157,4 +160,26 @@ export class SlackSharedService<CTX = any> {
 
     delete msg.kv
   }
+}
+
+export async function uploadFile(
+  token: string,
+  msg: SlackFileUploadMessage,
+  opts: SlackFileUploadOptions = { throwOnError: true },
+): Promise<void> {
+  const url = 'https://slack.com/api/files.upload'
+  const body = new FormData()
+  Object.keys(msg).forEach(key => body.append(key, msg[key]))
+
+  await got
+    .post(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body,
+    })
+    .json()
+    .catch(err => {
+      if (opts.throwOnError) throw err
+    })
 }
