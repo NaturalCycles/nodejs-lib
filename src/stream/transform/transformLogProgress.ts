@@ -70,8 +70,10 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
 
   /**
    * Function to return extra properties to the "progress object".
+   *
+   * chunk is undefined for "final" stats, otherwise is defined.
    */
-  extra?: (chunk: IN, index: number) => object
+  extra?: (chunk: IN | undefined, index: number) => object
 }
 
 const inspectOpt: NodeJS.InspectOptions = {
@@ -135,8 +137,8 @@ export function transformLogProgress<IN = any>(
     console.log(
       inspect(
         {
-          [metric]: progress,
-          ...(extra && !final ? extra(chunk, progress) : {}),
+          [final ? `${metric}_final` : metric]: progress,
+          ...(extra ? extra(chunk, progress) : {}),
           ...(logHeapUsed ? { heapUsed: _mb(mem.heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: _mb(mem.heapTotal) } : {}),
           ...(logRss ? { rss: _mb(mem.rss) } : {}),
