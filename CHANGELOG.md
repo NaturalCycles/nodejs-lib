@@ -1,3 +1,10 @@
+# [10.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.6.2...v10.7.0) (2020-08-04)
+
+
+### Features
+
+* transformLogProgress to log "final" with "extra" ([af75f1a](https://github.com/NaturalCycles/nodejs-lib/commit/af75f1a24695d7fa60b2916e7102a720a8f90152))
+
 ## [10.6.2](https://github.com/NaturalCycles/nodejs-lib/compare/v10.6.1...v10.6.2) (2020-07-13)
 
 
