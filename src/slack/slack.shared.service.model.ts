@@ -99,3 +99,28 @@ export interface SlackSharedServiceCfg {
    */
   channelByLevel?: StringMap
 }
+
+export interface SlackFileUploadOptions {
+  throwOnError: boolean
+}
+/**
+ * https://api.slack.com/methods/files.upload
+ */
+export interface SlackFileUploadMessage {
+  /**
+   * Comma-separated list of channel names or IDs where the file will be shared.
+   */
+  channels: string
+  /**
+   * The message text introducing the file in specified channels.
+   */
+  initial_comment: string
+  /**
+   * File contents via a POST variable. If omitting this parameter, you must provide a file.
+   */
+  content: Buffer
+  /**
+   * Filename of file.
+   */
+  filename?: string
+}
