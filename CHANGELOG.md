@@ -1,3 +1,10 @@
+# [11.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v11.0.2...v11.1.0) (2020-08-10)
+
+
+### Features
+
+* _chunkBuffer, _packJsonField, _unpackJsonField ([9fc2336](https://github.com/NaturalCycles/nodejs-lib/commit/9fc233666d5e6324b8148a63d61ec5b5f8b2d400))
+
 ## [11.0.2](https://github.com/NaturalCycles/nodejs-lib/compare/v11.0.1...v11.0.2) (2020-08-10)
 
 

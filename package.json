@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "11.0.2",
+  "version": "11.1.0",
   "scripts": {
     "ndjson-map-debug": "tsn ./src/bin/ndjson-map.ts --in ./tmp/ndjsonMapIn.ndjson --out ./tmp/ndjsonMapOut.ndjson --mapper ./src/test/ndjson/ndjsonMapper.ts",
     "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
