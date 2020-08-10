@@ -94,7 +94,7 @@ export class SlackService<CTX = any> {
       ...this.cfg.defaults,
       ...msg,
       // Text with Prefix
-      text: [messagePrefixHook(msg).join(': '), text].filter(Boolean).join('\n'),
+      text: [(await messagePrefixHook(msg)).join(': '), text].filter(Boolean).join('\n'),
     }
 
     json.channel = (this.cfg.channelByLevel || {})[msg.level!] || json.channel

@@ -42,6 +42,7 @@ import { slackDefaultMessagePrefixHook, SlackService } from './slack/slack.servi
 import {
   SlackApiBody,
   SlackMessage,
+  SlackMessagePrefixHook,
   SlackMessageProps,
   SlackSharedServiceCfg,
 } from './slack/slack.service.model'
@@ -236,6 +237,7 @@ export {
   SlackMessage,
   SlackMessageProps,
   SlackApiBody,
+  SlackMessagePrefixHook,
   slackDefaultMessagePrefixHook,
   readableCreate,
   readableFromArray,

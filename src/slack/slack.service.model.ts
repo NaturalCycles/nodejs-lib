@@ -41,7 +41,7 @@ export interface SlackMessage<CTX = any> extends SlackMessageProps {
   items: any
 
   /**
-   * Optional "context object", to be used by `decorateMessageHook`.
+   * Optional "context object", to be used by `messagePrefixHook`.
    */
   ctx?: CTX
 
@@ -99,6 +99,8 @@ export interface SlackMessageAttachment {
   mrkdwn_in?: ('pretext' | 'text' | 'fields')[]
 }
 
+export type SlackMessagePrefixHook = (msg: SlackMessage) => string[] | Promise<string[]>
+
 export interface SlackSharedServiceCfg<CTX = any> {
   /**
    * Undefined means slack is disabled.
@@ -117,5 +119,5 @@ export interface SlackSharedServiceCfg<CTX = any> {
   /**
    * Function to return an array of "prefix tokens" (will be joined by ': ').
    */
-  messagePrefixHook: (msg: SlackMessage) => string[]
+  messagePrefixHook: SlackMessagePrefixHook
 }
