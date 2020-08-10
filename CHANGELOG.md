@@ -1,3 +1,10 @@
+## [11.0.2](https://github.com/NaturalCycles/nodejs-lib/compare/v11.0.1...v11.0.2) (2020-08-10)
+
+
+### Bug Fixes
+
+* short version of slackService.send(string, ctx?: CTX) ([602346b](https://github.com/NaturalCycles/nodejs-lib/commit/602346bf61db021c3e5052a12a07084aacfaf0b0))
+
 ## [11.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v11.0.0...v11.0.1) (2020-08-10)
 
 
