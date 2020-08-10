@@ -1,21 +1,10 @@
 import { StringMap } from '@naturalcycles/js-lib'
 import { DebugLogLevel } from '..'
 
-export interface SlackMessage {
-  /**
-   * The only *required* field.
-   * Should be called `item` instead, cause it can have different types, not just text (see further).
-   *
-   * You can throw anything at it, it'll handle it appropriately:
-   * String - as is
-   * Object - pass via util.inspect()
-   * Array - will pass each item via util.inspect() and join with \n
-   * Error - print the stack nicely
-   *
-   * If you don't want the default Array behavior - you can pre-util.inspect() it yourself to your liking.
-   */
-  text: any
-
+/**
+ * Properties that exists both in SlackApiBody (as per Slack API) and SlackMessage (our abstraction).
+ */
+export interface SlackMessageProps {
   /**
    * @default bot
    */
@@ -29,8 +18,34 @@ export interface SlackMessage {
    */
   icon_emoji?: string
 
-  level?: DebugLogLevel
   attachments?: SlackMessageAttachment[]
+}
+
+export interface SlackApiBody extends SlackMessageProps {
+  text: string
+}
+
+export interface SlackMessage<CTX = any> extends SlackMessageProps {
+  /**
+   * The only *required* field.
+   * Should be called `item` instead, cause it can have different types, not just text (see further).
+   *
+   * You can throw anything at it, it'll handle it appropriately:
+   * String - as is
+   * Object - pass via util.inspect()
+   * Array - will pass each item via util.inspect() and join with \n
+   * Error - print the stack nicely
+   *
+   * If you don't want the default Array behavior - you can pre-util.inspect() it yourself to your liking.
+   */
+  items: any
+
+  /**
+   * Optional "context object", to be used by `decorateMessageHook`.
+   */
+  ctx?: CTX
+
+  level?: DebugLogLevel
 
   /**
    * Keys-values will be rendered as MessageAttachment with Fields
@@ -84,7 +99,7 @@ export interface SlackMessageAttachment {
   mrkdwn_in?: ('pretext' | 'text' | 'fields')[]
 }
 
-export interface SlackSharedServiceCfg {
+export interface SlackSharedServiceCfg<CTX = any> {
   /**
    * Undefined means slack is disabled.
    */
@@ -98,4 +113,9 @@ export interface SlackSharedServiceCfg {
    * value: channel name to send message to
    */
   channelByLevel?: StringMap
+
+  /**
+   * Function to return an array of "prefix tokens" (will be joined by ': ').
+   */
+  messagePrefixHook: (msg: SlackMessage) => string[]
 }

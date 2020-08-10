@@ -1,10 +1,10 @@
 import { requireEnvKeys } from '../index'
-import { SlackSharedService } from './slack.shared.service'
+import { SlackService } from './slack.service'
 require('dotenv').config()
 
 const { SLACK_WEBHOOK_URL } = requireEnvKeys('SLACK_WEBHOOK_URL')
 
-const slackService = new SlackSharedService({
+const slackService = new SlackService({
   webhookUrl: SLACK_WEBHOOK_URL,
   defaults: {
     channel: 'test',
@@ -12,17 +12,20 @@ const slackService = new SlackSharedService({
 })
 
 test('hello world', async () => {
-  await slackService.send(`Hello Slack`)
+  await slackService.log(`Hello Slack`)
+  await slackService.send({
+    items: 'hello string',
+  })
 })
 
 test('hello error', async () => {
-  await slackService.error(new Error('hello error'))
-  await slackService.error('hello error string')
+  await slackService.log(new Error('hello error'))
+  await slackService.log('hello error string')
 })
 
 test('attachments', async () => {
-  await slackService.sendMsg({
-    text: 'hello',
+  await slackService.send({
+    items: 'hello',
     attachments: [
       {
         pretext: 'Optional text that appears above the attachment block',
@@ -61,8 +64,8 @@ test('attachments', async () => {
 })
 
 test('kv', async () => {
-  await slackService.sendMsg({
-    text: 'hello kv',
+  await slackService.send({
+    items: 'hello kv',
     mentions: ['kirill'],
     kv: {
       a: 'a1',

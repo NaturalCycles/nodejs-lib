@@ -38,8 +38,13 @@ import {
   secretOptional,
   setSecretMap,
 } from './security/secret.util'
-import { SlackSharedService } from './slack/slack.shared.service'
-import { SlackMessage, SlackSharedServiceCfg } from './slack/slack.shared.service.model'
+import { slackDefaultMessagePrefixHook, SlackService } from './slack/slack.service'
+import {
+  SlackApiBody,
+  SlackMessage,
+  SlackMessageProps,
+  SlackSharedServiceCfg,
+} from './slack/slack.service.model'
 import { NDJsonStats } from './stream/ndjson/ndjson.model'
 import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
 import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
@@ -226,9 +231,12 @@ export {
   generateSecretKeyBase64,
   memoryUsage,
   memoryUsageFull,
-  SlackSharedService,
+  SlackService,
   SlackSharedServiceCfg,
   SlackMessage,
+  SlackMessageProps,
+  SlackApiBody,
+  slackDefaultMessagePrefixHook,
   readableCreate,
   readableFromArray,
   ReadableTyped,

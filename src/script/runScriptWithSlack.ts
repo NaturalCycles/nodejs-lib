@@ -1,6 +1,6 @@
 import { _substringAfterLast } from '@naturalcycles/js-lib'
 import { inspectAny } from '..'
-import { SlackSharedService } from '..'
+import { SlackService } from '..'
 import { dimGrey, yellow } from '../colors'
 
 export interface RunScriptOptions {
@@ -88,11 +88,11 @@ async function onSuccess(res: any, opt: RunScriptOptions): Promise<void> {
 
   text = `\`${_substringAfterLast(__filename, '/')}\` completed successfully\n\n${text}`
 
-  await new SlackSharedService({
+  await new SlackService({
     webhookUrl: SLACK_WEBHOOK_URL,
   })
-    .sendMsg({
-      text,
+    .send({
+      items: text,
       channel,
       noLog: true, // cause we logged the error already
       throwOnError: true,
@@ -115,11 +115,11 @@ function onFailure(err: Error, opt: RunScriptOptions): void {
     return console.warn(yellow(`env.SLACK_WEBHOOK_URL is missing, unable to slack on failure`))
   }
 
-  void new SlackSharedService({
+  void new SlackService({
     webhookUrl: SLACK_WEBHOOK_URL,
   })
-    .sendMsg({
-      text: err,
+    .send({
+      items: err,
       channel,
       noLog: true, // cause we logged the error already
       throwOnError: true,

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { SlackSharedService } from '..'
+import { SlackService } from '..'
 import { runScript } from '../script'
 
 runScript(async () => {
@@ -33,12 +33,12 @@ runScript(async () => {
     process.exit(1)
   }
 
-  const slack = new SlackSharedService({
+  const slack = new SlackService({
     webhookUrl,
   })
 
-  await slack.sendMsg({
-    text: msg,
+  await slack.send({
+    items: msg,
     channel,
     username,
     icon_emoji: emoji,
