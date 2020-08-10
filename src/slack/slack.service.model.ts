@@ -28,7 +28,6 @@ export interface SlackApiBody extends SlackMessageProps {
 export interface SlackMessage<CTX = any> extends SlackMessageProps {
   /**
    * The only *required* field.
-   * Should be called `item` instead, cause it can have different types, not just text (see further).
    *
    * You can throw anything at it, it'll handle it appropriately:
    * String - as is
