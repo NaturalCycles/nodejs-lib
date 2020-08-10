@@ -1,3 +1,10 @@
+# [10.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.7.0...v10.8.0) (2020-08-10)
+
+
+### Features
+
+* remove csv features/deps from this lib ([10c735e](https://github.com/NaturalCycles/nodejs-lib/commit/10c735e2252a6170575f604869430e66784720a2))
+
 # [10.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.6.2...v10.7.0) (2020-08-04)
 
 
