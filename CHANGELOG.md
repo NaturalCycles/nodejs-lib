@@ -1,3 +1,15 @@
+# [11.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.8.0...v11.0.0) (2020-08-10)
+
+
+### Features
+
+* refactor/refine the api of SlackService ([a67a525](https://github.com/NaturalCycles/nodejs-lib/commit/a67a5256162319b054f35fd43832560054bbf9c3))
+
+
+### BREAKING CHANGES
+
+* ^^^
+
 # [10.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.7.0...v10.8.0) (2020-08-10)
 
 
