@@ -32,6 +32,9 @@ const log = Debug('nc:nodejs-lib:slack')
  *
  * 2. .log(...items: any[])
  * Shortcut method to "just log a bunch of things", everything is "by default" there.
+ *
+ * .send method has a shortcut:
+ * .send(string, ctx?: CTX)
  */
 export class SlackService<CTX = any> {
   constructor(cfg: Partial<SlackSharedServiceCfg<CTX>>) {
@@ -53,8 +56,19 @@ export class SlackService<CTX = any> {
     })
   }
 
-  async send(msg: SlackMessage<CTX>): Promise<void> {
+  async send(msg: SlackMessage<CTX> | string, ctx?: CTX): Promise<void> {
     const { webhookUrl, messagePrefixHook } = this.cfg
+
+    // If String is passed as first argument - just transform it to a full SlackMessage
+    if (typeof msg === 'string') {
+      msg = {
+        items: msg,
+      }
+    }
+
+    if (ctx !== undefined) {
+      Object.assign(msg, { ctx })
+    }
 
     if (!msg.noLog) {
       log[msg.level || DebugLogLevel.info](
@@ -106,7 +120,7 @@ export class SlackService<CTX = any> {
       })
       .catch(err => {
         // ignore (unless throwOnError is set)
-        if (msg.throwOnError) throw err
+        if ((msg as SlackMessage).throwOnError) throw err
       })
   }
 

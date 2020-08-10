@@ -16,6 +16,7 @@ test('hello world', async () => {
   await slackService.send({
     items: 'hello string',
   })
+  await slackService.send('hello 3')
 })
 
 test('hello error', async () => {
