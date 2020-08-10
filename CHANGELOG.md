@@ -1,3 +1,10 @@
+## [11.0.1](https://github.com/NaturalCycles/nodejs-lib/compare/v11.0.0...v11.0.1) (2020-08-10)
+
+
+### Bug Fixes
+
+* allow SlackMessagePrefixHook to be async ([031d19d](https://github.com/NaturalCycles/nodejs-lib/commit/031d19d00f92107ac63c9f20785468dfef65f58f))
+
 # [11.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v10.8.0...v11.0.0) (2020-08-10)
 
 
