@@ -1,4 +1,4 @@
-import { Mapper } from '@naturalcycles/js-lib'
+import { AsyncMapper } from '@naturalcycles/js-lib'
 import { _pipeline } from './pipeline/pipeline'
 import { ReadableTyped } from './stream.model'
 import { transformMap, TransformMapOptions } from './transform/transformMap'
@@ -10,7 +10,7 @@ import { writablePushToArray } from './writable/writablePushToArray'
  */
 export async function streamMapToArray<IN, OUT = IN>(
   stream: ReadableTyped<IN>,
-  mapper: Mapper<IN, OUT> = item => item as any,
+  mapper: AsyncMapper<IN, OUT> = item => item as any,
   opt?: TransformMapOptions<IN, OUT>,
 ): Promise<OUT[]> {
   const res: OUT[] = []

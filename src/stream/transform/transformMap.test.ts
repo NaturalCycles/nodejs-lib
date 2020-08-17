@@ -1,4 +1,4 @@
-import { AggregatedError, ErrorMode, Mapper, _range } from '@naturalcycles/js-lib'
+import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
 import { Readable } from 'stream'
 import { readableFromArray, writablePushToArray, _pipeline } from '../..'
 import { transformMap } from './transformMap'
@@ -8,7 +8,7 @@ interface Item {
 }
 
 // Mapper that throws 'my error' on third id
-const mapperError3: Mapper<Item, Item> = item => {
+const mapperError3: AsyncMapper<Item, Item> = item => {
   if (item.id === '3') throw new Error('my error')
   return item
 }

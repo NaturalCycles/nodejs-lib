@@ -1,4 +1,10 @@
-import { AggregatedError, ErrorMode, Mapper, pFilter, Predicate } from '@naturalcycles/js-lib'
+import {
+  AggregatedError,
+  AsyncMapper,
+  AsyncPredicate,
+  ErrorMode,
+  pFilter,
+} from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import * as through2Concurrent from 'through2-concurrent'
 import { yellow } from '../../colors'
@@ -24,7 +30,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    *
    * Set to `r => r` (passthrough predicate) to pass ANY value (including undefined/null)
    */
-  predicate?: Predicate<OUT>
+  predicate?: AsyncPredicate<OUT>
 
   /**
    * Number of concurrently pending promises returned by `mapper`.
@@ -78,7 +84,7 @@ function notNullPredicate(item: any): boolean {
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
 export function transformMap<IN = any, OUT = IN>(
-  mapper: Mapper<IN, OUT>,
+  mapper: AsyncMapper<IN, OUT>,
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {

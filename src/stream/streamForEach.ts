@@ -1,4 +1,4 @@
-import { Mapper } from '@naturalcycles/js-lib'
+import { AsyncMapper } from '@naturalcycles/js-lib'
 import { writableForEach } from '..'
 import { _pipeline } from './pipeline/pipeline'
 import { ReadableTyped } from './stream.model'
@@ -9,7 +9,7 @@ import { TransformMapOptions } from './transform/transformMap'
  */
 export async function streamForEach<IN>(
   stream: ReadableTyped<IN>,
-  mapper: Mapper<IN, void>,
+  mapper: AsyncMapper<IN, void>,
   opt?: TransformMapOptions<IN, void>,
 ): Promise<void> {
   await _pipeline([stream, writableForEach(mapper, opt)])

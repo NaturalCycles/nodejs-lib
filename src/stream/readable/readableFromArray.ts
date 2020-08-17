@@ -1,4 +1,4 @@
-import { Mapper, pMap, _passthroughMapper } from '@naturalcycles/js-lib'
+import { AsyncMapper, pMap, _passthroughMapper } from '@naturalcycles/js-lib'
 import { Readable, ReadableOptions } from 'stream'
 import { ReadableTyped } from '../stream.model'
 
@@ -10,7 +10,7 @@ import { ReadableTyped } from '../stream.model'
  */
 export function readableFromArray<IN, OUT>(
   items: IN[],
-  mapper: Mapper<IN, OUT> = _passthroughMapper,
+  mapper: AsyncMapper<IN, OUT> = _passthroughMapper,
   opt?: ReadableOptions,
 ): ReadableTyped<OUT> {
   const readable = new Readable({

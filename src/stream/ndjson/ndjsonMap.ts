@@ -1,4 +1,4 @@
-import { Mapper } from '@naturalcycles/js-lib'
+import { AsyncMapper } from '@naturalcycles/js-lib'
 import { createReadStream, createWriteStream } from 'fs'
 import * as path from 'path'
 import { createGzip, createUnzip } from 'zlib'
@@ -15,7 +15,7 @@ import {
 } from '../..'
 
 interface NDJSONMapperFile<IN = any, OUT = any> {
-  mapper: Mapper<IN, OUT>
+  mapper: AsyncMapper<IN, OUT>
 }
 
 export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOptions<IN, OUT> {

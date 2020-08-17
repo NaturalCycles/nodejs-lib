@@ -19,7 +19,7 @@ const errResp = {
   documentation_url: 'https://developer.github.com/v3/git/refs/#create-a-reference',
 }
 
-const items = _range(0, 100).map(id => ({ id }))
+const items = _range(100).map(id => ({ id }))
 const itemsSchema = arraySchema(objectSchema({ id: integerSchema.max(98) }))
 const { error: validationError } = getValidationResult(items, itemsSchema)
 validationError!.data = { ...validationError!.data, httpStatusCode: 400 }

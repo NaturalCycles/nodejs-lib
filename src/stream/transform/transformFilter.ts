@@ -1,4 +1,4 @@
-import { Predicate } from '@naturalcycles/js-lib'
+import { AsyncPredicate } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
@@ -8,7 +8,7 @@ import { TransformOpt, TransformTyped } from '../stream.model'
  * filtering feature by default.
  */
 export function transformFilter<IN = any>(
-  predicate: Predicate<IN>,
+  predicate: AsyncPredicate<IN>,
   opt: TransformOpt = {},
 ): TransformTyped<IN, IN> {
   let index = 0
