@@ -1,5 +1,5 @@
 import type { Got } from 'got'
-import { _chunkBuffer, _packJsonField, _unpackJsonField } from './buffer/buffer.util'
+import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
 import { getGot } from './got/getGot'
 import { GetGotOptions } from './got/got.model'
@@ -296,6 +296,4 @@ export {
   getGot,
   GetGotOptions,
   _chunkBuffer,
-  _packJsonField,
-  _unpackJsonField,
 }
