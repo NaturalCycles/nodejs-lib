@@ -1,4 +1,5 @@
 import type { Got } from 'got'
+import { AnySchema } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
 import { getGot } from './got/getGot'
@@ -172,6 +173,7 @@ export {
   anySchema,
   anyObjectSchema,
   SchemaTyped,
+  AnySchema,
   AnySchemaTyped,
   ArraySchemaTyped,
   BooleanSchemaTyped,
