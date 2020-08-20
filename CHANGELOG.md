@@ -1,3 +1,10 @@
+## [11.1.3](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.2...v11.1.3) (2020-08-20)
+
+
+### Bug Fixes
+
+* export AnySchema from 'joi' ([aacef16](https://github.com/NaturalCycles/nodejs-lib/commit/aacef16e39ba550f7d5e597ede7ceb2aeb84f34b))
+
 ## [11.1.2](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.1...v11.1.2) (2020-08-20)
 
 
