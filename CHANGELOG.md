@@ -1,3 +1,10 @@
+## [11.1.2](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.1...v11.1.2) (2020-08-20)
+
+
+### Bug Fixes
+
+* replace @hapi/joi with joi ([e48c62f](https://github.com/NaturalCycles/nodejs-lib/commit/e48c62fff9e796906580dde138a23fec9466a8ec))
+
 ## [11.1.1](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.0...v11.1.1) (2020-08-17)
 
 
