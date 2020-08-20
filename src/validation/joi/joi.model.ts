@@ -9,7 +9,7 @@ import {
   NumberSchema,
   ObjectSchema,
   StringSchema,
-} from '@hapi/joi'
+} from 'joi'
 
 export type SchemaTyped<IN, OUT = IN> =
   | AnySchemaTyped<IN, OUT>

@@ -1,5 +1,5 @@
-import * as Joi from '@hapi/joi'
-import { Extension, NumberSchema } from '@hapi/joi'
+import * as Joi from 'joi'
+import { Extension, NumberSchema } from 'joi'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedNumberSchema extends NumberSchema, AnySchemaTyped<number> {

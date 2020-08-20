@@ -6,8 +6,8 @@
  * "Converts" mean e.g trims all strings from leading/trailing spaces.
  */
 
-import { ValidationError, ValidationOptions } from '@hapi/joi'
 import { _isObject } from '@naturalcycles/js-lib'
+import { ValidationError, ValidationOptions } from 'joi'
 import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 

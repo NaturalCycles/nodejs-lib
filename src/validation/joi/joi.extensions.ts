@@ -1,5 +1,5 @@
-import { StringSchema } from '@hapi/joi'
-import * as JoiLib from '@hapi/joi'
+import { StringSchema } from 'joi'
+import * as JoiLib from 'joi'
 import { ExtendedNumberSchema, numberExtensions } from './number.extensions'
 import { ExtendedStringSchema, stringExtensions } from './string.extensions'
 

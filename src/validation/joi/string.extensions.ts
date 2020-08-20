@@ -1,6 +1,6 @@
-import { Extension, StringSchema } from '@hapi/joi'
-import * as Joi from '@hapi/joi'
 import { dayjs } from '@naturalcycles/time-lib'
+import { Extension, StringSchema } from 'joi'
+import * as Joi from 'joi'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedStringSchema extends StringSchema, AnySchemaTyped<string> {

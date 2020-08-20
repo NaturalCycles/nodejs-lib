@@ -1,4 +1,4 @@
-import { AnySchema } from '@hapi/joi'
+import { AnySchema } from 'joi'
 import { validate } from '..'
 
 export function testValidation(schema: AnySchema, valid: any[], invalid: any[]) {
