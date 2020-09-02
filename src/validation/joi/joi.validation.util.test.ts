@@ -2,6 +2,7 @@ import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
   arraySchema,
+  booleanDefaultToFalseSchema,
   booleanSchema,
   integerSchema,
   numberSchema,
@@ -298,6 +299,13 @@ test('convert', () => {
   expect(convert('a', stringSchema)).toBe('a')
   expect(convert(' a', stringSchema)).toBe('a')
   expect(convert(' a b  ', stringSchema)).toBe('a b')
+})
+
+test('booleanDefaultToFalseSchema', () => {
+  const s = booleanDefaultToFalseSchema
+  expect(convert(undefined, s)).toBe(false)
+  expect(convert(false, s)).toBe(false)
+  expect(convert(true, s)).toBe(true)
 })
 
 // todo

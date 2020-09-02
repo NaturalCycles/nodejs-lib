@@ -9,6 +9,7 @@ import {
 
 // Should all booleans be optional as a convention? So undefined will be just treated as false?
 export const booleanSchema = Joi.boolean() as BooleanSchemaTyped
+export const booleanDefaultToFalseSchema = Joi.boolean().default(false) as BooleanSchemaTyped
 export const stringSchema = Joi.string()
 export const numberSchema = Joi.number()
 export const integerSchema = Joi.number().integer()
