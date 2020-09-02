@@ -1,5 +1,5 @@
 import type { Got } from 'got'
-import { AnySchema } from 'joi'
+import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
 import { getGot } from './got/getGot'
@@ -155,6 +155,7 @@ export {
   JoiValidationErrorData,
   JoiValidationError,
   JoiValidationResult,
+  ValidationErrorItem,
   validate,
   getValidationResult,
   isValid,
