@@ -1,3 +1,11 @@
+# [11.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.3...v11.2.0) (2020-09-02)
+
+
+### Features
+
+* booleanDefaultToFalseSchema ([97a9dba](https://github.com/NaturalCycles/nodejs-lib/commit/97a9dba572baea4d18a91f99876bca4f7d0d94bb))
+* export ValidationErrorItem ([0d4433b](https://github.com/NaturalCycles/nodejs-lib/commit/0d4433bafd8b70f11b926cb1978e1b1c83b1e365))
+
 ## [11.1.3](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.2...v11.1.3) (2020-08-20)
 
 
