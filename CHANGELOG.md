@@ -1,3 +1,10 @@
+## [11.2.1](https://github.com/NaturalCycles/nodejs-lib/compare/v11.2.0...v11.2.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* deps ([346cffe](https://github.com/NaturalCycles/nodejs-lib/commit/346cffe7e9828fe6d9c1fefd091b4038161d4f03))
+
 # [11.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v11.1.3...v11.2.0) (2020-09-02)
 
 
