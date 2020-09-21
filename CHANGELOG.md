@@ -1,3 +1,10 @@
+# [12.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.0.0...v12.1.0) (2020-09-21)
+
+
+### Features
+
+* bufferReviver ([ba8eeea](https://github.com/NaturalCycles/nodejs-lib/commit/ba8eeea9998cdfcfa37a45f6cf4fea497c79bdce))
+
 # [12.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v11.2.1...v12.0.0) (2020-09-21)
 
 
