@@ -14,14 +14,21 @@ export interface ExtendedJoi extends JoiLib.Root {
 export const Joi: ExtendedJoi = JoiLib.defaults(schema => {
   // hack to prevent infinite recursion due to .empty('') where '' is a stringSchema itself
   if (schema.type === 'string') {
-    return (schema as StringSchema)
-      .trim() // trim all strings by default
-      .empty([schema.valid('', null)]) // treat '' or null as empty (undefined, will be stripped out)
+    return (
+      (schema as StringSchema)
+        .trim() // trim all strings by default
+        // 2020-09-21: null values are NOT treated as EMPTY enymore
+        // .empty([schema.valid('', null)]) // treat '' or null as empty (undefined, will be stripped out)
+        // treat '' as empty (undefined, will be stripped out)
+        .empty([schema.valid('')])
+    )
   }
 
   // Treat `null` as undefined for all schema types
   // undefined values will be stripped by default from object values
-  return schema.empty(null)
+  // 2020-09-21: breaking change: null values are NOT treated as EMPTY anymore
+  // return schema.empty(null)
+  return schema
 })
   .extend((joi: typeof JoiLib) => stringExtensions(joi))
   .extend((joi: typeof JoiLib) => numberExtensions(joi))

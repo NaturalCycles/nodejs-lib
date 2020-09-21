@@ -1,6 +1,7 @@
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
+  anySchema,
   arraySchema,
   booleanDefaultToFalseSchema,
   booleanSchema,
@@ -240,7 +241,8 @@ test('empty string is not valid stringSchema', () => {
 test('should convert null to undefined and strip', () => {
   const schema = objectSchema<Obj1>({
     a1: stringSchema.optional(),
-    a2: stringSchema.optional(),
+    // this is how `null` can be accepted (as empty):
+    a2: stringSchema.empty([anySchema.valid(null)]).optional(),
   })
 
   const obj1: Obj1 = {
@@ -254,10 +256,14 @@ test('should convert null to undefined and strip', () => {
     a1: 'asd',
   })
 
+  // undefined is fine (empty, optional)
   expect(validate(undefined, booleanSchema.optional())).toBeUndefined()
-  expect(validate(null, numberSchema.optional())).toBeUndefined()
-  expect(validate(null, integerSchema.optional())).toBeUndefined()
-  expect(validate(null, arraySchema().optional())).toBeUndefined()
+  expect(validate(undefined, numberSchema.optional())).toBeUndefined()
+
+  // null is invalid
+  expect(isValid(null, numberSchema.optional())).toBeFalsy()
+  expect(isValid(null, integerSchema.optional())).toBeFalsy()
+  expect(isValid(null, arraySchema().optional())).toBeFalsy()
 })
 
 test('null is not a valid value when required', () => {
@@ -273,7 +279,7 @@ test('null is not a valid value when required', () => {
 test('default to empty array', () => {
   expect(validate(undefined, arraySchema().optional())).toBeUndefined()
   expect(validate(undefined, arraySchema().optional().default([]))).toEqual([])
-  expect(validate(null, arraySchema().optional().default([]))).toEqual([])
+  // expect(validate(null, arraySchema().optional().default([]))).toEqual([])
 })
 
 // Checking that partial schema is allowed (not all keys of Obj1 are required)

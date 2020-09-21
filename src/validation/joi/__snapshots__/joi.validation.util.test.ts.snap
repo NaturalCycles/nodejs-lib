@@ -89,7 +89,7 @@ exports[`long message string 1`] = `
 
 exports[`should fail on invalid values 1`] = `"\\"value\\" is required"`;
 
-exports[`should fail on invalid values 2`] = `"\\"value\\" is required"`;
+exports[`should fail on invalid values 2`] = `"\\"value\\" must be of type object"`;
 
 exports[`should fail on invalid values 3`] = `"\\"value\\" must be of type object"`;
 
