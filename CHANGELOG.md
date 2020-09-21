@@ -1,3 +1,24 @@
+# [12.0.0](https://github.com/NaturalCycles/nodejs-lib/compare/v11.2.1...v12.0.0) (2020-09-21)
+
+
+### Features
+
+* don't coerce null values to undefined/empty in Joi validation ([ef1d154](https://github.com/NaturalCycles/nodejs-lib/commit/ef1d1540beb1e281108e704c5f928a2d3761fae6))
+
+
+### BREAKING CHANGES
+
+* ^^^
+null values stay as null values now
+They become INVALID in most of the places, unless explicitly allowed
+
+Purpose of this change is to allow APIs to send null values to explicitly indicate
+ "absense of value".
+
+Example: a patch API that wants to "unset"/delete a value. It now can send { someProp: null } to
+indicate that backend have to "delete" this proporty. Previously null value would be stripped and
+ input become { } (empty object).
+
 ## [11.2.1](https://github.com/NaturalCycles/nodejs-lib/compare/v11.2.0...v11.2.1) (2020-09-09)
 
 
