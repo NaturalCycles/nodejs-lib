@@ -60,7 +60,11 @@ import {
   PipelineToNDJsonFileOptions,
 } from './stream/ndjson/pipelineToNDJsonFile'
 import { streamToNDJsonFile } from './stream/ndjson/streamToNDJsonFile'
-import { transformJsonParse, TransformJsonParseOptions } from './stream/ndjson/transformJsonParse'
+import {
+  bufferReviver,
+  transformJsonParse,
+  TransformJsonParseOptions,
+} from './stream/ndjson/transformJsonParse'
 import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
 import { _pipeline } from './stream/pipeline/pipeline'
 import { pipelineForEach } from './stream/pipeline/pipelineForEach'
@@ -263,6 +267,7 @@ export {
   streamToNDJsonFile,
   TransformJsonParseOptions,
   transformJsonParse,
+  bufferReviver,
   TransformToNDJsonOptions,
   transformToNDJson,
   transformThrough,

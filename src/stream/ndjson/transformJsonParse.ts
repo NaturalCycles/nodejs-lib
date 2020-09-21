@@ -1,3 +1,4 @@
+import { Reviver } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
 import { TransformTyped } from '../stream.model'
 
@@ -7,6 +8,8 @@ export interface TransformJsonParseOptions {
    * If true - will throw an error on JSON.parse / stringify error
    */
   strict?: boolean
+
+  reviver?: Reviver
 }
 
 /**
@@ -26,14 +29,14 @@ export interface TransformJsonParseOptions {
 export function transformJsonParse<OUT = object>(
   opt: TransformJsonParseOptions = {},
 ): TransformTyped<string | Buffer, OUT> {
-  const { strict = true } = opt
+  const { strict = true, reviver } = opt
 
   return new Transform({
     objectMode: false,
     readableObjectMode: true,
     transform(chunk: string, _encoding, cb) {
       try {
-        const data = JSON.parse(chunk)
+        const data = JSON.parse(chunk, reviver)
         cb(null, data)
       } catch (err) {
         // console.error(err)
@@ -45,4 +48,13 @@ export function transformJsonParse<OUT = object>(
       }
     },
   })
+}
+
+// Based on: https://stackoverflow.com/a/34557997/4919972
+export const bufferReviver: Reviver = (k, v) => {
+  if (v !== null && typeof v === 'object' && v.type === 'Buffer' && Array.isArray(v.data)) {
+    return Buffer.from(v.data)
+  }
+
+  return v
 }

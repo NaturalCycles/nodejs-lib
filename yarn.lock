@@ -653,16 +653,16 @@
     typescript "^4.0.2"
 
 "@naturalcycles/dev-lib@^10.2.0":
-  version "10.16.5"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.16.5.tgz#eb78751920b709e073065b9ca65abcc4f4025765"
-  integrity sha512-wc1ztv7J5kA9BaHJsQSRe3jLo1SA6SWJYJUOTgI4VIE6s/uCjyFNsLz56iasQ3ZebuOcHm9m6lP4K9ggiU/0QA==
+  version "10.16.6"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-10.16.6.tgz#c2eb43b73bd5f74785418b8b38ee61e8b530548b"
+  integrity sha512-hK0t9sYDhAq66tUe8VcyGb0lu6HYSEstlCsQxZsBUz4+J2QcqKA7ANPuyw9My5Ou1tBmHHu2CNNRKd9ifZeqWA==
   dependencies:
     "@commitlint/cli" "^11.0.0"
     "@commitlint/config-conventional" "^11.0.0"
     "@naturalcycles/cli" "^1.0.0"
     "@naturalcycles/fs-lib" "^2.0.0"
     "@naturalcycles/js-lib" "^14.0.0"
-    "@naturalcycles/nodejs-lib" "^11.0.0"
+    "@naturalcycles/nodejs-lib" "^12.0.0"
     "@naturalcycles/time-lib" "^3.0.1"
     "@types/fs-extra" "^9.0.0"
     "@types/jest" "^26.0.0"
@@ -683,28 +683,28 @@
     yargs "^16.0.0"
 
 "@naturalcycles/fs-lib@^2.0.0", "@naturalcycles/fs-lib@^2.7.0":
-  version "2.7.5"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/fs-lib/-/fs-lib-2.7.5.tgz#de605c778dcd9a80f1cb6407b401c0924b82377c"
-  integrity sha512-XvcR80gXiG/9SoSyhQ5aC/tAAOBPezxpegkvtk6uPcPv1HdCcF4gMlMpZtllwE3vHwQqZgSUfBzFtrqysC4kQQ==
+  version "2.7.6"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/fs-lib/-/fs-lib-2.7.6.tgz#c02bb7b2b41872a963285f1a0e9668dd411c9f32"
+  integrity sha512-MGhuL0bp/c1nCPrj02HOdbRx/UunNg4hxCOhegsYyqPHE968SMGB5ylgWeTqjG9rHqWbD1jg+VASXNhpqbtFog==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
-    "@naturalcycles/nodejs-lib" "^11.0.0"
+    "@naturalcycles/nodejs-lib" "^12.0.0"
     cp-file "^9.0.0"
     fs-extra "^9.0.0"
     globby "^11.0.0"
     loud-rejection "^2.1.0"
     move-file "^2.0.0"
-    yargs "^15.1.0"
+    yargs "^16.0.3"
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.2.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.2.0.tgz#47536e94f4217339c666f61c8c2265c22f831617"
-  integrity sha512-q/jpDkUONs9eicZb+dZ9TajQ05fDRoBROH9kgl0dvj/6xrWxnAA6X6qtBMvxm/iaLhN6sW3dDqV7liH/Ki1MXw==
+  version "14.3.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.3.0.tgz#278bae8a8ea86283ffa7973139a5bfcc7d924159"
+  integrity sha512-dAPQ9ZDzo2P5AsfWWlPcWUPpraTLNb/yD3FD1ymoc3AXbx/5K1cXNsIQwztBAjrToj40X5o0ZsYUgOus5Fbj2w==
 
-"@naturalcycles/nodejs-lib@^11.0.0":
-  version "11.2.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-11.2.1.tgz#b4e3e3f6cf7584e61e4dc07fad597a2d953570b8"
-  integrity sha512-U0b2mgQBuwWI/T+OXRJ6K2WSwL5G+gZuTGpz44sLNFa5mhJL8MWJNECFd6Dy6oVqPRJ7MCPlBc2T+5xfFs3eRA==
+"@naturalcycles/nodejs-lib@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.0.0.tgz#627e4dc50faae69a7b8d548c1e41cec987bc5efb"
+  integrity sha512-atqzVlUlOW7oD4cG89bFj7xrWqU1z9ZhwzS4Z7Ir6yJOmyOND76MLeF4IUrmjy4E2NM0zaxVh2SVIFgcYXrRgg==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/time-lib" "^3.0.1"
@@ -5687,7 +5687,7 @@ yargs@^15.1.0, yargs@^15.3.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^16.0.0:
+yargs@^16.0.0, yargs@^16.0.3:
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-16.0.3.tgz#7a919b9e43c90f80d4a142a89795e85399a7e54c"
   integrity sha512-6+nLw8xa9uK1BOEOykaiYAJVh6/CjxWXK/q9b5FpRgNslt8s22F2xMBqVIKgCRjNgGvGPBy8Vog7WN7yh4amtA==
