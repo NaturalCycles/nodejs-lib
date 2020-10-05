@@ -103,7 +103,7 @@ export interface SlackMessageAttachment {
  */
 export type SlackMessagePrefixHook<CTX = any> = (
   msg: SlackMessage<CTX>,
-) => string[] | Promise<string[]> | null
+) => string[] | null | Promise<string[] | null>
 
 export interface SlackServiceCfg<CTX = any> {
   /**
