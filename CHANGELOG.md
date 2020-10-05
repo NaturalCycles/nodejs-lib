@@ -1,3 +1,10 @@
+## [12.2.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.1...v12.2.2) (2020-10-05)
+
+
+### Bug Fixes
+
+* **slack:** allow to return Promise<null> ([8bbd544](https://github.com/NaturalCycles/nodejs-lib/commit/8bbd544c1713e127f01ce39c66cc881036b31848))
+
 ## [12.2.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.0...v12.2.1) (2020-10-05)
 
 
