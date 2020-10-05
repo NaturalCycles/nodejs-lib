@@ -1,3 +1,10 @@
+# [12.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.1.0...v12.2.0) (2020-10-05)
+
+
+### Features
+
+* **slack:** allow messagePrefixHook to skip messages ([098b479](https://github.com/NaturalCycles/nodejs-lib/commit/098b4792da284672d2a3a7ced95cad0a7d5b4ee9))
+
 # [12.1.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.0.0...v12.1.0) (2020-09-21)
 
 
