@@ -101,7 +101,9 @@ export interface SlackMessageAttachment {
 /**
  * Return `null` to skip (filter out) the message completely.
  */
-export type SlackMessagePrefixHook = (msg: SlackMessage) => string[] | Promise<string[]> | null
+export type SlackMessagePrefixHook<CTX = any> = (
+  msg: SlackMessage<CTX>,
+) => string[] | Promise<string[]> | null
 
 export interface SlackServiceCfg<CTX = any> {
   /**
@@ -122,5 +124,5 @@ export interface SlackServiceCfg<CTX = any> {
    * Function to return an array of "prefix tokens" (will be joined by ': ').
    * Allows to skip (filter out) the message by returning `null`.
    */
-  messagePrefixHook: SlackMessagePrefixHook
+  messagePrefixHook: SlackMessagePrefixHook<CTX>
 }
