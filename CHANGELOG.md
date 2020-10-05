@@ -1,3 +1,10 @@
+## [12.2.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.0...v12.2.1) (2020-10-05)
+
+
+### Bug Fixes
+
+* **slack:** improve typing of SlackMessagePrefixHook ([acf3ce1](https://github.com/NaturalCycles/nodejs-lib/commit/acf3ce1f71d404f24a558a6782c71ba19b452e70))
+
 # [12.2.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.1.0...v12.2.0) (2020-10-05)
 
 
