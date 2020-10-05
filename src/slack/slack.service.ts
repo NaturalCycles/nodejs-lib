@@ -6,7 +6,7 @@ import {
   SlackApiBody,
   SlackAttachmentField,
   SlackMessage,
-  SlackSharedServiceCfg,
+  SlackServiceCfg,
 } from './slack.service.model'
 
 const GAE = !!process.env.GAE_INSTANCE
@@ -37,14 +37,14 @@ const log = Debug('nc:nodejs-lib:slack')
  * .send(string, ctx?: CTX)
  */
 export class SlackService<CTX = any> {
-  constructor(cfg: Partial<SlackSharedServiceCfg<CTX>>) {
+  constructor(cfg: Partial<SlackServiceCfg<CTX>>) {
     this.cfg = {
       messagePrefixHook: slackDefaultMessagePrefixHook,
       ...cfg,
     }
   }
 
-  public cfg!: SlackSharedServiceCfg<CTX>
+  public cfg!: SlackServiceCfg<CTX>
 
   /**
    * Allows to "log" many things at once, similar to `console.log(one, two, three).
@@ -103,12 +103,15 @@ export class SlackService<CTX = any> {
       text += '\n' + msg.mentions.map(s => `<@${s}>`).join(' ')
     }
 
+    const prefix = await messagePrefixHook(msg)
+    if (prefix === null) return // filtered out!
+
     const json: SlackApiBody = {
       ...DEFAULTS(),
       ...this.cfg.defaults,
       ...msg,
       // Text with Prefix
-      text: [(await messagePrefixHook(msg)).join(': '), text].filter(Boolean).join('\n'),
+      text: [prefix.join(': '), text].filter(Boolean).join('\n'),
     }
 
     json.channel = (this.cfg.channelByLevel || {})[msg.level!] || json.channel
@@ -142,7 +145,6 @@ export function slackDefaultMessagePrefixHook(msg: SlackMessage): string[] {
     tokens.push(
       (ctx as any).header('x-appengine-country')!,
       (ctx as any).header('x-appengine-city')!,
-      // ctx.header('x-appengine-user-ip')!,
     )
   }
 

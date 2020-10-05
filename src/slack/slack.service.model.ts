@@ -98,9 +98,12 @@ export interface SlackMessageAttachment {
   mrkdwn_in?: ('pretext' | 'text' | 'fields')[]
 }
 
-export type SlackMessagePrefixHook = (msg: SlackMessage) => string[] | Promise<string[]>
+/**
+ * Return `null` to skip (filter out) the message completely.
+ */
+export type SlackMessagePrefixHook = (msg: SlackMessage) => string[] | Promise<string[]> | null
 
-export interface SlackSharedServiceCfg<CTX = any> {
+export interface SlackServiceCfg<CTX = any> {
   /**
    * Undefined means slack is disabled.
    */
@@ -117,6 +120,7 @@ export interface SlackSharedServiceCfg<CTX = any> {
 
   /**
    * Function to return an array of "prefix tokens" (will be joined by ': ').
+   * Allows to skip (filter out) the message by returning `null`.
    */
   messagePrefixHook: SlackMessagePrefixHook
 }

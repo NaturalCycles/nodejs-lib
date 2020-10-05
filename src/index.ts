@@ -46,7 +46,7 @@ import {
   SlackMessage,
   SlackMessagePrefixHook,
   SlackMessageProps,
-  SlackSharedServiceCfg,
+  SlackServiceCfg,
 } from './slack/slack.service.model'
 import { NDJsonStats } from './stream/ndjson/ndjson.model'
 import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
@@ -243,7 +243,7 @@ export {
   memoryUsage,
   memoryUsageFull,
   SlackService,
-  SlackSharedServiceCfg,
+  SlackServiceCfg,
   SlackMessage,
   SlackMessageProps,
   SlackApiBody,
