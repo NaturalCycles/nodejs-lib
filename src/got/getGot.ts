@@ -10,9 +10,15 @@ import { GetGotOptions, GotRequestContext } from './got.model'
  *
  * 1. Error handler hook that prints helpful errors.
  * 2. Hooks that log start/end of request (optional, false by default).
+ * 3. Reasonable defaults(tm), e.g non-infinite Timeout
  */
 export function getGot(opt: GetGotOptions = {}): Got {
   return got.extend({
+    // Most-important is to set to anything non-empty (so, requests don't "hang" by default).
+    // Should be long enough to handle for slow responses from scaled cloud APIs in times of spikes
+    // Ideally should be LESS than default Request timeout in backend-lib (so, it has a chance to error
+    // before server times out with 503).
+    timeout: 90_000,
     ...opt,
     hooks: {
       ...opt.hooks,
