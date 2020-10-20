@@ -1,3 +1,10 @@
+# [12.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.2...v12.3.0) (2020-10-20)
+
+
+### Features
+
+* getGot now sets default timeout (was: infinite) ([07bc3a9](https://github.com/NaturalCycles/nodejs-lib/commit/07bc3a9e451a67aca94c8dbebd36cf4427082020))
+
 ## [12.2.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.1...v12.2.2) (2020-10-05)
 
 
