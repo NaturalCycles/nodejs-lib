@@ -40,6 +40,8 @@ export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
       s = [s, Object.keys(obj.data).length > 0 && inspectAny(obj.data, opt)]
         .filter(Boolean)
         .join('\n')
+    } else if (typeof (obj as any).code === 'string') {
+      s = (obj as any).code + '\n' + s
     }
   } else if (_isErrorObject(obj)) {
     s = [obj.message, Object.keys(obj.data).length > 0 && inspectAny(obj.data, opt)]

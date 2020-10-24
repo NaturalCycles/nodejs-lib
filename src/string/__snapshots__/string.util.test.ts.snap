@@ -51,6 +51,8 @@ Map {
     "c",
   } => "Set { 'a', 'b', 'c' }",
   [Error: some err msg] => "Error: some err msg",
+  [Error: Error with code] => "auth/forbidden
+Error: Error with code",
   [AppError: app error] => "AppError: app error
 { k1: 'v1' }",
   Symbol(a_am_symbol) => "Symbol(a_am_symbol)",
