@@ -1,3 +1,10 @@
+# [12.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.3.0...v12.4.0) (2020-10-24)
+
+
+### Features
+
+* inspectAny handles "Error with code" now ([1d678f9](https://github.com/NaturalCycles/nodejs-lib/commit/1d678f9028414fa4a2e596df7b7a1785fe996251))
+
 # [12.3.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.2.2...v12.3.0) (2020-10-20)
 
 
