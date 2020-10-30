@@ -16,12 +16,14 @@ export function transformLimit<IN>(limit?: number, opt: TransformOpt = {}): Tran
 
       if (!ended) {
         cb(null, chunk) // pass through the item
+      } else {
+        cb(null) // pass-through empty
       }
 
       if (limit && index === limit) {
         ended = true
         console.log(`transformLimit: limit of ${limit} reached`)
-        this.emit('end')
+        // this.emit('end') // this makes it "halt" on Node 14 lts
       }
     },
   })
