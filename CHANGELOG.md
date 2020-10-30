@@ -1,3 +1,11 @@
+## [12.4.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.4.0...v12.4.1) (2020-10-30)
+
+
+### Bug Fixes
+
+* transformLimit to not halt on Node 14 lts ([c7eb15a](https://github.com/NaturalCycles/nodejs-lib/commit/c7eb15a2601c0620c29c47e858193537a718d363))
+* use es6-compliant imports ([aec5992](https://github.com/NaturalCycles/nodejs-lib/commit/aec59920ee75241df9e60088d4f96dbb96525720))
+
 # [12.4.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.3.0...v12.4.0) (2020-10-24)
 
 
