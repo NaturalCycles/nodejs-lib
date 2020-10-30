@@ -1,5 +1,5 @@
 import { MemoCache } from '@naturalcycles/js-lib'
-import * as LRUCache from 'lru-cache'
+import LRUCache = require('lru-cache')
 
 export type LRUMemoCacheOpts = LRUCache.Options<string, any>
 

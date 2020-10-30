@@ -1,6 +1,6 @@
 import { pMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
-import * as globby from 'globby'
+import globby = require('globby')
 import * as path from 'path'
 import { decryptRandomIVBuffer } from '..'
 import { dimGrey, yellow } from '../colors'

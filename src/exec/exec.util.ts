@@ -1,4 +1,4 @@
-import * as execa from 'execa'
+import execa = require('execa')
 import { dimGrey, grey } from '../colors'
 
 export interface ExecaOptions extends execa.Options {

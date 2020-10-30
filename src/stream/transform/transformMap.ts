@@ -6,7 +6,7 @@ import {
   pFilter,
 } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
-import * as through2Concurrent from 'through2-concurrent'
+import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
 

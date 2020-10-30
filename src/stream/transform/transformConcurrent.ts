@@ -1,6 +1,6 @@
 import { FlushCallback, TransformFunction } from 'through2'
 import { Through2ConcurrentOptions } from 'through2-concurrent'
-import * as through2Concurrent from 'through2-concurrent'
+import through2Concurrent = require('through2-concurrent')
 import { TransformTyped } from '../stream.model'
 
 /**
