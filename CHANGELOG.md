@@ -1,3 +1,10 @@
+# [12.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.4.1...v12.5.0) (2020-11-01)
+
+
+### Features
+
+* use sync methods for secret* api and CLI ([9fcc307](https://github.com/NaturalCycles/nodejs-lib/commit/9fcc30754936a12a9c7fd0670198c4bf859e451a))
+
 ## [12.4.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.4.0...v12.4.1) (2020-10-30)
 
 
