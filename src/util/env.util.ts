@@ -27,8 +27,8 @@ export function requireEnvKeys<T extends readonly string[]>(
   }, {} as { [k in ValuesOf<T>]: string })
 }
 
-export async function requireFileToExist(filePath: string): Promise<void> {
-  if (!(await fs.pathExists(filePath))) {
+export function requireFileToExist(filePath: string): void {
+  if (!fs.pathExistsSync(filePath)) {
     throw new Error(`Required file should exist: ${filePath}`)
   }
 }

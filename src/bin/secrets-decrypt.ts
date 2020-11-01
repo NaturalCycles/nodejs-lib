@@ -5,10 +5,10 @@ import { dimGrey } from '../colors'
 import { runScript } from '../script'
 import { DecryptCLIOptions, secretsDecrypt } from '../secret/secrets-decrypt.util'
 
-runScript(async () => {
+runScript(() => {
   const { dir, encKey, algorithm, del } = getDecryptCLIOptions()
 
-  await secretsDecrypt(dir, encKey, algorithm, del)
+  secretsDecrypt(dir, encKey, algorithm, del)
 })
 
 function getDecryptCLIOptions(): DecryptCLIOptions {

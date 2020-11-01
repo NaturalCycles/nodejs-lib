@@ -53,8 +53,8 @@ export async function ndjsonMap<IN = any, OUT = any>(
     limitOutput,
   } = opt
 
-  await requireFileToExist(inputFilePath)
-  await requireFileToExist(mapperFilePath)
+  requireFileToExist(inputFilePath)
+  requireFileToExist(mapperFilePath)
 
   const resolvedMapperPath = path.resolve(mapperFilePath)
 

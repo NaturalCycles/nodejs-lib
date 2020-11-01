@@ -38,7 +38,7 @@ export async function pipelineFromNDJsonFile(
   const started = Date.now()
   let rows = 0
 
-  const { size: sizeBytes } = await fs.stat(filePath)
+  const { size: sizeBytes } = fs.statSync(filePath)
 
   console.log(`<< ${grey(filePath)} ${dimWhite(_hb(sizeBytes))} started...`)
 

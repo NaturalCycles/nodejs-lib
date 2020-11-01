@@ -1,9 +1,8 @@
-import { pMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import globby = require('globby')
 import * as path from 'path'
-import { encryptRandomIVBuffer } from '..'
 import { dimGrey, yellow } from '../colors'
+import { encryptRandomIVBuffer } from '../security/crypto.util'
 
 export interface EncryptCLIOptions {
   pattern: string[]
@@ -16,27 +15,27 @@ export interface EncryptCLIOptions {
  * Encrypts all files in given directory (except *.enc), saves encrypted versions as filename.ext.enc.
  * Using provided encKey.
  */
-export async function secretsEncrypt(
+export function secretsEncrypt(
   pattern: string[],
   encKey: string,
   algorithm?: string,
   del?: boolean,
-): Promise<void> {
+): void {
   const patterns = [
     ...pattern,
     `!**/*.enc`, // excluding already encoded
   ]
-  const filenames = await globby(patterns)
+  const filenames = globby.sync(patterns)
 
-  await pMap(filenames, async filename => {
-    const plain = await fs.readFile(filename)
-    const enc = await encryptRandomIVBuffer(plain, encKey, algorithm)
+  filenames.forEach(filename => {
+    const plain = fs.readFileSync(filename)
+    const enc = encryptRandomIVBuffer(plain, encKey, algorithm)
 
     const encFilename = `${filename}.enc`
-    await fs.writeFile(encFilename, enc)
+    fs.writeFileSync(encFilename, enc)
 
     if (del) {
-      await fs.unlink(filename)
+      fs.unlinkSync(filename)
     }
 
     console.log(`  ${path.basename(filename)} > ${path.basename(encFilename)}`)

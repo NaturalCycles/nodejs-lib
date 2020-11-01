@@ -20,7 +20,7 @@ test('requireEnvKeys', () => {
 
 test('requireFileToExist', async () => {
   // should not throw
-  await requireFileToExist(`${__dirname}/env.util.ts`)
+  requireFileToExist(`${__dirname}/env.util.ts`)
 
-  await expect(requireFileToExist(`${__dirname}/non-existing`)).rejects.toThrow()
+  expect(() => requireFileToExist(`${__dirname}/non-existing`)).toThrow()
 })

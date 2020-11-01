@@ -7,12 +7,6 @@ import { GetGotOptions } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
 import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
 import {
-  decryptRandomIVBuffer,
-  encryptRandomIVBuffer,
-  generateSecretKey,
-  generateSecretKeyBase64,
-} from './security/crypto.util'
-import {
   base64ToBuffer,
   base64ToString,
   bufferToBase64,
@@ -236,10 +230,6 @@ export {
   removeSecretsFromEnv,
   secret,
   secretOptional,
-  encryptRandomIVBuffer,
-  decryptRandomIVBuffer,
-  generateSecretKey,
-  generateSecretKeyBase64,
   memoryUsage,
   memoryUsageFull,
   SlackService,

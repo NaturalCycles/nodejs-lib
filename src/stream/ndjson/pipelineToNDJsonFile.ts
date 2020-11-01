@@ -37,14 +37,14 @@ export async function pipelineToNDJsonFile(
 ): Promise<NDJsonStats> {
   const { filePath, gzip, protectFromOverwrite = false } = opt
 
-  if (protectFromOverwrite && (await fs.pathExists(filePath))) {
+  if (protectFromOverwrite && fs.pathExistsSync(filePath)) {
     throw new AppError(`pipelineToNDJsonFile: output file exists: ${filePath}`)
   }
 
   const started = Date.now()
   let rows = 0
 
-  await fs.ensureFile(filePath)
+  fs.ensureFileSync(filePath)
 
   console.log(`>> ${grey(filePath)} started...`)
 
@@ -56,7 +56,7 @@ export async function pipelineToNDJsonFile(
     fs.createWriteStream(filePath),
   ])
 
-  const { size: sizeBytes } = await fs.stat(filePath)
+  const { size: sizeBytes } = fs.statSync(filePath)
 
   const stats = NDJsonStats.create({
     tookMillis: Date.now() - started,

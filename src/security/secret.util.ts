@@ -1,6 +1,7 @@
 import { StringMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs'
-import { base64ToString, Debug, decryptRandomIVBuffer } from '..'
+import { base64ToString, Debug } from '..'
+import { decryptRandomIVBuffer } from './crypto.util'
 
 let loaded = false
 

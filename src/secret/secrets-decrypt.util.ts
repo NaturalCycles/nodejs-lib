@@ -1,9 +1,8 @@
-import { pMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import globby = require('globby')
 import * as path from 'path'
-import { decryptRandomIVBuffer } from '..'
 import { dimGrey, yellow } from '../colors'
+import { decryptRandomIVBuffer } from '../security/crypto.util'
 
 export interface DecryptCLIOptions {
   dir: string[]
@@ -16,25 +15,25 @@ export interface DecryptCLIOptions {
  * Decrypts all files in given directory (*.enc), saves decrypted versions without ending `.enc`.
  * Using provided encKey.
  */
-export async function secretsDecrypt(
+export function secretsDecrypt(
   dir: string[],
   encKey: string,
   algorithm?: string,
   del?: boolean,
-): Promise<void> {
+): void {
   const patterns = dir.map(d => `${d}/**/*.enc`)
 
-  const filenames = await globby(patterns)
+  const filenames = globby.sync(patterns)
 
-  await pMap(filenames, async filename => {
-    const enc = await fs.readFile(filename)
+  filenames.forEach(filename => {
+    const enc = fs.readFileSync(filename)
     const plain = decryptRandomIVBuffer(enc, encKey, algorithm)
 
     const plainFilename = filename.substr(0, filename.length - '.enc'.length)
-    await fs.writeFile(plainFilename, plain)
+    fs.writeFileSync(plainFilename, plain)
 
     if (del) {
-      await fs.unlink(filename)
+      fs.unlinkSync(filename)
     }
 
     console.log(`  ${path.basename(filename)} > ${path.basename(plainFilename)}`)

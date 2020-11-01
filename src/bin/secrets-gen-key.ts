@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
+import * as crypto from 'crypto'
 import * as yargs from 'yargs'
-import { generateSecretKeyBase64 } from '..'
 import { dimGrey } from '../colors'
 import { runScript } from '../script'
 
-runScript(async () => {
+runScript(() => {
   const { sizeBytes } = yargs.option('sizeBytes', {
     type: 'number',
     default: 256,
   }).argv
 
-  const key = await generateSecretKeyBase64(sizeBytes)
+  const key = crypto.randomBytes(sizeBytes).toString('base64')
 
   console.log(dimGrey('\nSECRET_ENCRYPTION_KEY:\n'))
   console.log(key, '\n')
