@@ -8,7 +8,8 @@
     "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
     "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
     "kpy-debug": "tsn ./src/bin/kpy.ts node_modules dist",
-    "del-debug": "tsn ./src/bin/del.ts dist --verbose --debug"
+    "del-debug": "tsn ./src/bin/del.ts dist --verbose --debug",
+    "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.0.0",
@@ -43,6 +44,7 @@
   "bin": {
     "del": "dist/bin/del.js",
     "kpy": "dist/bin/kpy.js",
+    "json2env": "dist/bin/json2env.js",
     "ndjson-map": "dist/bin/ndjson-map.js",
     "slack-this": "dist/bin/slack-this.js",
     "secrets-gen-key": "dist/bin/secrets-gen-key.js",

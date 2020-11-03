@@ -97,7 +97,7 @@ import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
 import { inspectAny, InspectAnyOptions } from './string/string.util'
-import { requireEnvKeys, requireFileToExist } from './util/env.util'
+import { json2env, objectToShellExport, requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import {
   gunzipBuffer,
@@ -304,4 +304,6 @@ export {
   kpySync,
   DelOptions,
   del,
+  objectToShellExport,
+  json2env,
 }
