@@ -1,3 +1,10 @@
+## [12.8.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.8.0...v12.8.1) (2020-11-03)
+
+
+### Bug Fixes
+
+* export kpy, del, json2env from `/dist/fs` endpoint ([bbfe1d3](https://github.com/NaturalCycles/nodejs-lib/commit/bbfe1d33a53b1e8ad00582636a09adbbd32eb745))
+
 # [12.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.7.0...v12.8.0) (2020-11-03)
 
 
