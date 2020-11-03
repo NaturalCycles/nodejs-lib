@@ -1,3 +1,10 @@
+# [12.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.6.0...v12.7.0) (2020-11-03)
+
+
+### Features
+
+* moved kpy, kpySync, del functions and CLI from fs-lib ([0f5aeac](https://github.com/NaturalCycles/nodejs-lib/commit/0f5aeacc76ea51de2db8c009acd81f977a9eb88f))
+
 # [12.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.5.0...v12.6.0) (2020-11-03)
 
 
