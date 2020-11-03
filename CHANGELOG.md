@@ -1,3 +1,10 @@
+# [12.6.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.5.0...v12.6.0) (2020-11-03)
+
+
+### Features
+
+* runScript to actually call process.exit(1) on error ([a6c2192](https://github.com/NaturalCycles/nodejs-lib/commit/a6c2192759eaa9286ebaf18e934c68c09769cad1))
+
 # [12.5.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.4.1...v12.5.0) (2020-11-01)
 
 
