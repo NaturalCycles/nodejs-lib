@@ -19,7 +19,7 @@ test('runScript', async () => {
   runScript(async () => Promise.reject(new Error('bad')))
   await pDelay() // because runScript is not actually async
   expect(process.exitCode).toBe(1)
-  // expect(processExit).toHaveBeenCalledTimes(1)
-  // expect(processExit).toHaveBeenCalledWith(1)
+  expect(processExit).toHaveBeenCalledTimes(1)
+  expect(processExit).toHaveBeenCalledWith(1)
   expect(consoleError).toHaveBeenCalledTimes(1)
 })

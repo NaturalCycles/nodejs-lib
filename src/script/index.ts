@@ -41,6 +41,9 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
     } catch (err) {
       console.error('runScript failed:', err)
       process.exitCode = 1
+      if (!opt.noExit) {
+        setImmediate(() => process.exit(1))
+      }
     }
   })()
 }
