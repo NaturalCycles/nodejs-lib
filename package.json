@@ -6,7 +6,9 @@
     "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
     "secrets-gen-key-debug": "tsn ./src/bin/secrets-gen-key.ts",
     "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
-    "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts"
+    "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
+    "kpy-debug": "tsn ./src/bin/kpy.ts node_modules dist",
+    "del-debug": "tsn ./src/bin/del.ts dist --verbose --debug"
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.0.0",
@@ -15,6 +17,7 @@
     "@types/through2-concurrent": "^2.0.0",
     "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
+    "cp-file": "^9.0.0",
     "debug": "^4.1.1",
     "dotenv": "^8.1.0",
     "execa": "^4.0.0",
@@ -23,6 +26,7 @@
     "got": "^11.0.1",
     "joi": "^17.2.1",
     "lru-cache": "^6.0.0",
+    "move-file": "^2.0.0",
     "nanoid": "^3.0.0",
     "through2-concurrent": "^2.0.0",
     "yargs": "^16.0.0"
@@ -37,6 +41,8 @@
     "weak-napi": "^2.0.0"
   },
   "bin": {
+    "del": "dist/bin/del.js",
+    "kpy": "dist/bin/kpy.js",
     "ndjson-map": "dist/bin/ndjson-map.js",
     "slack-this": "dist/bin/slack-this.js",
     "secrets-gen-key": "dist/bin/secrets-gen-key.js",

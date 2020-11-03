@@ -2,6 +2,9 @@ import type { Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
+import { del } from './fs/del'
+import { DelOptions } from './fs/del'
+import { kpy, KpyOptions, kpySync } from './fs/kpy'
 import { getGot } from './got/getGot'
 import { GetGotOptions } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
@@ -296,4 +299,9 @@ export {
   getGot,
   GetGotOptions,
   _chunkBuffer,
+  KpyOptions,
+  kpy,
+  kpySync,
+  DelOptions,
+  del,
 }
