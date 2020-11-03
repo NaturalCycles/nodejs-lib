@@ -1,3 +1,10 @@
+# [12.8.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.7.0...v12.8.0) (2020-11-03)
+
+
+### Features
+
+* json2env function and cli is moved here from dev-lib ([c4215b3](https://github.com/NaturalCycles/nodejs-lib/commit/c4215b3dc60045b3b07e9c6fdc35d3cac9ae4354))
+
 # [12.7.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.6.0...v12.7.0) (2020-11-03)
 
 
