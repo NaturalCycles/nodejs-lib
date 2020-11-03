@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
+import { json2env } from '../fs'
 import { runScript } from '../script'
-import { json2env } from '../util/env.util'
 
 runScript(() => {
   const { argv } = yargs.demandCommand(1).options({

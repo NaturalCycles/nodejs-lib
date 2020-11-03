@@ -2,9 +2,6 @@ import type { Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
-import { del } from './fs/del'
-import { DelOptions } from './fs/del'
-import { kpy, KpyOptions, kpySync } from './fs/kpy'
 import { getGot } from './got/getGot'
 import { GetGotOptions } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.shared.util'
@@ -97,7 +94,7 @@ import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
 import { inspectAny, InspectAnyOptions } from './string/string.util'
-import { json2env, objectToShellExport, requireEnvKeys, requireFileToExist } from './util/env.util'
+import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import {
   gunzipBuffer,
@@ -299,11 +296,4 @@ export {
   getGot,
   GetGotOptions,
   _chunkBuffer,
-  KpyOptions,
-  kpy,
-  kpySync,
-  DelOptions,
-  del,
-  objectToShellExport,
-  json2env,
 }

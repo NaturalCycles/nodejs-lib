@@ -49,6 +49,8 @@
   - execa
 - `/colors`
   - only chalk
+- `/fs`
+  - exports `kpy`, `kpySync`, `del`, `json2env`
 
 # Packaging
 
