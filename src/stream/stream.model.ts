@@ -1,4 +1,6 @@
 import { Readable, Transform, Writable } from 'stream'
+import { TransformLogProgressOptions } from './transform/transformLogProgress'
+import { TransformMapOptions } from './transform/transformMap'
 
 export interface ReadableTyped<T> extends Readable {}
 
@@ -17,3 +19,7 @@ export interface TransformOpt {
    */
   highWaterMark?: number
 }
+
+export interface StreamForEachOptions<IN>
+  extends TransformMapOptions<IN, void>,
+    TransformLogProgressOptions<IN> {}

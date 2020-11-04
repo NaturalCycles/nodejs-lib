@@ -61,11 +61,16 @@ import {
 } from './stream/ndjson/transformJsonParse'
 import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
 import { _pipeline } from './stream/pipeline/pipeline'
-import { pipelineForEach } from './stream/pipeline/pipelineForEach'
 import { pipelineToArray } from './stream/pipeline/pipelineToArray'
 import { readableCreate } from './stream/readable/readableCreate'
 import { readableFromArray } from './stream/readable/readableFromArray'
-import { ReadableTyped, TransformOpt, TransformTyped, WritableTyped } from './stream/stream.model'
+import {
+  ReadableTyped,
+  StreamForEachOptions,
+  TransformOpt,
+  TransformTyped,
+  WritableTyped,
+} from './stream/stream.model'
 import { streamForEach } from './stream/streamForEach'
 import { streamJoinToString } from './stream/streamJoinToString'
 import { streamMapToArray } from './stream/streamMapToArray'
@@ -261,7 +266,6 @@ export {
   TransformToNDJsonOptions,
   transformToNDJson,
   transformThrough,
-  pipelineForEach,
   pipelineToArray,
   transformConcurrent,
   transformFilter,
@@ -279,6 +283,7 @@ export {
   TransformLogProgressOptions,
   transformLimit,
   streamForEach,
+  StreamForEachOptions,
   streamMapToArray,
   writableVoid,
   writableFork,
