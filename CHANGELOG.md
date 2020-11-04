@@ -1,3 +1,10 @@
+# [12.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.8.1...v12.9.0) (2020-11-04)
+
+
+### Features
+
+* streamForEach now includes transformLogProgress ([2e977fd](https://github.com/NaturalCycles/nodejs-lib/commit/2e977fd6c35ff51ff246e6f6693e17b3d0d910d6))
+
 ## [12.8.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.8.0...v12.8.1) (2020-11-03)
 
 
