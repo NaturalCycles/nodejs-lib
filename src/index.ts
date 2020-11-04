@@ -62,7 +62,7 @@ import {
 import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
 import { _pipeline } from './stream/pipeline/pipeline'
 import { pipelineToArray } from './stream/pipeline/pipelineToArray'
-import { readableCreate } from './stream/readable/readableCreate'
+import { readableCreate, readableFrom } from './stream/readable/readableCreate'
 import { readableFromArray } from './stream/readable/readableFromArray'
 import {
   ReadableTyped,
@@ -245,6 +245,7 @@ export {
   SlackMessagePrefixHook,
   slackDefaultMessagePrefixHook,
   readableCreate,
+  readableFrom,
   readableFromArray,
   ReadableTyped,
   WritableTyped,
