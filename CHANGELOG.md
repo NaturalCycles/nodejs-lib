@@ -1,3 +1,10 @@
+# [12.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.9.0...v12.10.0) (2020-11-04)
+
+
+### Features
+
+* readableFrom convenience type-safe wrapper around Readable.from() ([1a1984e](https://github.com/NaturalCycles/nodejs-lib/commit/1a1984e20530315394a59449bb01848c45544b1c))
+
 # [12.9.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.8.1...v12.9.0) (2020-11-04)
 
 
