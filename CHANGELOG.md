@@ -1,3 +1,10 @@
+# [12.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.10.0...v12.11.0) (2020-11-08)
+
+
+### Features
+
+* transformLogProgress logEvery now defaults to 1000 (was: 100) ([9a9e5b6](https://github.com/NaturalCycles/nodejs-lib/commit/9a9e5b67c555791d00ed224805867c46251ed3f0))
+
 # [12.10.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.9.0...v12.10.0) (2020-11-04)
 
 
