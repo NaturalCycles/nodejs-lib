@@ -63,7 +63,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
 
   /**
    * Log progress event Nth record that is _processed_ (went through mapper).
-   * @default 100
+   * @default 1000
    * Set to 0 to disable logging.
    */
   logEvery?: number
@@ -87,7 +87,7 @@ const inspectOpt: NodeJS.InspectOptions = {
 export function transformLogProgress<IN = any>(
   opt: TransformLogProgressOptions = {},
 ): TransformTyped<IN, IN> {
-  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 100, extra } = opt
+  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 1000, extra } = opt
   const logProgress = opt.logProgress !== false && logEvery !== 0 // true by default
   const logHeapUsed = opt.heapUsed !== false // true by default
   const logRss = opt.rss !== false // true by default

@@ -26,7 +26,7 @@ export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOption
   limitOutput?: number
 
   /**
-   * @default 100
+   * @default 1000
    */
   logEveryInput?: number
 
