@@ -1,3 +1,10 @@
+## [12.11.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.0...v12.11.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* typescript@4.1, noUncheckedIndexedAccess=true ([beeca6f](https://github.com/NaturalCycles/nodejs-lib/commit/beeca6f524a126e4f28c136f4ede70ccf3e6169f))
+
 # [12.11.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.10.0...v12.11.0) (2020-11-08)
 
 
