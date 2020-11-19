@@ -14,5 +14,5 @@ export abstract class BaseWorkerClass<
 > {
   constructor(public workerData: WORKER_DATA) {}
 
-  abstract async process(msg: IN, index: number): Promise<OUT>
+  abstract process(msg: IN, index: number): Promise<OUT>
 }

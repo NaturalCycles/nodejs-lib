@@ -44,14 +44,14 @@ class ProcessSharedUtil {
   cpuAvg(): any {
     const avg = os.loadavg()
     return {
-      avg1: avg[0].toFixed(2),
-      avg5: avg[1].toFixed(2),
-      avg15: avg[2].toFixed(2),
+      avg1: avg[0]!.toFixed(2),
+      avg5: avg[1]!.toFixed(2),
+      avg15: avg[2]!.toFixed(2),
     }
   }
 
   cpuInfo(): any {
-    const c = (os.cpus() || [undefined])[0]
+    const c = os.cpus()[0]!
     return {
       count: os.cpus().length,
       model: c.model,

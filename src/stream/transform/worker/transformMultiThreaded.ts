@@ -73,12 +73,12 @@ export function transformMultiThreaded<IN, OUT>(
 
     worker.on('error', err => {
       console.error(`Worker ${workerIndex} error`, err)
-      workerDonePromises[workerIndex].reject(err)
+      workerDonePromises[workerIndex]!.reject(err)
     })
 
     worker.on('exit', _exitCode => {
       // console.log(`Worker ${index} exit: ${exitCode}`)
-      workerDonePromises[workerIndex].resolve(undefined)
+      workerDonePromises[workerIndex]!.resolve(undefined)
     })
 
     worker.on('message', (out: WorkerOutput<OUT>) => {
@@ -86,9 +86,9 @@ export function transformMultiThreaded<IN, OUT>(
       // console.log(Object.keys(messageDonePromises))
       // tr.push(out.payload)
       if (out.error) {
-        messageDonePromises[out.index].reject(out.error)
+        messageDonePromises[out.index]!.reject(out.error)
       } else {
-        messageDonePromises[out.index].resolve(out.payload)
+        messageDonePromises[out.index]!.resolve(out.payload)
       }
     })
 
@@ -121,7 +121,7 @@ export function transformMultiThreaded<IN, OUT>(
       // Create the unresolved promise (to avait)
       messageDonePromises[currentIndex] = pDefer<OUT>()
 
-      const worker = workers[currentIndex % poolSize] // round-robin
+      const worker = workers[currentIndex % poolSize]! // round-robin
       worker.postMessage({
         index: currentIndex,
         payload: chunk,

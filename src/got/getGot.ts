@@ -156,7 +156,7 @@ function getShortUrl(opt: GetGotOptions, url: URL, prefixUrl?: string): string {
   let shortUrl = url.toString()
 
   if (opt.logWithSearchParams === false) {
-    ;[shortUrl] = shortUrl.split('?')
+    shortUrl = shortUrl.split('?')[0]!
   }
 
   if (opt.logWithPrefixUrl === false && prefixUrl && shortUrl.startsWith(prefixUrl)) {

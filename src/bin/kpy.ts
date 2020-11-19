@@ -49,7 +49,7 @@ runScript(() => {
   })*/
 
   const kpyOpt = {
-    baseDir,
+    baseDir: baseDir!,
     inputPatterns,
     outputDir,
     ...opt,

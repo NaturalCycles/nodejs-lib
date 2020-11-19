@@ -1,6 +1,7 @@
 {
   "extends": "@naturalcycles/dev-lib/cfg/tsconfig.json",
   "compilerOptions": {
+    "noUncheckedIndexedAccess": true,
     "outDir": "dist"
   },
   "include": ["src"],
