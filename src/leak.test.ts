@@ -4,3 +4,5 @@ test('should not leak', () => {
   require('./colors')
   require('./exec')
 })
+
+export {}

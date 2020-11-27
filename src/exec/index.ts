@@ -1,3 +1,5 @@
 import { ExecaOptions, execCommand, execShell, execWithArgs } from './exec.util'
 
-export { ExecaOptions, execCommand, execShell, execWithArgs }
+export type { ExecaOptions }
+
+export { execCommand, execShell, execWithArgs }
