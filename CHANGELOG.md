@@ -1,3 +1,10 @@
+## [12.11.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.1...v12.11.2) (2020-11-27)
+
+
+### Bug Fixes
+
+* adopt isolatedModules=true ([471298d](https://github.com/NaturalCycles/nodejs-lib/commit/471298dc87a6e93c84b4fedda684b6ba27dba87e))
+
 ## [12.11.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.0...v12.11.1) (2020-11-19)
 
 
