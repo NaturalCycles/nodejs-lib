@@ -35,7 +35,7 @@ runScript(() => {
   const { _: args, prefix, saveEnvFile, bashEnv, fail, debug, silent } = argv
   if (debug) console.log({ argv })
 
-  const jsonPath = args[0]!
+  const jsonPath = args[0] as string
 
   json2env({
     jsonPath,

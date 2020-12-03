@@ -23,5 +23,5 @@ runScript(async () => {
     },
   }).argv
 
-  await del({ patterns, ...opt })
+  await del({ patterns: patterns as string[], ...opt })
 })

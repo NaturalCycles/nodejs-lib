@@ -36,7 +36,7 @@ runScript(() => {
     },
   }).argv
 
-  const outputDir = inputPatterns.pop()!
+  const outputDir = inputPatterns.pop() as string
 
   /*
   console.log({
@@ -49,8 +49,8 @@ runScript(() => {
   })*/
 
   const kpyOpt = {
-    baseDir: baseDir!,
-    inputPatterns,
+    baseDir: baseDir as string,
+    inputPatterns: inputPatterns as string[],
     outputDir,
     ...opt,
     noOverwrite: !opt.overwrite,
