@@ -13,6 +13,7 @@ export const booleanDefaultToFalseSchema = Joi.boolean().default(false) as Boole
 export const stringSchema = Joi.string()
 export const numberSchema = Joi.number()
 export const integerSchema = Joi.number().integer()
+export const percentageSchema = Joi.number().min(0).max(100)
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 export const urlSchema = (scheme: string | string[] = 'https') =>
