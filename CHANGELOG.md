@@ -1,3 +1,10 @@
+# [12.12.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.3...v12.12.0) (2021-01-14)
+
+
+### Features
+
+* percentage schema ([1934db9](https://github.com/NaturalCycles/nodejs-lib/commit/1934db991ad1b97e71c8bb85bb6eacfb962d355f))
+
 ## [12.11.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.2...v12.11.3) (2020-12-03)
 
 
