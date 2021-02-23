@@ -9,29 +9,29 @@ const gunzip = promisify(zlib.gunzip.bind(zlib)) as Function
 
 // string > zip
 export async function zipBuffer(buf: Buffer, options: ZlibOptions = {}): Promise<Buffer> {
-  return deflate(buf, options)
+  return await deflate(buf, options)
 }
 
 export async function gzipBuffer(buf: Buffer, options: ZlibOptions = {}): Promise<Buffer> {
-  return gzip(buf, options)
+  return await gzip(buf, options)
 }
 
 // zip > buffer
 export async function unzipBuffer(buf: Buffer, options: ZlibOptions = {}): Promise<Buffer> {
-  return inflate(buf, options)
+  return await inflate(buf, options)
 }
 
 export async function gunzipBuffer(buf: Buffer, options: ZlibOptions = {}): Promise<Buffer> {
-  return gunzip(buf, options)
+  return await gunzip(buf, options)
 }
 
 // convenience
 export async function zipString(s: string, options?: ZlibOptions): Promise<Buffer> {
-  return zipBuffer(Buffer.from(s), options)
+  return await zipBuffer(Buffer.from(s), options)
 }
 
 export async function gzipString(s: string, options?: ZlibOptions): Promise<Buffer> {
-  return gzipBuffer(Buffer.from(s), options)
+  return await gzipBuffer(Buffer.from(s), options)
 }
 
 // convenience
