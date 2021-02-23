@@ -1,3 +1,10 @@
+## [12.12.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.0...v12.12.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* `return await` in zip.util ([0233a61](https://github.com/NaturalCycles/nodejs-lib/commit/0233a61b4d92c57a27324a50ef247ea491efe2e8))
+
 # [12.12.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.11.3...v12.12.0) (2021-01-14)
 
 
