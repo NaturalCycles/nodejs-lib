@@ -36,7 +36,7 @@ export function numberExtensions(joi: typeof Joi): Extension {
           },
         ],
         validate(v: number, helpers, args) {
-          if (v % args.q === 0) {
+          if (v % args['q'] === 0) {
             return v
           }
 

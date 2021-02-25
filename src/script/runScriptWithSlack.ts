@@ -107,7 +107,7 @@ async function onSuccess(res: any, opt: RunScriptOptions): Promise<void> {
 }
 
 function onFailure(err: Error, opt: RunScriptOptions): void {
-  const channel = process.env.SLACK_ON_FAILURE || opt.slackOnFailure
+  const channel = process.env['SLACK_ON_FAILURE'] || opt.slackOnFailure
 
   if (!channel) return
 

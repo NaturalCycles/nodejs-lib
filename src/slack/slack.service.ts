@@ -9,7 +9,7 @@ import {
   SlackServiceCfg,
 } from './slack.service.model'
 
-const GAE = !!process.env.GAE_INSTANCE
+const GAE = !!process.env['GAE_INSTANCE']
 
 const DEFAULTS = (): SlackMessage => ({
   username: 'bot',
