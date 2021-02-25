@@ -1,3 +1,10 @@
+## [12.12.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.1...v12.12.2) (2021-02-25)
+
+
+### Bug Fixes
+
+* adopt noPropertyAccessFromIndexSignature=true ([6127652](https://github.com/NaturalCycles/nodejs-lib/commit/6127652672ff5ef788b6239453367ded474fd452))
+
 ## [12.12.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.0...v12.12.1) (2021-02-23)
 
 
