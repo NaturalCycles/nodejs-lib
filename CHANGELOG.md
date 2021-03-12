@@ -1,3 +1,10 @@
+# [12.13.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.2...v12.13.0) (2021-03-12)
+
+
+### Features
+
+* export more types from Got ([3f58d89](https://github.com/NaturalCycles/nodejs-lib/commit/3f58d8944415911130865cb1e356c2cacaa11fb0))
+
 ## [12.12.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.1...v12.12.2) (2021-02-25)
 
 
