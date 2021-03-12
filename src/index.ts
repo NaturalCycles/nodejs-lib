@@ -1,4 +1,4 @@
-import type { Got } from 'got'
+import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
@@ -196,6 +196,10 @@ export type {
   InspectAnyOptions,
   Got,
   GetGotOptions,
+  AfterResponseHook,
+  BeforeErrorHook,
+  BeforeRequestHook,
+  HTTPError,
 }
 
 export {
