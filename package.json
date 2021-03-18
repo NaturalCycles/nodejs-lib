@@ -9,13 +9,15 @@
     "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
     "kpy-debug": "tsn ./src/bin/kpy.ts node_modules dist",
     "del-debug": "tsn ./src/bin/del.ts dist --verbose --debug",
-    "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
+    "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json",
+    "xml-split-debug": "tsn ./src/bin/xmlsplit.ts"
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.0.0",
     "@naturalcycles/time-lib": "^3.0.1",
     "@types/lru-cache": "^5.1.0",
     "@types/through2-concurrent": "^2.0.0",
+    "@types/xmldom": "^0.1.30",
     "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
     "cp-file": "^9.0.0",
@@ -30,6 +32,8 @@
     "move-file": "^2.0.0",
     "nanoid": "^3.0.0",
     "through2-concurrent": "^2.0.0",
+    "xmldom": "^0.5.0",
+    "xpath": "^0.0.32",
     "yargs": "^16.0.0"
   },
   "devDependencies": {
@@ -49,7 +53,8 @@
     "slack-this": "dist/bin/slack-this.js",
     "secrets-gen-key": "dist/bin/secrets-gen-key.js",
     "secrets-encrypt": "dist/bin/secrets-encrypt.js",
-    "secrets-decrypt": "dist/bin/secrets-decrypt.js"
+    "secrets-decrypt": "dist/bin/secrets-decrypt.js",
+    "xml-split": "dist/bin/xmlsplit.js"
   },
   "files": [
     "dist",
