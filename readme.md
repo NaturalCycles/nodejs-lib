@@ -22,7 +22,7 @@
 - lruMemoCache (implementation of MemoCache based on lru-cache)
 - SlackService
 - [Secrets](./doc/secrets.md)
-- kpy, del [fs](./doc/fs.md)
+- kpy, del, xml-split [fs](./doc/fs.md)
 
 #### Other commands
 

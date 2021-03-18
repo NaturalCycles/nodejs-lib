@@ -12,6 +12,7 @@ Just run `kpy help` to see CLI options.
 
 - `kpy` - copy/move files/folders
 - `del` - delete files/folders
+- `xml-split` - split xml files 
 
 # CLI API
 
@@ -106,4 +107,25 @@ del dist '!**/*.json'
 # Delete folders `a`, `b` and `c`:
 del a b c
 
+```
+# xml-split
+
+This package also provides `xml-split` cli that takes a glob pattern of xml files and splits it into multiple files 
+with the following caveats:
+* Expects xpath to elements directly under root object
+* Uses regex to search all attributes of the specified element(s)
+
+Examples:
+
+```sh
+
+xml-split --xpath="<xpath selector>" --splitPatterns="<json array of key-value pairs - key:regex>" <baseDir> <pattern1> <pattern2> ... <outputDir>
+
+Example 1:
+# Split junit xml into multiple files based test suite string expected in some attribute of testcase
+xml-split --xpath="//testcase" --splitPatterns='[{"key": "Suite1", "regex": "TS-1"}, {"key": "Suite2", "regex": "TS-2"}, {"key": "other", "regex": "1028|1103", "inverse": true}]' . junit.xml . 
+
+# Assuming such test cases are found, outputs: 
+junit-Suite1.xml # Containing all test cases that has TS-1 in the testcase attributes
+junit-Suite2.xml # Containing all test cases that has TS-2 in the testcase attributes
 ```
