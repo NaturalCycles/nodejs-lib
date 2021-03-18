@@ -12,3 +12,16 @@ Array [
   },
 ]
 `;
+
+exports[`xmlsplit basic test 1`] = `
+Array [
+  Object {
+    "key": "x",
+    "xml": "<a><b c=\\"x\\">X</b></a>",
+  },
+  Object {
+    "key": "y",
+    "xml": "<a><b c=\\"y\\">Y</b><b c=\\"yy\\">YY</b></a>",
+  },
+]
+`;

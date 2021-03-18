@@ -3,27 +3,13 @@ import * as globby from 'globby'
 import * as path from 'path'
 import { DOMParser, XMLSerializer } from 'xmldom'
 import * as xpath from 'xpath'
-import { boldWhite, dimGrey, grey, yellow } from '../colors'
+import { dimGrey, grey, yellow } from '../colors'
+import { GenGlobOptions, globPrepare } from './shared'
 
 /**
  * Everything defaults to `undefined`.
  */
-export interface XmlSplitOptions {
-  /**
-   * @default . (cwd)
-   */
-  baseDir: string
-
-  /**
-   * @default to `**` (everything, including sub-dirs)
-   */
-  inputPatterns?: string[]
-
-  /**
-   * @default . (cwd)
-   */
-  outputDir: string
-
+export interface XmlSplitOptions extends GenGlobOptions {
   silent?: boolean
   /*
    json key values where key will be split filename suffix and value regex
@@ -48,7 +34,7 @@ export interface XmlSplitResult {
 }
 
 export async function xmlSplit(opt: XmlSplitOptions): Promise<void> {
-  splitPrepare(opt)
+  globPrepare(opt)
 
   const filenames = await globby(opt.inputPatterns!, {
     cwd: opt.baseDir,
@@ -74,22 +60,6 @@ export async function xmlSplit(opt: XmlSplitOptions): Promise<void> {
       }
     }),
   )
-}
-
-function splitPrepare(opt: XmlSplitOptions): void {
-  // Default pattern
-  if (!opt.inputPatterns?.length) opt.inputPatterns = ['**']
-
-  // default to cwd
-  opt.baseDir ||= '.'
-  opt.outputDir ||= '.'
-
-  if (!fs.existsSync(opt.baseDir)) {
-    console.log(`kpy: baseDir doesn't exist: ${boldWhite(opt.baseDir)}`)
-    return
-  }
-
-  fs.ensureDirSync(opt.outputDir)
 }
 
 function xmlSplitLogFilenames(opt: XmlSplitOptions, filenames: string[]): void {

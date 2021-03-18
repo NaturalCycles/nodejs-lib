@@ -1,30 +1,15 @@
 import { _since } from '@naturalcycles/js-lib'
 import * as cpFile from 'cp-file'
-import * as fs from 'fs-extra'
 import * as globby from 'globby'
 import * as moveFile from 'move-file'
 import * as path from 'path'
-import { boldWhite, dimGrey, grey, yellow } from '../colors'
+import { dimGrey, grey, yellow } from '../colors'
+import { GenGlobOptions, globPrepare } from './shared'
 
 /**
  * Everything defaults to `undefined`.
  */
-export interface KpyOptions {
-  /**
-   * @default . (cwd)
-   */
-  baseDir: string
-
-  /**
-   * @default to `**` (everything, including sub-dirs)
-   */
-  inputPatterns?: string[]
-
-  /**
-   * @default . (cwd)
-   */
-  outputDir: string
-
+export interface KpyOptions extends GenGlobOptions {
   silent?: boolean
   verbose?: boolean
 
@@ -47,7 +32,7 @@ export interface KpyOptions {
 export async function kpy(opt: KpyOptions): Promise<void> {
   const started = Date.now()
 
-  kpyPrepare(opt)
+  globPrepare(opt)
 
   const filenames = await globby(opt.inputPatterns!, {
     cwd: opt.baseDir,
@@ -84,7 +69,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 export function kpySync(opt: KpyOptions): void {
   const started = Date.now()
 
-  kpyPrepare(opt)
+  globPrepare(opt)
 
   const filenames = globby.sync(opt.inputPatterns!, {
     cwd: opt.baseDir,
@@ -114,22 +99,6 @@ export function kpySync(opt: KpyOptions): void {
   })
 
   kpyLogResult(opt, filenames, started)
-}
-
-function kpyPrepare(opt: KpyOptions): void {
-  // Default pattern
-  if (!opt.inputPatterns?.length) opt.inputPatterns = ['**']
-
-  // default to cwd
-  opt.baseDir ||= '.'
-  opt.outputDir ||= '.'
-
-  if (!fs.existsSync(opt.baseDir)) {
-    console.log(`kpy: baseDir doesn't exist: ${boldWhite(opt.baseDir)}`)
-    return
-  }
-
-  fs.ensureDirSync(opt.outputDir)
 }
 
 function kpyLogFilenames(opt: KpyOptions, filenames: string[]): void {
