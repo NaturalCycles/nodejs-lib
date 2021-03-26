@@ -1,3 +1,10 @@
+# [12.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.13.0...v12.14.0) (2021-03-26)
+
+
+### Features
+
+* es2020, node14 lts+ ([52bbffd](https://github.com/NaturalCycles/nodejs-lib/commit/52bbffde3b9b1d4dc11438ab8bcf563794540b76))
+
 # [12.13.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.12.2...v12.13.0) (2021-03-12)
 
 
