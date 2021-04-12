@@ -2,6 +2,8 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "12.14.0",
   "scripts": {
+    "docs-serve": "vuepress dev docs",
+    "docs-build": "vuepress build docs",
     "ndjson-map-debug": "tsn ./src/bin/ndjson-map.ts --in ./tmp/ndjsonMapIn.ndjson --out ./tmp/ndjsonMapOut.ndjson --mapper ./src/test/ndjson/ndjsonMapper.ts",
     "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
     "secrets-gen-key-debug": "tsn ./src/bin/secrets-gen-key.ts",
@@ -39,7 +41,13 @@
     "jest": "^26.0.1",
     "nock": "^13.0.2",
     "patch-package": "^6.2.1",
+    "vue-class-component": "^7.2.6",
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-typescript": "^0.3.1",
     "weak-napi": "^2.0.0"
+  },
+  "resolutions": {
+    "prettier": "^2.0.0"
   },
   "bin": {
     "del": "dist/bin/del.js",

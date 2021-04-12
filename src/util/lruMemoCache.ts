@@ -7,7 +7,7 @@ export type LRUMemoCacheOpts = LRUCache.Options<string, any>
  * @example
  * Use it like this:
  *
- * @memo({ cacheFactory: () => new LRUMemoCache({...}) })
+ * @_Memo({ cacheFactory: () => new LRUMemoCache({...}) })
  * method1 ()
  */
 export class LRUMemoCache implements MemoCache {

@@ -1,4 +1,4 @@
-# Features
+# fs
 
 - Dead simple (see examples), minimalistic
 - Provides both CLI and API (so you don't need 2 separate packages)

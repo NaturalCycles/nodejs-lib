@@ -1,4 +1,4 @@
-# Features
+# Secret management
 
 - Simple to install via npm (`npm i -g @naturalcycles/nodejs-lib` or
   `yarn global add @naturalcycles/nodejs-lib`)
