@@ -1,3 +1,10 @@
+## [12.14.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.0...v12.14.1) (2021-04-17)
+
+
+### Bug Fixes
+
+* SlackService tests ([cfae25a](https://github.com/NaturalCycles/nodejs-lib/commit/cfae25a5b88d64da95a82c667255fb7622c98e01))
+
 # [12.14.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.13.0...v12.14.0) (2021-03-26)
 
 
