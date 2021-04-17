@@ -11,6 +11,7 @@ import { ValidationError, ValidationOptions } from 'joi'
 import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
 
+// todo: consider replacing with Tuple of [error, value]
 export interface JoiValidationResult<T = any> {
   value: T
   error?: JoiValidationError
@@ -43,7 +44,7 @@ const defaultOptions: ValidationOptions = {
 
 /**
  * Validates with Joi.
- * Throws AppValidationError if invalid.
+ * Throws JoiValidationError if invalid.
  * Returns *converted* value.
  *
  * If `schema` is undefined - returns value as is.
@@ -70,7 +71,7 @@ export function validate<IN, OUT = IN>(
 
 /**
  * Validates with Joi.
- * Returns ValidationResult with converted value and error (if any).
+ * Returns JoiValidationResult with converted value and error (if any).
  * Does not throw.
  *
  * If `schema` is undefined - returns value as is.

@@ -7,7 +7,6 @@ import {
   StringSchemaTyped,
 } from './joi.model'
 
-// Should all booleans be optional as a convention? So undefined will be just treated as false?
 export const booleanSchema = Joi.boolean() as BooleanSchemaTyped
 export const booleanDefaultToFalseSchema = Joi.boolean().default(false) as BooleanSchemaTyped
 export const stringSchema = Joi.string()
@@ -35,7 +34,7 @@ export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
 // 1g498efj5sder3324zer
 /**
  * [a-z0-9_]*
- * 6-16 length
+ * 6-64 length
  */
 export const idSchema = stringSchema
   .regex(/^[a-z0-9_]*$/)
@@ -79,6 +78,4 @@ export const utcOffsetSchema = numberSchema
   .max(14 * 60)
   .dividable(15)
 
-// todo: we used to have format as "192.168.0.1/192.168.0.2" (slash with provided X-Forwarded-For value)
-// maybe it'll break this validation
 export const ipAddressSchema = stringSchema.ip()
