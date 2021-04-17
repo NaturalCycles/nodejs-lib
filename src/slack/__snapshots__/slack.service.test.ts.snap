@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic test 1`] = `
+Object {
+  "channel": "#log",
+  "icon_emoji": ":spider_web:",
+  "text": "2018-06-21 00:00:00
+hey",
+  "username": "bot",
+}
+`;
+
+exports[`basic test 2`] = `
+Object {
+  "channel": "#log",
+  "icon_emoji": ":spider_web:",
+  "text": "2018-06-21 00:00:00
+hey",
+  "username": "bot",
+}
+`;
+
+exports[`basic test 3`] = `
+Object {
+  "channel": "#log",
+  "icon_emoji": ":spider_web:",
+  "text": "2018-06-21 00:00:00
+\`\`\`yo\`\`\`",
+  "username": "bot",
+}
+`;
+
+exports[`basic test 4`] = `
+Object {
+  "attachments": Array [
+    Object {
+      "fields": Array [
+        Object {
+          "short": true,
+          "title": "k1",
+          "value": "v1",
+        },
+      ],
+    },
+  ],
+  "channel": "#log",
+  "icon_emoji": ":spider_web:",
+  "mentions": Array [
+    "kirill",
+  ],
+  "text": "2018-06-21 00:00:00
+\`\`\`a
+{ b: 'b' }
+Error: c error!\`\`\`
+<@kirill>",
+  "username": "bot",
+}
+`;

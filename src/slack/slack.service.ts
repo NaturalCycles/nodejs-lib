@@ -114,6 +114,11 @@ export class SlackService<CTX = any> {
       text: [prefix.join(': '), text].filter(Boolean).join('\n'),
     }
 
+    // they're not needed in the json payload
+    delete json['items']
+    delete json['ctx']
+    delete json['noLog']
+
     json.channel = (this.cfg.channelByLevel || {})[msg.level!] || json.channel
 
     await got
