@@ -26,22 +26,22 @@ export function memoryUsageFull() {
   }
 }
 
-class ProcessSharedUtil {
+class ProcessUtil {
   private timer!: NodeJS.Timer
 
-  startMemoryTimer(ms: number): void {
+  startMemoryTimer(intervalMillis = 1000): void {
     console.log(memoryUsage())
 
     this.timer = setInterval(() => {
       console.log(memoryUsage())
-    }, ms)
+    }, intervalMillis)
   }
 
-  stopMemoryTimer(afterMs = 0): void {
-    setTimeout(() => clearInterval(this.timer), afterMs)
+  stopMemoryTimer(afterMillis = 0): void {
+    setTimeout(() => clearInterval(this.timer), afterMillis)
   }
 
-  cpuAvg(): any {
+  cpuAvg(): { avg1: string; avg5: string; avg15: string } {
     const avg = os.loadavg()
     return {
       avg1: avg[0]!.toFixed(2),
@@ -50,7 +50,7 @@ class ProcessSharedUtil {
     }
   }
 
-  cpuInfo(): any {
+  cpuInfo(): { count: number; model: string; speed: number } {
     const c = os.cpus()[0]!
     return {
       count: os.cpus().length,
@@ -59,12 +59,12 @@ class ProcessSharedUtil {
     }
   }
 
-  async cpuPercent(ms: number): Promise<any> {
+  async cpuPercent(ms: number): Promise<number> {
     const stats1 = this.getCPUInfo()
     const startIdle = stats1.idle
     const startTotal = stats1.total
 
-    return new Promise(resolve => {
+    return new Promise<number>(resolve => {
       setTimeout(() => {
         const stats2 = this.getCPUInfo()
         const endIdle = stats2.idle
@@ -94,4 +94,4 @@ class ProcessSharedUtil {
   }
 }
 
-export const processSharedUtil = new ProcessSharedUtil()
+export const processSharedUtil = new ProcessUtil()
