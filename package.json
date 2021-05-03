@@ -32,11 +32,11 @@
     "move-file": "^2.0.0",
     "nanoid": "^3.0.0",
     "through2-concurrent": "^2.0.0",
-    "yargs": "^16.0.0"
+    "yargs": "^17.0.0"
   },
   "devDependencies": {
     "@naturalcycles/dev-lib": "^10.2.0",
-    "@types/node": "^14.0.1",
+    "@types/node": "^15.0.1",
     "@types/yargs": "^16.0.0",
     "jest": "^26.0.1",
     "nock": "^13.0.2",
