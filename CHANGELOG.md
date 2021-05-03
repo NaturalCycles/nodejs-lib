@@ -1,3 +1,10 @@
+## [12.14.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.1...v12.14.2) (2021-05-03)
+
+
+### Bug Fixes
+
+* deps ([1af429f](https://github.com/NaturalCycles/nodejs-lib/commit/1af429fd1bcb925a7b4a5a804592ffbd8bc41617))
+
 ## [12.14.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.0...v12.14.1) (2021-04-17)
 
 
