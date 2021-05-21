@@ -1,3 +1,10 @@
+## [12.14.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.2...v12.14.3) (2021-05-21)
+
+
+### Bug Fixes
+
+* deps, adopt eslint ([6891b85](https://github.com/NaturalCycles/nodejs-lib/commit/6891b8558bc47b7ae6c54201b470e4b9ed96162f))
+
 ## [12.14.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.1...v12.14.2) (2021-05-03)
 
 
