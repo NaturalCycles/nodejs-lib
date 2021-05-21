@@ -15,8 +15,9 @@ export const integerSchema = Joi.number().integer()
 export const percentageSchema = Joi.number().integer().min(0).max(100)
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
-export const urlSchema = (scheme: string | string[] = 'https') =>
-  Joi.string().uri({ scheme }) as StringSchemaTyped
+
+export const urlSchema = (scheme: string | string[] = 'https'): StringSchemaTyped =>
+  Joi.string().uri({ scheme })
 
 export function arraySchema<T>(items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T> {
   return items ? Joi.array().items(items) : Joi.array()

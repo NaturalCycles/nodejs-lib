@@ -160,7 +160,7 @@ function getShortUrl(opt: GetGotOptions, url: URL, prefixUrl?: string): string {
   }
 
   if (opt.logWithPrefixUrl === false && prefixUrl && shortUrl.startsWith(prefixUrl)) {
-    shortUrl = shortUrl.substr(prefixUrl.length)
+    shortUrl = shortUrl.slice(prefixUrl.length)
   }
 
   return shortUrl

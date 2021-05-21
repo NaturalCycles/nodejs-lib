@@ -29,7 +29,7 @@ export function secretsDecrypt(
     const enc = fs.readFileSync(filename)
     const plain = decryptRandomIVBuffer(enc, encKey, algorithm)
 
-    const plainFilename = filename.substr(0, filename.length - '.enc'.length)
+    const plainFilename = filename.slice(0, filename.length - '.enc'.length)
     fs.writeFileSync(plainFilename, plain)
 
     if (del) {

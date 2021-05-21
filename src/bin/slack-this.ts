@@ -5,7 +5,13 @@ import { SlackService } from '..'
 import { runScript } from '../script'
 
 runScript(async () => {
-  const { channel, msg, username, emoji, webhook: webhookUrl } = yargs.options({
+  const {
+    channel,
+    msg,
+    username,
+    emoji,
+    webhook: webhookUrl,
+  } = yargs.options({
     channel: {
       type: 'string',
       demandOption: true,

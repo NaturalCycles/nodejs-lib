@@ -32,7 +32,7 @@ export class JoiValidationError extends AppError<JoiValidationErrorData> {
       Error.captureStackTrace(this, this.constructor)
     } else {
       Object.defineProperty(this, 'stack', {
-        value: new Error().stack,
+        value: new Error().stack, //  eslint-disable-line unicorn/error-message
       })
     }
   }

@@ -11,6 +11,8 @@ import {
   StringSchema,
 } from 'joi'
 
+/* eslint-disable unused-imports/no-unused-vars */
+
 export type SchemaTyped<IN, OUT = IN> =
   | AnySchemaTyped<IN, OUT>
   | ArraySchemaTyped<IN>

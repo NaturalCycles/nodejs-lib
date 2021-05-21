@@ -13,7 +13,7 @@ export async function proxyCommand(
   args: string[] = [],
   opt: ExecaOptions = {},
 ): Promise<void> {
-  const [, , ...processArgs] = process.argv
+  const processArgs = process.argv.slice(2)
 
   await execWithArgs(cmd, [...args, ...processArgs], {
     ...opt,

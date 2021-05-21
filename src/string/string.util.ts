@@ -60,7 +60,7 @@ export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
   // todo: think about maybe removing it in favor of maxStringLength/maxArrayLength built-in options
   // Handle maxLen
   if (opt.maxLen && s.length > opt.maxLen) {
-    s = s.substr(0, opt.maxLen) + `... ${Math.ceil(s.length / 1024)} KB message truncated`
+    s = s.slice(0, opt.maxLen) + `... ${Math.ceil(s.length / 1024)} KB message truncated`
   }
 
   return s

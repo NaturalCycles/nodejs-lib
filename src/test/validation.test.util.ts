@@ -1,7 +1,7 @@
 import { AnySchema } from 'joi'
 import { validate } from '..'
 
-export function testValidation(schema: AnySchema, valid: any[], invalid: any[]) {
+export function testValidation(schema: AnySchema, valid: any[], invalid: any[]): void {
   valid.forEach(v => {
     try {
       validate(v, schema)
@@ -15,7 +15,7 @@ export function testValidation(schema: AnySchema, valid: any[], invalid: any[]) 
     try {
       validate(v, schema)
       console.log('value', v)
-      fail(`expected to fail on invalid value: ${v}`)
+      fail(`expected to fail on invalid value: ${v}`) // eslint-disable-line
     } catch {}
   })
 }

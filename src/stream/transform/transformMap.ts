@@ -52,6 +52,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
 
   /**
    * Progress metric
+   *
    * @default `stream`
    */
   metric?: string
@@ -126,7 +127,12 @@ export function transformMap<IN = any, OUT = IN>(
         afterFinal?.() // call afterFinal if defined (optional invokation operator)
       },
     },
-    async function transformMapFn(this: Transform, chunk: IN, _encoding: any, cb: Function) {
+    async function transformMapFn(
+      this: Transform,
+      chunk: IN,
+      _encoding: any,
+      cb: (...args: any[]) => any,
+    ) {
       // console.log({chunk, _encoding})
 
       // Stop processing if THROW_IMMEDIATELY mode is used

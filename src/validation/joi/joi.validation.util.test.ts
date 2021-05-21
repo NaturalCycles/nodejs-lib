@@ -170,7 +170,7 @@ test('array items with invalid props', async () => {
 test('long message string', () => {
   const objSchema = arraySchema<Obj1>(obj1Schema)
 
-  const longObject = Array(1000).fill({ a1: 5 })
+  const longObject = Array.from({ length: 1000 }).fill({ a1: 5 })
 
   const { error } = getValidationResult(longObject, objSchema)
   // console.log(error!.message, error!.message.length)

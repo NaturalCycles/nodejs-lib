@@ -52,8 +52,7 @@ test('transformMap emit array as multiple items', async () => {
 
   const expected: number[] = []
   data.forEach(n => {
-    expected.push(n * 2)
-    expected.push(n * 2 + 1)
+    expected.push(n * 2, n * 2 + 1)
   })
 
   // console.log(data2)

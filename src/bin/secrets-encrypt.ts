@@ -44,7 +44,7 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
   }).argv
 
   if (!encKey) {
-    encKey = process.env[encKeyVar!]
+    encKey = process.env[encKeyVar]
 
     if (encKey) {
       console.log(`using encKey from process.env.${dimGrey(encKeyVar)}`)

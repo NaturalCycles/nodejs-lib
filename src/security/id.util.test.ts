@@ -18,7 +18,7 @@ test('stringIdUnsafe', () => {
   expect(stringId(32).length).toBe(32)
 })
 
-test('stringIdAsync ', async () => {
+test('stringIdAsync', async () => {
   const id = await stringIdAsync()
   expect(id).not.toBeUndefined()
   expect(id.length).toBe(16)

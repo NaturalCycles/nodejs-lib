@@ -43,7 +43,7 @@ test('writableFork', async () => {
       // Chain2: write only odd numbers
       [
         transformMap(s => {
-          if (parseInt(s) % 2 !== 1) return // will be skipped
+          if (Number.parseInt(s) % 2 !== 1) return // will be skipped
           return s // proceed
         }),
         // fs.createWriteStream(out2Path),

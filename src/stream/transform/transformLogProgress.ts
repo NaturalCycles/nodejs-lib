@@ -8,36 +8,42 @@ import { TransformOpt, TransformTyped } from '../stream.model'
 export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   /**
    * Progress metric
+   *
    * @default `progress`
    */
   metric?: string
 
   /**
    * Include `heapUsed` in log.
+   *
    * @default true
    */
   heapUsed?: boolean
 
   /**
    * Include `heapTotal` in log.
+   *
    * @default false
    */
   heapTotal?: boolean
 
   /**
    * Include `rss` in log.
+   *
    * @default true
    */
   rss?: boolean
 
   /**
    * Include `external` in log.
+   *
    * @default false
    */
   external?: boolean
 
   /**
    * Include `arrayBuffers` in log.
+   *
    * @default false
    */
   arrayBuffers?: boolean
@@ -45,12 +51,14 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   /**
    * Log (rss - heapTotal)
    * For convenience of debugging "out-of-heap" memory size.
+   *
    * @default false
    */
   rssMinusHeap?: boolean
 
   /**
    * Log "rows per second"
+   *
    * @default true
    */
   logRPS?: boolean
@@ -63,6 +71,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
 
   /**
    * Log progress event Nth record that is _processed_ (went through mapper).
+   *
    * @default 1000
    * Set to 0 to disable logging.
    */
@@ -73,7 +82,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
    *
    * chunk is undefined for "final" stats, otherwise is defined.
    */
-  extra?: (chunk: IN | undefined, index: number) => object
+  extra?: (chunk: IN | undefined, index: number) => Record<string, any>
 }
 
 const inspectOpt: NodeJS.InspectOptions = {

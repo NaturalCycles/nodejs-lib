@@ -2,6 +2,8 @@ import { _range } from '@naturalcycles/js-lib'
 import { readableFromArray } from '../..'
 import { pipelineToArray } from './pipelineToArray'
 
+/* eslint-disable unicorn/no-array-callback-reference */
+
 interface Item {
   id: string
 }

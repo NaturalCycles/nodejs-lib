@@ -15,7 +15,7 @@ export type MultiMapper<IN = any, OUT = any> = (
 
 export function transformMapMulti<IN = any, OUT = any>(
   mapper: MultiMapper<IN, OUT>,
-  opt: TransformMapMultiOptions = {},
+  _opt: TransformMapMultiOptions = {},
 ): TransformTyped<IN, OUT> {
   let index = 0
 

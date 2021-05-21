@@ -60,7 +60,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
           }
           // console.log('min/max', min, max)
 
-          const m = v.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v)
           if (!m || m.length <= 1) {
             err = 'string.dateString'
           } else if (min && v < min) {

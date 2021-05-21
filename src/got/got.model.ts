@@ -8,6 +8,7 @@ export interface GetGotOptions extends Options {
 
   /**
    * Log when request is finished.
+   *
    * @default false
    */
   logFinished?: boolean

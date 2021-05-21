@@ -90,7 +90,7 @@ export function getValidationResult<IN, OUT = IN>(
   })
 
   const vr: JoiValidationResult<OUT> = {
-    value: (returnValue as any) as OUT,
+    value: returnValue as OUT,
   }
 
   if (error) {
@@ -118,17 +118,18 @@ export function undefinedIfInvalid<IN, OUT = IN>(
 
   const { value: returnValue, error } = schema.validate(value, defaultOptions)
 
-  return error ? undefined : (returnValue as any)
+  return error ? undefined : returnValue
 }
 
 /**
  * Will do joi-convertation, regardless of error/validity of value.
+ *
  * @returns converted value
  */
 export function convert<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
   if (!schema) return value as any
   const { value: returnValue } = schema.validate(value, defaultOptions)
-  return returnValue as any
+  return returnValue
 }
 
 function createError(value: any, err: ValidationError, objectName?: string): JoiValidationError {
@@ -148,7 +149,7 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   if (annotation.length > 1000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
     tokens.push(
-      annotation.substr(0, 1000),
+      annotation.slice(0, 1000),
       `... ${Math.ceil(annotation.length / 1024)} KB message truncated`,
     )
 

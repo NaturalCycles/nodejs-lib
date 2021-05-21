@@ -1,6 +1,8 @@
 import { _mb } from '@naturalcycles/js-lib'
 import * as os from 'os'
 
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 export function memoryUsage() {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
   return {
@@ -80,6 +82,7 @@ class ProcessUtil {
   }
 
   private getCPUInfo() {
+    // eslint-disable-next-line unicorn/no-array-reduce
     return os.cpus().reduce(
       (r, cpu) => {
         r['idle'] += cpu.times.idle

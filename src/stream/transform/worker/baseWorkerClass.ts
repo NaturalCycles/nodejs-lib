@@ -10,7 +10,7 @@ export interface WorkerClassInterface {
 export abstract class BaseWorkerClass<
   IN = any,
   OUT = any,
-  WORKER_DATA extends BaseWorkerData = BaseWorkerData
+  WORKER_DATA extends BaseWorkerData = BaseWorkerData,
 > {
   constructor(public workerData: WORKER_DATA) {}
 

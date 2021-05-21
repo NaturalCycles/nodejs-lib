@@ -28,7 +28,7 @@ export interface TransformMultiThreadedOptions extends TransformOpt {
   /**
    * Passed to the Worker as `workerData` property (initial data).
    */
-  workerData?: object
+  workerData?: Record<string, any>
 }
 
 const workerProxyFilePath = `${__dirname}/workerClassProxy.js`

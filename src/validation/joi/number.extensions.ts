@@ -31,7 +31,7 @@ export function numberExtensions(joi: typeof Joi): Extension {
           {
             name: 'q',
             ref: true,
-            assert: v => typeof v === 'number' && !isNaN(v),
+            assert: v => typeof v === 'number' && !Number.isNaN(v),
             message: 'must be a number',
           },
         ],

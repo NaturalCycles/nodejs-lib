@@ -10,9 +10,10 @@ export interface TransformBufferOptions extends TransformOpt {
 
 /**
  * Similar to RxJS bufferCount()
+ *
  * @default batchSize is 10
  */
-export function transformBuffer<IN = object>(
+export function transformBuffer<IN = Record<string, any>>(
   opt: TransformBufferOptions = {},
 ): TransformTyped<IN, IN[]> {
   const { batchSize = 10 } = opt

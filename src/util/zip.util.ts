@@ -2,10 +2,10 @@ import { promisify } from 'util'
 import { ZlibOptions } from 'zlib'
 import * as zlib from 'zlib'
 
-const deflate = promisify(zlib.deflate.bind(zlib)) as Function
-const inflate = promisify(zlib.inflate.bind(zlib)) as Function
-const gzip = promisify(zlib.gzip.bind(zlib)) as Function
-const gunzip = promisify(zlib.gunzip.bind(zlib)) as Function
+const deflate = promisify(zlib.deflate.bind(zlib))
+const inflate = promisify(zlib.inflate.bind(zlib))
+const gzip = promisify(zlib.gzip.bind(zlib))
+const gunzip = promisify(zlib.gunzip.bind(zlib))
 
 // string > zip
 export async function zipBuffer(buf: Buffer, options: ZlibOptions = {}): Promise<Buffer> {
