@@ -1,3 +1,10 @@
+## [12.14.5](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.4...v12.14.5) (2021-05-31)
+
+
+### Bug Fixes
+
+* ndjson-map to have ErrorMode.SUPPRESS by default ([dcb0203](https://github.com/NaturalCycles/nodejs-lib/commit/dcb0203b5595068ccdfa3a4f5ec1d25f51154f1c))
+
 ## [12.14.4](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.3...v12.14.4) (2021-05-26)
 
 
