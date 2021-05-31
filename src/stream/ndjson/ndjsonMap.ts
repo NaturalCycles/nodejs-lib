@@ -1,4 +1,4 @@
-import { AsyncMapper } from '@naturalcycles/js-lib'
+import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import { createReadStream, createWriteStream } from 'fs'
 import * as path from 'path'
 import { createGzip, createUnzip } from 'zlib'
@@ -89,6 +89,7 @@ export async function ndjsonMap<IN = any, OUT = any>(
     transformLogProgress({ metric: 'read', logEvery: logEveryInput }),
     transformMap(mapper, {
       flattenArrayOutput: true,
+      errorMode: ErrorMode.SUPPRESS,
       ...opt,
     }),
     transformLimit(limitOutput),
