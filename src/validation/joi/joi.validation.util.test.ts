@@ -1,7 +1,6 @@
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
-  anySchema,
   arraySchema,
   booleanDefaultToFalseSchema,
   booleanSchema,
@@ -242,7 +241,7 @@ test('should convert null to undefined and strip', () => {
   const schema = objectSchema<Obj1>({
     a1: stringSchema.optional(),
     // this is how `null` can be accepted (as empty):
-    a2: stringSchema.empty([anySchema.valid(null)]).optional(),
+    a2: stringSchema.empty(null).optional(),
   })
 
   const obj1: Obj1 = {
@@ -264,6 +263,12 @@ test('should convert null to undefined and strip', () => {
   expect(isValid(null, numberSchema.optional())).toBeFalsy()
   expect(isValid(null, integerSchema.optional())).toBeFalsy()
   expect(isValid(null, arraySchema().optional())).toBeFalsy()
+
+  // this is how to make null valid
+  const numberPermissiveSchema = numberSchema.empty(null).optional()
+  expect(isValid(null, numberPermissiveSchema)).toBe(true)
+  expect(isValid(undefined, numberPermissiveSchema)).toBe(true)
+  expect(isValid(5.1, numberPermissiveSchema)).toBe(true)
 })
 
 test('null is not a valid value when required', () => {
