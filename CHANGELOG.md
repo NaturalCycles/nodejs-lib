@@ -1,3 +1,11 @@
+# [12.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.5...v12.15.0) (2021-06-28)
+
+
+### Features
+
+* exec* preferLocal is true by default now ([2f3f900](https://github.com/NaturalCycles/nodejs-lib/commit/2f3f900df09fb683be96076afaf72bb42a5e7a6f))
+* ndjson-map logEveryOutput=100k (was: 0) ([7b6f933](https://github.com/NaturalCycles/nodejs-lib/commit/7b6f933a7aee28ad8c0aa6679f2e0493e5feb60d))
+
 ## [12.14.5](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.4...v12.14.5) (2021-05-31)
 
 
