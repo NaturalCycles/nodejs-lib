@@ -33,7 +33,7 @@ export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOption
   /**
    * @default 100_000
    */
-  logEveryOutput?: 100_000
+  logEveryOutput?: number
 }
 
 /**
@@ -47,7 +47,7 @@ export async function ndjsonMap<IN = any, OUT = any>(
     inputFilePath,
     outputFilePath,
     mapperFilePath,
-    logEveryInput,
+    logEveryInput = 1000,
     logEveryOutput = 100_000,
     limitInput,
     limitOutput,

@@ -26,7 +26,7 @@ export async function execCommand(cmd: string, opt: ExecaOptions = {}): Promise<
   await execa
     .command(cmd, {
       stdio: 'inherit',
-      // preferLocal: true,
+      preferLocal: true,
       ...opt,
     })
     .catch(err => handleError(err, cmd, opt))
@@ -41,7 +41,7 @@ export async function execWithArgs(
 
   await execa(cmd, args, {
     stdio: 'inherit',
-    // preferLocal: true,
+    preferLocal: true,
     ...opt,
   }).catch(err => handleError(err, cmd, opt))
 }

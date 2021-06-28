@@ -35,7 +35,7 @@ runScript(async () => {
     },
     logEveryOutput: {
       type: 'number',
-      default: 0,
+      default: 100_000,
     },
     limitInput: {
       type: 'number',
