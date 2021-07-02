@@ -4,6 +4,8 @@ import { Worker } from 'worker_threads'
 import { TransformOpt, TransformTyped } from '../../stream.model'
 import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 
+/* eslint-disable unicorn/require-post-message-target-origin */
+
 export interface TransformMultiThreadedOptions extends TransformOpt {
   /**
    * Absolute path to a js file with worker code
