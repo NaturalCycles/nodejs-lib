@@ -1,3 +1,10 @@
+## [12.15.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.15.0...v12.15.1) (2021-07-03)
+
+
+### Bug Fixes
+
+* deps (@types/nodejs@16) ([de38132](https://github.com/NaturalCycles/nodejs-lib/commit/de381326cad6a153c71d083cae9875b2069c3e32))
+
 # [12.15.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.14.5...v12.15.0) (2021-06-28)
 
 
