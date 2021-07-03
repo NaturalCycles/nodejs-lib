@@ -1,7 +1,7 @@
 import { AppError, _isErrorObject } from '@naturalcycles/js-lib'
-import { inspect } from 'util'
+import { inspect, InspectOptions } from 'util'
 
-export interface InspectAnyOptions extends NodeJS.InspectOptions {
+export interface InspectAnyOptions extends InspectOptions {
   /**
    * @default 10_000
    */

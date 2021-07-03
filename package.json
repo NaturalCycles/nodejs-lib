@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@naturalcycles/dev-lib": "^12.0.0",
-    "@types/node": "^15.0.1",
+    "@types/node": "^16.0.0",
     "@types/yargs": "^16.0.0",
     "jest": "^27.0.1",
     "nock": "^13.0.2",

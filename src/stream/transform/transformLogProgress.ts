@@ -1,7 +1,7 @@
 import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
-import { inspect } from 'util'
+import { inspect, InspectOptions } from 'util'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { TransformOpt, TransformTyped } from '../stream.model'
 
@@ -85,7 +85,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
   extra?: (chunk: IN | undefined, index: number) => Record<string, any>
 }
 
-const inspectOpt: NodeJS.InspectOptions = {
+const inspectOpt: InspectOptions = {
   colors: true,
   breakLength: 200,
 }
