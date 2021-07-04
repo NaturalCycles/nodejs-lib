@@ -1,3 +1,10 @@
+# [12.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.15.1...v12.16.0) (2021-07-04)
+
+
+### Features
+
+* transformMapSync (experimental) ([202d257](https://github.com/NaturalCycles/nodejs-lib/commit/202d257f72f79d79f98d7c866fa985fc84646151))
+
 ## [12.15.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.15.0...v12.15.1) (2021-07-03)
 
 
