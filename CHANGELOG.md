@@ -1,3 +1,10 @@
+# [12.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.16.0...v12.17.0) (2021-07-04)
+
+
+### Features
+
+* transformToString ([17bef5c](https://github.com/NaturalCycles/nodejs-lib/commit/17bef5ce155b53b13239f2a06ed0b409beed0a14))
+
 # [12.16.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.15.1...v12.16.0) (2021-07-04)
 
 
