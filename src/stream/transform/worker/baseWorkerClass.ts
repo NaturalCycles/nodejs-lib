@@ -1,15 +1,19 @@
 import { BaseWorkerData } from './transformMultiThreaded.model'
 
-export interface WorkerClassInterface {
-  WorkerClass: BaseWorkerClass
+export interface WorkerClassInterface<
+  IN,
+  OUT,
+  WORKER_DATA extends BaseWorkerData = BaseWorkerData,
+> {
+  WorkerClass: BaseWorkerClass<IN, OUT, WORKER_DATA>
 }
 
 /**
  * Class to be extended, to be used with `transformMultiThreaded`
  */
 export abstract class BaseWorkerClass<
-  IN = any,
-  OUT = any,
+  IN,
+  OUT,
   WORKER_DATA extends BaseWorkerData = BaseWorkerData,
 > {
   constructor(public workerData: WORKER_DATA) {}

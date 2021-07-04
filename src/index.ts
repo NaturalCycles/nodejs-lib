@@ -89,6 +89,7 @@ import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
 import { transformThrough } from './stream/transform/transformThrough'
 import { transformToArray } from './stream/transform/transformToArray'
+import { transformToString } from './stream/transform/transformToString'
 import { BaseWorkerClass, WorkerClassInterface } from './stream/transform/worker/baseWorkerClass'
 import {
   transformMultiThreaded,
@@ -300,6 +301,7 @@ export {
   transformMapMulti,
   writablePushToArray,
   transformSplit,
+  transformToString,
   transformToArray,
   transformTap,
   transformLogProgress,
