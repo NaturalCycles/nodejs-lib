@@ -84,6 +84,7 @@ import {
 } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
+import { transformMapSync, TransformMapSyncOptions } from './stream/transform/transformMapSync'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
 import { transformThrough } from './stream/transform/transformThrough'
@@ -184,6 +185,7 @@ export type {
   TransformJsonParseOptions,
   TransformToNDJsonOptions,
   TransformMapOptions,
+  TransformMapSyncOptions,
   MultiMapper,
   TransformOpt,
   TransformLogProgressOptions,
@@ -293,6 +295,7 @@ export {
   transformConcurrent,
   transformFilter,
   transformMap,
+  transformMapSync,
   writableForEach,
   transformMapMulti,
   writablePushToArray,

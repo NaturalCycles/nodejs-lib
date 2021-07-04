@@ -68,7 +68,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
   afterFinal?: () => any
 }
 
-function notNullPredicate(item: any): boolean {
+export function notNullishPredicate(item: any): boolean {
   return item !== undefined && item !== null
 }
 
@@ -90,7 +90,7 @@ export function transformMap<IN = any, OUT = IN>(
 ): TransformTyped<IN, OUT> {
   const {
     concurrency = 16,
-    predicate = notNullPredicate,
+    predicate = notNullishPredicate,
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput,
     onError,
