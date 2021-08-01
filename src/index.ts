@@ -113,6 +113,8 @@ import {
   zipBuffer,
   zipString,
 } from './util/zip.util'
+import { AjvSchema, AjvSchemaCfg, AjvValidationOptions } from './validation/ajv/ajvSchema'
+import { AjvValidationError, AjvValidationErrorData } from './validation/ajv/ajvValidationError'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   AnySchemaTyped,
@@ -203,6 +205,9 @@ export type {
   BeforeErrorHook,
   BeforeRequestHook,
   HTTPError,
+  AjvValidationOptions,
+  AjvSchemaCfg,
+  AjvValidationErrorData,
 }
 
 export {
@@ -316,4 +321,6 @@ export {
   inspectAny,
   getGot,
   _chunkBuffer,
+  AjvSchema,
+  AjvValidationError,
 }
