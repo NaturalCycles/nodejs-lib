@@ -1,3 +1,10 @@
+# [12.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.17.0...v12.18.0) (2021-08-01)
+
+
+### Features
+
+* experimental AjvSchema (wrapper around ajv) ([8abedab](https://github.com/NaturalCycles/nodejs-lib/commit/8abedab9022db04d08de1029b4f1c3d6c4b08a85))
+
 # [12.17.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.16.0...v12.17.0) (2021-07-04)
 
 
