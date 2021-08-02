@@ -10,6 +10,13 @@ export interface AjvValidationOptions {
    * @default to cfg.logErrors, which defaults to false
    */
   logErrors?: boolean
+
+  /**
+   * Used to separate multiple validation errors.
+   *
+   * @default cfg.separator || '\n'
+   */
+  separator?: string
 }
 
 export interface AjvSchemaCfg {
@@ -20,6 +27,13 @@ export interface AjvSchemaCfg {
   ajv?: Ajv
 
   objectName?: string
+
+  /**
+   * Used to separate multiple validation errors.
+   *
+   * @default '\n'
+   */
+  separator?: string
 
   /**
    * @default false
@@ -60,11 +74,13 @@ export class AjvSchema<T = unknown> {
       objectId = _isObject(obj) ? (obj['id'] as string) : undefined,
       objectName = this.cfg.objectName,
       logErrors = this.cfg.logErrors,
+      separator = this.cfg.separator || '\n',
     } = opt
     const name = [objectName || 'Object', objectId].filter(Boolean).join('.')
 
     const message = this.ajv.errorsText(errors, {
       dataVar: name,
+      separator,
     })
 
     if (logErrors) {

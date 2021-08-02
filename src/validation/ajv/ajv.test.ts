@@ -9,7 +9,14 @@ interface Simple {
   int?: number
 }
 
+interface TestType {
+  s: string
+  n: null
+  s2: string | null
+}
+
 const simpleSchema = fs.readJsonSync(`${testDir}/schema/simple.schema.json`)
+const testTypeSchema = fs.readJsonSync(`${testDir}/schema/TestType.schema.json`)
 
 test('simple', () => {
   const schema = new AjvSchema<Simple>(simpleSchema)
@@ -70,4 +77,39 @@ test('simple', () => {
 
   // logErrors
   _try(() => schema.validate(missing, { logErrors: true }))
+})
+
+test('TestType', () => {
+  const schema = new AjvSchema<TestType>(testTypeSchema)
+
+  // Valid
+  const valid: TestType = {
+    s: 's',
+    n: null,
+    s2: 's2',
+  }
+  const valid2: TestType = {
+    s: 's',
+    n: null,
+    s2: null,
+  }
+
+  schema.validate(valid)
+  schema.validate(valid2)
+
+  const invalid1 = {
+    s: 's',
+  } as TestType
+  expect(() => schema.validate(invalid1)).toThrowErrorMatchingInlineSnapshot(`
+    "Object must have required property 'n'
+    Object must have required property 's2'"
+  `)
+
+  const invalid2 = {
+    s: 's',
+    n: null,
+  } as TestType
+  expect(() => schema.validate(invalid2)).toThrowErrorMatchingInlineSnapshot(
+    `"Object must have required property 's2'"`,
+  )
 })
