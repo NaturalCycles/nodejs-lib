@@ -1,3 +1,10 @@
+## [12.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.0...v12.18.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* AjvSchema separator default to `\n` ([b1a4949](https://github.com/NaturalCycles/nodejs-lib/commit/b1a49491b934ce364f1ab01146759b5cc9497734))
+
 # [12.18.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.17.0...v12.18.0) (2021-08-01)
 
 
