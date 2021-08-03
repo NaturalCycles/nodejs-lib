@@ -1,4 +1,5 @@
-import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
+import { HTTPError } from 'got'
+import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
 import { tableDiff, TableDiffOptions } from './diff/tableDiff'
@@ -204,7 +205,6 @@ export type {
   AfterResponseHook,
   BeforeErrorHook,
   BeforeRequestHook,
-  HTTPError,
   AjvValidationOptions,
   AjvSchemaCfg,
   AjvValidationErrorData,
@@ -320,6 +320,7 @@ export {
   tableDiff,
   inspectAny,
   getGot,
+  HTTPError,
   _chunkBuffer,
   AjvSchema,
   AjvValidationError,
