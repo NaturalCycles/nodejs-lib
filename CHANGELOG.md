@@ -1,3 +1,10 @@
+## [12.18.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.1...v12.18.2) (2021-08-03)
+
+
+### Bug Fixes
+
+* export HTTPError as class (not as `type`) ([dcf0402](https://github.com/NaturalCycles/nodejs-lib/commit/dcf0402c87fd9ae3c9a5ae995419ff585a339955))
+
 ## [12.18.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.0...v12.18.1) (2021-08-02)
 
 
