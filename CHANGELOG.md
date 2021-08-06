@@ -1,3 +1,10 @@
+# [12.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.19.0...v12.20.0) (2021-08-06)
+
+
+### Features
+
+* **ajv:** detect objectName from schema.$id ([585d179](https://github.com/NaturalCycles/nodejs-lib/commit/585d1797e8371951b7d348b4c2bbf45e84475521))
+
 # [12.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.3...v12.19.0) (2021-08-06)
 
 
