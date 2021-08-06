@@ -1,3 +1,10 @@
+## [12.18.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.2...v12.18.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* export TimeoutError from got ([dcd55b2](https://github.com/NaturalCycles/nodejs-lib/commit/dcd55b241764b71e870b7d191bf7160eef29e214))
+
 ## [12.18.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.1...v12.18.2) (2021-08-03)
 
 
