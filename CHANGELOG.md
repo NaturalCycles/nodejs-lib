@@ -1,3 +1,10 @@
+# [12.19.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.3...v12.19.0) (2021-08-06)
+
+
+### Features
+
+* ndjsonStreamForEach ([f3dbe80](https://github.com/NaturalCycles/nodejs-lib/commit/f3dbe80190add1a9bb902eecb1d11bd2b44e5288))
+
 ## [12.18.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.18.2...v12.18.3) (2021-08-06)
 
 
