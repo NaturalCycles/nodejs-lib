@@ -101,8 +101,8 @@ test('TestType', () => {
     s: 's',
   } as TestType
   expect(() => schema.validate(invalid1)).toThrowErrorMatchingInlineSnapshot(`
-    "Object must have required property 'n'
-    Object must have required property 's2'"
+    "TestType must have required property 'n'
+    TestType must have required property 's2'"
   `)
 
   const invalid2 = {
@@ -110,6 +110,6 @@ test('TestType', () => {
     n: null,
   } as TestType
   expect(() => schema.validate(invalid2)).toThrowErrorMatchingInlineSnapshot(
-    `"Object must have required property 's2'"`,
+    `"TestType must have required property 's2'"`,
   )
 })

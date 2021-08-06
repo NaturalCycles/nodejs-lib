@@ -1,3 +1,4 @@
+import Ajv from 'ajv'
 import { HTTPError, TimeoutError } from 'got'
 import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
@@ -120,6 +121,7 @@ import {
 } from './util/zip.util'
 import { AjvSchema, AjvSchemaCfg, AjvValidationOptions } from './validation/ajv/ajvSchema'
 import { AjvValidationError, AjvValidationErrorData } from './validation/ajv/ajvValidationError'
+import { getAjv } from './validation/ajv/getAjv'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   AnySchemaTyped,
@@ -329,6 +331,8 @@ export {
   HTTPError,
   TimeoutError,
   _chunkBuffer,
+  Ajv,
+  getAjv,
   AjvSchema,
   AjvValidationError,
 }

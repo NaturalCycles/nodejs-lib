@@ -1,13 +1,14 @@
-import { _filterNullishValues, _isObject } from '@naturalcycles/js-lib'
+import { _filterNullishValues, _isObject, _substringBefore } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
 import { AjvValidationError } from './ajvValidationError'
+import { getAjv } from './getAjv'
 
 export interface AjvValidationOptions {
   objectName?: string
   objectId?: string
 
   /**
-   * @default to cfg.logErrors, which defaults to false
+   * @default to cfg.logErrors, which defaults to true
    */
   logErrors?: boolean
 
@@ -24,7 +25,13 @@ export interface AjvSchemaCfg {
    * Pass Ajv instance, otherwise Ajv will be created with
    * AjvSchema default (not the same as Ajv defaults) parameters
    */
-  ajv?: Ajv
+  ajv: Ajv
+
+  /**
+   * Dependent schemas to pass to Ajv instance constructor.
+   * Simpler than instantiating and passing ajv instance yourself.
+   */
+  schemas?: any[]
 
   objectName?: string
 
@@ -33,31 +40,37 @@ export interface AjvSchemaCfg {
    *
    * @default '\n'
    */
-  separator?: string
+  separator: string
 
   /**
-   * @default false
+   * @default true
    */
-  logErrors?: boolean
+  logErrors: boolean
 }
 
 /**
  * @experimental
  */
 export class AjvSchema<T = unknown> {
-  constructor(schema: any, private cfg: AjvSchemaCfg = {}) {
-    this.ajv =
-      cfg.ajv ||
-      new Ajv({
-        // default Ajv configuration!
-        removeAdditional: true,
-        allErrors: true,
-        // verbose: true,
-      })
-    this.validateFunction = this.ajv.compile<T>(schema)
+  constructor(schema: any, cfg: Partial<AjvSchemaCfg> = {}) {
+    this.cfg = {
+      logErrors: true,
+      separator: '\n',
+      ...cfg,
+      ajv:
+        cfg.ajv ||
+        getAjv({
+          schemas: cfg.schemas,
+          // verbose: true,
+        }),
+      // Auto-detecting "ObjectName" from $id of the schema (e.g "Address.schema.json")
+      objectName: cfg.objectName || schema.$id ? _substringBefore(schema.$id, '.') : undefined,
+    }
+
+    this.validateFunction = this.cfg.ajv.compile<T>(schema)
   }
 
-  private readonly ajv: Ajv
+  private readonly cfg: AjvSchemaCfg
   private readonly validateFunction: ValidateFunction<T>
 
   validate(obj: T, opt: AjvValidationOptions = {}): void {
@@ -74,11 +87,11 @@ export class AjvSchema<T = unknown> {
       objectId = _isObject(obj) ? (obj['id'] as string) : undefined,
       objectName = this.cfg.objectName,
       logErrors = this.cfg.logErrors,
-      separator = this.cfg.separator || '\n',
+      separator = this.cfg.separator,
     } = opt
     const name = [objectName || 'Object', objectId].filter(Boolean).join('.')
 
-    const message = this.ajv.errorsText(errors, {
+    const message = this.cfg.ajv.errorsText(errors, {
       dataVar: name,
       separator,
     })
