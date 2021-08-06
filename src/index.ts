@@ -47,6 +47,10 @@ import { NDJsonStats } from './stream/ndjson/ndjson.model'
 import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
 import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
 import {
+  ndjsonStreamForEach,
+  NDJSONStreamForEachOptions,
+} from './stream/ndjson/ndjsonStreamForEach'
+import {
   pipelineFromNDJsonFile,
   PipelineFromNDJsonFileOptions,
 } from './stream/ndjson/pipelineFromNDJsonFile'
@@ -191,6 +195,7 @@ export type {
   TransformMapOptions,
   TransformMapSyncOptions,
   MultiMapper,
+  NDJSONStreamForEachOptions,
   TransformOpt,
   TransformLogProgressOptions,
   StreamForEachOptions,
@@ -289,6 +294,7 @@ export {
   transformBuffer,
   ndJsonFileRead,
   ndJsonFileWrite,
+  ndjsonStreamForEach,
   pipelineFromNDJsonFile,
   pipelineToNDJsonFile,
   NDJsonStats,
