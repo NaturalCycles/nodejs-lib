@@ -1,4 +1,4 @@
-import { HTTPError } from 'got'
+import { HTTPError, TimeoutError } from 'got'
 import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
@@ -321,6 +321,7 @@ export {
   inspectAny,
   getGot,
   HTTPError,
+  TimeoutError,
   _chunkBuffer,
   AjvSchema,
   AjvValidationError,
