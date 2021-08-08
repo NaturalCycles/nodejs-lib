@@ -1,3 +1,10 @@
+# [12.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.20.0...v12.21.0) (2021-08-08)
+
+
+### Features
+
+* add ajv keywords, formats, custom formats ([9e19acf](https://github.com/NaturalCycles/nodejs-lib/commit/9e19acf45e14f360293782cf2f44ca227711903e))
+
 # [12.20.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.19.0...v12.20.0) (2021-08-06)
 
 
