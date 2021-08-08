@@ -1,4 +1,9 @@
-import { _filterNullishValues, _isObject, _substringBefore } from '@naturalcycles/js-lib'
+import {
+  _filterNullishValues,
+  _isObject,
+  _stringifyAny,
+  _substringBefore,
+} from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
@@ -91,10 +96,13 @@ export class AjvSchema<T = unknown> {
     } = opt
     const name = [objectName || 'Object', objectId].filter(Boolean).join('.')
 
-    const message = this.cfg.ajv.errorsText(errors, {
+    let message = this.cfg.ajv.errorsText(errors, {
       dataVar: name,
       separator,
     })
+
+    const strValue = _stringifyAny(obj, { maxLen: 1000 })
+    message = [message, 'Input: ' + strValue].join(separator)
 
     if (logErrors) {
       console.log(errors)

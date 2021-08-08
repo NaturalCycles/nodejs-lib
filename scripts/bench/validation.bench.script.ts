@@ -5,9 +5,10 @@ yarn tsn bench/validation.bench
  */
 
 import { runBench } from '@naturalcycles/bench-lib'
+import { JsonSchema } from '@naturalcycles/common-type'
 import { _range } from '@naturalcycles/js-lib'
-import Ajv, { JSONSchemaType } from 'ajv'
 import {
+  AjvSchema,
   arraySchema,
   booleanSchema,
   numberSchema,
@@ -33,18 +34,20 @@ const joiSchema = objectSchema<Item>({
   a: arraySchema(numberSchema),
 }).options({ convert: false })
 
-const jsonSchema: JSONSchemaType<Item> = {
+const jsonSchema: JsonSchema = {
   type: 'object',
   properties: {
     s: { type: 'string' },
     n1: { type: 'integer' },
-    n2: { type: 'integer', nullable: true },
-    b1: { type: 'boolean', nullable: true },
+    n2: { type: 'integer' },
+    b1: { type: 'boolean' },
     a: { type: 'array', items: { type: 'integer' } },
   },
   required: ['s', 'n1', 'a'],
   additionalProperties: false,
 }
+
+const ajvSchema = new AjvSchema(jsonSchema)
 
 const items = _range(1000).map(id => ({
   s: `id${id}`,
@@ -54,19 +57,7 @@ const items = _range(1000).map(id => ({
   a: _range(id).map(n => n * 2),
 }))
 
-const ajv = new Ajv()
-const ajvValidate = ajv.compile<Item>(jsonSchema)
-
 runScript(async () => {
-  // items.forEach(item => {
-  //   // validate(item, joiSchema)
-  //   const valid = ajvValidate(item)
-  //   if (!valid) {
-  //     console.log(ajvValidate.errors)
-  //     throw new Error('invalid!')
-  //   }
-  // })
-
   await runBench({
     fns: {
       joi: async done => {
@@ -78,12 +69,7 @@ runScript(async () => {
       },
       ajv: async done => {
         items.forEach(item => {
-          // validate(item, joiSchema)
-          const valid = ajvValidate(item)
-          if (!valid) {
-            console.log(ajvValidate.errors)
-            throw new Error('invalid!')
-          }
+          ajvSchema.validate(item)
         })
         done.resolve()
       },
