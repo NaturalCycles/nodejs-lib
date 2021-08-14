@@ -1,3 +1,10 @@
+## [12.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.0...v12.21.1) (2021-08-14)
+
+
+### Bug Fixes
+
+* deps, AjvSchema to use JsonSchema types ([354cfe6](https://github.com/NaturalCycles/nodejs-lib/commit/354cfe614034c4c4d75c93945b74806a3ff0a65a))
+
 # [12.21.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.20.0...v12.21.0) (2021-08-08)
 
 
