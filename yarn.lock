@@ -1369,17 +1369,6 @@
     ts-node "^10.0.0"
     typescript "^4.0.2"
 
-"@naturalcycles/common-type@^1.6.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/common-type/-/common-type-1.8.0.tgz#aa783576366a2e680639a35703573b382ed37511"
-  integrity sha512-QBCV8ST4DzDix+KDtWrPCkJuZHv0y2+AZV4Vfb5M3M1uqcGG0tTsfstpggptGIBrbK0RiujWzsBgISt6OHIeXQ==
-  dependencies:
-    "@naturalcycles/js-lib" "^14.20.0"
-    "@naturalcycles/nodejs-lib" "^12.14.0"
-    ajv "^8.6.2"
-    globby "^11.0.3"
-    typescript "^4.3.5"
-
 "@naturalcycles/dev-lib@^12.0.0":
   version "12.1.2"
   resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-12.1.2.tgz#417ef9fcced950c7dbd997e4168cd66d83891e0c"
@@ -1420,14 +1409,14 @@
     typescript "^4.0.2"
     yargs "^17.0.0"
 
-"@naturalcycles/js-lib@^14.0.0", "@naturalcycles/js-lib@^14.20.0":
+"@naturalcycles/js-lib@^14.0.0":
   version "14.33.0"
   resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.33.0.tgz#34f99f0250d45785a21041670be78f153f050b25"
   integrity sha512-9izXsZgDhhyFPFvg5Ke2Sg8HayG5hvBGdIHG0MsRz8CCn1aT6PWVEaqQZtwdzOxwJzdzfHDD65jhdUDSW8lF4Q==
   dependencies:
     tslib "^2.0.0"
 
-"@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.14.0", "@naturalcycles/nodejs-lib@^12.8.0":
+"@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.8.0":
   version "12.21.1"
   resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.21.1.tgz#6d2df232005851788cdddb03e9984a0c46c9656e"
   integrity sha512-M0Udp42IhXONooHa1Qb6t1ICgPfH6P3QEKzTsuqN3G+UovIIo9g95pILWLyvAe7ibzWeFTdDw8ribDhZDa8vNw==
@@ -11799,7 +11788,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.0.2, typescript@^4.3.5:
+typescript@^4.0.2:
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
   integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
