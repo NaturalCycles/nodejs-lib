@@ -1,6 +1,5 @@
-import { JsonSchema } from '@naturalcycles/common-type'
 import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
-import { _stringifyAny, _try } from '@naturalcycles/js-lib'
+import { JsonSchema, _stringifyAny, _try } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -17,11 +16,13 @@ interface TestType {
   s2: string | null
 }
 
-const simpleSchema = fs.readJsonSync(`${testDir}/schema/simple.schema.json`)
-const testTypeSchema = fs.readJsonSync(`${testDir}/schema/TestType.schema.json`)
+const simpleSchema: JsonSchema<Simple> = fs.readJsonSync(`${testDir}/schema/simple.schema.json`)
+const testTypeSchema: JsonSchema<TestType> = fs.readJsonSync(
+  `${testDir}/schema/TestType.schema.json`,
+)
 
 test('simple', () => {
-  const schema = new AjvSchema<Simple>(simpleSchema)
+  const schema = new AjvSchema(simpleSchema)
 
   // Valid
   const valid: Simple = { s: 's' }
@@ -90,7 +91,7 @@ test('simple', () => {
 })
 
 test('TestType', () => {
-  const schema = new AjvSchema<TestType>(testTypeSchema)
+  const schema = new AjvSchema(testTypeSchema)
 
   // Valid
   const valid: TestType = {

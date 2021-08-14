@@ -5,8 +5,7 @@ yarn tsn bench/validation.bench
  */
 
 import { runBench } from '@naturalcycles/bench-lib'
-import { JsonSchema } from '@naturalcycles/common-type'
-import { _range } from '@naturalcycles/js-lib'
+import { jsonSchema, _range } from '@naturalcycles/js-lib'
 import {
   AjvSchema,
   arraySchema,
@@ -34,20 +33,28 @@ const joiSchema = objectSchema<Item>({
   a: arraySchema(numberSchema),
 }).options({ convert: false })
 
-const jsonSchema: JsonSchema = {
-  type: 'object',
-  properties: {
-    s: { type: 'string' },
-    n1: { type: 'integer' },
-    n2: { type: 'integer' },
-    b1: { type: 'boolean' },
-    a: { type: 'array', items: { type: 'integer' } },
-  },
-  required: ['s', 'n1', 'a'],
-  additionalProperties: false,
-}
+// const jsonSchema1: JsonSchema = {
+//   type: 'object',
+//   properties: {
+//     s: { type: 'string' },
+//     n1: { type: 'integer' },
+//     n2: { type: 'integer' },
+//     b1: { type: 'boolean' },
+//     a: { type: 'array', items: { type: 'integer' } },
+//   },
+//   required: ['s', 'n1', 'a'],
+//   additionalProperties: false,
+// }
 
-const ajvSchema = new AjvSchema(jsonSchema)
+const jsonSchema2 = jsonSchema.object<Item>({
+  s: jsonSchema.string(),
+  n1: jsonSchema.number(),
+  n2: jsonSchema.number().optional(),
+  b1: jsonSchema.boolean().optional(),
+  a: jsonSchema.array(jsonSchema.number()),
+})
+
+const ajvSchema = new AjvSchema(jsonSchema2)
 
 const items = _range(1000).map(id => ({
   s: `id${id}`,
