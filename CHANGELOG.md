@@ -1,3 +1,10 @@
+## [12.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.2...v12.21.3) (2021-08-14)
+
+
+### Bug Fixes
+
+* revert to have SchemaBuilder option ([6ace4b5](https://github.com/NaturalCycles/nodejs-lib/commit/6ace4b5d6fca736778c02888938391d99ea04ad3))
+
 ## [12.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.1...v12.21.2) (2021-08-14)
 
 
