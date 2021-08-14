@@ -1,3 +1,10 @@
+## [12.21.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.1...v12.21.2) (2021-08-14)
+
+
+### Bug Fixes
+
+* simplify/remove JsonSchemaBuilder option ([ca6be9e](https://github.com/NaturalCycles/nodejs-lib/commit/ca6be9e9fc898a1667fd1d5aa8f7f75d0f223661))
+
 ## [12.21.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.0...v12.21.1) (2021-08-14)
 
 
