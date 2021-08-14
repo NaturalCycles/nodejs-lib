@@ -1,6 +1,5 @@
 import {
   JsonSchema,
-  JsonSchemaAnyBuilder,
   _filterNullishValues,
   _isObject,
   _stringifyAny,
@@ -59,9 +58,7 @@ export interface AjvSchemaCfg {
  * @experimental
  */
 export class AjvSchema<T = unknown> {
-  constructor(schema: JsonSchemaAnyBuilder<T> | JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
-    const s = schema instanceof JsonSchemaAnyBuilder ? schema.build() : schema
-
+  constructor(schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
     this.cfg = {
       logErrors: true,
       separator: '\n',
@@ -73,10 +70,10 @@ export class AjvSchema<T = unknown> {
           // verbose: true,
         }),
       // Auto-detecting "ObjectName" from $id of the schema (e.g "Address.schema.json")
-      objectName: cfg.objectName || s.$id ? _substringBefore(s.$id!, '.') : undefined,
+      objectName: cfg.objectName || schema.$id ? _substringBefore(schema.$id!, '.') : undefined,
     }
 
-    this.validateFunction = this.cfg.ajv.compile<T>(s)
+    this.validateFunction = this.cfg.ajv.compile<T>(schema)
   }
 
   private readonly cfg: AjvSchemaCfg
