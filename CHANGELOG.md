@@ -1,3 +1,10 @@
+## [12.22.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.22.0...v12.22.1) (2021-08-15)
+
+
+### Bug Fixes
+
+* ajv objectName bug ([aac437e](https://github.com/NaturalCycles/nodejs-lib/commit/aac437e4721d96dedbaa6ecf794cbb05edd34555))
+
 # [12.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.3...v12.22.0) (2021-08-15)
 
 
