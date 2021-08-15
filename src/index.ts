@@ -119,6 +119,7 @@ import {
   zipBuffer,
   zipString,
 } from './util/zip.util'
+import { readAjvSchemas, readJsonSchemas } from './validation/ajv/ajv.util'
 import { AjvSchema, AjvSchemaCfg, AjvValidationOptions } from './validation/ajv/ajvSchema'
 import { AjvValidationError, AjvValidationErrorData } from './validation/ajv/ajvValidationError'
 import { getAjv } from './validation/ajv/getAjv'
@@ -335,4 +336,6 @@ export {
   getAjv,
   AjvSchema,
   AjvValidationError,
+  readJsonSchemas,
+  readAjvSchemas,
 }

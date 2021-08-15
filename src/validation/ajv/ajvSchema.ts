@@ -7,6 +7,8 @@ import {
   _substringBefore,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
+import * as fs from 'fs'
+import { requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
 
@@ -56,6 +58,9 @@ export interface AjvSchemaCfg {
 }
 
 /**
+ * On creation - compiles ajv validation function.
+ * Provides convenient methods, error reporting, etc.
+ *
  * @experimental
  */
 export class AjvSchema<T = unknown> {
@@ -79,7 +84,20 @@ export class AjvSchema<T = unknown> {
     this.validateFunction = this.cfg.ajv.compile<T>(s)
   }
 
-  private readonly cfg: AjvSchemaCfg
+  /**
+   * Create AjvSchema directly from a filePath of json schema.
+   * Convenient method that just does fs.readFileSync for you.
+   */
+  static readJsonSync<T = unknown>(
+    filePath: string,
+    cfg: Partial<AjvSchemaCfg> = {},
+  ): AjvSchema<T> {
+    requireFileToExist(filePath)
+    const schema = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    return new AjvSchema<T>(schema, cfg)
+  }
+
+  readonly cfg: AjvSchemaCfg
   private readonly validateFunction: ValidateFunction<T>
 
   validate(obj: T, opt: AjvValidationOptions = {}): void {
