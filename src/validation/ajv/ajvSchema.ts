@@ -78,7 +78,7 @@ export class AjvSchema<T = unknown> {
           // verbose: true,
         }),
       // Auto-detecting "ObjectName" from $id of the schema (e.g "Address.schema.json")
-      objectName: cfg.objectName || s.$id ? _substringBefore(s.$id!, '.') : undefined,
+      objectName: cfg.objectName || (s.$id ? _substringBefore(s.$id, '.') : undefined),
     }
 
     this.validateFunction = this.cfg.ajv.compile<T>(s)

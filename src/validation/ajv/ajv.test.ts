@@ -275,3 +275,13 @@ test('transform string', () => {
   schema.validate(obj2)
   expect(obj2).toEqual({ s: 'lo lo lo' })
 })
+
+test('objectName', () => {
+  const s = new AjvSchema(
+    {},
+    {
+      objectName: 'body',
+    },
+  )
+  expect(s.cfg.objectName).toBe('body')
+})
