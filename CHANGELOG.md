@@ -1,3 +1,10 @@
+# [12.22.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.3...v12.22.0) (2021-08-15)
+
+
+### Features
+
+* improve AjvSchema ([dd6cfcd](https://github.com/NaturalCycles/nodejs-lib/commit/dd6cfcd642359c43ad9abf15a32077309e54382c))
+
 ## [12.21.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.21.2...v12.21.3) (2021-08-14)
 
 
