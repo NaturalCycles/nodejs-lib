@@ -1,3 +1,10 @@
+# [12.26.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.25.0...v12.26.0) (2021-08-21)
+
+
+### Features
+
+* refactor/clarify/cleanup stream methods ([288f154](https://github.com/NaturalCycles/nodejs-lib/commit/288f1545044551576e528fe9f71402254809d7ba))
+
 # [12.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.24.0...v12.25.0) (2021-08-21)
 
 
