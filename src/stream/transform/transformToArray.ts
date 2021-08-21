@@ -1,10 +1,10 @@
 import { Transform } from 'stream'
-import { TransformOpt, TransformTyped } from '../stream.model'
+import { TransformOptions, TransformTyped } from '../stream.model'
 
 /**
  * Will collect all stream results in the array (keeping it in memory) and emit in the end as one result.
  */
-export function transformToArray<IN>(opt: TransformOpt = {}): TransformTyped<IN, IN[]> {
+export function transformToArray<IN>(opt: TransformOptions = {}): TransformTyped<IN, IN[]> {
   const res: IN[] = []
 
   return new Transform({
@@ -15,8 +15,7 @@ export function transformToArray<IN>(opt: TransformOpt = {}): TransformTyped<IN,
       // callback to signal that we processed input, but not emitting any output
       cb()
     },
-    final(cb) {
-      // tslint:disable-next-line:no-invalid-this
+    final(this: Transform, cb) {
       this.push(res)
       cb()
     },

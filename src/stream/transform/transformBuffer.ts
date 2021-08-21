@@ -1,11 +1,8 @@
 import { Transform } from 'stream'
-import { TransformOpt, TransformTyped } from '../stream.model'
+import { TransformOptions, TransformTyped } from '../stream.model'
 
-export interface TransformBufferOptions extends TransformOpt {
-  /**
-   * @default 10
-   */
-  batchSize?: number
+export interface TransformBufferOptions extends TransformOptions {
+  batchSize: number
 }
 
 /**
@@ -14,9 +11,9 @@ export interface TransformBufferOptions extends TransformOpt {
  * @default batchSize is 10
  */
 export function transformBuffer<IN = Record<string, any>>(
-  opt: TransformBufferOptions = {},
+  opt: TransformBufferOptions,
 ): TransformTyped<IN, IN[]> {
-  const { batchSize = 10 } = opt
+  const { batchSize } = opt
 
   let buf: IN[] = []
 
@@ -33,9 +30,8 @@ export function transformBuffer<IN = Record<string, any>>(
         cb()
       }
     },
-    final(cb) {
+    final(this: Transform, cb) {
       if (buf.length) {
-        // tslint:disable-next-line:no-invalid-this
         this.push(buf)
         buf = []
       }

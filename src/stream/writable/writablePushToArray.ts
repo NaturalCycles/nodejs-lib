@@ -1,10 +1,10 @@
 import { Writable } from 'stream'
-import { TransformOpt, WritableTyped } from '../stream.model'
+import { TransformOptions, WritableTyped } from '../stream.model'
 
 /**
  * Will push all results to `arr`, will emit nothing in the end.
  */
-export function writablePushToArray<IN>(arr: IN[], opt: TransformOpt = {}): WritableTyped<IN> {
+export function writablePushToArray<IN>(arr: IN[], opt: TransformOptions = {}): WritableTyped<IN> {
   return new Writable({
     objectMode: true,
     ...opt,

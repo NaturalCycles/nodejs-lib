@@ -1,6 +1,6 @@
 import { Writable } from 'stream'
 import { readableCreate, ReadableTyped, _pipeline } from '../..'
-import { TransformOpt, WritableTyped } from '../stream.model'
+import { TransformOptions, WritableTyped } from '../stream.model'
 
 /**
  * Allows "forking" a stream inside pipeline into a number of pipeline chains (2 or more).
@@ -10,7 +10,7 @@ import { TransformOpt, WritableTyped } from '../stream.model'
  */
 export function writableFork<T>(
   chains: NodeJS.WritableStream[][],
-  opt?: TransformOpt,
+  opt?: TransformOptions,
 ): WritableTyped<T> {
   const readables: ReadableTyped<T>[] = []
 

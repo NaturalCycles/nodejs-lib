@@ -1,6 +1,6 @@
 import { AsyncMapper } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
-import { TransformOpt, TransformTyped } from '../stream.model'
+import { TransformOptions, TransformTyped } from '../stream.model'
 
 /**
  * Similar to RxJS `tap` - allows to run a function for each stream item, without affecting the result.
@@ -10,7 +10,7 @@ import { TransformOpt, TransformTyped } from '../stream.model'
  */
 export function transformTap<IN>(
   fn: AsyncMapper<IN, any>,
-  opt: TransformOpt = {},
+  opt: TransformOptions = {},
 ): TransformTyped<IN, IN> {
   let index = 0
 

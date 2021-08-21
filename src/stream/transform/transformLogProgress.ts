@@ -3,9 +3,9 @@ import { dayjs } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect, InspectOptions } from 'util'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
-import { TransformOpt, TransformTyped } from '../stream.model'
+import { TransformOptions, TransformTyped } from '../stream.model'
 
-export interface TransformLogProgressOptions<IN = any> extends TransformOpt {
+export interface TransformLogProgressOptions<IN = any> extends TransformOptions {
   /**
    * Progress metric
    *
@@ -96,11 +96,16 @@ const inspectOpt: InspectOptions = {
 export function transformLogProgress<IN = any>(
   opt: TransformLogProgressOptions = {},
 ): TransformTyped<IN, IN> {
-  const { metric = 'progress', heapTotal: logHeapTotal = false, logEvery = 1000, extra } = opt
+  const {
+    metric = 'progress',
+    heapTotal: logHeapTotal = false,
+    heapUsed: logHeapUsed = true,
+    rss: logRss = true,
+    logRPS = true,
+    logEvery = 1000,
+    extra,
+  } = opt
   const logProgress = opt.logProgress !== false && logEvery !== 0 // true by default
-  const logHeapUsed = opt.heapUsed !== false // true by default
-  const logRss = opt.rss !== false // true by default
-  const logRPS = opt.logRPS !== false // true by default
   const logEvery10 = logEvery * 10
 
   const started = Date.now()

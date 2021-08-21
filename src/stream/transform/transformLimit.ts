@@ -1,10 +1,13 @@
 import { Transform } from 'stream'
-import { TransformOpt, TransformTyped } from '../stream.model'
+import { TransformOptions, TransformTyped } from '../stream.model'
 
 /**
  * 0 or falsy value means "no limit"
  */
-export function transformLimit<IN>(limit?: number, opt: TransformOpt = {}): TransformTyped<IN, IN> {
+export function transformLimit<IN>(
+  limit?: number,
+  opt: TransformOptions = {},
+): TransformTyped<IN, IN> {
   let index = 0
   let ended = false
 

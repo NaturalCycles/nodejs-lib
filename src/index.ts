@@ -74,26 +74,22 @@ import { readableMap } from './stream/readable/readableMap'
 import { readableToArray } from './stream/readable/readableToArray'
 import {
   ReadableTyped,
-  StreamForEachOptions,
-  TransformOpt,
+  TransformOptions,
   TransformTyped,
   WritableTyped,
 } from './stream/stream.model'
 import { transformBuffer } from './stream/transform/transformBuffer'
-import { transformConcurrent } from './stream/transform/transformConcurrent'
-import { transformFilter } from './stream/transform/transformFilter'
+import { transformFilter, transformFilterSync } from './stream/transform/transformFilter'
 import { transformLimit } from './stream/transform/transformLimit'
 import {
   transformLogProgress,
   TransformLogProgressOptions,
 } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
-import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
 import { transformMapSimple } from './stream/transform/transformMapSimple'
 import { transformMapSync, TransformMapSyncOptions } from './stream/transform/transformMapSync'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
-import { transformThrough } from './stream/transform/transformThrough'
 import { transformToArray } from './stream/transform/transformToArray'
 import { transformToString } from './stream/transform/transformToString'
 import { BaseWorkerClass, WorkerClassInterface } from './stream/transform/worker/baseWorkerClass'
@@ -197,11 +193,9 @@ export type {
   TransformToNDJsonOptions,
   TransformMapOptions,
   TransformMapSyncOptions,
-  MultiMapper,
   NDJSONStreamForEachOptions,
-  TransformOpt,
+  TransformOptions,
   TransformLogProgressOptions,
-  StreamForEachOptions,
   TransformMultiThreadedOptions,
   WorkerClassInterface,
   WorkerInput,
@@ -308,14 +302,12 @@ export {
   transformJsonParse,
   bufferReviver,
   transformToNDJson,
-  transformThrough,
-  transformConcurrent,
   transformFilter,
+  transformFilterSync,
   transformMap,
   transformMapSync,
   transformMapSimple,
   writableForEach,
-  transformMapMulti,
   writablePushToArray,
   transformSplit,
   transformToString,
