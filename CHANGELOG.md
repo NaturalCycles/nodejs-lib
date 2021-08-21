@@ -1,3 +1,10 @@
+# [12.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.22.1...v12.23.0) (2021-08-21)
+
+
+### Features
+
+* readableForEach, readableForEachSync ([ebc20ed](https://github.com/NaturalCycles/nodejs-lib/commit/ebc20ed4e2daa17926a2a73392259aedbf959d86))
+
 ## [12.22.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.22.0...v12.22.1) (2021-08-15)
 
 
