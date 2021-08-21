@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra'
 import { dimGrey } from '../colors'
 
-export interface Json2EnvOpts {
+export interface Json2EnvOptions {
   jsonPath: string
   prefix?: string
 
@@ -24,13 +24,13 @@ export interface Json2EnvOpts {
   silent?: boolean
 }
 
-const JSON2ENV_OPT_DEF: Partial<Json2EnvOpts> = {
+const JSON2ENV_OPT_DEF: Partial<Json2EnvOptions> = {
   saveEnvFile: true,
   bashEnv: true,
   fail: true,
 }
 
-export function json2env(opt: Json2EnvOpts): void {
+export function json2env(opt: Json2EnvOptions): void {
   const { jsonPath, prefix, saveEnvFile, bashEnv, fail, debug, silent } = {
     ...JSON2ENV_OPT_DEF,
     ...opt,
