@@ -1,3 +1,10 @@
+# [12.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.23.0...v12.24.0) (2021-08-21)
+
+
+### Features
+
+* readableToArray ([158452d](https://github.com/NaturalCycles/nodejs-lib/commit/158452da32d9d2d40c590b6868399e63e605e922))
+
 # [12.23.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.22.1...v12.23.0) (2021-08-21)
 
 
