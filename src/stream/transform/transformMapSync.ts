@@ -1,9 +1,9 @@
-import { ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
+import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
+import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
-import { notNullishPredicate, TransformMapOptions } from './transformMap'
+import { notNullishPredicate } from './transformMap'
 
-// todo: not all options are implemented
 export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   /**
    * @default true
@@ -15,7 +15,6 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
    * Set true to support "multiMap" - possibility to return [] and emit 1 result for each item in the array.
    */
   flattenArrayOutput?: boolean
-  // todo
 
   /**
    * Predicate to filter outgoing results (after mapper).
@@ -52,23 +51,29 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
  */
 export function transformMapSync<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT>,
-  opt: TransformMapOptions = {},
+  opt: TransformMapSyncOptions = {},
 ): TransformTyped<IN, OUT> {
   let index = 0
 
   const {
     predicate = notNullishPredicate,
-    // errorMode = ErrorMode.THROW_IMMEDIATELY,
-    // flattenArrayOutput,
-    // onError,
-    // metric = 'stream',
+    errorMode = ErrorMode.THROW_IMMEDIATELY,
+    flattenArrayOutput = false,
+    onError,
+    metric = 'stream',
+    objectMode = true,
   } = opt
-  const objectMode = opt.objectMode !== false // default true
+  let isRejected = false
+  let errors = 0
+  const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
 
   return new Transform({
     objectMode,
     ...opt,
-    transform(chunk: IN, _encoding, cb) {
+    transform(this: Transform, chunk: IN, _encoding, cb) {
+      // Stop processing if THROW_IMMEDIATELY mode is used
+      if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
+
       try {
         if (!predicate(chunk, index++)) {
           cb() // signal that we've finished processing, but emit no output here
@@ -76,12 +81,57 @@ export function transformMapSync<IN = any, OUT = IN>(
         }
 
         // map and pass through
-        cb(null, mapper(chunk, index))
+        const v = mapper(chunk, index)
+
+        if (flattenArrayOutput && Array.isArray(v)) {
+          // Pass each item individually
+          v.forEach(item => this.push(item))
+        } else {
+          cb(null, v)
+        }
       } catch (err) {
-        // todo: implement error handling
-        // console.error(err)
-        cb(err)
+        console.error(err)
+        errors++
+
+        logErrorStats()
+
+        if (onError) {
+          try {
+            onError(err, chunk)
+          } catch {}
+        }
+
+        if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
+          isRejected = true
+          // Emit error immediately
+          return cb(err)
+        }
+
+        if (errorMode === ErrorMode.THROW_AGGREGATED) {
+          collectedErrors.push(err)
+        }
+
+        cb()
+      }
+    },
+    final(cb) {
+      // console.log('transformMap final')
+
+      logErrorStats(true)
+
+      if (collectedErrors.length) {
+        // emit Aggregated error
+        cb(new AggregatedError(collectedErrors))
+      } else {
+        // emit no error
+        cb()
       }
     },
   })
+
+  function logErrorStats(final = false): void {
+    if (!errors) return
+
+    console.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
+  }
 }

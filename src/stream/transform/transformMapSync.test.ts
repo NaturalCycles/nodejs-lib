@@ -1,6 +1,7 @@
 import { _range } from '@naturalcycles/js-lib'
 import { Readable } from 'stream'
 import { writableVoid, _pipeline } from '../..'
+import { transformMapSimple } from './transformMapSimple'
 import { transformMapSync } from './transformMapSync'
 
 interface Item {
@@ -17,4 +18,19 @@ test('transformMapSync simple', async () => {
 
   expect(data2).toEqual(data)
   // expect(readable.destroyed).toBe(true)
+})
+
+test('transformMapSimple', async () => {
+  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
+  const readable = Readable.from(data)
+
+  const data2: Item[] = []
+
+  await _pipeline([
+    readable,
+    transformMapSimple<Item, void>(r => void data2.push(r)),
+    writableVoid(),
+  ])
+
+  expect(data2).toEqual(data)
 })

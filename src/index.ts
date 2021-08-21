@@ -70,6 +70,7 @@ import { _pipeline } from './stream/pipeline/pipeline'
 import { readableCreate, readableFrom } from './stream/readable/readableCreate'
 import { readableForEach, readableForEachSync } from './stream/readable/readableForEach'
 import { readableFromArray } from './stream/readable/readableFromArray'
+import { readableMap } from './stream/readable/readableMap'
 import { readableToArray } from './stream/readable/readableToArray'
 import {
   ReadableTyped,
@@ -88,6 +89,7 @@ import {
 } from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
 import { MultiMapper, transformMapMulti } from './stream/transform/transformMapMulti'
+import { transformMapSimple } from './stream/transform/transformMapSimple'
 import { transformMapSync, TransformMapSyncOptions } from './stream/transform/transformMapSync'
 import { transformSplit } from './stream/transform/transformSplit'
 import { transformTap } from './stream/transform/transformTap'
@@ -293,6 +295,7 @@ export {
   readableToArray,
   readableForEach,
   readableForEachSync,
+  readableMap,
   _pipeline,
   transformBuffer,
   ndJsonFileRead,
@@ -310,6 +313,7 @@ export {
   transformFilter,
   transformMap,
   transformMapSync,
+  transformMapSimple,
   writableForEach,
   transformMapMulti,
   writablePushToArray,

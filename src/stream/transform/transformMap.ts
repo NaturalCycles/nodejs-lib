@@ -97,8 +97,8 @@ export function transformMap<IN = any, OUT = IN>(
     beforeFinal,
     afterFinal,
     metric = 'stream',
+    objectMode = true,
   } = opt
-  const objectMode = opt.objectMode !== false // default true
 
   let index = 0
   let isRejected = false
