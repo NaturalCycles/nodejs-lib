@@ -67,8 +67,8 @@ import {
 } from './stream/ndjson/transformJsonParse'
 import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
 import { _pipeline } from './stream/pipeline/pipeline'
-import { pipelineToArray } from './stream/pipeline/pipelineToArray'
 import { readableCreate, readableFrom } from './stream/readable/readableCreate'
+import { readableForEach, readableForEachSync } from './stream/readable/readableForEach'
 import { readableFromArray } from './stream/readable/readableFromArray'
 import {
   ReadableTyped,
@@ -77,9 +77,6 @@ import {
   TransformTyped,
   WritableTyped,
 } from './stream/stream.model'
-import { streamForEach } from './stream/streamForEach'
-import { streamJoinToString } from './stream/streamJoinToString'
-import { streamMapToArray } from './stream/streamMapToArray'
 import { transformBuffer } from './stream/transform/transformBuffer'
 import { transformConcurrent } from './stream/transform/transformConcurrent'
 import { transformFilter } from './stream/transform/transformFilter'
@@ -292,8 +289,9 @@ export {
   readableCreate,
   readableFrom,
   readableFromArray,
+  readableForEach,
+  readableForEachSync,
   _pipeline,
-  streamJoinToString,
   transformBuffer,
   ndJsonFileRead,
   ndJsonFileWrite,
@@ -306,7 +304,6 @@ export {
   bufferReviver,
   transformToNDJson,
   transformThrough,
-  pipelineToArray,
   transformConcurrent,
   transformFilter,
   transformMap,
@@ -320,8 +317,6 @@ export {
   transformTap,
   transformLogProgress,
   transformLimit,
-  streamForEach,
-  streamMapToArray,
   writableVoid,
   writableFork,
   transformMultiThreaded,
