@@ -70,6 +70,7 @@ import { _pipeline } from './stream/pipeline/pipeline'
 import { readableCreate, readableFrom } from './stream/readable/readableCreate'
 import { readableForEach, readableForEachSync } from './stream/readable/readableForEach'
 import { readableFromArray } from './stream/readable/readableFromArray'
+import { readableToArray } from './stream/readable/readableToArray'
 import {
   ReadableTyped,
   StreamForEachOptions,
@@ -289,6 +290,7 @@ export {
   readableCreate,
   readableFrom,
   readableFromArray,
+  readableToArray,
   readableForEach,
   readableForEachSync,
   _pipeline,
