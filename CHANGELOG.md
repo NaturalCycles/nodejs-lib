@@ -1,3 +1,10 @@
+# [12.25.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.24.0...v12.25.0) (2021-08-21)
+
+
+### Features
+
+* readableMap, transformMapSimple ([3cd114f](https://github.com/NaturalCycles/nodejs-lib/commit/3cd114f254daa62286f2c21f30385a507c426aed))
+
 # [12.24.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.23.0...v12.24.0) (2021-08-21)
 
 
