@@ -71,6 +71,7 @@ import { readableCreate, readableFrom } from './stream/readable/readableCreate'
 import { readableForEach, readableForEachSync } from './stream/readable/readableForEach'
 import { readableFromArray } from './stream/readable/readableFromArray'
 import { readableMap } from './stream/readable/readableMap'
+import { readableMapToArray } from './stream/readable/readableMapToArray'
 import { readableToArray } from './stream/readable/readableToArray'
 import {
   ReadableTyped,
@@ -290,6 +291,7 @@ export {
   readableForEach,
   readableForEachSync,
   readableMap,
+  readableMapToArray,
   _pipeline,
   transformBuffer,
   ndJsonFileRead,
