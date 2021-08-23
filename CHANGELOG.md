@@ -1,3 +1,10 @@
+# [12.27.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.26.0...v12.27.0) (2021-08-23)
+
+
+### Features
+
+* restore `readableMapToArray` ([f1a908b](https://github.com/NaturalCycles/nodejs-lib/commit/f1a908b140d7537290d1044a3b6b691aefc4469f))
+
 # [12.26.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.25.0...v12.26.0) (2021-08-21)
 
 
