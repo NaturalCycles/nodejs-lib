@@ -1,3 +1,10 @@
+## [12.30.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.30.0...v12.30.1) (2021-08-24)
+
+
+### Bug Fixes
+
+* transformMapSimple to support SUPPRESS ([146a94d](https://github.com/NaturalCycles/nodejs-lib/commit/146a94d4159be4c5236bd9c71cd33b1816eb8a20))
+
 # [12.30.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.29.0...v12.30.0) (2021-08-24)
 
 

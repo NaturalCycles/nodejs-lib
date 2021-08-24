@@ -1,6 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
-  "version": "12.30.0",
+  "version": "12.30.1",
   "scripts": {
     "prepare": "husky install",
     "docs-serve": "vuepress dev docs",
