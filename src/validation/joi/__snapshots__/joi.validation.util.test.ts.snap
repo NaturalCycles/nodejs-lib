@@ -65,7 +65,7 @@ Object {
 `;
 
 exports[`getValidationResult should still convert 1`] = `
-[JoiValidationError: objName
+[JoiValidationError: Invalid objName
 {
   "a1": " ff ",
   "a2" [1]: "a"
@@ -116,7 +116,7 @@ exports[`should fail on invalid values 8`] = `
 `;
 
 exports[`should include id in the error message 1`] = `
-"Object.someId
+"Invalid Object.someId
 {
   \\"id\\": \\"someId\\",
   \\"a1\\" [1]: -- missing --
@@ -146,7 +146,7 @@ Object {
 `;
 
 exports[`should include id in the error message 3`] = `
-"ObjName.someId
+"Invalid ObjName.someId
 {
   \\"id\\": \\"someId\\",
   \\"a1\\" [1]: -- missing --
@@ -176,7 +176,7 @@ Object {
 `;
 
 exports[`should include id in the error message 5`] = `
-"Obj1.someId
+"Invalid Obj1.someId
 {
   \\"id\\": \\"someId\\",
   \\"a1\\" [1]: -- missing --

@@ -141,7 +141,7 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   if (objectId || objectName) {
     objectName = objectName || value?.constructor?.name
 
-    tokens.push([objectName, objectId].filter(Boolean).join('.'))
+    tokens.push('Invalid ' + [objectName, objectId].filter(Boolean).join('.'))
   }
 
   const annotation = err.annotate(stripColors)
