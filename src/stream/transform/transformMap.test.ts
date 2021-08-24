@@ -8,7 +8,7 @@ interface Item {
 }
 
 // Mapper that throws 'my error' on third id
-const mapperError3: AsyncMapper<Item, Item> = item => {
+const mapperError3: AsyncMapper<Item, Item> = (item, _i) => {
   if (item.id === '3') throw new Error('my error')
   return item
 }

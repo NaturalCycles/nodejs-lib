@@ -1,32 +1,32 @@
 import { AppError, ErrorMode, pTuple, _range } from '@naturalcycles/js-lib'
 import { Readable } from 'stream'
-import { writableVoid, _pipeline } from '../..'
-import { transformMapSync } from './transformMapSync'
+import { _pipeline } from '../pipeline/pipeline'
+import { writableVoid } from '../writable/writableVoid'
+import { transformMapSimple } from './transformMapSimple'
 
-interface Item {
-  id: string
-}
-
-test('transformMapSync simple', async () => {
-  const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
+test('transformMapSimple', async () => {
+  const data = _range(1, 4).map(String)
   const readable = Readable.from(data)
 
-  const data2: Item[] = []
+  const data2: string[] = []
 
-  await _pipeline([readable, transformMapSync<Item, void>(r => void data2.push(r)), writableVoid()])
+  await _pipeline([
+    readable,
+    transformMapSimple<string, void>(r => void data2.push(r)),
+    writableVoid(),
+  ])
 
   expect(data2).toEqual(data)
-  // expect(readable.destroyed).toBe(true)
 })
 
-test('transformMapSync error', async () => {
+test('transformMapSimple error', async () => {
   const data = _range(100).map(String)
 
   const data2: string[] = []
   const [err] = await pTuple(
     _pipeline([
       Readable.from(data),
-      transformMapSync<string, void>((r, i) => {
+      transformMapSimple<string, void>((r, i) => {
         if (i === 50) {
           throw new AppError('error on 50th')
         }
@@ -43,13 +43,13 @@ test('transformMapSync error', async () => {
   expect(data2).toEqual(data.slice(0, 50))
 })
 
-test('transformMapSync suppressed error', async () => {
+test('transformMapSimple suppressed error', async () => {
   const data = _range(100).map(String)
 
   const data2: string[] = []
   await _pipeline([
     Readable.from(data),
-    transformMapSync<string, void>(
+    transformMapSimple<string, void>(
       (r, i) => {
         if (i === 50) {
           throw new AppError('error on 50th')

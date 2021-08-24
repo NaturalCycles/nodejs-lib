@@ -100,7 +100,7 @@ export function transformMap<IN = any, OUT = IN>(
     objectMode = true,
   } = opt
 
-  let index = 0
+  let index = -1
   let isRejected = false
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
@@ -133,13 +133,14 @@ export function transformMap<IN = any, OUT = IN>(
       _encoding: any,
       cb: (...args: any[]) => any,
     ) {
+      index++
       // console.log({chunk, _encoding})
 
       // Stop processing if THROW_IMMEDIATELY mode is used
       if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
 
       try {
-        const currentIndex = index++ // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
+        const currentIndex = index // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
         const res = await mapper(chunk, currentIndex)
         const passedResults = await pFilter(
           flattenArrayOutput && Array.isArray(res) ? res : [res],

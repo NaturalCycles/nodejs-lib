@@ -53,7 +53,7 @@ export function transformMapSync<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT>,
   opt: TransformMapSyncOptions = {},
 ): TransformTyped<IN, OUT> {
-  let index = 0
+  let index = -1
 
   const {
     predicate = notNullishPredicate,
@@ -72,10 +72,12 @@ export function transformMapSync<IN = any, OUT = IN>(
     ...opt,
     transform(this: Transform, chunk: IN, _encoding, cb) {
       // Stop processing if THROW_IMMEDIATELY mode is used
-      if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
+      if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) {
+        return cb()
+      }
 
       try {
-        if (!predicate(chunk, index++)) {
+        if (!predicate(chunk, ++index)) {
           cb() // signal that we've finished processing, but emit no output here
           return
         }
