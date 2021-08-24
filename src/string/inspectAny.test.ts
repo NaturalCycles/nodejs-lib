@@ -3,8 +3,12 @@ import { _range } from '@naturalcycles/js-lib'
 import { inspectAny } from '../index'
 
 test('inspectAny', () => {
+  expectResults(v => inspectAny(v), mockAllKindsOfThings()).toMatchSnapshot()
+})
+
+test('inspectAny includeErrorData', () => {
   expectResults(
-    v => inspectAny(v, { noErrorStack: true }),
+    v => inspectAny(v, { includeErrorData: true }),
     mockAllKindsOfThings(),
   ).toMatchSnapshot()
 })

@@ -1,4 +1,4 @@
-import { _isHttpErrorResponse, _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
+import { _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { URL } from 'url'
 import { inspectAny } from '..'
@@ -64,11 +64,9 @@ export function getGot(opt: GetGotOptions = {}): Got {
  * 3. Auto-detects and parses JSON response body (limited length).
  * 4. Includes time spent (gotBeforeRequestHook must also be enabled).
  * UPD: excluded now to allow automatic Sentry error grouping
- *
- * todo (try): Return error as familiar/convenient js-lib's HttpError (not got's HTTPError)
  */
 function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
-  const { maxResponseLength = 10000 } = opt
+  const { maxResponseLength = 10_000 } = opt
 
   return err => {
     if (err instanceof HTTPError) {
@@ -77,15 +75,7 @@ function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
       const shortUrl = getShortUrl(opt, url, prefixUrl)
       // const { started } = context as GotRequestContext
 
-      // Auto-detect and prettify JSON response (if any)
-      let body = _jsonParseIfPossible(err.response.body)
-
-      // Detect HttpErrorResponse
-      if (_isHttpErrorResponse(body)) {
-        body = body.error
-      }
-
-      body = inspectAny(body, {
+      const body = inspectAny(err.response.body, {
         maxLen: maxResponseLength,
         colors: false,
       })

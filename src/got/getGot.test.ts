@@ -1,7 +1,7 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
-import { _anyToErrorObject, _range } from '@naturalcycles/js-lib'
+import { pTuple, _anyToErrorObject, _range } from '@naturalcycles/js-lib'
 import nock = require('nock')
-import { arraySchema, getValidationResult, integerSchema, objectSchema } from '..'
+import { arraySchema, getValidationResult, HTTPError, integerSchema, objectSchema } from '..'
 import { getGot } from './getGot'
 
 beforeAll(() => {
@@ -59,11 +59,14 @@ test('gotErrorHook', async () => {
 })
 
 test('backend error', async () => {
-  await expect(
+  const [err] = await pTuple(
     _got.get('http://a.com/backendErr', {
       searchParams: { q: 1 },
     }),
-  ).rejects.toThrowErrorMatchingSnapshot()
+  )
+
+  expect(err).toBeInstanceOf(HTTPError)
+  expect(err).toMatchSnapshot()
 })
 
 test('logWithSearchParams=false', async () => {
