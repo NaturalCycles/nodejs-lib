@@ -1,3 +1,10 @@
+# [12.30.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.29.0...v12.30.0) (2021-08-24)
+
+
+### Features
+
+* more verbose/friendly joi error messages ([a5d3e2a](https://github.com/NaturalCycles/nodejs-lib/commit/a5d3e2a48c52ec700c86778161545f8874fb203f))
+
 # [12.29.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.28.0...v12.29.0) (2021-08-24)
 
 
