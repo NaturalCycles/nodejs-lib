@@ -1,5 +1,6 @@
 import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
-import { JsonSchema, _stringifyAny, _try } from '@naturalcycles/js-lib'
+import { JsonSchema, _try } from '@naturalcycles/js-lib'
+import { inspectAny } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
 import { AjvValidationError } from './ajvValidationError'
@@ -76,9 +77,7 @@ test('simple', () => {
   // Object id from object
   expect(() => schema.validate({ id: 'id2' } as any)).toThrowErrorMatchingInlineSnapshot(`
     "simple.id2 must have required property 's'
-    Input: {
-      \\"id\\": \\"id2\\"
-    }"
+    Input: { id: 'id2' }"
   `)
 
   // logErrors
@@ -109,9 +108,7 @@ test('TestType', () => {
   expect(() => schema.validate(invalid1)).toThrowErrorMatchingInlineSnapshot(`
     "TestType must have required property 'n'
     TestType must have required property 's2'
-    Input: {
-      \\"s\\": \\"s\\"
-    }"
+    Input: { s: 's' }"
   `)
 
   const invalid2 = {
@@ -120,20 +117,13 @@ test('TestType', () => {
   } as TestType
   expect(() => schema.validate(invalid2)).toThrowErrorMatchingInlineSnapshot(`
     "TestType must have required property 's2'
-    Input: {
-      \\"s\\": \\"s\\",
-      \\"n\\": null
-    }"
+    Input: { s: 's', n: null }"
   `)
 })
 
 // todo:
-// custom: unixTimestamp
 // email TLD! (as in Joi)
-// email should lowercase itself! But how? No, it should only transform Inputs, but not "data in rest"
 // url format (require https?)
-// id? custom regex format
-// check other standard joi schemas that we currently support
 
 test.each([
   [{ type: 'string' }, ['', 'lo']],
@@ -201,7 +191,7 @@ test.each([
   objects.forEach(obj => {
     if (ajvSchema.isValid(obj)) {
       console.log(obj, 'should be invalid for schema:', schema)
-      throw new Error(`${_stringifyAny(obj)} should be invalid for ${_stringifyAny(schema)}`)
+      throw new Error(`${inspectAny(obj)} should be invalid for ${inspectAny(schema)}`)
     }
   })
 })

@@ -3,12 +3,11 @@ import {
   JsonSchemaAnyBuilder,
   _filterNullishValues,
   _isObject,
-  _stringifyAny,
   _substringBefore,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
 import * as fs from 'fs'
-import { requireFileToExist } from '../../index'
+import { inspectAny, requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
 
@@ -123,7 +122,7 @@ export class AjvSchema<T = unknown> {
       separator,
     })
 
-    const strValue = _stringifyAny(obj, { maxLen: 1000 })
+    const strValue = inspectAny(obj, { maxLen: 1000 })
     message = [message, 'Input: ' + strValue].join(separator)
 
     if (logErrors) {
