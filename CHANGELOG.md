@@ -1,3 +1,10 @@
+# [12.29.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.28.0...v12.29.0) (2021-08-24)
+
+
+### Features
+
+* use inspectAny instead of _stringifyAny ([7fd6d4d](https://github.com/NaturalCycles/nodejs-lib/commit/7fd6d4db2ac18752e7d1c3b9b2a7a0b6e54af828))
+
 # [12.28.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.27.0...v12.28.0) (2021-08-24)
 
 
