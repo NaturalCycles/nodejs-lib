@@ -24,7 +24,7 @@ export function transformFilter<IN = any>(
           cb() // signal that we've finished processing, but emit no output here
         }
       } catch (err) {
-        cb(err)
+        cb(err as Error)
       }
     },
   })
@@ -50,7 +50,7 @@ export function transformFilterSync<IN = any>(
           cb() // signal that we've finished processing, but emit no output here
         }
       } catch (err) {
-        cb(err)
+        cb(err as Error)
       }
     },
   })

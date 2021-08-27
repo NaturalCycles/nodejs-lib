@@ -41,7 +41,7 @@ export function transformJsonParse<OUT = Record<string, any>>(
       } catch (err) {
         // console.error(err)
         if (strict) {
-          cb(err) // emit error
+          cb(err as Error) // emit error
         } else {
           cb() // emit no error, but no result neither
         }

@@ -48,7 +48,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * If defined - will be called on every error happening in the stream.
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
-  onError?: (err: Error, input: IN) => any
+  onError?: (err: unknown, input: IN) => any
 
   /**
    * Progress metric
@@ -176,7 +176,7 @@ export function transformMap<IN = any, OUT = IN>(
         }
 
         if (errorMode === ErrorMode.THROW_AGGREGATED) {
-          collectedErrors.push(err)
+          collectedErrors.push(err as Error)
         }
 
         // Tell input stream that we're done processing, but emit nothing to output - not error nor result

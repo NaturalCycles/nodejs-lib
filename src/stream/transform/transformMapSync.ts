@@ -35,7 +35,7 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
    * If defined - will be called on every error happening in the stream.
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
-  onError?: (err: Error, input: IN) => any
+  onError?: (err: unknown, input: IN) => any
 
   /**
    * Progress metric
@@ -106,11 +106,11 @@ export function transformMapSync<IN = any, OUT = IN>(
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isRejected = true
           // Emit error immediately
-          return cb(err)
+          return cb(err as Error)
         }
 
         if (errorMode === ErrorMode.THROW_AGGREGATED) {
-          collectedErrors.push(err)
+          collectedErrors.push(err as Error)
         }
 
         cb()

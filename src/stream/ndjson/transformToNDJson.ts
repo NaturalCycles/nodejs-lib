@@ -42,7 +42,7 @@ export function transformToNDJson<IN = any>(
         console.error(err)
 
         if (strict) {
-          cb(err) // emit error
+          cb(err as Error) // emit error
         } else {
           cb() // emit no error, but no result neither
         }

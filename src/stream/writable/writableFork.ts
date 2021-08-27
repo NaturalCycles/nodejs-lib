@@ -46,7 +46,7 @@ export function writableFork<T>(
         console.log(`writableFork.final all chains done`)
         cb()
       } catch (err) {
-        cb(err)
+        cb(err as Error)
       }
     },
   })

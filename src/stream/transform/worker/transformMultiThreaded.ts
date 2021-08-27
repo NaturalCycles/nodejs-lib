@@ -112,7 +112,7 @@ export function transformMultiThreaded<IN, OUT>(
 
           cb()
         } catch (err) {
-          cb(err)
+          cb(err as Error)
         }
       },
     },

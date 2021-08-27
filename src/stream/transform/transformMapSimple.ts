@@ -39,7 +39,7 @@ export function transformMapSimple<IN = any, OUT = IN>(
           cb() // suppress the error
         } else {
           // Emit the error
-          cb(err)
+          cb(err as Error)
         }
       }
     },
