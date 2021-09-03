@@ -1,3 +1,10 @@
+# [12.32.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.31.0...v12.32.0) (2021-09-03)
+
+
+### Features
+
+* AjvSchema.validate now also returns the object ([000f34a](https://github.com/NaturalCycles/nodejs-lib/commit/000f34a1544a97d9700006b77358125c1826e0ed))
+
 # [12.31.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.30.1...v12.31.0) (2021-08-27)
 
 
