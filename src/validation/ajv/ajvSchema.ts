@@ -54,6 +54,15 @@ export interface AjvSchemaCfg {
    * @default true
    */
   logErrors: boolean
+
+  /**
+   * Option of Ajv.
+   * If set to true - will mutate your input objects!
+   * Defaults to false.
+   *
+   * This option is a "shortcut" to skip creating and passing Ajv instance.
+   */
+  coerceTypes?: boolean
 }
 
 /**
@@ -74,6 +83,7 @@ export class AjvSchema<T = unknown> {
         cfg.ajv ||
         getAjv({
           schemas: cfg.schemas,
+          coerceTypes: cfg.coerceTypes || false,
           // verbose: true,
         }),
       // Auto-detecting "ObjectName" from $id of the schema (e.g "Address.schema.json")
@@ -99,9 +109,18 @@ export class AjvSchema<T = unknown> {
   readonly cfg: AjvSchemaCfg
   private readonly validateFunction: ValidateFunction<T>
 
-  validate(obj: T, opt: AjvValidationOptions = {}): void {
+  /**
+   * It returns the original object just for convenience.
+   * Reminder: Ajv will MUTATE your object under 2 circumstances:
+   * 1. `useDefaults` option (enabled by default!), which will set missing/empty values that have `default` set in the schema.
+   * 2. `coerceTypes` (false by default).
+   *
+   * Returned object is always the same object (`===`) that was passed, so it is returned just for convenience.
+   */
+  validate(obj: T, opt: AjvValidationOptions = {}): T {
     const err = this.getValidationError(obj, opt)
     if (err) throw err
+    return obj
   }
 
   getValidationError(obj: T, opt: AjvValidationOptions = {}): AjvValidationError | undefined {
