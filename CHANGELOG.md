@@ -1,3 +1,10 @@
+# [12.33.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.32.0...v12.33.0) (2021-09-04)
+
+
+### Features
+
+* change AjvSchema constructor to `create` method ([3416854](https://github.com/NaturalCycles/nodejs-lib/commit/34168541e0e826b6bae7d638e0b92bcbcacd4f0e))
+
 # [12.32.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.31.0...v12.32.0) (2021-09-03)
 
 
