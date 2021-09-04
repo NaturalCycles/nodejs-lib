@@ -1,5 +1,6 @@
 import {
   JsonSchema,
+  JsonSchemaAny,
   JsonSchemaAnyBuilder,
   _filterNullishValues,
   _isObject,
@@ -72,9 +73,7 @@ export interface AjvSchemaCfg {
  * @experimental
  */
 export class AjvSchema<T = unknown> {
-  constructor(schema: JsonSchema<T> | JsonSchemaAnyBuilder<T>, cfg: Partial<AjvSchemaCfg> = {}) {
-    const s = schema instanceof JsonSchemaAnyBuilder ? schema.build() : schema
-
+  private constructor(schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
     this.cfg = {
       logErrors: true,
       separator: '\n',
@@ -87,10 +86,30 @@ export class AjvSchema<T = unknown> {
           // verbose: true,
         }),
       // Auto-detecting "ObjectName" from $id of the schema (e.g "Address.schema.json")
-      objectName: cfg.objectName || (s.$id ? _substringBefore(s.$id, '.') : undefined),
+      objectName: cfg.objectName || (schema.$id ? _substringBefore(schema.$id, '.') : undefined),
     }
 
-    this.validateFunction = this.cfg.ajv.compile<T>(s)
+    this.validateFunction = this.cfg.ajv.compile<T>(schema)
+  }
+
+  /**
+   * Conveniently allows to pass either JsonSchema or JsonSchemaAnyBuilder or existing AjvSchema.
+   * If it's already an AjvSchema - it'll just return it without any processing.
+   * If it's a Builder - will call `build` before proceeding.
+   * Otherwise - will construct AjvSchema instance ready to be used.
+   *
+   * Implementation note: it's using `JsonSchemaAny`, not `JsonSchema`, otherwise TypeScript fails to infer <T> type
+   * correctly for some reason.
+   */
+  static create<T>(
+    schema: JsonSchemaAny<T> | JsonSchemaAnyBuilder<T> | AjvSchema<T>,
+    cfg: Partial<AjvSchemaCfg> = {},
+  ): AjvSchema<T> {
+    if (schema instanceof AjvSchema) return schema
+    if (schema instanceof JsonSchemaAnyBuilder) {
+      return new AjvSchema<T>(schema.build(), cfg)
+    }
+    return new AjvSchema<T>(schema, cfg)
   }
 
   /**

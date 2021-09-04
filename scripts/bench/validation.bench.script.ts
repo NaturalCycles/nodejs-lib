@@ -54,7 +54,7 @@ const jsonSchema2 = jsonSchema.object<Item>({
   a: jsonSchema.array(jsonSchema.number()),
 })
 
-const ajvSchema = new AjvSchema(jsonSchema2)
+const ajvSchema = AjvSchema.create(jsonSchema2)
 
 const items = _range(1000).map(id => ({
   s: `id${id}`,

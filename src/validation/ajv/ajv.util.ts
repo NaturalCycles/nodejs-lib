@@ -25,11 +25,10 @@ export function readJsonSchemas(patterns: string | string[], opt?: GlobbyOptions
  */
 export function readAjvSchemas(patterns: string | string[], cfg?: AjvSchemaCfg): AjvSchema[] {
   const schemas = readJsonSchemas(patterns)
-  return schemas.map(
-    schema =>
-      new AjvSchema(schema, {
-        schemas,
-        ...cfg,
-      }),
+  return schemas.map(schema =>
+    AjvSchema.create(schema, {
+      schemas,
+      ...cfg,
+    }),
   )
 }

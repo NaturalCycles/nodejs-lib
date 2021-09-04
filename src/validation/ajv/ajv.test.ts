@@ -1,5 +1,5 @@
 import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
-import { JsonSchema, _try } from '@naturalcycles/js-lib'
+import { JsonSchema, jsonSchema, _try } from '@naturalcycles/js-lib'
 import { inspectAny } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -154,7 +154,7 @@ test.each([
   [{ type: 'number', format: 'utcOffset' }, [-14 * 60, -12 * 60, 0, 12 * 60, 14 * 60]],
   [{ type: 'number', format: 'utcOffsetHours' }, [-14, -12, 0, 12, 14]],
 ] as [JsonSchema, any[]][])('%s should be valid', (schema, objects: any[]) => {
-  const ajvSchema = new AjvSchema(schema)
+  const ajvSchema = AjvSchema.create(schema)
   objects.forEach(obj => {
     // should not throw
     ajvSchema.validate(obj)
@@ -187,7 +187,7 @@ test.each([
   [{ type: 'number', format: 'utcOffset' }, [-15 * 60]],
   [{ type: 'number', format: 'utcOffsetHours' }, [-15, 15]],
 ] as [JsonSchema, any[]][])('%s should be invalid', (schema, objects: any[]) => {
-  const ajvSchema = new AjvSchema(schema)
+  const ajvSchema = AjvSchema.create(schema)
   objects.forEach(obj => {
     if (ajvSchema.isValid(obj)) {
       console.log(obj, 'should be invalid for schema:', schema)
@@ -197,7 +197,7 @@ test.each([
 })
 
 test('default string', () => {
-  const schema = new AjvSchema({
+  const schema = AjvSchema.create({
     type: 'object',
     properties: {
       s: {
@@ -217,7 +217,7 @@ test('default string', () => {
 })
 
 test('default object', () => {
-  const schema = new AjvSchema({
+  const schema = AjvSchema.create({
     type: 'object',
     properties: {
       o: {
@@ -247,7 +247,7 @@ test('default object', () => {
 })
 
 test('transform string', () => {
-  const schema = new AjvSchema({
+  const schema = AjvSchema.create({
     type: 'object',
     properties: {
       s: {
@@ -267,11 +267,29 @@ test('transform string', () => {
 })
 
 test('objectName', () => {
-  const s = new AjvSchema(
+  const s = AjvSchema.create(
     {},
     {
       objectName: 'body',
     },
   )
   expect(s.cfg.objectName).toBe('body')
+})
+
+interface Item {
+  id: string
+}
+
+test('types', () => {
+  const rawSchema = jsonSchema.object<Item>({
+    id: jsonSchema.string(),
+  })
+
+  // Type of ajvSchema must be AjvSchema<Item> (not AjvSchema<any> !)
+  const ajvSchema = AjvSchema.create(rawSchema)
+
+  // Let's assert it by using
+
+  const item = ajvSchema.validate({ id: 'yay' })
+  expect(item).toEqual({ id: 'yay' })
 })
