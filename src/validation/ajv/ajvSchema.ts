@@ -1,6 +1,5 @@
 import {
   JsonSchema,
-  JsonSchemaAny,
   JsonSchemaAnyBuilder,
   JsonSchemaBuilder,
   _filterNullishValues,
@@ -94,7 +93,7 @@ export class AjvSchema<T = unknown> {
   }
 
   /**
-   * Conveniently allows to pass either JsonSchema or JsonSchemaAnyBuilder or existing AjvSchema.
+   * Conveniently allows to pass either JsonSchema or JsonSchemaBuilder, or existing AjvSchema.
    * If it's already an AjvSchema - it'll just return it without any processing.
    * If it's a Builder - will call `build` before proceeding.
    * Otherwise - will construct AjvSchema instance ready to be used.
@@ -103,7 +102,7 @@ export class AjvSchema<T = unknown> {
    * correctly for some reason.
    */
   static create<T>(
-    schema: JsonSchemaBuilder<T> | JsonSchemaAny<T> | AjvSchema<T>,
+    schema: JsonSchemaBuilder<T> | JsonSchema<T> | AjvSchema<T>,
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
     if (schema instanceof AjvSchema) return schema
