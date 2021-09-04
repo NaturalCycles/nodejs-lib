@@ -2,6 +2,7 @@ import {
   JsonSchema,
   JsonSchemaAny,
   JsonSchemaAnyBuilder,
+  JsonSchemaBuilder,
   _filterNullishValues,
   _isObject,
   _substringBefore,
@@ -98,18 +99,18 @@ export class AjvSchema<T = unknown> {
    * If it's a Builder - will call `build` before proceeding.
    * Otherwise - will construct AjvSchema instance ready to be used.
    *
-   * Implementation note: it's using `JsonSchemaAny`, not `JsonSchema`, otherwise TypeScript fails to infer <T> type
+   * Implementation note: JsonSchemaBuilder goes first in the union type, otherwise TypeScript fails to infer <T> type
    * correctly for some reason.
    */
   static create<T>(
-    schema: JsonSchemaAny<T> | JsonSchemaAnyBuilder<T> | AjvSchema<T>,
+    schema: JsonSchemaBuilder<T> | JsonSchemaAny<T> | AjvSchema<T>,
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
     if (schema instanceof AjvSchema) return schema
     if (schema instanceof JsonSchemaAnyBuilder) {
       return new AjvSchema<T>(schema.build(), cfg)
     }
-    return new AjvSchema<T>(schema, cfg)
+    return new AjvSchema<T>(schema as JsonSchema<T>, cfg)
   }
 
   /**
