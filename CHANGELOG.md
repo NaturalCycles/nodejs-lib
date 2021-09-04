@@ -1,3 +1,10 @@
+## [12.33.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.0...v12.33.1) (2021-09-04)
+
+
+### Bug Fixes
+
+* jsonSchema type inferrence ([77f40bf](https://github.com/NaturalCycles/nodejs-lib/commit/77f40bf36d557487175c5525deda4e82ec9a3f51))
+
 # [12.33.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.32.0...v12.33.0) (2021-09-04)
 
 
