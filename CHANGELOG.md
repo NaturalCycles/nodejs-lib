@@ -1,3 +1,10 @@
+## [12.33.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.2...v12.33.3) (2021-09-04)
+
+
+### Bug Fixes
+
+* allow schemaLike in AjvSchemaCfg.schemas ([5a3cc55](https://github.com/NaturalCycles/nodejs-lib/commit/5a3cc556c5ec92cd82ca0c6c32a11f9f97ddb387))
+
 ## [12.33.2](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.1...v12.33.2) (2021-09-04)
 
 
