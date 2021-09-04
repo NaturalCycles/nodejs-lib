@@ -40,7 +40,7 @@ export interface AjvSchemaCfg {
    * Dependent schemas to pass to Ajv instance constructor.
    * Simpler than instantiating and passing ajv instance yourself.
    */
-  schemas?: any[]
+  schemas?: (JsonSchema | JsonSchemaBuilder | AjvSchema)[]
 
   objectName?: string
 
@@ -73,7 +73,7 @@ export interface AjvSchemaCfg {
  * @experimental
  */
 export class AjvSchema<T = unknown> {
-  private constructor(schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
+  private constructor(public schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
     this.cfg = {
       logErrors: true,
       separator: '\n',
@@ -81,7 +81,11 @@ export class AjvSchema<T = unknown> {
       ajv:
         cfg.ajv ||
         getAjv({
-          schemas: cfg.schemas,
+          schemas: cfg.schemas?.map(s => {
+            if (s instanceof AjvSchema) return s.schema
+            if (s instanceof JsonSchemaAnyBuilder) return s.build()
+            return s as JsonSchema
+          }),
           coerceTypes: cfg.coerceTypes || false,
           // verbose: true,
         }),
