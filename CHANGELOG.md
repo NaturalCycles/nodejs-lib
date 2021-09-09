@@ -1,3 +1,10 @@
+## [12.33.4](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.3...v12.33.4) (2021-09-09)
+
+
+### Bug Fixes
+
+* SlackService to include error data and stack by default ([153c62c](https://github.com/NaturalCycles/nodejs-lib/commit/153c62cd1a0c6888724b678d2223d9658ec2d0dc))
+
 ## [12.33.3](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.2...v12.33.3) (2021-09-04)
 
 
