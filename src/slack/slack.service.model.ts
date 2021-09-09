@@ -1,5 +1,5 @@
 import { StringMap } from '@naturalcycles/js-lib'
-import { DebugLogLevel } from '..'
+import { DebugLogLevel, InspectAnyOptions } from '..'
 
 /**
  * Properties that exists both in SlackApiBody (as per Slack API) and SlackMessage (our abstraction).
@@ -67,6 +67,13 @@ export interface SlackMessage<CTX = any> extends SlackMessageProps {
    * Skips logging message
    */
   noLog?: boolean
+
+  /**
+   * Defaults to:
+   * includeErrorData: true
+   * includeErrorStack: true
+   */
+  inspectOptions?: InspectAnyOptions
 }
 
 export interface SlackAttachmentField {

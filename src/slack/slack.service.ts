@@ -18,8 +18,10 @@ const DEFAULTS = (): SlackMessage => ({
   items: 'no text',
 })
 
-const inspectOpt: InspectAnyOptions = {
+const INSPECT_OPT: InspectAnyOptions = {
   colors: false,
+  includeErrorData: true,
+  includeErrorStack: true,
 }
 
 const log = Debug('nc:nodejs-lib:slack')
@@ -86,6 +88,11 @@ export class SlackService<CTX = any> {
     }
 
     let text: string
+
+    const inspectOpt = {
+      ...INSPECT_OPT,
+      ...msg.inspectOptions,
+    }
 
     // Array has a special treatment here
     if (Array.isArray(msg.items)) {
