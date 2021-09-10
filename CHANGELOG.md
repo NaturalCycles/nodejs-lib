@@ -1,3 +1,10 @@
+# [12.34.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.4...v12.34.0) (2021-09-10)
+
+
+### Features
+
+* getAjv to enable `instanceof` keyword ([f8e07e8](https://github.com/NaturalCycles/nodejs-lib/commit/f8e07e8bd4730099467711d955e4df42421b32ad))
+
 ## [12.33.4](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.3...v12.33.4) (2021-09-09)
 
 
