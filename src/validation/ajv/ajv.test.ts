@@ -135,6 +135,7 @@ test.each([
   [{ type: 'string', format: 'uuid' }, ['123e4567-e89b-12d3-a456-426614174000']],
   [{ type: 'string', format: 'byte' }, ['aGVsbG8gd29ybGQ=']],
   [{ type: 'string', format: 'binary' }, ['any string']],
+  [{ instanceof: 'Buffer' }, [Buffer.from('a b c'), Buffer.alloc(1)]],
   [{ type: 'string', format: 'password' }, ['any string']],
   [{ type: 'number' }, [1, -5, 1059]],
   [{ type: 'integer' }, [1, -5, 1059]],
@@ -170,6 +171,7 @@ test.each([
   [{ type: 'string', format: 'regex' }, ['[', '[]++']],
   [{ type: 'string', format: 'uuid' }, ['123e4567-e89b-12d3-a456-4266141740']],
   [{ type: 'string', format: 'byte' }, ['123']],
+  [{ instanceof: 'Buffer' }, ['not a buffer', 1, {}, [], null, () => {}]],
   [{ type: 'number' }, ['1']],
   [{ type: 'integer' }, [1.1]],
   [{ type: 'number', format: 'int32' }, [Number.MAX_VALUE, 1.1]],
@@ -292,4 +294,13 @@ test('types', () => {
 
   const item = ajvSchema.validate({ id: 'yay' })
   expect(item).toEqual({ id: 'yay' })
+})
+
+test('buffer', () => {
+  const schema = AjvSchema.create({
+    instanceof: 'Buffer',
+  } as any)
+  schema.validate(Buffer.from('abc'))
+
+  expect(schema.isValid('a b c' as any)).toBe(false)
 })

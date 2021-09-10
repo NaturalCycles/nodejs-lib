@@ -33,6 +33,7 @@ export function getAjv(opt?: Options): Ajv {
   require('ajv-keywords')(ajv, [
     'transform', // trim, toLowerCase, etc.
     'uniqueItemProperties',
+    'instanceof',
   ])
 
   // Adds $merge, $patch keywords

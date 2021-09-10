@@ -23,9 +23,9 @@ export function arraySchema<T>(items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T
   return items ? Joi.array().items(items) : Joi.array()
 }
 
-export function objectSchema<IN, OUT = IN>(
-  schema?: { [key in keyof Partial<IN>]: AnySchemaTyped<IN[key]> },
-): ObjectSchemaTyped<IN, OUT> {
+export function objectSchema<IN, OUT = IN>(schema?: {
+  [key in keyof Partial<IN>]: AnySchemaTyped<IN[key]>
+}): ObjectSchemaTyped<IN, OUT> {
   return Joi.object(schema)
 }
 
