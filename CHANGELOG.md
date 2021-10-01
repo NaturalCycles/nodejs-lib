@@ -1,3 +1,10 @@
+# [12.35.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.34.0...v12.35.0) (2021-10-01)
+
+
+### Features
+
+* inspectAny depth defaults to 10 now (was: 6) ([601f0b2](https://github.com/NaturalCycles/nodejs-lib/commit/601f0b29220e84de2feed2b3648313093e6c3f59))
+
 # [12.34.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.33.4...v12.34.0) (2021-09-10)
 
 
