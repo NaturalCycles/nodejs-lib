@@ -5,7 +5,7 @@ export interface InspectAnyOptions extends StringifyAnyOptions, InspectOptions {
 
 const INSPECT_OPT: InspectOptions = {
   breakLength: 80, // default: ??
-  depth: 6, // default: 2
+  depth: 10, // default: 2
 }
 
 /**
