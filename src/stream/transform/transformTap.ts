@@ -1,5 +1,5 @@
-import { AsyncMapper } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
+import { AsyncMapper } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
 
 /**

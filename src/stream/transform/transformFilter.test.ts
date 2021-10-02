@@ -1,5 +1,5 @@
-import { _range } from '@naturalcycles/js-lib'
 import { Readable } from 'stream'
+import { _range } from '@naturalcycles/js-lib'
 import { transformFilter, writablePushToArray, _pipeline } from '../../index'
 import { transformFilterSync } from './transformFilter'
 

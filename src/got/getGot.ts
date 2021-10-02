@@ -1,6 +1,6 @@
+import { URL } from 'url'
 import { _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
-import { URL } from 'url'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
 import { GetGotOptions, GotRequestContext } from './got.model'

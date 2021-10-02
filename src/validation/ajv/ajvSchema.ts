@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import {
   JsonSchema,
   JsonSchemaAnyBuilder,
@@ -7,7 +8,6 @@ import {
   _substringBefore,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
-import * as fs from 'fs'
 import { inspectAny, requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'

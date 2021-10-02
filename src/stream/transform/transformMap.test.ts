@@ -1,5 +1,5 @@
-import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
 import { Readable } from 'stream'
+import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
 import { readableFromArray, writablePushToArray, _pipeline } from '../..'
 import { transformMap } from './transformMap'
 

@@ -1,7 +1,7 @@
-import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import { createReadStream, createWriteStream } from 'fs'
 import * as path from 'path'
 import { createGzip, createUnzip } from 'zlib'
+import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
   requireFileToExist,
   transformJsonParse,

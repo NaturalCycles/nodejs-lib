@@ -1,9 +1,9 @@
+import * as path from 'path'
 import { _since } from '@naturalcycles/js-lib'
 import * as cpFile from 'cp-file'
 import * as fs from 'fs-extra'
 import * as globby from 'globby'
 import * as moveFile from 'move-file'
-import * as path from 'path'
 import { boldWhite, dimGrey, grey, yellow } from '../colors'
 
 /**

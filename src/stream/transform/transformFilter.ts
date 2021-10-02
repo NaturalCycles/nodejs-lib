@@ -1,5 +1,5 @@
-import { AsyncPredicate, Predicate } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
+import { AsyncPredicate, Predicate } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
 
 /**

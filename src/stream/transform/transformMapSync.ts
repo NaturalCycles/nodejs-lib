@@ -1,5 +1,5 @@
-import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import { Transform } from 'stream'
+import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
 import { notNullishPredicate } from './transformMap'

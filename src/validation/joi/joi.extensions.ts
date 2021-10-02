@@ -13,6 +13,7 @@ export interface ExtendedJoi extends JoiLib.Root {
 /**
  * This is the only right place to import Joi from
  */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const Joi: ExtendedJoi = JoiLib.defaults(schema => {
   // hack to prevent infinite recursion due to .empty('') where '' is a stringSchema itself
   if (schema.type === 'string') {

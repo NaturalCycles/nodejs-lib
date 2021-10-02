@@ -21,7 +21,6 @@ export function numberExtensions(joi: typeof Joi): Extension {
       dividable: {
         multi: true,
         method(q: number) {
-          // tslint:disable-next-line:no-invalid-this
           return this.$_addRule({
             name: 'dividable',
             args: { q },

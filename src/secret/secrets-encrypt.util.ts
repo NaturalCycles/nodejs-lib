@@ -1,6 +1,6 @@
+import * as path from 'path'
 import * as fs from 'fs-extra'
 import globby = require('globby')
-import * as path from 'path'
 import { dimGrey, yellow } from '../colors'
 import { encryptRandomIVBuffer } from '../security/crypto.util'
 

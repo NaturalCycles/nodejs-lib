@@ -1,6 +1,6 @@
+import * as fs from 'fs'
+import * as fsp from 'fs/promises'
 import * as fse from 'fs-extra'
-const fs = require('fs')
-const fsp = require('fs').promises
 import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
 import { json2env, kpy, kpySync } from './index'
 

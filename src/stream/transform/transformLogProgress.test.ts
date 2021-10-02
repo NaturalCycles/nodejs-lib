@@ -1,6 +1,5 @@
 import { pDelay, _range } from '@naturalcycles/js-lib'
-import { readableFromArray, _pipeline } from '../..'
-import { writableVoid } from '../..'
+import { readableFromArray, _pipeline, writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'
 
 test('transformLogProgress', async () => {

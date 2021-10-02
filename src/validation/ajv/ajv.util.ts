@@ -1,5 +1,5 @@
-import { JsonSchema } from '@naturalcycles/js-lib'
 import * as fs from 'fs'
+import { JsonSchema } from '@naturalcycles/js-lib'
 import { GlobbyOptions } from 'globby'
 import * as globby from 'globby'
 import { AjvSchema, AjvSchemaCfg } from './ajvSchema'

@@ -40,32 +40,33 @@ export enum DebugLogLevel {
   error = 'error',
 }
 
-const OriginalDebug = require('debug') as IDebug
+const originalDebug = require('debug') as IDebug
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const Debug = ((namespace: string) => {
-  const instance = OriginalDebug(namespace)
+  const instance = originalDebug(namespace)
   instance.log = console.log.bind(console) // this enables colors for objects
   instance.info = instance.bind(instance)
 
-  const instanceDebug = OriginalDebug([namespace, 'debug'].join(':'))
+  const instanceDebug = originalDebug([namespace, 'debug'].join(':'))
   instanceDebug.log = console.debug.bind(console)
   instance.debug = instanceDebug.bind(instanceDebug)
 
-  const instanceWarn = OriginalDebug([namespace, 'warn'].join(':'))
+  const instanceWarn = originalDebug([namespace, 'warn'].join(':'))
   instanceWarn.log = console.warn.bind(console)
   instance.warn = instanceWarn.bind(instanceWarn)
 
-  const instanceError = OriginalDebug([namespace, 'error'].join(':'))
+  const instanceError = originalDebug([namespace, 'error'].join(':'))
   instanceError.log = console.error.bind(console)
   instance.error = instanceError.bind(instanceError)
 
   return instance
 }) as IDebug
-Debug.coerce = OriginalDebug.coerce.bind(OriginalDebug)
-Debug.disable = OriginalDebug.disable.bind(OriginalDebug)
-Debug.enable = OriginalDebug.enable.bind(OriginalDebug)
-Debug.enabled = OriginalDebug.enabled.bind(OriginalDebug)
-Debug.log = OriginalDebug.log.bind(OriginalDebug)
-Debug.names = OriginalDebug.names
-Debug.skips = OriginalDebug.skips
-Debug.formatters = OriginalDebug.formatters
+Debug.coerce = originalDebug.coerce.bind(originalDebug)
+Debug.disable = originalDebug.disable.bind(originalDebug)
+Debug.enable = originalDebug.enable.bind(originalDebug)
+Debug.enabled = originalDebug.enabled.bind(originalDebug)
+Debug.log = originalDebug.log.bind(originalDebug)
+Debug.names = originalDebug.names
+Debug.skips = originalDebug.skips
+Debug.formatters = originalDebug.formatters

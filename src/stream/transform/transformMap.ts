@@ -1,3 +1,4 @@
+import { Transform } from 'stream'
 import {
   AggregatedError,
   AsyncMapper,
@@ -5,7 +6,6 @@ import {
   ErrorMode,
   pFilter,
 } from '@naturalcycles/js-lib'
-import { Transform } from 'stream'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'

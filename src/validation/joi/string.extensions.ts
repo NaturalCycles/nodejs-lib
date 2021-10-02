@@ -25,7 +25,6 @@ export function stringExtensions(joi: typeof Joi): Extension {
     rules: {
       dateString: {
         method(min?: string, max?: string) {
-          // tslint:disable-next-line:no-invalid-this
           return this.$_addRule({
             name: 'dateString',
             args: { min, max } as DateStringParams,

@@ -1,5 +1,5 @@
-import { _mb } from '@naturalcycles/js-lib'
 import * as os from 'os'
+import { _mb } from '@naturalcycles/js-lib'
 
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 

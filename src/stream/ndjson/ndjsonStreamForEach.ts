@@ -1,6 +1,6 @@
-import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import * as fs from 'fs'
 import { createUnzip } from 'zlib'
+import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
   requireFileToExist,
   transformJsonParse,

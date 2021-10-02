@@ -1,5 +1,5 @@
-import { StringMap } from '@naturalcycles/js-lib'
 import * as fs from 'fs'
+import { StringMap } from '@naturalcycles/js-lib'
 import { base64ToString, Debug } from '..'
 import { decryptRandomIVBuffer } from './crypto.util'
 
@@ -50,6 +50,7 @@ export function removeSecretsFromEnv(): void {
  *
  * If SECRET_ENCRYPTION_KEY argument is passed - will decrypt the contents of the file first, before parsing it as JSON.
  */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?: string): void {
   if (!fs.existsSync(filePath)) {
     throw new Error(`loadSecretsFromPlainJsonFile() cannot load from path: ${filePath}`)

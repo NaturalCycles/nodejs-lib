@@ -1,6 +1,6 @@
+import { Worker } from 'worker_threads'
 import { DeferredPromise, pDefer, _range } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
-import { Worker } from 'worker_threads'
 import { TransformOptions, TransformTyped } from '../../stream.model'
 import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 

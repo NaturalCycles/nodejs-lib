@@ -1,6 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { transformMap, writablePushToArray, _pipeline } from '../..'
-import { readableCreate } from '../..'
+import { transformMap, writablePushToArray, _pipeline, readableCreate } from '../..'
 import { writableFork } from './writableFork'
 
 // jest.setTimeout(900_000)

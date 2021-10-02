@@ -1,5 +1,5 @@
-import { AsyncMapper, pMap, _passthroughMapper } from '@naturalcycles/js-lib'
 import { Readable, ReadableOptions } from 'stream'
+import { AsyncMapper, pMap, _passthroughMapper } from '@naturalcycles/js-lib'
 import { ReadableTyped } from '../stream.model'
 
 /**

@@ -1,7 +1,7 @@
-import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
-import { dayjs } from '@naturalcycles/time-lib'
 import { Transform } from 'stream'
 import { inspect, InspectOptions } from 'util'
+import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
+import { dayjs } from '@naturalcycles/time-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { TransformOptions, TransformTyped } from '../stream.model'
 
