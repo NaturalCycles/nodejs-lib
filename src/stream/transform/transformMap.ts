@@ -12,11 +12,6 @@ import { TransformTyped } from '../stream.model'
 
 export interface TransformMapOptions<IN = any, OUT = IN> {
   /**
-   * @default true
-   */
-  objectMode?: boolean
-
-  /**
    * @default false
    * Set true to support "multiMap" - possibility to return [] and emit 1 result for each item in the array.
    */
@@ -61,11 +56,6 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * If defined - called BEFORE `final()` callback is called.
    */
   beforeFinal?: () => any
-
-  /**
-   * If defined - called AFTER final chunk was processed.
-   */
-  afterFinal?: () => any
 }
 
 export function notNullishPredicate(item: any): boolean {
@@ -95,9 +85,7 @@ export function transformMap<IN = any, OUT = IN>(
     flattenArrayOutput,
     onError,
     beforeFinal,
-    afterFinal,
     metric = 'stream',
-    objectMode = true,
   } = opt
 
   let index = -1
@@ -105,7 +93,7 @@ export function transformMap<IN = any, OUT = IN>(
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
 
-  return (objectMode ? through2Concurrent.obj : through2Concurrent)(
+  return through2Concurrent.obj(
     {
       maxConcurrency: concurrency,
       // autoDestroy: true,
@@ -123,8 +111,6 @@ export function transformMap<IN = any, OUT = IN>(
           // emit no error
           cb()
         }
-
-        afterFinal?.() // call afterFinal if defined (optional invokation operator)
       },
     },
     async function transformMapFn(

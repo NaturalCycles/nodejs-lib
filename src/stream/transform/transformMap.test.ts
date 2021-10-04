@@ -60,19 +60,20 @@ test('transformMap emit array as multiple items', async () => {
   expect(data2).toEqual(expected)
 })
 
-test('transformMap objectMode=false', async () => {
-  const data: string[] = _range(1, 4).map(n => String(n))
-  const readable = Readable.from(data)
-
-  const data2: string[] = []
-
-  await _pipeline([
-    readable,
-    transformMap<Buffer, void>(r => void data2.push(String(r)), { objectMode: false }),
-  ])
-
-  expect(data2).toEqual(data)
-})
+// non-object mode is not supported anymore
+// test('transformMap objectMode=false', async () => {
+//   const data: string[] = _range(1, 4).map(n => String(n))
+//   const readable = Readable.from(data)
+//
+//   const data2: string[] = []
+//
+//   await _pipeline([
+//     readable,
+//     transformMap<Buffer, void>(r => void data2.push(String(r)), { objectMode: false }),
+//   ])
+//
+//   expect(data2).toEqual(data)
+// })
 
 test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
   const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))

@@ -1,12 +1,12 @@
 import { Worker } from 'worker_threads'
 import { DeferredPromise, pDefer, _range } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
-import { TransformOptions, TransformTyped } from '../../stream.model'
+import { TransformTyped } from '../../stream.model'
 import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 
 /* eslint-disable unicorn/require-post-message-target-origin */
 
-export interface TransformMultiThreadedOptions extends TransformOptions {
+export interface TransformMultiThreadedOptions {
   /**
    * Absolute path to a js file with worker code
    */
@@ -47,7 +47,6 @@ export function transformMultiThreaded<IN, OUT>(
   const { workerFile, poolSize = 2, workerData } = opt
   const maxConcurrency = opt.concurrency || poolSize
   const highWaterMark = Math.max(16, maxConcurrency)
-  const objectMode = opt.objectMode !== false // default true
 
   console.log({
     poolSize,
@@ -97,7 +96,7 @@ export function transformMultiThreaded<IN, OUT>(
     return worker
   })
 
-  return (objectMode ? through2Concurrent.obj : through2Concurrent)(
+  return through2Concurrent.obj(
     {
       maxConcurrency,
       highWaterMark,
