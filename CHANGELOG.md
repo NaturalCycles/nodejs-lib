@@ -1,3 +1,10 @@
+# [12.37.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.36.0...v12.37.0) (2021-10-04)
+
+
+### Features
+
+* cleanup, support only objectMode=true in transformMap ([540b397](https://github.com/NaturalCycles/nodejs-lib/commit/540b3972eaa5d1a630c53af6d0f5af1e4e22b6ba))
+
 # [12.36.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.35.0...v12.36.0) (2021-10-04)
 
 
