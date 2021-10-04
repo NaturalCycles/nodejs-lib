@@ -1,3 +1,10 @@
+# [12.36.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.35.0...v12.36.0) (2021-10-04)
+
+
+### Features
+
+* transformNoOp ([14e50ec](https://github.com/NaturalCycles/nodejs-lib/commit/14e50ecb78923464b3665e9317837bb78ad6add1))
+
 # [12.35.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.34.0...v12.35.0) (2021-10-01)
 
 
