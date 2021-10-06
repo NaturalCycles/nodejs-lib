@@ -35,6 +35,13 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
   rss?: boolean
 
   /**
+   * Incude Peak RSS in log.
+   *
+   * @default false
+   */
+  peakRSS?: boolean
+
+  /**
    * Include `external` in log.
    *
    * @default false
@@ -64,16 +71,17 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
   logRPS?: boolean
 
   /**
-   * @default true
    * Set to false to disable logging progress
+   *
+   * @default true
    */
   logProgress?: boolean
 
   /**
    * Log progress event Nth record that is _processed_ (went through mapper).
+   * Set to 0 to disable logging.
    *
    * @default 1000
-   * Set to 0 to disable logging.
    */
   logEvery?: number
 
@@ -87,7 +95,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
 
 const inspectOpt: InspectOptions = {
   colors: true,
-  breakLength: 200,
+  breakLength: 300,
 }
 
 /**
@@ -101,6 +109,7 @@ export function transformLogProgress<IN = any>(
     heapTotal: logHeapTotal = false,
     heapUsed: logHeapUsed = true,
     rss: logRss = true,
+    peakRSS: logPeakRSS = false,
     logRPS = true,
     logEvery = 1000,
     extra,
@@ -113,6 +122,7 @@ export function transformLogProgress<IN = any>(
   const sma = new SimpleMovingAverage(10) // over last 10 seconds
   let processedLastSecond = 0
   let progress = 0
+  let peakRSS = 0
 
   logStats() // initial
 
@@ -138,6 +148,7 @@ export function transformLogProgress<IN = any>(
 
   function logStats(chunk?: IN, final = false, tenx = false): void {
     if (!logProgress) return
+
     const mem = process.memoryUsage()
 
     const now = Date.now()
@@ -147,6 +158,7 @@ export function transformLogProgress<IN = any>(
     processedLastSecond = 0
 
     const rps10 = Math.round(sma.push(lastRPS))
+    if (mem.rss > peakRSS) peakRSS = mem.rss
 
     console.log(
       inspect(
@@ -156,6 +168,7 @@ export function transformLogProgress<IN = any>(
           ...(logHeapUsed ? { heapUsed: _mb(mem.heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: _mb(mem.heapTotal) } : {}),
           ...(logRss ? { rss: _mb(mem.rss) } : {}),
+          ...(logPeakRSS ? { peakRSS: _mb(peakRSS) } : {}),
           ...(opt.rssMinusHeap ? { rssMinusHeap: _mb(mem.rss - mem.heapTotal) } : {}),
           ...(opt.external ? { external: _mb(mem.external) } : {}),
           ...(opt.arrayBuffers ? { arrayBuffers: _mb(mem.arrayBuffers || 0) } : {}),

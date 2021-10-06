@@ -9,6 +9,7 @@ test('transformLogProgress', async () => {
     readable,
     transformLogProgress({
       logEvery: 2,
+      peakRSS: true,
       extra: (r, index) => {
         // console.log(r, index)
 
