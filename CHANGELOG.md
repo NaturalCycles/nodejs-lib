@@ -1,3 +1,10 @@
+# [12.38.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.37.0...v12.38.0) (2021-10-06)
+
+
+### Features
+
+* TransformLogOptions.peakRSS to log peak rss ([4602565](https://github.com/NaturalCycles/nodejs-lib/commit/4602565c8e52d17d8bd975f73e0f2bd6df03cf8b))
+
 # [12.37.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.36.0...v12.37.0) (2021-10-04)
 
 
