@@ -1,5 +1,12 @@
 import { testValidation } from '../../test/validation.test.util'
-import { emailSchema, semVerSchema, stringSchema, urlSchema } from './joi.shared.schemas'
+import {
+  binarySchema,
+  emailSchema,
+  oneOfSchema,
+  semVerSchema,
+  stringSchema,
+  urlSchema,
+} from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
 test('semVerSchema', () => {
@@ -38,4 +45,16 @@ test('possibility to disable TLD email validation', () => {
 
 test('emailSchema should lowercase', () => {
   expect(validate('test@GMAIL.cOm', emailSchema)).toBe('test@gmail.com')
+})
+
+test('oneOfSchema', () => {
+  const s = oneOfSchema(stringSchema, binarySchema)
+
+  // Should pass
+  validate('abc', s)
+  validate('', s)
+  validate(Buffer.from('abc'), s)
+
+  expect(isValid(5, s)).toBe(false)
+  expect(isValid(['s'], s)).toBe(false)
 })

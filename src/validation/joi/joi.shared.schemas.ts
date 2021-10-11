@@ -1,5 +1,6 @@
 import { Joi } from './joi.extensions'
 import {
+  AlternativesSchemaTyped,
   AnySchemaTyped,
   ArraySchemaTyped,
   BooleanSchemaTyped,
@@ -27,6 +28,12 @@ export function objectSchema<IN, OUT = IN>(schema?: {
   [key in keyof Partial<IN>]: AnySchemaTyped<IN[key]>
 }): ObjectSchemaTyped<IN, OUT> {
   return Joi.object(schema)
+}
+
+export function oneOfSchema<T = any>(
+  ...schemas: AnySchemaTyped<any>[]
+): AlternativesSchemaTyped<T> {
+  return Joi.alternatives(schemas)
 }
 
 export const anySchema = Joi.any()
