@@ -1,3 +1,10 @@
+# [12.39.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.38.0...v12.39.0) (2021-10-11)
+
+
+### Features
+
+* **joi:** oneOfSchema ([8376400](https://github.com/NaturalCycles/nodejs-lib/commit/8376400aa384e2c88fc4e66f17cb0575eac63296))
+
 # [12.38.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.37.0...v12.38.0) (2021-10-06)
 
 
