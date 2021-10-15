@@ -1,3 +1,4 @@
+import { BaseDBEntity, SavedDBEntity } from '@naturalcycles/js-lib'
 import { Joi } from './joi.extensions'
 import {
   AlternativesSchemaTyped,
@@ -87,3 +88,15 @@ export const utcOffsetSchema = numberSchema
   .dividable(15)
 
 export const ipAddressSchema = stringSchema.ip()
+
+export const baseDBEntitySchema = objectSchema<BaseDBEntity>({
+  id: stringSchema.optional(),
+  created: unixTimestampSchema.optional(),
+  updated: unixTimestampSchema.optional(),
+})
+
+export const savedDBEntitySchema = objectSchema<SavedDBEntity>({
+  id: stringSchema,
+  created: unixTimestampSchema,
+  updated: unixTimestampSchema,
+})
