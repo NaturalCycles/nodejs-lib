@@ -1,3 +1,10 @@
+# [12.40.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.39.0...v12.40.0) (2021-10-15)
+
+
+### Features
+
+* export baseDBEntitySchema, savedDBEntitySchema ([f4644ad](https://github.com/NaturalCycles/nodejs-lib/commit/f4644ad25aed0021fad5b9091e9e10cec6884e53))
+
 # [12.39.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.38.0...v12.39.0) (2021-10-11)
 
 
