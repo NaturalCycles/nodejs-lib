@@ -1,3 +1,10 @@
+# [12.41.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.40.0...v12.41.0) (2021-10-18)
+
+
+### Features
+
+* increase joiError length from 1000 to 2000 characters ([1c40dce](https://github.com/NaturalCycles/nodejs-lib/commit/1c40dce8dadc46d63b84f46f4c67546bd703ac7e))
+
 # [12.40.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.39.0...v12.40.0) (2021-10-15)
 
 
