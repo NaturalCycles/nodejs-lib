@@ -1,3 +1,10 @@
+# [12.42.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.41.0...v12.42.0) (2021-10-19)
+
+
+### Features
+
+* JoiValidationError to include full `annotation` ([c17756e](https://github.com/NaturalCycles/nodejs-lib/commit/c17756e1f8760987e62f6bee35f72fe7449b5671))
+
 # [12.41.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.40.0...v12.41.0) (2021-10-18)
 
 
