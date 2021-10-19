@@ -277,9 +277,35 @@ JoiValidationError: [
     "id": 90
   },
   {
-  
-... 3 KB message truncated
-"[99].id" must be less than or equal to 98 @ .99.id]
+    "id": 91
+  },
+  {
+    "id": 92
+  },
+  {
+    "id": 93
+  },
+  {
+    "id": 94
+  },
+  {
+    "id": 95
+  },
+  {
+    "id": 96
+  },
+  {
+    "id": 97
+  },
+  {
+    "id": 98
+  },
+  {
+    "id" [1]: 99
+  }
+]
+
+[1] "[99].id" must be less than or equal to 98]
 `;
 
 exports[`gotErrorHook 1`] = `

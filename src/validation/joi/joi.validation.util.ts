@@ -6,7 +6,7 @@
  * "Converts" mean e.g trims all strings from leading/trailing spaces.
  */
 
-import { _isObject } from '@naturalcycles/js-lib'
+import { _hb, _isObject, _truncateMiddle } from '@naturalcycles/js-lib'
 import { ValidationError, ValidationOptions } from 'joi'
 import { AnySchemaTyped } from './joi.model'
 import { JoiValidationError } from './joi.validation.error'
@@ -146,11 +146,11 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
 
   const annotation = err.annotate(stripColors)
 
-  if (annotation.length > 2000) {
+  if (annotation.length > 4000) {
     // Annotation message is too big and will be replaced by stringified `error.details` instead
+
     tokens.push(
-      annotation.slice(0, 2000),
-      `... ${Math.ceil(annotation.length / 1024)} KB message truncated`,
+      _truncateMiddle(annotation, 4000, `\n... ${_hb(annotation.length)} message truncated ...\n`),
     )
 
     // Up to 5 `details`
@@ -167,5 +167,6 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
     joiValidationErrorItems: err.details,
     ...(objectName && { joiValidationObjectName: objectName }),
     ...(objectId && { joiValidationObjectId: objectId }),
+    annotation,
   })
 }

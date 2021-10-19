@@ -15,6 +15,11 @@ export interface JoiValidationErrorData extends ErrorData {
   joiValidationErrorItems: ValidationErrorItem[]
   joiValidationObjectName?: string
   joiValidationObjectId?: string
+  /**
+   * Error "annotation" is stripped in Error.message.
+   * This field contains the "full" annotation.
+   */
+  annotation?: string
 }
 
 export class JoiValidationError extends AppError<JoiValidationErrorData> {
