@@ -3,6 +3,7 @@ import { inspect, InspectOptions } from 'util'
 import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
+import { hasColors } from '../../colors/colors'
 import { TransformOptions, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions<IN = any> extends TransformOptions {
@@ -94,7 +95,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
 }
 
 const inspectOpt: InspectOptions = {
-  colors: true,
+  colors: hasColors(),
   breakLength: 300,
 }
 

@@ -36,6 +36,7 @@ import {
   secretOptional,
   setSecretMap,
 } from './security/secret.util'
+import { hasColors } from './colors/colors'
 import { slackDefaultMessagePrefixHook, SlackService } from './slack/slack.service'
 import {
   SlackApiBody,
@@ -341,4 +342,5 @@ export {
   AjvValidationError,
   readJsonSchemas,
   readAjvSchemas,
+  hasColors,
 }
