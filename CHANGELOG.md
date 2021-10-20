@@ -1,3 +1,10 @@
+# [12.43.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.42.0...v12.43.0) (2021-10-20)
+
+
+### Features
+
+* hasColors, transformLogProgress to use it ([d5f7244](https://github.com/NaturalCycles/nodejs-lib/commit/d5f724488a8ee3239cf49c29ec9f9ffad5b95340))
+
 # [12.42.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.41.0...v12.42.0) (2021-10-19)
 
 
