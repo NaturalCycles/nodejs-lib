@@ -4,8 +4,9 @@ import { TransformTyped } from '../stream.model'
 
 export interface TransformJsonParseOptions {
   /**
-   * @default true
    * If true - will throw an error on JSON.parse / stringify error
+   *
+   * @default true
    */
   strict?: boolean
 

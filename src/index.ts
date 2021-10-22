@@ -50,6 +50,7 @@ import {
 import { NDJsonStats } from './stream/ndjson/ndjson.model'
 import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
 import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
+import { ndjsonMap } from './stream/ndjson/ndjsonMap'
 import {
   ndjsonStreamForEach,
   NDJSONStreamForEachOptions,
@@ -306,6 +307,7 @@ export {
   readableMapToArray,
   _pipeline,
   transformBuffer,
+  ndjsonMap,
   ndJsonFileRead,
   ndJsonFileWrite,
   ndjsonStreamForEach,

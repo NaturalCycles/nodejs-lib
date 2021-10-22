@@ -4,14 +4,16 @@ import { TransformTyped } from '../stream.model'
 
 export interface TransformToNDJsonOptions {
   /**
-   * @default true
    * If true - will throw an error on JSON.parse / stringify error
+   *
+   * @default true
    */
   strict?: boolean
 
   /**
-   * @default false
    * If true - will run `sortObjectDeep()` on each object to achieve deterministic sort
+   *
+   * @default false
    */
   sortObjects?: boolean
 

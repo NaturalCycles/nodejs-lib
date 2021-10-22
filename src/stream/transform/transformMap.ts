@@ -12,8 +12,9 @@ import { TransformTyped } from '../stream.model'
 
 export interface TransformMapOptions<IN = any, OUT = IN> {
   /**
-   * @default false
    * Set true to support "multiMap" - possibility to return [] and emit 1 result for each item in the array.
+   *
+   * @default false
    */
   flattenArrayOutput?: boolean
 
@@ -21,9 +22,9 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * Predicate to filter outgoing results (after mapper).
    * Allows to not emit all results.
    *
-   * @default to filter out undefined/null values, but pass anything else
-   *
    * Set to `r => r` (passthrough predicate) to pass ANY value (including undefined/null)
+   *
+   * @default to filter out undefined/null values, but pass anything else
    */
   predicate?: AsyncPredicate<OUT>
 

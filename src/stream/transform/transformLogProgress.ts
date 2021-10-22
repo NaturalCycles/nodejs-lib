@@ -17,7 +17,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
   /**
    * Include `heapUsed` in log.
    *
-   * @default true
+   * @default false
    */
   heapUsed?: boolean
 
@@ -38,7 +38,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
   /**
    * Incude Peak RSS in log.
    *
-   * @default false
+   * @default true
    */
   peakRSS?: boolean
 
@@ -108,9 +108,9 @@ export function transformLogProgress<IN = any>(
   const {
     metric = 'progress',
     heapTotal: logHeapTotal = false,
-    heapUsed: logHeapUsed = true,
+    heapUsed: logHeapUsed = false,
     rss: logRss = true,
-    peakRSS: logPeakRSS = false,
+    peakRSS: logPeakRSS = true,
     logRPS = true,
     logEvery = 1000,
     extra,

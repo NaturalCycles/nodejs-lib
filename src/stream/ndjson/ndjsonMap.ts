@@ -1,5 +1,4 @@
 import { createReadStream, createWriteStream } from 'fs'
-import * as path from 'path'
 import { createGzip, createUnzip } from 'zlib'
 import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
@@ -12,28 +11,29 @@ import {
   transformSplit,
   transformToNDJson,
   _pipeline,
+  TransformLogProgressOptions,
 } from '../..'
 
-interface NDJSONMapperFile<IN = any, OUT = any> {
-  mapper: AsyncMapper<IN, OUT>
-}
-
-export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOptions<IN, OUT> {
+export interface NDJSONMapOptions<IN = any, OUT = IN>
+  extends TransformMapOptions<IN, OUT>,
+    TransformLogProgressOptions<IN> {
   inputFilePath: string
   outputFilePath: string
-  mapperFilePath: string
+
   limitInput?: number
   limitOutput?: number
-
-  /**
-   * @default 1000
-   */
-  logEveryInput?: number
 
   /**
    * @default 100_000
    */
   logEveryOutput?: number
+
+  /**
+   * Defaults to `true` for ndjsonMap
+   *
+   * @default true
+   */
+  flattenArrayOutput?: boolean
 }
 
 /**
@@ -41,41 +41,17 @@ export interface NDJSONMapOptions<IN = any, OUT = IN> extends TransformMapOption
  * Zips output file automatically, if it ends with `.gz`.
  */
 export async function ndjsonMap<IN = any, OUT = any>(
+  mapper: AsyncMapper<IN, OUT>,
   opt: NDJSONMapOptions<IN, OUT>,
 ): Promise<void> {
-  const {
-    inputFilePath,
-    outputFilePath,
-    mapperFilePath,
-    logEveryInput = 1000,
-    logEveryOutput = 100_000,
-    limitInput,
-    limitOutput,
-  } = opt
+  const { inputFilePath, outputFilePath, logEveryOutput = 100_000, limitInput, limitOutput } = opt
 
   requireFileToExist(inputFilePath)
-  requireFileToExist(mapperFilePath)
-
-  const resolvedMapperPath = path.resolve(mapperFilePath)
 
   console.log({
     inputFilePath,
     outputFilePath,
-    mapperFilePath,
-    resolvedMapperPath,
   })
-
-  // This is to allow importing *.ts mappers
-  try {
-    require('ts-node/register/transpile-only')
-    require('tsconfig-paths/register')
-  } catch {} // require if exists
-
-  const { mapper } = require(resolvedMapperPath) as NDJSONMapperFile<IN, OUT>
-
-  if (!mapper) {
-    throw new Error(`Mapper file should export "mapper" function`)
-  }
 
   const transformUnzip = inputFilePath.endsWith('.gz') ? [createUnzip()] : []
   const transformZip = outputFilePath.endsWith('.gz') ? [createGzip()] : []
@@ -86,7 +62,7 @@ export async function ndjsonMap<IN = any, OUT = any>(
     transformSplit(), // splits by \n
     transformJsonParse(),
     transformLimit(limitInput),
-    transformLogProgress({ metric: 'read', logEvery: logEveryInput }),
+    transformLogProgress({ metric: 'read', ...opt }),
     transformMap(mapper, {
       flattenArrayOutput: true,
       errorMode: ErrorMode.SUPPRESS,

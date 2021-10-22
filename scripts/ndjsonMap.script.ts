@@ -9,13 +9,12 @@ import * as fs from 'fs'
 import { _range } from '@naturalcycles/js-lib'
 import { readableFromArray, transformToNDJson, _pipeline } from '../src'
 import { runScript } from '../src/script'
-import { ndjsonMap } from '../src/stream/ndjson/ndjsonMap'
-import { testDir, tmpDir } from '../src/test/paths.cnst'
+import { ndjsonMap } from '../src'
+import { tmpDir } from '../src/test/paths.cnst'
 
 runScript(async () => {
   const inputFilePath = `${tmpDir}/ndjsonMapIn.ndjson`
   const outputFilePath = `${tmpDir}/ndjsonMapOut.ndjson`
-  const mapperFilePath = `${testDir}/ndjson/ndjsonMapper.ts`
 
   if (!fs.existsSync(inputFilePath)) {
     // Create input file
@@ -27,5 +26,18 @@ runScript(async () => {
     ])
   }
 
-  await ndjsonMap({ inputFilePath, outputFilePath, mapperFilePath })
+  await ndjsonMap(mapper, { inputFilePath, outputFilePath })
 })
+
+interface Obj {
+  id: string
+  even?: boolean
+}
+
+async function mapper(o: Obj, _index: number): Promise<Obj | undefined> {
+  if (o.even) return // filter out evens
+  return {
+    ...o,
+    extra: o.id + '_',
+  } as any
+}
