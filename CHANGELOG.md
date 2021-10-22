@@ -1,3 +1,10 @@
+# [12.45.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.44.0...v12.45.0) (2021-10-22)
+
+
+### Features
+
+* ndjsonMap to take mapper as option ([eb06ae1](https://github.com/NaturalCycles/nodejs-lib/commit/eb06ae1e6ff02ef0338e764e5f7d39142ede4760))
+
 # [12.44.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.43.0...v12.44.0) (2021-10-22)
 
 
