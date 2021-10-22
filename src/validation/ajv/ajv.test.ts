@@ -40,9 +40,9 @@ test('simple', () => {
     Input: {}"
   `)
 
-  const [err] = _try(() => schema.validate(missing))
+  const [err] = _try<AjvValidationError>(() => schema.validate(missing))
   expect(err).toBeInstanceOf(AjvValidationError)
-  expect((err as AjvValidationError).data).toMatchInlineSnapshot(`
+  expect(err!.data).toMatchInlineSnapshot(`
     Object {
       "errors": Array [
         Object {

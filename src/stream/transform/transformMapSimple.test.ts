@@ -1,5 +1,5 @@
 import { Readable } from 'stream'
-import { AppError, ErrorMode, pTuple, _range } from '@naturalcycles/js-lib'
+import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
 import { _pipeline } from '../pipeline/pipeline'
 import { writableVoid } from '../writable/writableVoid'
 import { transformMapSimple } from './transformMapSimple'
@@ -23,7 +23,7 @@ test('transformMapSimple error', async () => {
   const data = _range(100).map(String)
 
   const data2: string[] = []
-  const [err] = await pTuple(
+  const [err] = await pTry(
     _pipeline([
       Readable.from(data),
       transformMapSimple<string, void>((r, i) => {

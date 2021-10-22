@@ -14,6 +14,8 @@ import {
   bufferToBase64,
   hash,
   md5,
+  hashAsBuffer,
+  md5AsBuffer,
   stringToBase64,
 } from './security/hash.util'
 import {
@@ -275,6 +277,8 @@ export {
   ALPHABET_ALPHANUMERIC,
   md5,
   hash,
+  hashAsBuffer,
+  md5AsBuffer,
   stringToBase64,
   base64ToString,
   bufferToBase64,
