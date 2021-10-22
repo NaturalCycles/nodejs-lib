@@ -1,3 +1,11 @@
+# [12.44.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.43.0...v12.44.0) (2021-10-22)
+
+
+### Features
+
+* hashAsBuffer, md5AsBuffer ([67bd66b](https://github.com/NaturalCycles/nodejs-lib/commit/67bd66b3a9bdf85016970b7a49d78eca703ec071))
+* remove `ndjson-map` bin ([5ee734b](https://github.com/NaturalCycles/nodejs-lib/commit/5ee734bcaf9ace2bf9a18ffef9f8d09cca6cc315))
+
 # [12.43.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.42.0...v12.43.0) (2021-10-20)
 
 
