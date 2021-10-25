@@ -1,6 +1,6 @@
 import { Transform } from 'stream'
 import { inspect, InspectOptions } from 'util'
-import { SimpleMovingAverage, _mb, _since } from '@naturalcycles/js-lib'
+import { SimpleMovingAverage, _mb, _since, AnyObject } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { hasColors } from '../../colors/colors'
@@ -91,7 +91,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
    *
    * chunk is undefined for "final" stats, otherwise is defined.
    */
-  extra?: (chunk: IN | undefined, index: number) => Record<string, any>
+  extra?: (chunk: IN | undefined, index: number) => AnyObject
 }
 
 const inspectOpt: InspectOptions = {

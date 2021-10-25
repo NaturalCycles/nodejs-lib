@@ -1,3 +1,4 @@
+import { AnyObject } from '@naturalcycles/js-lib'
 import type { Options } from 'got'
 
 export interface GetGotOptions extends Options {
@@ -40,7 +41,7 @@ export interface GetGotOptions extends Options {
   maxResponseLength?: number
 }
 
-export interface GotRequestContext extends Record<string, any> {
+export interface GotRequestContext extends AnyObject {
   /**
    * Millisecond-timestamp of when the request was started. To be able to count "time spent".
    */

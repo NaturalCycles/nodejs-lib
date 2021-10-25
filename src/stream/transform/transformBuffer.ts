@@ -10,9 +10,7 @@ export interface TransformBufferOptions extends TransformOptions {
  *
  * @default batchSize is 10
  */
-export function transformBuffer<IN = Record<string, any>>(
-  opt: TransformBufferOptions,
-): TransformTyped<IN, IN[]> {
+export function transformBuffer<IN = any>(opt: TransformBufferOptions): TransformTyped<IN, IN[]> {
   const { batchSize } = opt
 
   let buf: IN[] = []

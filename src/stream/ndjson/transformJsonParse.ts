@@ -27,7 +27,7 @@ export interface TransformJsonParseOptions {
  *   consumeYourStream...
  * [)
  */
-export function transformJsonParse<OUT = Record<string, any>>(
+export function transformJsonParse<OUT = any>(
   opt: TransformJsonParseOptions = {},
 ): TransformTyped<string | Buffer, OUT> {
   const { strict = true, reviver } = opt

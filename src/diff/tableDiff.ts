@@ -1,4 +1,4 @@
-import { StringMap, _truncate } from '@naturalcycles/js-lib'
+import { StringMap, _truncate, AnyObject } from '@naturalcycles/js-lib'
 
 export interface TableDiffOptions {
   /**
@@ -35,11 +35,7 @@ export interface TableDiffOptions {
  *
  * Function is located in nodejs-lib (not js-lib), because it's planned to improve in the future and add e.g colors (via chalk).
  */
-export function tableDiff(
-  a: Record<string, any>,
-  b: Record<string, any>,
-  opt: TableDiffOptions = {},
-): void {
+export function tableDiff(a: AnyObject, b: AnyObject, opt: TableDiffOptions = {}): void {
   const { maxFieldLen, aTitle = 'a', bTitle = 'b' } = opt
   const diff: StringMap<any> = {}
 

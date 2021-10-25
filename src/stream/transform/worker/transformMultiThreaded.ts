@@ -1,5 +1,5 @@
 import { Worker } from 'worker_threads'
-import { DeferredPromise, pDefer, _range } from '@naturalcycles/js-lib'
+import { DeferredPromise, pDefer, _range, AnyObject } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { TransformTyped } from '../../stream.model'
 import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
@@ -30,7 +30,7 @@ export interface TransformMultiThreadedOptions {
   /**
    * Passed to the Worker as `workerData` property (initial data).
    */
-  workerData?: Record<string, any>
+  workerData?: AnyObject
 }
 
 const workerProxyFilePath = `${__dirname}/workerClassProxy.js`
