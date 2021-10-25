@@ -1,3 +1,10 @@
+## [12.47.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.47.0...v12.47.1) (2021-10-25)
+
+
+### Bug Fixes
+
+* remove console.log ([90f186c](https://github.com/NaturalCycles/nodejs-lib/commit/90f186c942dd461245faae479674a74058860b65))
+
 # [12.47.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.46.0...v12.47.0) (2021-10-25)
 
 
