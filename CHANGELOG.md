@@ -1,3 +1,10 @@
+# [12.46.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.45.1...v12.46.0) (2021-10-25)
+
+
+### Features
+
+* stringSchema.stripHTML extension, export sanitizeHTML ([586d576](https://github.com/NaturalCycles/nodejs-lib/commit/586d576585652af822d974607ee913c16a81691f))
+
 ## [12.45.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.45.0...v12.45.1) (2021-10-25)
 
 
