@@ -1,3 +1,10 @@
+## [12.45.1](https://github.com/NaturalCycles/nodejs-lib/compare/v12.45.0...v12.45.1) (2021-10-25)
+
+
+### Bug Fixes
+
+* make JoiValidationError.annotation non-enumerable ([9337fd3](https://github.com/NaturalCycles/nodejs-lib/commit/9337fd3e1a60deb0d9e91b17cf5e7b42f72b5459))
+
 # [12.45.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.44.0...v12.45.0) (2021-10-22)
 
 
