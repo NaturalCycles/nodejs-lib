@@ -2,6 +2,7 @@ import { testValidation } from '../../test/validation.test.util'
 import {
   binarySchema,
   emailSchema,
+  idSchema,
   oneOfSchema,
   semVerSchema,
   stringSchema,
@@ -57,4 +58,28 @@ test('oneOfSchema', () => {
 
   expect(isValid(5, s)).toBe(false)
   expect(isValid(['s'], s)).toBe(false)
+})
+
+test.each(['123456', '123456a', '123456aB', '123456aB_', `a`.repeat(30), `a`.repeat(64)])(
+  'valid idSchema: %s',
+  s => {
+    validate(s, idSchema)
+  },
+)
+
+test.each([
+  '1',
+  '12',
+  45,
+  '12345',
+  '12345-',
+  '12345%',
+  '12345$',
+  '12345&',
+  '12345^',
+  '12345@',
+  `a`.repeat(65),
+  `a`.repeat(129),
+])('invalid idSchema: %s', s => {
+  expect(isValid(s, idSchema)).toBe(false)
 })

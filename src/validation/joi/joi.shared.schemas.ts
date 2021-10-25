@@ -42,13 +42,10 @@ export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
 
 // 1g498efj5sder3324zer
 /**
- * [a-z0-9_]*
+ * [a-zA-Z0-9_]*
  * 6-64 length
  */
-export const idSchema = stringSchema
-  .regex(/^[a-z0-9_]*$/)
-  .min(6)
-  .max(64)
+export const idSchema = stringSchema.regex(/^[a-zA-Z0-9_]{6,64}$/)
 
 /**
  * `_` should NOT be allowed to be able to use slug-ids as part of natural ids with `_` separator.
@@ -58,7 +55,7 @@ export const SLUG_PATTERN = /^[a-z0-9-]*$/
 /**
  * "Slug" - a valid URL, filename, etc.
  */
-export const slugSchema = stringSchema.regex(SLUG_PATTERN).min(1).max(255)
+export const slugSchema = stringSchema.regex(/^[a-z0-9-]{1,255}$/)
 
 // 16725225600 is 2500-01-01
 export const unixTimestampSchema = numberSchema.integer().min(0).max(16725225600)
