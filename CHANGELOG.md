@@ -1,3 +1,10 @@
+# [12.47.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.46.0...v12.47.0) (2021-10-25)
+
+
+### Features
+
+* idSchema to allow uppercase characters too ([80111c3](https://github.com/NaturalCycles/nodejs-lib/commit/80111c3d601fbb6e417b7ebb38b42ae1451c8866))
+
 # [12.46.0](https://github.com/NaturalCycles/nodejs-lib/compare/v12.45.1...v12.46.0) (2021-10-25)
 
 
