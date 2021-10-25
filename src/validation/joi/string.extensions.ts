@@ -1,15 +1,26 @@
 import { dayjs } from '@naturalcycles/time-lib'
 import { Extension, StringSchema } from 'joi'
 import * as Joi from 'joi'
+import * as sanitize from 'sanitize-html'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedStringSchema extends StringSchema, AnySchemaTyped<string> {
   dateString(min?: string, max?: string): this
+  stripHTML(opt?: JoiStripHTMLOptions): this
 }
 
-export interface DateStringParams {
+export interface JoiDateStringOptions {
   min?: string
   max?: string
+}
+
+export interface JoiStripHTMLOptions {
+  /**
+   * 'Strict' would throw an error if it detects any HTML.
+   * Non-strict (default) does not error, but DOES convert the string to the string without HTML.
+   * Internally uses `sanitize-html` library, with allowedTags = [], and method = 'discard'.
+   */
+  strict?: boolean
 }
 
 export function stringExtensions(joi: typeof Joi): Extension {
@@ -21,13 +32,14 @@ export function stringExtensions(joi: typeof Joi): Extension {
       'string.dateStringMin': '"{{#label}}" must be not earlier than {{#min}}',
       'string.dateStringMax': '"{{#label}}" must be not later than {{#max}}',
       'string.dateStringCalendarAccuracy': '"{{#label}}" must be a VALID calendar date',
+      'string.stripHTML': '"{{#label}}" must NOT contain any HTML tags',
     },
     rules: {
       dateString: {
         method(min?: string, max?: string) {
           return this.$_addRule({
             name: 'dateString',
-            args: { min, max } as DateStringParams,
+            args: { min, max } as JoiDateStringOptions,
           })
         },
         args: [
@@ -44,7 +56,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
             message: 'must be a string',
           },
         ],
-        validate(v: string, helpers, args: DateStringParams) {
+        validate(v: string, helpers, args: JoiDateStringOptions) {
           // console.log('dateString validate called', {v, args})
 
           let err: string | undefined
@@ -67,6 +79,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
           } else if (max && v > max) {
             err = 'string.dateStringMax'
           } else if (!dayjs(v).isValid()) {
+            // todo: replace with another regex (from ajv-validators) for speed
             err = 'string.dateStringCalendarAccuracy'
           }
 
@@ -75,6 +88,40 @@ export function stringExtensions(joi: typeof Joi): Extension {
           }
 
           return v // validation passed
+        },
+      },
+      stripHTML: {
+        method(opt?: JoiStripHTMLOptions) {
+          return this.$_addRule({
+            name: 'stripHTML',
+            args: {
+              strict: false,
+              ...opt,
+            },
+          })
+        },
+        args: [
+          {
+            name: 'strict',
+            ref: true,
+            assert: v => typeof v === 'boolean',
+            message: 'must be a boolean',
+          },
+        ],
+        validate(v: string, helpers, args: JoiStripHTMLOptions) {
+          console.log('!!! stripHTML', args, v)
+          const { strict = false } = args
+
+          const r = sanitize(v, {
+            allowedTags: [], // no html tags allowed at all
+            // disallowedTagsMode: 'discard' // discard is default
+          })
+
+          if (strict && r !== v) {
+            return helpers.error('string.stripHTML', args)
+          }
+
+          return r // return converted value (or the same, if there was nothing to sanitize)
         },
       },
     },

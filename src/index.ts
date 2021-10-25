@@ -172,6 +172,7 @@ import {
   undefinedIfInvalid,
   validate,
 } from './validation/joi/joi.validation.util'
+import { sanitizeHTML, SanitizeHTMLOptions } from './validation/sanitize.util'
 
 export type {
   JoiValidationErrorData,
@@ -219,6 +220,7 @@ export type {
   AjvValidationOptions,
   AjvSchemaCfg,
   AjvValidationErrorData,
+  SanitizeHTMLOptions,
 }
 
 export {
@@ -349,4 +351,5 @@ export {
   readJsonSchemas,
   readAjvSchemas,
   hasColors,
+  sanitizeHTML,
 }
