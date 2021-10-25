@@ -2,15 +2,6 @@
 
 exports[`array items with invalid props 1`] = `
 Object {
-  "annotation": "{
-  \\"a\\": [
-    {
-      \\"a1\\" [1]: 5
-    }
-  ]
-}
-
-[1] \\"a[0].a1\\" must be a string",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {
@@ -32,16 +23,6 @@ Object {
 
 exports[`array with invalid items 1`] = `
 Object {
-  "annotation": "{
-  \\"a\\": [
-    {
-      \\"a1\\": \\"hello\\"
-    },
-    \\"\\" [1]
-  ]
-}
-
-[1] \\"a[1]\\" must be of type object",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {
@@ -63,12 +44,6 @@ Object {
 
 exports[`error should contain errorItems 1`] = `
 Object {
-  "annotation": "{
-  \\"a1\\": \\" ff \\",
-  \\"a2\\" [1]: \\"a\\"
-}
-
-[1] \\"a2\\" length must be at least 2 characters long",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {
@@ -211,12 +186,6 @@ exports[`should include id in the error message 1`] = `
 
 exports[`should include id in the error message 2`] = `
 Object {
-  "annotation": "{
-  \\"id\\": \\"someId\\",
-  \\"a1\\" [1]: -- missing --
-}
-
-[1] \\"a1\\" is required",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {
@@ -247,12 +216,6 @@ exports[`should include id in the error message 3`] = `
 
 exports[`should include id in the error message 4`] = `
 Object {
-  "annotation": "{
-  \\"id\\": \\"someId\\",
-  \\"a1\\" [1]: -- missing --
-}
-
-[1] \\"a1\\" is required",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {
@@ -283,12 +246,6 @@ exports[`should include id in the error message 5`] = `
 
 exports[`should include id in the error message 6`] = `
 Object {
-  "annotation": "{
-  \\"id\\": \\"someId\\",
-  \\"a1\\" [1]: -- missing --
-}
-
-[1] \\"a1\\" is required",
   "joiValidationErrorItems": Array [
     Object {
       "context": Object {

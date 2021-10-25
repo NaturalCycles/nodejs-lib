@@ -9,7 +9,7 @@
 import { _hb, _isObject, _truncateMiddle } from '@naturalcycles/js-lib'
 import { ValidationError, ValidationOptions } from 'joi'
 import { AnySchemaTyped } from './joi.model'
-import { JoiValidationError } from './joi.validation.error'
+import { JoiValidationError, JoiValidationErrorData } from './joi.validation.error'
 
 // todo: consider replacing with Tuple of [error, value]
 export interface JoiValidationResult<T = any> {
@@ -163,10 +163,18 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
 
   const msg = tokens.join('\n')
 
-  return new JoiValidationError(msg, {
+  const data: JoiValidationErrorData = {
     joiValidationErrorItems: err.details,
     ...(objectName && { joiValidationObjectName: objectName }),
     ...(objectId && { joiValidationObjectId: objectId }),
-    annotation,
+  }
+
+  // Make annotation non-enumerable, to not get it automatically printed,
+  // but still accessible
+  Object.defineProperty(data, 'annotation', {
+    enumerable: false,
+    value: annotation,
   })
+
+  return new JoiValidationError(msg, data)
 }

@@ -18,6 +18,9 @@ export interface JoiValidationErrorData extends ErrorData {
   /**
    * Error "annotation" is stripped in Error.message.
    * This field contains the "full" annotation.
+   *
+   * This field is non-enumerable, won't be printed or included in JSON by default,
+   * but still accessible programmatically (via `err.data.annotation`) when needed!
    */
   annotation?: string
 }

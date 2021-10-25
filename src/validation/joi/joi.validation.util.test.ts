@@ -326,3 +326,31 @@ test.skip('arraySchema should strip undefined/null values by default', () => {
 
   expect(validate(['s', undefined, 's2', null], schema)).toEqual(['s', 's2'])
 })
+
+test('annotation is non-enumerable, but still accessible', () => {
+  const s = booleanSchema
+  const { error } = getValidationResult('notBoolean', s)
+  expect(error).toBeInstanceOf(JoiValidationError)
+
+  expect(error!.data).toMatchInlineSnapshot(`
+    Object {
+      "joiValidationErrorItems": Array [
+        Object {
+          "context": Object {
+            "label": "value",
+            "value": "notBoolean",
+          },
+          "message": "\\"value\\" must be a boolean",
+          "path": Array [],
+          "type": "boolean.base",
+        },
+      ],
+    }
+  `)
+
+  expect(JSON.stringify(error!.data)).not.toContain('annotation')
+
+  // But it's still present!
+  expect(error!.data.annotation).toMatchInlineSnapshot(`"\\"value\\" must be a boolean"`)
+  expect(!!error!.data.annotation).toBe(true)
+})
