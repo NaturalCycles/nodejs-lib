@@ -109,8 +109,8 @@ export function stringExtensions(joi: typeof Joi): Extension {
           },
         ],
         validate(v: string, helpers, args: JoiStripHTMLOptions) {
-          console.log('!!! stripHTML', args, v)
-          const { strict = false } = args
+          // console.log('!!! stripHTML', args, v)
+          const { strict } = args
 
           const r = sanitize(v, {
             allowedTags: [], // no html tags allowed at all
