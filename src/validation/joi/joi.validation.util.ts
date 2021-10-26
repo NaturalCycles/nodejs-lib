@@ -172,6 +172,7 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   // Make annotation non-enumerable, to not get it automatically printed,
   // but still accessible
   Object.defineProperty(data, 'annotation', {
+    configurable: true,
     enumerable: false,
     value: annotation,
   })
