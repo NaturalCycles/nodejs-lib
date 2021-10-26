@@ -8,8 +8,9 @@ test.each([
   'yo % xo %% xo !@#$%^',
   'la\nla\nla',
   'a + b == c',
+  // `"Bread" & 'Salt', a < b, b > a`,
 ])('happy case: nothing to strip: %s', v => {
-  const schema = stringSchema.stripHTML({ strict: true }).optional()
+  const schema = stringSchema.stripHTML({ strict: false }).optional()
 
   const r = validate(v, schema)
 

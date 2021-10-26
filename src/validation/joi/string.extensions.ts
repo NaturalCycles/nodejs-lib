@@ -110,14 +110,16 @@ export function stringExtensions(joi: typeof Joi): Extension {
         ],
         validate(v: string, helpers, args: JoiStripHTMLOptions) {
           // console.log('!!! stripHTML', args, v)
-          const { strict } = args
 
           const r = sanitize(v, {
             allowedTags: [], // no html tags allowed at all
             // disallowedTagsMode: 'discard' // discard is default
+            parser: {
+              decodeEntities: false, // prevent decoding/changing of &<>"'
+            },
           })
 
-          if (strict && r !== v) {
+          if (args.strict && r !== v) {
             return helpers.error('string.stripHTML', args)
           }
 

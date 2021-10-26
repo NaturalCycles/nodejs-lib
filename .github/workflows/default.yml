@@ -11,7 +11,7 @@ jobs:
       CC_TEST_REPORTER_ID: de1dd499aa47f47e03c811b848134442d267f451ac39e2bf6b242c7ad0fd8e28
     steps:
       - { uses: actions/checkout@v2, with: { persist-credentials: false } }
-      - { uses: actions/setup-node@v2, with: { node-version: 14, cache: 'yarn' } }
+      - { uses: actions/setup-node@v2, with: { node-version: 16, cache: 'yarn' } }
 
       - name: deps
         run: yarn --frozen-lockfile
