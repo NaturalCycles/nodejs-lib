@@ -10,7 +10,7 @@ export let _pipeline = promisify(pipeline)
 
 // Workaround https://github.com/nodejs/node/issues/40191
 // todo: remove it when fix is released in 16.x and in AppEngine 16.x
-if (process.version > 'v16.13') {
+if (process.version >= 'v16.10') {
   const { pipeline } = require('stream/promises')
   _pipeline = ((streams: AnyStream[]) => pipeline(...streams)) as any
 }
