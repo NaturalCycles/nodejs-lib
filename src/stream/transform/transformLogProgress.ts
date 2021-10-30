@@ -92,6 +92,15 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
    * chunk is undefined for "final" stats, otherwise is defined.
    */
   extra?: (chunk: IN | undefined, index: number) => AnyObject
+
+  /**
+   * If specified - will multiply the counter by this number.
+   * Useful e.g when using `transformBuffer({ batchSize: 500 })`, so
+   * it'll accurately represent the number of processed entries (not batches).
+   *
+   * Defaults to 1.
+   */
+  batchSize?: number
 }
 
 const inspectOpt: InspectOptions = {
@@ -113,6 +122,7 @@ export function transformLogProgress<IN = any>(
     peakRSS: logPeakRSS = true,
     logRPS = true,
     logEvery = 1000,
+    batchSize = 1,
     extra,
   } = opt
   const logProgress = opt.logProgress !== false && logEvery !== 0 // true by default
@@ -161,10 +171,12 @@ export function transformLogProgress<IN = any>(
     const rps10 = Math.round(sma.push(lastRPS))
     if (mem.rss > peakRSS) peakRSS = mem.rss
 
+    const batchedProgress = progress * batchSize
+
     console.log(
       inspect(
         {
-          [final ? `${metric}_final` : metric]: progress,
+          [final ? `${metric}_final` : metric]: batchedProgress,
           ...(extra ? extra(chunk, progress) : {}),
           ...(logHeapUsed ? { heapUsed: _mb(mem.heapUsed) } : {}),
           ...(logHeapTotal ? { heapTotal: _mb(mem.heapTotal) } : {}),
