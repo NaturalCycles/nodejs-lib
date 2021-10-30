@@ -163,8 +163,8 @@ export function transformLogProgress<IN = any>(
     const mem = process.memoryUsage()
 
     const now = Date.now()
-    const lastRPS = processedLastSecond / ((now - lastSecondStarted) / 1000) || 0
-    const rpsTotal = Math.round(progress / ((now - started) / 1000)) || 0
+    const lastRPS = (processedLastSecond * batchSize) / ((now - lastSecondStarted) / 1000) || 0
+    const rpsTotal = Math.round((progress * batchSize) / ((now - started) / 1000)) || 0
     lastSecondStarted = now
     processedLastSecond = 0
 
