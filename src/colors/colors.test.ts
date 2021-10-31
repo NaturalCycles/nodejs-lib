@@ -8,5 +8,5 @@ test('colors', () => {
 })
 
 test('hasColors', () => {
-  console.log(hasColors())
+  console.log(hasColors)
 })

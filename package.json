@@ -37,7 +37,6 @@
     "move-file": "^2.0.0",
     "nanoid": "^3.0.0",
     "sanitize-html": "^2.5.2",
-    "supports-color": "^8.0.0",
     "through2-concurrent": "^2.0.0",
     "yargs": "^17.0.0"
   },

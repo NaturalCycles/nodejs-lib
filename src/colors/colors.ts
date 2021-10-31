@@ -1,6 +1,8 @@
-const supporsColorLib = require('supports-color')
+import * as tty from 'tty'
 
-export function hasColors(): boolean {
-  if (process.env['NO_COLOR']) return false // https://no-color.org/
-  return !!supporsColorLib.stdout
-}
+/**
+ * Based on: https://github.com/sindresorhus/yoctocolors/pull/5
+ *
+ * @experimental
+ */
+export const hasColors = !process.env['NO_COLOR'] && tty.WriteStream.prototype.hasColors()

@@ -104,7 +104,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
 }
 
 const inspectOpt: InspectOptions = {
-  colors: hasColors(),
+  colors: hasColors,
   breakLength: 300,
 }
 
@@ -163,15 +163,15 @@ export function transformLogProgress<IN = any>(
     const mem = process.memoryUsage()
 
     const now = Date.now()
-    const lastRPS = (processedLastSecond * batchSize) / ((now - lastSecondStarted) / 1000) || 0
-    const rpsTotal = Math.round((progress * batchSize) / ((now - started) / 1000)) || 0
+    const batchedProgress = progress * batchSize
+    const lastRPS =
+      (processedLastSecond * batchedProgress) / ((now - lastSecondStarted) / 1000) || 0
+    const rpsTotal = Math.round(batchedProgress / ((now - started) / 1000)) || 0
     lastSecondStarted = now
     processedLastSecond = 0
 
     const rps10 = Math.round(sma.push(lastRPS))
     if (mem.rss > peakRSS) peakRSS = mem.rss
-
-    const batchedProgress = progress * batchSize
 
     console.log(
       inspect(
