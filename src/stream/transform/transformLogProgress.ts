@@ -164,8 +164,7 @@ export function transformLogProgress<IN = any>(
 
     const now = Date.now()
     const batchedProgress = progress * batchSize
-    const lastRPS =
-      (processedLastSecond * batchedProgress) / ((now - lastSecondStarted) / 1000) || 0
+    const lastRPS = (processedLastSecond * batchSize) / ((now - lastSecondStarted) / 1000) || 0
     const rpsTotal = Math.round(batchedProgress / ((now - started) / 1000)) || 0
     lastSecondStarted = now
     processedLastSecond = 0
