@@ -1,4 +1,4 @@
-import { Debug, DebugLogLevel } from './debug'
+import { Debug } from './debug'
 
 const log = Debug('nodejs-lib')
 
@@ -24,16 +24,6 @@ test('debug', () => {
   expect(log.enabled).toBe(true)
 
   log('hello log', obj)
-  log.info('hello log', obj)
-  log.debug('hello log', obj)
-  log.warn('hello log', obj)
-  log.error('hello log', obj)
-
-  const level = DebugLogLevel.warn
-  log[level]('hello level')
 
   log(err)
-  log.debug(err)
-  log.warn(err)
-  log.error(err)
 })

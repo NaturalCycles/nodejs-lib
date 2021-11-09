@@ -7,7 +7,7 @@ import { tableDiff, TableDiffOptions } from './diff/tableDiff'
 import { getGot } from './got/getGot'
 import { GetGotOptions } from './got/got.model'
 import { memoryUsage, memoryUsageFull, processSharedUtil } from './infra/process.util'
-import { Debug, DebugLogLevel, IDebug, IDebugger } from './log/debug'
+import { Debug, IDebug, IDebugger } from './log/debug'
 import {
   base64ToBuffer,
   base64ToString,
@@ -287,7 +287,6 @@ export {
   bufferToBase64,
   base64ToBuffer,
   Debug,
-  DebugLogLevel,
   getSecretMap,
   setSecretMap,
   loadSecretsFromEnv,
