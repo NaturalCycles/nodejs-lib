@@ -1,7 +1,7 @@
-import { StringMap } from '@naturalcycles/js-lib'
+import { _omit, StringMap } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
-import { Debug, DebugLogLevel, inspectAny, InspectAnyOptions } from '..'
+import { inspectAny, InspectAnyOptions } from '..'
 import {
   SlackApiBody,
   SlackAttachmentField,
@@ -11,20 +11,18 @@ import {
 
 const GAE = !!process.env['GAE_INSTANCE']
 
-const DEFAULTS = (): SlackMessage => ({
+const DEFAULTS: SlackMessage = {
   username: 'bot',
   channel: '#log',
   icon_emoji: ':spider_web:',
   items: 'no text',
-})
+}
 
 const INSPECT_OPT: InspectAnyOptions = {
   colors: false,
   includeErrorData: true,
   includeErrorStack: true,
 }
-
-const log = Debug('nc:nodejs-lib:slack')
 
 /**
  * Has 2 main methods:
@@ -42,7 +40,12 @@ export class SlackService<CTX = any> {
   constructor(cfg: Partial<SlackServiceCfg<CTX>>) {
     this.cfg = {
       messagePrefixHook: slackDefaultMessagePrefixHook,
+      logger: console,
       ...cfg,
+      inspectOptions: {
+        ...INSPECT_OPT,
+        ...cfg.inspectOptions,
+      },
     }
   }
 
@@ -58,47 +61,34 @@ export class SlackService<CTX = any> {
     })
   }
 
-  async send(msg: SlackMessage<CTX> | string, ctx?: CTX): Promise<void> {
-    const { webhookUrl, messagePrefixHook } = this.cfg
+  async send(input: SlackMessage<CTX> | string, ctx?: CTX): Promise<void> {
+    const { webhookUrl, messagePrefixHook, inspectOptions } = this.cfg
 
     // If String is passed as first argument - just transform it to a full SlackMessage
-    if (typeof msg === 'string') {
-      msg = {
-        items: msg,
-      }
-    }
+    const msg = typeof input === 'string' ? { items: input } : input
 
     if (ctx !== undefined) {
       Object.assign(msg, { ctx })
     }
 
-    if (!msg.noLog) {
-      log[msg.level || DebugLogLevel.info](
-        ...[msg.items, msg.kv, msg.attachments, msg.mentions].filter(Boolean),
-      )
-    }
+    this.cfg.logger.log(...[msg.items, msg.kv, msg.attachments, msg.mentions].filter(Boolean))
 
     if (!webhookUrl) return
 
     // Transform msg.kv into msg.attachments
     if (msg.kv) {
-      msg.attachments = [...(msg.attachments || []), { fields: this.kvToFields(msg.kv) }]
+      ;(msg.attachments ||= []).push({ fields: this.kvToFields(msg.kv) })
 
       delete msg.kv // to not pass it all the way to Slack Api
     }
 
     let text: string
 
-    const inspectOpt = {
-      ...INSPECT_OPT,
-      ...msg.inspectOptions,
-    }
-
     // Array has a special treatment here
     if (Array.isArray(msg.items)) {
-      text = msg.items.map(t => inspectAny(t, inspectOpt)).join('\n')
+      text = msg.items.map(t => inspectAny(t, inspectOptions)).join('\n')
     } else {
-      text = inspectAny(msg.items, inspectOpt)
+      text = inspectAny(msg.items, inspectOptions)
     }
 
     // Wrap in markdown-text-block if it's anything but plain String
@@ -113,29 +103,26 @@ export class SlackService<CTX = any> {
     const prefix = await messagePrefixHook(msg)
     if (prefix === null) return // filtered out!
 
-    const json: SlackApiBody = {
-      ...DEFAULTS(),
-      ...this.cfg.defaults,
-      ...msg,
-      // Text with Prefix
-      text: [prefix.join(': '), text].filter(Boolean).join('\n'),
-    }
-
-    // they're not needed in the json payload
-    delete json['items']
-    delete json['ctx']
-    delete json['noLog']
-
-    json.channel = (this.cfg.channelByLevel || {})[msg.level!] || json.channel
+    const json: SlackApiBody = _omit(
+      {
+        ...DEFAULTS,
+        ...this.cfg.defaults,
+        ...msg,
+        // Text with Prefix
+        text: [prefix.join(': '), text].filter(Boolean).join('\n'),
+      },
+      ['items', 'ctx'],
+    )
 
     await got
       .post(webhookUrl, {
         json,
         responseType: 'text',
+        timeout: 90_000,
       })
       .catch(err => {
         // ignore (unless throwOnError is set)
-        if ((msg as SlackMessage).throwOnError) throw err
+        if (msg.throwOnError) throw err
       })
   }
 

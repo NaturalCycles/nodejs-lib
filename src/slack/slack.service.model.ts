@@ -1,5 +1,5 @@
-import { StringMap } from '@naturalcycles/js-lib'
-import { DebugLogLevel, InspectAnyOptions } from '..'
+import { CommonLogger, StringMap } from '@naturalcycles/js-lib'
+import { InspectAnyOptions } from '..'
 
 /**
  * Properties that exists both in SlackApiBody (as per Slack API) and SlackMessage (our abstraction).
@@ -44,8 +44,6 @@ export interface SlackMessage<CTX = any> extends SlackMessageProps {
    */
   ctx?: CTX
 
-  level?: DebugLogLevel
-
   /**
    * Keys-values will be rendered as MessageAttachment with Fields
    */
@@ -57,23 +55,11 @@ export interface SlackMessage<CTX = any> extends SlackMessageProps {
   mentions?: string[]
 
   /**
-   * @default false
    * By default it ignores possible errors from slack
+   *
+   * @default false
    */
   throwOnError?: boolean
-
-  /**
-   * @default false
-   * Skips logging message
-   */
-  noLog?: boolean
-
-  /**
-   * Defaults to:
-   * includeErrorData: true
-   * includeErrorStack: true
-   */
-  inspectOptions?: InspectAnyOptions
 }
 
 export interface SlackAttachmentField {
@@ -121,15 +107,22 @@ export interface SlackServiceCfg<CTX = any> {
   defaults?: Partial<SlackMessage>
 
   /**
-   * Override channel when msg.level is set.
-   * key: DebugLogLevel
-   * value: channel name to send message to
-   */
-  channelByLevel?: StringMap
-
-  /**
    * Function to return an array of "prefix tokens" (will be joined by ': ').
    * Allows to skip (filter out) the message by returning `null`.
    */
   messagePrefixHook: SlackMessagePrefixHook<CTX>
+
+  /**
+   * By default SlackService logs every message to console.log
+   * Pass another logger if needed.
+   * Pass `noopLogger` to suppress logging completely.
+   */
+  logger: CommonLogger
+
+  /**
+   * Defaults to:
+   * includeErrorData: true
+   * includeErrorStack: true
+   */
+  inspectOptions: InspectAnyOptions
 }

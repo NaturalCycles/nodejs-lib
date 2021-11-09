@@ -1,12 +1,9 @@
 import * as fs from 'fs'
 import { StringMap } from '@naturalcycles/js-lib'
-import { base64ToString, Debug } from '..'
+import { base64ToString } from '..'
 import { decryptRandomIVBuffer } from './crypto.util'
 
 let loaded = false
-
-// it's wrapped to be able to pipe console.* to Stackdriver
-const getLog = () => Debug('nc:nodejs-lib:secret')
 
 const secretMap: StringMap = {}
 
@@ -29,7 +26,7 @@ export function loadSecretsFromEnv(): void {
     })
 
   loaded = true
-  getLog()(
+  console.log(
     `${Object.keys(secrets).length} secret(s) loaded from process.env: ${Object.keys(secrets).join(
       ', ',
     )}`,
@@ -69,7 +66,7 @@ export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
 
   loaded = true
-  getLog()(
+  console.log(
     `${Object.keys(secrets).length} secret(s) loaded from ${filePath}: ${Object.keys(secrets)
       .map(s => s.toUpperCase())
       .join(', ')}`,
@@ -105,7 +102,7 @@ export function getSecretMap(): StringMap {
 export function setSecretMap(map: StringMap): void {
   Object.keys(secretMap).forEach(k => delete secretMap[k])
   Object.entries(map).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
-  getLog()(
+  console.log(
     `setSecretMap set ${Object.keys(secretMap).length} secret(s): ${Object.keys(map)
       .map(s => s.toUpperCase())
       .join(', ')}`,
