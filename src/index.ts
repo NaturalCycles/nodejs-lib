@@ -108,7 +108,7 @@ import { writableForEach } from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
-import { inspectAny, InspectAnyOptions } from './string/inspectAny'
+import { inspectAny, InspectAnyOptions, inspectAnyStringifyFn } from './string/inspectAny'
 import { requireEnvKeys, requireFileToExist } from './util/env.util'
 import { LRUMemoCache } from './util/lruMemoCache'
 import {
@@ -339,6 +339,7 @@ export {
   BaseWorkerClass,
   tableDiff,
   inspectAny,
+  inspectAnyStringifyFn,
   getGot,
   HTTPError,
   TimeoutError,

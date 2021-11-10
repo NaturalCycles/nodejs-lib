@@ -1,5 +1,5 @@
 import { inspect, InspectOptions } from 'util'
-import { StringifyAnyOptions, _stringifyAny } from '@naturalcycles/js-lib'
+import { StringifyAnyOptions, _stringifyAny, JsonStringifyFunction } from '@naturalcycles/js-lib'
 
 export interface InspectAnyOptions extends StringifyAnyOptions, InspectOptions {}
 
@@ -7,6 +7,11 @@ const INSPECT_OPT: InspectOptions = {
   breakLength: 80, // default: ??
   depth: 10, // default: 2
 }
+
+/**
+ * Just a convenience export of a const that fulfills the JsonStringifyFunction interface.
+ */
+export const inspectAnyStringifyFn: JsonStringifyFunction = obj => inspectAny(obj)
 
 /**
  * Transforms ANY to human-readable string (via util.inspect mainly).
