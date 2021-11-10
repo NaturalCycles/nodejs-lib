@@ -1,4 +1,4 @@
-import { AnyObject } from '@naturalcycles/js-lib'
+import { AnyObject, CommonLogger } from '@naturalcycles/js-lib'
 import type { Options } from 'got'
 
 export interface GetGotOptions extends Options {
@@ -32,6 +32,11 @@ export interface GetGotOptions extends Options {
    * Set to false to strip searchParams from url when logging (both success and error)
    */
   logWithSearchParams?: boolean
+
+  /**
+   * Defaults to `console`
+   */
+  logger?: CommonLogger
 
   /**
    * Max length of response object before it's truncated.

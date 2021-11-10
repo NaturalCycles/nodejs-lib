@@ -1,5 +1,5 @@
 import { URL } from 'url'
-import { _jsonParseIfPossible, _since } from '@naturalcycles/js-lib'
+import { _since } from '@naturalcycles/js-lib'
 import got, { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got, HTTPError } from 'got'
 import { inspectAny } from '..'
 import { dimGrey, grey, red, yellow } from '../colors'
@@ -13,6 +13,8 @@ import { GetGotOptions, GotRequestContext } from './got.model'
  * 3. Reasonable defaults(tm), e.g non-infinite Timeout
  */
 export function getGot(opt: GetGotOptions = {}): Got {
+  opt.logger ||= console
+
   return got.extend({
     // Most-important is to set to anything non-empty (so, requests don't "hang" by default).
     // Should be long enough to handle for slow responses from scaled cloud APIs in times of spikes
@@ -99,7 +101,7 @@ function gotBeforeRequestHook(opt: GetGotOptions): BeforeRequestHook {
 
     if (opt.logStart) {
       const shortUrl = getShortUrl(opt, options.url, options.prefixUrl)
-      console.log([dimGrey(' >>'), dimGrey(options.method), grey(shortUrl)].join(' '))
+      opt.logger!.log([dimGrey(' >>'), dimGrey(options.method), grey(shortUrl)].join(' '))
     }
   }
 }
@@ -113,7 +115,7 @@ function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
       const { url, prefixUrl, method } = resp.request.options
       const shortUrl = getShortUrl(opt, url, prefixUrl)
 
-      console.log(
+      opt.logger!.log(
         [
           dimGrey(' <<'),
           coloredHttpCode(resp.statusCode),
@@ -129,7 +131,7 @@ function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
 
     // Error responses are not logged, cause they're included in Error message already
     if (opt.logResponse && success) {
-      console.log(inspectAny(_jsonParseIfPossible(resp.body), { maxLen: opt.maxResponseLength }))
+      opt.logger!.log(inspectAny(resp.body, { maxLen: opt.maxResponseLength }))
     }
 
     return resp
