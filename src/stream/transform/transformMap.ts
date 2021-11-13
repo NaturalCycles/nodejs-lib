@@ -3,6 +3,7 @@ import {
   AggregatedError,
   AsyncMapper,
   AsyncPredicate,
+  CommonLogger,
   ErrorMode,
   pFilter,
 } from '@naturalcycles/js-lib'
@@ -57,6 +58,8 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * If defined - called BEFORE `final()` callback is called.
    */
   beforeFinal?: () => any
+
+  logger?: CommonLogger
 }
 
 export function notNullishPredicate(item: any): boolean {
@@ -87,6 +90,7 @@ export function transformMap<IN = any, OUT = IN>(
     onError,
     beforeFinal,
     metric = 'stream',
+    logger = console,
   } = opt
 
   let index = -1
@@ -101,7 +105,7 @@ export function transformMap<IN = any, OUT = IN>(
       async final(cb) {
         // console.log('transformMap final')
 
-        logErrorStats(true)
+        logErrorStats(logger, true)
 
         await beforeFinal?.() // call beforeFinal if defined
 
@@ -144,11 +148,11 @@ export function transformMap<IN = any, OUT = IN>(
           cb() // done processing
         }
       } catch (err) {
-        console.error(err)
+        logger.error(err)
 
         errors++
 
-        logErrorStats()
+        logErrorStats(logger)
 
         if (onError) {
           try {
@@ -172,9 +176,9 @@ export function transformMap<IN = any, OUT = IN>(
     },
   )
 
-  function logErrorStats(final = false): void {
+  function logErrorStats(logger: CommonLogger, final = false): void {
     if (!errors) return
 
-    console.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
+    logger.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
   }
 }
