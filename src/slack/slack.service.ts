@@ -1,4 +1,11 @@
-import { _omit, StringMap } from '@naturalcycles/js-lib'
+import {
+  _omit,
+  AnyObject,
+  CommonLogger,
+  commonLoggerMinLevel,
+  CommonLogLevel,
+  PQueue,
+} from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
 import { inspectAny, InspectAnyOptions } from '..'
@@ -126,12 +133,41 @@ export class SlackService<CTX = any> {
       })
   }
 
-  kvToFields(kv: StringMap<any>): SlackAttachmentField[] {
+  kvToFields(kv: AnyObject): SlackAttachmentField[] {
     return Object.entries(kv).map(([k, v]) => ({
       title: k,
       value: String(v),
       short: String(v).length < 80,
     }))
+  }
+
+  /**
+   * Returns a CommonLogger implementation based on this SlackService instance.
+   */
+  getCommonLogger(opt: {
+    minLogLevel: CommonLogLevel
+    logChannel?: string
+    warnChannel?: string
+    errorChannel?: string
+  }): CommonLogger {
+    const { minLogLevel = 'log', logChannel, warnChannel, errorChannel } = opt
+    const defaultChannel = this.cfg.defaults?.channel || DEFAULTS.channel!
+
+    const q = new PQueue({
+      concurrency: 1,
+    })
+
+    return commonLoggerMinLevel(
+      {
+        log: (...args) =>
+          q.push(() => this.send({ items: args, channel: logChannel || defaultChannel })),
+        warn: (...args) =>
+          q.push(() => this.send({ items: args, channel: warnChannel || defaultChannel })),
+        error: (...args) =>
+          q.push(() => this.send({ items: args, channel: errorChannel || defaultChannel })),
+      },
+      minLogLevel,
+    )
   }
 }
 

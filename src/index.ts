@@ -173,8 +173,10 @@ import {
   validate,
 } from './validation/joi/joi.validation.util'
 import { sanitizeHTML, SanitizeHTMLOptions } from './validation/sanitize.util'
+import { runScript, RunScriptOptions } from './script'
 
 export type {
+  RunScriptOptions,
   JoiValidationErrorData,
   JoiValidationResult,
   ValidationErrorItem,
@@ -352,4 +354,5 @@ export {
   readAjvSchemas,
   hasColors,
   sanitizeHTML,
+  runScript,
 }

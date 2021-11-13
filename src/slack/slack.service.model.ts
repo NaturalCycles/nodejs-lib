@@ -1,4 +1,4 @@
-import { CommonLogger, StringMap } from '@naturalcycles/js-lib'
+import { AnyObject, CommonLogger } from '@naturalcycles/js-lib'
 import { InspectAnyOptions } from '..'
 
 /**
@@ -47,7 +47,7 @@ export interface SlackMessage<CTX = any> extends SlackMessageProps {
   /**
    * Keys-values will be rendered as MessageAttachment with Fields
    */
-  kv?: StringMap<any>
+  kv?: AnyObject
 
   /**
    * If specified - adds @name1, @name2 in the end of the message

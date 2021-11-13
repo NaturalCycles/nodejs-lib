@@ -1,4 +1,4 @@
-import { StringMap, _truncate, AnyObject } from '@naturalcycles/js-lib'
+import { _truncate, AnyObject } from '@naturalcycles/js-lib'
 
 export interface TableDiffOptions {
   /**
@@ -37,7 +37,7 @@ export interface TableDiffOptions {
  */
 export function tableDiff(a: AnyObject, b: AnyObject, opt: TableDiffOptions = {}): void {
   const { maxFieldLen, aTitle = 'a', bTitle = 'b' } = opt
-  const diff: StringMap<any> = {}
+  const diff: AnyObject = {}
 
   if (a && b && a !== b) {
     new Set([...Object.keys(a), ...Object.keys(b)]).forEach(k => {

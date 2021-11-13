@@ -6,6 +6,7 @@ import {
   _filterNullishValues,
   _isObject,
   _substringBefore,
+  CommonLogger,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
 import { inspectAny, requireFileToExist } from '../../index'
@@ -57,6 +58,11 @@ export interface AjvSchemaCfg {
   logErrors: boolean
 
   /**
+   * Default to `console`
+   */
+  logger: CommonLogger
+
+  /**
    * Option of Ajv.
    * If set to true - will mutate your input objects!
    * Defaults to false.
@@ -76,6 +82,7 @@ export class AjvSchema<T = unknown> {
   private constructor(public schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
     this.cfg = {
       logErrors: true,
+      logger: console,
       separator: '\n',
       ...cfg,
       ajv:
@@ -168,7 +175,7 @@ export class AjvSchema<T = unknown> {
     message = [message, 'Input: ' + strValue].join(separator)
 
     if (logErrors) {
-      console.log(errors)
+      this.cfg.logger.error(errors)
     }
 
     return new AjvValidationError(

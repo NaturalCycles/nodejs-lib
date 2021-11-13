@@ -1,3 +1,5 @@
+import type { CommonLogger } from '@naturalcycles/js-lib'
+
 export interface RunScriptOptions {
   /**
    * @default false
@@ -5,6 +7,11 @@ export interface RunScriptOptions {
    * Currently it exists because of `jest --maxWorkers=1` behavior. To be investigated more..
    */
   noExit?: boolean
+
+  /**
+   * Default to `console`
+   */
+  logger?: CommonLogger
 }
 
 /**
@@ -24,24 +31,26 @@ export interface RunScriptOptions {
  * This function is kept light, dependency-free, exported separately.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
+  const { logger = console, noExit } = opt
+
   process.on('uncaughtException', err => {
-    console.error('uncaughtException', err)
+    logger.error('uncaughtException:', err)
   })
   process.on('unhandledRejection', err => {
-    console.error('unhandledRejection', err)
+    logger.error('unhandledRejection:', err)
   })
 
   void (async () => {
     try {
       await fn()
 
-      if (!opt.noExit) {
+      if (!noExit) {
         setImmediate(() => process.exit(0))
       }
     } catch (err) {
-      console.error('runScript failed:', err)
+      logger.error('runScript error:', err)
       process.exitCode = 1
-      if (!opt.noExit) {
+      if (!noExit) {
         setImmediate(() => process.exit(1))
       }
     }

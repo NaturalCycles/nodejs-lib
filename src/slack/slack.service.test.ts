@@ -1,5 +1,5 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
-import { noopLogger } from '@naturalcycles/js-lib'
+import { commonLoggerNoop } from '@naturalcycles/js-lib'
 import nock = require('nock')
 import { slackDefaultMessagePrefixHook, SlackService } from './slack.service'
 
@@ -28,7 +28,7 @@ nock(/.*/)
 
 const slackService = new SlackService({
   webhookUrl: 'https://dummyhook.com',
-  logger: noopLogger,
+  logger: commonLoggerNoop,
   // defaults: {
   //   channel: 'test',
   // },
@@ -64,7 +64,7 @@ test('basic test', async () => {
 
 test('no webhookUrl', async () => {
   const s = new SlackService({
-    logger: noopLogger,
+    logger: commonLoggerNoop,
   })
   await s.log('anything')
   expect(lastBody).toBeNull() // should be unchanged
@@ -73,7 +73,7 @@ test('no webhookUrl', async () => {
 test('error', async () => {
   const s = new SlackService({
     webhookUrl: 'wrongUrl',
-    logger: noopLogger,
+    logger: commonLoggerNoop,
   })
 
   // This should NOT throw, because errors are suppressed
@@ -86,7 +86,7 @@ test('messagePrefixHook returning null should NOT be sent', async () => {
   const s = new SlackService({
     webhookUrl: 'https://valid.com',
     messagePrefixHook: () => null,
-    logger: noopLogger,
+    logger: commonLoggerNoop,
   })
   await s.log('yo')
   expect(lastBody).toBeNull()
