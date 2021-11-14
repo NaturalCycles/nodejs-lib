@@ -82,14 +82,8 @@ export function transformMap2<IN = any, OUT = IN>(
       // Stop processing if THROW_IMMEDIATELY mode is used
       if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
 
-      let calledBack = false
-
-      // Allow up to 1 x concurrency "buffer" (aka highWatermark)
-      if (q.queueSize < concurrency) {
-        cb()
-        calledBack = true
-      }
-
+      // It resolves when it is successfully STARTED execution.
+      // If it's queued instead - it'll wait and resolve only upon START.
       await q.push(async () => {
         try {
           const currentIndex = index // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
@@ -128,9 +122,7 @@ export function transformMap2<IN = any, OUT = IN>(
 
       // Resolved, which means it STARTED processing
       // This means we can take more load
-      if (!calledBack) {
-        cb()
-      }
+      cb()
     },
   })
 
