@@ -1,6 +1,6 @@
 import { Transform } from 'stream'
 import { _range } from '@naturalcycles/js-lib'
-import { writableForEach, _pipeline } from '..'
+import { _pipeline, writablePushToArray } from '..'
 import { readableFromArray } from './readable/readableFromArray'
 
 function errorTransformUnhandled() {
@@ -30,7 +30,7 @@ test.skip('unhandled transform error', async () => {
 
   const results: any[] = []
   await expect(
-    _pipeline([readable, errorTransformUnhandled(), writableForEach(r => void results.push(r))]),
+    _pipeline([readable, errorTransformUnhandled(), writablePushToArray(results)]),
   ).rejects.toThrow('error_in_transform')
 })
 
@@ -40,7 +40,7 @@ test('handled transform error', async () => {
 
   const results: any[] = []
   await expect(
-    _pipeline([readable, errorTransform(), writableForEach(r => void results.push(r))]),
+    _pipeline([readable, errorTransform(), writablePushToArray(results)]),
   ).rejects.toThrow('error_in_transform')
   // console.log(results)
   expect(results).toEqual(data.filter(r => r.id < '4'))

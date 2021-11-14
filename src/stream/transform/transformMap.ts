@@ -6,8 +6,8 @@ import {
   CommonLogger,
   ErrorMode,
   pFilter,
+  PQueue,
 } from '@naturalcycles/js-lib'
-import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
 
@@ -98,83 +98,84 @@ export function transformMap<IN = any, OUT = IN>(
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
 
-  return through2Concurrent.obj(
-    {
-      maxConcurrency: concurrency,
-      // autoDestroy: true,
-      async final(cb) {
-        // console.log('transformMap final')
+  const q = new PQueue({
+    concurrency,
+    resolveOn: 'start',
+    // debug: true,
+  })
 
-        logErrorStats(logger, true)
+  return new Transform({
+    objectMode: true,
 
-        await beforeFinal?.() // call beforeFinal if defined
+    async final(cb) {
+      // console.log('transformMap final', {index}, q.inFlight, q.queueSize)
 
-        if (collectedErrors.length) {
-          // emit Aggregated error
-          cb(new AggregatedError(collectedErrors))
-        } else {
-          // emit no error
-          cb()
-        }
-      },
+      // wait for the current inFlight jobs to complete and push their results
+      await q.onIdle()
+
+      logErrorStats(logger, true)
+
+      await beforeFinal?.() // call beforeFinal if defined
+
+      if (collectedErrors.length) {
+        // emit Aggregated error
+        cb(new AggregatedError(collectedErrors))
+      } else {
+        // emit no error
+        cb()
+      }
     },
-    async function transformMapFn(
-      this: Transform,
-      chunk: IN,
-      _encoding: any,
-      cb: (...args: any[]) => any,
-    ) {
+
+    async transform(this: Transform, chunk: IN, _encoding, cb) {
       index++
-      // console.log({chunk, _encoding})
+      // console.log('transform', {index})
 
       // Stop processing if THROW_IMMEDIATELY mode is used
       if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) return cb()
 
-      try {
-        const currentIndex = index // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
-        const res = await mapper(chunk, currentIndex)
-        const passedResults = await pFilter(
-          flattenArrayOutput && Array.isArray(res) ? res : [res],
-          async r => await predicate(r, currentIndex),
-        )
+      // It resolves when it is successfully STARTED execution.
+      // If it's queued instead - it'll wait and resolve only upon START.
+      await q.push(async () => {
+        try {
+          const currentIndex = index // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
+          const res = await mapper(chunk, currentIndex)
+          const passedResults = await pFilter(
+            flattenArrayOutput && Array.isArray(res) ? res : [res],
+            async r => await predicate(r, currentIndex),
+          )
 
-        if (passedResults.length === 0) {
-          cb() // 0 results
-        } else {
-          passedResults.forEach(r => {
-            this.push(r)
-            // cb(null, r)
-          })
-          cb() // done processing
+          passedResults.forEach(r => this.push(r))
+        } catch (err) {
+          logger.error(err)
+
+          errors++
+
+          logErrorStats(logger)
+
+          if (onError) {
+            try {
+              onError(err, chunk)
+            } catch {}
+          }
+
+          if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
+            isRejected = true
+            // Emit error immediately
+            // return cb(err as Error)
+            return this.emit('error', err as Error)
+          }
+
+          if (errorMode === ErrorMode.THROW_AGGREGATED) {
+            collectedErrors.push(err as Error)
+          }
         }
-      } catch (err) {
-        logger.error(err)
+      })
 
-        errors++
-
-        logErrorStats(logger)
-
-        if (onError) {
-          try {
-            onError(err, chunk)
-          } catch {}
-        }
-
-        if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
-          isRejected = true
-          // Emit error immediately
-          return cb(err)
-        }
-
-        if (errorMode === ErrorMode.THROW_AGGREGATED) {
-          collectedErrors.push(err as Error)
-        }
-
-        // Tell input stream that we're done processing, but emit nothing to output - not error nor result
-        cb()
-      }
+      // Resolved, which means it STARTED processing
+      // This means we can take more load
+      cb()
     },
-  )
+  })
 
   function logErrorStats(logger: CommonLogger, final = false): void {
     if (!errors) return

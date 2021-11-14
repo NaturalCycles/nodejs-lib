@@ -1,6 +1,6 @@
-import { Readable } from 'stream'
-import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
-import { readableFromArray, writablePushToArray, _pipeline } from '../..'
+import { Readable, Transform } from 'stream'
+import { AggregatedError, AsyncMapper, ErrorMode, _range, pDelay } from '@naturalcycles/js-lib'
+import { readableFromArray, writablePushToArray, _pipeline, writableVoid } from '../..'
 import { transformMap } from './transformMap'
 
 interface Item {
@@ -125,4 +125,47 @@ test('transformMap errorMode=SUPPRESS', async () => {
   expect(data2).toEqual(data.filter(r => r.id !== '3'))
 
   // expect(readable.destroyed).toBe(true)
+})
+
+class MyReadable extends Readable {
+  private n = 0
+
+  override async _read() {
+    // console.log(`_read ${size}`)
+    await pDelay(10)
+
+    this.push(++this.n)
+
+    if (this.n >= 50) this.push(null) // done
+  }
+}
+
+test('transformMap concurrency', async () => {
+  const readable = new MyReadable({
+    objectMode: true,
+  })
+
+  await _pipeline([
+    readable,
+    transformMap(
+      async n => {
+        // wait and return doubled number
+        // console.log('mapper started')
+        await pDelay(100, n * 2)
+        // console.log('mapper done')
+        return n * 2
+      },
+      {
+        concurrency: 16,
+      },
+    ),
+    new Transform({
+      objectMode: true,
+      transform(r: any, _enc, cb) {
+        // console.log('t2', r)
+        cb()
+      },
+    }),
+    writableVoid(),
+  ])
 })

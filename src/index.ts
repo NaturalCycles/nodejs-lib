@@ -104,7 +104,7 @@ import {
   TransformMultiThreadedOptions,
 } from './stream/transform/worker/transformMultiThreaded'
 import { WorkerInput, WorkerOutput } from './stream/transform/worker/transformMultiThreaded.model'
-import { writableForEach } from './stream/writable/writableForEach'
+export * from './stream/writable/writableForEach'
 import { writableFork } from './stream/writable/writableFork'
 import { writablePushToArray } from './stream/writable/writablePushToArray'
 import { writableVoid } from './stream/writable/writableVoid'
@@ -327,7 +327,6 @@ export {
   transformMapSync,
   transformMapSimple,
   transformNoOp,
-  writableForEach,
   writablePushToArray,
   transformSplit,
   transformToString,

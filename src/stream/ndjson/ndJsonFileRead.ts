@@ -1,4 +1,4 @@
-import { writableForEach } from '../..'
+import { writablePushToArray } from '../..'
 import { pipelineFromNDJsonFile, PipelineFromNDJsonFileOptions } from './pipelineFromNDJsonFile'
 
 /**
@@ -9,7 +9,7 @@ export async function ndJsonFileRead<OUT = any>(
 ): Promise<OUT[]> {
   const res: OUT[] = []
 
-  await pipelineFromNDJsonFile([writableForEach(r => void res.push(r))], opt)
+  await pipelineFromNDJsonFile([writablePushToArray(res)], opt)
 
   return res
 }
