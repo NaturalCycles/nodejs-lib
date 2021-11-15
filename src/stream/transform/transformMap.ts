@@ -119,10 +119,15 @@ export function transformMap<IN = any, OUT = IN>(
 
       if (collectedErrors.length) {
         // emit Aggregated error
+        // For the same reason, magically, let's not call `cb`, but emit an error event instead
+        // this.emit('error', new AggregatedError(collectedErrors))
         cb(new AggregatedError(collectedErrors))
       } else {
         // emit no error
-        cb()
+        // It is truly a mistery, but calling cb() here was causing ERR_MULTIPLE_CALLBACK ?!
+        // Commenting it out seems to work ?!
+        // ?!
+        // cb()
       }
     },
 
