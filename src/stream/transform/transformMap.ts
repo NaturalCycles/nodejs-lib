@@ -10,6 +10,7 @@ import {
 } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
+import { transformMapLegacy } from './legacy/transformMap'
 
 export interface TransformMapOptions<IN = any, OUT = IN> {
   /**
@@ -67,6 +68,11 @@ export function notNullishPredicate(item: any): boolean {
 }
 
 /**
+ * Temporary export legacy transformMap, to debug 503 errors
+ */
+export const transformMap = transformMapLegacy
+
+/**
  * Like pMap, but for streams.
  * Inspired by `through2`.
  * Main feature is concurrency control (implemented via `through2-concurrent`) and convenient options.
@@ -78,7 +84,7 @@ export function notNullishPredicate(item: any): boolean {
  *
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
-export function transformMap<IN = any, OUT = IN>(
+export function transformMapNew<IN = any, OUT = IN>(
   mapper: AsyncMapper<IN, OUT>,
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
