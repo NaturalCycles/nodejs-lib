@@ -7,6 +7,8 @@ import { TransformOptions, WritableTyped } from '../stream.model'
  * Currently does NOT (!) maintain backpressure.
  * Error in the forked pipeline will propagate up to the main pipeline (and log error, to be sure).
  * Will wait until all forked pipelines are completed before completing the stream.
+ *
+ * @experimental
  */
 export function writableFork<T>(
   chains: NodeJS.WritableStream[][],

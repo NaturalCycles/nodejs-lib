@@ -1,5 +1,5 @@
 import { Transform } from 'stream'
-import { AggregatedError, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
+import { AggregatedError, CommonLogger, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
 import { notNullishPredicate } from './transformMap'
@@ -43,6 +43,8 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
    * @default `stream`
    */
   metric?: string
+
+  logger?: CommonLogger
 }
 
 /**
@@ -62,6 +64,7 @@ export function transformMapSync<IN = any, OUT = IN>(
     onError,
     metric = 'stream',
     objectMode = true,
+    logger = console,
   } = opt
   let isRejected = false
   let errors = 0
@@ -92,7 +95,7 @@ export function transformMapSync<IN = any, OUT = IN>(
           cb(null, v)
         }
       } catch (err) {
-        console.error(err)
+        logger.error(err)
         errors++
 
         logErrorStats()
@@ -134,6 +137,6 @@ export function transformMapSync<IN = any, OUT = IN>(
   function logErrorStats(final = false): void {
     if (!errors) return
 
-    console.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
+    logger.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
   }
 }

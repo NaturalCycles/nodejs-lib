@@ -1,6 +1,10 @@
 import { Transform } from 'stream'
-import { AsyncMapper } from '@naturalcycles/js-lib'
+import { AsyncMapper, CommonLogger } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
+
+export interface TransformTapOptions extends TransformOptions {
+  logger?: CommonLogger
+}
 
 /**
  * Similar to RxJS `tap` - allows to run a function for each stream item, without affecting the result.
@@ -10,8 +14,9 @@ import { TransformOptions, TransformTyped } from '../stream.model'
  */
 export function transformTap<IN>(
   fn: AsyncMapper<IN, any>,
-  opt: TransformOptions = {},
+  opt: TransformTapOptions = {},
 ): TransformTyped<IN, IN> {
+  const { logger = console } = opt
   let index = 0
 
   return new Transform({
@@ -23,7 +28,7 @@ export function transformTap<IN>(
       try {
         await fn(chunk, index++)
       } catch (err) {
-        console.error(err)
+        logger.error(err)
         // suppressed error
       }
 

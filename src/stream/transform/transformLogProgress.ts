@@ -1,6 +1,6 @@
 import { Transform } from 'stream'
 import { inspect, InspectOptions } from 'util'
-import { SimpleMovingAverage, _mb, _since, AnyObject } from '@naturalcycles/js-lib'
+import { SimpleMovingAverage, _mb, _since, AnyObject, CommonLogger } from '@naturalcycles/js-lib'
 import { dayjs } from '@naturalcycles/time-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { hasColors } from '../../colors/colors'
@@ -86,6 +86,8 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
    */
   logEvery?: number
 
+  logger?: CommonLogger
+
   /**
    * Function to return extra properties to the "progress object".
    *
@@ -124,6 +126,7 @@ export function transformLogProgress<IN = any>(
     logEvery = 1000,
     batchSize = 1,
     extra,
+    logger = console,
   } = opt
   const logProgress = opt.logProgress !== false && logEvery !== 0 // true by default
   const logEvery10 = logEvery * 10
@@ -172,7 +175,7 @@ export function transformLogProgress<IN = any>(
     const rps10 = Math.round(sma.push(lastRPS))
     if (mem.rss > peakRSS) peakRSS = mem.rss
 
-    console.log(
+    logger.log(
       inspect(
         {
           [final ? `${metric}_final` : metric]: batchedProgress,
@@ -202,13 +205,13 @@ export function transformLogProgress<IN = any>(
         perHour = Math.round(perHour / 1000) + 'K'
       }
 
-      console.log(
+      logger.log(
         `${dimGrey(dayjs().toPretty())} ${white(metric)} took ${yellow(
           _since(started),
         )} so far to process ${yellow(batchedProgress)} rows, ~${yellow(perHour)}/hour`,
       )
     } else if (final) {
-      console.log(
+      logger.log(
         `${boldWhite(metric)} took ${yellow(_since(started))} to process ${yellow(
           batchedProgress,
         )} rows with total RPS of ${yellow(rpsTotal)}`,

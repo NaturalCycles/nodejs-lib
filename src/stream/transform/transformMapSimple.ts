@@ -1,5 +1,5 @@
 import { Transform } from 'stream'
-import { ErrorMode, Mapper } from '@naturalcycles/js-lib'
+import { CommonLogger, ErrorMode, Mapper } from '@naturalcycles/js-lib'
 import { TransformTyped } from '../stream.model'
 
 export interface TransformMapSimpleOptions {
@@ -9,6 +9,8 @@ export interface TransformMapSimpleOptions {
    * @default ErrorMode.THROW_IMMEDIATELY
    */
   errorMode?: ErrorMode.THROW_IMMEDIATELY | ErrorMode.SUPPRESS
+
+  logger?: CommonLogger
 }
 
 /**
@@ -25,7 +27,7 @@ export function transformMapSimple<IN = any, OUT = IN>(
   opt: TransformMapSimpleOptions = {},
 ): TransformTyped<IN, OUT> {
   let index = -1
-  const { errorMode = ErrorMode.THROW_IMMEDIATELY } = opt
+  const { errorMode = ErrorMode.THROW_IMMEDIATELY, logger = console } = opt
 
   return new Transform({
     objectMode: true,
@@ -33,7 +35,7 @@ export function transformMapSimple<IN = any, OUT = IN>(
       try {
         cb(null, mapper(chunk, ++index))
       } catch (err) {
-        console.error(err)
+        logger.error(err)
 
         if (errorMode === ErrorMode.SUPPRESS) {
           cb() // suppress the error

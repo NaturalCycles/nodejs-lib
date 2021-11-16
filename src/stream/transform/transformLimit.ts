@@ -1,13 +1,19 @@
 import { Transform } from 'stream'
+import { CommonLogger } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
+
+export interface TransformLimitOptions extends TransformOptions {
+  logger?: CommonLogger
+}
 
 /**
  * 0 or falsy value means "no limit"
  */
 export function transformLimit<IN>(
   limit?: number,
-  opt: TransformOptions = {},
+  opt: TransformLimitOptions = {},
 ): TransformTyped<IN, IN> {
+  const { logger = console } = opt
   let index = 0
   let ended = false
 
@@ -25,7 +31,7 @@ export function transformLimit<IN>(
 
       if (limit && index === limit) {
         ended = true
-        console.log(`transformLimit: limit of ${limit} reached`)
+        logger.log(`transformLimit: limit of ${limit} reached`)
         // this.emit('end') // this makes it "halt" on Node 14 lts
       }
     },
