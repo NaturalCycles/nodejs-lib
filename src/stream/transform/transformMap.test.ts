@@ -1,6 +1,6 @@
 import { Readable, Transform } from 'stream'
 import { AggregatedError, AsyncMapper, ErrorMode, _range, pDelay } from '@naturalcycles/js-lib'
-import { readableFromArray, writablePushToArray, _pipeline, writableVoid } from '../..'
+import { readableFromArray, _pipeline, writableVoid, _pipelineToArray } from '../..'
 import { transformMap } from './transformMap'
 
 interface Item {
@@ -27,14 +27,11 @@ test('transformMap simple', async () => {
 
 test('transformMap with mapping', async () => {
   const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
-  const data2: Item[] = []
-
-  await _pipeline([
+  const data2 = await _pipelineToArray<Item>([
     readableFromArray(data),
     transformMap(r => ({
       id: r.id + '!',
     })),
-    writablePushToArray(data2),
   ])
 
   expect(data2).toEqual(data.map(r => ({ id: r.id + '!' })))
@@ -42,12 +39,9 @@ test('transformMap with mapping', async () => {
 
 test('transformMap emit array as multiple items', async () => {
   const data = _range(1, 4)
-  const data2: number[] = []
-
-  await _pipeline([
+  const data2 = await _pipelineToArray<number>([
     readableFromArray(data),
     transformMap(n => [n * 2, n * 2 + 1], { flattenArrayOutput: true }),
-    writablePushToArray(data2),
   ])
 
   const expected: number[] = []

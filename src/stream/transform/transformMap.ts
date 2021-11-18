@@ -1,12 +1,14 @@
 import { Transform } from 'stream'
 import {
+  AbortableAsyncMapper,
   AggregatedError,
-  AsyncMapper,
   AsyncPredicate,
   CommonLogger,
+  END,
   ErrorMode,
   pFilter,
   PQueue,
+  SKIP,
 } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors'
 import { TransformTyped } from '../stream.model'
@@ -85,7 +87,7 @@ export const transformMap = transformMapLegacy
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
 export function transformMapNew<IN = any, OUT = IN>(
-  mapper: AsyncMapper<IN, OUT>,
+  mapper: AbortableAsyncMapper<IN, OUT>,
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {
@@ -152,7 +154,10 @@ export function transformMapNew<IN = any, OUT = IN>(
           const res = await mapper(chunk, currentIndex)
           const passedResults = await pFilter(
             flattenArrayOutput && Array.isArray(res) ? res : [res],
-            async r => await predicate(r, currentIndex),
+            async r => {
+              if (r === END) throw new Error('END is not supported in transformMap yet')
+              return r !== SKIP && (await predicate(r, currentIndex))
+            },
           )
 
           passedResults.forEach(r => this.push(r))

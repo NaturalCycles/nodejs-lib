@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 import { createUnzip } from 'zlib'
-import { AsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
+import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
   requireFileToExist,
   transformJsonParse,
@@ -23,7 +23,7 @@ export interface NDJSONStreamForEachOptions<IN = any>
  * Convenience function to `forEach` through an ndjson file.
  */
 export async function ndjsonStreamForEach<T>(
-  mapper: AsyncMapper<T, void>,
+  mapper: AbortableAsyncMapper<T, void>,
   opt: NDJSONStreamForEachOptions<T>,
 ): Promise<void> {
   requireFileToExist(opt.inputFilePath)

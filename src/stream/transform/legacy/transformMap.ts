@@ -1,10 +1,11 @@
 import { Transform } from 'stream'
 import {
+  AbortableAsyncMapper,
   AggregatedError,
-  AsyncMapper,
-  CommonLogger,
+  END,
   ErrorMode,
   pFilter,
+  SKIP,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../../colors'
@@ -28,7 +29,7 @@ export function notNullishPredicate(item: any): boolean {
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
 export function transformMapLegacy<IN = any, OUT = IN>(
-  mapper: AsyncMapper<IN, OUT>,
+  mapper: AbortableAsyncMapper<IN, OUT>,
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {
@@ -54,7 +55,7 @@ export function transformMapLegacy<IN = any, OUT = IN>(
       async final(cb) {
         // console.log('transformMap final')
 
-        logErrorStats(logger, true)
+        logErrorStats(true)
 
         await beforeFinal?.() // call beforeFinal if defined
 
@@ -84,7 +85,10 @@ export function transformMapLegacy<IN = any, OUT = IN>(
         const res = await mapper(chunk, currentIndex)
         const passedResults = await pFilter(
           flattenArrayOutput && Array.isArray(res) ? res : [res],
-          async r => await predicate(r, currentIndex),
+          async r => {
+            if (r === END) throw new Error('END is not supported in transformMap yet')
+            return r !== SKIP && (await predicate(r, currentIndex))
+          },
         )
 
         if (passedResults.length === 0) {
@@ -101,7 +105,7 @@ export function transformMapLegacy<IN = any, OUT = IN>(
 
         errors++
 
-        logErrorStats(logger)
+        logErrorStats()
 
         if (onError) {
           try {
@@ -125,7 +129,7 @@ export function transformMapLegacy<IN = any, OUT = IN>(
     },
   )
 
-  function logErrorStats(logger: CommonLogger, final = false): void {
+  function logErrorStats(final = false): void {
     if (!errors) return
 
     logger.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)

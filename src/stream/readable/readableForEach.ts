@@ -1,4 +1,4 @@
-import { AsyncMapper, Mapper, _passNothingPredicate } from '@naturalcycles/js-lib'
+import { Mapper, _passNothingPredicate, AbortableAsyncMapper } from '@naturalcycles/js-lib'
 import { ReadableTyped, _pipeline } from '../../index'
 import { transformMap, TransformMapOptions } from '../transform/transformMap'
 
@@ -10,7 +10,7 @@ import { transformMap, TransformMapOptions } from '../transform/transformMap'
  */
 export async function readableForEach<T>(
   readable: ReadableTyped<T>,
-  mapper: AsyncMapper<T, void>,
+  mapper: AbortableAsyncMapper<T, void>,
   opt: TransformMapOptions<T, void> = {},
 ): Promise<void> {
   await _pipeline([

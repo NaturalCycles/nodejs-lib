@@ -1,5 +1,5 @@
 import { Readable, ReadableOptions } from 'stream'
-import { AsyncMapper, pMap, _passthroughMapper } from '@naturalcycles/js-lib'
+import { _passthroughMapper, AbortableAsyncMapper } from '@naturalcycles/js-lib'
 import { ReadableTyped } from '../stream.model'
 
 /**
@@ -10,29 +10,26 @@ import { ReadableTyped } from '../stream.model'
  */
 export function readableFromArray<IN, OUT>(
   items: IN[],
-  mapper: AsyncMapper<IN, OUT> = _passthroughMapper,
+  mapper: AbortableAsyncMapper<IN, OUT> = _passthroughMapper,
   opt?: ReadableOptions,
 ): ReadableTyped<OUT> {
-  const readable = new Readable({
+  let i = -1
+
+  return new Readable({
     objectMode: true,
     ...opt,
-    read() {},
-  })
-
-  void pMap(
-    items,
-    async (item, index) => {
-      readable.push(await mapper(item, index))
+    async read() {
+      i++
+      if (i < items.length) {
+        try {
+          this.push(await mapper(items[i]!, i))
+        } catch (err) {
+          console.error(err)
+          this.destroy(err as Error)
+        }
+      } else {
+        this.push(null) // end
+      }
     },
-    { concurrency: 1 },
-  )
-    .then(() => {
-      readable.push(null) // done
-    })
-    .catch(err => {
-      console.error(err)
-      readable.push(err)
-    })
-
-  return readable
+  })
 }

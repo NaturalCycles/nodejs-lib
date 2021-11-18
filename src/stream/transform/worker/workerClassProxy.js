@@ -10,6 +10,7 @@ if (!workerFile) {
 // console.log(`worker#${workerIndex} created`)
 
 try {
+  // require('esbuild-register') // alternative
   require('ts-node/register/transpile-only')
   require('tsconfig-paths/register')
 } catch {} // require if exists
