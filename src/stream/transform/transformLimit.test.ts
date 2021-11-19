@@ -18,13 +18,13 @@ test('transformLimit', async () => {
 
 test('transformLimit with readable.destroy', async () => {
   const data = _range(1, 50).map(n => ({ id: String(n) }))
-  const readable = readableFromArray(data)
+  const sourceReadable = readableFromArray(data)
 
   const arr = await _pipelineToArray(
     [
-      readable,
+      sourceReadable,
       // transformTap((r, i) => console.log(i)),
-      transformLimit({ limit: 5, readable }),
+      transformLimit({ limit: 5, sourceReadable }),
     ],
     { allowClose: true },
   )

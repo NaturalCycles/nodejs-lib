@@ -63,14 +63,14 @@ export async function ndjsonMap<IN = any, OUT = any>(
     ...transformUnzip,
     transformSplit(), // splits by \n
     transformJsonParse(),
-    transformLimit({ limit: limitInput, readable }),
+    transformLimit({ limit: limitInput, sourceReadable: readable }),
     transformLogProgress({ metric: 'read', ...opt }),
     transformMap(mapper, {
       flattenArrayOutput: true,
       errorMode: ErrorMode.SUPPRESS,
       ...opt,
     }),
-    transformLimit({ limit: limitOutput, readable }),
+    transformLimit({ limit: limitOutput, sourceReadable: readable }),
     transformLogProgress({ metric: 'saved', logEvery: logEveryOutput }),
     transformToNDJson(),
     ...transformZip,

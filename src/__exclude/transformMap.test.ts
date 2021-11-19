@@ -1,7 +1,7 @@
-import { Readable } from 'stream'
-import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
-import { readableFromArray, _pipeline, _pipelineToArray } from '../../..'
-import { transformMapLegacy } from './transformMap'
+import { Readable, Transform } from 'stream'
+import { AggregatedError, AsyncMapper, ErrorMode, _range, pDelay } from '@naturalcycles/js-lib'
+import { readableFromArray, _pipeline, writableVoid, _pipelineToArray } from '../..'
+import { transformMap } from './transformMap'
 
 interface Item {
   id: string
@@ -19,7 +19,7 @@ test('transformMap simple', async () => {
 
   const data2: Item[] = []
 
-  await _pipeline([readable, transformMapLegacy<Item, void>(r => void data2.push(r))])
+  await _pipeline([readable, transformMap<Item, void>(r => void data2.push(r))])
 
   expect(data2).toEqual(data)
   // expect(readable.destroyed).toBe(true)
@@ -29,7 +29,7 @@ test('transformMap with mapping', async () => {
   const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
   const data2 = await _pipelineToArray<Item>([
     readableFromArray(data),
-    transformMapLegacy(r => ({
+    transformMap(r => ({
       id: r.id + '!',
     })),
   ])
@@ -41,7 +41,7 @@ test('transformMap emit array as multiple items', async () => {
   const data = _range(1, 4)
   const data2 = await _pipelineToArray<number>([
     readableFromArray(data),
-    transformMapLegacy(n => [n * 2, n * 2 + 1], { flattenArrayOutput: true }),
+    transformMap(n => [n * 2, n * 2 + 1], { flattenArrayOutput: true }),
   ])
 
   const expected: number[] = []
@@ -77,8 +77,8 @@ test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
   await expect(
     _pipeline([
       readable,
-      transformMapLegacy(mapperError3, { concurrency: 1 }),
-      transformMapLegacy<Item, void>(r => void data2.push(r)),
+      transformMap(mapperError3, { concurrency: 1 }),
+      transformMap<Item, void>(r => void data2.push(r)),
     ]),
   ).rejects.toThrow('my error')
 
@@ -95,8 +95,8 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   await expect(
     _pipeline([
       readable,
-      transformMapLegacy(mapperError3, { errorMode: ErrorMode.THROW_AGGREGATED }),
-      transformMapLegacy<Item, void>(r => void data2.push(r)),
+      transformMap(mapperError3, { errorMode: ErrorMode.THROW_AGGREGATED }),
+      transformMap<Item, void>(r => void data2.push(r)),
     ]),
   ).rejects.toThrow(AggregatedError)
 
@@ -112,11 +112,54 @@ test('transformMap errorMode=SUPPRESS', async () => {
   const data2: Item[] = []
   await _pipeline([
     readable,
-    transformMapLegacy(mapperError3, { errorMode: ErrorMode.SUPPRESS }),
-    transformMapLegacy<Item, void>(r => void data2.push(r)),
+    transformMap(mapperError3, { errorMode: ErrorMode.SUPPRESS }),
+    transformMap<Item, void>(r => void data2.push(r)),
   ])
 
   expect(data2).toEqual(data.filter(r => r.id !== '3'))
 
   // expect(readable.destroyed).toBe(true)
+})
+
+class MyReadable extends Readable {
+  private n = 0
+
+  override async _read() {
+    // console.log(`_read ${size}`)
+    await pDelay(10)
+
+    this.push(++this.n)
+
+    if (this.n >= 50) this.push(null) // done
+  }
+}
+
+test('transformMap concurrency', async () => {
+  const readable = new MyReadable({
+    objectMode: true,
+  })
+
+  await _pipeline([
+    readable,
+    transformMap(
+      async n => {
+        // wait and return doubled number
+        // console.log('mapper started')
+        await pDelay(100, n * 2)
+        // console.log('mapper done')
+        return n * 2
+      },
+      {
+        concurrency: 16,
+      },
+    ),
+    new Transform({
+      objectMode: true,
+      transform(r: any, _enc, cb) {
+        // console.log('t2', r)
+        cb()
+      },
+    }),
+    writableVoid(),
+  ])
 })

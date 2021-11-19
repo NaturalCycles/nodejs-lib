@@ -5,15 +5,16 @@ yarn tsn debugStreams
  */
 
 import * as fs from 'fs'
-import { Readable, Transform, Writable } from 'stream'
+import { Readable, Writable } from 'stream'
 import { createUnzip } from 'zlib'
-import { pDefer, pDelay } from '@naturalcycles/js-lib'
+import { pDelay } from '@naturalcycles/js-lib'
 import {
   _pipeline,
   requireEnvKeys,
   runScript,
   transformJsonParse,
   transformLimit,
+  transformMap,
   transformSplit,
   writableVoid,
 } from '../src'
@@ -85,32 +86,35 @@ process.on('beforeExit', code => {
 runScript(async () => {
   const { SNAPSHOTS_DIR, SNAPSHOT_ID } = requireEnvKeys('SNAPSHOTS_DIR', 'SNAPSHOT_ID')
 
-  const readable = fs.createReadStream(`${SNAPSHOTS_DIR}/${SNAPSHOT_ID}`)
-
-  let streamDone = pDefer()
-  let i = 0
-
   await _pipeline(
     [
-      // readable(obj),
-      readable,
+      fs.createReadStream(`${SNAPSHOTS_DIR}/${SNAPSHOT_ID}`),
       createUnzip(),
       transformSplit(),
       transformJsonParse(),
-      transformLimit({ limit: 20, readable, streamDone, debug: true }),
+      transformLimit({ limit: 10, debug: true }),
       // writable(),
-      new Transform({
-        objectMode: true,
-        async transform(chunk, _, cb) {
-          i++
+      transformMap(
+        async (chunk, i) => {
           await pDelay(200)
-          console.log(`transform`, i)
-          cb(null, chunk)
+          console.log(`transform`, i + 1)
+          // if (i === 9) return END
+          return chunk
         },
-      }),
-      // transformStreamDone(streamDone),
-      writableVoid({ streamDone }),
-      // writableLimit(readable, 10),
+        {
+          concurrency: 1,
+        },
+      ),
+      // new Transform({
+      //   objectMode: true,
+      //   async transform(chunk, _, cb) {
+      //     i++
+      //     await pDelay(200)
+      //     console.log(`transform`, i)
+      //     cb(null, chunk)
+      //   },
+      // }),
+      writableVoid(),
     ],
     { allowClose: true },
   )
