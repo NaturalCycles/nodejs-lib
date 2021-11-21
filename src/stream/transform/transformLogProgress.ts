@@ -4,6 +4,7 @@ import { SimpleMovingAverage, _mb, _since, AnyObject, CommonLogger } from '@natu
 import { dayjs } from '@naturalcycles/time-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { hasColors } from '../../colors/colors'
+import { SizeStack } from '../sizeStack'
 import { TransformOptions, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions<IN = any> extends TransformOptions {
@@ -103,6 +104,41 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
    * Defaults to 1.
    */
   batchSize?: number
+
+  /**
+   * Experimental logging of item (shunk) sizes, when json-stringified.
+   *
+   * Defaults to false.
+   *
+   * @experimental
+   */
+  logSizes?: boolean
+
+  /**
+   * How many last item sizes to keep in a buffer, to calculate stats (p50, p90, avg, etc).
+   * Defaults to 100_000.
+   * Cannot be Infinity.
+   */
+  logSizesBuffer?: number
+
+  /**
+   * Works in addition to `logSizes`. Adds "zipped sizes".
+   *
+   * @experimental
+   */
+  logZippedSizes?: boolean
+}
+
+interface LogItem extends AnyObject {
+  heapUsed?: number
+  heapTotal?: number
+  rss?: number
+  peakRSS?: number
+  rssMinusHeap?: number
+  external?: number
+  arrayBuffers?: number
+  rps10?: number
+  rpsTotal?: number
 }
 
 const inspectOpt: InspectOptions = {
@@ -124,6 +160,9 @@ export function transformLogProgress<IN = any>(
     peakRSS: logPeakRSS = true,
     logRPS = true,
     logEvery = 1000,
+    logSizes = false,
+    logSizesBuffer = 100_000,
+    logZippedSizes = false,
     batchSize = 1,
     extra,
     logger = console,
@@ -138,6 +177,9 @@ export function transformLogProgress<IN = any>(
   let progress = 0
   let peakRSS = 0
 
+  const sizes = logSizes ? new SizeStack('json', logSizesBuffer) : undefined
+  const sizesZipped = logZippedSizes ? new SizeStack('json.gz', logSizesBuffer) : undefined
+
   logStats() // initial
 
   return new Transform({
@@ -146,6 +188,11 @@ export function transformLogProgress<IN = any>(
     transform(chunk: IN, _, cb) {
       progress++
       processedLastSecond++
+
+      if (sizes) {
+        // Check it, cause gzipping might be delayed here..
+        void SizeStack.countItem(chunk, logger, sizes, sizesZipped)
+      }
 
       if (logProgress && progress % logEvery === 0) {
         logStats(chunk, false, progress % logEvery10 === 0)
@@ -175,28 +222,30 @@ export function transformLogProgress<IN = any>(
     const rps10 = Math.round(sma.push(lastRPS))
     if (mem.rss > peakRSS) peakRSS = mem.rss
 
-    logger.log(
-      inspect(
-        {
-          [final ? `${metric}_final` : metric]: batchedProgress,
-          ...(extra ? extra(chunk, progress) : {}),
-          ...(logHeapUsed ? { heapUsed: _mb(mem.heapUsed) } : {}),
-          ...(logHeapTotal ? { heapTotal: _mb(mem.heapTotal) } : {}),
-          ...(logRss ? { rss: _mb(mem.rss) } : {}),
-          ...(logPeakRSS ? { peakRSS: _mb(peakRSS) } : {}),
-          ...(opt.rssMinusHeap ? { rssMinusHeap: _mb(mem.rss - mem.heapTotal) } : {}),
-          ...(opt.external ? { external: _mb(mem.external) } : {}),
-          ...(opt.arrayBuffers ? { arrayBuffers: _mb(mem.arrayBuffers || 0) } : {}),
-          ...(logRPS
-            ? {
-                rps10,
-                rpsTotal,
-              }
-            : {}),
-        },
-        inspectOpt,
-      ),
-    )
+    const o: LogItem = {
+      [final ? `${metric}_final` : metric]: batchedProgress,
+    }
+
+    if (extra) Object.assign(o, extra(chunk, progress))
+    if (logHeapUsed) o.heapUsed = _mb(mem.heapUsed)
+    if (logHeapTotal) o.heapTotal = _mb(mem.heapTotal)
+    if (logRss) o.rss = _mb(mem.rss)
+    if (logPeakRSS) o.peakRSS = _mb(peakRSS)
+    if (opt.rssMinusHeap) o.rssMinusHeap = _mb(mem.rss - mem.heapTotal)
+    if (opt.external) o.external = _mb(mem.external)
+    if (opt.arrayBuffers) o.arrayBuffers = _mb(mem.arrayBuffers || 0)
+
+    if (logRPS) Object.assign(o, { rps10, rpsTotal })
+
+    logger.log(inspect(o, inspectOpt))
+
+    if (sizes?.items.length) {
+      logger.log(sizes.getStats())
+
+      if (sizesZipped?.items.length) {
+        logger.log(sizesZipped.getStats())
+      }
+    }
 
     if (tenx) {
       let perHour: number | string =

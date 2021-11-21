@@ -37,7 +37,7 @@ export function transformToNDJson<IN = any>(
   const { strict = true, separator = '\n', sortObjects = false, useFlatstr = false } = opt
 
   return new Transform({
-    objectMode: true,
+    writableObjectMode: true,
     readableObjectMode: false,
     transform(chunk: IN, _, cb) {
       try {

@@ -17,7 +17,7 @@ export function transformTap<IN>(
   opt: TransformTapOptions = {},
 ): TransformTyped<IN, IN> {
   const { logger = console } = opt
-  let index = 0
+  let index = -1
 
   return new Transform({
     objectMode: true,
@@ -26,7 +26,7 @@ export function transformTap<IN>(
       // console.log('tap', chunk)
 
       try {
-        await fn(chunk, index++)
+        await fn(chunk, ++index)
       } catch (err) {
         logger.error(err)
         // suppressed error

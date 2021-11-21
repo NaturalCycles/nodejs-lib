@@ -33,17 +33,17 @@ export function transformJsonParse<OUT = any>(
   const { strict = true, reviver } = opt
 
   return new Transform({
-    objectMode: false,
+    writableObjectMode: false,
     readableObjectMode: true,
     transform(chunk: string, _, cb) {
       try {
         const data = JSON.parse(chunk, reviver)
         cb(null, data)
       } catch (err) {
-        // console.error(err)
         if (strict) {
           cb(err as Error) // emit error
         } else {
+          console.error(err)
           cb() // emit no error, but no result neither
         }
       }

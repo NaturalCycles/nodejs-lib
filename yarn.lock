@@ -1427,9 +1427,9 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0", "@naturalcycles/js-lib@^14.6.1":
-  version "14.71.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.71.0.tgz#0e331b59dae8901725a2d81b4a1d19ddec7daf5b"
-  integrity sha512-islfl9OQ5cENT4a9HwAr2NNs6aEkxNi7/VR8pED2qz5G0OqQMJEY69UdLd9NeQge3r7lmJbufGq2+8DPQXc8eQ==
+  version "14.75.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.75.0.tgz#5bcb217bb5aee19e22d45377dde765c76331fc10"
+  integrity sha512-ERPjPWBAOjkOiVYRcK4q31XFUBrh5nTJ7/YO5DwEm+nlb+j00WFSK/MNm6pJobTYJ3x4/N3EM5GKWS0Pxn8mBw==
   dependencies:
     tslib "^2.0.0"
 
@@ -1465,9 +1465,9 @@
     yargs "^17.0.0"
 
 "@naturalcycles/time-lib@^3.0.1":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/time-lib/-/time-lib-3.5.0.tgz#9b492a444cb392900bbace458e8c337b9742fb2c"
-  integrity sha512-mscjPodI5SD9isj0iVxpH2IjT0tw5afuPwR0AmFq6kC12ecGieVow4IQ+/ogA3nRtg3ZE8FUgkRzUHCzM4bxMw==
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/time-lib/-/time-lib-3.5.1.tgz#83cea25a3b8f170a0ece1997465db16e7668653a"
+  integrity sha512-jJHqCmpRPjHndQr2vMDylueZkepIWSnHZ/FR5PC6vS5G/dt7XDvff1TkMMYwGKKrB8kcP9mTBeaVzc51kYiz/w==
   dependencies:
     "@naturalcycles/js-lib" "^14.6.1"
     dayjs "^1.8.26"
@@ -2387,9 +2387,9 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1, ajv-keywords@^3.5.2:
   integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
 ajv-keywords@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-5.0.0.tgz#d01b3b21715b2f63d02aa511b82fc6eb3b30083c"
-  integrity sha512-ULd1QMjRoH6JDNUQIfDLrlE+OgZlFaxyYCjzt58uNuUQtKXt8/U+vK/8Ql0gyn/C5mqZzUWtKMqr/4YquvTrWA==
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-5.1.0.tgz#69d4d385a4733cdbeab44964a1170a88f87f0e16"
+  integrity sha512-YCS/JNFAUyr5vAuhk1DWm1CBxRHW9LbJ2ozWeemrIqpbsqKjHVxYPyi5GC0rjZIT5JxJ3virVTS8wk4i/Z+krw==
   dependencies:
     fast-deep-equal "^3.1.3"
 
@@ -2412,9 +2412,9 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4:
     uri-js "^4.2.2"
 
 ajv@^8.0.0, ajv@^8.0.1, ajv@^8.6.2:
-  version "8.8.1"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.8.1.tgz#e73dd88eeb4b10bbcd82bee136e6fbe801664d18"
-  integrity sha512-6CiMNDrzv0ZR916u2T+iRunnD60uWmNn8SkdB44/6stVORUg0aAkWO7PkOhpCmjmW8f2I/G/xnowD66fxGyQJg==
+  version "8.8.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.8.2.tgz#01b4fef2007a28bf75f0b7fc009f62679de4abbb"
+  integrity sha512-x9VuX+R/jcFj1DHo/fCp99esgGDWiHENrKxaCENuCxpoMCmAt/COCGVDwA7kleEpEzJjDnvh3yGoOuLu0Dtllw==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -7939,9 +7939,9 @@ linkify-it@^2.0.0:
     uc.micro "^1.0.1"
 
 lint-staged@^12.0.2:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.0.tgz#b06815793e28b856cbfd17be599c533388d960d5"
-  integrity sha512-h+fhsdYbt1fhItNj63UmpY5mkeF6z2YjXHtY0oQ4KdQc2kUvaPXOkWk0W9MhUlMdfb1G2SwYPhpcF17JIJDNWg==
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-12.1.1.tgz#d50efc88a0108d0f82158b3477bdce049bebfba8"
+  integrity sha512-zOmteWgJwTfZXcj6vXSnjeDDI/fvkKI2KOqRdc84ZFc2ZMDKXEeiTITtaskE3HiNrHraFmYVBpnMSZHngLoogA==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.16"
