@@ -26,9 +26,8 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * Predicate to filter outgoing results (after mapper).
    * Allows to not emit all results.
    *
-   * Set to `r => r` (passthrough predicate) to pass ANY value (including undefined/null)
-   *
-   * @default to filter out undefined/null values, but pass anything else
+   * Defaults to "pass everything" (including null, undefined, etc).
+   * Simpler way to exclude certain cases is to return SKIP symbol from the mapper.
    */
   predicate?: AsyncPredicate<OUT>
 
@@ -60,10 +59,6 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
   logger?: CommonLogger
 }
 
-export function notNullishPredicate(item: any): boolean {
-  return item !== undefined && item !== null
-}
-
 // doesn't work, cause here we don't construct our Transform instance ourselves
 // export class TransformMap extends AbortableTransform {}
 
@@ -85,7 +80,7 @@ export function transformMap<IN = any, OUT = IN>(
 ): TransformTyped<IN, OUT> {
   const {
     concurrency = 16,
-    predicate = notNullishPredicate,
+    predicate, // we now default to "no predicate" (meaning pass-everything)
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput,
     onError,
@@ -116,14 +111,12 @@ export function transformMap<IN = any, OUT = IN>(
       },
     },
     async function transformMapFn(this: AbortableTransform, chunk: IN, _, cb) {
-      index++
-      // console.log({chunk, _encoding})
-
       // Stop processing if isSettled (either THROW_IMMEDIATELY was fired or END received)
       if (isSettled) return cb()
 
+      const currentIndex = ++index
+
       try {
-        const currentIndex = index // because we need to pass it to 2 functions - mapper and predicate. Refers to INPUT index (since it may return multiple outputs)
         const res = await mapper(chunk, currentIndex)
         const passedResults = await pFilter(
           flattenArrayOutput && Array.isArray(res) ? res : [res],
@@ -132,14 +125,14 @@ export function transformMap<IN = any, OUT = IN>(
               isSettled = true // will be checked later
               return false
             }
-            return r !== SKIP && (await predicate(r, currentIndex))
+            return r !== SKIP && (!predicate || (await predicate(r, currentIndex)))
           },
         )
 
         passedResults.forEach(r => this.push(r))
 
         if (isSettled) {
-          logger.log(`transformMap END received at index ${index}`)
+          logger.log(`transformMap END received at index ${currentIndex}`)
           pipelineClose('transformMap', this, this.sourceReadable, this.streamDone, logger)
         }
 

@@ -1,8 +1,16 @@
-import { Transform } from 'stream'
-import { AggregatedError, CommonLogger, ErrorMode, Mapper, Predicate } from '@naturalcycles/js-lib'
+import {
+  AggregatedError,
+  CommonLogger,
+  END,
+  ErrorMode,
+  Mapper,
+  Predicate,
+  SKIP,
+} from '@naturalcycles/js-lib'
 import { yellow } from '../../colors'
+import { AbortableTransform } from '../pipeline/pipeline'
 import { TransformTyped } from '../stream.model'
-import { notNullishPredicate } from './transformMap'
+import { pipelineClose } from '../stream.util'
 
 export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   /**
@@ -20,9 +28,8 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
    * Predicate to filter outgoing results (after mapper).
    * Allows to not emit all results.
    *
-   * @default to filter out undefined/null values, but pass anything else
-   *
-   * Set to `r => r` (passthrough predicate) to pass ANY value (including undefined/null)
+   * Defaults to "pass everything".
+   * Simpler way to skip individual entries is to return SKIP symbol.
    */
   predicate?: Predicate<OUT>
 
@@ -47,6 +54,8 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   logger?: CommonLogger
 }
 
+export class TransformMapSync extends AbortableTransform {}
+
 /**
  * Sync (not async) version of transformMap.
  * Supposedly faster, for cases when async is not needed.
@@ -58,7 +67,7 @@ export function transformMapSync<IN = any, OUT = IN>(
   let index = -1
 
   const {
-    predicate = notNullishPredicate,
+    predicate, // defaults to "no predicate" (pass everything)
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput = false,
     onError,
@@ -66,34 +75,39 @@ export function transformMapSync<IN = any, OUT = IN>(
     objectMode = true,
     logger = console,
   } = opt
-  let isRejected = false
+  let isSettled = false
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
 
-  return new Transform({
+  return new TransformMapSync({
     objectMode,
     ...opt,
-    transform(this: Transform, chunk: IN, _encoding, cb) {
-      // Stop processing if THROW_IMMEDIATELY mode is used
-      if (isRejected && errorMode === ErrorMode.THROW_IMMEDIATELY) {
-        return cb()
-      }
+    transform(this: AbortableTransform, chunk: IN, _, cb) {
+      // Stop processing if isSettled
+      if (isSettled) return cb()
+
+      const currentIndex = ++index
 
       try {
-        if (!predicate(chunk, ++index)) {
-          cb() // signal that we've finished processing, but emit no output here
-          return
-        }
-
         // map and pass through
-        const v = mapper(chunk, index)
+        const v = mapper(chunk, currentIndex)
 
-        if (flattenArrayOutput && Array.isArray(v)) {
-          // Pass each item individually
-          v.forEach(item => this.push(item))
-        } else {
-          cb(null, v)
+        const passedResults = (flattenArrayOutput && Array.isArray(v) ? v : [v]).filter(r => {
+          if (r === END) {
+            isSettled = true // will be checked later
+            return false
+          }
+          return r !== SKIP && (!predicate || predicate(r, currentIndex))
+        })
+
+        passedResults.forEach(r => this.push(r))
+
+        if (isSettled) {
+          logger.log(`transformMapSync END received at index ${currentIndex}`)
+          pipelineClose('transformMapSync', this, this.sourceReadable, this.streamDone, logger)
         }
+
+        cb() // done processing
       } catch (err) {
         logger.error(err)
         errors++
@@ -107,7 +121,7 @@ export function transformMapSync<IN = any, OUT = IN>(
         }
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
-          isRejected = true
+          isSettled = true
           // Emit error immediately
           return cb(err as Error)
         }

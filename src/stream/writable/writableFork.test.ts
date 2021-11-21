@@ -1,4 +1,4 @@
-import { _range } from '@naturalcycles/js-lib'
+import { _range, SKIP } from '@naturalcycles/js-lib'
 import { transformMap, writablePushToArray, _pipeline, readableCreate } from '../..'
 import { writableFork } from './writableFork'
 
@@ -42,7 +42,7 @@ test('writableFork', async () => {
       // Chain2: write only odd numbers
       [
         transformMap(s => {
-          if (Number.parseInt(s) % 2 !== 1) return // will be skipped
+          if (Number.parseInt(s) % 2 !== 1) return SKIP
           return s // proceed
         }),
         // fs.createWriteStream(out2Path),
