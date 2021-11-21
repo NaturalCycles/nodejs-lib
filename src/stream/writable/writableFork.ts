@@ -31,7 +31,7 @@ export function writableFork<T>(
   return new Writable({
     objectMode: true,
     ...opt,
-    write(chunk: T, _encoding, cb) {
+    write(chunk: T, _, cb) {
       // Push/fork to all sub-streams
       // No backpressure is ensured here, it'll push regardless of the
       readables.forEach(readable => readable.push(chunk))

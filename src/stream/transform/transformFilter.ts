@@ -28,7 +28,7 @@ export function transformFilterSync<IN = any>(
   return new Transform({
     objectMode: true,
     ...opt,
-    transform(chunk: IN, _encoding, cb) {
+    transform(chunk: IN, _, cb) {
       try {
         if (predicate(chunk, index++)) {
           cb(null, chunk) // pass through

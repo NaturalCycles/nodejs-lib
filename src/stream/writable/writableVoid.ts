@@ -18,7 +18,7 @@ export function writableVoid(opt: WritableVoidOptions = {}): Writable {
   return new Writable({
     objectMode: true,
     ...opt,
-    write(chunk, _encoding, cb) {
+    write(chunk, _, cb) {
       cb()
     },
     final(cb) {

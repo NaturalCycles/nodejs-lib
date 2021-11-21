@@ -18,7 +18,7 @@ export function transformBuffer<IN = any>(opt: TransformBufferOptions): Transfor
   return new Transform({
     objectMode: true,
     ...opt,
-    transform(chunk, _encoding, cb) {
+    transform(chunk, _, cb) {
       buf.push(chunk)
 
       if (buf.length >= batchSize) {

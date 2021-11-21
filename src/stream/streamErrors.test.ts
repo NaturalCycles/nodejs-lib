@@ -6,7 +6,7 @@ import { readableFromArray } from './readable/readableFromArray'
 function errorTransformUnhandled() {
   return new Transform({
     objectMode: true,
-    transform(chunk, _encoding, cb) {
+    transform(chunk, _, cb) {
       if (chunk.id === '4') throw new Error('error_in_transform')
       cb(null, chunk)
     },
@@ -16,7 +16,7 @@ function errorTransformUnhandled() {
 function errorTransform() {
   return new Transform({
     objectMode: true,
-    transform(chunk, _encoding, cb) {
+    transform(chunk, _, cb) {
       if (chunk.id === '4') return cb(new Error('error_in_transform'))
       cb(null, chunk)
     },

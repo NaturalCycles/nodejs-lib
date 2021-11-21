@@ -35,7 +35,7 @@ export function transformJsonParse<OUT = any>(
   return new Transform({
     objectMode: false,
     readableObjectMode: true,
-    transform(chunk: string, _encoding, cb) {
+    transform(chunk: string, _, cb) {
       try {
         const data = JSON.parse(chunk, reviver)
         cb(null, data)

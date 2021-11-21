@@ -14,8 +14,8 @@ export function transformToString(): TransformTyped<Buffer, string> {
   return new Transform({
     objectMode: false,
     readableObjectMode: true,
-    transform(chunk: Buffer, _encoding, cb) {
-      // console.log(`enc: ${_encoding}`, chunk.toString())
+    transform(chunk: Buffer, _, cb) {
+      // console.log(`enc: ${_}`, chunk.toString())
       cb(null, chunk.toString())
     },
   })

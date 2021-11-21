@@ -8,7 +8,7 @@ export function writablePushToArray<IN>(arr: IN[], opt: TransformOptions = {}): 
   return new Writable({
     objectMode: true,
     ...opt,
-    write(chunk: IN, _encoding, cb) {
+    write(chunk: IN, _, cb) {
       arr.push(chunk)
       // callback to signal that we processed input, but not emitting any output
       cb()

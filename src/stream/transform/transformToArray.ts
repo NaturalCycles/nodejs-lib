@@ -10,7 +10,7 @@ export function transformToArray<IN>(opt: TransformOptions = {}): TransformTyped
   return new Transform({
     objectMode: true,
     ...opt,
-    transform(chunk: IN, _encoding, cb) {
+    transform(chunk: IN, _, cb) {
       res.push(chunk)
       // callback to signal that we processed input, but not emitting any output
       cb()

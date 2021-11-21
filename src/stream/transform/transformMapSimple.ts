@@ -31,7 +31,7 @@ export function transformMapSimple<IN = any, OUT = IN>(
 
   return new Transform({
     objectMode: true,
-    transform(chunk: IN, _encoding, cb) {
+    transform(chunk: IN, _, cb) {
       try {
         cb(null, mapper(chunk, ++index))
       } catch (err) {

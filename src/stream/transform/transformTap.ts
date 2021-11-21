@@ -22,7 +22,7 @@ export function transformTap<IN>(
   return new Transform({
     objectMode: true,
     ...opt,
-    async transform(chunk: IN, _encoding, cb) {
+    async transform(chunk: IN, _, cb) {
       // console.log('tap', chunk)
 
       try {

@@ -39,7 +39,7 @@ export function transformToNDJson<IN = any>(
   return new Transform({
     objectMode: true,
     readableObjectMode: false,
-    transform(chunk: IN, _encoding, cb) {
+    transform(chunk: IN, _, cb) {
       try {
         if (sortObjects) {
           chunk = _sortObjectDeep(chunk as any)

@@ -115,7 +115,7 @@ export function transformMultiThreaded<IN, OUT>(
         }
       },
     },
-    async function transformMapFn(chunk: IN, _encoding, cb) {
+    async function transformMapFn(chunk: IN, _, cb) {
       // Freezing the index, because it may change due to concurrency
       const currentIndex = ++index
 
