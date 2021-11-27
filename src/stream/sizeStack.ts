@@ -15,16 +15,16 @@ export class SizeStack extends NumberStack {
   }
 
   getStats(): string {
-    const pcs = this.percentiles([50, 90])
+    // const pcs = this.percentiles([50, 90])
 
     return [
-      this.name,
+      '  ' + this.name,
       'avg',
       yellow(_hb(this.avg())),
-      'p50',
-      yellow(_hb(pcs[50])),
-      'p90',
-      yellow(_hb(pcs[90])),
+      // 'p50',
+      // yellow(_hb(pcs[50])),
+      // 'p90',
+      // yellow(_hb(pcs[90])),
       'total',
       yellow(_hb(this.total)),
     ].join(' ')
