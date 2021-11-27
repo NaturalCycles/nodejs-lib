@@ -1,5 +1,5 @@
 import Ajv from 'ajv'
-import { HTTPError, TimeoutError } from 'got'
+import { RequestError, TimeoutError } from 'got'
 import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
 import { _chunkBuffer } from './buffer/buffer.util'
@@ -11,7 +11,7 @@ import { Debug, IDebug, IDebugger } from './log/debug'
 export * from './security/hash.util'
 export * from './security/id.util'
 export * from './security/secret.util'
-import { hasColors } from './colors/colors'
+export * from './colors/colors'
 export * from './log/log.util'
 import { slackDefaultMessagePrefixHook, SlackService } from './slack/slack.service'
 import {
@@ -22,9 +22,9 @@ import {
   SlackServiceCfg,
 } from './slack/slack.service.model'
 import { NDJsonStats } from './stream/ndjson/ndjson.model'
-import { ndJsonFileRead } from './stream/ndjson/ndJsonFileRead'
-import { ndJsonFileWrite } from './stream/ndjson/ndJsonFileWrite'
-import { ndjsonMap } from './stream/ndjson/ndjsonMap'
+export * from './stream/ndjson/ndJsonFileRead'
+export * from './stream/ndjson/ndJsonFileWrite'
+export * from './stream/ndjson/ndjsonMap'
 import {
   ndjsonStreamForEach,
   NDJSONStreamForEachOptions,
@@ -45,12 +45,12 @@ import {
 } from './stream/ndjson/transformJsonParse'
 import { transformToNDJson, TransformToNDJsonOptions } from './stream/ndjson/transformToNDJson'
 export * from './stream/pipeline/pipeline'
-import { readableCreate, readableFrom } from './stream/readable/readableCreate'
-import { readableForEach, readableForEachSync } from './stream/readable/readableForEach'
-import { readableFromArray } from './stream/readable/readableFromArray'
-import { readableMap } from './stream/readable/readableMap'
-import { readableMapToArray } from './stream/readable/readableMapToArray'
-import { readableToArray } from './stream/readable/readableToArray'
+export * from './stream/readable/readableCreate'
+export * from './stream/readable/readableForEach'
+export * from './stream/readable/readableFromArray'
+export * from './stream/readable/readableMap'
+export * from './stream/readable/readableMapToArray'
+export * from './stream/readable/readableToArray'
 import {
   ReadableTyped,
   TransformOptions,
@@ -62,13 +62,13 @@ export * from './stream/transform/transformFilter'
 export * from './stream/transform/transformLimit'
 export * from './stream/transform/transformLogProgress'
 import { transformMap, TransformMapOptions } from './stream/transform/transformMap'
-import { transformMapSimple } from './stream/transform/transformMapSimple'
-import { transformNoOp } from './stream/transform/transformNoOp'
+export * from './stream/transform/transformMapSimple'
+export * from './stream/transform/transformNoOp'
 import { transformMapSync, TransformMapSyncOptions } from './stream/transform/transformMapSync'
-import { transformSplit } from './stream/transform/transformSplit'
-import { transformTap } from './stream/transform/transformTap'
-import { transformToArray } from './stream/transform/transformToArray'
-import { transformToString } from './stream/transform/transformToString'
+export * from './stream/transform/transformSplit'
+export * from './stream/transform/transformTap'
+export * from './stream/transform/transformToArray'
+export * from './stream/transform/transformToString'
 import { BaseWorkerClass, WorkerClassInterface } from './stream/transform/worker/baseWorkerClass'
 import {
   transformMultiThreaded,
@@ -86,7 +86,7 @@ export * from './util/zip.util'
 import { readAjvSchemas, readJsonSchemas } from './validation/ajv/ajv.util'
 import { AjvSchema, AjvSchemaCfg, AjvValidationOptions } from './validation/ajv/ajvSchema'
 import { AjvValidationError, AjvValidationErrorData } from './validation/ajv/ajvValidationError'
-import { getAjv } from './validation/ajv/getAjv'
+export * from './validation/ajv/getAjv'
 import { ExtendedJoi, Joi } from './validation/joi/joi.extensions'
 import {
   AnySchemaTyped,
@@ -171,17 +171,6 @@ export {
   Debug,
   SlackService,
   slackDefaultMessagePrefixHook,
-  readableCreate,
-  readableFrom,
-  readableFromArray,
-  readableToArray,
-  readableForEach,
-  readableForEachSync,
-  readableMap,
-  readableMapToArray,
-  ndjsonMap,
-  ndJsonFileRead,
-  ndJsonFileWrite,
   ndjsonStreamForEach,
   pipelineFromNDJsonFile,
   pipelineToNDJsonFile,
@@ -192,27 +181,19 @@ export {
   transformToNDJson,
   transformMap,
   transformMapSync,
-  transformMapSimple,
-  transformNoOp,
-  transformSplit,
-  transformToString,
-  transformToArray,
-  transformTap,
   transformMultiThreaded,
   BaseWorkerClass,
   tableDiff,
   inspectAny,
   inspectAnyStringifyFn,
-  HTTPError,
+  RequestError,
   TimeoutError,
   _chunkBuffer,
   Ajv,
-  getAjv,
   AjvSchema,
   AjvValidationError,
   readJsonSchemas,
   readAjvSchemas,
-  hasColors,
   sanitizeHTML,
   runScript,
 }

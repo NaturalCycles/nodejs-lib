@@ -1,9 +1,7 @@
 import { getGot } from './getGot'
 
 const got = getGot({
-  logStart: true,
-  logFinished: true,
-  logResponse: true,
+  debug: true,
 })
 
 test('actual error', async () => {

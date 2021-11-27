@@ -3,6 +3,12 @@ import type { Options } from 'got'
 
 export interface GetGotOptions extends Options {
   /**
+   * Set to `true` to enable all possible debug logging.
+   * Not safe in prod (as it logs Responses), but great to use during development.
+   */
+  debug?: boolean
+
+  /**
    * @default false
    */
   logStart?: boolean
@@ -51,4 +57,6 @@ export interface GotRequestContext extends AnyObject {
    * Millisecond-timestamp of when the request was started. To be able to count "time spent".
    */
   started: number
+
+  retryCount?: number
 }
