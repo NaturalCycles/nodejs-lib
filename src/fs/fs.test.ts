@@ -4,7 +4,7 @@ import * as fse from 'fs-extra'
 import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
 import { json2env, kpy, kpySync } from './index'
 
-beforeAll(() => {
+beforeEach(() => {
   jest.spyOn(fs, 'writeFileSync').mockImplementation()
   jest.spyOn(fs, 'unlinkSync').mockImplementation()
   jest.spyOn(fs, 'mkdirSync').mockImplementation()

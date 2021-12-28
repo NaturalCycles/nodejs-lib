@@ -7,9 +7,6 @@ let lastBody: any
 
 beforeEach(() => {
   lastBody = null
-})
-
-beforeAll(() => {
   mockTime()
 })
 

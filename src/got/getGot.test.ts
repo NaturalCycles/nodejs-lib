@@ -4,7 +4,7 @@ import nock = require('nock')
 import { arraySchema, getValidationResult, integerSchema, objectSchema, RequestError } from '..'
 import { getGot } from './getGot'
 
-beforeAll(() => {
+beforeEach(() => {
   mockTime()
 })
 

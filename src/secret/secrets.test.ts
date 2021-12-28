@@ -3,7 +3,7 @@ import { secretDir } from '../test/paths.cnst'
 import { secretsDecrypt } from './secrets-decrypt.util'
 import { secretsEncrypt } from './secrets-encrypt.util'
 
-beforeAll(() => {
+beforeEach(() => {
   jest.spyOn(fs, 'writeFileSync').mockImplementation()
   jest.spyOn(fs, 'unlinkSync').mockImplementation()
 })
