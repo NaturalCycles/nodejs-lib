@@ -16,7 +16,9 @@ test('runScript', async () => {
 
   jest.resetAllMocks() // resets counters
 
-  runScript(async () => Promise.reject(new Error('bad')))
+  runScript(async () => {
+    throw new Error('bad')
+  })
   await pDelay() // because runScript is not actually async
   expect(process.exitCode).toBe(1)
   expect(processExit).toHaveBeenCalledTimes(1)
