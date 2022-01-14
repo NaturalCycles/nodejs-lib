@@ -5,7 +5,8 @@ const got = getGot({
 })
 
 test('actual error', async () => {
-  await got.get('http://a.com/err', {
+  await got.post('http://a.com/err', {
     searchParams: { q: 1 },
+    json: { a: 'a' },
   })
 })

@@ -21,7 +21,7 @@ export function getGot(opt: GetGotOptions = {}): Got {
   opt.logger ||= console
 
   if (opt.debug) {
-    opt.logStart = opt.logFinished = opt.logResponse = true
+    opt.logStart = opt.logFinished = opt.logResponse = opt.logRequest = true
   }
 
   return got.extend({
@@ -152,6 +152,14 @@ function gotBeforeRequestHook(opt: GetGotOptions): BeforeRequestHook {
       opt.logger!.log(
         [' >>', options.method, shortUrl, retryCount && `(retry ${retryCount})`].join(' '),
       )
+    }
+
+    if (opt.logRequest) {
+      const body = options.json || options.body
+
+      if (body) {
+        opt.logger!.log(body)
+      }
     }
   }
 }

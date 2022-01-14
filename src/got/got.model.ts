@@ -21,6 +21,13 @@ export interface GetGotOptions extends Options {
   logFinished?: boolean
 
   /**
+   * Log request object.
+   *
+   * @default false
+   */
+  logRequest?: boolean
+
+  /**
    * Log actual response object.
    *
    * @default false
