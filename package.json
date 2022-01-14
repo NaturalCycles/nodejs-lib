@@ -17,7 +17,6 @@
     "@naturalcycles/js-lib": "^14.0.0",
     "@naturalcycles/time-lib": "^3.0.1",
     "@types/lru-cache": "^5.1.0",
-    "@types/sanitize-html": "^2.5.0",
     "@types/through2-concurrent": "^2.0.0",
     "ajv": "^8.6.2",
     "ajv-formats": "^2.1.0",
@@ -36,7 +35,6 @@
     "lru-cache": "^6.0.0",
     "move-file": "^2.0.0",
     "nanoid": "^3.0.0",
-    "sanitize-html": "^2.5.2",
     "through2-concurrent": "^2.0.0",
     "yargs": "^17.0.0"
   },

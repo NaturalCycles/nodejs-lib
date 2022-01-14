@@ -107,7 +107,6 @@ import {
   undefinedIfInvalid,
   validate,
 } from './validation/joi/joi.validation.util'
-import { sanitizeHTML, SanitizeHTMLOptions } from './validation/sanitize.util'
 import { runScript, RunScriptOptions } from './script'
 
 export type {
@@ -156,7 +155,6 @@ export type {
   AjvValidationOptions,
   AjvSchemaCfg,
   AjvValidationErrorData,
-  SanitizeHTMLOptions,
 }
 
 export {
@@ -194,6 +192,5 @@ export {
   AjvValidationError,
   readJsonSchemas,
   readAjvSchemas,
-  sanitizeHTML,
   runScript,
 }

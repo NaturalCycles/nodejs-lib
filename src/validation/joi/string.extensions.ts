@@ -1,26 +1,15 @@
 import { dayjs } from '@naturalcycles/time-lib'
 import { Extension, StringSchema } from 'joi'
 import * as Joi from 'joi'
-import * as sanitize from 'sanitize-html'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedStringSchema extends StringSchema, AnySchemaTyped<string> {
   dateString(min?: string, max?: string): this
-  stripHTML(opt?: JoiStripHTMLOptions): this
 }
 
 export interface JoiDateStringOptions {
   min?: string
   max?: string
-}
-
-export interface JoiStripHTMLOptions {
-  /**
-   * 'Strict' would throw an error if it detects any HTML.
-   * Non-strict (default) does not error, but DOES convert the string to the string without HTML.
-   * Internally uses `sanitize-html` library, with allowedTags = [], and method = 'discard'.
-   */
-  strict?: boolean
 }
 
 export function stringExtensions(joi: typeof Joi): Extension {
@@ -88,42 +77,6 @@ export function stringExtensions(joi: typeof Joi): Extension {
           }
 
           return v // validation passed
-        },
-      },
-      stripHTML: {
-        method(opt?: JoiStripHTMLOptions) {
-          return this.$_addRule({
-            name: 'stripHTML',
-            args: {
-              strict: false,
-              ...opt,
-            },
-          })
-        },
-        args: [
-          {
-            name: 'strict',
-            ref: true,
-            assert: v => typeof v === 'boolean',
-            message: 'must be a boolean',
-          },
-        ],
-        validate(v: string, helpers, args: JoiStripHTMLOptions) {
-          // console.log('!!! stripHTML', args, v)
-
-          const r = sanitize(v, {
-            allowedTags: [], // no html tags allowed at all
-            // disallowedTagsMode: 'discard' // discard is default
-            parser: {
-              decodeEntities: false, // prevent decoding/changing of &<>"'
-            },
-          })
-
-          if (args.strict && r !== v) {
-            return helpers.error('string.stripHTML', args)
-          }
-
-          return r // return converted value (or the same, if there was nothing to sanitize)
         },
       },
     },
