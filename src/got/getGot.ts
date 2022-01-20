@@ -16,6 +16,7 @@ import { GetGotOptions, GotRequestContext } from './got.model'
  * 1. Error handler hook that prints helpful errors.
  * 2. Hooks that log start/end of request (optional, false by default).
  * 3. Reasonable defaults(tm), e.g non-infinite Timeout
+ * 4. Preserves error stack traces (!) (experimental!)
  */
 export function getGot(opt: GetGotOptions = {}): Got {
   opt.logger ||= console
@@ -48,6 +49,19 @@ export function getGot(opt: GetGotOptions = {}): Got {
     // Which definitely doesn't fit into default "RequestTimeout"
     timeout: 60_000,
     ...opt,
+    handlers: [
+      (options, next) => {
+        options.context = {
+          ...options.context,
+          started: Date.now(),
+          // This is to preserve original stack trace
+          // https://github.com/sindresorhus/got/blob/main/documentation/async-stack-traces.md
+          err: new Error('RequestError'),
+        } as GotRequestContext
+
+        return next(options)
+      },
+    ],
     hooks: {
       ...opt.hooks,
       beforeError: [
@@ -135,17 +149,17 @@ function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
       .filter(Boolean)
       .join('\n')
 
+    const stack = (err.options.context as GotRequestContext)?.err?.stack
+    if (stack) {
+      err.stack += '\n    --' + stack.replace('Error: RequestError', '')
+    }
+
     return err
   }
 }
 
 function gotBeforeRequestHook(opt: GetGotOptions): BeforeRequestHook {
   return options => {
-    options.context = {
-      ...options.context,
-      started: Date.now(),
-    } as GotRequestContext
-
     if (opt.logStart) {
       const { retryCount } = options.context as GotRequestContext
       const shortUrl = getShortUrl(opt, options.url, options.prefixUrl)

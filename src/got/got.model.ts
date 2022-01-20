@@ -65,5 +65,7 @@ export interface GotRequestContext extends AnyObject {
    */
   started: number
 
+  err?: Error
+
   retryCount?: number
 }
