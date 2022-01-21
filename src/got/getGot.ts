@@ -151,7 +151,25 @@ function gotErrorHook(opt: GetGotOptions = {}): BeforeErrorHook {
 
     const stack = (err.options.context as GotRequestContext)?.err?.stack
     if (stack) {
-      err.stack += '\n    --' + stack.replace('Error: RequestError', '')
+      const originalStack = err.stack.split('\n')
+      let originalStackIndex = originalStack.findIndex(line => line.includes(' at '))
+      if (originalStackIndex === -1) originalStackIndex = originalStack.length - 1
+
+      // Skipping first line as it has RequestError: ...
+      // Skipping second line as it's known to be from e.g at got_1.default.extend.handlers
+      const syntheticStack = stack.split('\n').slice(2)
+      let firstNonNodeModulesIndex = syntheticStack.findIndex(
+        line => !line.includes('node_modules'),
+      )
+      if (firstNonNodeModulesIndex === -1) firstNonNodeModulesIndex = 0
+
+      err.stack = [
+        // First lines of original error
+        ...originalStack.slice(0, originalStackIndex),
+        // Other lines from "Synthetic error"
+        ...syntheticStack.slice(firstNonNodeModulesIndex),
+      ].join('\n')
+      // err.stack += '\n    --' + stack.replace('Error: RequestError', '')
     }
 
     return err
@@ -226,7 +244,8 @@ function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
   return resp => {
     const success = resp.statusCode >= 200 && resp.statusCode < 400
 
-    if (opt.logFinished) {
+    // Errors are not logged here, as they're logged by gotErrorHook
+    if (opt.logFinished && success) {
       const { started, retryCount } = resp.request.options.context as GotRequestContext
       const { url, prefixUrl, method } = resp.request.options
       const shortUrl = getShortUrl(opt, url, prefixUrl)

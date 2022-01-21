@@ -90,18 +90,14 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 
   // console.log({ dirnamesSorted })
 
-  const deletedDirs = await pFilter(
-    dirnamesSorted,
-    async dirpath => {
-      if (await isEmptyDir(dirpath)) {
-        // console.log(`empty dir: ${dirpath}`)
-        await fs.remove(dirpath)
-        return true
-      }
-      return false
-    },
-    { concurrency: 1 },
-  )
+  const deletedDirs: string[] = []
+  for await (const dirpath of dirnamesSorted) {
+    if (await isEmptyDir(dirpath)) {
+      // console.log(`empty dir: ${dirpath}`)
+      await fs.remove(dirpath)
+      deletedDirs.push(dirpath)
+    }
+  }
 
   if (verbose || debug) console.log({ deletedDirs })
 

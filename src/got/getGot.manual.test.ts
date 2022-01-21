@@ -8,7 +8,8 @@ const got = getGot({
 
 test('actual error', async () => {
   const err = await pExpectedError<RequestError>(myFunction())
-  console.log(err)
+  console.log('!!!')
+  console.log(err.stack)
 
   expect(err).toBeInstanceOf(RequestError)
   expect(err.stack).toContain('at myFunction')
