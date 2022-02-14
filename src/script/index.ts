@@ -14,6 +14,8 @@ export interface RunScriptOptions {
   logger?: CommonLogger
 }
 
+const { DEBUG_RUN_SCRIPT } = process.env
+
 /**
  * Use it in your top-level scripts like this:
  *
@@ -29,6 +31,8 @@ export interface RunScriptOptions {
  * - No need to add `.catch(err => { console.error(err); process.exit(1) })`
  *
  * This function is kept light, dependency-free, exported separately.
+ *
+ * Set env DEBUG_RUN_SCRIPT for extra debugging.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
   const { logger = console, noExit } = opt
@@ -40,9 +44,19 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
     logger.error('unhandledRejection:', err)
   })
 
+  if (DEBUG_RUN_SCRIPT) {
+    process.on('exit', code => logger.log(`process.exit event, code=${code}`))
+    process.on('beforeExit', code => logger.log(`process.beforeExit event, code=${code}`))
+  }
+
+  // fake timeout, to ensure node.js process won't exit until runScript main promise is resolved
+  const timeout = setTimeout(() => {}, 10000000)
+
   void (async () => {
     try {
       await fn()
+
+      if (DEBUG_RUN_SCRIPT) logger.log(`runScript promise resolved`)
 
       if (!noExit) {
         setImmediate(() => process.exit(0))
@@ -53,6 +67,8 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
       if (!noExit) {
         setImmediate(() => process.exit(1))
       }
+    } finally {
+      clearTimeout(timeout)
     }
   })()
 }
