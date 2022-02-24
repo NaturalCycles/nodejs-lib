@@ -204,6 +204,13 @@ function gotBeforeRetryHook(opt: GetGotOptions): BeforeRetryHook {
   return (options, err, retryCount) => {
     // opt.logger!.log('beforeRetry', retryCount)
     const statusCode = err?.response?.statusCode || 0
+
+    if (statusCode && statusCode < 300) {
+      // todo: possibly remove the log message completely in the future
+      opt.logger!.log(`skipping got.beforeRetry hook at statusCode is ${statusCode}`)
+      return
+    }
+
     const { method, url, prefixUrl } = options
     const shortUrl = getShortUrl(opt, url, prefixUrl)
     const { started } = options.context as GotRequestContext
