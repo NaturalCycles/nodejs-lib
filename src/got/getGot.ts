@@ -207,7 +207,9 @@ function gotBeforeRetryHook(opt: GetGotOptions): BeforeRetryHook {
 
     if (statusCode && statusCode < 300) {
       // todo: possibly remove the log message completely in the future
-      opt.logger!.log(`skipping got.beforeRetry hook at statusCode is ${statusCode}`)
+      opt.logger!.log(
+        `skipping got.beforeRetry hook as statusCode is ${statusCode}, err.msg is ${err?.message}`,
+      )
       return
     }
 
