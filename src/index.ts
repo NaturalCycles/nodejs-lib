@@ -81,7 +81,7 @@ export * from './stream/writable/writablePushToArray'
 export * from './stream/writable/writableVoid'
 import { inspectAny, InspectAnyOptions, inspectAnyStringifyFn } from './string/inspectAny'
 export * from './util/env.util'
-import { LRUMemoCache } from './util/lruMemoCache'
+export * from './util/lruMemoCache'
 export * from './util/zip.util'
 import { readAjvSchemas, readJsonSchemas } from './validation/ajv/ajv.util'
 import { AjvSchema, AjvSchemaCfg, AjvValidationOptions } from './validation/ajv/ajvSchema'
@@ -165,7 +165,6 @@ export {
   undefinedIfInvalid,
   convert,
   Joi,
-  LRUMemoCache,
   Debug,
   SlackService,
   slackDefaultMessagePrefixHook,

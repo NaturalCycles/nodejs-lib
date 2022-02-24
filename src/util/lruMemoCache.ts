@@ -1,7 +1,8 @@
 import { MemoCache } from '@naturalcycles/js-lib'
 import LRUCache = require('lru-cache')
 
-export type LRUMemoCacheOpts = LRUCache.Options<string, any>
+// Partial, to be able to provide default `max`
+export interface LRUMemoCacheOptions<KEY, VALUE> extends Partial<LRUCache.Options<KEY, VALUE>> {}
 
 /**
  * @example
@@ -10,12 +11,15 @@ export type LRUMemoCacheOpts = LRUCache.Options<string, any>
  * @_Memo({ cacheFactory: () => new LRUMemoCache({...}) })
  * method1 ()
  */
-export class LRUMemoCache implements MemoCache {
-  constructor(opt: LRUMemoCacheOpts) {
-    this.lru = new LRUCache<string, any>(opt)
+export class LRUMemoCache<KEY = any, VALUE = any> implements MemoCache<KEY, VALUE> {
+  constructor(opt: LRUMemoCacheOptions<KEY, VALUE>) {
+    this.lru = new LRUCache<KEY, VALUE>({
+      max: 100,
+      ...opt,
+    })
   }
 
-  private lru!: LRUCache<string, any>
+  private lru!: LRUCache<KEY, VALUE>
 
   has(k: any): boolean {
     return this.lru.has(k)
