@@ -6,7 +6,7 @@ class A {
     console.log(`func ${n}`)
   }
 
-  @_Memo({ cacheFactory: () => new LRUMemoCache({ maxAge: 100, max: 100 }) })
+  @_Memo({ cacheFactory: () => new LRUMemoCache({ ttl: 100, max: 100 }) })
   a(a1: number, a2: number): number {
     const n = a1 * a2
     this.func(n)

@@ -13,7 +13,7 @@ import { AjvSchema, AjvSchemaCfg } from './ajvSchema'
  * @experimental
  */
 export function readJsonSchemas(patterns: string | string[], opt?: GlobbyOptions): JsonSchema[] {
-  return globby.sync(patterns, opt).map(fileName => JSON.parse(fs.readFileSync(fileName, 'utf-8')))
+  return globby.sync(patterns, opt).map(fileName => JSON.parse(fs.readFileSync(fileName, 'utf8')))
 }
 
 /**

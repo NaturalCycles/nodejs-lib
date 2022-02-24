@@ -132,7 +132,7 @@ export class AjvSchema<T = unknown> {
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
     requireFileToExist(filePath)
-    const schema = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    const schema = JSON.parse(fs.readFileSync(filePath, 'utf8'))
     return new AjvSchema<T>(schema, cfg)
   }
 

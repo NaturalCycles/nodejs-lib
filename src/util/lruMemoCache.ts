@@ -30,6 +30,6 @@ export class LRUMemoCache implements MemoCache {
   }
 
   clear(): void {
-    this.lru.reset()
+    this.lru.clear()
   }
 }
