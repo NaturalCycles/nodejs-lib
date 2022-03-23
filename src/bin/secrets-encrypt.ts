@@ -6,15 +6,15 @@ import { runScript } from '../script'
 import { EncryptCLIOptions, secretsEncrypt } from '../secret/secrets-encrypt.util'
 
 runScript(() => {
-  const { pattern, encKey, algorithm, del } = getEncryptCLIOptions()
+  const { pattern, encKey, del } = getEncryptCLIOptions()
 
-  secretsEncrypt(pattern, encKey, algorithm, del)
+  secretsEncrypt(pattern, encKey, del)
 })
 
 function getEncryptCLIOptions(): EncryptCLIOptions {
   require('dotenv').config()
 
-  let { pattern, encKey, encKeyVar, algorithm, del } = yargs.options({
+  let { pattern, encKey, encKeyVar, del } = yargs.options({
     pattern: {
       type: 'string',
       array: true,
@@ -33,10 +33,10 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
       desc: 'Env variable name to get `encKey` from.',
       default: 'SECRET_ENCRYPTION_KEY',
     },
-    algorithm: {
-      type: 'string',
-      default: 'aes-256-cbc',
-    },
+    // algorithm: {
+    //   type: 'string',
+    //   default: 'aes-256-cbc',
+    // },
     del: {
       type: 'boolean',
       desc: 'Delete source files after encryption/decryption. Be careful!',
@@ -56,5 +56,5 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
   }
 
   // `as any` because @types/yargs can't handle string[] type properly
-  return { pattern: pattern as any, encKey, algorithm, del }
+  return { pattern: pattern as any, encKey, del }
 }

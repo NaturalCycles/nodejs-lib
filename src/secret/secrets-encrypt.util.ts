@@ -15,12 +15,7 @@ export interface EncryptCLIOptions {
  * Encrypts all files in given directory (except *.enc), saves encrypted versions as filename.ext.enc.
  * Using provided encKey.
  */
-export function secretsEncrypt(
-  pattern: string[],
-  encKey: string,
-  algorithm?: string,
-  del?: boolean,
-): void {
+export function secretsEncrypt(pattern: string[], encKey: string, del?: boolean): void {
   const patterns = [
     ...pattern,
     `!**/*.enc`, // excluding already encoded
@@ -29,7 +24,7 @@ export function secretsEncrypt(
 
   filenames.forEach(filename => {
     const plain = fs.readFileSync(filename)
-    const enc = encryptRandomIVBuffer(plain, encKey, algorithm)
+    const enc = encryptRandomIVBuffer(plain, encKey)
 
     const encFilename = `${filename}.enc`
     fs.writeFileSync(encFilename, enc)

@@ -14,8 +14,8 @@ const SECRET_ENCRYPTION_KEY =
 
 test('secrets', async () => {
   secretsDecrypt([secretDir], SECRET_ENCRYPTION_KEY)
-  secretsDecrypt([secretDir], SECRET_ENCRYPTION_KEY, undefined, true)
+  secretsDecrypt([secretDir], SECRET_ENCRYPTION_KEY, true)
 
   secretsEncrypt([secretDir], SECRET_ENCRYPTION_KEY)
-  secretsEncrypt([secretDir], SECRET_ENCRYPTION_KEY, undefined, true)
+  secretsEncrypt([secretDir], SECRET_ENCRYPTION_KEY, true)
 })

@@ -1,7 +1,7 @@
 import * as fs from 'fs'
-import { StringMap } from '@naturalcycles/js-lib'
+import { _assert, _stringMapEntries, StringMap } from '@naturalcycles/js-lib'
 import { base64ToString } from '..'
-import { decryptRandomIVBuffer } from './crypto.util'
+import { decryptRandomIVBuffer, decryptString } from './crypto.util'
 
 let loaded = false
 
@@ -46,21 +46,59 @@ export function removeSecretsFromEnv(): void {
  * Does NOT delete previous secrets from secretMap.
  *
  * If SECRET_ENCRYPTION_KEY argument is passed - will decrypt the contents of the file first, before parsing it as JSON.
+ *
+ * Whole file is encrypted.
+ * For "json-values encrypted" style - use `loadSecretsFromEncryptedJsonFileValues`
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export function loadSecretsFromJsonFile(filePath: string, SECRET_ENCRYPTION_KEY?: string): void {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`loadSecretsFromPlainJsonFile() cannot load from path: ${filePath}`)
-  }
+export function loadSecretsFromEncryptedJsonFile(
+  filePath: string,
+  secretEncryptionKey?: string,
+): void {
+  _assert(
+    fs.existsSync(filePath),
+    `loadSecretsFromEncryptedJsonFile() cannot load from path: ${filePath}`,
+  )
 
   let secrets: StringMap
 
-  if (SECRET_ENCRYPTION_KEY) {
+  if (secretEncryptionKey) {
     const buf = fs.readFileSync(filePath)
-    const plain = decryptRandomIVBuffer(buf, SECRET_ENCRYPTION_KEY).toString('utf8')
+    const plain = decryptRandomIVBuffer(buf, secretEncryptionKey).toString('utf8')
     secrets = JSON.parse(plain)
   } else {
     secrets = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  }
+
+  Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
+
+  loaded = true
+  console.log(
+    `${Object.keys(secrets).length} secret(s) loaded from ${filePath}: ${Object.keys(secrets)
+      .map(s => s.toUpperCase())
+      .join(', ')}`,
+  )
+}
+
+/**
+ * Whole file is NOT encrypted, but instead individual json values ARE encrypted..
+ * For whole-file encryption - use `loadSecretsFromEncryptedJsonFile`
+ */
+export function loadSecretsFromEncryptedJsonFileValues(
+  filePath: string,
+  secretEncryptionKey?: string,
+): void {
+  _assert(
+    fs.existsSync(filePath),
+    `loadSecretsFromEncryptedJsonFileValues() cannot load from path: ${filePath}`,
+  )
+
+  const secrets: StringMap = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+
+  if (secretEncryptionKey) {
+    _stringMapEntries(secrets).forEach(([k, enc]) => {
+      secrets[k] = decryptString(enc, secretEncryptionKey)
+    })
   }
 
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))

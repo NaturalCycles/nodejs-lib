@@ -7,15 +7,21 @@ process.env = {
   SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',
 }
 
-import { secretsJsonEncPath, secretsJsonPath, TEST_ENC_KEY } from '../test/test.cnst'
+import {
+  secrets2JsonPath,
+  secretsJsonEncPath,
+  secretsJsonPath,
+  TEST_ENC_KEY,
+} from '../test/test.cnst'
 // order is important, secret.util should be loaded after the mocks
 import {
   getSecretMap,
   loadSecretsFromEnv,
-  loadSecretsFromJsonFile,
+  loadSecretsFromEncryptedJsonFile,
   secret,
   secretOptional,
   setSecretMap,
+  loadSecretsFromEncryptedJsonFileValues,
 } from './secret.util'
 
 test('secret', async () => {
@@ -49,14 +55,21 @@ test('secret', async () => {
   expect(secret('a')).toBe('b')
 })
 
-test('loadSecretsFromJsonFile', async () => {
+test('loadSecretsFromEncryptedJsonFile', async () => {
   setSecretMap({}) // reset
 
-  loadSecretsFromJsonFile(secretsJsonPath)
+  loadSecretsFromEncryptedJsonFile(secretsJsonPath)
   expect(secret('very')).toBe('secretuous')
 
   setSecretMap({}) // reset
 
-  loadSecretsFromJsonFile(secretsJsonEncPath, TEST_ENC_KEY)
+  loadSecretsFromEncryptedJsonFile(secretsJsonEncPath, TEST_ENC_KEY)
+  expect(secret('very')).toBe('secretuous')
+})
+
+test('loadSecretsFromEncryptedJsonFileValues', async () => {
+  setSecretMap({}) // reset
+
+  loadSecretsFromEncryptedJsonFileValues(secrets2JsonPath, TEST_ENC_KEY)
   expect(secret('very')).toBe('secretuous')
 })

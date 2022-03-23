@@ -15,19 +15,14 @@ export interface DecryptCLIOptions {
  * Decrypts all files in given directory (*.enc), saves decrypted versions without ending `.enc`.
  * Using provided encKey.
  */
-export function secretsDecrypt(
-  dir: string[],
-  encKey: string,
-  algorithm?: string,
-  del?: boolean,
-): void {
+export function secretsDecrypt(dir: string[], encKey: string, del?: boolean): void {
   const patterns = dir.map(d => `${d}/**/*.enc`)
 
   const filenames = globby.sync(patterns)
 
   filenames.forEach(filename => {
     const enc = fs.readFileSync(filename)
-    const plain = decryptRandomIVBuffer(enc, encKey, algorithm)
+    const plain = decryptRandomIVBuffer(enc, encKey)
 
     const plainFilename = filename.slice(0, filename.length - '.enc'.length)
     fs.writeFileSync(plainFilename, plain)

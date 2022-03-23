@@ -1,5 +1,10 @@
 import { TEST_ENC_KEY } from '../test/test.cnst'
-import { decryptRandomIVBuffer, encryptRandomIVBuffer } from './crypto.util'
+import {
+  decryptRandomIVBuffer,
+  decryptString,
+  encryptRandomIVBuffer,
+  encryptString,
+} from './crypto.util'
 
 test('testEncKeySize', () => {
   const key = Buffer.from(TEST_ENC_KEY, 'base64')
@@ -22,4 +27,18 @@ test('encryptBuffer should not be deterministic', () => {
   const enc1 = encryptRandomIVBuffer(plain, TEST_ENC_KEY)
   const enc2 = encryptRandomIVBuffer(plain, TEST_ENC_KEY)
   expect(enc1).not.toStrictEqual(enc2)
+})
+
+test('encryptString, decryptString', () => {
+  const plain = 'hello!@#123'
+  const enc = encryptString(plain, TEST_ENC_KEY)
+  const dec = decryptString(enc, TEST_ENC_KEY)
+  expect(dec).toStrictEqual(plain)
+})
+
+test('encryptString should be deterministic', () => {
+  const plain = 'hello!@#123'
+  const enc1 = encryptString(plain, TEST_ENC_KEY)
+  const enc2 = encryptString(plain, TEST_ENC_KEY)
+  expect(enc2).toBe(enc1)
 })
