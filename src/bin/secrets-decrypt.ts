@@ -6,20 +6,24 @@ import { runScript } from '../script'
 import { DecryptCLIOptions, secretsDecrypt } from '../secret/secrets-decrypt.util'
 
 runScript(() => {
-  const { dir, encKey, del } = getDecryptCLIOptions()
+  const { dir, file, encKey, del, jsonMode } = getDecryptCLIOptions()
 
-  secretsDecrypt(dir, encKey, del)
+  secretsDecrypt(dir, file, encKey, del, jsonMode)
 })
 
 function getDecryptCLIOptions(): DecryptCLIOptions {
   require('dotenv').config()
 
-  let { dir, encKey, encKeyVar, del } = yargs.options({
+  let { dir, file, encKey, encKeyVar, del, jsonMode } = yargs.options({
     dir: {
       type: 'array',
       desc: 'Directory with secrets. Can be many',
       // demandOption: true,
       default: './secret',
+    },
+    file: {
+      type: 'string',
+      desc: 'Single file to decrypt. Useful in jsonMode',
     },
     encKey: {
       type: 'string',
@@ -40,6 +44,11 @@ function getDecryptCLIOptions(): DecryptCLIOptions {
       type: 'boolean',
       desc: 'Delete source files after encryption/decryption. Be careful!',
     },
+    jsonMode: {
+      type: 'boolean',
+      desc: 'JSON mode. Encrypts only json values, not the whole file',
+      default: false,
+    },
   }).argv
 
   if (!encKey) {
@@ -55,5 +64,5 @@ function getDecryptCLIOptions(): DecryptCLIOptions {
   }
 
   // `as any` because @types/yargs can't handle string[] type properly
-  return { dir: dir as any, encKey, del }
+  return { dir: dir as any, file, encKey, del, jsonMode }
 }
