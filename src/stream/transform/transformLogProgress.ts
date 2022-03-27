@@ -1,7 +1,13 @@
 import { Transform } from 'stream'
 import { inspect, InspectOptions } from 'util'
-import { SimpleMovingAverage, _mb, _since, AnyObject, CommonLogger } from '@naturalcycles/js-lib'
-import { dayjs } from '@naturalcycles/time-lib'
+import {
+  SimpleMovingAverage,
+  _mb,
+  _since,
+  AnyObject,
+  CommonLogger,
+  localTime,
+} from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, white, yellow } from '../../colors'
 import { hasColors } from '../../colors/colors'
 import { SizeStack } from '../sizeStack'
@@ -255,7 +261,7 @@ export function transformLogProgress<IN = any>(
       }
 
       logger.log(
-        `${dimGrey(dayjs().toPretty())} ${white(metric)} took ${yellow(
+        `${dimGrey(localTime().toPretty())} ${white(metric)} took ${yellow(
           _since(started),
         )} so far to process ${yellow(batchedProgress)} rows, ~${yellow(perHour)}/hour`,
       )

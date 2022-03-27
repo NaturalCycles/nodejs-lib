@@ -1418,16 +1418,15 @@
     typescript "^4.0.2"
 
 "@naturalcycles/dev-lib@^12.0.0":
-  version "12.16.6"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-12.16.6.tgz#c8f6d3f398d0c30828dc1e3e8f6995122caa303e"
-  integrity sha512-aQj2d43MeHwylUjtDxX1mJm+v4LprNg8xFgF2tvoK7+CPvyAVAZ2KGenBiE+OLqq6iXBL08BSz8gZliMiQiAuw==
+  version "12.17.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-12.17.0.tgz#cfb165654c01ca6196d2259693d5c4cc54485401"
+  integrity sha512-lyeWMwtqTLn9e1ctDa0gN82w9OtASWjtgAg5hq6Q2ok0V86ApwxsU1BAwHLKfGcX5VNDtHGIxwXipdLG3z0RzA==
   dependencies:
     "@commitlint/cli" "^16.0.1"
     "@commitlint/config-conventional" "^16.0.0"
     "@naturalcycles/cli" "^1.0.0"
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/nodejs-lib" "^12.0.0"
-    "@naturalcycles/time-lib" "^3.0.1"
     "@types/fs-extra" "^9.0.0"
     "@types/jest" "^27.0.0"
     "@types/node" "^17.0.0"
@@ -1459,16 +1458,16 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0", "@naturalcycles/js-lib@^14.6.1":
-  version "14.88.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.88.0.tgz#593095b1b9dec0a2253086700869e71bd5f5b8a2"
-  integrity sha512-pyumd6qcqlME8dN8O2LMhtD3SA2nVwCsKIZIx3Y1LhRYa7Eygp2Sum9OH+7IguwprJyxswvNZp/RqKAfX8kcfw==
+  version "14.91.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.91.1.tgz#ae8b6710930f058f76437eda59c19908dbfe3a5a"
+  integrity sha512-c46g988atPUpp06n5qSmHzv7mlzPBWeEuAhBtNWCxTRHDnGs05afqVZQP06GBK/jlJnbmAaNeWlFRv7x5H4BOw==
   dependencies:
     tslib "^2.0.0"
 
 "@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.8.0":
-  version "12.67.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.67.0.tgz#3a9600dde2c6fbc0b757f19fd31413d9b9815462"
-  integrity sha512-uXV0pTfSXVlT1tL37ieY7GkVvTLz3cP4IXbaJiefr8w232JhpQd3J4wOcaPvwdHoyW/StkmoNAQ/eLdWzEtfwQ==
+  version "12.68.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.68.1.tgz#b1cf6b57983f942dce59aaba3a033387ed81ea83"
+  integrity sha512-xlJesSauu9SuUhDBVlOgDMNGnuy50rd7CAhiXLLQRZuHXhWtDmmQ7gP1M795FWe4jCB5dUzXzkWUcIWr4Vgh8w==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@naturalcycles/time-lib" "^3.0.1"
@@ -5013,9 +5012,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.84:
-  version "1.4.95"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.95.tgz#49303dbe037c15e2e0cc851d71c4cb86119a9cd6"
-  integrity sha512-h2VAMV/hPtmAeiDkwA8c5sjS+cWt6GlQL4ERdrOUWu7cRIG5IRk9uwR9f0utP+hPJ9ZZsADTq9HpbuT46eBYAg==
+  version "1.4.96"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.96.tgz#a97438a01d5db1460343fea4a344960b09330990"
+  integrity sha512-DPNjvNGPabv6FcyjzLAN4C0psN/GgD9rSGvMTuv81SeXG/EX3mCz0wiw9N1tUEnfQXYCJi3H8M0oFPRziZh7rw==
 
 elliptic@^6.5.3:
   version "6.5.4"

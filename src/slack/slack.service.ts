@@ -4,9 +4,9 @@ import {
   CommonLogger,
   commonLoggerMinLevel,
   CommonLogLevel,
+  localTime,
   PQueue,
 } from '@naturalcycles/js-lib'
-import { dayjs } from '@naturalcycles/time-lib'
 import got from 'got'
 import { inspectAny, InspectAnyOptions } from '..'
 import {
@@ -172,7 +172,7 @@ export class SlackService<CTX = any> {
 }
 
 export function slackDefaultMessagePrefixHook(msg: SlackMessage): string[] {
-  const tokens = [dayjs().toPretty()]
+  const tokens = [localTime().toPretty()]
   const { ctx } = msg
 
   // AppEngine-specific decoration

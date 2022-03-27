@@ -1,4 +1,4 @@
-import { dayjs } from '@naturalcycles/time-lib'
+import { LocalDate, localTime } from '@naturalcycles/js-lib'
 import { Extension, StringSchema } from 'joi'
 import * as Joi from 'joi'
 import { AnySchemaTyped } from './joi.model'
@@ -53,10 +53,10 @@ export function stringExtensions(joi: typeof Joi): Extension {
 
           // Today allows +-14 hours gap to account for different timezones
           if (max === 'today') {
-            max = dayjs().add(14, 'hour').toISODate()
+            max = localTime().add(14, 'hour').toISODate()
           }
           if (min === 'today') {
-            min = dayjs().subtract(14, 'hour').toISODate()
+            min = localTime().subtract(14, 'hour').toISODate()
           }
           // console.log('min/max', min, max)
 
@@ -67,7 +67,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
             err = 'string.dateStringMin'
           } else if (max && v > max) {
             err = 'string.dateStringMax'
-          } else if (!dayjs(v).isValid()) {
+          } else if (!LocalDate.isValid(v)) {
             // todo: replace with another regex (from ajv-validators) for speed
             err = 'string.dateStringCalendarAccuracy'
           }
