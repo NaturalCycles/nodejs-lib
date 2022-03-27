@@ -1,9 +1,9 @@
 import * as path from 'path'
-import { _assert, _stringMapEntries, StringMap } from '@naturalcycles/js-lib'
+import { _assert } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import globby = require('globby')
 import { dimGrey, yellow } from '../colors'
-import { encryptRandomIVBuffer, encryptString } from '../security/crypto.util'
+import { encryptObject, encryptRandomIVBuffer } from '../security/crypto.util'
 
 export interface EncryptCLIOptions {
   pattern: string[]
@@ -41,11 +41,7 @@ export function secretsEncrypt(
       )
       encFilename = filename.replace('.plain', '')
 
-      const json: StringMap = JSON.parse(fs.readFileSync(filename, 'utf8'))
-
-      _stringMapEntries(json).forEach(([k, plain]) => {
-        json[k] = encryptString(plain, encKey)
-      })
+      const json = encryptObject(JSON.parse(fs.readFileSync(filename, 'utf8')), encKey)
 
       fs.writeFileSync(encFilename, JSON.stringify(json, null, 2))
     } else {

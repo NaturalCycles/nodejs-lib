@@ -1,7 +1,9 @@
 import { TEST_ENC_KEY } from '../test/test.cnst'
 import {
+  decryptObject,
   decryptRandomIVBuffer,
   decryptString,
+  encryptObject,
   encryptRandomIVBuffer,
   encryptString,
 } from './crypto.util'
@@ -41,4 +43,26 @@ test('encryptString should be deterministic', () => {
   const enc1 = encryptString(plain, TEST_ENC_KEY)
   const enc2 = encryptString(plain, TEST_ENC_KEY)
   expect(enc2).toBe(enc1)
+})
+
+test('encryptObject, decryptObject', () => {
+  const obj1 = {
+    a: 'aaa',
+    b: 'bbb',
+  }
+
+  const enc = encryptObject(obj1, TEST_ENC_KEY)
+  const obj2 = decryptObject(enc, TEST_ENC_KEY)
+  expect(obj2).toEqual(obj1)
+  expect(obj2 === obj1).toBe(false)
+
+  expect(enc).toMatchInlineSnapshot(`
+    Object {
+      "a": "wgYkdhDuRgmLSWkpfGGW/A==",
+      "b": "5q89bvl+K55gbEWxKWDScA==",
+    }
+  `)
+
+  // Should be deterministic:
+  expect(encryptObject(obj1, TEST_ENC_KEY)).toEqual(enc)
 })

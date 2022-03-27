@@ -1,7 +1,7 @@
 import * as fs from 'fs'
-import { _assert, _stringMapEntries, StringMap } from '@naturalcycles/js-lib'
+import { _assert, StringMap } from '@naturalcycles/js-lib'
 import { base64ToString } from '..'
-import { decryptRandomIVBuffer, decryptString } from './crypto.util'
+import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 
 let loaded = false
 
@@ -93,12 +93,10 @@ export function loadSecretsFromEncryptedJsonFileValues(
     `loadSecretsFromEncryptedJsonFileValues() cannot load from path: ${filePath}`,
   )
 
-  const secrets: StringMap = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  let secrets: StringMap = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
   if (secretEncryptionKey) {
-    _stringMapEntries(secrets).forEach(([k, enc]) => {
-      secrets[k] = decryptString(enc, secretEncryptionKey)
-    })
+    secrets = decryptObject(secrets, secretEncryptionKey)
   }
 
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
