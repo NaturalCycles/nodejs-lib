@@ -1,4 +1,5 @@
 import {
+  _anyToError,
   AbortableAsyncMapper,
   AggregatedError,
   AsyncPredicate,
@@ -47,7 +48,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * If defined - will be called on every error happening in the stream.
    * Called BEFORE observable will emit error (unless skipErrors is set to true).
    */
-  onError?: (err: unknown, input: IN) => any
+  onError?: (err: Error, input: IN) => any
 
   /**
    * Progress metric
@@ -144,7 +145,7 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (onError) {
           try {
-            onError(err, chunk)
+            onError(_anyToError(err), chunk)
           } catch {}
         }
 
