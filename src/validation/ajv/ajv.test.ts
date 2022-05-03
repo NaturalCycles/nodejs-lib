@@ -43,13 +43,13 @@ test('simple', () => {
   const [err] = _try<AjvValidationError>(() => schema.validate(missing))
   expect(err).toBeInstanceOf(AjvValidationError)
   expect(err!.data).toMatchInlineSnapshot(`
-    Object {
-      "errors": Array [
-        Object {
+    {
+      "errors": [
+        {
           "instancePath": "",
           "keyword": "required",
           "message": "must have required property 's'",
-          "params": Object {
+          "params": {
             "missingProperty": "s",
           },
           "schemaPath": "#/required",

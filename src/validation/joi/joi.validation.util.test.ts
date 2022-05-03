@@ -333,15 +333,15 @@ test('annotation is non-enumerable, but still accessible', () => {
   expect(error).toBeInstanceOf(JoiValidationError)
 
   expect(error!.data).toMatchInlineSnapshot(`
-    Object {
-      "joiValidationErrorItems": Array [
-        Object {
-          "context": Object {
+    {
+      "joiValidationErrorItems": [
+        {
+          "context": {
             "label": "value",
             "value": "notBoolean",
           },
-          "message": "\\"value\\" must be a boolean",
-          "path": Array [],
+          "message": ""value" must be a boolean",
+          "path": [],
           "type": "boolean.base",
         },
       ],
@@ -351,6 +351,6 @@ test('annotation is non-enumerable, but still accessible', () => {
   expect(JSON.stringify(error!.data)).not.toContain('annotation')
 
   // But it's still present!
-  expect(error!.data.annotation).toMatchInlineSnapshot(`"\\"value\\" must be a boolean"`)
+  expect(error!.data.annotation).toMatchInlineSnapshot(`""value" must be a boolean"`)
   expect(!!error!.data.annotation).toBe(true)
 })

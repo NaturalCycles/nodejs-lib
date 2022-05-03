@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`basic test 1`] = `
-Object {
+{
   "channel": "#log",
   "icon_emoji": ":spider_web:",
   "text": "2018-06-21 00:00:00
@@ -11,7 +11,7 @@ hey",
 `;
 
 exports[`basic test 2`] = `
-Object {
+{
   "channel": "#log",
   "icon_emoji": ":spider_web:",
   "text": "2018-06-21 00:00:00
@@ -21,7 +21,7 @@ hey",
 `;
 
 exports[`basic test 3`] = `
-Object {
+{
   "channel": "#log",
   "icon_emoji": ":spider_web:",
   "text": "2018-06-21 00:00:00
@@ -31,11 +31,11 @@ Object {
 `;
 
 exports[`basic test 4`] = `
-Object {
-  "attachments": Array [
-    Object {
-      "fields": Array [
-        Object {
+{
+  "attachments": [
+    {
+      "fields": [
+        {
           "short": true,
           "title": "k1",
           "value": "v1",
@@ -45,7 +45,7 @@ Object {
   ],
   "channel": "#log",
   "icon_emoji": ":spider_web:",
-  "mentions": Array [
+  "mentions": [
     "kirill",
   ],
   "text": "2018-06-21 00:00:00

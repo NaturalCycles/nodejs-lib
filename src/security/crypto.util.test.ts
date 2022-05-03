@@ -57,7 +57,7 @@ test('encryptObject, decryptObject', () => {
   expect(obj2 === obj1).toBe(false)
 
   expect(enc).toMatchInlineSnapshot(`
-    Object {
+    {
       "a": "wgYkdhDuRgmLSWkpfGGW/A==",
       "b": "5q89bvl+K55gbEWxKWDScA==",
     }
