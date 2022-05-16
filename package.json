@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.0.0",
-    "@types/lru-cache": "^7.4.0",
     "@types/through2-concurrent": "^2.0.0",
     "ajv": "^8.6.2",
     "ajv-formats": "^2.1.0",
