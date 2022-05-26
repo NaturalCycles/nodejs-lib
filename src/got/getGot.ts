@@ -284,6 +284,11 @@ function gotAfterResponseHook(opt: GetGotOptions = {}): AfterResponseHook {
 }
 
 function getShortUrl(opt: GetGotOptions, url: URL, prefixUrl?: string): string {
+  if (url.password) {
+    url = new URL(url.toString()) // prevent original url mutation
+    url.password = '[redacted]'
+  }
+
   let shortUrl = url.toString()
 
   if (opt.logWithSearchParams === false) {
