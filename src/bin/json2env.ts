@@ -19,6 +19,11 @@ runScript(() => {
       desc: 'Populate $BASH_ENV file if BASH_ENV env variable exists',
       default: true,
     },
+    githubEnv: {
+      type: 'boolean',
+      desc: 'Populate $GITHUB_ENV file if GITHUB_ENV env variable exists',
+      default: true,
+    },
     fail: {
       type: 'boolean',
       desc: 'Fail (exit status 1) on non-existing input file',
@@ -32,7 +37,7 @@ runScript(() => {
     },
   })
 
-  const { _: args, prefix, saveEnvFile, bashEnv, fail, debug, silent } = argv
+  const { _: args, prefix, saveEnvFile, bashEnv, githubEnv, fail, debug, silent } = argv
   if (debug) console.log({ argv })
 
   const jsonPath = args[0] as string
@@ -42,6 +47,7 @@ runScript(() => {
     prefix,
     saveEnvFile,
     bashEnv,
+    githubEnv,
     fail,
     debug,
     silent,

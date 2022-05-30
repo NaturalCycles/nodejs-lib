@@ -18,6 +18,11 @@ export interface Json2EnvOptions {
   /**
    * @default true
    */
+  githubEnv?: boolean
+
+  /**
+   * @default true
+   */
   fail?: boolean
 
   debug?: boolean
@@ -27,11 +32,12 @@ export interface Json2EnvOptions {
 const JSON2ENV_OPT_DEF: Partial<Json2EnvOptions> = {
   saveEnvFile: true,
   bashEnv: true,
+  githubEnv: true,
   fail: true,
 }
 
 export function json2env(opt: Json2EnvOptions): void {
-  const { jsonPath, prefix, saveEnvFile, bashEnv, fail, debug, silent } = {
+  const { jsonPath, prefix, saveEnvFile, bashEnv, githubEnv, fail, debug, silent } = {
     ...JSON2ENV_OPT_DEF,
     ...opt,
   }
@@ -56,8 +62,10 @@ export function json2env(opt: Json2EnvOptions): void {
   const json = fs.readJsonSync(jsonPath)
 
   const exportStr = objectToShellExport(json, prefix)
+  const githubStr = objectToGithubActionsEnv(json, prefix)
+
   if (debug) {
-    console.log(json, exportStr)
+    console.log(json, exportStr, githubStr)
   }
 
   if (saveEnvFile) {
@@ -73,6 +81,10 @@ export function json2env(opt: Json2EnvOptions): void {
   if (bashEnv) {
     appendBashEnv(exportStr)
   }
+
+  if (githubEnv) {
+    appendGithubEnv(githubStr)
+  }
 }
 
 function appendBashEnv(exportStr: string): void {
@@ -81,6 +93,15 @@ function appendBashEnv(exportStr: string): void {
     fs.appendFileSync(BASH_ENV, exportStr + '\n')
 
     console.log(`BASH_ENV file appended (${dimGrey(BASH_ENV)})`)
+  }
+}
+
+function appendGithubEnv(exportStr: string): void {
+  const { GITHUB_ENV } = process.env
+  if (GITHUB_ENV) {
+    fs.appendFileSync(GITHUB_ENV, exportStr + '\n')
+
+    console.log(`GITHUB_ENV file appended (${dimGrey(GITHUB_ENV)})`)
   }
 }
 
@@ -101,6 +122,29 @@ export function objectToShellExport(o: any, prefix = ''): string {
       const v = o[k]
       if (v) {
         return `export ${prefix}${k}="${v}"`
+      }
+    })
+    .filter(Boolean)
+    .join('\n')
+}
+
+/**
+ * Turns Object with keys/values into a file of key-value pairs
+ *
+ * @example
+ * { a: 'b', b: 'c'}
+ *
+ * will turn into:
+ *
+ * a=b
+ * b=c
+ */
+export function objectToGithubActionsEnv(o: any, prefix = ''): string {
+  return Object.keys(o)
+    .map(k => {
+      const v = o[k]
+      if (v) {
+        return `${prefix}${k}=${v}`
       }
     })
     .filter(Boolean)
