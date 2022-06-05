@@ -43,6 +43,9 @@ export function getAjv(opt?: Options): Ajv {
   return ajv
 }
 
+const TS_2500 = 16725225600 // 2500-01-01
+const TS_2000 = 946684800 // 2000-01-01
+
 function addCustomAjvFormats(ajv: Ajv): Ajv {
   return (
     ajv
@@ -56,15 +59,25 @@ function addCustomAjvFormats(ajv: Ajv): Ajv {
       .addFormat('unixTimestamp', {
         type: 'number',
         validate: (n: number) => {
-          // 16725225600 is 2500-01-01 in seconds
-          return n >= 0 && n < 16725225600
+          return n >= 0 && n < TS_2500
+        },
+      })
+      .addFormat('unixTimestamp2000', {
+        type: 'number',
+        validate: (n: number) => {
+          return n >= TS_2000 && n < TS_2500
         },
       })
       .addFormat('unixTimestampMillis', {
         type: 'number',
         validate: (n: number) => {
-          // 16725225600000 is 2500-01-01 in milliseconds
-          return n >= 0 && n < 16725225600000
+          return n >= 0 && n < TS_2500 * 1000
+        },
+      })
+      .addFormat('unixTimestampMillis2000', {
+        type: 'number',
+        validate: (n: number) => {
+          return n >= TS_2000 * 1000 && n < TS_2500 * 1000
         },
       })
       .addFormat('utcOffset', {

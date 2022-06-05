@@ -1,5 +1,5 @@
 import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
-import { JsonSchema, jsonSchema, _try } from '@naturalcycles/js-lib'
+import { JsonSchema, jsonSchema, _try, localTime } from '@naturalcycles/js-lib'
 import { inspectAny } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -151,7 +151,9 @@ test.each([
   [{ type: 'string', format: 'countryCode' }, ['SE', 'US']],
   [{ type: 'string', format: 'currency' }, ['SEK', 'USD']],
   [{ type: 'number', format: 'unixTimestamp' }, [1232342342]],
+  [{ type: 'number', format: 'unixTimestamp2000' }, [1232342342]],
   [{ type: 'number', format: 'unixTimestampMillis' }, [1232342342 * 1000]],
+  [{ type: 'number', format: 'unixTimestampMillis2000' }, [1232342342 * 1000]],
   [{ type: 'number', format: 'utcOffset' }, [-14 * 60, -12 * 60, 0, 12 * 60, 14 * 60]],
   [{ type: 'number', format: 'utcOffsetHours' }, [-14, -12, 0, 12, 14]],
 ] as [JsonSchema, any[]][])('%s should be valid', (schema, objects: any[]) => {
@@ -185,7 +187,15 @@ test.each([
   [{ type: 'string', format: 'countryCode' }, ['se', 'sve']],
   [{ type: 'string', format: 'currency' }, ['sek', 'us']],
   [{ type: 'number', format: 'unixTimestamp' }, [1232342342000, -1]],
+  [
+    { type: 'number', format: 'unixTimestamp2000' },
+    [1232342342000, localTime('1999-01-01').unix()],
+  ],
   [{ type: 'number', format: 'unixTimestampMillis' }, [-1]],
+  [
+    { type: 'number', format: 'unixTimestampMillis2000' },
+    [-1, localTime('1999-01-01').unixMillis()],
+  ],
   [{ type: 'number', format: 'utcOffset' }, [-15 * 60]],
   [{ type: 'number', format: 'utcOffsetHours' }, [-15, 15]],
 ] as [JsonSchema, any[]][])('%s should be invalid', (schema, objects: any[]) => {

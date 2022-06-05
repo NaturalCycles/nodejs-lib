@@ -1512,16 +1512,16 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.101.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.101.0.tgz#721ade09970582446e805355151ffb21d483e4ec"
-  integrity sha512-w4ABpzdWQLmRtV9VDAEezPFoYI4SlHS9fApuYGkmcguo9ngCyD7mIPwpPhzHx7VSdo/omjoCViOoV90zFRZQPw==
+  version "14.102.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.102.0.tgz#956c880b29e0bae9eefcdb09e2d2e436f3c01923"
+  integrity sha512-prZ7D4t+Ae5yjOCwgDoJ+P8B4RH5HHkqj5FVcT/tpC0mERoAzNkimYQb+OMqCcfXq6e+OIqDLuOARKLK2GQ9RA==
   dependencies:
     tslib "^2.0.0"
 
 "@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.8.0":
-  version "12.72.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.72.0.tgz#085f4f6926cdc0c8f5faba1976f30f35bbb2d809"
-  integrity sha512-3IhvId+q0zZgBo1NbVN+/zU5PnvZCuLo3isB1GnEaH6r7fbUkbwuZIq41rqudeinpMJ0nOb7qPQbswuwsHaQzA==
+  version "12.73.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.73.0.tgz#08872094886ead4d84cefc866beddea39211d8e5"
+  integrity sha512-u+RYyBrgeaY7UTk8fsmJYINmKKIP9Vx6fUf0kaltjsL9Xz/ZudMpJu+TNkdeQI4p5Ce9qtIOlYpsZRajXx8OBA==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@types/through2-concurrent" "^2.0.0"
