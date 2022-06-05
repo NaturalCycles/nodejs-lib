@@ -57,8 +57,31 @@ export const SLUG_PATTERN = /^[a-z0-9-]*$/
  */
 export const slugSchema = stringSchema.regex(/^[a-z0-9-]{1,255}$/)
 
-// 16725225600 is 2500-01-01
-export const unixTimestampSchema = numberSchema.integer().min(0).max(16725225600)
+const TS_2500 = 16725225600 // 2500-01-01
+const TS_2000 = 946684800 // 2000-01-01
+
+/**
+ * Between years 1970 and 2050
+ */
+export const unixTimestampSchema = numberSchema.integer().min(0).max(TS_2500)
+/**
+ * Between years 2000 and 2050
+ */
+export const unixTimestamp2000Schema = numberSchema.integer().min(0).min(TS_2000).max(TS_2500)
+/**
+ * Between years 1970 and 2050
+ */
+export const unixTimestampMillisSchema = numberSchema
+  .integer()
+  .min(0)
+  .max(TS_2500 * 1000)
+/**
+ * Between years 2000 and 2050
+ */
+export const unixTimestampMillis2000Schema = numberSchema
+  .integer()
+  .min(TS_2000 * 1000)
+  .max(TS_2500 * 1000)
 
 // 2
 export const verSchema = numberSchema.optional().integer().min(1).max(100)
@@ -88,12 +111,12 @@ export const ipAddressSchema = stringSchema.ip()
 
 export const baseDBEntitySchema = objectSchema<BaseDBEntity>({
   id: stringSchema.optional(),
-  created: unixTimestampSchema.optional(),
-  updated: unixTimestampSchema.optional(),
+  created: unixTimestamp2000Schema.optional(),
+  updated: unixTimestamp2000Schema.optional(),
 })
 
 export const savedDBEntitySchema = objectSchema<SavedDBEntity>({
   id: stringSchema,
-  created: unixTimestampSchema,
-  updated: unixTimestampSchema,
+  created: unixTimestamp2000Schema,
+  updated: unixTimestamp2000Schema,
 })
