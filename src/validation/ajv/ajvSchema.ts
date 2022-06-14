@@ -159,7 +159,7 @@ export class AjvSchema<T = unknown> {
     const errors = this.validateFunction.errors!
 
     const {
-      objectId = _isObject(obj) ? (obj['id'] as string) : undefined,
+      objectId = _isObject(obj) ? (obj['id' as keyof T] as any) : undefined,
       objectName = this.cfg.objectName,
       logErrors = this.cfg.logErrors,
       separator = this.cfg.separator,

@@ -1,6 +1,6 @@
+import * as fs from 'fs'
 import type { ValuesOf } from '@naturalcycles/js-lib'
 import 'dotenv/config' // ensure .env is read before requiring keys
-import * as fs from 'fs-extra'
 
 /**
  * @example
@@ -16,13 +16,13 @@ export function requireEnvKeys<T extends readonly string[]>(
   return keys.reduce((r, k) => {
     const v = process.env[k]
     if (!v) throw new Error(`${k} env variable is required, but missing`)
-    r[k] = v
+    r[k as ValuesOf<T>] = v
     return r
   }, {} as { [k in ValuesOf<T>]: string })
 }
 
 export function requireFileToExist(filePath: string): void {
-  if (!fs.pathExistsSync(filePath)) {
+  if (!fs.existsSync(filePath)) {
     throw new Error(`Required file should exist: ${filePath}`)
   }
 }
