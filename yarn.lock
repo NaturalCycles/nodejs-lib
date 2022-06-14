@@ -1477,10 +1477,10 @@
     ts-node "^10.0.0"
     typescript "^4.0.2"
 
-"@naturalcycles/dev-lib@^12.0.0":
-  version "12.21.4"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-12.21.4.tgz#22383ca9226199f48db2162e5e9d546787242767"
-  integrity sha512-6q6PVchXQV7U3H3qUkDkao4M7IA8TM8C3HuGK2zOULxovITVX0o7kjcU93IsMxwhadYYxXcqnZn6AnIKWkSCqg==
+"@naturalcycles/dev-lib@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-13.0.0.tgz#0a0b86812819c91fb8269bc9e3954c57ffd57e2b"
+  integrity sha512-YncXGiGU9DZ70oqlNG6bG7H8HQ1/StjawnvTUS0RSHUPKMl9AjueY4UBv6+rDYzIpbtL7fN8G7zzSUUK8RuiXw==
   dependencies:
     "@commitlint/cli" "^17.0.0"
     "@commitlint/config-conventional" "^17.0.0"
@@ -1518,9 +1518,9 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.104.2"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.104.2.tgz#8e753c8c02f28bd5b375c8ac30ac275b4cd38a99"
-  integrity sha512-90AnPDq9ERk78DC4ZItka2fDbFVm1FDydAFD1y+mnNMpZUu7TNjBsAW4UhXt/GpX2uHHu9Kg2Qu2CivgKJiXOw==
+  version "14.105.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.105.0.tgz#90f8819cf4910f6f027ed48d9034702fdade8994"
+  integrity sha512-DqDt0VIgMqcMFqYgJnP+OsV02vpvLJ/9zQ3rw/Q10Ijxt3siGbv89sknTCd64NlY9DutXwdQJLN6avMs/nsD/g==
   dependencies:
     tslib "^2.0.0"
 
@@ -10185,9 +10185,9 @@ react-is@^17.0.1:
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
 react-is@^18.0.0:
-  version "18.1.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.1.0.tgz#61aaed3096d30eacf2a2127118b5b41387d32a67"
-  integrity sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
+  integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
 read-pkg-up@^7.0.1:
   version "7.0.1"
