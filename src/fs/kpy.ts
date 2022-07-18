@@ -2,9 +2,9 @@ import * as path from 'path'
 import { _since } from '@naturalcycles/js-lib'
 import * as cpFile from 'cp-file'
 import * as fs from 'fs-extra'
-import * as globby from 'globby'
 import * as moveFile from 'move-file'
 import { boldWhite, dimGrey, grey, yellow } from '../colors'
+import { fastGlob } from '../index'
 
 /**
  * Everything defaults to `undefined`.
@@ -50,7 +50,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 
   kpyPrepare(opt)
 
-  const filenames = await globby(opt.inputPatterns!, {
+  const filenames = await fastGlob(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })
@@ -87,7 +87,7 @@ export function kpySync(opt: KpyOptions): void {
 
   kpyPrepare(opt)
 
-  const filenames = globby.sync(opt.inputPatterns!, {
+  const filenames = fastGlob.sync(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })

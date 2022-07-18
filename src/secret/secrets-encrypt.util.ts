@@ -1,8 +1,8 @@
 import * as path from 'path'
 import { _assert } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
-import globby = require('globby')
 import { dimGrey, yellow } from '../colors'
+import { fastGlob } from '../index'
 import { encryptObject, encryptRandomIVBuffer } from '../security/crypto.util'
 
 export interface EncryptCLIOptions {
@@ -30,7 +30,7 @@ export function secretsEncrypt(
         ...pattern,
         `!**/*.enc`, // excluding already encoded
       ]
-  const filenames = globby.sync(patterns)
+  const filenames = fastGlob.sync(patterns)
   let encFilename
 
   filenames.forEach(filename => {

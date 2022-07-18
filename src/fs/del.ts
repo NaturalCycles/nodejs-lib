@@ -1,7 +1,7 @@
 import { pFilter, pMap, _since } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
-import * as globby from 'globby'
 import { dimGrey, yellow } from '../colors'
+import { fastGlob } from '../index'
 
 export interface DelOptions {
   /**
@@ -58,9 +58,9 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 
   // 1. glob only files, expand dirs, delete
 
-  const filenames = await globby(patterns, {
+  const filenames = await fastGlob(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true,
     onlyFiles: true,
   })
 
@@ -73,9 +73,9 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   await pMap(filenames, filepath => fs.remove(filepath), { concurrency })
 
   // 2. glob only dirs, expand, delete only empty!
-  let dirnames = await globby(patterns, {
+  let dirnames = await fastGlob(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true,
     onlyDirectories: true,
   })
 
