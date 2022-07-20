@@ -4,7 +4,7 @@ import * as cpFile from 'cp-file'
 import * as fs from 'fs-extra'
 import * as moveFile from 'move-file'
 import { boldWhite, dimGrey, grey, yellow } from '../colors'
-import { fastGlob } from '../index'
+import { globby } from '../index'
 
 /**
  * Everything defaults to `undefined`.
@@ -50,7 +50,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 
   kpyPrepare(opt)
 
-  const filenames = await fastGlob(opt.inputPatterns!, {
+  const filenames = await globby(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })
@@ -87,7 +87,7 @@ export function kpySync(opt: KpyOptions): void {
 
   kpyPrepare(opt)
 
-  const filenames = fastGlob.sync(opt.inputPatterns!, {
+  const filenames = globby.sync(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })

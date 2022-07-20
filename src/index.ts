@@ -1,6 +1,8 @@
 import Ajv from 'ajv'
 import * as fastGlob from 'fast-glob'
 import { Options as FastGlobOptions } from 'fast-glob'
+import * as globby from 'globby'
+import { GlobbyOptions } from 'globby'
 import { RequestError, TimeoutError } from 'got'
 import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import { AnySchema, ValidationErrorItem } from 'joi'
@@ -113,6 +115,7 @@ import {
 import { runScript, RunScriptOptions } from './script'
 
 export type {
+  GlobbyOptions,
   FastGlobOptions,
   RunScriptOptions,
   JoiValidationErrorData,
@@ -162,6 +165,7 @@ export type {
 }
 
 export {
+  globby,
   fastGlob,
   JoiValidationError,
   validate,
