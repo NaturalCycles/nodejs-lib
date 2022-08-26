@@ -1,5 +1,6 @@
 import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
-import { JsonSchema, jsonSchema, _try, localTime } from '@naturalcycles/js-lib'
+import type { JsonSchema } from '@naturalcycles/js-lib'
+import { jsonSchema, _try, localTime } from '@naturalcycles/js-lib'
 import { inspectAny } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -298,7 +299,8 @@ test('types', () => {
   })
 
   // Type of ajvSchema must be AjvSchema<Item> (not AjvSchema<any> !)
-  const ajvSchema = AjvSchema.create(rawSchema)
+  // todo: make it work without explicit <Item>
+  const ajvSchema = AjvSchema.create<Item>(rawSchema)
 
   // Let's assert it by using
 

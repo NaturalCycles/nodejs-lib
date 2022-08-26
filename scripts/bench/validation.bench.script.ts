@@ -46,13 +46,15 @@ const joiSchema = objectSchema<Item>({
 //   additionalProperties: false,
 // }
 
-const jsonSchema2 = jsonSchema.object<Item>({
-  s: jsonSchema.string(),
-  n1: jsonSchema.number(),
-  n2: jsonSchema.number().optional(),
-  b1: jsonSchema.boolean().optional(),
-  a: jsonSchema.array(jsonSchema.number()),
-})
+const jsonSchema2 = jsonSchema
+  .object<Item>({
+    s: jsonSchema.string(),
+    n1: jsonSchema.number(),
+    n2: jsonSchema.number().optional(),
+    b1: jsonSchema.boolean().optional(),
+    a: jsonSchema.array(jsonSchema.number()),
+  })
+  .build()
 
 const ajvSchema = AjvSchema.create(jsonSchema2)
 
