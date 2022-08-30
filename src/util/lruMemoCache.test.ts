@@ -16,7 +16,7 @@ class A {
 
 test('memoCache a', () => {
   const a = new A()
-  a.func = jest.fn()
+  jest.spyOn(a, 'func').mockImplementation()
 
   // first call
   let r = a.a(2, 3)

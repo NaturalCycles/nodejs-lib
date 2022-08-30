@@ -2,7 +2,7 @@ import { stringId, stringIdAsync, stringIdUnsafe } from '../index'
 
 test('stringId', () => {
   const id = stringId()
-  expect(id).not.toBeUndefined()
+  expect(id).toBeDefined()
   expect(id.length).toBe(16)
   expect(id.toLowerCase()).toBe(id)
 
@@ -11,7 +11,7 @@ test('stringId', () => {
 
 test('stringIdUnsafe', () => {
   const id = stringIdUnsafe()
-  expect(id).not.toBeUndefined()
+  expect(id).toBeDefined()
   expect(id.length).toBe(16)
   expect(id.toLowerCase()).toBe(id)
 
@@ -20,7 +20,7 @@ test('stringIdUnsafe', () => {
 
 test('stringIdAsync', async () => {
   const id = await stringIdAsync()
-  expect(id).not.toBeUndefined()
+  expect(id).toBeDefined()
   expect(id.length).toBe(16)
   expect(id.toLowerCase()).toBe(id)
 
