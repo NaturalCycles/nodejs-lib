@@ -6,6 +6,7 @@ yarn tsn bench/validation.bench
 
 import { runBench } from '@naturalcycles/bench-lib'
 import { jsonSchema, _range } from '@naturalcycles/js-lib'
+import { z } from 'zod'
 import {
   AjvSchema,
   arraySchema,
@@ -58,6 +59,14 @@ const jsonSchema2 = jsonSchema
 
 const ajvSchema = AjvSchema.create(jsonSchema2)
 
+const zodSchema = z.object({
+  s: z.string(),
+  n1: z.number(),
+  n2: z.number().optional(),
+  b1: z.boolean().optional(),
+  a: z.array(z.number()),
+})
+
 const items = _range(1000).map(id => ({
   s: `id${id}`,
   n1: id,
@@ -69,14 +78,21 @@ const items = _range(1000).map(id => ({
 runScript(async () => {
   await runBench({
     fns: {
-      joi: async done => {
+      joi: done => {
         items.forEach(item => {
           validate(item, joiSchema)
         })
 
         done.resolve()
       },
-      ajv: async done => {
+      zod: done => {
+        items.forEach(item => {
+          zodSchema.parse(item)
+        })
+
+        done.resolve()
+      },
+      ajv: done => {
         items.forEach(item => {
           ajvSchema.validate(item)
         })
