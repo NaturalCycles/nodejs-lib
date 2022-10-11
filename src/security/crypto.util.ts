@@ -26,8 +26,8 @@ export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: string): B
   const key = md5(Buffer.from(secretKeyBase64, 'base64'))
 
   // iv is first 16 bytes of encrypted buffer, the rest is payload
-  const iv = input.slice(0, 16)
-  const payload = input.slice(16)
+  const iv = input.subarray(0, 16)
+  const payload = input.subarray(16)
 
   const decipher = crypto.createDecipheriv(algorithm, key, iv)
 
