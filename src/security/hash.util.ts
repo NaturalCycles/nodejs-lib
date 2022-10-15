@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as crypto from 'node:crypto'
 
 export function md5(s: string | Buffer): string {
   return hash(s, 'md5')

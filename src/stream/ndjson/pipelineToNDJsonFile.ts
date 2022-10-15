@@ -1,4 +1,4 @@
-import { createGzip, ZlibOptions } from 'zlib'
+import { createGzip, ZlibOptions } from 'node:zlib'
 import { AppError } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { transformTap, _pipeline } from '../..'

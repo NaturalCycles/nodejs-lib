@@ -1,4 +1,4 @@
-import { Transform } from 'stream'
+import { Transform } from 'node:stream'
 import { AbortableAsyncMapper, SKIP } from '@naturalcycles/js-lib'
 import { ReadableTyped } from '../stream.model'
 

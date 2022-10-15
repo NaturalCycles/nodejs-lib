@@ -1,6 +1,6 @@
-import { promisify } from 'util'
-import { ZlibOptions } from 'zlib'
-import * as zlib from 'zlib'
+import { promisify } from 'node:util'
+import { ZlibOptions } from 'node:zlib'
+import * as zlib from 'node:zlib'
 
 const deflate = promisify(zlib.deflate.bind(zlib))
 const inflate = promisify(zlib.inflate.bind(zlib))

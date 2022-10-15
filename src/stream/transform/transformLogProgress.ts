@@ -1,5 +1,5 @@
-import { Transform } from 'stream'
-import { inspect, InspectOptions } from 'util'
+import { Transform } from 'node:stream'
+import { inspect, InspectOptions } from 'node:util'
 import {
   SimpleMovingAverage,
   _mb,

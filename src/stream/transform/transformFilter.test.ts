@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { transformFilter, _pipelineToArray } from '../../index'
 import { transformFilterSync } from './transformFilter'

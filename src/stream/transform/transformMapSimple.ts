@@ -1,4 +1,4 @@
-import { Transform } from 'stream'
+import { Transform } from 'node:stream'
 import { CommonLogger, ErrorMode, Mapper } from '@naturalcycles/js-lib'
 import { TransformTyped } from '../stream.model'
 

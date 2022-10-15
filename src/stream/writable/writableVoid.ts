@@ -1,4 +1,4 @@
-import { Writable } from 'stream'
+import { Writable } from 'node:stream'
 import { DeferredPromise } from '@naturalcycles/js-lib'
 import { TransformOptions } from '../stream.model'
 

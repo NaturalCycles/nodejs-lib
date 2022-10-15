@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { writablePushToArray, _pipeline } from '../..'
 import { transformBuffer } from './transformBuffer'

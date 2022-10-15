@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 import { JsonSchema } from '@naturalcycles/js-lib'
 import { fastGlob } from '../..'
 import type { FastGlobOptions } from '../..'

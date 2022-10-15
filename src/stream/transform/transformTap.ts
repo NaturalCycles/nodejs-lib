@@ -1,4 +1,4 @@
-import { Transform } from 'stream'
+import { Transform } from 'node:stream'
 import { AsyncMapper, CommonLogger } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
 

@@ -1,4 +1,4 @@
-import * as tty from 'tty'
+import * as tty from 'node:tty'
 
 /**
  * Based on: https://github.com/sindresorhus/yoctocolors/pull/5

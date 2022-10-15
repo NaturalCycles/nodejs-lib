@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
 import { readableFromArray, _pipeline, _pipelineToArray, transformMap } from '../../index'
 

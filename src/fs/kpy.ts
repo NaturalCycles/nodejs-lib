@@ -1,4 +1,4 @@
-import * as path from 'path'
+import * as path from 'node:path'
 import { _since } from '@naturalcycles/js-lib'
 import * as cpFile from 'cp-file'
 import * as fs from 'fs-extra'

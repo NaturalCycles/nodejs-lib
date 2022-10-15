@@ -4,7 +4,7 @@ yarn tsn bench/transformMap.bench
 
  */
 
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { runBench } from '@naturalcycles/bench-lib'
 import { _range } from '@naturalcycles/js-lib'
 import { transformMap, writableForEach, _pipeline } from '../../src'

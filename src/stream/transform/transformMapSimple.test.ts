@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
 import { _pipeline } from '../pipeline/pipeline'
 import { writableVoid } from '../writable/writableVoid'

@@ -1,4 +1,4 @@
-import { Transform } from 'stream'
+import { Transform } from 'node:stream'
 import { AsyncPredicate, Predicate } from '@naturalcycles/js-lib'
 import { TransformOptions, TransformTyped } from '../stream.model'
 import { transformMap, TransformMapOptions } from './transformMap'

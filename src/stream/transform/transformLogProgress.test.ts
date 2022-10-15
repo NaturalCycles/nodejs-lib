@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { AsyncSequence, END, pDelay } from '@naturalcycles/js-lib'
 import { _pipeline, writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'

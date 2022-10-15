@@ -1,4 +1,4 @@
-import { pipeline, Readable, Transform, Writable } from 'stream'
+import { pipeline, Readable, Transform, Writable } from 'node:stream'
 import { _last, AnyFunction, DeferredPromise, pDefer } from '@naturalcycles/js-lib'
 import { writablePushToArray } from '../../index'
 

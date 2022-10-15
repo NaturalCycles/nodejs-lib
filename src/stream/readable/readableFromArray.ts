@@ -1,4 +1,4 @@
-import { Readable, ReadableOptions } from 'stream'
+import { Readable, ReadableOptions } from 'node:stream'
 import { _passthroughMapper, AbortableAsyncMapper } from '@naturalcycles/js-lib'
 import { ReadableTyped } from '../stream.model'
 

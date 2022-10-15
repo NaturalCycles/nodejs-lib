@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as crypto from 'node:crypto'
 import { _stringMapEntries, StringMap } from '@naturalcycles/js-lib'
 import { md5 } from './hash.util'
 

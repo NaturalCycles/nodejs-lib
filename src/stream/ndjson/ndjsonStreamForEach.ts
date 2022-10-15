@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import { createUnzip } from 'zlib'
+import * as fs from 'node:fs'
+import { createUnzip } from 'node:zlib'
 import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
   requireFileToExist,

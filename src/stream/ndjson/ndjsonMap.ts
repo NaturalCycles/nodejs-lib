@@ -1,5 +1,5 @@
-import { createReadStream, createWriteStream } from 'fs'
-import { createGzip, createUnzip } from 'zlib'
+import { createReadStream, createWriteStream } from 'node:fs'
+import { createGzip, createUnzip } from 'node:zlib'
 import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
   requireFileToExist,

@@ -1,4 +1,4 @@
-import { Readable, Transform, Writable } from 'stream'
+import { Readable, Transform, Writable } from 'node:stream'
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 export interface ReadableTyped<T> extends Readable {}

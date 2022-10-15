@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { CommonLogger } from '@naturalcycles/js-lib'
 import { AbortableTransform, transformNoOp } from '../../index'
 import { TransformOptions, TransformTyped } from '../stream.model'

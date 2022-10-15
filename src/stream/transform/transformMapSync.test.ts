@@ -1,4 +1,4 @@
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
 import { writableVoid, _pipeline } from '../..'
 import { transformMapSync } from './transformMapSync'

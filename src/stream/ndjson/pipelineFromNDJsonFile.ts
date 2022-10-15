@@ -1,4 +1,4 @@
-import { createUnzip, ZlibOptions } from 'zlib'
+import { createUnzip, ZlibOptions } from 'node:zlib'
 import { _hb } from '@naturalcycles/js-lib'
 import * as fs from 'fs-extra'
 import { transformTap, _pipeline, transformSplit } from '../..'

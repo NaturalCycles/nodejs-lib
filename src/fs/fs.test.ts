@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as fsp from 'fs/promises'
+import * as fs from 'node:fs'
+import * as fsp from 'node:fs/promises'
 import * as fse from 'fs-extra'
 import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
 import { json2env, kpy, kpySync } from './index'
