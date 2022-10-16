@@ -33,7 +33,6 @@
     "joi": "17.4.2",
     "lru-cache": "^7.4.0",
     "move-file": "^2.0.0",
-    "nanoid": "^3.0.0",
     "through2-concurrent": "^2.0.0",
     "yargs": "^17.0.0"
   },

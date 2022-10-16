@@ -47,6 +47,14 @@ export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
  */
 export const idSchema = stringSchema.regex(/^[a-zA-Z0-9_]{6,64}$/)
 
+export const idBase62Schema = stringSchema.regex(/^[a-zA-Z0-9]{8,64}$/)
+export const idBase64Schema = stringSchema.regex(/^[a-zA-Z0-9+/]{8,64}$/)
+export const idBase64UrlSchema = stringSchema.regex(/^[a-zA-Z0-9-_]{8,64}$/)
+
+export const base62Schema = stringSchema.regex(/^[a-zA-Z0-9]+$/)
+export const base64Schema = stringSchema.regex(/^[a-zA-Z0-9+/]+$/)
+export const base64UrlSchema = stringSchema.regex(/^[a-zA-Z0-9-_]+$/)
+
 /**
  * `_` should NOT be allowed to be able to use slug-ids as part of natural ids with `_` separator.
  */
@@ -55,7 +63,7 @@ export const SLUG_PATTERN = /^[a-z0-9-]*$/
 /**
  * "Slug" - a valid URL, filename, etc.
  */
-export const slugSchema = stringSchema.regex(/^[a-z0-9-]{1,255}$/)
+export const slugSchema = stringSchema.regex(/^[a-z0-9-_]{1,255}$/)
 
 const TS_2500 = 16725225600 // 2500-01-01
 const TS_2000 = 946684800 // 2000-01-01
