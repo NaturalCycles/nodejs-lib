@@ -1,5 +1,5 @@
 import * as crypto from 'node:crypto'
-import { _stringMapEntries, StringMap } from '@naturalcycles/js-lib'
+import { _stringMapEntries, Base64String, StringMap } from '@naturalcycles/js-lib'
 import { md5 } from './hash.util'
 
 const algorithm = 'aes-256-cbc'
@@ -7,7 +7,7 @@ const algorithm = 'aes-256-cbc'
 /**
  * Using aes-256-cbc
  */
-export function encryptRandomIVBuffer(input: Buffer, secretKeyBase64: string): Buffer {
+export function encryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64String): Buffer {
   // md5 to match aes-256 key length of 32 bytes
   const key = md5(Buffer.from(secretKeyBase64, 'base64'))
 
@@ -21,7 +21,7 @@ export function encryptRandomIVBuffer(input: Buffer, secretKeyBase64: string): B
 /**
  * Using aes-256-cbc
  */
-export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: string): Buffer {
+export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64String): Buffer {
   // md5 to match aes-256 key length of 32 bytes
   const key = md5(Buffer.from(secretKeyBase64, 'base64'))
 
@@ -38,7 +38,7 @@ export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: string): B
  * Decrypts all object values.
  * Returns object with decrypted values.
  */
-export function decryptObject(obj: StringMap, secretKey: string): StringMap {
+export function decryptObject(obj: StringMap<Base64String>, secretKey: string): StringMap {
   const { key, iv } = getCryptoParams(secretKey)
 
   const r: StringMap = {}
@@ -49,7 +49,7 @@ export function decryptObject(obj: StringMap, secretKey: string): StringMap {
   return r
 }
 
-export function encryptObject(obj: StringMap, secretKey: string): StringMap {
+export function encryptObject(obj: StringMap, secretKey: string): StringMap<Base64String> {
   const { key, iv } = getCryptoParams(secretKey)
 
   const r: StringMap = {}
@@ -63,7 +63,7 @@ export function encryptObject(obj: StringMap, secretKey: string): StringMap {
 /**
  * Using aes-256-cbc
  */
-export function decryptString(str: string, secretKey: string): string {
+export function decryptString(str: Base64String, secretKey: string): string {
   const { key, iv } = getCryptoParams(secretKey)
   const decipher = crypto.createDecipheriv(algorithm, key, iv)
   return decipher.update(str, 'base64', 'utf8') + decipher.final('utf8')
@@ -72,7 +72,7 @@ export function decryptString(str: string, secretKey: string): string {
 /**
  * Using aes-256-cbc
  */
-export function encryptString(str: string, secretKey: string): string {
+export function encryptString(str: string, secretKey: string): Base64String {
   const { key, iv } = getCryptoParams(secretKey)
   const cipher = crypto.createCipheriv(algorithm, key, iv)
   return cipher.update(str, 'utf8', 'base64') + cipher.final('base64')

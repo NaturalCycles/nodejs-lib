@@ -1,5 +1,5 @@
 import * as fs from 'node:fs'
-import { _assert, StringMap } from '@naturalcycles/js-lib'
+import { _assert, Base64String, StringMap } from '@naturalcycles/js-lib'
 import { base64ToString } from '..'
 import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 
@@ -53,7 +53,7 @@ export function removeSecretsFromEnv(): void {
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export function loadSecretsFromEncryptedJsonFile(
   filePath: string,
-  secretEncryptionKey?: string,
+  secretEncryptionKey?: Base64String,
 ): void {
   _assert(
     fs.existsSync(filePath),
@@ -86,7 +86,7 @@ export function loadSecretsFromEncryptedJsonFile(
  */
 export function loadSecretsFromEncryptedJsonFileValues(
   filePath: string,
-  secretEncryptionKey?: string,
+  secretEncryptionKey?: Base64String,
 ): void {
   _assert(
     fs.existsSync(filePath),
