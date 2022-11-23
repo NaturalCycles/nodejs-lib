@@ -50,12 +50,13 @@ export const base64UrlSchema = stringSchema.regex(BASE64URL_REGEX)
 export const JWT_REGEX = /^[\w-]+\.[\w-]+\.[\w-]+$/
 export const jwtSchema = stringSchema.regex(JWT_REGEX)
 
+export const ID_REGEX = /^[a-zA-Z0-9_]{6,64}$/
 // 1g498efj5sder3324zer
 /**
  * [a-zA-Z0-9_]*
  * 6-64 length
  */
-export const idSchema = stringSchema.regex(/^[a-zA-Z0-9_]{6,64}$/)
+export const idSchema = stringSchema.regex(ID_REGEX)
 
 export const idBase62Schema = base62Schema.min(8).max(64)
 export const idBase64Schema = base64Schema.min(8).max(64)
