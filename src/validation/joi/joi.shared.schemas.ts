@@ -42,7 +42,7 @@ export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
 
 export const BASE62_REGEX = /^[a-zA-Z0-9]+$/
 export const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/
-export const BASE64URL_REGEX = /^[\w-/]+$/
+export const BASE64URL_REGEX = /^[\w-|/]+$/
 export const base62Schema = stringSchema.regex(BASE62_REGEX)
 export const base64Schema = stringSchema.regex(BASE64_REGEX)
 export const base64UrlSchema = stringSchema.regex(BASE64URL_REGEX)
@@ -55,7 +55,7 @@ export const jwtSchema = stringSchema.regex(JWT_REGEX)
  * [a-zA-Z0-9_]*
  * 6-64 length
  */
-export const idSchema = stringSchema.regex(/^[a-zA-Z0-9_]{6,64}$/)
+export const idSchema = stringSchema.regex(/^[a-zA-Z0-9_|]{6,64}$/)
 
 export const idBase62Schema = base62Schema.min(8).max(64)
 export const idBase64Schema = base64Schema.min(8).max(64)
