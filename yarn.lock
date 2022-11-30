@@ -1500,9 +1500,9 @@
     typescript "^4.0.2"
 
 "@naturalcycles/dev-lib@^13.0.0":
-  version "13.11.4"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-13.11.4.tgz#7ca350a79ab36676105f2832231ad2e92f4b9aae"
-  integrity sha512-peVJZggkA/IL795SblOCuPeL00DpqCM9DZzrq3i7qRxzn+2z7zFg4wTwuBUlQ7Q7XwfT+Gu+Io4H6FVyUA1phw==
+  version "13.12.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-13.12.0.tgz#4cd8369c7708fac54be266e87f596332a1672065"
+  integrity sha512-T+KDHafCFZzVe+gxKYJVPhwBf70BPXGoiYbINTDIULFVXlP7EWlzUQ4Ew6DEClOdQ6DtfkGgOM1hbLo/3mDKtQ==
   dependencies:
     "@commitlint/cli" "^17.0.0"
     "@commitlint/config-conventional" "^17.0.0"
@@ -1526,7 +1526,7 @@
     eslint-plugin-vue "^9.0.0"
     execa "^5.0.0"
     expect-type "^0.15.0"
-    fs-extra "^10.0.0"
+    fs-extra "^11.0.0"
     husky "^8.0.1"
     jest-junit "^15.0.0"
     lint-staged "^13.0.0"
@@ -1548,9 +1548,9 @@
     tslib "^2.0.0"
 
 "@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.8.0":
-  version "12.80.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.80.1.tgz#60af74264757cdcb40e4cc12f9e452f34dd619b1"
-  integrity sha512-jv3vZld6nX34cVhbqOiV2SN5XWeichO0DjBRZ7tl1I6natqMuX45m5H6fcU5R6jvnhy2heZJdwd/Qa8+nYK/Xg==
+  version "12.80.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.80.2.tgz#41909225b735392f8e7994f4ee0dc0cb69de543e"
+  integrity sha512-vo2Pd8w4yGH4kjQ4y9cyNYZpN0HWG4CxMVO+PtYMa5CHWXM/PjVJnKu42wBAWR6LM7RJdfmeiGZMLNBQTWLSIQ==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@types/through2-concurrent" "^2.0.0"
@@ -1565,7 +1565,7 @@
     dotenv "^16.0.0"
     execa "^5.0.0"
     fast-glob "^3.2.11"
-    fs-extra "^10.0.0"
+    fs-extra "^11.0.0"
     globby "^11.0.0"
     got "^11.0.1"
     joi "17.4.2"
@@ -3618,9 +3618,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001400:
-  version "1.0.30001434"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001434.tgz#ec1ec1cfb0a93a34a0600d37903853030520a4e5"
-  integrity sha512-aOBHrLmTQw//WFa2rcF1If9fa3ypkC1wzqqiKHgfdrXTWcU8C4gKVZT77eQAPWN1APys3+uQ0Df07rKauXGEYA==
+  version "1.0.30001435"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001435.tgz#502c93dbd2f493bee73a408fe98e98fb1dad10b2"
+  integrity sha512-kdCkUTjR+v4YAJelyiDTqiu82BDr4W4CP5sgTA0ZBmqn30XfS2ZghPLMowik9TPhS+psWJiUNxsqLyurDbmutA==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -6027,9 +6027,9 @@ fs-extra@^10.0.0:
     universalify "^2.0.0"
 
 fs-extra@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.0.0.tgz#5c50cf225ab1b16804cabd4249b7e58feb4bdbe7"
-  integrity sha512-4YxRvMi4P5C3WQTvdRfrv5UVqbISpqjORFQAW5QPiKAauaxNCwrEdIi6pG3tDFhKKpMen+enEhHIzB/tvIO+/w==
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.0.tgz#5784b102104433bb0e090f48bfc4a30742c357ed"
+  integrity sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
