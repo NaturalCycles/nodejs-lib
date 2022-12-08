@@ -1,11 +1,11 @@
 // Types based on @types/debug
 export interface IDebug {
   (namespace: string): IDebugger
-  coerce: (val: any) => any
-  disable: () => string
-  enable: (namespaces: string) => void
-  enabled: (namespaces: string) => boolean
-  log: (...args: any[]) => any
+  coerce(val: any): any
+  disable(): string
+  enable(namespaces: string): void
+  enabled(namespaces: string): boolean
+  log(...args: any[]): any
 
   names: RegExp[]
   skips: RegExp[]
@@ -23,9 +23,9 @@ export interface IDebugger {
 
   color: string
   enabled: boolean
-  log: (...args: any[]) => any
+  log(...args: any[]): any
   namespace: string
-  destroy: () => boolean
+  destroy(): boolean
   // extend: (namespace: string, delimiter?: string) => IDebugger
 }
 

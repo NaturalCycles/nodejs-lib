@@ -100,7 +100,7 @@ export interface TransformLogProgressOptions<IN = any> extends TransformOptions 
    *
    * chunk is undefined for "final" stats, otherwise is defined.
    */
-  extra?: (chunk: IN | undefined, index: number) => AnyObject
+  extra?(chunk: IN | undefined, index: number): AnyObject
 
   /**
    * If specified - will multiply the counter by this number.

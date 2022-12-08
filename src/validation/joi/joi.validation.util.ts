@@ -139,7 +139,7 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
   const objectId = _isObject(value) ? (value['id'] as string) : undefined
 
   if (objectId || objectName) {
-    objectName = objectName || value?.constructor?.name
+    objectName ||= value?.constructor?.name
 
     tokens.push('Invalid ' + [objectName, objectId].filter(Boolean).join('.'))
   }
