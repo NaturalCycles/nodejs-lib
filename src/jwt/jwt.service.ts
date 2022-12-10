@@ -1,0 +1,143 @@
+import {
+  _assert,
+  _errorDataAppend,
+  _typeCast,
+  AnyObject,
+  ErrorData,
+  JWTString,
+} from '@naturalcycles/js-lib'
+import type { Algorithm, VerifyOptions, JwtHeader, SignOptions } from 'jsonwebtoken'
+import * as jsonwebtoken from 'jsonwebtoken'
+import { AnySchemaTyped } from '../validation/joi/joi.model'
+import { anyObjectSchema } from '../validation/joi/joi.shared.schemas'
+import { validate } from '../validation/joi/joi.validation.util'
+export { jsonwebtoken }
+export type { Algorithm, VerifyOptions, SignOptions, JwtHeader }
+
+export interface JWTServiceCfg {
+  /**
+   * Public key is required to Verify incoming tokens.
+   * Optional if you only want to Decode or Sign.
+   */
+  publicKey?: string | Buffer
+  /**
+   * Private key is required to Sign (create) outgoing tokens.
+   * Optional if you only want to Decode or Verify.
+   */
+  privateKey?: string | Buffer
+
+  /**
+   * Recommended: ES256
+   */
+  algorithm: Algorithm
+
+  /**
+   * If provided - will be applied to every Sign operation.
+   */
+  signOptions?: SignOptions
+
+  /**
+   * If provided - will be applied to every Sign operation.
+   */
+  verifyOptions?: VerifyOptions
+
+  /**
+   * If set - errors thrown from this service will be extended
+   * with this errorData (in err.data)
+   */
+  errorData?: ErrorData
+}
+
+// todo: define JWTError and list possible options
+
+/**
+ * Wraps popular `jsonwebtoken` library.
+ * You should create one instance of JWTService for each pair of private/public key.
+ *
+ * Generate key pair like this:
+ * openssl ecparam -name secp256k1 -genkey -noout -out key.pem
+ * openssl ec -in key.pem -pubout > key.pub.pem
+ */
+export class JWTService {
+  constructor(public cfg: JWTServiceCfg) {}
+
+  sign<T extends AnyObject>(
+    payload: T,
+    schema?: AnySchemaTyped<T>,
+    opt: SignOptions = {},
+  ): JWTString {
+    _assert(
+      this.cfg.privateKey,
+      'JWTService: privateKey is required to be able to verify, but not provided',
+    )
+
+    if (schema) {
+      validate(payload, schema)
+    }
+
+    return jsonwebtoken.sign(payload, this.cfg.privateKey, {
+      algorithm: this.cfg.algorithm,
+      noTimestamp: true,
+      ...this.cfg.signOptions,
+      ...opt,
+    })
+  }
+
+  verify<T extends AnyObject>(
+    token: JWTString,
+    schema?: AnySchemaTyped<T>,
+    opt: VerifyOptions = {},
+  ): T {
+    _assert(
+      this.cfg.publicKey,
+      'JWTService: publicKey is required to be able to verify, but not provided',
+    )
+
+    try {
+      const data = jsonwebtoken.verify(token, this.cfg.publicKey, {
+        algorithms: [this.cfg.algorithm],
+        ...this.cfg.verifyOptions,
+        ...opt,
+      }) as T
+
+      if (schema) {
+        validate(data, schema)
+      }
+
+      return data
+    } catch (err) {
+      if (this.cfg.errorData) {
+        _typeCast<Error>(err)
+        _errorDataAppend(err, {
+          ...this.cfg.errorData,
+        })
+      }
+      throw err
+    }
+  }
+
+  decode<T extends AnyObject>(
+    token: JWTString,
+    schema?: AnySchemaTyped<T>,
+  ): {
+    header: JwtHeader
+    payload: T
+    signature: string
+  } {
+    const data = jsonwebtoken.decode(token, {
+      complete: true,
+    }) as {
+      header: JwtHeader
+      payload: T
+      signature: string
+    } | null
+
+    _assert(data, 'invalid token, decoded value is null', {
+      ...this.cfg.errorData,
+    })
+
+    validate(data.payload, schema || anyObjectSchema)
+
+    return data
+  }
+}
