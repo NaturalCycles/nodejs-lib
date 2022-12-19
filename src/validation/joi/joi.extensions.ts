@@ -5,9 +5,9 @@ import { ExtendedStringSchema, stringExtensions } from './string.extensions'
 
 export interface ExtendedJoi extends JoiLib.Root {
   // eslint-disable-next-line id-blacklist
-  string(): ExtendedStringSchema
+  string: () => ExtendedStringSchema
   // eslint-disable-next-line id-blacklist
-  number(): ExtendedNumberSchema
+  number: () => ExtendedNumberSchema
 }
 
 /**

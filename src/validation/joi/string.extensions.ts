@@ -4,7 +4,7 @@ import * as Joi from 'joi'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedStringSchema extends StringSchema, AnySchemaTyped<string> {
-  dateString(min?: string, max?: string): this
+  dateString: (min?: string, max?: string) => this
 }
 
 export interface JoiDateStringOptions {

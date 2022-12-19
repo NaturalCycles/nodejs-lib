@@ -3,7 +3,7 @@ import { Extension, NumberSchema } from 'joi'
 import { AnySchemaTyped } from './joi.model'
 
 export interface ExtendedNumberSchema extends NumberSchema, AnySchemaTyped<number> {
-  dividable(q: number): this
+  dividable: (q: number) => this
 }
 
 export function numberExtensions(joi: typeof Joi): Extension {
