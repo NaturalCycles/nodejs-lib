@@ -55,7 +55,7 @@ export interface JWTServiceCfg {
  * You should create one instance of JWTService for each pair of private/public key.
  *
  * Generate key pair like this:
- * openssl ecparam -name secp256k1 -genkey -noout -out key.pem
+ * openssl ecparam -name prime256v1 -genkey -noout -out key.pem
  * openssl ec -in key.pem -pubout > key.pub.pem
  */
 export class JWTService {
