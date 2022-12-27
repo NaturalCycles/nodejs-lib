@@ -28,6 +28,8 @@ export interface JWTServiceCfg {
 
   /**
    * Recommended: ES256
+   * Keys (private/public) should be generated using proper settings
+   * that fit the used Algorithm.
    */
   algorithm: Algorithm
 
@@ -54,7 +56,10 @@ export interface JWTServiceCfg {
  * Wraps popular `jsonwebtoken` library.
  * You should create one instance of JWTService for each pair of private/public key.
  *
- * Generate key pair like this:
+ * Generate key pair like this.
+ * Please note that parameters should be different for different algorithms.
+ * For ES256 (default algo in JWTService) key should have `prime256v1` parameter:
+ *
  * openssl ecparam -name prime256v1 -genkey -noout -out key.pem
  * openssl ec -in key.pem -pubout > key.pub.pem
  */
@@ -87,6 +92,7 @@ export class JWTService {
     token: JWTString,
     schema?: AnySchemaTyped<T>,
     opt: VerifyOptions = {},
+    publicKey?: string, // allows to override public key
   ): T {
     _assert(
       this.cfg.publicKey,
@@ -94,7 +100,7 @@ export class JWTService {
     )
 
     try {
-      const data = jsonwebtoken.verify(token, this.cfg.publicKey, {
+      const data = jsonwebtoken.verify(token, publicKey || this.cfg.publicKey, {
         algorithms: [this.cfg.algorithm],
         ...this.cfg.verifyOptions,
         ...opt,
