@@ -1,6 +1,7 @@
 import { testValidation } from '../../test/validation.test.util'
 import {
   binarySchema,
+  dateObjectSchema,
   emailSchema,
   idSchema,
   oneOfSchema,
@@ -82,4 +83,9 @@ test.each([
   `a`.repeat(129),
 ])('invalid idSchema: %s', s => {
   expect(isValid(s, idSchema)).toBe(false)
+})
+
+test('other schemas', () => {
+  validate(new Date(), dateObjectSchema)
+  expect(isValid('2022-01-01', dateObjectSchema)).toBe(false)
 })

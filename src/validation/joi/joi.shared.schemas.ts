@@ -17,6 +17,7 @@ export const integerSchema = Joi.number().integer()
 export const percentageSchema = Joi.number().integer().min(0).max(100)
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
+export const dateObjectSchema = Joi.object().instance(Date)
 
 export const urlSchema = (scheme: string | string[] = 'https'): StringSchemaTyped =>
   Joi.string().uri({ scheme })
