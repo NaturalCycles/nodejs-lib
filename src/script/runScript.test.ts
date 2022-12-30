@@ -1,4 +1,5 @@
-import { pDelay } from '@naturalcycles/js-lib'
+import { _stringifyAny, pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
+import { inspectAnyStringifyFn } from '../string/inspectAny'
 import { runScript } from '.'
 
 const detectLeaks = process.argv.some(a => a.includes('detectLeaks'))
@@ -24,4 +25,17 @@ test('runScript', async () => {
   expect(processExit).toHaveBeenCalledTimes(1)
   expect(processExit).toHaveBeenCalledWith(1)
   expect(consoleError).toHaveBeenCalledTimes(1)
+})
+
+test('setGlobalStringifyFunction', () => {
+  jest.spyOn(process, 'exit').mockImplementation()
+
+  setGlobalStringifyFunction(inspectAnyStringifyFn)
+
+  expect(
+    _stringifyAny({
+      hello: 'world',
+      a: { b: 'c' },
+    }),
+  ).toMatchInlineSnapshot(`"{ hello: 'world', a: { b: 'c' } }"`)
 })

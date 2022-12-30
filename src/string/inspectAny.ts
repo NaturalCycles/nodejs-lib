@@ -11,7 +11,7 @@ const INSPECT_OPT: InspectOptions = {
 /**
  * Just a convenience export of a const that fulfills the JsonStringifyFunction interface.
  */
-export const inspectAnyStringifyFn: JsonStringifyFunction = obj => inspectAny(obj)
+export const inspectAnyStringifyFn: JsonStringifyFunction = obj => inspect(obj, INSPECT_OPT)
 
 /**
  * Transforms ANY to human-readable string (via util.inspect mainly).
