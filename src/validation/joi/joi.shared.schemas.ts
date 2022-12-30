@@ -82,7 +82,7 @@ export const unixTimestampSchema = numberSchema.integer().min(0).max(TS_2500)
 /**
  * Between years 2000 and 2050
  */
-export const unixTimestamp2000Schema = numberSchema.integer().min(0).min(TS_2000).max(TS_2500)
+export const unixTimestamp2000Schema = numberSchema.integer().min(TS_2000).max(TS_2500)
 /**
  * Between years 1970 and 2050
  */
