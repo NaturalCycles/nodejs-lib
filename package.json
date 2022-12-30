@@ -49,8 +49,7 @@
     "prettier": "^2.0.0",
     "vue-class-component": "^7.2.6",
     "vuepress": "^1.7.1",
-    "vuepress-plugin-typescript": "^0.3.1",
-    "zod": "^3.19.1"
+    "vuepress-plugin-typescript": "^0.3.1"
   },
   "bin": {
     "del": "dist/bin/del.js",
