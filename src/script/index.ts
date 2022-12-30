@@ -1,4 +1,6 @@
+import { setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import type { CommonLogger } from '@naturalcycles/js-lib'
+import { inspectAnyStringifyFn } from '../string/inspectAny'
 
 export interface RunScriptOptions {
   /**
@@ -35,6 +37,8 @@ const { DEBUG_RUN_SCRIPT } = process.env
  * Set env DEBUG_RUN_SCRIPT for extra debugging.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
+  setGlobalStringifyFunction(inspectAnyStringifyFn)
+
   const { logger = console, noExit } = opt
 
   process.on('uncaughtException', err => {

@@ -5,8 +5,7 @@ yarn tsn bench/validation.bench
  */
 
 import { runBench } from '@naturalcycles/bench-lib'
-import { jsonSchema, _range } from '@naturalcycles/js-lib'
-import { z } from 'zod'
+import { jsonSchema, _range, z } from '@naturalcycles/js-lib'
 import {
   AjvSchema,
   arraySchema,
@@ -16,7 +15,7 @@ import {
   stringSchema,
   validate,
 } from '../../src'
-import { runScript } from '../../src/script'
+import { runScript } from '../../src'
 
 interface Item {
   s: string
@@ -67,7 +66,7 @@ const zodSchema = z.object({
   a: z.array(z.number()),
 })
 
-const items = _range(1000).map(id => ({
+const items = _range(1).map(id => ({
   s: `id${id}`,
   n1: id,
   n2: 1,
