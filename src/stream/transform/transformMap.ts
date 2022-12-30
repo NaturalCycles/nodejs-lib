@@ -1,7 +1,6 @@
 import {
   _anyToError,
   AbortableAsyncMapper,
-  AggregatedError,
   AsyncPredicate,
   CommonLogger,
   END,
@@ -104,7 +103,12 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (collectedErrors.length) {
           // emit Aggregated error
-          cb(new AggregatedError(collectedErrors))
+          cb(
+            new AggregateError(
+              collectedErrors,
+              `transformMap resulted in ${collectedErrors.length} error(s)`,
+            ),
+          )
         } else {
           // emit no error
           cb()

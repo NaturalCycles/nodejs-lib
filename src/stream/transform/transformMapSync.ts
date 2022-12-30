@@ -1,6 +1,5 @@
 import {
   _anyToError,
-  AggregatedError,
   CommonLogger,
   END,
   ErrorMode,
@@ -141,7 +140,12 @@ export function transformMapSync<IN = any, OUT = IN>(
 
       if (collectedErrors.length) {
         // emit Aggregated error
-        cb(new AggregatedError(collectedErrors))
+        cb(
+          new AggregateError(
+            collectedErrors,
+            `transformMapSync resulted in ${collectedErrors.length} error(s)`,
+          ),
+        )
       } else {
         // emit no error
         cb()

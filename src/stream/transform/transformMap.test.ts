@@ -1,5 +1,11 @@
 import { Readable } from 'node:stream'
-import { AggregatedError, AsyncMapper, ErrorMode, _range } from '@naturalcycles/js-lib'
+import {
+  AsyncMapper,
+  ErrorMode,
+  _range,
+  pExpectedError,
+  _stringifyAny,
+} from '@naturalcycles/js-lib'
 import { readableFromArray, _pipeline, _pipelineToArray, transformMap } from '../../index'
 
 interface Item {
@@ -91,13 +97,19 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   const readable = readableFromArray(data)
   const data2: Item[] = []
 
-  await expect(
+  const err = await pExpectedError(
     _pipeline([
       readable,
       transformMap(mapperError3, { errorMode: ErrorMode.THROW_AGGREGATED }),
       transformMap<Item, void>(r => void data2.push(r)),
     ]),
-  ).rejects.toThrow(AggregatedError)
+    AggregateError,
+  )
+  expect(_stringifyAny(err)).toMatchInlineSnapshot(`
+    "AggregateError: transformMap resulted in 1 error(s)
+    1 error(s):
+    1. Error: my error"
+  `)
 
   expect(data2).toEqual(data.filter(r => r.id !== '3'))
 
