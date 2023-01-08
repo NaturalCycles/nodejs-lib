@@ -10,7 +10,7 @@ import { runScript } from '../src/script'
 
 const s = 'Hello World! 1 2 3 4 5ms'
 
-const colors: typeof Color[] = [
+const colors: (typeof Color)[] = [
   'white',
   'grey',
   'yellow',
@@ -20,7 +20,7 @@ const colors: typeof Color[] = [
   'magenta',
   'cyan',
 ]
-const modifiers: typeof Modifiers[] = ['dim', null as any, 'bold', 'inverse']
+const modifiers: (typeof Modifiers)[] = ['dim', null as any, 'bold', 'inverse']
 
 runScript(async () => {
   colors.forEach(color => {
