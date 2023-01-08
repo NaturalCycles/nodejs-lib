@@ -17,6 +17,8 @@ import { GetGotOptions, GotRequestContext } from './got.model'
  * 2. Hooks that log start/end of request (optional, false by default).
  * 3. Reasonable defaults(tm), e.g non-infinite Timeout
  * 4. Preserves error stack traces (!) (experimental!)
+ *
+ * @deprecated `getGot` (together with `getKy`) is deprecated in favor of `getFetcher` of js-lib
  */
 export function getGot(opt: GetGotOptions = {}): Got {
   opt.logger ||= console
