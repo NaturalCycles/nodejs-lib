@@ -27,7 +27,6 @@ const DEFAULTS: SlackMessage = {
 
 const INSPECT_OPT: InspectAnyOptions = {
   colors: false,
-  includeErrorData: true,
   includeErrorStack: true,
 }
 
