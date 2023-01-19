@@ -4,7 +4,9 @@ process.env = {
   B: 'BBB',
   SECRET_A: 'VALUE A',
   SECRET_B: 'VALUE B',
-  SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',
+  SECRET_J: {
+    hello: 'secret world',
+  } as any,
 }
 
 import {
@@ -35,7 +37,9 @@ test('secret', async () => {
   expect(getSecretMap()).toMatchObject({
     SECRET_A: 'VALUE A',
     SECRET_B: 'VALUE B',
-    SECRET_J: 'eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9',
+    SECRET_J: {
+      hello: 'secret world',
+    },
   })
 
   expect(secretOptional('N')).toBeUndefined()
@@ -44,8 +48,7 @@ test('secret', async () => {
   expect(secret('secret_a')).toBe('VALUE A')
   expect(secret('seCrEt_a')).toBe('VALUE A')
   expect(secret('SECRET_B')).toBe('VALUE B')
-  expect(secret('SECRET_J')).toBe('eyJoZWxsbyI6InNlY3JldCB3b3JsZCJ9')
-  expect(secret('SECRET_J', true)).toEqual({
+  expect(secret('SECRET_J')).toEqual({
     hello: 'secret world',
   })
 

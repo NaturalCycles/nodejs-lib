@@ -1,6 +1,5 @@
 import * as fs from 'node:fs'
 import { _assert, Base64String, StringMap } from '@naturalcycles/js-lib'
-import { base64ToString } from '..'
 import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 
 let loaded = false
@@ -50,7 +49,6 @@ export function removeSecretsFromEnv(): void {
  * Whole file is encrypted.
  * For "json-values encrypted" style - use `loadSecretsFromEncryptedJsonFileValues`
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export function loadSecretsFromEncryptedJsonFile(
   filePath: string,
   secretEncryptionKey?: Base64String,
@@ -109,11 +107,8 @@ export function loadSecretsFromEncryptedJsonFileValues(
   )
 }
 
-/**
- * json secrets are always base64'd
- */
-export function secret<T = string>(k: string, json = false): T {
-  const v = secretOptional(k, json)
+export function secret<T = string>(k: string): T {
+  const v = secretOptional(k)
   if (!v) {
     throw new Error(`secret(${k.toUpperCase()}) not found!`)
   }
@@ -121,10 +116,9 @@ export function secret<T = string>(k: string, json = false): T {
   return v as any
 }
 
-export function secretOptional<T = string>(k: string, json = false): T | undefined {
+export function secretOptional<T = string>(k: string): T | undefined {
   requireLoaded()
-  const v = secretMap[k.toUpperCase()]
-  return v && json ? JSON.parse(base64ToString(v)) : v
+  return secretMap[k.toUpperCase()] as T | undefined
 }
 
 export function getSecretMap(): StringMap {
