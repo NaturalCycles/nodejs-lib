@@ -1,5 +1,5 @@
 import * as fs from 'node:fs'
-import { _assert, Base64String, StringMap } from '@naturalcycles/js-lib'
+import { _assert, _jsonParseIfPossible, Base64String, StringMap } from '@naturalcycles/js-lib'
 import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 
 let loaded = false
@@ -107,8 +107,8 @@ export function loadSecretsFromEncryptedJsonFileValues(
   )
 }
 
-export function secret<T = string>(k: string): T {
-  const v = secretOptional(k)
+export function secret<T = string>(k: string, parseJson = false): T {
+  const v = secretOptional(k, parseJson)
   if (!v) {
     throw new Error(`secret(${k.toUpperCase()}) not found!`)
   }
@@ -116,9 +116,16 @@ export function secret<T = string>(k: string): T {
   return v as any
 }
 
-export function secretOptional<T = string>(k: string): T | undefined {
+export function secretOptional<T = string>(k: string, parseJson = false): T | undefined {
   requireLoaded()
-  return secretMap[k.toUpperCase()] as T | undefined
+  let v = secretMap[k.toUpperCase()]
+  if (!v) return
+
+  if (parseJson) {
+    v = _jsonParseIfPossible(v)
+  }
+
+  return v as T
 }
 
 export function getSecretMap(): StringMap {

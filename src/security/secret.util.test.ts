@@ -48,7 +48,8 @@ test('secret', async () => {
   expect(secret('secret_a')).toBe('VALUE A')
   expect(secret('seCrEt_a')).toBe('VALUE A')
   expect(secret('SECRET_B')).toBe('VALUE B')
-  expect(secret('SECRET_J')).toEqual({
+  expect(secret('SECRET_B', true)).toBe('VALUE B')
+  expect(secret('SECRET_J', true)).toEqual({
     hello: 'secret world',
   })
 
