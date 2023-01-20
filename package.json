@@ -78,7 +78,7 @@
     "url": "https://github.com/NaturalCycles/nodejs-lib"
   },
   "engines": {
-    "node": ">=16.10.0"
+    "node": ">=18.12.0"
   },
   "description": "Standard library for Node.js",
   "author": "Natural Cycles Team",
