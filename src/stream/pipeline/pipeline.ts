@@ -1,4 +1,5 @@
-import { pipeline, Readable, Transform, Writable } from 'node:stream'
+import { Readable, Transform, Writable } from 'node:stream'
+import { pipeline } from 'node:stream/promises'
 import { _last, AnyFunction, DeferredPromise, pDefer } from '@naturalcycles/js-lib'
 import { writablePushToArray } from '../../index'
 
@@ -74,20 +75,16 @@ export async function _pipeline(streams: AnyStream[], opt: PipelineOptions = {})
     })
   }
 
-  return new Promise<void>((resolve, reject) => {
-    pipeline(first, ...(rest as any[]), (err: Error) => {
-      if (err) {
-        if (opt.allowClose && (err as any)?.code === 'ERR_STREAM_PREMATURE_CLOSE') {
-          console.log('_pipeline closed (as expected)')
-          return resolve()
-        }
-        // console.log(`_pipeline error`, err)
-        return reject(err)
-      }
-
-      resolve()
-    })
-  })
+  try {
+    return await pipeline(first, ...(rest as any[]))
+  } catch (err) {
+    if (opt.allowClose && (err as any)?.code === 'ERR_STREAM_PREMATURE_CLOSE') {
+      console.log('_pipeline closed (as expected)')
+      return
+    }
+    // console.log(`_pipeline error`, err)
+    throw err
+  }
 }
 
 /**
