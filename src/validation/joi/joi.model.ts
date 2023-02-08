@@ -42,3 +42,11 @@ export interface ObjectSchemaTyped<IN, OUT = IN>
   extends ObjectSchema<IN>,
     AnySchemaTyped<IN, OUT> {}
 export interface StringSchemaTyped extends StringSchema, AnySchemaTyped<string> {}
+
+/**
+ * This type is useful to allow "joi schema merging".
+ * Because by default Joi doesn't allow normal merging.
+ * E.g `joiSchema.concat` doesn't play well when some property exists
+ * in both left and right side.
+ */
+export type JoiSchemaObject<T> = Partial<Record<keyof T, any>>
