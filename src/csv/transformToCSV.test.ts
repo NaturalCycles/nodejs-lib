@@ -3,6 +3,7 @@ import { _range } from '@naturalcycles/js-lib'
 import { _pipeline } from '../stream/pipeline/pipeline'
 import { writablePushToArray } from '../stream/writable/writablePushToArray'
 import { csvStringParse } from './csvReader'
+import { arrayToCSVString } from './csvWriter'
 import { transformToCSV } from './transformToCSV'
 
 interface Item {
@@ -50,6 +51,32 @@ test('transformToCSV', async () => {
     id9,k 9,"""yo 9""",9,false
     id10,k 10,"""yo 10""",,true
     "
+  `)
+})
+
+test('arrayToCSVString', () => {
+  expect(arrayToCSVString(items)).toMatchInlineSnapshot(`
+    "id,k,k2,k3,b,n
+    id1,k 1,"""yo 1""","hey,
+    1",false,1
+    id2,k 2,"""yo 2""","hey,
+    2",true,
+    id3,k 3,"""yo 3""","hey,
+    3",false,3
+    id4,k 4,"""yo 4""","hey,
+    4",true,
+    id5,k 5,"""yo 5""","hey,
+    5",false,5
+    id6,k 6,"""yo 6""","hey,
+    6",true,
+    id7,k 7,"""yo 7""","hey,
+    7",false,7
+    id8,k 8,"""yo 8""","hey,
+    8",true,
+    id9,k 9,"""yo 9""","hey,
+    9",false,9
+    id10,k 10,"""yo 10""","hey,
+    10",true,"
   `)
 })
 

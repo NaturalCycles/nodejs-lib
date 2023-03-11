@@ -16,7 +16,12 @@ export interface TransformToCSVOptions extends CSVWriterConfig {
  * Transforms objects (objectMode=true) into chunks \n-terminated CSV strings (readableObjectMode=false).
  */
 export function transformToCSV<IN extends AnyObject = any>(
-  opt: TransformToCSVOptions,
+  opt: TransformToCSVOptions & {
+    /**
+     * Columns are required, as they cannot be detected on the fly.
+     */
+    columns: string[]
+  },
 ): TransformTyped<IN, string> {
   const { strict = true } = opt
   const writer = new CSVWriter(opt)

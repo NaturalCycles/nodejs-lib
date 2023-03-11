@@ -1,6 +1,6 @@
 // Inspired by: https://github.com/ryu1kn/csv-writer/
 
-import { AnyObject } from '@naturalcycles/js-lib'
+import { _assert, AnyObject } from '@naturalcycles/js-lib'
 
 export interface CSVWriterConfig {
   /**
@@ -11,7 +11,7 @@ export interface CSVWriterConfig {
   /**
    * Array of columns
    */
-  columns: string[]
+  columns?: string[]
 
   /**
    * Default: true
@@ -28,21 +28,26 @@ export class CSVWriter {
     }
   }
 
-  public cfg: Required<CSVWriterConfig>
+  public cfg: CSVWriterConfig & { delimiter: string }
 
   writeRows(rows: AnyObject[]): string {
     let s = ''
     if (this.cfg.includeHeader) {
+      // Detect columns based on content, if not defined upfront
+      this.cfg.columns ||= arrayToCSVColumns(rows)
+
       s += this.writeHeader() + '\n'
     }
     return s + rows.map(row => this.writeRow(row)).join('\n')
   }
 
   writeHeader(): string {
+    _assert(this.cfg.columns, 'CSVWriter cannot writeHeader, because columns were not provided')
     return this.cfg.columns.map(col => this.quoteIfNeeded(col)).join(this.cfg.delimiter)
   }
 
   writeRow(row: AnyObject): string {
+    _assert(this.cfg.columns, 'CSVWriter cannot writeRow, because columns were not provided')
     return this.cfg.columns
       .map(col => this.quoteIfNeeded(String(row[col] ?? '')))
       .join(this.cfg.delimiter)
@@ -57,11 +62,20 @@ export class CSVWriter {
   }
 
   private shouldQuote(s: string): boolean {
-    return s.includes(this.cfg.delimiter) || s.includes('\r') || s.includes('\n') || s.includes('"')
+    return s.includes(this.cfg.delimiter) || s.includes('"') || s.includes('\n') || s.includes('\r')
   }
 }
 
-export function arrayToCSVString(arr: AnyObject[], cfg: CSVWriterConfig): string {
+export function arrayToCSVString(arr: AnyObject[], cfg: CSVWriterConfig = {}): string {
   const writer = new CSVWriter(cfg)
   return writer.writeRows(arr)
+}
+
+/**
+ * Iterates over the whole array and notes all possible columns.
+ */
+export function arrayToCSVColumns(arr: AnyObject[]): string[] {
+  const cols = new Set<string>()
+  arr.forEach(row => Object.keys(row).forEach(col => cols.add(col)))
+  return [...cols]
 }
