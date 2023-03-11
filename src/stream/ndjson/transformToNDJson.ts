@@ -21,11 +21,6 @@ export interface TransformToNDJsonOptions {
    * @default `\n`
    */
   separator?: string
-
-  /**
-   * @experimental
-   */
-  useFlatstr?: boolean
 }
 
 /**
@@ -34,7 +29,7 @@ export interface TransformToNDJsonOptions {
 export function transformToNDJson<IN = any>(
   opt: TransformToNDJsonOptions = {},
 ): TransformTyped<IN, string> {
-  const { strict = true, separator = '\n', sortObjects = false, useFlatstr = false } = opt
+  const { strict = true, separator = '\n', sortObjects = false } = opt
 
   return new Transform({
     writableObjectMode: true,
@@ -45,11 +40,7 @@ export function transformToNDJson<IN = any>(
           chunk = _sortObjectDeep(chunk as any)
         }
 
-        if (useFlatstr) {
-          cb(null, flatstr(JSON.stringify(chunk) + separator))
-        } else {
-          cb(null, JSON.stringify(chunk) + separator)
-        }
+        cb(null, JSON.stringify(chunk) + separator)
       } catch (err) {
         console.error(err)
 
@@ -61,13 +52,4 @@ export function transformToNDJson<IN = any>(
       }
     },
   })
-}
-
-/**
- * Based on: https://github.com/davidmarkclements/flatstr/blob/master/index.js
- */
-function flatstr(s: any): string {
-  // eslint-disable-next-line
-  s | 0
-  return s
 }
