@@ -2,7 +2,7 @@
 
 exports[`backend error 1`] = `
 [HTTPError: 400 GET http://a.com/backendErr?q=1
-JoiValidationError(400): [
+JoiValidationError: [
   {
     "id": 0
   },
