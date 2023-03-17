@@ -88,6 +88,18 @@ test('arrayToCSVString', () => {
     id10,k 10,"""yo 10""","hey,
     10",true,"
   `)
+
+  // Columns should be detected even when includeHeader == false
+  expect(
+    arrayToCSVString(items.slice(0, 2), {
+      includeHeader: false,
+    }),
+  ).toMatchInlineSnapshot(`
+    "id1,k 1,"""yo 1""","hey,
+    1",false,1
+    id2,k 2,"""yo 2""","hey,
+    2",true,"
+  `)
 })
 
 test('csvStringParse', () => {

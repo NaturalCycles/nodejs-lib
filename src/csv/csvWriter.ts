@@ -32,10 +32,11 @@ export class CSVWriter {
 
   writeRows(rows: AnyObject[]): string {
     let s = ''
-    if (this.cfg.includeHeader && rows.length) {
-      // Detect columns based on content, if not defined upfront
-      this.cfg.columns ||= arrayToCSVColumns(rows)
 
+    // Detect columns based on content, if not defined upfront
+    this.cfg.columns ||= arrayToCSVColumns(rows)
+
+    if (this.cfg.includeHeader && rows.length) {
       s += this.writeHeader() + '\n'
     }
     return s + rows.map(row => this.writeRow(row)).join('\n')
