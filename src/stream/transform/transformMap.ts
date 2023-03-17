@@ -75,7 +75,7 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
 export function transformMap<IN = any, OUT = IN>(
-  mapper: AbortableAsyncMapper<IN, OUT>,
+  mapper: AbortableAsyncMapper<IN, OUT | typeof SKIP | typeof END>,
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {

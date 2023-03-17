@@ -61,7 +61,7 @@ export class TransformMapSync extends AbortableTransform {}
  * Supposedly faster, for cases when async is not needed.
  */
 export function transformMapSync<IN = any, OUT = IN>(
-  mapper: Mapper<IN, OUT>,
+  mapper: Mapper<IN, OUT | typeof SKIP | typeof END>,
   opt: TransformMapSyncOptions = {},
 ): TransformTyped<IN, OUT> {
   let index = -1
