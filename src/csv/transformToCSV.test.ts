@@ -55,6 +55,16 @@ test('transformToCSV', async () => {
 })
 
 test('arrayToCSVString', () => {
+  // Headers should not be printed on empty rows input
+  expect(arrayToCSVString([])).toBe('')
+
+  // No headers even if columns where provided
+  expect(
+    arrayToCSVString([], {
+      columns: ['a', 'b'],
+    }),
+  ).toBe('')
+
   expect(arrayToCSVString(items)).toMatchInlineSnapshot(`
     "id,k,k2,k3,b,n
     id1,k 1,"""yo 1""","hey,

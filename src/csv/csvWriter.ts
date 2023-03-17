@@ -32,7 +32,7 @@ export class CSVWriter {
 
   writeRows(rows: AnyObject[]): string {
     let s = ''
-    if (this.cfg.includeHeader) {
+    if (this.cfg.includeHeader && rows.length) {
       // Detect columns based on content, if not defined upfront
       this.cfg.columns ||= arrayToCSVColumns(rows)
 
