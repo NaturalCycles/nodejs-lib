@@ -33,7 +33,7 @@
     "got": "^11.0.1",
     "joi": "17.4.2",
     "jsonwebtoken": "^9.0.0",
-    "lru-cache": "^7.4.0",
+    "lru-cache": "^8.0.4",
     "move-file": "^2.0.0",
     "through2-concurrent": "^2.0.0",
     "yargs": "^17.0.0"
