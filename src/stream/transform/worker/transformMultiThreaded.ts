@@ -4,8 +4,6 @@ import through2Concurrent = require('through2-concurrent')
 import { TransformTyped } from '../../stream.model'
 import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 
-/* eslint-disable unicorn/require-post-message-target-origin */
-
 export interface TransformMultiThreadedOptions {
   /**
    * Absolute path to a js file with worker code

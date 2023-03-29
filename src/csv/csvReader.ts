@@ -59,7 +59,7 @@ export function csvStringToArray(str: string): string[][] {
   const objPattern = new RegExp('(,|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^,\\r\\n]*))', 'gi')
   let matches = null
   const arr: any[][] = [[]]
-  // eslint-disable-next-line no-cond-assign
+
   while ((matches = objPattern.exec(str))) {
     if (matches[1]!.length && matches[1] !== ',') {
       arr.push([])
