@@ -1,5 +1,5 @@
 import { MemoCache } from '@naturalcycles/js-lib'
-import LRUCache from 'lru-cache'
+import { LRUCache } from 'lru-cache'
 
 // Partial, to be able to provide default `max`
 export type LRUMemoCacheOptions<KEY, VALUE> = Partial<LRUCache.Options<KEY, VALUE, any>>
