@@ -65,7 +65,7 @@ export function csvStringToArray(str: string): string[][] {
       arr.push([])
     }
     arr[arr.length - 1]!.push(
-      matches[2] ? matches[2].replace(new RegExp('""', 'g'), '"') : matches[3],
+      matches[2] ? matches[2].replaceAll(new RegExp('""', 'g'), '"') : matches[3],
     )
   }
   return arr

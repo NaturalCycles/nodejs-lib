@@ -59,7 +59,7 @@ export class CSVWriter {
   }
 
   private quote(s: string): string {
-    return `"${s.replace(/"/g, '""')}"`
+    return `"${s.replaceAll('"', '""')}"`
   }
 
   private shouldQuote(s: string): boolean {
