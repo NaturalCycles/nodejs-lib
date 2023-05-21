@@ -1,6 +1,8 @@
 import { testDir } from '../test/paths.cnst'
 import {
+  _ensureDir,
   _ensureDirSync,
+  _ensureFile,
   _ensureFileSync,
   _pathExists,
   _pathExistsSync,
@@ -37,5 +39,7 @@ test('readFile', async () => {
   expect(await _pathExists(testDir)).toBe(true)
 
   _ensureDirSync(testDir)
+  await _ensureDir(testDir)
   _ensureFileSync(someFilePath)
+  await _ensureFile(someFilePath)
 })

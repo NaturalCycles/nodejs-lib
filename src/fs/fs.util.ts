@@ -130,7 +130,28 @@ export function _ensureDirSync(dirPath: string): void {
   })
 }
 
-// Skipping `_ensureFile` (async), until it's needed
+export async function _ensureFile(filePath: string): Promise<void> {
+  let stats
+  try {
+    stats = await fsp.stat(filePath)
+  } catch {}
+  if (stats?.isFile()) return
+
+  const dir = path.dirname(filePath)
+  try {
+    if (!(await fsp.stat(dir)).isDirectory()) {
+      // parent is not a directory
+      // This is just to cause an internal ENOTDIR error to be thrown
+      await fsp.readdir(dir)
+    }
+  } catch (err) {
+    // If the stat call above failed because the directory doesn't exist, create it
+    if ((err as any)?.code === 'ENOENT') return await _ensureDir(dir)
+    throw err
+  }
+
+  await fsp.writeFile(filePath, '')
+}
 
 export function _ensureFileSync(filePath: string): void {
   let stats
