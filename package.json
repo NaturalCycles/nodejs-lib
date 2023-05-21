@@ -23,7 +23,6 @@
     "ajv-merge-patch": "^5.0.1",
     "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
-    "cp-file": "^9.0.0",
     "debug": "^4.1.1",
     "dotenv": "^16.0.0",
     "execa": "^5.0.0",
@@ -34,7 +33,6 @@
     "joi": "17.4.2",
     "jsonwebtoken": "^9.0.0",
     "lru-cache": "^9.0.2",
-    "move-file": "^2.0.0",
     "through2-concurrent": "^2.0.0",
     "yargs": "^17.0.0"
   },

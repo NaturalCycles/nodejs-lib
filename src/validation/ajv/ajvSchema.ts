@@ -1,4 +1,3 @@
-import * as fs from 'node:fs'
 import {
   JsonSchema,
   JsonSchemaAnyBuilder,
@@ -9,7 +8,7 @@ import {
   CommonLogger,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
-import { inspectAny, requireFileToExist } from '../../index'
+import { _readJsonFileSync, inspectAny, requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
 
@@ -132,7 +131,7 @@ export class AjvSchema<T = unknown> {
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
     requireFileToExist(filePath)
-    const schema = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    const schema = _readJsonFileSync<JsonSchema<T>>(filePath)
     return new AjvSchema<T>(schema, cfg)
   }
 

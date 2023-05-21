@@ -1,6 +1,5 @@
-import * as fs from 'node:fs'
 import { JsonSchema } from '@naturalcycles/js-lib'
-import { fastGlob } from '../..'
+import { _readJsonFileSync, fastGlob } from '../..'
 import type { FastGlobOptions } from '../..'
 import { AjvSchema, AjvSchemaCfg } from './ajvSchema'
 
@@ -13,7 +12,7 @@ import { AjvSchema, AjvSchemaCfg } from './ajvSchema'
  * @experimental
  */
 export function readJsonSchemas(patterns: string | string[], opt?: FastGlobOptions): JsonSchema[] {
-  return fastGlob.sync(patterns, opt).map(fileName => JSON.parse(fs.readFileSync(fileName, 'utf8')))
+  return fastGlob.sync(patterns, opt).map(fileName => _readJsonFileSync(fileName))
 }
 
 /**

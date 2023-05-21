@@ -1,12 +1,12 @@
-import * as fs from 'node:fs'
 import { _omit } from '@naturalcycles/js-lib'
+import { _readFileSync } from '../fs/fs.util'
 import { testDir } from '../test/paths.cnst'
 import { numberSchema, objectSchema, stringSchema } from '../validation/joi/joi.shared.schemas'
 import { JWTService } from './jwt.service'
 
 const jwtService = new JWTService({
-  privateKey: fs.readFileSync(`${testDir}/demoPrivateKey.pem`, 'utf8'),
-  publicKey: fs.readFileSync(`${testDir}/demoPrivateKey.pem`, 'utf8'),
+  privateKey: _readFileSync(`${testDir}/demoPrivateKey.pem`),
+  publicKey: _readFileSync(`${testDir}/demoPrivateKey.pem`),
   algorithm: 'ES256',
 })
 

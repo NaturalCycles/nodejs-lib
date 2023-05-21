@@ -76,6 +76,7 @@ export * from './validation/joi/joi.validation.error'
 export * from './validation/joi/joi.validation.util'
 export * from './script'
 export * from './jwt/jwt.service'
+export * from './fs/fs.util'
 
 export type {
   GlobbyOptions,
