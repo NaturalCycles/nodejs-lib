@@ -37,15 +37,25 @@ export function _readFileSync(filePath: string): string {
   return fs.readFileSync(filePath, 'utf8')
 }
 
-export async function _readJsonFile<T = unknown>(filePath: string): Promise<T> {
+export async function _readJson<T = unknown>(filePath: string): Promise<T> {
   const str = await fsp.readFile(filePath, 'utf8')
   return _jsonParse(str)
 }
 
-export function _readJsonFileSync<T = unknown>(filePath: string): T {
+/**
+ * @deprecated use _readJson
+ */
+export const _readJsonFile = _readJson
+
+export function _readJsonSync<T = unknown>(filePath: string): T {
   const str = fs.readFileSync(filePath, 'utf8')
   return _jsonParse(str)
 }
+
+/**
+ * @deprecated use _readJsonSync
+ */
+export const _readJsonFileSync = _readJsonSync
 
 export async function _writeFile(filePath: string, data: string | Buffer): Promise<void> {
   await fsp.writeFile(filePath, data)
@@ -73,33 +83,45 @@ export function _outputFileSync(filePath: string, data: string | Buffer): void {
   fs.writeFileSync(filePath, data)
 }
 
-export async function _writeJsonFile(
-  filePath: string,
-  data: any,
-  opt?: JsonOptions,
-): Promise<void> {
+export async function _writeJson(filePath: string, data: any, opt?: JsonOptions): Promise<void> {
   const str = JSON.stringify(data, null, opt?.spaces)
   await fsp.writeFile(filePath, str)
 }
 
-export function _writeJsonFileSync(filePath: string, data: any, opt?: JsonOptions): void {
+/**
+ * @deprecated use _writeJson
+ */
+export const _writeJsonFile = _writeJson
+
+export function _writeJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
   const str = JSON.stringify(data, null, opt?.spaces)
   fs.writeFileSync(filePath, str)
 }
 
-export async function _outputJsonFile(
-  filePath: string,
-  data: any,
-  opt?: JsonOptions,
-): Promise<void> {
+/**
+ * @deprecated use _writeJsonSync
+ */
+export const _writeJsonFileSync = _writeJsonSync
+
+export async function _outputJson(filePath: string, data: any, opt?: JsonOptions): Promise<void> {
   const str = JSON.stringify(data, null, opt?.spaces)
   await _outputFile(filePath, str)
 }
 
-export function _outputJsonFileSync(filePath: string, data: any, opt?: JsonOptions): void {
+/**
+ * @deprecated use _outputJson
+ */
+export const _outputJsonFile = _outputJson
+
+export function _outputJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
   const str = JSON.stringify(data, null, opt?.spaces)
   _outputFileSync(filePath, str)
 }
+
+/**
+ * @deprecated use _outputJsonSync
+ */
+export const _outputJsonFileSync = _outputJsonSync
 
 export async function _pathExists(filePath: string): Promise<boolean> {
   try {

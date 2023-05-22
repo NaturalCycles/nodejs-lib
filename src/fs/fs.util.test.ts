@@ -8,8 +8,8 @@ import {
   _pathExistsSync,
   _readFile,
   _readFileSync,
-  _readJsonFile,
-  _readJsonFileSync,
+  _readJson,
+  _readJsonSync,
 } from './fs.util'
 
 test('readFile', async () => {
@@ -20,14 +20,14 @@ test('readFile', async () => {
   r = await _readFile(someFilePath)
   expect(r).toContain('aaa')
 
-  let o = _readJsonFileSync(someFilePath)
+  let o = _readJsonSync(someFilePath)
   expect(o).toMatchInlineSnapshot(`
     {
       "a": "aaa",
       "b": "bbb",
     }
   `)
-  o = await _readJsonFile(someFilePath)
+  o = await _readJson(someFilePath)
   expect(o).toMatchInlineSnapshot(`
     {
       "a": "aaa",

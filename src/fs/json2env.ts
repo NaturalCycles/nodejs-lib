@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
 import { dimGrey } from '../colors'
-import { _pathExistsSync, _readJsonFileSync, _writeFileSync } from './fs.util'
+import { _pathExistsSync, _readJsonSync, _writeFileSync } from './fs.util'
 
 export interface Json2EnvOptions {
   jsonPath: string
@@ -60,7 +60,7 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 
   // read file
-  const json = _readJsonFileSync(jsonPath)
+  const json = _readJsonSync(jsonPath)
 
   const exportStr = objectToShellExport(json, prefix)
   const githubStr = objectToGithubActionsEnv(json, prefix)
