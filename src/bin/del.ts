@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { del } from '../fs/del'
+import { delSync } from '../fs/del'
 import { runScript } from '../script'
 
 runScript(async () => {
@@ -23,5 +23,5 @@ runScript(async () => {
     },
   }).argv
 
-  await del({ patterns: patterns as string[], ...opt })
+  delSync({ patterns: patterns as string[], ...opt })
 })

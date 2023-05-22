@@ -71,7 +71,14 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 
   if (dry) return
 
-  await pMap(filenames, filepath => fsp.unlink(filepath), { concurrency })
+  await pMap(
+    filenames,
+    filepath =>
+      fsp.rm(filepath, {
+        force: true,
+      }),
+    { concurrency },
+  )
 
   // 2. glob only dirs, expand, delete only empty!
   let dirnames = await globby(patterns, {
@@ -95,7 +102,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   for await (const dirpath of dirnamesSorted) {
     if (await isEmptyDir(dirpath)) {
       // console.log(`empty dir: ${dirpath}`)
-      await fsp.unlink(dirpath)
+      await fsp.rm(dirpath, { force: true, recursive: true })
       deletedDirs.push(dirpath)
     }
   }
@@ -145,7 +152,7 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
 
   if (dry) return
 
-  filenames.forEach(filepath => fs.unlinkSync(filepath))
+  filenames.forEach(filepath => fs.rmSync(filepath, { force: true }))
 
   // 2. glob only dirs, expand, delete only empty!
   let dirnames = globby.sync(patterns, {
@@ -167,7 +174,7 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
   for (const dirpath of dirnamesSorted) {
     if (isEmptyDirSync(dirpath)) {
       // console.log(`empty dir: ${dirpath}`)
-      fs.unlinkSync(dirpath)
+      fs.rmSync(dirpath, { force: true, recursive: true })
       deletedDirs.push(dirpath)
     }
   }
