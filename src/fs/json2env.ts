@@ -1,5 +1,6 @@
-import * as fs from 'fs-extra'
+import * as fs from 'node:fs'
 import { dimGrey } from '../colors'
+import { _pathExistsSync, _readJsonFileSync, _writeFileSync } from './fs.util'
 
 export interface Json2EnvOptions {
   jsonPath: string
@@ -42,7 +43,7 @@ export function json2env(opt: Json2EnvOptions): void {
     ...opt,
   }
 
-  if (!fs.pathExistsSync(jsonPath)) {
+  if (!_pathExistsSync(jsonPath)) {
     if (fail) {
       throw new Error(`Path doesn't exist: ${jsonPath}`)
     }
@@ -59,7 +60,7 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 
   // read file
-  const json = fs.readJsonSync(jsonPath)
+  const json = _readJsonFileSync(jsonPath)
 
   const exportStr = objectToShellExport(json, prefix)
   const githubStr = objectToGithubActionsEnv(json, prefix)
@@ -70,7 +71,7 @@ export function json2env(opt: Json2EnvOptions): void {
 
   if (saveEnvFile) {
     const shPath = `${jsonPath}.sh`
-    fs.writeFileSync(shPath, exportStr)
+    _writeFileSync(shPath, exportStr)
 
     if (!silent) {
       console.log(`json2env created ${dimGrey(shPath)}:`)

@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14.0.0",
-    "@types/fs-extra": "^11.0.1",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/through2-concurrent": "^2.0.0",
     "ajv": "^8.6.2",
@@ -28,7 +27,6 @@
     "dotenv": "^16.0.0",
     "execa": "^5.0.0",
     "fast-glob": "^3.2.11",
-    "fs-extra": "^11.0.0",
     "globby": "^11.0.0",
     "got": "^11.0.1",
     "joi": "17.4.2",

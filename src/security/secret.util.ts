@@ -122,7 +122,7 @@ export function secretOptional<T = string>(k: string, parseJson = false): T | un
   if (!v) return
 
   if (parseJson) {
-    v = _jsonParseIfPossible(v) as any
+    v = _jsonParseIfPossible(v)
   }
 
   return v as T

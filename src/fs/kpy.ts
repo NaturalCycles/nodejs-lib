@@ -72,9 +72,11 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 
       if (!opt.dry) {
         if (opt.move) {
-          await _movePath(srcFilename, destFilename, { overwrite })
+          await _movePath(srcFilename, destFilename, {
+            force: overwrite,
+          })
         } else {
-          await _copyPath(srcFilename, destFilename, { overwrite })
+          await _copyPath(srcFilename, destFilename, { force: overwrite })
         }
       }
 
@@ -108,9 +110,9 @@ export function kpySync(opt: KpyOptions): void {
 
     if (!opt.dry) {
       if (opt.move) {
-        _movePathSync(srcFilename, destFilename, { overwrite })
+        _movePathSync(srcFilename, destFilename, { force: overwrite })
       } else {
-        _copyPathSync(srcFilename, destFilename, { overwrite })
+        _copyPathSync(srcFilename, destFilename, { force: overwrite })
       }
     }
 

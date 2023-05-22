@@ -18,8 +18,6 @@ import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
 import * as path from 'node:path'
 import { _jsonParse } from '@naturalcycles/js-lib'
-import type { CopyOptions, CopyOptionsSync, MoveOptions } from 'fs-extra'
-import * as fse from 'fs-extra'
 
 export interface JsonOptions {
   spaces?: number
@@ -206,20 +204,32 @@ export function _emptyDirSync(dirPath: string): void {
   items.forEach(item => _removePathSync(path.join(dirPath, item)))
 }
 
-// copyFile/moveFile - let's keep using fs-extra for now
-
-export async function _copyPath(src: string, dest: string, opt?: CopyOptions): Promise<void> {
-  await fse.copy(src, dest, opt)
+/**
+ * Cautious, underlying Node function is currently Experimental.
+ */
+export async function _copyPath(src: string, dest: string, opt?: fs.CopyOptions): Promise<void> {
+  await fsp.cp(src, dest, {
+    recursive: true,
+    ...opt,
+  })
 }
 
-export function _copyPathSync(src: string, dest: string, opt?: CopyOptionsSync): void {
-  fse.copySync(src, dest, opt)
+/**
+ * Cautious, underlying Node function is currently Experimental.
+ */
+export function _copyPathSync(src: string, dest: string, opt?: fs.CopySyncOptions): void {
+  fs.cpSync(src, dest, {
+    recursive: true,
+    ...opt,
+  })
 }
 
-export async function _movePath(src: string, dest: string, opt?: MoveOptions): Promise<void> {
-  await fse.move(src, dest, opt)
+export async function _movePath(src: string, dest: string, opt?: fs.CopyOptions): Promise<void> {
+  await _copyPath(src, dest, opt)
+  await _removePath(src)
 }
 
-export function _movePathSync(src: string, dest: string, opt?: MoveOptions): void {
-  fse.moveSync(src, dest, opt)
+export function _movePathSync(src: string, dest: string, opt?: fs.CopySyncOptions): void {
+  _copyPathSync(src, dest, opt)
+  _removePathSync(src)
 }

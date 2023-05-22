@@ -1,6 +1,6 @@
 import { createUnzip, ZlibOptions } from 'node:zlib'
+import * as fs from 'node:fs'
 import { _hb } from '@naturalcycles/js-lib'
-import * as fs from 'fs-extra'
 import { transformTap, _pipeline, transformSplit } from '../..'
 import { dimWhite, grey } from '../../colors'
 import { NDJsonStats } from './ndjson.model'

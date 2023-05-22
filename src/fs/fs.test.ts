@@ -1,6 +1,5 @@
 import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
-import * as fse from 'fs-extra'
 import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
 import { json2env, kpy, kpySync } from './index'
 
@@ -11,18 +10,20 @@ beforeEach(() => {
   jest.spyOn(fs, 'copyFileSync').mockImplementation()
   jest.spyOn(fs, 'unlinkSync').mockImplementation()
   jest.spyOn(fs, 'renameSync').mockImplementation()
-  jest.spyOn(fse, 'writeFileSync').mockImplementation()
-  jest.spyOn(fse, 'unlinkSync').mockImplementation()
-  jest.spyOn(fse, 'mkdirSync').mockImplementation()
-  jest.spyOn(fse, 'copySync').mockImplementation()
-  jest.spyOn(fse, 'copyFileSync').mockImplementation()
-  jest.spyOn(fse, 'moveSync').mockImplementation()
-  jest.spyOn(fse, 'move').mockImplementation()
-  jest.spyOn(fse, 'unlinkSync').mockImplementation()
+  jest.spyOn(fs, 'writeFileSync').mockImplementation()
+  jest.spyOn(fs, 'unlinkSync').mockImplementation()
+  jest.spyOn(fs, 'rmSync').mockImplementation()
+  jest.spyOn(fs, 'mkdirSync').mockImplementation()
+  // jest.spyOn(fse, 'copySync').mockImplementation()
+  jest.spyOn(fs, 'copyFileSync').mockImplementation()
+  jest.spyOn(fs, 'renameSync').mockImplementation()
+  jest.spyOn(fs, 'rename').mockImplementation()
+  jest.spyOn(fs, 'unlinkSync').mockImplementation()
   jest.spyOn(fsp, 'rename').mockImplementation()
   jest.spyOn(fsp, 'mkdir').mockImplementation()
   jest.spyOn(fsp, 'copyFile').mockImplementation()
   jest.spyOn(fsp, 'unlink').mockImplementation()
+  jest.spyOn(fsp, 'rm').mockImplementation()
 })
 
 const outputDir = `${tmpDir}/debug/kpy`
