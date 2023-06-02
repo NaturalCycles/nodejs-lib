@@ -1,9 +1,11 @@
+import { _stringifyAny } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
   arraySchema,
   booleanDefaultToFalseSchema,
   booleanSchema,
+  emailSchema,
   integerSchema,
   numberSchema,
   objectSchema,
@@ -353,4 +355,31 @@ test('annotation is non-enumerable, but still accessible', () => {
   // But it's still present!
   expect(error!.data.annotation).toMatchInlineSnapshot(`""value" must be a boolean"`)
   expect(!!error!.data.annotation).toBe(true)
+})
+
+test('formatting of email error', () => {
+  const obj = {
+    name1: 'Vasya',
+    name2: 'Pupkeen',
+    email: 'la@gmail.con',
+  }
+
+  const schema = objectSchema({
+    name1: stringSchema,
+    name2: stringSchema,
+    email: emailSchema,
+  })
+
+  const { error } = getValidationResult(obj, schema)
+  expect(_stringifyAny(error)).toMatchInlineSnapshot(`
+    "JoiValidationError: "email" must be a valid email
+
+    {
+      "name1": "Vasya",
+      "name2": "Pupkeen",
+      "email" [1]: "la@gmail.con"
+    }
+
+    [1] "email" must be a valid email"
+  `)
 })

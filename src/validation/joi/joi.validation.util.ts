@@ -146,20 +146,29 @@ function createError(value: any, err: ValidationError, objectName?: string): Joi
 
   const annotation = err.annotate(stripColors)
 
-  if (annotation.length > 4000) {
-    // Annotation message is too big and will be replaced by stringified `error.details` instead
-
-    tokens.push(
-      _truncateMiddle(annotation, 4000, `\n... ${_hb(annotation.length)} message truncated ...\n`),
-    )
+  if (annotation.length > 100) {
+    // For rather large annotations - we include up to 5 errors up front, before printing the whole object.
 
     // Up to 5 `details`
-    tokens.push(...err.details.slice(0, 5).map(i => `${i.message} @ .${i.path.join('.')}`))
+    tokens.push(
+      ...err.details.slice(0, 5).map(i => {
+        return i.message
+        // Currently not specifying the path, to not "overwhelm" the message
+        // Can be reverted if needed.
+        // let msg = i.message
+        // const paths = i.path.filter(Boolean).join('.')
+        // if (paths) msg += ` @ .${paths}`
+        // return msg
+      }),
+    )
 
-    if (err.details.length > 5) tokens.push(`... ${err.details.length} errors`)
-  } else {
-    tokens.push(annotation)
+    if (err.details.length > 5) tokens.push(`... ${err.details.length} errors in total`)
+    tokens.push('')
   }
+
+  tokens.push(
+    _truncateMiddle(annotation, 4000, `\n... ${_hb(annotation.length)} message truncated ...\n`),
+  )
 
   const msg = tokens.join('\n')
 

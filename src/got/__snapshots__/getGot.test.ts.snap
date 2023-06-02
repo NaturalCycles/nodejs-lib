@@ -2,7 +2,9 @@
 
 exports[`backend error 1`] = `
 [HTTPError: 400 GET http://a.com/backendErr?q=1
-JoiValidationError: [
+JoiValidationError: "[99].id" must be less than or equal to 98
+
+[
   {
     "id": 0
   },
