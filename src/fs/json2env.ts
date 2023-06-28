@@ -88,7 +88,7 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 }
 
-function appendBashEnv(exportStr: string): void {
+export function appendBashEnv(exportStr: string): void {
   const { BASH_ENV } = process.env
   if (BASH_ENV) {
     fs.appendFileSync(BASH_ENV, exportStr + '\n')
@@ -97,7 +97,7 @@ function appendBashEnv(exportStr: string): void {
   }
 }
 
-function appendGithubEnv(exportStr: string): void {
+export function appendGithubEnv(exportStr: string): void {
   const { GITHUB_ENV } = process.env
   if (GITHUB_ENV) {
     fs.appendFileSync(GITHUB_ENV, exportStr + '\n')
