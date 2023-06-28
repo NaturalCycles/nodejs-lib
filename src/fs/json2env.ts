@@ -137,15 +137,17 @@ export function objectToShellExport(o: any, prefix = ''): string {
  *
  * will turn into:
  *
- * a=b
- * b=c
+ * a="b"
+ * b="c"
+ *
+ * Quotes are important, otherwise it'll break on e.g space character in the value.
  */
 export function objectToGithubActionsEnv(o: any, prefix = ''): string {
   return Object.keys(o)
     .map(k => {
       const v = o[k]
       if (v) {
-        return `${prefix}${k}=${v}`
+        return `${prefix}${k}="${v}"`
       }
     })
     .filter(Boolean)
