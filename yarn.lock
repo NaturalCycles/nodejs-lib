@@ -1563,9 +1563,9 @@
     typescript "^5.0.2"
 
 "@naturalcycles/dev-lib@^13.0.0":
-  version "13.28.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-13.28.0.tgz#66221171c79c492bd59b748a76263084f26ac11d"
-  integrity sha512-y0vZTYf46xV/B/w3bK/bd5jMeH1EXSIk/K4ahuDaMlQkqiFB39XXc+FReQJ4TCP/tSkPtR9epboej/SGE1dn2g==
+  version "13.28.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-13.28.2.tgz#d75e00da77a84b479586ea1f641ae68ac415816a"
+  integrity sha512-fWQR68j+KHvZvDnME5wOfUxvY4ds0y4qHpnrzMeKpJgKFihoYy4nSIJpuJnWRYCa0BOsogfbY1PPA2LCX4riSQ==
   dependencies:
     "@commitlint/cli" "^17.0.0"
     "@commitlint/config-conventional" "^17.0.0"
@@ -1597,17 +1597,17 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.154.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.154.0.tgz#046630ac6502c268e99229edc6d5a160cd673d09"
-  integrity sha512-YlCWrdbBlqBuKgLEKUIkPgDGziC6YItZb2mW9v7K+wy8p0mz2LBq/4JNBXQakTcUyJvwB44hn375CyAt+U8oEg==
+  version "14.155.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.155.0.tgz#a30c8c0488f246f7ae1914da67ffa018871cd707"
+  integrity sha512-mqFb7wdpReuG1W2mDByHI3ibMF/mfd3XzIxcENYQXuCxKTtfXpIwh179jrUGS8WbUkDCgbUy+JS+1HM6wyAKpg==
   dependencies:
     tslib "^2.0.0"
     zod "^3.20.2"
 
 "@naturalcycles/nodejs-lib@^12.0.0", "@naturalcycles/nodejs-lib@^12.8.0":
-  version "12.94.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.94.1.tgz#1054d4ecb5f1e32b82734f9b5beba3fd061699fd"
-  integrity sha512-wgtWev8L73eOBnhPUGl1EkKztM5jHHQMJOx/Ca0Tn+Jvusal5rKzxNsldB6imr1q+OhBIVTBlYWIypAwrx75mQ==
+  version "12.94.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-12.94.2.tgz#aeaa5b6ebf6855b397c9acd0c9a655a48112d6b4"
+  integrity sha512-Mz80pC7Hq/GTjmzdU+U3hrU7eaMNNkB5bS/n1vEp/4zUuTHZauCXxBYpHpIT/SdjBYCaOT4zhK4YZlS56A6WRA==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@types/jsonwebtoken" "^9.0.0"
@@ -1620,7 +1620,6 @@
     chalk "^4.0.0"
     debug "^4.1.1"
     dotenv "^16.0.0"
-    execa "^5.0.0"
     fast-glob "^3.2.11"
     globby "^11.0.0"
     got "^11.0.1"
