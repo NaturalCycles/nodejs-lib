@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+import { AnyObject } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors'
 import { _pathExistsSync, _readJsonSync, _writeFileSync } from './fs.util'
 
@@ -17,6 +18,8 @@ export interface Json2EnvOptions {
   bashEnv?: boolean
 
   /**
+   * Appends GITHUB_ENV file, also GITHUB_OUTPUT for that step
+   *
    * @default true
    */
   githubEnv?: boolean
@@ -53,24 +56,22 @@ export function json2env(opt: Json2EnvOptions): void {
     }
 
     if (bashEnv) {
-      appendBashEnv('')
+      appendToBashEnv({})
     }
 
     return
   }
 
   // read file
-  const json = _readJsonSync(jsonPath)
-
-  const exportStr = objectToShellExport(json, prefix)
-  const githubStr = objectToGithubActionsEnv(json, prefix)
+  const json: AnyObject = _readJsonSync(jsonPath)
 
   if (debug) {
-    console.log(json, exportStr, githubStr)
+    console.log(json)
   }
 
   if (saveEnvFile) {
     const shPath = `${jsonPath}.sh`
+    const exportStr = objectToShellExport(json, prefix)
     _writeFileSync(shPath, exportStr)
 
     if (!silent) {
@@ -80,29 +81,36 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 
   if (bashEnv) {
-    appendBashEnv(exportStr)
+    appendToBashEnv(json)
   }
 
   if (githubEnv) {
-    appendGithubEnv(githubStr)
+    appendToGithubEnv(json)
+    appendToGithubOutput(json)
   }
 }
 
-export function appendBashEnv(exportStr: string): void {
+export function appendToBashEnv(obj: AnyObject, prefix = ''): void {
   const { BASH_ENV } = process.env
   if (BASH_ENV) {
-    fs.appendFileSync(BASH_ENV, exportStr + '\n')
-
+    fs.appendFileSync(BASH_ENV, objectToShellExport(obj, prefix))
     console.log(`BASH_ENV file appended (${dimGrey(BASH_ENV)})`)
   }
 }
 
-export function appendGithubEnv(exportStr: string): void {
+export function appendToGithubEnv(obj: AnyObject, prefix = ''): void {
   const { GITHUB_ENV } = process.env
   if (GITHUB_ENV) {
-    fs.appendFileSync(GITHUB_ENV, exportStr + '\n')
-
+    fs.appendFileSync(GITHUB_ENV, objectToGithubActionsEnv(obj, prefix))
     console.log(`GITHUB_ENV file appended (${dimGrey(GITHUB_ENV)})`)
+  }
+}
+
+export function appendToGithubOutput(obj: AnyObject, prefix = ''): void {
+  const { GITHUB_OUTPUT } = process.env
+  if (GITHUB_OUTPUT) {
+    fs.appendFileSync(GITHUB_OUTPUT, objectToGithubActionsEnv(obj, prefix))
+    console.log(`GITHUB_OUTPUT file appended (${dimGrey(GITHUB_OUTPUT)})`)
   }
 }
 
@@ -116,17 +124,23 @@ export function appendGithubEnv(exportStr: string): void {
  *
  * export a="b"
  * export b="c"
+ *
+ * Quotes are important, otherwise it'll break on e.g space character in the value.
+ * Includes trailing newline for composability.
  */
-export function objectToShellExport(o: any, prefix = ''): string {
-  return Object.keys(o)
-    .map(k => {
-      const v = o[k]
-      if (v) {
-        return `export ${prefix}${k}="${v}"`
-      }
-    })
-    .filter(Boolean)
-    .join('\n')
+export function objectToShellExport(obj: AnyObject, prefix = ''): string {
+  if (!Object.keys(obj).length) return ''
+
+  return (
+    Object.entries(obj)
+      .map(([k, v]) => {
+        if (v) {
+          return `export ${prefix}${k}="${v}"`
+        }
+      })
+      .filter(Boolean)
+      .join('\n') + '\n'
+  ) // trailing \n is important
 }
 
 /**
@@ -141,15 +155,19 @@ export function objectToShellExport(o: any, prefix = ''): string {
  * b="c"
  *
  * Quotes are important, otherwise it'll break on e.g space character in the value.
+ * Includes trailing newline for composability.
  */
-export function objectToGithubActionsEnv(o: any, prefix = ''): string {
-  return Object.keys(o)
-    .map(k => {
-      const v = o[k]
-      if (v) {
-        return `${prefix}${k}="${v}"`
-      }
-    })
-    .filter(Boolean)
-    .join('\n')
+export function objectToGithubActionsEnv(obj: AnyObject, prefix = ''): string {
+  if (!Object.keys(obj).length) return ''
+
+  return (
+    Object.entries(obj)
+      .map(([k, v]) => {
+        if (v) {
+          return `${prefix}${k}="${v}"`
+        }
+      })
+      .filter(Boolean)
+      .join('\n') + '\n'
+  ) // trailing \n is important
 }

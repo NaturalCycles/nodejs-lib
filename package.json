@@ -50,6 +50,7 @@
     "del": "dist/bin/del.js",
     "kpy": "dist/bin/kpy.js",
     "json2env": "dist/bin/json2env.js",
+    "generate-build-info": "dist/bin/generate-build-info.js",
     "slack-this": "dist/bin/slack-this.js",
     "secrets-gen-key": "dist/bin/secrets-gen-key.js",
     "secrets-encrypt": "dist/bin/secrets-encrypt.js",

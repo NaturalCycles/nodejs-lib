@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import * as yargs from 'yargs'
+import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs'
+import { runScript } from '../script'
+import { generateBuildInfo } from '../util/buildInfo.util'
+
+runScript(async () => {
+  const { dir } = yargs.options({
+    dir: {
+      type: 'string',
+      desc: 'Output directory',
+    },
+  }).argv
+
+  const buildInfo = generateBuildInfo()
+  console.log(buildInfo)
+
+  if (dir) fs.mkdirSync(dir, { recursive: true })
+
+  const buildInfoPath = dir ? path.resolve(dir, 'buildInfo.json') : 'buildInfo.json'
+  fs.writeFileSync(buildInfoPath, JSON.stringify(buildInfo, null, 2))
+
+  const prefix = 'buildInfo_'
+
+  appendToBashEnv(buildInfo, prefix)
+  appendToGithubEnv(buildInfo, prefix)
+  appendToGithubOutput(buildInfo, prefix)
+})
