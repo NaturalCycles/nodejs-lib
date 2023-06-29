@@ -78,5 +78,8 @@
   },
   "description": "Standard library for Node.js",
   "author": "Natural Cycles Team",
-  "license": "MIT"
+  "license": "MIT",
+  "envByBranch": {
+    "master": "master"
+  }
 }

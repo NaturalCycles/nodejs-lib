@@ -1,4 +1,5 @@
-import { _filterUndefinedValues, BuildInfo, localTime } from '@naturalcycles/js-lib'
+import { _filterUndefinedValues, AnyObject, BuildInfo, localTime } from '@naturalcycles/js-lib'
+import { _pathExistsSync, _readJsonSync } from '../fs/fs.util'
 import {
   gitCurrentBranchName,
   gitCurrentCommitSha,
@@ -7,7 +8,6 @@ import {
 } from './git.util'
 
 export function generateBuildInfo(): BuildInfo {
-  const { APP_ENV } = process.env
   const now = localTime()
   const ts = now.unix()
   const tsStr = now.toPretty()
@@ -19,6 +19,18 @@ export function generateBuildInfo(): BuildInfo {
 
   const ver = [now.toStringCompact(), repoName, branchName, rev].join('_')
 
+  let { APP_ENV: env } = process.env
+
+  if (!env) {
+    // Attempt to read `envByBranch` from package.json root
+    try {
+      if (_pathExistsSync('package.json')) {
+        const packageJson = _readJsonSync<AnyObject>('package.json')
+        env = packageJson?.['envByBranch']?.[branchName]
+      }
+    } catch {}
+  }
+
   return _filterUndefinedValues({
     ts,
     tsCommit,
@@ -27,6 +39,6 @@ export function generateBuildInfo(): BuildInfo {
     branchName,
     rev,
     ver,
-    env: APP_ENV,
+    env,
   })
 }
