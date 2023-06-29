@@ -10,6 +10,6 @@ test('generateBuildInfo', () => {
 
   process.env['APP_ENV'] = ''
   buildInfo = generateBuildInfo()
-  // console.log(buildInfo)
-  expect(buildInfo.env).toBe('master') // read from package.json
+  console.log(buildInfo)
+  expect(buildInfo.env).not.toBe('test') // read from package.json
 })

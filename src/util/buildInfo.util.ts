@@ -26,7 +26,7 @@ export function generateBuildInfo(): BuildInfo {
     try {
       if (_pathExistsSync('package.json')) {
         const packageJson = _readJsonSync<AnyObject>('package.json')
-        env = packageJson?.['envByBranch']?.[branchName]
+        env = packageJson?.['envByBranch']?.[branchName] || packageJson?.['envByBranch']?.['*']
       }
     } catch {}
   }

@@ -80,6 +80,7 @@
   "author": "Natural Cycles Team",
   "license": "MIT",
   "envByBranch": {
-    "master": "master"
+    "master": "master",
+    "*": "branch"
   }
 }
