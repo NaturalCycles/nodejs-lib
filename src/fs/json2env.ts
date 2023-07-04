@@ -81,12 +81,12 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 
   if (bashEnv) {
-    appendToBashEnv(json)
+    appendToBashEnv(json, prefix)
   }
 
   if (githubEnv) {
-    appendToGithubEnv(json)
-    appendToGithubOutput(json)
+    appendToGithubEnv(json, prefix)
+    appendToGithubOutput(json, prefix)
   }
 }
 
