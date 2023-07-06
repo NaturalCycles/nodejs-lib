@@ -13,12 +13,15 @@ export function requireEnvKeys<T extends readonly string[]>(
   ...keys: T
 ): { [k in ValuesOf<T>]: string } {
   // eslint-disable-next-line unicorn/no-array-reduce
-  return keys.reduce((r, k) => {
-    const v = process.env[k]
-    if (!v) throw new Error(`${k} env variable is required, but missing`)
-    r[k as ValuesOf<T>] = v
-    return r
-  }, {} as { [k in ValuesOf<T>]: string })
+  return keys.reduce(
+    (r, k) => {
+      const v = process.env[k]
+      if (!v) throw new Error(`${k} env variable is required, but missing`)
+      r[k as ValuesOf<T>] = v
+      return r
+    },
+    {} as { [k in ValuesOf<T>]: string },
+  )
 }
 
 export function requireFileToExist(filePath: string): void {

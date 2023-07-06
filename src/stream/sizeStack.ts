@@ -3,7 +3,10 @@ import { yellow } from '../colors'
 import { gzipBuffer } from '../util/zip.util'
 
 export class SizeStack extends NumberStack {
-  constructor(public name: string, size: number) {
+  constructor(
+    public name: string,
+    size: number,
+  ) {
     super(size)
   }
 

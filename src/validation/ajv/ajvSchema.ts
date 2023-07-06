@@ -78,7 +78,10 @@ export interface AjvSchemaCfg {
  * @experimental
  */
 export class AjvSchema<T = unknown> {
-  private constructor(public schema: JsonSchema<T>, cfg: Partial<AjvSchemaCfg> = {}) {
+  private constructor(
+    public schema: JsonSchema<T>,
+    cfg: Partial<AjvSchemaCfg> = {},
+  ) {
     this.cfg = {
       logErrors: true,
       logger: console,
