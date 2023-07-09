@@ -1,11 +1,4 @@
-import {
-  _assert,
-  _errorDataAppend,
-  _typeCast,
-  AnyObject,
-  ErrorData,
-  JWTString,
-} from '@naturalcycles/js-lib'
+import { _assert, _errorDataAppend, AnyObject, ErrorData, JWTString } from '@naturalcycles/js-lib'
 import type { Algorithm, VerifyOptions, JwtHeader, SignOptions } from 'jsonwebtoken'
 import * as jsonwebtoken from 'jsonwebtoken'
 import { AnySchemaTyped } from '../validation/joi/joi.model'
@@ -51,6 +44,9 @@ export interface JWTServiceCfg {
 }
 
 // todo: define JWTError and list possible options
+// jwt expired (TokenExpiredError)
+// jwt invalid
+// jwt token is empty
 
 /**
  * Wraps popular `jsonwebtoken` library.
@@ -113,7 +109,6 @@ export class JWTService {
       return data
     } catch (err) {
       if (this.cfg.errorData) {
-        _typeCast<Error>(err)
         _errorDataAppend(err, {
           ...this.cfg.errorData,
         })
@@ -138,7 +133,7 @@ export class JWTService {
       signature: string
     } | null
 
-    _assert(data, 'invalid token, decoded value is null', {
+    _assert(data?.payload, 'invalid token, decoded value is empty', {
       ...this.cfg.errorData,
     })
 

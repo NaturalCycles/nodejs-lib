@@ -1,9 +1,12 @@
 import * as os from 'node:os'
 import { _mb } from '@naturalcycles/js-lib'
 
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
-export function memoryUsage() {
+export function memoryUsage(): {
+  rss: number
+  heapTotal: number
+  heapUsed: number
+  external: number
+} {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
   return {
     rss: _mb(rss),
@@ -13,7 +16,15 @@ export function memoryUsage() {
   }
 }
 
-export function memoryUsageFull() {
+export function memoryUsageFull(): {
+  rss: number
+  heapTotal: number
+  heapUsed: number
+  external: number
+  totalMem: number
+  freeMem: number
+  usedMem: number
+} {
   const { rss, external, heapUsed, heapTotal } = process.memoryUsage()
   const totalMem = os.totalmem()
   const freeMem = os.freemem()
@@ -81,7 +92,10 @@ class ProcessUtil {
     })
   }
 
-  private getCPUInfo() {
+  private getCPUInfo(): {
+    idle: number
+    total: number
+  } {
     // eslint-disable-next-line unicorn/no-array-reduce
     return os.cpus().reduce(
       (r, cpu) => {

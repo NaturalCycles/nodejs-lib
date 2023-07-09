@@ -3,7 +3,7 @@ import { _range } from '@naturalcycles/js-lib'
 import { _pipeline, writablePushToArray } from '..'
 import { readableFromArray } from './readable/readableFromArray'
 
-function errorTransformUnhandled() {
+function errorTransformUnhandled(): Transform {
   return new Transform({
     objectMode: true,
     transform(chunk, _, cb) {
@@ -13,7 +13,7 @@ function errorTransformUnhandled() {
   })
 }
 
-function errorTransform() {
+function errorTransform(): Transform {
   return new Transform({
     objectMode: true,
     transform(chunk, _, cb) {

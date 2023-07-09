@@ -63,7 +63,7 @@ test('malformed token', () => {
   )
 
   expect(() => jwtService.decode(token2)).toThrowErrorMatchingInlineSnapshot(
-    `"invalid token, decoded value is null"`,
+    `"invalid token, decoded value is empty"`,
   )
 
   // token3 has corrupted signature, but Decode doesn't use it

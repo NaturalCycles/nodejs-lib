@@ -7,8 +7,7 @@ yarn tsn bench/transformMap.bench
 import { Readable } from 'node:stream'
 import { runBench } from '@naturalcycles/bench-lib'
 import { _range } from '@naturalcycles/js-lib'
-import { transformMap, writableForEach, _pipeline } from '../../src'
-import { runScript } from '../../src/script'
+import { transformMap, writableForEach, _pipeline, runScript } from '../../src'
 import { transformMapSync } from '../../src'
 
 const items = _range(1000).map(id => ({
@@ -16,7 +15,7 @@ const items = _range(1000).map(id => ({
   even: id % 2 === 0,
 }))
 
-const mapper = (item: any) => ({ ...item, id2: item.id })
+const mapper = (item: any): any => ({ ...item, id2: item.id })
 
 runScript(async () => {
   await runBench({
