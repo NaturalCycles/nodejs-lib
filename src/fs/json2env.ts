@@ -164,7 +164,7 @@ export function objectToGithubActionsEnv(obj: AnyObject, prefix = ''): string {
     Object.entries(obj)
       .map(([k, v]) => {
         if (v) {
-          return `${prefix}${k}="${v}"`
+          return `${prefix}${k}=${v}`
         }
       })
       .filter(Boolean)
