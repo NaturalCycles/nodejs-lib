@@ -156,6 +156,8 @@ export function objectToShellExport(obj: AnyObject, prefix = ''): string {
  *
  * Quotes are important, otherwise it'll break on e.g space character in the value.
  * Includes trailing newline for composability.
+ *
+ * UPD: Quoted values behave inconsistently, so we're trying to NOT quote now, and-see-what-happens.
  */
 export function objectToGithubActionsEnv(obj: AnyObject, prefix = ''): string {
   if (!Object.keys(obj).length) return ''
@@ -164,7 +166,7 @@ export function objectToGithubActionsEnv(obj: AnyObject, prefix = ''): string {
     Object.entries(obj)
       .map(([k, v]) => {
         if (v) {
-          return `${prefix}${k}="${v}"`
+          return `${prefix}${k}=${v}`
         }
       })
       .filter(Boolean)

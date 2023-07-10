@@ -10,7 +10,6 @@ import {
 export function generateBuildInfo(): BuildInfo {
   const now = localTime()
   const ts = now.unix()
-  const tsStr = now.toPretty()
 
   const rev = gitCurrentCommitSha()
   const branchName = gitCurrentBranchName()
@@ -34,7 +33,6 @@ export function generateBuildInfo(): BuildInfo {
   return _filterUndefinedValues({
     ts,
     tsCommit,
-    tsStr,
     repoName,
     branchName,
     rev,
