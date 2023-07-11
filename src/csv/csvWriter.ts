@@ -28,7 +28,7 @@ export class CSVWriter {
     }
   }
 
-  public cfg: CSVWriterConfig & { delimiter: string }
+  cfg: CSVWriterConfig & { delimiter: string }
 
   writeRows(rows: AnyObject[]): string {
     let s = ''

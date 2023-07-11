@@ -55,7 +55,7 @@ export class SlackService<CTX = any> {
     }
   }
 
-  public cfg!: SlackServiceCfg<CTX>
+  cfg!: SlackServiceCfg<CTX>
 
   /**
    * Allows to "log" many things at once, similar to `console.log(one, two, three).
