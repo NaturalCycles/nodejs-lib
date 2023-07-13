@@ -1,4 +1,10 @@
-import { _filterUndefinedValues, AnyObject, BuildInfo, localTime } from '@naturalcycles/js-lib'
+import {
+  _filterUndefinedValues,
+  AnyObject,
+  BuildInfo,
+  localTime,
+  UnixTimestampNumber,
+} from '@naturalcycles/js-lib'
 import { _pathExistsSync, _readJsonSync } from '../fs/fs.util'
 import {
   gitCurrentBranchName,
@@ -7,8 +13,15 @@ import {
   gitCurrentRepoName,
 } from './git.util'
 
-export function generateBuildInfo(): BuildInfo {
-  const now = localTime()
+export interface GenerateBuildInfoOptions {
+  /**
+   * If set - this timestamp will be used, instead of "current time".
+   */
+  overrideTimestamp?: UnixTimestampNumber
+}
+
+export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo {
+  const now = localTime(opt.overrideTimestamp)
   const ts = now.unix()
 
   const rev = gitCurrentCommitSha()

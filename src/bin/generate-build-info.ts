@@ -8,14 +8,20 @@ import { runScript } from '../script'
 import { generateBuildInfo } from '../util/buildInfo.util'
 
 runScript(async () => {
-  const { dir } = yargs.options({
+  const { dir, overrideTimestamp } = yargs.options({
     dir: {
       type: 'string',
       desc: 'Output directory',
     },
+    overrideTimestamp: {
+      type: 'number',
+      desc: 'This unix timestamp will be used instead of "current time"',
+    },
   }).argv
 
-  const buildInfo = generateBuildInfo()
+  const buildInfo = generateBuildInfo({
+    overrideTimestamp,
+  })
   console.log(buildInfo)
 
   if (dir) fs.mkdirSync(dir, { recursive: true })
