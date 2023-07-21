@@ -9,7 +9,7 @@ import { ReadableTyped } from '../stream.model'
  *
  * Caution!
  * The implementation of this Readable is not fully compliant,
- * e.g the read() method doesn't return anything, so, it will hand the Node process (or cause it to process.exit(0))
+ * e.g the read() method doesn't return anything, so, it will hang the Node process (or cause it to process.exit(0))
  * if read() will be called AFTER everything was pushed and Readable is closed (by pushing `null`).
  * Beware of it when e.g doing unit testing! Jest prefers to hang (not exit-0).
  *
