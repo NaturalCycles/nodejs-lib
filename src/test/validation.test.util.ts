@@ -15,7 +15,7 @@ export function testValidation(schema: AnySchema, valid: any[], invalid: any[]):
     try {
       validate(v, schema)
       console.log('value', v)
-      fail(`expected to fail on invalid value: ${v}`) // eslint-disable-line
+      fail(`expected to fail on invalid value: ${v}`)
     } catch {}
   })
 }
