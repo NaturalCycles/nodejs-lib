@@ -93,24 +93,27 @@ export function json2env(opt: Json2EnvOptions): void {
 export function appendToBashEnv(obj: AnyObject, prefix = ''): void {
   const { BASH_ENV } = process.env
   if (BASH_ENV) {
-    fs.appendFileSync(BASH_ENV, objectToShellExport(obj, prefix))
-    console.log(`BASH_ENV file appended (${dimGrey(BASH_ENV)})`)
+    const data = objectToShellExport(obj, prefix)
+    fs.appendFileSync(BASH_ENV, data)
+    console.log(`BASH_ENV file appended (${dimGrey(BASH_ENV)})\n${data}`)
   }
 }
 
 export function appendToGithubEnv(obj: AnyObject, prefix = ''): void {
   const { GITHUB_ENV } = process.env
   if (GITHUB_ENV) {
-    fs.appendFileSync(GITHUB_ENV, objectToGithubActionsEnv(obj, prefix))
-    console.log(`GITHUB_ENV file appended (${dimGrey(GITHUB_ENV)})`)
+    const data = objectToGithubActionsEnv(obj, prefix)
+    fs.appendFileSync(GITHUB_ENV, data)
+    console.log(`GITHUB_ENV file appended (${dimGrey(GITHUB_ENV)})\n${data}`)
   }
 }
 
 export function appendToGithubOutput(obj: AnyObject, prefix = ''): void {
   const { GITHUB_OUTPUT } = process.env
   if (GITHUB_OUTPUT) {
-    fs.appendFileSync(GITHUB_OUTPUT, objectToGithubActionsEnv(obj, prefix))
-    console.log(`GITHUB_OUTPUT file appended (${dimGrey(GITHUB_OUTPUT)})`)
+    const data = objectToGithubActionsEnv(obj, prefix)
+    fs.appendFileSync(GITHUB_OUTPUT, data)
+    console.log(`GITHUB_OUTPUT file appended (${dimGrey(GITHUB_OUTPUT)})\n${data}`)
   }
 }
 
