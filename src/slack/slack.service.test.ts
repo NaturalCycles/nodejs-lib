@@ -1,34 +1,37 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
-import { commonLoggerNoop } from '@naturalcycles/js-lib'
-import nock = require('nock')
+import { _stringifyAny, commonLoggerNoop, Fetcher, pExpectedError } from '@naturalcycles/js-lib'
 import { slackDefaultMessagePrefixHook, SlackService } from './slack.service'
 
-let lastBody: any
-
-beforeEach(() => {
-  lastBody = null
-  mockTime()
-})
-
-afterAll(() => {
-  nock.cleanAll()
-  nock.restore() // prevents jest memory leak
-})
-
-nock(/.*/)
-  .persist()
-  .post(/.*/)
-  .reply((uri, body: any) => {
-    lastBody = body
-    return uri.includes('error') ? [500, 'some error!'] : [200, 'ok']
-  })
-
-const slackService = new SlackService({
+let slackService = new SlackService({
   webhookUrl: 'https://dummyhook.com',
   logger: commonLoggerNoop,
   // defaults: {
   //   channel: 'test',
   // },
+})
+
+let lastBody: any
+
+function mockSlack(): void {
+  jest
+    .spyOn((slackService as any as { fetcher: Fetcher }).fetcher, 'callNativeFetch')
+    .mockImplementation(async (url, init) => {
+      lastBody = init.body
+
+      if (url.includes('error')) {
+        return new Response('some error!', {
+          status: 500,
+        })
+      }
+
+      return new Response('ok')
+    })
+}
+
+beforeEach(() => {
+  lastBody = null
+  mockTime()
+  mockSlack()
 })
 
 test('basic test', async () => {
@@ -60,36 +63,42 @@ test('basic test', async () => {
 })
 
 test('no webhookUrl', async () => {
-  const s = new SlackService({
+  slackService = new SlackService({
     logger: commonLoggerNoop,
   })
-  await s.log('anything')
+  await slackService.log('anything')
   expect(lastBody).toBeNull() // should be unchanged
 })
 
 test('error', async () => {
-  const s = new SlackService({
+  slackService = new SlackService({
     webhookUrl: 'wrongUrl',
     logger: commonLoggerNoop,
   })
 
   // This should NOT throw, because errors are suppressed
-  await s.log('yo')
+  await slackService.log('yo')
 
-  await expect(s.send({ items: 'yo', throwOnError: true })).rejects.toThrow('Invalid URL')
+  const err = await pExpectedError(slackService.send({ items: 'yo', throwOnError: true }))
+  expect(_stringifyAny(err)).toMatchInlineSnapshot(`
+    "HttpRequestError: POST wrongUrl
+    Caused by: TypeError: Failed to parse URL from wrongUrl
+    Caused by: TypeError: Invalid URL"
+  `)
 })
 
 test('messagePrefixHook returning null should NOT be sent', async () => {
-  const s = new SlackService({
+  slackService = new SlackService({
     webhookUrl: 'https://valid.com',
     messagePrefixHook: () => null,
     logger: commonLoggerNoop,
   })
-  await s.log('yo')
+  mockSlack()
+  await slackService.log('yo')
   expect(lastBody).toBeNull()
 
   // revert to default hook
-  s.cfg.messagePrefixHook = slackDefaultMessagePrefixHook
-  await s.log('yo')
+  slackService.cfg.messagePrefixHook = slackDefaultMessagePrefixHook
+  await slackService.log('yo')
   expect(lastBody).not.toBeNull()
 })

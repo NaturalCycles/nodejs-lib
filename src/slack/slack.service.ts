@@ -132,9 +132,12 @@ export class SlackService<CTX = any> {
         json,
       })
       .catch(err => {
-        // console.log(err)
         // ignore (unless throwOnError is set)
-        if (msg.throwOnError) throw err
+        if (msg.throwOnError) {
+          throw err
+        } else {
+          console.log(err)
+        }
       })
   }
 
