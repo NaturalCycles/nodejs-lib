@@ -4,10 +4,11 @@ import {
   CommonLogger,
   commonLoggerMinLevel,
   CommonLogLevel,
+  Fetcher,
+  getFetcher,
   localTime,
   PQueue,
 } from '@naturalcycles/js-lib'
-import got from 'got'
 import { inspectAny, InspectAnyOptions } from '..'
 import {
   SlackApiBody,
@@ -53,7 +54,13 @@ export class SlackService<CTX = any> {
         ...cfg.inspectOptions,
       },
     }
+
+    this.fetcher = getFetcher({
+      timeoutSeconds: 90,
+    })
   }
+
+  private fetcher: Fetcher
 
   cfg!: SlackServiceCfg<CTX>
 
@@ -120,13 +127,12 @@ export class SlackService<CTX = any> {
       ['items', 'ctx'],
     )
 
-    await got
-      .post(webhookUrl, {
+    await this.fetcher
+      .postVoid(webhookUrl, {
         json,
-        responseType: 'text',
-        timeout: 90_000,
       })
       .catch(err => {
+        // console.log(err)
         // ignore (unless throwOnError is set)
         if (msg.throwOnError) throw err
       })

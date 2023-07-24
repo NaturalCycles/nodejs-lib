@@ -4,6 +4,8 @@ require('dotenv').config()
 
 const { SLACK_WEBHOOK_URL } = requireEnvKeys('SLACK_WEBHOOK_URL')
 
+// uncomment jestOffline() before use
+
 const slackService = new SlackService({
   webhookUrl: SLACK_WEBHOOK_URL,
   defaults: {
@@ -15,6 +17,7 @@ test('hello world', async () => {
   await slackService.log(`Hello Slack`)
   await slackService.send({
     items: 'hello string',
+    throwOnError: true,
   })
   await slackService.send('hello 3')
 })
