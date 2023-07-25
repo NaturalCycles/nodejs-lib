@@ -26,6 +26,6 @@ const got = getGot({
 })
 
 test('timeout error', async () => {
-  const [err] = await pTry<Error, any>(got.get(''))
+  const [err] = await pTry(got.get(''))
   console.error(err)
 }, 60_000)
