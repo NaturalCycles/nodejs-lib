@@ -1,9 +1,13 @@
+import { BaseDBEntity } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import {
+  baseDBEntitySchema,
   binarySchema,
   dateObjectSchema,
   emailSchema,
   idSchema,
+  numberSchema,
+  objectSchema,
   oneOfSchema,
   semVerSchema,
   stringSchema,
@@ -89,3 +93,11 @@ test('other schemas', () => {
   validate(new Date(), dateObjectSchema)
   expect(isValid('2022-01-01', dateObjectSchema)).toBe(false)
 })
+
+interface Obj extends BaseDBEntity {
+  v: number
+}
+
+const _objSchema = objectSchema<Obj>({
+  v: numberSchema,
+}).concat(baseDBEntitySchema as any)

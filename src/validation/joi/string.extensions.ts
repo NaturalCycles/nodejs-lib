@@ -1,8 +1,8 @@
 import { LocalDate, localTime } from '@naturalcycles/js-lib'
-import { Extension, StringSchema } from 'joi'
+import { Extension, StringSchema as JoiStringSchema } from 'joi'
 import * as Joi from 'joi'
 
-export interface ExtendedStringSchema<TSchema = string> extends StringSchema<TSchema> {
+export interface StringSchema<TSchema = string> extends JoiStringSchema<TSchema> {
   dateString: (min?: string, max?: string) => this
 }
 

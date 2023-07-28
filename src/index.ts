@@ -14,9 +14,7 @@ import type {
   BooleanSchema,
   DateSchema,
   FunctionSchema,
-  NumberSchema,
   ObjectSchema,
-  StringSchema,
 } from 'joi'
 export * from './buffer/buffer.util'
 export * from './diff/tableDiff'
@@ -109,9 +107,10 @@ export type {
   BooleanSchema,
   DateSchema,
   FunctionSchema,
-  NumberSchema,
   ObjectSchema,
-  StringSchema,
+  // extended
+  // NumberSchema,
+  // StringSchema,
 }
 
 export { globby, fastGlob, RequestError, TimeoutError, Ajv }

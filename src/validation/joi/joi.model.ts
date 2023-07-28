@@ -1,3 +1,8 @@
+// export interface ObjectSchema<T = any> extends JoiObjectSchema<T> {
+//   // Open-ended index signature to allow for easier .concat(baseDBEntitySchema)
+//   [k: string]: any
+// }
+
 /**
  * This type is useful to allow "joi schema merging".
  * Because by default Joi doesn't allow normal merging.

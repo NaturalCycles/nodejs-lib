@@ -1,7 +1,7 @@
 import { BaseDBEntity, SavedDBEntity } from '@naturalcycles/js-lib'
 import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { Joi } from './joi.extensions'
-import { ExtendedStringSchema } from './string.extensions'
+import { StringSchema } from './string.extensions'
 
 export const booleanSchema = Joi.boolean()
 export const booleanDefaultToFalseSchema = Joi.boolean().default(false)
@@ -13,7 +13,7 @@ export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 export const dateObjectSchema = Joi.object().instance(Date)
 
-export const urlSchema = (scheme: string | string[] = 'https'): ExtendedStringSchema =>
+export const urlSchema = (scheme: string | string[] = 'https'): StringSchema =>
   Joi.string().uri({ scheme })
 
 export function arraySchema<T>(items?: AnySchema<T>): ArraySchema<T[]> {
@@ -31,7 +31,7 @@ export function oneOfSchema<T = any>(...schemas: AnySchema[]): AlternativesSchem
 }
 
 export const anySchema = Joi.any()
-export const anyObjectSchema = Joi.object().options({ stripUnknown: false })
+export const anyObjectSchema: ObjectSchema = Joi.object().options({ stripUnknown: false })
 
 export const BASE62_REGEX = /^[a-zA-Z0-9]+$/
 export const BASE64_REGEX = /^[A-Za-z0-9+/]+={0,2}$/
@@ -116,7 +116,7 @@ export const utcOffsetSchema = numberSchema
 
 export const ipAddressSchema = stringSchema.ip()
 
-export const baseDBEntitySchema = objectSchema<BaseDBEntity>({
+export const baseDBEntitySchema: ObjectSchema<BaseDBEntity> = objectSchema<BaseDBEntity>({
   id: stringSchema.optional(),
   created: unixTimestamp2000Schema.optional(),
   updated: unixTimestamp2000Schema.optional(),

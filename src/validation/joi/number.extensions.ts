@@ -1,7 +1,7 @@
 import * as Joi from 'joi'
-import { Extension, NumberSchema } from 'joi'
+import { Extension, NumberSchema as JoiNumberSchema } from 'joi'
 
-export interface ExtendedNumberSchema<TSchema = number> extends NumberSchema<TSchema> {
+export interface NumberSchema<TSchema = number> extends JoiNumberSchema<TSchema> {
   dividable: (q: number) => this
 }
 

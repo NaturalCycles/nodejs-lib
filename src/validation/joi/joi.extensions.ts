@@ -1,13 +1,12 @@
-import { StringSchema } from 'joi'
 import * as JoiLib from 'joi'
-import { ExtendedNumberSchema, numberExtensions } from './number.extensions'
-import { ExtendedStringSchema, stringExtensions } from './string.extensions'
+import { NumberSchema, numberExtensions } from './number.extensions'
+import { StringSchema, stringExtensions } from './string.extensions'
 
 export interface ExtendedJoi extends JoiLib.Root {
   // eslint-disable-next-line id-blacklist
-  string: <TSchema = string>() => ExtendedStringSchema<TSchema>
+  string: <TSchema = string>() => StringSchema<TSchema>
   // eslint-disable-next-line id-blacklist
-  number: <TSchema = number>() => ExtendedNumberSchema<TSchema>
+  number: <TSchema = number>() => NumberSchema<TSchema>
 }
 
 /**
