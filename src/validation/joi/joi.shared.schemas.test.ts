@@ -1,4 +1,5 @@
 import { BaseDBEntity } from '@naturalcycles/js-lib'
+import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
 import { testValidation } from '../../test/validation.test.util'
 import {
   baseDBEntitySchema,
@@ -10,8 +11,14 @@ import {
   objectSchema,
   oneOfSchema,
   semVerSchema,
+  stringSchemaTyped,
   stringSchema,
   urlSchema,
+  stringEnumValuesSchema,
+  stringEnumKeysSchema,
+  numberSchemaTyped,
+  numberEnumValuesSchema,
+  numberEnumKeysSchema,
 } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
@@ -101,3 +108,33 @@ interface Obj extends BaseDBEntity {
 const _objSchema = objectSchema<Obj>({
   v: numberSchema,
 }).concat(baseDBEntitySchema as any)
+
+enum OS {
+  IOS = 'IOS',
+  ANDROID = 'ANDROID',
+}
+
+enum AppId {
+  APP1 = 1,
+  APP2 = 2,
+}
+
+test('enum schemas', () => {
+  let os = validate(OS.IOS, stringSchemaTyped<OS>())
+  expectTypeOf(os).toEqualTypeOf<OS>()
+
+  os = validate(OS.IOS, stringEnumValuesSchema(OS))
+  expectTypeOf(os).toEqualTypeOf<OS>()
+
+  const osKey = validate(OS.IOS, stringEnumKeysSchema(OS))
+  expectTypeOf(osKey).toEqualTypeOf<string>()
+
+  let appId = validate(AppId.APP1, numberSchemaTyped<AppId>())
+  expectTypeOf(appId).toEqualTypeOf<AppId>()
+
+  appId = validate(AppId.APP1, numberEnumValuesSchema(AppId))
+  expectTypeOf(appId).toEqualTypeOf<AppId>()
+
+  const appIdKey = validate(AppId[AppId.APP1], numberEnumKeysSchema(AppId))
+  expectTypeOf(appIdKey).toEqualTypeOf<string>()
+})

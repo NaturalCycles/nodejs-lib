@@ -1,17 +1,55 @@
-import { BaseDBEntity, SavedDBEntity } from '@naturalcycles/js-lib'
+import {
+  _numberEnumKeys,
+  _numberEnumValues,
+  _stringEnumKeys,
+  _stringEnumValues,
+  BaseDBEntity,
+  NumberEnum,
+  SavedDBEntity,
+  StringEnum,
+} from '@naturalcycles/js-lib'
 import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { Joi } from './joi.extensions'
+import { NumberSchema } from './number.extensions'
 import { StringSchema } from './string.extensions'
 
 export const booleanSchema = Joi.boolean()
 export const booleanDefaultToFalseSchema = Joi.boolean().default(false)
 export const stringSchema = Joi.string()
+export const stringSchemaTyped = <T>(): StringSchema<T> => Joi.string<T>()
 export const numberSchema = Joi.number()
+export const numberSchemaTyped = <T>(): NumberSchema<T> => Joi.number<T>()
 export const integerSchema = Joi.number().integer()
 export const percentageSchema = Joi.number().integer().min(0).max(100)
 export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 export const dateObjectSchema = Joi.object().instance(Date)
+
+/**
+ * Allows all values of a String Enum.
+ */
+export const stringEnumValuesSchema = <ENUM extends StringEnum>(
+  en: ENUM,
+): StringSchema<ENUM[keyof ENUM]> => Joi.string<ENUM[keyof ENUM]>().allow(..._stringEnumValues(en))
+
+/**
+ * Allows all keys of a String Enum.
+ */
+export const stringEnumKeysSchema = <ENUM extends StringEnum>(en: ENUM): StringSchema =>
+  Joi.string().allow(..._stringEnumKeys(en))
+
+/**
+ * Allows all values of a String Enum.
+ */
+export const numberEnumValuesSchema = <ENUM extends NumberEnum>(
+  en: ENUM,
+): NumberSchema<ENUM[keyof ENUM]> => Joi.number<ENUM[keyof ENUM]>().allow(..._numberEnumValues(en))
+
+/**
+ * Allows all keys of a Number Enum.
+ */
+export const numberEnumKeysSchema = <ENUM extends NumberEnum>(en: ENUM): StringSchema =>
+  Joi.string().allow(..._numberEnumKeys(en))
 
 export const urlSchema = (scheme: string | string[] = 'https'): StringSchema =>
   Joi.string().uri({ scheme })
