@@ -1,4 +1,4 @@
-import { _stringifyAny } from '@naturalcycles/js-lib'
+import { _stringifyAny, AnyObject } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
@@ -82,14 +82,14 @@ test('should trim strings by default', async () => {
 })
 
 test('should strip unknown keys', async () => {
-  const v = {
+  const v: AnyObject = {
     a1: 'ff',
     unk: 'ddd',
   }
   const v2 = validate(v, obj1Schema)
 
   expect(v2).toEqual({ a1: 'ff' })
-  expect(v2.unk).toBeUndefined()
+  expect(v2['unk']).toBeUndefined()
 })
 
 test('getValidationResult should still convert', async () => {
@@ -188,13 +188,13 @@ test('should include id in the error message', () => {
   })
 
   // No objectName, with id
-  let { error } = getValidationResult(obj, obj1Schema)
+  let { error } = getValidationResult(obj as any, obj1Schema)
   // console.log(error)
   expect(error!.message).toMatchSnapshot()
   expect(error!.data).toMatchSnapshot()
 
   // ObjectName, with id
-  ;({ error } = getValidationResult(obj, obj1Schema, 'ObjName'))
+  ;({ error } = getValidationResult(obj as any, obj1Schema, 'ObjName'))
   // console.log(error)
   expect(error!.message).toMatchSnapshot()
   expect(error!.data).toMatchSnapshot()
@@ -296,12 +296,12 @@ const _partialSchema = objectSchema<Obj1>({
 
 test('isValid', () => {
   expect(isValid('asd', stringSchema)).toBe(true)
-  expect(isValid(56, stringSchema)).toBe(false)
+  expect(isValid(56 as any, stringSchema)).toBe(false)
 })
 
 test('undefinedIfInvalid', () => {
   expect(undefinedIfInvalid('asd', stringSchema)).toBe('asd')
-  expect(undefinedIfInvalid(56, stringSchema)).toBeUndefined()
+  expect(undefinedIfInvalid(56 as any, stringSchema)).toBeUndefined()
 })
 
 test('convert', () => {
@@ -331,7 +331,7 @@ test.skip('arraySchema should strip undefined/null values by default', () => {
 
 test('annotation is non-enumerable, but still accessible', () => {
   const s = booleanSchema
-  const { error } = getValidationResult('notBoolean', s)
+  const { error } = getValidationResult('notBoolean' as any, s)
   expect(error).toBeInstanceOf(JoiValidationError)
 
   expect(error!.data).toMatchInlineSnapshot(`

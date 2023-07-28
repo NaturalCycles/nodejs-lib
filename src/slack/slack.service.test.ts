@@ -12,26 +12,21 @@ let slackService = new SlackService({
 
 let lastBody: any
 
-function mockSlack(): void {
-  jest
-    .spyOn((slackService as any as { fetcher: Fetcher }).fetcher, 'callNativeFetch')
-    .mockImplementation(async (url, init) => {
-      lastBody = init.body
-
-      if (url.includes('error')) {
-        return new Response('some error!', {
-          status: 500,
-        })
-      }
-
-      return new Response('ok')
-    })
-}
-
 beforeEach(() => {
   lastBody = null
   mockTime()
-  mockSlack()
+
+  jest.spyOn(Fetcher, 'callNativeFetch').mockImplementation(async (url, init) => {
+    lastBody = init.body
+
+    if (url.includes('error')) {
+      return new Response('some error!', {
+        status: 500,
+      })
+    }
+
+    return new Response('ok')
+  })
 })
 
 test('basic test', async () => {
@@ -79,6 +74,9 @@ test('error', async () => {
   // This should NOT throw, because errors are suppressed
   await slackService.log('yo')
 
+  // this unmocks Fetcher and lets Slack fail
+  jest.restoreAllMocks()
+
   const err = await pExpectedError(slackService.send({ items: 'yo', throwOnError: true }))
   expect(_stringifyAny(err)).toMatchInlineSnapshot(`
     "HttpRequestError: POST wrongUrl
@@ -93,7 +91,7 @@ test('messagePrefixHook returning null should NOT be sent', async () => {
     messagePrefixHook: () => null,
     logger: commonLoggerNoop,
   })
-  mockSlack()
+
   await slackService.log('yo')
   expect(lastBody).toBeNull()
 

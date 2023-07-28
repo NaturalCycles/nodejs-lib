@@ -7,8 +7,7 @@
  */
 
 import { _hb, _isObject, _truncateMiddle } from '@naturalcycles/js-lib'
-import { ValidationError, ValidationOptions } from 'joi'
-import { AnySchemaTyped } from './joi.model'
+import { AnySchema, ValidationError, ValidationOptions } from 'joi'
 import { JoiValidationError, JoiValidationErrorData } from './joi.validation.error'
 
 // todo: consider replacing with Tuple of [error, value]
@@ -49,18 +48,13 @@ const defaultOptions: ValidationOptions = {
  *
  * If `schema` is undefined - returns value as is.
  */
-export function validate<IN, OUT = IN>(
-  value: IN,
-  schema?: AnySchemaTyped<IN, OUT>,
+export function validate<T>(
+  value: T,
+  schema?: AnySchema<T>,
   objectName?: string,
   options: ValidationOptions = {},
-): OUT {
-  const { value: returnValue, error } = getValidationResult<IN, OUT>(
-    value,
-    schema,
-    objectName,
-    options,
-  )
+): T {
+  const { value: returnValue, error } = getValidationResult(value, schema, objectName, options)
 
   if (error) {
     throw error
@@ -76,12 +70,12 @@ export function validate<IN, OUT = IN>(
  *
  * If `schema` is undefined - returns value as is.
  */
-export function getValidationResult<IN, OUT = IN>(
-  value: IN,
-  schema?: AnySchemaTyped<IN, OUT>,
+export function getValidationResult<T>(
+  value: T,
+  schema?: AnySchema<T>,
   objectName?: string,
   options: ValidationOptions = {},
-): JoiValidationResult<OUT> {
+): JoiValidationResult<T> {
   if (!schema) return { value } as any
 
   const { value: returnValue, error } = schema.validate(value, {
@@ -89,8 +83,8 @@ export function getValidationResult<IN, OUT = IN>(
     ...options,
   })
 
-  const vr: JoiValidationResult<OUT> = {
-    value: returnValue as OUT,
+  const vr: JoiValidationResult<T> = {
+    value: returnValue!,
   }
 
   if (error) {
@@ -103,17 +97,14 @@ export function getValidationResult<IN, OUT = IN>(
 /**
  * Convenience function that returns true if !error.
  */
-export function isValid<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): boolean {
+export function isValid<T>(value: T, schema?: AnySchema<T>): boolean {
   if (!schema) return { value } as any
 
   const { error } = schema.validate(value, defaultOptions)
   return !error
 }
 
-export function undefinedIfInvalid<IN, OUT = IN>(
-  value: IN,
-  schema?: AnySchemaTyped<IN, OUT>,
-): OUT | undefined {
+export function undefinedIfInvalid<T>(value: T, schema?: AnySchema<T>): T | undefined {
   if (!schema) return { value } as any
 
   const { value: returnValue, error } = schema.validate(value, defaultOptions)
@@ -126,10 +117,10 @@ export function undefinedIfInvalid<IN, OUT = IN>(
  *
  * @returns converted value
  */
-export function convert<IN, OUT = IN>(value: IN, schema?: AnySchemaTyped<IN, OUT>): OUT {
+export function convert<T>(value: T, schema?: AnySchema<T>): T {
   if (!schema) return value as any
   const { value: returnValue } = schema.validate(value, defaultOptions)
-  return returnValue
+  return returnValue!
 }
 
 function createError(value: any, err: ValidationError, objectName?: string): JoiValidationError {

@@ -1,6 +1,5 @@
-import { deepFreeze } from '@naturalcycles/dev-lib/dist/testing'
 import type { JsonSchema } from '@naturalcycles/js-lib'
-import { jsonSchema, _try, localTime } from '@naturalcycles/js-lib'
+import { jsonSchema, _try, localTime, _deepFreeze } from '@naturalcycles/js-lib'
 import { inspectAny } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -221,7 +220,7 @@ test('default string', () => {
   } as JsonSchema)
 
   const obj1 = { s: 's' }
-  deepFreeze(obj1)
+  _deepFreeze(obj1)
   schema.validate(obj1)
 
   const obj2 = {}
@@ -246,7 +245,7 @@ test('default object', () => {
   } as JsonSchema)
 
   const obj1 = { o: {} }
-  deepFreeze(obj1)
+  _deepFreeze(obj1)
   schema.validate(obj1)
 
   // Additional props should be removed
@@ -271,7 +270,7 @@ test('transform string', () => {
   } as JsonSchema)
 
   const obj1 = { s: 's' }
-  deepFreeze(obj1)
+  _deepFreeze(obj1)
   schema.validate(obj1)
 
   const obj2 = { s: '   lo Lo lO' }

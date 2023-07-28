@@ -28,7 +28,7 @@
     "fast-glob": "^3.2.11",
     "globby": "^11.0.0",
     "got": "^11.0.1",
-    "joi": "17.4.2",
+    "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "lru-cache": "^10.0.0",
     "through2-concurrent": "^2.0.0",

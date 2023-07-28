@@ -5,7 +5,19 @@ import * as globby from 'globby'
 import type { GlobbyOptions } from 'globby'
 import { RequestError, TimeoutError } from 'got'
 import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
-import type { AnySchema, ValidationErrorItem } from 'joi'
+import type {
+  AnySchema,
+  ValidationErrorItem,
+  AlternativesSchema,
+  ArraySchema,
+  BinarySchema,
+  BooleanSchema,
+  DateSchema,
+  FunctionSchema,
+  NumberSchema,
+  ObjectSchema,
+  StringSchema,
+} from 'joi'
 export * from './buffer/buffer.util'
 export * from './diff/tableDiff'
 export * from './got/getGot'
@@ -86,11 +98,20 @@ export type {
   GlobbyOptions,
   FastGlobOptions,
   ValidationErrorItem,
-  AnySchema,
   Got,
   AfterResponseHook,
   BeforeErrorHook,
   BeforeRequestHook,
+  AlternativesSchema,
+  AnySchema,
+  ArraySchema,
+  BinarySchema,
+  BooleanSchema,
+  DateSchema,
+  FunctionSchema,
+  NumberSchema,
+  ObjectSchema,
+  StringSchema,
 }
 
 export { globby, fastGlob, RequestError, TimeoutError, Ajv }

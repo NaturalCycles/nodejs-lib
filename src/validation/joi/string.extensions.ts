@@ -1,9 +1,8 @@
 import { LocalDate, localTime } from '@naturalcycles/js-lib'
 import { Extension, StringSchema } from 'joi'
 import * as Joi from 'joi'
-import { AnySchemaTyped } from './joi.model'
 
-export interface ExtendedStringSchema extends StringSchema, AnySchemaTyped<string> {
+export interface ExtendedStringSchema<TSchema = string> extends StringSchema<TSchema> {
   dateString: (min?: string, max?: string) => this
 }
 
@@ -28,20 +27,20 @@ export function stringExtensions(joi: typeof Joi): Extension {
         method(min?: string, max?: string) {
           return this.$_addRule({
             name: 'dateString',
-            args: { min, max } as JoiDateStringOptions,
+            args: { min, max } satisfies JoiDateStringOptions,
           })
         },
         args: [
           {
             name: 'min',
-            ref: true,
-            assert: v => typeof v === 'string',
+            // ref: true, // check false
+            assert: v => v === undefined || typeof v === 'string',
             message: 'must be a string',
           },
           {
             name: 'max',
-            ref: true,
-            assert: v => typeof v === 'string',
+            // ref: true,
+            assert: v => v === undefined || typeof v === 'string',
             message: 'must be a string',
           },
         ],

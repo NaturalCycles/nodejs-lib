@@ -1,16 +1,10 @@
 import { BaseDBEntity, SavedDBEntity } from '@naturalcycles/js-lib'
+import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { Joi } from './joi.extensions'
-import {
-  AlternativesSchemaTyped,
-  AnySchemaTyped,
-  ArraySchemaTyped,
-  BooleanSchemaTyped,
-  ObjectSchemaTyped,
-  StringSchemaTyped,
-} from './joi.model'
+import { ExtendedStringSchema } from './string.extensions'
 
-export const booleanSchema = Joi.boolean() as BooleanSchemaTyped
-export const booleanDefaultToFalseSchema = Joi.boolean().default(false) as BooleanSchemaTyped
+export const booleanSchema = Joi.boolean()
+export const booleanDefaultToFalseSchema = Joi.boolean().default(false)
 export const stringSchema = Joi.string()
 export const numberSchema = Joi.number()
 export const integerSchema = Joi.number().integer()
@@ -19,22 +13,20 @@ export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 export const dateObjectSchema = Joi.object().instance(Date)
 
-export const urlSchema = (scheme: string | string[] = 'https'): StringSchemaTyped =>
+export const urlSchema = (scheme: string | string[] = 'https'): ExtendedStringSchema =>
   Joi.string().uri({ scheme })
 
-export function arraySchema<T>(items?: AnySchemaTyped<T, T>): ArraySchemaTyped<T> {
+export function arraySchema<T>(items?: AnySchema<T>): ArraySchema<T[]> {
   return items ? Joi.array().items(items) : Joi.array()
 }
 
-export function objectSchema<IN, OUT = IN>(schema?: {
-  [key in keyof Partial<IN>]: AnySchemaTyped<IN[key]>
-}): ObjectSchemaTyped<IN, OUT> {
+export function objectSchema<T>(schema?: {
+  [key in keyof Partial<T>]: AnySchema<T[key]>
+}): ObjectSchema<T> {
   return Joi.object(schema)
 }
 
-export function oneOfSchema<T = any>(
-  ...schemas: AnySchemaTyped<any>[]
-): AlternativesSchemaTyped<T> {
+export function oneOfSchema<T = any>(...schemas: AnySchema[]): AlternativesSchema<T> {
   return Joi.alternatives(schemas)
 }
 

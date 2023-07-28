@@ -1,7 +1,7 @@
 import { _assert, _errorDataAppend, AnyObject, ErrorData, JWTString } from '@naturalcycles/js-lib'
+import { AnySchema } from 'joi'
 import type { Algorithm, VerifyOptions, JwtHeader, SignOptions } from 'jsonwebtoken'
 import * as jsonwebtoken from 'jsonwebtoken'
-import { AnySchemaTyped } from '../validation/joi/joi.model'
 import { anyObjectSchema } from '../validation/joi/joi.shared.schemas'
 import { validate } from '../validation/joi/joi.validation.util'
 export { jsonwebtoken }
@@ -62,11 +62,7 @@ export interface JWTServiceCfg {
 export class JWTService {
   constructor(public cfg: JWTServiceCfg) {}
 
-  sign<T extends AnyObject>(
-    payload: T,
-    schema?: AnySchemaTyped<T>,
-    opt: SignOptions = {},
-  ): JWTString {
+  sign<T extends AnyObject>(payload: T, schema?: AnySchema<T>, opt: SignOptions = {}): JWTString {
     _assert(
       this.cfg.privateKey,
       'JWTService: privateKey is required to be able to verify, but not provided',
@@ -86,7 +82,7 @@ export class JWTService {
 
   verify<T extends AnyObject>(
     token: JWTString,
-    schema?: AnySchemaTyped<T>,
+    schema?: AnySchema<T>,
     opt: VerifyOptions = {},
     publicKey?: string, // allows to override public key
   ): T {
@@ -119,7 +115,7 @@ export class JWTService {
 
   decode<T extends AnyObject>(
     token: JWTString,
-    schema?: AnySchemaTyped<T>,
+    schema?: AnySchema<T>,
   ): {
     header: JwtHeader
     payload: T
