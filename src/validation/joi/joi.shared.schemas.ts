@@ -28,27 +28,27 @@ export const dateObjectSchema = Joi.object().instance(Date)
 /**
  * Allows all values of a String Enum.
  */
-export const stringEnumValuesSchema = <ENUM extends StringEnum>(
+export const stringEnumValueSchema = <ENUM extends StringEnum>(
   en: ENUM,
 ): StringSchema<ENUM[keyof ENUM]> => Joi.string<ENUM[keyof ENUM]>().allow(..._stringEnumValues(en))
 
 /**
  * Allows all keys of a String Enum.
  */
-export const stringEnumKeysSchema = <ENUM extends StringEnum>(en: ENUM): StringSchema =>
+export const stringEnumKeySchema = <ENUM extends StringEnum>(en: ENUM): StringSchema =>
   Joi.string().allow(..._stringEnumKeys(en))
 
 /**
  * Allows all values of a String Enum.
  */
-export const numberEnumValuesSchema = <ENUM extends NumberEnum>(
+export const numberEnumValueSchema = <ENUM extends NumberEnum>(
   en: ENUM,
 ): NumberSchema<ENUM[keyof ENUM]> => Joi.number<ENUM[keyof ENUM]>().allow(..._numberEnumValues(en))
 
 /**
  * Allows all keys of a Number Enum.
  */
-export const numberEnumKeysSchema = <ENUM extends NumberEnum>(en: ENUM): StringSchema =>
+export const numberEnumKeySchema = <ENUM extends NumberEnum>(en: ENUM): StringSchema =>
   Joi.string().allow(..._numberEnumKeys(en))
 
 export const urlSchema = (scheme: string | string[] = 'https'): StringSchema =>

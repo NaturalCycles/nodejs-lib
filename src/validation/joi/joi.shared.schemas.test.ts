@@ -14,11 +14,11 @@ import {
   stringSchemaTyped,
   stringSchema,
   urlSchema,
-  stringEnumValuesSchema,
-  stringEnumKeysSchema,
+  stringEnumValueSchema,
+  stringEnumKeySchema,
   numberSchemaTyped,
-  numberEnumValuesSchema,
-  numberEnumKeysSchema,
+  numberEnumValueSchema,
+  numberEnumKeySchema,
 } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
@@ -123,18 +123,18 @@ test('enum schemas', () => {
   let os = validate(OS.IOS, stringSchemaTyped<OS>())
   expectTypeOf(os).toEqualTypeOf<OS>()
 
-  os = validate(OS.IOS, stringEnumValuesSchema(OS))
+  os = validate(OS.IOS, stringEnumValueSchema(OS))
   expectTypeOf(os).toEqualTypeOf<OS>()
 
-  const osKey = validate(OS.IOS, stringEnumKeysSchema(OS))
+  const osKey = validate(OS.IOS, stringEnumKeySchema(OS))
   expectTypeOf(osKey).toEqualTypeOf<string>()
 
   let appId = validate(AppId.APP1, numberSchemaTyped<AppId>())
   expectTypeOf(appId).toEqualTypeOf<AppId>()
 
-  appId = validate(AppId.APP1, numberEnumValuesSchema(AppId))
+  appId = validate(AppId.APP1, numberEnumValueSchema(AppId))
   expectTypeOf(appId).toEqualTypeOf<AppId>()
 
-  const appIdKey = validate(AppId[AppId.APP1], numberEnumKeysSchema(AppId))
+  const appIdKey = validate(AppId[AppId.APP1], numberEnumKeySchema(AppId))
   expectTypeOf(appIdKey).toEqualTypeOf<string>()
 })
