@@ -1,7 +1,7 @@
 import * as cp from 'node:child_process'
 import * as path from 'node:path'
 import type { UnixTimestampNumber } from '@naturalcycles/js-lib'
-import { grey } from '../colors'
+import { grey } from '../colors/colors'
 
 export function getLastGitCommitMsg(): string {
   return execSync('git log -1 --pretty=%B')

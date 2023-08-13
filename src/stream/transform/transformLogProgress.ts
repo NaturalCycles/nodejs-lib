@@ -8,8 +8,7 @@ import {
   CommonLogger,
   localTime,
 } from '@naturalcycles/js-lib'
-import { boldWhite, dimGrey, white, yellow } from '../../colors'
-import { hasColors } from '../../colors/colors'
+import { hasColors, boldWhite, dimGrey, white, yellow } from '../../colors/colors'
 import { SizeStack } from '../sizeStack'
 import { TransformOptions, TransformTyped } from '../stream.model'
 

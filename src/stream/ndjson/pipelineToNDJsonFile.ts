@@ -2,7 +2,7 @@ import { createGzip, ZlibOptions } from 'node:zlib'
 import * as fs from 'node:fs'
 import { AppError } from '@naturalcycles/js-lib'
 import { transformTap, _pipeline, _pathExistsSync, _ensureFileSync } from '../..'
-import { grey } from '../../colors'
+import { grey } from '../../colors/colors'
 import { NDJsonStats } from './ndjson.model'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
 

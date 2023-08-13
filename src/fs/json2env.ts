@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
 import { AnyObject } from '@naturalcycles/js-lib'
-import { dimGrey } from '../colors'
+import { dimGrey } from '../colors/colors'
 import { _pathExistsSync, _readJsonSync, _writeFileSync } from './fs.util'
 
 export interface Json2EnvOptions {
@@ -95,7 +95,7 @@ export function appendToBashEnv(obj: AnyObject, prefix = ''): void {
   if (BASH_ENV) {
     const data = objectToShellExport(obj, prefix)
     fs.appendFileSync(BASH_ENV, data)
-    console.log(`BASH_ENV file appended (${dimGrey(BASH_ENV)})\n${data}`)
+    console.log(`BASH_ENV appended:\n${data}`)
   }
 }
 
@@ -104,7 +104,7 @@ export function appendToGithubEnv(obj: AnyObject, prefix = ''): void {
   if (GITHUB_ENV) {
     const data = objectToGithubActionsEnv(obj, prefix)
     fs.appendFileSync(GITHUB_ENV, data)
-    console.log(`GITHUB_ENV file appended (${dimGrey(GITHUB_ENV)})\n${data}`)
+    console.log(`GITHUB_ENV appended:\n${data}`)
   }
 }
 
@@ -113,7 +113,18 @@ export function appendToGithubOutput(obj: AnyObject, prefix = ''): void {
   if (GITHUB_OUTPUT) {
     const data = objectToGithubActionsEnv(obj, prefix)
     fs.appendFileSync(GITHUB_OUTPUT, data)
-    console.log(`GITHUB_OUTPUT file appended (${dimGrey(GITHUB_OUTPUT)})\n${data}`)
+    console.log(`GITHUB_OUTPUT appended:\n${data}`)
+  }
+}
+
+/**
+ * https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
+ */
+export function appendToGithubSummary(str: string): void {
+  const { GITHUB_STEP_SUMMARY } = process.env
+  if (GITHUB_STEP_SUMMARY) {
+    fs.appendFileSync(GITHUB_STEP_SUMMARY, str + '\n')
+    console.log(`GITHUB_STEP_SUMMARY appended:\n${str}`)
   }
 }
 

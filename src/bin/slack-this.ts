@@ -2,7 +2,7 @@
 
 import * as yargs from 'yargs'
 import { SlackService } from '..'
-import { runScript } from '../script'
+import { runScript } from '../script/runScript'
 
 runScript(async () => {
   const {

@@ -1,7 +1,7 @@
 import * as path from 'node:path'
 import * as fs from 'node:fs'
 import { _assert } from '@naturalcycles/js-lib'
-import { dimGrey, yellow } from '../colors'
+import { dimGrey, yellow } from '../colors/colors'
 import { _readJsonSync, _writeJsonSync, fastGlob } from '../index'
 import { decryptObject, decryptRandomIVBuffer } from '../security/crypto.util'
 

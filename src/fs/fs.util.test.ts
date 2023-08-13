@@ -1,3 +1,4 @@
+import * as fs from 'node:fs'
 import { testDir } from '../test/paths.cnst'
 import {
   _ensureDir,
@@ -10,6 +11,7 @@ import {
   _readFileSync,
   _readJson,
   _readJsonSync,
+  fs2,
 } from './fs.util'
 
 test('readFile', async () => {
@@ -42,4 +44,8 @@ test('readFile', async () => {
   await _ensureDir(testDir)
   _ensureFileSync(someFilePath)
   await _ensureFile(someFilePath)
+})
+
+test('extends native fs', () => {
+  expect(fs2.createWriteStream).toBe(fs.createWriteStream)
 })

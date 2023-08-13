@@ -8,7 +8,7 @@ import { createWriteStream } from 'node:fs'
 import * as fs from 'node:fs'
 import { _range } from '@naturalcycles/js-lib'
 import { readableFromArray, transformToNDJson, _pipeline } from '../src'
-import { runScript } from '../src/script'
+import { runScript } from '../src/script/runScript'
 import { ndjsonMap } from '../src'
 import { tmpDir } from '../src/test/paths.cnst'
 

@@ -2,7 +2,7 @@
 
 import * as yargs from 'yargs'
 import { delSync } from '../fs/del'
-import { runScript } from '../script'
+import { runScript } from '../script/runScript'
 
 runScript(async () => {
   const { _: patterns, ...opt } = yargs.demandCommand(1).options({

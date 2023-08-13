@@ -1,7 +1,7 @@
 import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
 import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
-import { json2env, kpy, kpySync } from './index'
+import { json2env, kpy, kpySync } from '../'
 
 beforeEach(() => {
   jest.spyOn(fs, 'writeFileSync').mockImplementation()

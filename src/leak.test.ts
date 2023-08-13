@@ -1,7 +1,7 @@
 test('should not leak', () => {
   require('.')
-  require('./script')
-  require('./colors')
+  require('./script/runScript')
+  require('./colors/colors')
 })
 
 export {}

@@ -2,7 +2,7 @@ import { createUnzip, ZlibOptions } from 'node:zlib'
 import * as fs from 'node:fs'
 import { _hb } from '@naturalcycles/js-lib'
 import { transformTap, _pipeline, transformSplit } from '../..'
-import { dimWhite, grey } from '../../colors'
+import { dimWhite, grey } from '../../colors/colors'
 import { NDJsonStats } from './ndjson.model'
 import { transformJsonParse, TransformJsonParseOptions } from './transformJsonParse'
 

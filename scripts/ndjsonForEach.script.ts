@@ -5,7 +5,7 @@ yarn tsn ndjsonForEach.script
  */
 
 import { ndjsonStreamForEach } from '../src'
-import { runScript } from '../src/script'
+import { runScript } from '../src/script/runScript'
 import { tmpDir } from '../src/test/paths.cnst'
 
 runScript(async () => {

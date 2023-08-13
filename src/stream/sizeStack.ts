@@ -1,5 +1,5 @@
 import { _hb, CommonLogger, NumberStack } from '@naturalcycles/js-lib'
-import { yellow } from '../colors'
+import { yellow } from '../colors/colors'
 import { gzipBuffer } from '../util/zip.util'
 
 export class SizeStack extends NumberStack {

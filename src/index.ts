@@ -88,9 +88,12 @@ export * from './validation/joi/joi.model'
 export * from './validation/joi/joi.shared.schemas'
 export * from './validation/joi/joi.validation.error'
 export * from './validation/joi/joi.validation.util'
-export * from './script'
+export * from './script/runScript'
 export * from './jwt/jwt.service'
 export * from './fs/fs.util'
+export * from './fs/del'
+export * from './fs/json2env'
+export * from './fs/kpy'
 
 export type {
   GlobbyOptions,

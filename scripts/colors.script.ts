@@ -5,8 +5,8 @@ yarn tsn colors.script.ts
  */
 
 import { Color, Modifiers } from 'chalk'
-import { chalk } from '../src/colors'
-import { runScript } from '../src/script'
+import { chalk } from '../src/colors/colors'
+import { runScript } from '../src/script/runScript'
 
 const s = 'Hello World! 1 2 3 4 5ms'
 

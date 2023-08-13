@@ -9,7 +9,7 @@ import {
   SKIP,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
-import { yellow } from '../../colors'
+import { yellow } from '../../colors/colors'
 import { AbortableTransform } from '../pipeline/pipeline'
 import { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'

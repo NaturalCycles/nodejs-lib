@@ -19,6 +19,48 @@ import * as fsp from 'node:fs/promises'
 import * as path from 'node:path'
 import { _jsonParse } from '@naturalcycles/js-lib'
 
+/**
+ * fs2 conveniently groups filesystem functions together.
+ * Supposed to be almost a drop-in replacement for these things together:
+ *
+ * 1. node:fs
+ * 2. node:fs/promises
+ * 3. fs-extra
+ */
+export const fs2 = {
+  // "Omit" is here to workaround this TS error:
+  // Exported variable 'fs2' has or is using name 'StreamOptions' from external module "fs" but cannot be named.
+  ...(fs as Omit<typeof fs, 'StreamOptions'>),
+  readFile: _readFile,
+  readFileSync: _readFileSync,
+  readFileAsBuffer: _readFileAsBuffer,
+  readFileAsBufferSync: _readFileAsBufferSync,
+  readJson: _readJson,
+  readJsonSync: _readJsonSync,
+  writeFile: _writeFile,
+  writeFileSync: _writeFileSync,
+  outputJson: _outputJson,
+  outputJsonSync: _outputJsonSync,
+  writeJson: _writeJson,
+  writeJsonSync: _writeJsonSync,
+  outputFile: _outputFile,
+  outputFileSync: _outputFileSync,
+  pathExists: _pathExists,
+  pathExistsSync: _pathExistsSync,
+  ensureDir: _ensureDir,
+  ensureDirSync: _ensureDirSync,
+  ensureFile: _ensureFile,
+  ensureFileSync: _ensureFileSync,
+  removePath: _removePath,
+  removePathSync: _removePathSync,
+  emptyDir: _emptyDir,
+  emptyDirSync: _emptyDirSync,
+  copyPath: _copyPath,
+  copyPathSync: _copyPathSync,
+  movePath: _movePath,
+  movePathSync: _movePathSync,
+}
+
 export interface JsonOptions {
   spaces?: number
 }
@@ -30,6 +72,10 @@ export async function _readFile(filePath: string): Promise<string> {
   return await fsp.readFile(filePath, 'utf8')
 }
 
+export async function _readFileAsBuffer(filePath: string): Promise<Buffer> {
+  return await fsp.readFile(filePath)
+}
+
 /**
  * Convenience wrapper that defaults to utf-8 string output.
  */
@@ -37,25 +83,22 @@ export function _readFileSync(filePath: string): string {
   return fs.readFileSync(filePath, 'utf8')
 }
 
+/**
+ * Convenience wrapper that defaults to utf-8 string output.
+ */
+export function _readFileAsBufferSync(filePath: string): Buffer {
+  return fs.readFileSync(filePath)
+}
+
 export async function _readJson<T = unknown>(filePath: string): Promise<T> {
   const str = await fsp.readFile(filePath, 'utf8')
   return _jsonParse(str)
 }
 
-/**
- * @deprecated use _readJson
- */
-export const _readJsonFile = _readJson
-
 export function _readJsonSync<T = unknown>(filePath: string): T {
   const str = fs.readFileSync(filePath, 'utf8')
   return _jsonParse(str)
 }
-
-/**
- * @deprecated use _readJsonSync
- */
-export const _readJsonFileSync = _readJsonSync
 
 export async function _writeFile(filePath: string, data: string | Buffer): Promise<void> {
   await fsp.writeFile(filePath, data)
@@ -88,40 +131,20 @@ export async function _writeJson(filePath: string, data: any, opt?: JsonOptions)
   await fsp.writeFile(filePath, str)
 }
 
-/**
- * @deprecated use _writeJson
- */
-export const _writeJsonFile = _writeJson
-
 export function _writeJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
   const str = JSON.stringify(data, null, opt?.spaces)
   fs.writeFileSync(filePath, str)
 }
-
-/**
- * @deprecated use _writeJsonSync
- */
-export const _writeJsonFileSync = _writeJsonSync
 
 export async function _outputJson(filePath: string, data: any, opt?: JsonOptions): Promise<void> {
   const str = JSON.stringify(data, null, opt?.spaces)
   await _outputFile(filePath, str)
 }
 
-/**
- * @deprecated use _outputJson
- */
-export const _outputJsonFile = _outputJson
-
 export function _outputJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
   const str = JSON.stringify(data, null, opt?.spaces)
   _outputFileSync(filePath, str)
 }
-
-/**
- * @deprecated use _outputJsonSync
- */
-export const _outputJsonFileSync = _outputJsonSync
 
 export async function _pathExists(filePath: string): Promise<boolean> {
   try {

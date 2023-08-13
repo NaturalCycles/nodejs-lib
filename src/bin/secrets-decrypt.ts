@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import * as yargs from 'yargs'
-import { dimGrey } from '../colors'
-import { runScript } from '../script'
+import { dimGrey } from '../colors/colors'
+import { runScript } from '../script/runScript'
 import { DecryptCLIOptions, secretsDecrypt } from '../secret/secrets-decrypt.util'
 
 runScript(() => {
