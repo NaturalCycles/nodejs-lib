@@ -19,4 +19,4 @@ test('transformMultiThreaded', async () => {
 
   // console.log(items2)
   expect(items2.sort((a, b) => (a.id < b.id ? -1 : 1))).toEqual(items.filter(i => i.id <= 10))
-})
+}, 10_000)

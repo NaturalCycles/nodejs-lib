@@ -8,7 +8,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/119a3b4735c4ed81cf84/maintainability)](https://codeclimate.com/github/NaturalCycles/nodejs-lib/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/119a3b4735c4ed81cf84/test_coverage)](https://codeclimate.com/github/NaturalCycles/nodejs-lib/test_coverage)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Actions](https://github.com/NaturalCycles/nodejs-lib/workflows/default/badge.svg)](https://github.com/NaturalCycles/nodejs-lib/actions)
+[![Actions](https://github.com/NaturalCycles/nodejs-lib/workflows/ci/badge.svg)](https://github.com/NaturalCycles/nodejs-lib/actions)
 
 # [Documentation](https://naturalcycles.github.io/nodejs-lib/)
 

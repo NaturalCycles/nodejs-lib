@@ -1,14 +1,13 @@
-name: release
-
 on:
   push:
     branches: [master, next, act]
 
+env:
+  NODE_OPTIONS: --max-old-space-size=3200
+
 jobs:
   release-job:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
-    env: { NODE_OPTIONS: '--max-old-space-size=3200' }
     steps:
       - { uses: actions/checkout@v3, with: { persist-credentials: true } }
       - { uses: actions/setup-node@v3, with: { node-version: 18, cache: 'yarn' } }
@@ -19,11 +18,8 @@ jobs:
           path: ~/.npm
           key: npm-v1-${{ runner.os }}
 
-      - name: yarn
-        run: yarn --frozen-lockfile
-
-      - name: build
-        run: yarn build-prod
+      - run: yarn --frozen-lockfile
+      - run: yarn build-prod
 
       - name: release
         env:

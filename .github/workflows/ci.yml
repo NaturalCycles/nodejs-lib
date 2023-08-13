@@ -1,0 +1,25 @@
+on: [push, workflow_dispatch]
+
+env:
+  NODE_OPTIONS: --max-old-space-size=3200
+  CC_TEST_REPORTER_ID: de1dd499aa47f47e03c811b848134442d267f451ac39e2bf6b242c7ad0fd8e28
+
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+    steps:
+      - { uses: actions/checkout@v3, with: { persist-credentials: false } }
+      - { uses: actions/setup-node@v3, with: { node-version: 18, cache: 'yarn' } }
+
+      - name: deps
+        run: yarn --frozen-lockfile
+
+      - name: build
+        run: yarn build
+
+      - name: test
+        run: |
+          curl -s -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+          yarn test
+          ./cc-test-reporter after-build -t lcov
