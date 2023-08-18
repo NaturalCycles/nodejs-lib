@@ -126,23 +126,28 @@ export function _outputFileSync(filePath: string, data: string | Buffer): void {
   fs.writeFileSync(filePath, data)
 }
 
+function stringify(data: any, opt?: JsonOptions): string {
+  // If pretty-printing is enabled (spaces) - also add a newline at the end (to match our prettier config)
+  return JSON.stringify(data, null, opt?.spaces) + (opt?.spaces ? '\n' : '')
+}
+
 export async function _writeJson(filePath: string, data: any, opt?: JsonOptions): Promise<void> {
-  const str = JSON.stringify(data, null, opt?.spaces)
+  const str = stringify(data, opt)
   await fsp.writeFile(filePath, str)
 }
 
 export function _writeJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
-  const str = JSON.stringify(data, null, opt?.spaces)
+  const str = stringify(data, opt)
   fs.writeFileSync(filePath, str)
 }
 
 export async function _outputJson(filePath: string, data: any, opt?: JsonOptions): Promise<void> {
-  const str = JSON.stringify(data, null, opt?.spaces)
+  const str = stringify(data, opt)
   await _outputFile(filePath, str)
 }
 
 export function _outputJsonSync(filePath: string, data: any, opt?: JsonOptions): void {
-  const str = JSON.stringify(data, null, opt?.spaces)
+  const str = stringify(data, opt)
   _outputFileSync(filePath, str)
 }
 
