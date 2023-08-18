@@ -8,16 +8,17 @@ import {
   encryptString,
 } from './crypto.util'
 
+const encKeyBuffer = Buffer.from(TEST_ENC_KEY, 'base64')
+
 test('testEncKeySize', () => {
-  const key = Buffer.from(TEST_ENC_KEY, 'base64')
-  expect(key.length).toBe(256)
+  expect(encKeyBuffer.length).toBe(256)
 })
 
 test('encryptBuffer, decryptBuffer', () => {
   const plainStr = 'hello!@#123'
   const plain = Buffer.from(plainStr, 'utf8')
-  const enc = encryptRandomIVBuffer(plain, TEST_ENC_KEY)
-  const dec = decryptRandomIVBuffer(enc, TEST_ENC_KEY)
+  const enc = encryptRandomIVBuffer(plain, encKeyBuffer)
+  const dec = decryptRandomIVBuffer(enc, encKeyBuffer)
   const decStr = dec.toString('utf8')
   expect(dec).toStrictEqual(plain)
   expect(decStr).toBe(plainStr)
@@ -26,22 +27,22 @@ test('encryptBuffer, decryptBuffer', () => {
 test('encryptBuffer should not be deterministic', () => {
   const plainStr = 'hello!@#123'
   const plain = Buffer.from(plainStr, 'utf8')
-  const enc1 = encryptRandomIVBuffer(plain, TEST_ENC_KEY)
-  const enc2 = encryptRandomIVBuffer(plain, TEST_ENC_KEY)
+  const enc1 = encryptRandomIVBuffer(plain, encKeyBuffer)
+  const enc2 = encryptRandomIVBuffer(plain, encKeyBuffer)
   expect(enc1).not.toStrictEqual(enc2)
 })
 
 test('encryptString, decryptString', () => {
   const plain = 'hello!@#123'
-  const enc = encryptString(plain, TEST_ENC_KEY)
-  const dec = decryptString(enc, TEST_ENC_KEY)
+  const enc = encryptString(plain, encKeyBuffer)
+  const dec = decryptString(enc, encKeyBuffer)
   expect(dec).toStrictEqual(plain)
 })
 
 test('encryptString should be deterministic', () => {
   const plain = 'hello!@#123'
-  const enc1 = encryptString(plain, TEST_ENC_KEY)
-  const enc2 = encryptString(plain, TEST_ENC_KEY)
+  const enc1 = encryptString(plain, encKeyBuffer)
+  const enc2 = encryptString(plain, encKeyBuffer)
   expect(enc2).toBe(enc1)
 })
 
@@ -51,19 +52,19 @@ test('encryptObject, decryptObject', () => {
     b: 'bbb',
   }
 
-  const enc = encryptObject(obj1, TEST_ENC_KEY)
-  const obj2 = decryptObject(enc, TEST_ENC_KEY)
+  const enc = encryptObject(obj1, encKeyBuffer)
+  const obj2 = decryptObject(enc, encKeyBuffer)
   expect(obj2).toEqual(obj1)
   // eslint-disable-next-line jest/prefer-equality-matcher
   expect(obj2 === obj1).toBe(false)
 
   expect(enc).toMatchInlineSnapshot(`
     {
-      "a": "wgYkdhDuRgmLSWkpfGGW/A==",
-      "b": "5q89bvl+K55gbEWxKWDScA==",
+      "a": "Z0/b6KRhob1dn7128Nu7UQ==",
+      "b": "Bg13TAXhqGoKZhZznomdWA==",
     }
   `)
 
   // Should be deterministic:
-  expect(encryptObject(obj1, TEST_ENC_KEY)).toEqual(enc)
+  expect(encryptObject(obj1, encKeyBuffer)).toEqual(enc)
 })

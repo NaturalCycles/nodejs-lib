@@ -6,9 +6,9 @@ import { runScript } from '../script/runScript'
 import { DecryptCLIOptions, secretsDecrypt } from '../secret/secrets-decrypt.util'
 
 runScript(() => {
-  const { dir, file, encKey, del, jsonMode } = getDecryptCLIOptions()
+  const { dir, file, encKeyBuffer, del, jsonMode } = getDecryptCLIOptions()
 
-  secretsDecrypt(dir, file, encKey, del, jsonMode)
+  secretsDecrypt(dir, file, encKeyBuffer, del, jsonMode)
 })
 
 function getDecryptCLIOptions(): DecryptCLIOptions {
@@ -27,7 +27,7 @@ function getDecryptCLIOptions(): DecryptCLIOptions {
     },
     encKey: {
       type: 'string',
-      desc: 'Encryption key',
+      desc: 'Encryption key as base64 encoded string',
       // demandOption: true,
       // default: process.env.SECRET_ENCRYPTION_KEY!,
     },
@@ -63,6 +63,8 @@ function getDecryptCLIOptions(): DecryptCLIOptions {
     }
   }
 
+  const encKeyBuffer = Buffer.from(encKey, 'base64')
+
   // `as any` because @types/yargs can't handle string[] type properly
-  return { dir: dir as any, file, encKey, del, jsonMode }
+  return { dir: dir as any, file, encKeyBuffer, del, jsonMode }
 }

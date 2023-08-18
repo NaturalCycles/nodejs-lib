@@ -62,7 +62,8 @@ export function loadSecretsFromEncryptedJsonFile(
 
   if (secretEncryptionKey) {
     const buf = fs.readFileSync(filePath)
-    const plain = decryptRandomIVBuffer(buf, secretEncryptionKey).toString('utf8')
+    const encKeyBuffer = Buffer.from(secretEncryptionKey, 'base64')
+    const plain = decryptRandomIVBuffer(buf, encKeyBuffer).toString('utf8')
     secrets = JSON.parse(plain)
   } else {
     secrets = JSON.parse(fs.readFileSync(filePath, 'utf8'))
@@ -94,7 +95,8 @@ export function loadSecretsFromEncryptedJsonFileValues(
   let secrets: StringMap = JSON.parse(fs.readFileSync(filePath, 'utf8'))
 
   if (secretEncryptionKey) {
-    secrets = decryptObject(secrets, secretEncryptionKey)
+    const encKeyBuffer = Buffer.from(secretEncryptionKey, 'base64')
+    secrets = decryptObject(secrets, encKeyBuffer)
   }
 
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))

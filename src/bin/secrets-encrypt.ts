@@ -6,9 +6,9 @@ import { runScript } from '../script/runScript'
 import { EncryptCLIOptions, secretsEncrypt } from '../secret/secrets-encrypt.util'
 
 runScript(() => {
-  const { pattern, file, encKey, del, jsonMode } = getEncryptCLIOptions()
+  const { pattern, file, encKeyBuffer, del, jsonMode } = getEncryptCLIOptions()
 
-  secretsEncrypt(pattern, file, encKey, del, jsonMode)
+  secretsEncrypt(pattern, file, encKeyBuffer, del, jsonMode)
 })
 
 function getEncryptCLIOptions(): EncryptCLIOptions {
@@ -18,7 +18,7 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
     pattern: {
       type: 'string',
       array: true,
-      desc: 'Globby pattern for secrets. Can be many.',
+      desc: 'Globby pattern for secrets. Can be multiple.',
       // demandOption: true,
       default: './secret/**',
     },
@@ -28,7 +28,7 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
     },
     encKey: {
       type: 'string',
-      desc: 'Encryption key',
+      desc: 'Encryption key as base64 encoded string',
       // demandOption: true,
       // default: process.env.SECRET_ENCRYPTION_KEY!,
     },
@@ -65,6 +65,8 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
     }
   }
 
+  const encKeyBuffer = Buffer.from(encKey, 'base64')
+
   // `as any` because @types/yargs can't handle string[] type properly
-  return { pattern: pattern as any, file, encKey, del, jsonMode }
+  return { pattern: pattern as any, file, encKeyBuffer, del, jsonMode }
 }

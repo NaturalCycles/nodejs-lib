@@ -8,7 +8,7 @@ import { encryptObject, encryptRandomIVBuffer } from '../security/crypto.util'
 export interface EncryptCLIOptions {
   pattern: string[]
   file?: string
-  encKey: string
+  encKeyBuffer: Buffer
   del?: boolean
   jsonMode?: boolean
 }
@@ -20,7 +20,7 @@ export interface EncryptCLIOptions {
 export function secretsEncrypt(
   pattern: string[],
   file: string | undefined,
-  encKey: string,
+  encKeyBuffer: Buffer,
   del = false,
   jsonMode = false,
 ): void {
@@ -41,12 +41,12 @@ export function secretsEncrypt(
       )
       encFilename = filename.replace('.plain', '')
 
-      const json = encryptObject(_readJsonSync(filename), encKey)
+      const json = encryptObject(_readJsonSync(filename), encKeyBuffer)
 
       _writeJsonSync(encFilename, json, { spaces: 2 })
     } else {
       const plain = fs.readFileSync(filename)
-      const enc = encryptRandomIVBuffer(plain, encKey)
+      const enc = encryptRandomIVBuffer(plain, encKeyBuffer)
       encFilename = `${filename}.enc`
       fs.writeFileSync(encFilename, enc)
     }

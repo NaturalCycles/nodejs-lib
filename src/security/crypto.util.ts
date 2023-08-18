@@ -1,15 +1,15 @@
 import * as crypto from 'node:crypto'
 import { _stringMapEntries, Base64String, StringMap } from '@naturalcycles/js-lib'
-import { md5 } from './hash.util'
+import { md5AsBuffer, sha256AsBuffer } from './hash.util'
 
 const algorithm = 'aes-256-cbc'
 
 /**
- * Using aes-256-cbc
+ * Using aes-256-cbc.
  */
-export function encryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64String): Buffer {
-  // md5 to match aes-256 key length of 32 bytes
-  const key = md5(Buffer.from(secretKeyBase64, 'base64'))
+export function encryptRandomIVBuffer(input: Buffer, secretKeyBuffer: Buffer): Buffer {
+  // sha256 to match aes-256 key length
+  const key = sha256AsBuffer(secretKeyBuffer)
 
   // Random iv to achieve non-deterministic encryption (but deterministic decryption)
   const iv = crypto.randomBytes(16)
@@ -19,11 +19,11 @@ export function encryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64Stri
 }
 
 /**
- * Using aes-256-cbc
+ * Using aes-256-cbc.
  */
-export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64String): Buffer {
-  // md5 to match aes-256 key length of 32 bytes
-  const key = md5(Buffer.from(secretKeyBase64, 'base64'))
+export function decryptRandomIVBuffer(input: Buffer, secretKeyBuffer: Buffer): Buffer {
+  // sha256 to match aes-256 key length
+  const key = sha256AsBuffer(secretKeyBuffer)
 
   // iv is first 16 bytes of encrypted buffer, the rest is payload
   const iv = input.subarray(0, 16)
@@ -35,11 +35,11 @@ export function decryptRandomIVBuffer(input: Buffer, secretKeyBase64: Base64Stri
 }
 
 /**
- * Decrypts all object values.
- * Returns object with decrypted values.
+ * Decrypts all object values (base64 strings).
+ * Returns object with decrypted values (utf8 strings).
  */
-export function decryptObject(obj: StringMap<Base64String>, secretKey: string): StringMap {
-  const { key, iv } = getCryptoParams(secretKey)
+export function decryptObject(obj: StringMap<Base64String>, secretKeyBuffer: Buffer): StringMap {
+  const { key, iv } = getCryptoParams(secretKeyBuffer)
 
   const r: StringMap = {}
   _stringMapEntries(obj).forEach(([k, v]) => {
@@ -49,8 +49,12 @@ export function decryptObject(obj: StringMap<Base64String>, secretKey: string): 
   return r
 }
 
-export function encryptObject(obj: StringMap, secretKey: string): StringMap<Base64String> {
-  const { key, iv } = getCryptoParams(secretKey)
+/**
+ * Encrypts all object values (utf8 strings).
+ * Returns object with encrypted values (base64 strings).
+ */
+export function encryptObject(obj: StringMap, secretKeyBuffer: Buffer): StringMap<Base64String> {
+  const { key, iv } = getCryptoParams(secretKeyBuffer)
 
   const r: StringMap = {}
   _stringMapEntries(obj).forEach(([k, v]) => {
@@ -61,25 +65,31 @@ export function encryptObject(obj: StringMap, secretKey: string): StringMap<Base
 }
 
 /**
- * Using aes-256-cbc
+ * Using aes-256-cbc.
+ *
+ * Input is base64 string.
+ * Output is utf8 string.
  */
-export function decryptString(str: Base64String, secretKey: string): string {
-  const { key, iv } = getCryptoParams(secretKey)
+export function decryptString(str: Base64String, secretKeyBuffer: Buffer): string {
+  const { key, iv } = getCryptoParams(secretKeyBuffer)
   const decipher = crypto.createDecipheriv(algorithm, key, iv)
   return decipher.update(str, 'base64', 'utf8') + decipher.final('utf8')
 }
 
 /**
- * Using aes-256-cbc
+ * Using aes-256-cbc.
+ *
+ * Input is utf8 string.
+ * Output is base64 string.
  */
-export function encryptString(str: string, secretKey: string): Base64String {
-  const { key, iv } = getCryptoParams(secretKey)
+export function encryptString(str: string, secretKeyBuffer: Buffer): Base64String {
+  const { key, iv } = getCryptoParams(secretKeyBuffer)
   const cipher = crypto.createCipheriv(algorithm, key, iv)
   return cipher.update(str, 'utf8', 'base64') + cipher.final('base64')
 }
 
-function getCryptoParams(secretKey: string): { key: string; iv: string } {
-  const key = md5(secretKey)
-  const iv = md5(secretKey + key).slice(0, 16)
+function getCryptoParams(secretKeyBuffer: Buffer): { key: Buffer; iv: Buffer } {
+  const key = sha256AsBuffer(secretKeyBuffer)
+  const iv = md5AsBuffer(Buffer.concat([secretKeyBuffer, key]))
   return { key, iv }
 }
