@@ -3,8 +3,6 @@ import * as fastGlob from 'fast-glob'
 import type { Options as FastGlobOptions } from 'fast-glob'
 import * as globby from 'globby'
 import type { GlobbyOptions } from 'globby'
-import { RequestError, TimeoutError } from 'got'
-import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Got } from 'got'
 import type {
   AnySchema,
   ValidationErrorItem,
@@ -18,8 +16,6 @@ import type {
 } from 'joi'
 export * from './buffer/buffer.util'
 export * from './diff/tableDiff'
-export * from './got/getGot'
-export * from './got/got.model'
 export * from './infra/process.util'
 export * from './log/debug'
 export * from './security/hash.util'
@@ -99,10 +95,6 @@ export type {
   GlobbyOptions,
   FastGlobOptions,
   ValidationErrorItem,
-  Got,
-  AfterResponseHook,
-  BeforeErrorHook,
-  BeforeRequestHook,
   AlternativesSchema,
   AnySchema,
   ArraySchema,
@@ -116,4 +108,4 @@ export type {
   // StringSchema,
 }
 
-export { globby, fastGlob, RequestError, TimeoutError, Ajv }
+export { globby, fastGlob, Ajv }

@@ -1602,9 +1602,9 @@
     yargs "^17.0.0"
 
 "@naturalcycles/nodejs-lib@^13.0.1":
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.0.1.tgz#bf62b667c2aa8f702c8ff4adff78e2b98a4caa22"
-  integrity sha512-61nUKekYBWkQ1AAwFnyW7WjDq0wLraESA1w3Rx04BiJX5Zp5MV8EX23NBYLImTQ8Vc1WLdG2m7ilH9qImp9oIw==
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.0.2.tgz#b6f3197647833b1a7c046f95803a79b181f9137c"
+  integrity sha512-TXtnK+dgxlhtHHKQB3Ez9LI/1UAwH3Jrwiqp038kf12DQ34kswK+bu9D2Rfz2VWYn4CJ727k9eatC4y42XDChA==
   dependencies:
     "@naturalcycles/js-lib" "^14.0.0"
     "@types/jsonwebtoken" "^9.0.0"
