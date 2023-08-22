@@ -27,6 +27,8 @@ export interface JoiValidationErrorData extends ErrorData {
 
 export class JoiValidationError extends AppError<JoiValidationErrorData> {
   constructor(message: string, data: JoiValidationErrorData) {
-    super(message, data)
+    super(message, data, {
+      name: 'JoiValidationError',
+    })
   }
 }

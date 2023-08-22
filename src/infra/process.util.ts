@@ -40,7 +40,7 @@ export function memoryUsageFull(): {
 }
 
 class ProcessUtil {
-  private timer!: NodeJS.Timer
+  private timer!: NodeJS.Timeout
 
   startMemoryTimer(intervalMillis = 1000): void {
     console.log(memoryUsage())

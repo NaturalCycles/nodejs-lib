@@ -9,6 +9,8 @@ export interface AjvValidationErrorData extends ErrorData {
 
 export class AjvValidationError extends AppError<AjvValidationErrorData> {
   constructor(message: string, data: AjvValidationErrorData) {
-    super(message, data)
+    super(message, data, {
+      name: 'AjvValidationError',
+    })
   }
 }
