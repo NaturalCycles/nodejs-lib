@@ -1,4 +1,4 @@
-import * as crypto from 'node:crypto'
+import crypto from 'node:crypto'
 import { Base64String } from '@naturalcycles/js-lib'
 
 export function md5(s: string | Buffer): string {

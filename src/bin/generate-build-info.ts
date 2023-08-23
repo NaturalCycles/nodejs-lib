@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import * as fs from 'node:fs'
-import * as path from 'node:path'
-import * as yargs from 'yargs'
+import fs from 'node:fs'
+import path from 'node:path'
+import yargs from 'yargs'
 import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env'
 import { runScript } from '../script/runScript'
 import { generateBuildInfo } from '../util/buildInfo.util'

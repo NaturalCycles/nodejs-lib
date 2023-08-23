@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { testDir } from '../test/paths.cnst'
 import {
   _ensureDir,

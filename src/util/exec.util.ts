@@ -1,5 +1,5 @@
 import type { ProcessEnvOptions, SpawnOptions } from 'node:child_process'
-import * as cp from 'node:child_process'
+import cp from 'node:child_process'
 
 export async function execVoidCommand(
   cmd: string,

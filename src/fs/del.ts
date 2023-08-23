@@ -1,5 +1,5 @@
-import * as fs from 'node:fs'
-import * as fsp from 'node:fs/promises'
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import { pFilter, pMap, _since } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
 import { _pathExists, _pathExistsSync, globby } from '../index'

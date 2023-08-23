@@ -14,9 +14,9 @@ Credit to: fs-extra (https://github.com/jprichardson/node-fs-extra)
 
  */
 
-import * as fs from 'node:fs'
-import * as fsp from 'node:fs/promises'
-import * as path from 'node:path'
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
+import path from 'node:path'
 import { _jsonParse } from '@naturalcycles/js-lib'
 
 /**

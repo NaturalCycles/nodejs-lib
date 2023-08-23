@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as yargs from 'yargs'
+import yargs from 'yargs'
 import { json2env } from '../fs/json2env'
 import { runScript } from '../script/runScript'
 

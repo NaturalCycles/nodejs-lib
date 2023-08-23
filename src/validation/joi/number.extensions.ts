@@ -1,4 +1,4 @@
-import * as Joi from 'joi'
+import Joi from 'joi'
 import { Extension, NumberSchema as JoiNumberSchema } from 'joi'
 
 export interface NumberSchema<TSchema = number> extends JoiNumberSchema<TSchema> {

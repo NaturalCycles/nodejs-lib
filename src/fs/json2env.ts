@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { AnyObject } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors/colors'
 import { _pathExistsSync, _readJsonSync, _writeFileSync } from './fs.util'

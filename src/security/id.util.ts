@@ -1,4 +1,4 @@
-import * as crypto from 'node:crypto'
+import crypto from 'node:crypto'
 import {
   ALPHABET_ALPHANUMERIC,
   ALPHABET_ALPHANUMERIC_LOWERCASE,

@@ -1,4 +1,4 @@
-import * as path from 'node:path'
+import path from 'node:path'
 import { _since } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
 import {

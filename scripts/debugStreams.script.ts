@@ -4,7 +4,7 @@ yarn tsn debugStreams
 
  */
 
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { Readable, Writable } from 'node:stream'
 import { createUnzip } from 'node:zlib'
 import { pDelay } from '@naturalcycles/js-lib'

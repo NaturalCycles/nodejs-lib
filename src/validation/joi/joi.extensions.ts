@@ -1,4 +1,4 @@
-import * as JoiLib from 'joi'
+import JoiLib from 'joi'
 import { NumberSchema, numberExtensions } from './number.extensions'
 import { StringSchema, stringExtensions } from './string.extensions'
 

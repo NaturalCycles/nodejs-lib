@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { secretDir } from '../test/paths.cnst'
 import { TEST_ENC_KEY } from '../test/test.cnst'
 import { secretsDecrypt } from './secrets-decrypt.util'

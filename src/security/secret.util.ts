@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { _assert, _jsonParseIfPossible, Base64String, StringMap } from '@naturalcycles/js-lib'
 import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 

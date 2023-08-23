@@ -1,5 +1,5 @@
-import * as tty from 'node:tty'
-import * as chalk from 'chalk'
+import tty from 'node:tty'
+import chalk from 'chalk'
 
 export { chalk }
 

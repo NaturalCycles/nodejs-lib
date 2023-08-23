@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { createUnzip } from 'node:zlib'
 import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {

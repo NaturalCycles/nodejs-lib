@@ -1,5 +1,5 @@
-import * as cp from 'node:child_process'
-import * as path from 'node:path'
+import cp from 'node:child_process'
+import path from 'node:path'
 import type { UnixTimestampNumber } from '@naturalcycles/js-lib'
 import { grey } from '../colors/colors'
 

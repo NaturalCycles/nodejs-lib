@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import * as crypto from 'node:crypto'
-import * as yargs from 'yargs'
+import crypto from 'node:crypto'
+import yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
 

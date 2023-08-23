@@ -1,7 +1,7 @@
 import Ajv from 'ajv'
-import * as fastGlob from 'fast-glob'
+import fastGlob from 'fast-glob'
 import type { Options as FastGlobOptions } from 'fast-glob'
-import * as globby from 'globby'
+import globby from 'globby'
 import type { GlobbyOptions } from 'globby'
 import type {
   AnySchema,

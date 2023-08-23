@@ -5,7 +5,7 @@ yarn tsn ndjsonMap.script
  */
 
 import { createWriteStream } from 'node:fs'
-import * as fs from 'node:fs'
+import fs from 'node:fs'
 import { _range } from '@naturalcycles/js-lib'
 import { readableFromArray, transformToNDJson, _pipeline } from '../src'
 import { runScript } from '../src/script/runScript'
