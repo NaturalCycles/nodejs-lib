@@ -224,7 +224,7 @@ export function transformLogProgress<IN = any>(
     lastSecondStarted = now
     processedLastSecond = 0
 
-    const rps10 = Math.round(sma.push(lastRPS))
+    const rps10 = Math.round(sma.pushGetAvg(lastRPS))
     if (mem.rss > peakRSS) peakRSS = mem.rss
 
     const o: LogItem = {
