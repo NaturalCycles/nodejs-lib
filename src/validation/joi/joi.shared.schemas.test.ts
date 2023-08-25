@@ -1,5 +1,5 @@
-import { BaseDBEntity } from '@naturalcycles/js-lib'
 import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
+import { BaseDBEntity } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import {
   baseDBEntitySchema,

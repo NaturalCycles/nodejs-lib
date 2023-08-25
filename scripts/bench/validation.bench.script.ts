@@ -14,8 +14,8 @@ import {
   objectSchema,
   stringSchema,
   validate,
+  runScript,
 } from '../../src'
-import { runScript } from '../../src'
 
 interface Item {
   s: string

@@ -4,12 +4,10 @@ yarn tsn ndjsonMap.script
 
  */
 
-import { createWriteStream } from 'node:fs'
-import fs from 'node:fs'
+import fs, { createWriteStream } from 'node:fs'
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray, transformToNDJson, _pipeline } from '../src'
+import { readableFromArray, transformToNDJson, _pipeline, ndjsonMap } from '../src'
 import { runScript } from '../src/script/runScript'
-import { ndjsonMap } from '../src'
 import { tmpDir } from '../src/test/paths.cnst'
 
 runScript(async () => {
