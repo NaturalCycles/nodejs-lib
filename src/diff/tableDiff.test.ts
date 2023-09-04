@@ -23,4 +23,15 @@ test('tableDiff', () => {
       c: 'c1',
     },
   )
+
+  tableDiff(
+    {
+      a: { aa: 'aa1' },
+      c: 'c1',
+    },
+    {
+      a: { aa: 'aa2' },
+      c: 'c1',
+    },
+  )
 })

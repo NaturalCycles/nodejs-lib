@@ -2,7 +2,7 @@ import {
   _filterUndefinedValues,
   AnyObject,
   BuildInfo,
-  localTime,
+  localTimeOrNow,
   UnixTimestampNumber,
 } from '@naturalcycles/js-lib'
 import { _pathExistsSync, _readJsonSync } from '../fs/fs.util'
@@ -21,7 +21,7 @@ export interface GenerateBuildInfoOptions {
 }
 
 export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo {
-  const now = localTime(opt.overrideTimestamp)
+  const now = localTimeOrNow(opt.overrideTimestamp)
   const ts = now.unix()
 
   const rev = gitCurrentCommitSha()

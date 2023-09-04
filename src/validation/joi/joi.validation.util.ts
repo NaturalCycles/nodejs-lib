@@ -84,7 +84,7 @@ export function getValidationResult<T>(
   })
 
   const vr: JoiValidationResult<T> = {
-    value: returnValue!,
+    value: returnValue,
   }
 
   if (error) {
@@ -120,7 +120,7 @@ export function undefinedIfInvalid<T>(value: T, schema?: AnySchema<T>): T | unde
 export function convert<T>(value: T, schema?: AnySchema<T>): T {
   if (!schema) return value as any
   const { value: returnValue } = schema.validate(value, defaultOptions)
-  return returnValue!
+  return returnValue
 }
 
 function createError(value: any, err: ValidationError, objectName?: string): JoiValidationError {

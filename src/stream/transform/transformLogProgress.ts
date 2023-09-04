@@ -6,7 +6,7 @@ import {
   _since,
   AnyObject,
   CommonLogger,
-  localTime,
+  localTimeNow,
 } from '@naturalcycles/js-lib'
 import { hasColors, boldWhite, dimGrey, white, yellow } from '../../colors/colors'
 import { SizeStack } from '../sizeStack'
@@ -260,7 +260,7 @@ export function transformLogProgress<IN = any>(
       }
 
       logger.log(
-        `${dimGrey(localTime().toPretty())} ${white(metric)} took ${yellow(
+        `${dimGrey(localTimeNow().toPretty())} ${white(metric)} took ${yellow(
           _since(started),
         )} so far to process ${yellow(batchedProgress)} rows, ~${yellow(perHour)}/hour`,
       )

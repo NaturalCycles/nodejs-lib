@@ -1,4 +1,4 @@
-import { LocalDate, localTime } from '@naturalcycles/js-lib'
+import { LocalDate, localTimeNow } from '@naturalcycles/js-lib'
 import Joi, { Extension, StringSchema as JoiStringSchema } from 'joi'
 
 export interface StringSchema<TSchema = string> extends JoiStringSchema<TSchema> {
@@ -51,10 +51,10 @@ export function stringExtensions(joi: typeof Joi): Extension {
 
           // Today allows +-14 hours gap to account for different timezones
           if (max === 'today') {
-            max = localTime().add(14, 'hour').toISODate()
+            max = localTimeNow().add(14, 'hour').toISODate()
           }
           if (min === 'today') {
-            min = localTime().subtract(14, 'hour').toISODate()
+            min = localTimeNow().subtract(14, 'hour').toISODate()
           }
           // console.log('min/max', min, max)
 
