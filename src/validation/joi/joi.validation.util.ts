@@ -49,12 +49,12 @@ const defaultOptions: ValidationOptions = {
  * If `schema` is undefined - returns value as is.
  */
 export function validate<T>(
-  value: T,
+  input: any,
   schema?: AnySchema<T>,
   objectName?: string,
-  options: ValidationOptions = {},
+  opt: ValidationOptions = {},
 ): T {
-  const { value: returnValue, error } = getValidationResult(value, schema, objectName, options)
+  const { value: returnValue, error } = getValidationResult(input, schema, objectName, opt)
 
   if (error) {
     throw error
@@ -71,24 +71,24 @@ export function validate<T>(
  * If `schema` is undefined - returns value as is.
  */
 export function getValidationResult<T>(
-  value: T,
+  input: any,
   schema?: AnySchema<T>,
   objectName?: string,
   options: ValidationOptions = {},
 ): JoiValidationResult<T> {
-  if (!schema) return { value } as any
+  if (!schema) return { value: input }
 
-  const { value: returnValue, error } = schema.validate(value, {
+  const { value, error } = schema.validate(input, {
     ...defaultOptions,
     ...options,
   })
 
   const vr: JoiValidationResult<T> = {
-    value: returnValue,
+    value,
   }
 
   if (error) {
-    vr.error = createError(value, error, objectName)
+    vr.error = createError(input, error, objectName)
   }
 
   return vr
@@ -97,34 +97,33 @@ export function getValidationResult<T>(
 /**
  * Convenience function that returns true if !error.
  */
-export function isValid<T>(value: T, schema?: AnySchema<T>): boolean {
-  if (!schema) return { value } as any
+export function isValid<T>(input: T, schema?: AnySchema<T>): boolean {
+  if (!schema) return true
 
-  const { error } = schema.validate(value, defaultOptions)
+  const { error } = schema.validate(input, defaultOptions)
   return !error
 }
 
-export function undefinedIfInvalid<T>(value: T, schema?: AnySchema<T>): T | undefined {
-  if (!schema) return { value } as any
+export function undefinedIfInvalid<T>(input: any, schema?: AnySchema<T>): T | undefined {
+  if (!schema) return input
 
-  const { value: returnValue, error } = schema.validate(value, defaultOptions)
+  const { value, error } = schema.validate(input, defaultOptions)
 
-  return error ? undefined : returnValue
+  return error ? undefined : value
 }
 
 /**
- * Will do joi-convertation, regardless of error/validity of value.
+ * Will do joi-conversion, regardless of error/validity of value.
  *
  * @returns converted value
  */
-export function convert<T>(value: T, schema?: AnySchema<T>): T {
-  if (!schema) return value as any
-  const { value: returnValue } = schema.validate(value, defaultOptions)
-  return returnValue
+export function convert<T>(input: any, schema?: AnySchema<T>): T {
+  if (!schema) return input
+  const { value } = schema.validate(input, defaultOptions)
+  return value
 }
 
 function createError(value: any, err: ValidationError, objectName?: string): JoiValidationError {
-  if (!err) return undefined as any
   const tokens: string[] = []
 
   const objectId = _isObject(value) ? (value['id'] as string) : undefined

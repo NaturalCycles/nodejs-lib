@@ -1,6 +1,7 @@
+import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
 import { JoiSchemaObject } from './joi.model'
 import { numberSchema, objectSchema, stringSchema } from './joi.shared.schemas'
-import { validate } from './joi.validation.util'
+import { getValidationResult, validate } from './joi.validation.util'
 
 interface ItemBM {
   id?: string
@@ -36,4 +37,12 @@ test('joiSchemaObject', () => {
     },
     itemDBMSchema,
   )
+})
+
+test('validate type inference', () => {
+  const r = validate({} as any, itemBMSchema)
+  expectTypeOf(r).toEqualTypeOf<ItemBM>()
+
+  const { value } = getValidationResult({} as any, itemBMSchema)
+  expectTypeOf(value).toEqualTypeOf<ItemBM>()
 })

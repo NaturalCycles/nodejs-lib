@@ -1,5 +1,5 @@
-import { testDir } from '../test/paths.cnst'
-import { readAjvSchemas, readJsonSchemas } from './ajv/ajv.util'
+import { testDir } from '../../test/paths.cnst'
+import { readAjvSchemas, readJsonSchemas } from './ajv.util'
 
 const schemaDir = `${testDir}/schema`
 

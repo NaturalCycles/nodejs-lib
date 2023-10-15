@@ -89,7 +89,7 @@ test('should strip unknown keys', async () => {
   const v2 = validate(v, obj1Schema)
 
   expect(v2).toEqual({ a1: 'ff' })
-  expect(v2['unk']).toBeUndefined()
+  expect((v2 as any)['unk']).toBeUndefined()
 })
 
 test('getValidationResult should still convert', async () => {
