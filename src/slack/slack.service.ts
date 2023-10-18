@@ -9,7 +9,7 @@ import {
   localTimeNow,
   PQueue,
 } from '@naturalcycles/js-lib'
-import { inspectAny, InspectAnyOptions } from '..'
+import { _inspect, InspectAnyOptions } from '..'
 import {
   SlackApiBody,
   SlackAttachmentField,
@@ -99,9 +99,9 @@ export class SlackService<CTX = any> {
 
     // Array has a special treatment here
     if (Array.isArray(msg.items)) {
-      text = msg.items.map(t => inspectAny(t, inspectOptions)).join('\n')
+      text = msg.items.map(t => _inspect(t, inspectOptions)).join('\n')
     } else {
-      text = inspectAny(msg.items, inspectOptions)
+      text = _inspect(msg.items, inspectOptions)
     }
 
     // Wrap in markdown-text-block if it's anything but plain String

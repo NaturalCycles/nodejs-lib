@@ -1,5 +1,5 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
-import { _stringifyAny, commonLoggerNoop, Fetcher, pExpectedError } from '@naturalcycles/js-lib'
+import { _stringify, commonLoggerNoop, Fetcher, pExpectedError } from '@naturalcycles/js-lib'
 import { slackDefaultMessagePrefixHook, SlackService } from './slack.service'
 
 let slackService = new SlackService({
@@ -78,7 +78,7 @@ test('error', async () => {
   jest.restoreAllMocks()
 
   const err = await pExpectedError(slackService.send({ items: 'yo', throwOnError: true }))
-  expect(_stringifyAny(err)).toMatchInlineSnapshot(`
+  expect(_stringify(err)).toMatchInlineSnapshot(`
     "HttpRequestError: POST wrongUrl
     Caused by: TypeError: Failed to parse URL from wrongUrl
     Caused by: TypeError: Invalid URL"

@@ -1,6 +1,6 @@
 import type { JsonSchema } from '@naturalcycles/js-lib'
 import { jsonSchema, _try, localTime, _deepFreeze } from '@naturalcycles/js-lib'
-import { inspectAny } from '../../index'
+import { _inspect } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
 import { AjvValidationError } from './ajvValidationError'
@@ -203,7 +203,7 @@ test.each([
   objects.forEach(obj => {
     if (ajvSchema.isValid(obj)) {
       console.log(obj, 'should be invalid for schema:', schema)
-      throw new Error(`${inspectAny(obj)} should be invalid for ${inspectAny(schema)}`)
+      throw new Error(`${_inspect(obj)} should be invalid for ${_inspect(schema)}`)
     }
   })
 })

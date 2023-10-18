@@ -1,4 +1,4 @@
-import { _stringifyAny, AnyObject } from '@naturalcycles/js-lib'
+import { _stringify, AnyObject } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {
@@ -371,7 +371,7 @@ test('formatting of email error', () => {
   })
 
   const { error } = getValidationResult(obj, schema)
-  expect(_stringifyAny(error)).toMatchInlineSnapshot(`
+  expect(_stringify(error)).toMatchInlineSnapshot(`
     "JoiValidationError: "email" must be a valid email
 
     {

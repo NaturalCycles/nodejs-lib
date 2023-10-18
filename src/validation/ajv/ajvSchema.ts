@@ -8,7 +8,7 @@ import {
   CommonLogger,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
-import { _readJsonSync, inspectAny, requireFileToExist } from '../../index'
+import { _readJsonSync, _inspect, requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
 
@@ -173,7 +173,7 @@ export class AjvSchema<T = unknown> {
       separator,
     })
 
-    const strValue = inspectAny(obj, { maxLen: 1000 })
+    const strValue = _inspect(obj, { maxLen: 1000 })
     message = [message, 'Input: ' + strValue].join(separator)
 
     if (logErrors) {

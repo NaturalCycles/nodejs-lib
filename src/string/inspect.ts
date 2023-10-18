@@ -1,7 +1,7 @@
 import { inspect, InspectOptions } from 'node:util'
-import { StringifyAnyOptions, _stringifyAny, JsonStringifyFunction } from '@naturalcycles/js-lib'
+import { StringifyOptions, _stringify, JsonStringifyFunction } from '@naturalcycles/js-lib'
 
-export interface InspectAnyOptions extends StringifyAnyOptions, InspectOptions {}
+export interface InspectAnyOptions extends StringifyOptions, InspectOptions {}
 
 const INSPECT_OPT: InspectOptions = {
   breakLength: 80, // default: ??
@@ -11,7 +11,7 @@ const INSPECT_OPT: InspectOptions = {
 /**
  * Just a convenience export of a const that fulfills the JsonStringifyFunction interface.
  */
-export const inspectAnyStringifyFn: JsonStringifyFunction = obj => inspect(obj, INSPECT_OPT)
+export const inspectStringifyFn: JsonStringifyFunction = obj => inspect(obj, INSPECT_OPT)
 
 /**
  * Transforms ANY to human-readable string (via util.inspect mainly).
@@ -28,9 +28,9 @@ export const inspectAnyStringifyFn: JsonStringifyFunction = obj => inspect(obj, 
  * Returns 'empty_string' if empty string is passed.
  * Returns 'undefined' if undefined is passed (default util.inspect behavior).
  *
- * Based on `_stringifyAny` from `js-lib`, just replaced `JSON.stringify` with `util.inspect`.
+ * Based on `_stringify` from `js-lib`, just replaced `JSON.stringify` with `util.inspect`.
  */
-export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
+export function _inspect(obj: any, opt: InspectAnyOptions = {}): string {
   // Inspect handles functions better
   if (typeof obj === 'function') {
     return inspect(obj, {
@@ -39,7 +39,7 @@ export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
     })
   }
 
-  return _stringifyAny(obj, {
+  return _stringify(obj, {
     ...opt,
     stringifyFn: obj =>
       inspect(obj, {
@@ -48,3 +48,8 @@ export function inspectAny(obj: any, opt: InspectAnyOptions = {}): string {
       }),
   })
 }
+
+/**
+ * @deprecated renamed to _inspect
+ */
+export const inspectAny = _inspect

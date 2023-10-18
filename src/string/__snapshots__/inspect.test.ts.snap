@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`inspectAny 1`] = `
+exports[`_inspect 1`] = `
 Map {
   undefined => "undefined",
   null => "null",

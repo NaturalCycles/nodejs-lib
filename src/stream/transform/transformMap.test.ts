@@ -1,11 +1,5 @@
 import { Readable } from 'node:stream'
-import {
-  AsyncMapper,
-  ErrorMode,
-  _range,
-  pExpectedError,
-  _stringifyAny,
-} from '@naturalcycles/js-lib'
+import { AsyncMapper, ErrorMode, _range, pExpectedError, _stringify } from '@naturalcycles/js-lib'
 import { readableFromArray, _pipeline, _pipelineToArray, transformMap } from '../../index'
 
 interface Item {
@@ -105,7 +99,7 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
     ]),
     AggregateError,
   )
-  expect(_stringifyAny(err)).toMatchInlineSnapshot(`
+  expect(_stringify(err)).toMatchInlineSnapshot(`
     "AggregateError: transformMap resulted in 1 error(s)
     1 error(s):
     1. Error: my error"
