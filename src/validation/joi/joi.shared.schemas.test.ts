@@ -126,6 +126,9 @@ test('enum schemas', () => {
   os = validate(OS.IOS, stringEnumValueSchema(OS))
   expectTypeOf(os).toEqualTypeOf<OS>()
 
+  expect(isValid(OS.IOS, stringEnumValueSchema(OS))).toBe(true)
+  expect(isValid('bad' as OS, stringEnumValueSchema(OS))).toBe(false)
+
   const osKey = validate(OS.IOS, stringEnumKeySchema(OS))
   expectTypeOf(osKey).toEqualTypeOf<string>()
 

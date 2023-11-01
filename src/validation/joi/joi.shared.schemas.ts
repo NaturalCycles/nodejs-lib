@@ -30,26 +30,26 @@ export const dateObjectSchema = Joi.object().instance(Date)
  */
 export const stringEnumValueSchema = <ENUM extends StringEnum>(
   en: ENUM,
-): StringSchema<ENUM[keyof ENUM]> => Joi.string<ENUM[keyof ENUM]>().allow(..._stringEnumValues(en))
+): StringSchema<ENUM[keyof ENUM]> => Joi.string<ENUM[keyof ENUM]>().valid(..._stringEnumValues(en))
 
 /**
  * Allows all keys of a String Enum.
  */
 export const stringEnumKeySchema = <ENUM extends StringEnum>(en: ENUM): StringSchema =>
-  Joi.string().allow(..._stringEnumKeys(en))
+  Joi.string().valid(..._stringEnumKeys(en))
 
 /**
  * Allows all values of a String Enum.
  */
 export const numberEnumValueSchema = <ENUM extends NumberEnum>(
   en: ENUM,
-): NumberSchema<ENUM[keyof ENUM]> => Joi.number<ENUM[keyof ENUM]>().allow(..._numberEnumValues(en))
+): NumberSchema<ENUM[keyof ENUM]> => Joi.number<ENUM[keyof ENUM]>().valid(..._numberEnumValues(en))
 
 /**
  * Allows all keys of a Number Enum.
  */
 export const numberEnumKeySchema = <ENUM extends NumberEnum>(en: ENUM): StringSchema =>
-  Joi.string().allow(..._numberEnumKeys(en))
+  Joi.string().valid(..._numberEnumKeys(en))
 
 export const urlSchema = (scheme: string | string[] = 'https'): StringSchema =>
   Joi.string().uri({ scheme })
