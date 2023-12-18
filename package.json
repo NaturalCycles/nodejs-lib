@@ -20,7 +20,6 @@
     "ajv": "^8.6.2",
     "ajv-formats": "^2.1.0",
     "ajv-keywords": "^5.0.0",
-    "ajv-merge-patch": "^5.0.1",
     "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
     "debug": "^4.1.1",

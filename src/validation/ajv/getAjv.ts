@@ -38,7 +38,8 @@ export function getAjv(opt?: Options): Ajv {
 
   // Adds $merge, $patch keywords
   // https://github.com/ajv-validator/ajv-merge-patch
-  require('ajv-merge-patch')(ajv)
+  // Kirill: temporarily disabled, as it creates a noise of CVE warnings
+  // require('ajv-merge-patch')(ajv)
 
   return ajv
 }
