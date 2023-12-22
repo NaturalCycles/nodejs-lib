@@ -1,4 +1,4 @@
-import crypto from 'node:crypto'
+import crypto, { BinaryToTextEncoding } from 'node:crypto'
 import { Base64String } from '@naturalcycles/js-lib'
 
 export function md5(s: string | Buffer): string {
@@ -25,8 +25,12 @@ export function sha256AsBuffer(s: string | Buffer): Buffer {
   return hashAsBuffer(s, 'sha256')
 }
 
-export function hash(s: string | Buffer, algorithm: string): string {
-  return crypto.createHash(algorithm).update(s).digest('hex')
+export function hash(
+  s: string | Buffer,
+  algorithm: string,
+  encoding: BinaryToTextEncoding = 'hex',
+): string {
+  return crypto.createHash(algorithm).update(s).digest(encoding)
 }
 
 export function hashAsBuffer(s: string | Buffer, algorithm: string): Buffer {
