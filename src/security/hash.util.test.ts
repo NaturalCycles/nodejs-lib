@@ -4,10 +4,8 @@ import {
   base64ToString,
   bufferToBase64,
   md5,
-  md5AsBase64,
   md5AsBuffer,
   sha256,
-  sha256AsBase64,
   sha256AsBuffer,
   stringToBase64,
 } from './hash.util'
@@ -15,7 +13,8 @@ import {
 test('md5', () => {
   const plain = 'hello!@#123'
   expect(md5(plain)).toMatchInlineSnapshot(`"41f871086829ceb41c02d2f99e11ddd0"`)
-  expect(md5AsBase64(plain)).toMatchInlineSnapshot(`"QfhxCGgpzrQcAtL5nhHd0A=="`)
+  expect(md5(plain, 'base64')).toMatchInlineSnapshot(`"QfhxCGgpzrQcAtL5nhHd0A=="`)
+  expect(md5(plain, 'base64url')).toMatchInlineSnapshot(`"QfhxCGgpzrQcAtL5nhHd0A"`)
   expect(md5AsBuffer(plain)).toMatchInlineSnapshot(`
     {
       "data": [
@@ -46,8 +45,11 @@ test('sha256', () => {
   expect(sha256(plain)).toMatchInlineSnapshot(
     `"4e6af34bdf31ddf67ffa21c7e0fa53a1a0ddf2b2a10918c2a5f5c773deb4407d"`,
   )
-  expect(sha256AsBase64(plain)).toMatchInlineSnapshot(
+  expect(sha256(plain, 'base64')).toMatchInlineSnapshot(
     `"TmrzS98x3fZ/+iHH4PpToaDd8rKhCRjCpfXHc960QH0="`,
+  )
+  expect(sha256(plain, 'base64url')).toMatchInlineSnapshot(
+    `"TmrzS98x3fZ_-iHH4PpToaDd8rKhCRjCpfXHc960QH0"`,
   )
   expect(sha256AsBuffer(plain)).toMatchInlineSnapshot(`
     {
