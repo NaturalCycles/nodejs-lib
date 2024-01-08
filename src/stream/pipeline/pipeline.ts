@@ -11,6 +11,16 @@ export interface PipelineOptions {
    * Required to support graceful close when using transformLimit
    */
   allowClose?: boolean
+
+  /**
+   * Set to true to allow graceful abort (via AbortSignal).
+   * "Graceful" means it'll swallow the AbortError and let the pipeline resolve normally.
+   *
+   * Default is false - AbortError will be thrown.
+   */
+  allowGracefulAbort?: boolean
+
+  signal?: AbortSignal
 }
 
 /**
@@ -55,7 +65,7 @@ export async function _pipeline(streams: AnyStream[], opt: PipelineOptions = {})
 
     rest.forEach(s => {
       // console.log(s)
-      if (s instanceof AbortableTransform || s.constructor.name === 'DestroyableTransform') {
+      if (s instanceof AbortableTransform || s.constructor.name === 'AbortableTransform') {
         // console.log(`found ${s.constructor.name}, setting props`)
         ;(s as AbortableTransform).sourceReadable = sourceReadable
         ;(s as AbortableTransform).streamDone = streamDone
@@ -64,12 +74,18 @@ export async function _pipeline(streams: AnyStream[], opt: PipelineOptions = {})
   }
 
   try {
-    return await pipeline(first, ...(rest as any[]))
+    return await pipeline([first, ...rest], opt)
   } catch (err) {
     if (opt.allowClose && (err as any)?.code === 'ERR_STREAM_PREMATURE_CLOSE') {
       console.log('_pipeline closed (as expected)')
       return
     }
+
+    if (opt.allowGracefulAbort && (err as any)?.name === 'AbortError') {
+      console.log('_pipeline closed via AbortSignal (as expected)')
+      return
+    }
+
     // console.log(`_pipeline error`, err)
     throw err
   }
