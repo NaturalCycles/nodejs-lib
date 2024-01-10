@@ -1,4 +1,4 @@
-import { _range, pExpectedErrorString } from '@naturalcycles/js-lib'
+import { _range, createAbortableSignal, pExpectedErrorString } from '@naturalcycles/js-lib'
 import { readableFromArray } from '../readable/readableFromArray'
 import { transformTap } from '../transform/transformTap'
 import { writablePushToArray } from '../writable/writablePushToArray'
@@ -20,8 +20,7 @@ code: ABORT_ERR"
 
   async function runPipeline(opt: PipelineOptions = {}): Promise<any[]> {
     const sourceReadable = readableFromArray(data)
-    const ac = new AbortController()
-    const { signal } = ac
+    const signal = createAbortableSignal()
 
     const arr: any[] = []
 
@@ -31,7 +30,7 @@ code: ABORT_ERR"
         transformTap((_row, i) => {
           // console.log(i, arr)
           if (i === 5) {
-            ac.abort()
+            signal.abort()
           }
         }),
         writablePushToArray(arr),
