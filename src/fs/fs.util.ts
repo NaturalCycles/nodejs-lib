@@ -59,6 +59,8 @@ export const fs2 = {
   copyPathSync: _copyPathSync,
   movePath: _movePath,
   movePathSync: _movePathSync,
+  statAsync: fsp.stat,
+  mkdirAsync: fsp.mkdir,
 }
 
 export interface JsonOptions {
