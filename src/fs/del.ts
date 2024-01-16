@@ -1,8 +1,6 @@
-import fs from 'node:fs'
-import fsp from 'node:fs/promises'
 import { pFilter, pMap, _since } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
-import { _pathExists, _pathExistsSync, globby } from '../index'
+import { fs2, globby } from '../index'
 
 export interface DelOptions {
   /**
@@ -71,14 +69,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 
   if (dry) return
 
-  await pMap(
-    filenames,
-    filepath =>
-      fsp.rm(filepath, {
-        force: true,
-      }),
-    { concurrency },
-  )
+  await pMap(filenames, filepath => fs2.removePath(filepath), { concurrency })
 
   // 2. glob only dirs, expand, delete only empty!
   let dirnames = await globby(patterns, {
@@ -90,7 +81,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   // Add original patterns (if any of them are dirs)
   dirnames = dirnames.concat(
     await pFilter(patterns, async pattern => {
-      return (await _pathExists(pattern)) && (await fsp.lstat(pattern)).isDirectory()
+      return (await fs2.pathExistsAsync(pattern)) && (await fs2.lstatAsync(pattern)).isDirectory()
     }),
   )
 
@@ -102,7 +93,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   for await (const dirpath of dirnamesSorted) {
     if (await isEmptyDir(dirpath)) {
       // console.log(`empty dir: ${dirpath}`)
-      await fsp.rm(dirpath, { force: true, recursive: true })
+      await fs2.removePathAsync(dirpath)
       deletedDirs.push(dirpath)
     }
   }
@@ -152,7 +143,7 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
 
   if (dry) return
 
-  filenames.forEach(filepath => fs.rmSync(filepath, { force: true }))
+  filenames.forEach(filepath => fs2.removePath(filepath))
 
   // 2. glob only dirs, expand, delete only empty!
   let dirnames = globby.sync(patterns, {
@@ -162,9 +153,7 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
   })
 
   // Add original patterns (if any of them are dirs)
-  dirnames = dirnames.concat(
-    patterns.filter(p => _pathExistsSync(p) && fs.lstatSync(p).isDirectory()),
-  )
+  dirnames = dirnames.concat(patterns.filter(p => fs2.pathExists(p) && fs2.lstat(p).isDirectory()))
 
   const dirnamesSorted = dirnames.sort().reverse()
 
@@ -174,7 +163,7 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
   for (const dirpath of dirnamesSorted) {
     if (isEmptyDirSync(dirpath)) {
       // console.log(`empty dir: ${dirpath}`)
-      fs.rmSync(dirpath, { force: true, recursive: true })
+      fs2.removePath(dirpath)
       deletedDirs.push(dirpath)
     }
   }
@@ -196,9 +185,9 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
 // 3. test each original pattern, if it exists and is directory and is empty - delete
 
 async function isEmptyDir(dir: string): Promise<boolean> {
-  return (await fsp.readdir(dir)).length === 0
+  return (await fs2.readdirAsync(dir)).length === 0
 }
 
 function isEmptyDirSync(dir: string): boolean {
-  return fs.readdirSync(dir).length === 0
+  return fs2.readdir(dir).length === 0
 }

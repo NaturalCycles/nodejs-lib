@@ -8,7 +8,7 @@ import {
   CommonLogger,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
-import { _readJsonSync, _inspect, requireFileToExist } from '../../index'
+import { _inspect, fs2, requireFileToExist } from '../../index'
 import { AjvValidationError } from './ajvValidationError'
 import { getAjv } from './getAjv'
 
@@ -134,7 +134,7 @@ export class AjvSchema<T = unknown> {
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
     requireFileToExist(filePath)
-    const schema = _readJsonSync<JsonSchema<T>>(filePath)
+    const schema = fs2.readJson<JsonSchema<T>>(filePath)
     return new AjvSchema<T>(schema, cfg)
   }
 

@@ -185,7 +185,7 @@ export function slackDefaultMessagePrefixHook(msg: SlackMessage): string[] {
 
   // AppEngine-specific decoration
   if (GAE && ctx && typeof ctx === 'object' && typeof ctx.header === 'function') {
-    tokens.push(ctx.header('x-appengine-country')!, ctx.header('x-appengine-city')!)
+    tokens.push(ctx.header('x-appengine-country'), ctx.header('x-appengine-city'))
   }
 
   return tokens.filter(Boolean)

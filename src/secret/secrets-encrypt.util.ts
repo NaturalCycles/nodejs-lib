@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { _assert } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
-import { _readJsonSync, _writeJsonSync, fastGlob } from '../index'
+import { fastGlob, fs2 } from '../index'
 import { encryptObject, encryptRandomIVBuffer } from '../security/crypto.util'
 
 export interface EncryptCLIOptions {
@@ -41,9 +41,9 @@ export function secretsEncrypt(
       )
       encFilename = filename.replace('.plain', '')
 
-      const json = encryptObject(_readJsonSync(filename), encKeyBuffer)
+      const json = encryptObject(fs2.readJson(filename), encKeyBuffer)
 
-      _writeJsonSync(encFilename, json, { spaces: 2 })
+      fs2.writeJson(encFilename, json, { spaces: 2 })
     } else {
       const plain = fs.readFileSync(filename)
       const enc = encryptRandomIVBuffer(plain, encKeyBuffer)

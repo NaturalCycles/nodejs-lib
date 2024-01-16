@@ -5,7 +5,7 @@ import {
   localTimeOrNow,
   UnixTimestampNumber,
 } from '@naturalcycles/js-lib'
-import { _pathExistsSync, _readJsonSync } from '../fs/fs.util'
+import { fs2 } from '../fs/fs2'
 import {
   gitCurrentBranchName,
   gitCurrentCommitSha,
@@ -36,8 +36,8 @@ export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo
   if (!env) {
     // Attempt to read `envByBranch` from package.json root
     try {
-      if (_pathExistsSync('package.json')) {
-        const packageJson = _readJsonSync<AnyObject>('package.json')
+      if (fs2.pathExists('package.json')) {
+        const packageJson = fs2.readJson<AnyObject>('package.json')
         env = packageJson?.['envByBranch']?.[branchName] || packageJson?.['envByBranch']?.['*']
       }
     } catch {}

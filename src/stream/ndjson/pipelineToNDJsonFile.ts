@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { createGzip, ZlibOptions } from 'node:zlib'
 import { AppError } from '@naturalcycles/js-lib'
-import { transformTap, _pipeline, _pathExistsSync, _ensureFileSync } from '../..'
+import { transformTap, _pipeline, fs2 } from '../..'
 import { grey } from '../../colors/colors'
 import { NDJsonStats } from './ndjson.model'
 import { transformToNDJson, TransformToNDJsonOptions } from './transformToNDJson'
@@ -37,14 +37,14 @@ export async function pipelineToNDJsonFile(
 ): Promise<NDJsonStats> {
   const { filePath, gzip, protectFromOverwrite = false } = opt
 
-  if (protectFromOverwrite && _pathExistsSync(filePath)) {
+  if (protectFromOverwrite && fs2.pathExists(filePath)) {
     throw new AppError(`pipelineToNDJsonFile: output file exists: ${filePath}`)
   }
 
   const started = Date.now()
   let rows = 0
 
-  _ensureFileSync(filePath)
+  fs2.ensureFile(filePath)
 
   console.log(`>> ${grey(filePath)} started...`)
 

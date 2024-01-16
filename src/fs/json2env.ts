@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { AnyObject } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors/colors'
-import { _pathExistsSync, _readJsonSync, _writeFileSync } from './fs.util'
+import { fs2 } from './fs2'
 
 export interface Json2EnvOptions {
   jsonPath: string
@@ -46,7 +46,7 @@ export function json2env(opt: Json2EnvOptions): void {
     ...opt,
   }
 
-  if (!_pathExistsSync(jsonPath)) {
+  if (!fs2.pathExists(jsonPath)) {
     if (fail) {
       throw new Error(`Path doesn't exist: ${jsonPath}`)
     }
@@ -63,7 +63,7 @@ export function json2env(opt: Json2EnvOptions): void {
   }
 
   // read file
-  const json: AnyObject = _readJsonSync(jsonPath)
+  const json: AnyObject = fs2.readJson(jsonPath)
 
   if (debug) {
     console.log(json)
@@ -72,7 +72,7 @@ export function json2env(opt: Json2EnvOptions): void {
   if (saveEnvFile) {
     const shPath = `${jsonPath}.sh`
     const exportStr = objectToShellExport(json, prefix)
-    _writeFileSync(shPath, exportStr)
+    fs2.writeFile(shPath, exportStr)
 
     if (!silent) {
       console.log(`json2env created ${dimGrey(shPath)}:`)

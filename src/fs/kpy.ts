@@ -1,15 +1,7 @@
 import path from 'node:path'
 import { _since } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
-import {
-  _copyPath,
-  _copyPathSync,
-  _ensureDirSync,
-  _movePath,
-  _movePathSync,
-  _pathExistsSync,
-  globby,
-} from '../index'
+import { fs2, globby } from '../index'
 
 /**
  * Everything defaults to `undefined`.
@@ -72,11 +64,11 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 
       if (!opt.dry) {
         if (opt.move) {
-          await _movePath(srcFilename, destFilename, {
+          await fs2.movePathAsync(srcFilename, destFilename, {
             force: overwrite,
           })
         } else {
-          await _copyPath(srcFilename, destFilename, { force: overwrite })
+          await fs2.copyPathAsync(srcFilename, destFilename, { force: overwrite })
         }
       }
 
@@ -110,9 +102,9 @@ export function kpySync(opt: KpyOptions): void {
 
     if (!opt.dry) {
       if (opt.move) {
-        _movePathSync(srcFilename, destFilename, { force: overwrite })
+        fs2.movePath(srcFilename, destFilename, { force: overwrite })
       } else {
-        _copyPathSync(srcFilename, destFilename, { force: overwrite })
+        fs2.copyPath(srcFilename, destFilename, { force: overwrite })
       }
     }
 
@@ -132,12 +124,12 @@ function kpyPrepare(opt: KpyOptions): void {
   opt.baseDir ||= '.'
   opt.outputDir ||= '.'
 
-  if (!_pathExistsSync(opt.baseDir)) {
+  if (!fs2.pathExists(opt.baseDir)) {
     console.log(`kpy: baseDir doesn't exist: ${boldWhite(opt.baseDir)}`)
     return
   }
 
-  _ensureDirSync(opt.outputDir)
+  fs2.ensureDir(opt.outputDir)
 }
 
 function kpyLogFilenames(opt: KpyOptions, filenames: string[]): void {
