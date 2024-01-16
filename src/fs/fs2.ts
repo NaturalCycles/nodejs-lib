@@ -102,6 +102,14 @@ class FS2 {
     await fsp.writeFile(filePath, str)
   }
 
+  appendFile(filePath: string, data: string | Buffer): void {
+    fs.appendFileSync(filePath, data)
+  }
+
+  async appendFileAsync(filePath: string, data: string | Buffer): Promise<void> {
+    await fsp.appendFile(filePath, data)
+  }
+
   outputJson(filePath: string, data: any, opt?: JsonOptions): void {
     const str = stringify(data, opt)
     this.outputFile(filePath, str)
@@ -261,6 +269,14 @@ class FS2 {
       recursive: true,
       ...opt,
     })
+  }
+
+  renamePath(src: string, dest: string): void {
+    fs.renameSync(src, dest)
+  }
+
+  async renamePathAsync(src: string, dest: string): Promise<void> {
+    await fsp.rename(src, dest)
   }
 
   movePath(src: string, dest: string, opt?: fs.CopySyncOptions): void {
