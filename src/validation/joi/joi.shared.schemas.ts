@@ -5,7 +5,6 @@ import {
   _stringEnumValues,
   BaseDBEntity,
   NumberEnum,
-  SavedDBEntity,
   StringEnum,
 } from '@naturalcycles/js-lib'
 import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
@@ -158,10 +157,4 @@ export const baseDBEntitySchema: ObjectSchema<BaseDBEntity> = objectSchema<BaseD
   id: stringSchema.optional(),
   created: unixTimestamp2000Schema.optional(),
   updated: unixTimestamp2000Schema.optional(),
-})
-
-export const savedDBEntitySchema = objectSchema<SavedDBEntity>({
-  id: stringSchema,
-  created: unixTimestamp2000Schema,
-  updated: unixTimestamp2000Schema,
 })
