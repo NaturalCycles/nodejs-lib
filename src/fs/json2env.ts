@@ -148,7 +148,7 @@ export function objectToShellExport(obj: AnyObject, prefix = ''): string {
   return (
     Object.entries(obj)
       .map(([k, v]) => {
-        if (v) {
+        if (v !== undefined && v !== null) {
           return `export ${prefix}${k}="${v}"`
         }
       })
@@ -179,7 +179,7 @@ export function objectToGithubActionsEnv(obj: AnyObject, prefix = ''): string {
   return (
     Object.entries(obj)
       .map(([k, v]) => {
-        if (v) {
+        if (v !== undefined && v !== null) {
           return `${prefix}${k}=${v}`
         }
       })
