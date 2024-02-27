@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import { json2env, kpy, kpySync } from '..'
-import { projectDir, scriptsDir, tmpDir } from '../test/paths.cnst'
+import { scriptsDir, testDir, tmpDir } from '../test/paths.cnst'
 
 beforeEach(() => {
   jest.spyOn(fs, 'writeFileSync').mockImplementation()
@@ -76,7 +76,7 @@ test('kpy', async () => {
 })
 
 test('json2env', async () => {
-  const jsonPath = `${projectDir}/tsconfig.prod.json`
+  const jsonPath = `${testDir}/someFile.json`
 
   json2env({
     jsonPath,
