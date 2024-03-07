@@ -6,6 +6,7 @@ import {
   encryptObject,
   encryptRandomIVBuffer,
   encryptString,
+  timingSafeStringEqual,
 } from './crypto.util'
 
 const encKeyBuffer = Buffer.from(TEST_ENC_KEY, 'base64')
@@ -67,4 +68,16 @@ test('encryptObject, decryptObject', () => {
 
   // Should be deterministic:
   expect(encryptObject(obj1, encKeyBuffer)).toEqual(enc)
+})
+
+test('timingSafeStringEquals', () => {
+  const pw = 'hello!@#123'
+
+  expect(timingSafeStringEqual(undefined, pw)).toBe(false)
+  expect(timingSafeStringEqual('', pw)).toBe(false)
+  expect(timingSafeStringEqual('', '')).toBe(true)
+  expect(timingSafeStringEqual('abc', 'abc')).toBe(true)
+  expect(timingSafeStringEqual('abc', 'abd')).toBe(false)
+  expect(timingSafeStringEqual(pw, pw)).toBe(true)
+  expect(timingSafeStringEqual(pw, undefined)).toBe(false)
 })

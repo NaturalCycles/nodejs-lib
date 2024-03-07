@@ -93,3 +93,20 @@ function getCryptoParams(secretKeyBuffer: Buffer): { key: Buffer; iv: Buffer } {
   const iv = md5AsBuffer(Buffer.concat([secretKeyBuffer, key]))
   return { key, iv }
 }
+
+/**
+ * Wraps `crypto.timingSafeEqual` and allows it to be used with String inputs:
+ *
+ * 1. Does length check first and short-circuits on length mismatch. Because `crypto.timingSafeEqual` only works with same-length inputs.
+ *
+ * Relevant read:
+ * https://medium.com/nerd-for-tech/checking-api-key-without-shooting-yourself-in-the-foot-javascript-nodejs-f271e47bb428
+ * https://codahale.com/a-lesson-in-timing-attacks/
+ * https://github.com/suryagh/tsscmp/blob/master/lib/index.js
+ *
+ * Returns true if inputs are equal, false otherwise.
+ */
+export function timingSafeStringEqual(s1: string | undefined, s2: string | undefined): boolean {
+  if (s1 === undefined || s2 === undefined || s1.length !== s2.length) return false
+  return crypto.timingSafeEqual(Buffer.from(s1), Buffer.from(s2))
+}
