@@ -35,7 +35,7 @@
     "yargs": "^17.0.0"
   },
   "devDependencies": {
-    "@naturalcycles/bench-lib": "^1.0.7",
+    "@naturalcycles/bench-lib": "^2.0.0",
     "@naturalcycles/dev-lib": "^13.0.0",
     "@types/node": "^20.1.0",
     "@types/yargs": "^16.0.0",
