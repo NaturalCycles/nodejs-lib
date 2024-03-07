@@ -1,5 +1,6 @@
 import { createGzip } from 'node:zlib'
-import { transformMap, writablePushToArray, _pipeline, readableCreate } from '../..'
+import { pMap } from '@naturalcycles/js-lib'
+import { transformMap, writablePushToArray, _pipeline, readableCreate, gunzipToString } from '../..'
 import { writableChunk } from './writableChunk'
 
 // jest.setTimeout(900_000)
@@ -42,12 +43,12 @@ test('writableChunk', async () => {
     ),
   ])
   expect(allData).toEqual([array1, array2])
-
-  // console.log('done')
 })
 
 test('writableChunk with Gzip', async () => {
-  const allData: string[][] = []
+  const allData: Buffer[][] = []
+  const file1: string = [1, 2, 3, 4, 5].map(n => n + '\n').join('')
+  const file2: string = [6, 7, 8, 9].map(n => n + '\n').join('')
 
   const readableInput = readableCreate<number>()
 
@@ -72,101 +73,17 @@ test('writableChunk with Gzip', async () => {
     writableChunk(
       // Split every 5th row
       (row: string) => Number.parseInt(row) % 5 === 0,
-      // no transforms
+      // gzipped data
       [createGzip],
       (_: number) => {
-        const newArray: string[] = []
+        const newArray: Buffer[] = []
         allData.push(newArray)
         return writablePushToArray(newArray)
       },
     ),
   ])
-  expect(allData).toMatchInlineSnapshot(`
-[
-  [
-    {
-      "data": [
-        31,
-        139,
-        8,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        19,
-      ],
-      "type": "Buffer",
-    },
-    {
-      "data": [
-        51,
-        228,
-        50,
-        226,
-        50,
-        230,
-        50,
-        225,
-        50,
-        229,
-        2,
-        0,
-        138,
-        172,
-        105,
-        106,
-        10,
-        0,
-        0,
-        0,
-      ],
-      "type": "Buffer",
-    },
-  ],
-  [
-    {
-      "data": [
-        31,
-        139,
-        8,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        19,
-      ],
-      "type": "Buffer",
-    },
-    {
-      "data": [
-        51,
-        227,
-        50,
-        231,
-        178,
-        224,
-        178,
-        228,
-        2,
-        0,
-        85,
-        196,
-        102,
-        7,
-        8,
-        0,
-        0,
-        0,
-      ],
-      "type": "Buffer",
-    },
-  ],
-]
-`)
-
-  // console.log('done')
+  const unzippedData = await pMap(allData, async buff => {
+    return await gunzipToString(Buffer.concat(buff))
+  })
+  expect(unzippedData).toEqual([file1, file2])
 })
