@@ -44,12 +44,12 @@ Map {
   /i am regex, who are you\\?/ => "/i am regex, who are you?/",
   Map {
     "a" => "b",
-  } => "Map(1) { 'a' => 'b' }",
+  } => "{ a: 'b' }",
   Set {
     "a",
     "b",
     "c",
-  } => "Set(3) { 'a', 'b', 'c' }",
+  } => "[ 'a', 'b', 'c' ]",
   [Error: some err msg] => "Error: some err msg",
   [Error: Error with code] => "Error: Error with code
 code: auth/forbidden",
