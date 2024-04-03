@@ -2,7 +2,7 @@
   "name": "@naturalcycles/nodejs-lib",
   "version": "12.47.1",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "docs-serve": "vuepress dev docs",
     "docs-build": "vuepress build docs",
     "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
@@ -19,7 +19,7 @@
     "@types/jsonwebtoken": "^9.0.0",
     "@types/through2-concurrent": "^2.0.0",
     "ajv": "^8.6.2",
-    "ajv-formats": "^2.1.0",
+    "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.0.0",
     "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
