@@ -1,12 +1,21 @@
 import type { ProcessEnvOptions, SpawnOptions } from 'node:child_process'
 import cp from 'node:child_process'
 
+interface ExecCommandOptions extends SpawnOptions {
+  /**
+   * Set to true to not log the command (for less verbose output)
+   */
+  hideCommand?: boolean
+}
+
 export async function execVoidCommand(
   cmd: string,
   args: string[] = [],
-  opt: SpawnOptions = {},
+  opt: ExecCommandOptions = {},
 ): Promise<void> {
-  logExec(cmd, args, opt)
+  if (!opt.hideCommand) {
+    logExec(cmd, args, opt)
+  }
 
   await new Promise<void>(resolve => {
     const p = cp.spawn(cmd, [...args], {
@@ -32,9 +41,11 @@ export async function execVoidCommand(
 export function execVoidCommandSync(
   cmd: string,
   args: string[] = [],
-  opt: SpawnOptions = {},
+  opt: ExecCommandOptions = {},
 ): void {
-  logExec(cmd, args, opt)
+  if (!opt.hideCommand) {
+    logExec(cmd, args, opt)
+  }
 
   const r = cp.spawnSync(cmd, [...args], {
     encoding: 'utf8',
