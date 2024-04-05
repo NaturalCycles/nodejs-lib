@@ -1,21 +1,20 @@
 import type { ProcessEnvOptions, SpawnOptions } from 'node:child_process'
 import cp from 'node:child_process'
 
-interface ExecCommandOptions extends SpawnOptions {
+export interface ExecOptions extends SpawnOptions {
   /**
-   * Set to true to not log the command (for less verbose output)
+   * Defaults to true.
+   * Set to false to skip logging.
    */
-  hideCommand?: boolean
+  log?: boolean
 }
 
 export async function execVoidCommand(
   cmd: string,
   args: string[] = [],
-  opt: ExecCommandOptions = {},
+  opt: ExecOptions = {},
 ): Promise<void> {
-  if (!opt.hideCommand) {
-    logExec(cmd, args, opt)
-  }
+  logExec(cmd, args, opt)
 
   await new Promise<void>(resolve => {
     const p = cp.spawn(cmd, [...args], {
@@ -38,14 +37,8 @@ export async function execVoidCommand(
   })
 }
 
-export function execVoidCommandSync(
-  cmd: string,
-  args: string[] = [],
-  opt: ExecCommandOptions = {},
-): void {
-  if (!opt.hideCommand) {
-    logExec(cmd, args, opt)
-  }
+export function execVoidCommandSync(cmd: string, args: string[] = [], opt: ExecOptions = {}): void {
+  logExec(cmd, args, opt)
 
   const r = cp.spawnSync(cmd, [...args], {
     encoding: 'utf8',
@@ -69,7 +62,13 @@ export function execVoidCommandSync(
   }
 }
 
-function logExec(cmd: string, args: string[] = [], opt: ProcessEnvOptions = {}): void {
+function logExec(
+  cmd: string,
+  args: string[] = [],
+  opt: ProcessEnvOptions & ExecOptions = {},
+): void {
+  if (opt.log === false) return
+
   const cmdline = [
     ...Object.entries(opt.env || {}).map(([k, v]) => [k, v].join('=')),
     cmd,
