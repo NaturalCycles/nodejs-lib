@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream'
 import { pDelay } from '@naturalcycles/js-lib'
-import { _pipeline, writableVoid } from '../..'
+import { _pipeline, progressReadableMapper, readableFrom, writableVoid } from '../..'
 import { transformLogProgress } from './transformLogProgress'
 
 // todo: AsyncIterable2 (or Iterable2.mapAsync) should be implemented in js-lib
@@ -40,4 +40,16 @@ test('transformLogProgress', async () => {
     // transformLogProgress({logProgressInterval: 10}),
     writableVoid(),
   ])
+})
+
+test('progressReadableMapper', async () => {
+  const readable = readableFrom(rangeItAsync(1, 11, 10))
+
+  await readable
+    .map(
+      progressReadableMapper({
+        logEvery: 2,
+      }),
+    )
+    .toArray()
 })

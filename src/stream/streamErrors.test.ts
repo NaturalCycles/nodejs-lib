@@ -1,7 +1,6 @@
-import { Transform } from 'node:stream'
-import { _range } from '@naturalcycles/js-lib'
+import { Readable, Transform } from 'node:stream'
+import { _range, ObjectWithId, pExpectedErrorString } from '@naturalcycles/js-lib'
 import { _pipeline, writablePushToArray } from '..'
-import { readableFromArray } from './readable/readableFromArray'
 
 function errorTransformUnhandled(): Transform {
   return new Transform({
@@ -23,10 +22,15 @@ function errorTransform(): Transform {
   })
 }
 
+const errorMapper = (chunk: ObjectWithId): ObjectWithId => {
+  if (chunk.id === '4') throw new Error('error_in_transform')
+  return chunk
+}
+
 // still don't know how to handle such errors. Domains?
 test.skip('unhandled transform error', async () => {
   const data = _range(1, 6).map(n => ({ id: String(n) }))
-  const readable = readableFromArray(data)
+  const readable = Readable.from(data)
 
   const results: any[] = []
   await expect(
@@ -36,7 +40,7 @@ test.skip('unhandled transform error', async () => {
 
 test('handled transform error', async () => {
   const data = _range(1, 6).map(n => ({ id: String(n) }))
-  const readable = readableFromArray(data)
+  const readable = Readable.from(data)
 
   const results: any[] = []
   await expect(
@@ -44,4 +48,12 @@ test('handled transform error', async () => {
   ).rejects.toThrow('error_in_transform')
   // console.log(results)
   expect(results).toEqual(data.filter(r => r.id < '4'))
+})
+
+test('does map handle errors?', async () => {
+  const data = _range(1, 6).map(n => ({ id: String(n) }))
+  const readable = Readable.from(data)
+
+  const s = await pExpectedErrorString(readable.map(errorMapper).toArray())
+  expect(s).toMatchInlineSnapshot(`"Error: error_in_transform"`)
 })

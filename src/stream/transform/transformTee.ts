@@ -14,7 +14,7 @@ type AnyStream = NodeJS.WritableStream | NodeJS.ReadWriteStream
  *
  * @experimental
  */
-export function transformTee<T>(streams: AnyStream[]): TransformTyped<T> {
+export function transformTee<T>(streams: AnyStream[]): TransformTyped<T, T> {
   const readable = readableCreate<T>()
 
   const secondPipelinePromise = _pipeline([readable, ...streams])

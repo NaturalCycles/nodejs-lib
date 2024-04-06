@@ -34,8 +34,8 @@ export function readableCreate<T>(
  * Convenience type-safe wrapper around Readable.from() that infers the Type of input.
  */
 export function readableFrom<T>(
-  items: Iterable<T> | AsyncIterable<T>,
+  iterable: Iterable<T> | AsyncIterable<T>,
   opt?: ReadableOptions,
 ): ReadableTyped<T> {
-  return Readable.from(items, opt)
+  return Readable.from(iterable, opt)
 }

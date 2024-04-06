@@ -1,6 +1,5 @@
-import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray } from '../..'
+import { readableFrom, readableFromArray } from '../..'
 import { _pipelineToArray } from '../pipeline/pipeline'
 import { transformLimit } from './transformLimit'
 
@@ -35,9 +34,25 @@ test('transformLimit with readable.destroy', async () => {
 
 test('using .take', async () => {
   const data = _range(1, 50).map(n => ({ id: String(n) }))
-  const readable = Readable.from(data)
+  const readable = readableFrom(data)
 
   const arr = await readable.take(5).toArray()
 
   expect(arr).toEqual(data.slice(0, 5))
+})
+
+test('flatMap', async () => {
+  const data = _range(1, 50).map(n => ({ id: n }))
+  const readable = readableFrom(data)
+
+  const arr = await readable
+    .take(5)
+    .flatMap(r => {
+      if (r.id % 2) return [r]
+      // return undefined // TypeError: undefined is not a function
+      return []
+    })
+    .toArray()
+
+  expect(arr).toEqual(data.slice(0, 5).filter(r => r.id % 2))
 })

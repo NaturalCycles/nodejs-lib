@@ -10,8 +10,9 @@ import {
 } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, hasColors, white, yellow } from '../colors/colors'
 import { SizeStack } from './sizeStack'
+import { ReadableMapper } from './stream.model'
 
-export interface ProgressLoggerCfg<IN = any> {
+export interface ProgressLoggerCfg<T = any> {
   /**
    * Progress metric
    *
@@ -98,7 +99,7 @@ export interface ProgressLoggerCfg<IN = any> {
    *
    * chunk is undefined for "final" stats, otherwise is defined.
    */
-  extra?: (chunk: IN | undefined, index: number) => AnyObject
+  extra?: (chunk: T | undefined, index: number) => AnyObject
 
   /**
    * If specified - will multiply the counter by this number.
@@ -150,8 +151,8 @@ const inspectOpt: InspectOptions = {
   breakLength: 300,
 }
 
-export class ProgressLogger<IN> implements Disposable {
-  constructor(cfg: ProgressLoggerCfg<IN> = {}) {
+export class ProgressLogger<T> implements Disposable {
+  constructor(cfg: ProgressLoggerCfg<T> = {}) {
     this.cfg = {
       metric: 'progress',
       rss: true,
@@ -170,7 +171,7 @@ export class ProgressLogger<IN> implements Disposable {
     this.logStats() // initial
   }
 
-  cfg!: ProgressLoggerCfg<IN> & {
+  cfg!: ProgressLoggerCfg<T> & {
     logEvery: number
     logSizesBuffer: number
     batchSize: number
@@ -201,7 +202,7 @@ export class ProgressLogger<IN> implements Disposable {
       : undefined
   }
 
-  log(chunk?: IN): void {
+  log(chunk?: T): void {
     this.progress++
     this.processedLastSecond++
 
@@ -223,7 +224,7 @@ export class ProgressLogger<IN> implements Disposable {
     this.done()
   }
 
-  private logStats(chunk?: IN, final = false, tenx = false): void {
+  private logStats(chunk?: T, final = false, tenx = false): void {
     if (!this.cfg.logProgress) return
 
     const {
@@ -304,6 +305,20 @@ export class ProgressLogger<IN> implements Disposable {
 /**
  * Create new ProgressLogger.
  */
-export function progressLogger<IN>(cfg: ProgressLoggerCfg<IN> = {}): ProgressLogger<IN> {
+export function progressLogger<T>(cfg: ProgressLoggerCfg<T> = {}): ProgressLogger<T> {
   return new ProgressLogger(cfg)
+}
+
+/**
+ * Limitation: I don't know how to catch the `final` callback to log final stats.
+ *
+ * @experimental
+ */
+export function progressReadableMapper<T>(cfg: ProgressLoggerCfg<T> = {}): ReadableMapper<T, T> {
+  const progress = new ProgressLogger(cfg)
+
+  return chunk => {
+    progress.log(chunk)
+    return chunk
+  }
 }
