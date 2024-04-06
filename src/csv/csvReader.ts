@@ -57,7 +57,7 @@ export function csvStringParse<T extends AnyObject = any>(
 
 export function csvStringToArray(str: string): string[][] {
   const objPattern = new RegExp('(,|\\r?\\n|\\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^,\\r\\n]*))', 'gi')
-  let matches = null
+  let matches: RegExpExecArray | null
   const arr: any[][] = [[]]
 
   while ((matches = objPattern.exec(str))) {
