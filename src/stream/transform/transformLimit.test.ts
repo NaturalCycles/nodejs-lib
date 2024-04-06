@@ -1,3 +1,4 @@
+import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { readableFromArray } from '../..'
 import { _pipelineToArray } from '../pipeline/pipeline'
@@ -28,6 +29,15 @@ test('transformLimit with readable.destroy', async () => {
     ],
     { allowClose: true },
   )
+
+  expect(arr).toEqual(data.slice(0, 5))
+})
+
+test('using .take', async () => {
+  const data = _range(1, 50).map(n => ({ id: String(n) }))
+  const readable = Readable.from(data)
+
+  const arr = await readable.take(5).toArray()
 
   expect(arr).toEqual(data.slice(0, 5))
 })

@@ -6,6 +6,8 @@ import { transformMap, TransformMapOptions } from '../transform/transformMap'
  * Convenience function to do `.forEach` over a Readable.
  * Typed! (unlike default Readable).
  *
+ * Try native readable.forEach() instead!
+ *
  * @experimental
  */
 export async function readableForEach<T>(

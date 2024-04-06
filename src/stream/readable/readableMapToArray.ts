@@ -8,6 +8,8 @@ import { TransformMapOptions } from '../transform/transformMap'
  * passing each result via `transformMap`.
  *
  * Warning! All results are stored in memory (no backpressure).
+ *
+ * Try native readable.toArray instead!
  */
 export async function readableMapToArray<IN, OUT = IN>(
   stream: ReadableTyped<IN>,
