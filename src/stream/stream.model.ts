@@ -48,6 +48,17 @@ export interface ReadableTyped<T> extends Readable {
 // eslint-disable-next-line unused-imports/no-unused-vars
 export interface WritableTyped<T> extends Writable {}
 
+/**
+ * Type alias that indicates that the Readable is not in objectMode,
+ * e.g returns a binary stream (like a gzip stream).
+ */
+export type ReadableBinary = Readable
+/**
+ * Type alias that indicates that the Writable is not in objectMode,
+ * e.g reads a binary stream (like a gzip stream).
+ */
+export type WritableBinary = Writable
+
 // eslint-disable-next-line unused-imports/no-unused-vars
 export interface TransformTyped<IN, OUT> extends Transform {}
 
