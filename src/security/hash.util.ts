@@ -22,10 +22,23 @@ export function hash(
   algorithm: string,
   outputEncoding: BinaryToTextEncoding = 'hex',
 ): string {
+  // todo: cleanup after @types/node is updated
+  // https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V20.md#crypto-implement-cryptohash
+  // Node 20.12+
+  if ((crypto as any).hash) {
+    return (crypto as any).hash(algorithm, s, outputEncoding)
+  }
+
   return crypto.createHash(algorithm).update(s).digest(outputEncoding)
 }
 
 export function hashAsBuffer(s: string | Buffer, algorithm: string): Buffer {
+  // todo: cleanup after @types/node is updated
+  // Node 20.12+
+  if ((crypto as any).hash) {
+    return (crypto as any).hash(algorithm, s, 'buffer')
+  }
+
   return crypto.createHash(algorithm).update(s).digest()
 }
 
