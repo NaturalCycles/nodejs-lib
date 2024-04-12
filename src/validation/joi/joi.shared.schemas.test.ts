@@ -19,6 +19,7 @@ import {
   numberSchemaTyped,
   numberEnumValueSchema,
   numberEnumKeySchema,
+  dateIntervalStringSchema,
 } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
@@ -140,4 +141,25 @@ test('enum schemas', () => {
 
   const appIdKey = validate(AppId[AppId.APP1], numberEnumKeySchema(AppId))
   expectTypeOf(appIdKey).toEqualTypeOf<string>()
+})
+
+test('dateIntervalSchema', () => {
+  const schema = dateIntervalStringSchema
+
+  validate('2022-01-01/2022-01-02', schema)
+  expect(() => validate(undefined, schema)).toThrowErrorMatchingInlineSnapshot(
+    `""value" is required"`,
+  )
+  expect(() => validate('2022-01-01', schema)).toThrowErrorMatchingInlineSnapshot(
+    `"must be a DateInterval string"`,
+  )
+  expect(() => validate('2022-01-01/2022-01-0', schema)).toThrowErrorMatchingInlineSnapshot(
+    `"must be a DateInterval string"`,
+  )
+  expect(() => validate('2022-01-01/2022-01-02/', schema)).toThrowErrorMatchingInlineSnapshot(
+    `"must be a DateInterval string"`,
+  )
+  expect(() =>
+    validate('2022-01-01/2022-01-02/2022-01-03', schema),
+  ).toThrowErrorMatchingInlineSnapshot(`"must be a DateInterval string"`)
 })

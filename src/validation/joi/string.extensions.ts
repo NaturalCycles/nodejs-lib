@@ -51,10 +51,10 @@ export function stringExtensions(joi: typeof Joi): Extension {
 
           // Today allows +-14 hours gap to account for different timezones
           if (max === 'today') {
-            max = localTimeNow().add(14, 'hour').toISODate()
+            max = localTimeNow().plus(14, 'hour').toISODate()
           }
           if (min === 'today') {
-            min = localTimeNow().subtract(14, 'hour').toISODate()
+            min = localTimeNow().minus(14, 'hour').toISODate()
           }
           // console.log('min/max', min, max)
 

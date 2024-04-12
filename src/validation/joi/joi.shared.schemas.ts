@@ -24,6 +24,11 @@ export const dateStringSchema = stringSchema.dateString()
 export const binarySchema = Joi.binary()
 export const dateObjectSchema = Joi.object().instance(Date)
 
+const DATE_INTERVAL_REGEX = /^\d{4}-\d{2}-\d{2}\/\d{4}-\d{2}-\d{2}$/
+export const dateIntervalStringSchema = stringSchema.regex(DATE_INTERVAL_REGEX).messages({
+  'string.pattern.base': `must be a DateInterval string`,
+})
+
 /**
  * Allows all values of a String Enum.
  */
