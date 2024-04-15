@@ -1,7 +1,7 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { writablePushToArray, _pipeline } from '../..'
-import { transformBuffer } from './transformBuffer'
+import { transformChunk } from './transformChunk'
 
 test('transformBuffer', async () => {
   const data = _range(1, 6).map(n => ({ id: String(n) }))
@@ -10,7 +10,7 @@ test('transformBuffer', async () => {
 
   await _pipeline([
     Readable.from(data),
-    transformBuffer({ batchSize: 2 }),
+    transformChunk({ chunkSize: 2 }),
     writablePushToArray(data2),
   ])
 

@@ -103,12 +103,12 @@ export interface ProgressLoggerCfg<T = any> {
 
   /**
    * If specified - will multiply the counter by this number.
-   * Useful e.g when using `transformBuffer({ batchSize: 500 })`, so
-   * it'll accurately represent the number of processed entries (not batches).
+   * Useful e.g when using `transformChunk({ chunkSize: 500 })`, so
+   * it'll accurately represent the number of processed entries (not chunks).
    *
    * Defaults to 1.
    */
-  batchSize?: number
+  chunkSize?: number
 
   /**
    * Experimental logging of item (shunk) sizes, when json-stringified.
@@ -160,7 +160,7 @@ export class ProgressLogger<T> implements Disposable {
       logRPS: true,
       logEvery: 1000,
       logSizesBuffer: 100_000,
-      batchSize: 1,
+      chunkSize: 1,
       logger: console,
       logProgress: cfg.logProgress !== false && cfg.logEvery !== 0,
       ...cfg,
@@ -174,7 +174,7 @@ export class ProgressLogger<T> implements Disposable {
   cfg!: ProgressLoggerCfg<T> & {
     logEvery: number
     logSizesBuffer: number
-    batchSize: number
+    chunkSize: number
     metric: string
     logger: CommonLogger
   }
@@ -230,7 +230,7 @@ export class ProgressLogger<T> implements Disposable {
     const {
       metric,
       extra,
-      batchSize,
+      chunkSize,
       heapUsed: logHeapUsed,
       heapTotal: logHeapTotal,
       rss: logRss,
@@ -245,9 +245,9 @@ export class ProgressLogger<T> implements Disposable {
     const mem = process.memoryUsage()
 
     const now = Date.now()
-    const batchedProgress = this.progress * batchSize
+    const batchedProgress = this.progress * chunkSize
     const lastRPS =
-      (this.processedLastSecond * batchSize) / ((now - this.lastSecondStarted) / 1000) || 0
+      (this.processedLastSecond * chunkSize) / ((now - this.lastSecondStarted) / 1000) || 0
     const rpsTotal = Math.round(batchedProgress / ((now - this.started) / 1000)) || 0
     this.lastSecondStarted = now
     this.processedLastSecond = 0
