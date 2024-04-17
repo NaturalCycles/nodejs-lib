@@ -50,6 +50,18 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
   onError?: (err: Error, input: IN) => any
 
   /**
+   * A hook that is called when the last item is finished processing.
+   * stats object is passed, containing countIn and countOut -
+   * number of items that entered the transform and number of items that left it.
+   *
+   * Callback is called **before** [possible] Aggregated error is thrown,
+   * and before [possible] THROW_IMMEDIATELY error.
+   *
+   * onDone callback will be called before Error is thrown.
+   */
+  onDone?: (stats: TransformMapStats) => any
+
+  /**
    * Progress metric
    *
    * @default `stream`
@@ -57,6 +69,20 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
   metric?: string
 
   logger?: CommonLogger
+}
+
+export interface TransformMapStats {
+  /**
+   * True if transform was successful (didn't throw Immediate or Aggregated error).
+   */
+  ok: boolean
+  /**
+   * Only used (and returned) for ErrorMode.Aggregated
+   */
+  collectedErrors: Error[]
+  countErrors: number
+  countIn: number
+  countOut: number
 }
 
 // doesn't work, cause here we don't construct our Transform instance ourselves
@@ -84,11 +110,13 @@ export function transformMap<IN = any, OUT = IN>(
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput,
     onError,
+    onDone,
     metric = 'stream',
     logger = console,
   } = opt
 
   let index = -1
+  let countOut = 0
   let isSettled = false
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
@@ -102,6 +130,14 @@ export function transformMap<IN = any, OUT = IN>(
         logErrorStats(true)
 
         if (collectedErrors.length) {
+          onDone?.({
+            ok: false,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+          })
+
           // emit Aggregated error
           cb(
             new AggregateError(
@@ -111,6 +147,15 @@ export function transformMap<IN = any, OUT = IN>(
           )
         } else {
           // emit no error
+
+          onDone?.({
+            ok: true,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+          })
+
           cb()
         }
       },
@@ -134,6 +179,7 @@ export function transformMap<IN = any, OUT = IN>(
           },
         )
 
+        countOut += passedResults.length
         passedResults.forEach(r => this.push(r))
 
         if (isSettled) {
@@ -155,6 +201,13 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isSettled = true
+          onDone?.({
+            ok: false,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+          })
           return cb(err) // Emit error immediately
         }
 

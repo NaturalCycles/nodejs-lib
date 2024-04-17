@@ -1,6 +1,12 @@
 import { Readable } from 'node:stream'
 import { pDelay } from '@naturalcycles/js-lib'
-import { _pipeline, progressReadableMapper, readableFrom, writableVoid } from '../..'
+import {
+  _pipeline,
+  ProgressLogItem,
+  progressReadableMapper,
+  readableFrom,
+  writableVoid,
+} from '../..'
 import { transformLogProgress } from './transformLogProgress'
 
 // todo: AsyncIterable2 (or Iterable2.mapAsync) should be implemented in js-lib
@@ -19,6 +25,7 @@ test('transformLogProgress', async () => {
   // const readable = readableFromArray(_range(0, 11), i => pDelay(10, i))
   // const readable = Readable.from(AsyncSequence.create(1, i => (i === 10 ? END : pDelay(10, i + 1))))
   const readable = Readable.from(rangeItAsync(1, 11, 10))
+  let stats: ProgressLogItem
 
   await _pipeline([
     readable,
@@ -36,10 +43,19 @@ test('transformLogProgress', async () => {
           aaa: index,
         }
       },
+      onProgressDone: s => (stats = s),
     }),
     // transformLogProgress({logProgressInterval: 10}),
     writableVoid(),
   ])
+
+  expect(stats!).toEqual({
+    progress_final: 10,
+    peakRSS: expect.any(Number),
+    rps10: expect.any(Number),
+    rpsTotal: expect.any(Number),
+    rss: expect.any(Number),
+  })
 })
 
 test('progressReadableMapper', async () => {

@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream'
 import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
-import { writableVoid, _pipeline } from '../..'
+import { writableVoid, _pipeline, TransformMapStats } from '../..'
 import { transformMapSync } from './transformMapSync'
 
 interface Item {
@@ -20,19 +20,25 @@ test('transformMapSync simple', async () => {
 })
 
 test('transformMapSync error', async () => {
+  let stats: TransformMapStats
   const data = _range(100).map(String)
 
   const data2: string[] = []
   const [err] = await pTry(
     _pipeline([
       Readable.from(data),
-      transformMapSync<string, void>((r, i) => {
-        if (i === 50) {
-          throw new AppError('error on 50th')
-        }
+      transformMapSync<string, void>(
+        (r, i) => {
+          if (i === 50) {
+            throw new AppError('error on 50th')
+          }
 
-        data2.push(r)
-      }),
+          data2.push(r)
+        },
+        {
+          onDone: s => (stats = s),
+        },
+      ),
       writableVoid(),
     ]),
   )
@@ -41,9 +47,20 @@ test('transformMapSync error', async () => {
   expect(err).toMatchInlineSnapshot(`[AppError: error on 50th]`)
 
   expect(data2).toEqual(data.slice(0, 50))
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [],
+  "countErrors": 1,
+  "countIn": 51,
+  "countOut": 50,
+  "ok": false,
+}
+`)
 })
 
 test('transformMapSync suppressed error', async () => {
+  let stats: TransformMapStats
   const data = _range(100).map(String)
 
   const data2: string[] = []
@@ -59,10 +76,21 @@ test('transformMapSync suppressed error', async () => {
       },
       {
         errorMode: ErrorMode.SUPPRESS,
+        onDone: s => (stats = s),
       },
     ),
     writableVoid(),
   ])
 
   expect(data2).toEqual(data.filter(r => r !== '50'))
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [],
+  "countErrors": 1,
+  "countIn": 100,
+  "countOut": 99,
+  "ok": true,
+}
+`)
 })

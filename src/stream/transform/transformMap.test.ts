@@ -1,6 +1,12 @@
 import { Readable } from 'node:stream'
 import { AsyncMapper, ErrorMode, _range, pExpectedError, _stringify } from '@naturalcycles/js-lib'
-import { readableFromArray, _pipeline, _pipelineToArray, transformMap } from '../../index'
+import {
+  readableFromArray,
+  _pipeline,
+  _pipelineToArray,
+  transformMap,
+  TransformMapStats,
+} from '../../index'
 
 interface Item {
   id: string
@@ -37,10 +43,15 @@ test('transformMap with mapping', async () => {
 })
 
 test('transformMap emit array as multiple items', async () => {
+  let stats: TransformMapStats
   const data = _range(1, 4)
   const data2 = await _pipelineToArray<number>([
     readableFromArray(data),
-    transformMap(n => [n * 2, n * 2 + 1], { flattenArrayOutput: true }),
+    transformMap(n => [n * 2, n * 2 + 1], {
+      flattenArrayOutput: true,
+      // async is to test that it's awaited
+      onDone: async s => (stats = s),
+    }),
   ])
 
   const expected: number[] = []
@@ -51,6 +62,16 @@ test('transformMap emit array as multiple items', async () => {
   // console.log(data2)
 
   expect(data2).toEqual(expected)
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [],
+  "countErrors": 0,
+  "countIn": 3,
+  "countOut": 6,
+  "ok": true,
+}
+`)
 })
 
 // non-object mode is not supported anymore
@@ -69,6 +90,7 @@ test('transformMap emit array as multiple items', async () => {
 // })
 
 test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
+  let stats: TransformMapStats
   const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))
   const readable = readableFromArray(data)
   const data2: Item[] = []
@@ -76,7 +98,7 @@ test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
   await expect(
     _pipeline([
       readable,
-      transformMap(mapperError3, { concurrency: 1 }),
+      transformMap(mapperError3, { concurrency: 1, onDone: s => (stats = s) }),
       transformMap<Item, void>(r => void data2.push(r)),
     ]),
   ).rejects.toThrow('my error')
@@ -84,9 +106,20 @@ test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
   expect(data2).toEqual(data.filter(r => Number(r.id) < 3))
 
   // expect(readable.destroyed).toBe(true)
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [],
+  "countErrors": 1,
+  "countIn": 3,
+  "countOut": 2,
+  "ok": false,
+}
+`)
 })
 
 test('transformMap errorMode=THROW_AGGREGATED', async () => {
+  let stats: TransformMapStats
   const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))
   const readable = readableFromArray(data)
   const data2: Item[] = []
@@ -94,7 +127,10 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   const err = await pExpectedError(
     _pipeline([
       readable,
-      transformMap(mapperError3, { errorMode: ErrorMode.THROW_AGGREGATED }),
+      transformMap(mapperError3, {
+        errorMode: ErrorMode.THROW_AGGREGATED,
+        onDone: s => (stats = s),
+      }),
       transformMap<Item, void>(r => void data2.push(r)),
     ]),
     AggregateError,
@@ -108,20 +144,43 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   expect(data2).toEqual(data.filter(r => r.id !== '3'))
 
   // expect(readable.destroyed).toBe(true)
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [
+    [Error: my error],
+  ],
+  "countErrors": 1,
+  "countIn": 4,
+  "countOut": 3,
+  "ok": false,
+}
+`)
 })
 
 test('transformMap errorMode=SUPPRESS', async () => {
+  let stats: TransformMapStats
   const data: Item[] = _range(1, 5).map(n => ({ id: String(n) }))
   const readable = readableFromArray(data)
 
   const data2: Item[] = []
   await _pipeline([
     readable,
-    transformMap(mapperError3, { errorMode: ErrorMode.SUPPRESS }),
+    transformMap(mapperError3, { errorMode: ErrorMode.SUPPRESS, onDone: s => (stats = s) }),
     transformMap<Item, void>(r => void data2.push(r)),
   ])
 
   expect(data2).toEqual(data.filter(r => r.id !== '3'))
 
   // expect(readable.destroyed).toBe(true)
+
+  expect(stats!).toMatchInlineSnapshot(`
+{
+  "collectedErrors": [],
+  "countErrors": 1,
+  "countIn": 4,
+  "countOut": 3,
+  "ok": true,
+}
+`)
 })

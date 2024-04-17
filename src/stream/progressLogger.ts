@@ -102,6 +102,12 @@ export interface ProgressLoggerCfg<T = any> {
   extra?: (chunk: T | undefined, index: number) => AnyObject
 
   /**
+   * Hook that is called when the last item is passed through.
+   * Passes the final stats as `ProgressLogItem`.
+   */
+  onProgressDone?: (stats: ProgressLogItem) => any
+
+  /**
    * If specified - will multiply the counter by this number.
    * Useful e.g when using `transformChunk({ chunkSize: 500 })`, so
    * it'll accurately represent the number of processed entries (not chunks).
@@ -298,6 +304,8 @@ export class ProgressLogger<T> implements Disposable {
           batchedProgress,
         )} rows with total RPS of ${yellow(rpsTotal)}`,
       )
+
+      this.cfg.onProgressDone?.(o)
     }
   }
 }

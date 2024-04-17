@@ -11,6 +11,7 @@ import { yellow } from '../../colors/colors'
 import { AbortableTransform } from '../pipeline/pipeline'
 import { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
+import { TransformMapStats } from './transformMap'
 
 export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   /**
@@ -45,6 +46,18 @@ export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   onError?: (err: Error, input: IN) => any
 
   /**
+   * A hook that is called when the last item is finished processing.
+   * stats object is passed, containing countIn and countOut -
+   * number of items that entered the transform and number of items that left it.
+   *
+   * Callback is called **before** [possible] Aggregated error is thrown,
+   * and before [possible] THROW_IMMEDIATELY error.
+   *
+   * onDone callback will be called before Error is thrown.
+   */
+  onDone?: (stats: TransformMapStats) => any
+
+  /**
    * Progress metric
    *
    * @default `stream`
@@ -64,17 +77,19 @@ export function transformMapSync<IN = any, OUT = IN>(
   mapper: Mapper<IN, OUT | typeof SKIP | typeof END>,
   opt: TransformMapSyncOptions = {},
 ): TransformTyped<IN, OUT> {
-  let index = -1
-
   const {
     predicate, // defaults to "no predicate" (pass everything)
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput = false,
     onError,
+    onDone,
     metric = 'stream',
     objectMode = true,
     logger = console,
   } = opt
+
+  let index = -1
+  let countOut = 0
   let isSettled = false
   let errors = 0
   const collectedErrors: Error[] = [] // only used if errorMode == THROW_AGGREGATED
@@ -100,6 +115,7 @@ export function transformMapSync<IN = any, OUT = IN>(
           return r !== SKIP && (!predicate || predicate(r, currentIndex))
         })
 
+        countOut += passedResults.length
         passedResults.forEach(r => this.push(r))
 
         if (isSettled) {
@@ -122,6 +138,13 @@ export function transformMapSync<IN = any, OUT = IN>(
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isSettled = true
+          onDone?.({
+            ok: false,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+          })
           // Emit error immediately
           return cb(err as Error)
         }
@@ -139,6 +162,14 @@ export function transformMapSync<IN = any, OUT = IN>(
       logErrorStats(true)
 
       if (collectedErrors.length) {
+        onDone?.({
+          ok: false,
+          collectedErrors,
+          countErrors: errors,
+          countIn: index + 1,
+          countOut,
+        })
+
         // emit Aggregated error
         cb(
           new AggregateError(
@@ -148,6 +179,15 @@ export function transformMapSync<IN = any, OUT = IN>(
         )
       } else {
         // emit no error
+
+        onDone?.({
+          ok: true,
+          collectedErrors,
+          countErrors: errors,
+          countIn: index + 1,
+          countOut,
+        })
+
         cb()
       }
     },
