@@ -120,10 +120,11 @@ export function appendToGithubOutput(obj: AnyObject, prefix = ''): void {
 /**
  * https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary
  */
-export function appendToGithubSummary(str: string): void {
+export function appendToGithubSummary(...lines: string[]): void {
   const { GITHUB_STEP_SUMMARY } = process.env
   if (GITHUB_STEP_SUMMARY) {
-    fs.appendFileSync(GITHUB_STEP_SUMMARY, str + '\n')
+    const str = lines.join('\n') + '\n'
+    fs.appendFileSync(GITHUB_STEP_SUMMARY, str)
     console.log(`GITHUB_STEP_SUMMARY appended:\n${str}`)
   }
 }

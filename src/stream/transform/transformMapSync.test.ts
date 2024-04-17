@@ -1,4 +1,5 @@
 import { Readable } from 'node:stream'
+import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
 import { writableVoid, _pipeline, TransformMapStats } from '../..'
 import { transformMapSync } from './transformMapSync'
@@ -6,6 +7,10 @@ import { transformMapSync } from './transformMapSync'
 interface Item {
   id: string
 }
+
+beforeAll(() => {
+  mockTime()
+})
 
 test('transformMapSync simple', async () => {
   const data: Item[] = _range(1, 4).map(n => ({ id: String(n) }))
@@ -55,6 +60,7 @@ test('transformMapSync error', async () => {
   "countIn": 51,
   "countOut": 50,
   "ok": false,
+  "started": 1529539200000,
 }
 `)
 })
@@ -91,6 +97,7 @@ test('transformMapSync suppressed error', async () => {
   "countIn": 100,
   "countOut": 99,
   "ok": true,
+  "started": 1529539200000,
 }
 `)
 })

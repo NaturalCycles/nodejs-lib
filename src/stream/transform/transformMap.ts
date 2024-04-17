@@ -1,5 +1,7 @@
 import {
   _anyToError,
+  _hc,
+  _since,
   AbortableAsyncMapper,
   AsyncPredicate,
   CommonLogger,
@@ -7,9 +9,12 @@ import {
   ErrorMode,
   pFilter,
   SKIP,
+  StringMap,
+  UnixTimestampMillisNumber,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors/colors'
+import { appendToGithubSummary } from '../../fs/json2env'
 import { AbortableTransform } from '../pipeline/pipeline'
 import { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
@@ -83,6 +88,7 @@ export interface TransformMapStats {
   countErrors: number
   countIn: number
   countOut: number
+  started: UnixTimestampMillisNumber
 }
 
 // doesn't work, cause here we don't construct our Transform instance ourselves
@@ -115,6 +121,7 @@ export function transformMap<IN = any, OUT = IN>(
     logger = console,
   } = opt
 
+  const started = Date.now()
   let index = -1
   let countOut = 0
   let isSettled = false
@@ -136,6 +143,7 @@ export function transformMap<IN = any, OUT = IN>(
             countErrors: errors,
             countIn: index + 1,
             countOut,
+            started,
           })
 
           // emit Aggregated error
@@ -154,6 +162,7 @@ export function transformMap<IN = any, OUT = IN>(
             countErrors: errors,
             countIn: index + 1,
             countOut,
+            started,
           })
 
           cb()
@@ -207,6 +216,7 @@ export function transformMap<IN = any, OUT = IN>(
             countErrors: errors,
             countIn: index + 1,
             countOut,
+            started,
           })
           return cb(err) // Emit error immediately
         }
@@ -225,4 +235,20 @@ export function transformMap<IN = any, OUT = IN>(
     if (!errors) return
     logger.log(`${metric} ${final ? 'final ' : ''}errors: ${yellow(errors)}`)
   }
+}
+
+export function appendTransformMapStatsToGithubSummary(
+  stats: TransformMapStats & { name?: string; extra?: StringMap<any> },
+): void {
+  const { countIn, countOut, countErrors, started, name = 'Transform', extra = {} } = stats
+
+  appendToGithubSummary(
+    ...[
+      `### ${name} summary\n`,
+      `${_since(started)} spent`,
+      `${_hc(countIn)} / ${_hc(countOut)} rows in / out`,
+      countErrors ? `${countErrors} errors` : '',
+      ...Object.entries(extra).map(([k, v]) => `${k}: ${v}`),
+    ].filter(Boolean),
+  )
 }

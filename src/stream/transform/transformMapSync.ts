@@ -88,6 +88,7 @@ export function transformMapSync<IN = any, OUT = IN>(
     logger = console,
   } = opt
 
+  const started = Date.now()
   let index = -1
   let countOut = 0
   let isSettled = false
@@ -144,6 +145,7 @@ export function transformMapSync<IN = any, OUT = IN>(
             countErrors: errors,
             countIn: index + 1,
             countOut,
+            started,
           })
           // Emit error immediately
           return cb(err as Error)
@@ -168,6 +170,7 @@ export function transformMapSync<IN = any, OUT = IN>(
           countErrors: errors,
           countIn: index + 1,
           countOut,
+          started,
         })
 
         // emit Aggregated error
@@ -186,6 +189,7 @@ export function transformMapSync<IN = any, OUT = IN>(
           countErrors: errors,
           countIn: index + 1,
           countOut,
+          started,
         })
 
         cb()

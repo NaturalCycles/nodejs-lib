@@ -1,4 +1,5 @@
 import { Readable } from 'node:stream'
+import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { AsyncMapper, ErrorMode, _range, pExpectedError, _stringify } from '@naturalcycles/js-lib'
 import {
   readableFromArray,
@@ -7,6 +8,10 @@ import {
   transformMap,
   TransformMapStats,
 } from '../../index'
+
+beforeAll(() => {
+  mockTime()
+})
 
 interface Item {
   id: string
@@ -70,6 +75,7 @@ test('transformMap emit array as multiple items', async () => {
   "countIn": 3,
   "countOut": 6,
   "ok": true,
+  "started": 1529539200000,
 }
 `)
 })
@@ -114,6 +120,7 @@ test('transformMap errorMode=THROW_IMMEDIATELY', async () => {
   "countIn": 3,
   "countOut": 2,
   "ok": false,
+  "started": 1529539200000,
 }
 `)
 })
@@ -154,6 +161,7 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   "countIn": 4,
   "countOut": 3,
   "ok": false,
+  "started": 1529539200000,
 }
 `)
 })
@@ -181,6 +189,7 @@ test('transformMap errorMode=SUPPRESS', async () => {
   "countIn": 4,
   "countOut": 3,
   "ok": true,
+  "started": 1529539200000,
 }
 `)
 })
