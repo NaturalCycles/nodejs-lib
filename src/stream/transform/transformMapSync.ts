@@ -139,14 +139,20 @@ export function transformMapSync<IN = any, OUT = IN>(
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isSettled = true
-          onDone?.({
-            ok: false,
-            collectedErrors,
-            countErrors: errors,
-            countIn: index + 1,
-            countOut,
-            started,
-          })
+
+          try {
+            onDone?.({
+              ok: false,
+              collectedErrors,
+              countErrors: errors,
+              countIn: index + 1,
+              countOut,
+              started,
+            })
+          } catch (err) {
+            logger.error(err)
+          }
+
           // Emit error immediately
           return cb(err as Error)
         }
@@ -164,14 +170,18 @@ export function transformMapSync<IN = any, OUT = IN>(
       logErrorStats(true)
 
       if (collectedErrors.length) {
-        onDone?.({
-          ok: false,
-          collectedErrors,
-          countErrors: errors,
-          countIn: index + 1,
-          countOut,
-          started,
-        })
+        try {
+          onDone?.({
+            ok: false,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+            started,
+          })
+        } catch (err) {
+          logger.error(err)
+        }
 
         // emit Aggregated error
         cb(
@@ -183,14 +193,18 @@ export function transformMapSync<IN = any, OUT = IN>(
       } else {
         // emit no error
 
-        onDone?.({
-          ok: true,
-          collectedErrors,
-          countErrors: errors,
-          countIn: index + 1,
-          countOut,
-          started,
-        })
+        try {
+          onDone?.({
+            ok: true,
+            collectedErrors,
+            countErrors: errors,
+            countIn: index + 1,
+            countOut,
+            started,
+          })
+        } catch (err) {
+          logger.error(err)
+        }
 
         cb()
       }

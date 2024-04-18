@@ -2,19 +2,20 @@ import {
   _anyToError,
   _hc,
   _since,
+  _stringify,
   AbortableAsyncMapper,
   AsyncPredicate,
   CommonLogger,
   END,
   ErrorMode,
   pFilter,
+  Promisable,
   SKIP,
   StringMap,
   UnixTimestampMillisNumber,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors/colors'
-import { appendToGithubSummary } from '../../fs/json2env'
 import { AbortableTransform } from '../pipeline/pipeline'
 import { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
@@ -62,9 +63,9 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
    * Callback is called **before** [possible] Aggregated error is thrown,
    * and before [possible] THROW_IMMEDIATELY error.
    *
-   * onDone callback will be called before Error is thrown.
+   * onDone callback will be awaited before Error is thrown.
    */
-  onDone?: (stats: TransformMapStats) => any
+  onDone?: (stats: TransformMapStats) => Promisable<any>
 
   /**
    * Progress metric
@@ -89,6 +90,20 @@ export interface TransformMapStats {
   countIn: number
   countOut: number
   started: UnixTimestampMillisNumber
+}
+
+export interface TransformMapStatsSummary extends TransformMapStats {
+  /**
+   * Name of the summary, defaults to `Transform`
+   */
+  name?: string
+
+  /**
+   * Allows to pass extra key-value object, which will be rendered as:
+   * key: value
+   * key2: value2
+   */
+  extra?: StringMap<any>
 }
 
 // doesn't work, cause here we don't construct our Transform instance ourselves
@@ -137,14 +152,18 @@ export function transformMap<IN = any, OUT = IN>(
         logErrorStats(true)
 
         if (collectedErrors.length) {
-          onDone?.({
-            ok: false,
-            collectedErrors,
-            countErrors: errors,
-            countIn: index + 1,
-            countOut,
-            started,
-          })
+          try {
+            await onDone?.({
+              ok: false,
+              collectedErrors,
+              countErrors: errors,
+              countIn: index + 1,
+              countOut,
+              started,
+            })
+          } catch (err) {
+            logger.error(err)
+          }
 
           // emit Aggregated error
           cb(
@@ -156,14 +175,18 @@ export function transformMap<IN = any, OUT = IN>(
         } else {
           // emit no error
 
-          onDone?.({
-            ok: true,
-            collectedErrors,
-            countErrors: errors,
-            countIn: index + 1,
-            countOut,
-            started,
-          })
+          try {
+            await onDone?.({
+              ok: true,
+              collectedErrors,
+              countErrors: errors,
+              countIn: index + 1,
+              countOut,
+              started,
+            })
+          } catch (err) {
+            logger.error(err)
+          }
 
           cb()
         }
@@ -210,14 +233,20 @@ export function transformMap<IN = any, OUT = IN>(
 
         if (errorMode === ErrorMode.THROW_IMMEDIATELY) {
           isSettled = true
-          onDone?.({
-            ok: false,
-            collectedErrors,
-            countErrors: errors,
-            countIn: index + 1,
-            countOut,
-            started,
-          })
+
+          try {
+            await onDone?.({
+              ok: false,
+              collectedErrors,
+              countErrors: errors,
+              countIn: index + 1,
+              countOut,
+              started,
+            })
+          } catch (err) {
+            logger.error(err)
+          }
+
           return cb(err) // Emit error immediately
         }
 
@@ -237,18 +266,20 @@ export function transformMap<IN = any, OUT = IN>(
   }
 }
 
-export function appendTransformMapStatsToGithubSummary(
-  stats: TransformMapStats & { name?: string; extra?: StringMap<any> },
-): void {
-  const { countIn, countOut, countErrors, started, name = 'Transform', extra = {} } = stats
+/**
+ * Renders TransformMapStatsSummary into a friendly string,
+ * to be used e.g in Github Actions summary or Slack.
+ */
+export function transformMapStatsSummary(summary: TransformMapStatsSummary): string {
+  const { countIn, countOut, countErrors, started, name = 'Transform', extra = {} } = summary
 
-  appendToGithubSummary(
-    ...[
-      `### ${name} summary\n`,
-      `${_since(started)} spent`,
-      `${_hc(countIn)} / ${_hc(countOut)} rows in / out`,
-      countErrors ? `${countErrors} errors` : '',
-      ...Object.entries(extra).map(([k, v]) => `${k}: ${v}`),
-    ].filter(Boolean),
-  )
+  return [
+    `### ${name} summary\n`,
+    `${_since(started)} spent`,
+    `${_hc(countIn)} / ${_hc(countOut)} row(s) in / out`,
+    countErrors ? `${countErrors} error(s)` : '',
+    ...Object.entries(extra).map(([k, v]) => `${k}: ${_stringify(v)}`),
+  ]
+    .filter(Boolean)
+    .join('\n')
 }

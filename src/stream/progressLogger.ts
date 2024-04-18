@@ -305,7 +305,11 @@ export class ProgressLogger<T> implements Disposable {
         )} rows with total RPS of ${yellow(rpsTotal)}`,
       )
 
-      this.cfg.onProgressDone?.(o)
+      try {
+        this.cfg.onProgressDone?.(o)
+      } catch (err) {
+        logger.error(err)
+      }
     }
   }
 }

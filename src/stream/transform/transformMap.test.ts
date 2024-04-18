@@ -7,6 +7,7 @@ import {
   _pipelineToArray,
   transformMap,
   TransformMapStats,
+  transformMapStatsSummary,
 } from '../../index'
 
 beforeAll(() => {
@@ -163,6 +164,33 @@ test('transformMap errorMode=THROW_AGGREGATED', async () => {
   "ok": false,
   "started": 1529539200000,
 }
+`)
+
+  expect(transformMapStatsSummary(stats!)).toMatchInlineSnapshot(`
+"### Transform summary
+
+0 ms spent
+4 / 3 row(s) in / out
+1 error(s)"
+`)
+
+  expect(
+    transformMapStatsSummary({
+      ...stats!,
+      name: 'MyCustomJob',
+      extra: {
+        key1: 'value1',
+        n1: 145,
+      },
+    }),
+  ).toMatchInlineSnapshot(`
+"### MyCustomJob summary
+
+0 ms spent
+4 / 3 row(s) in / out
+1 error(s)
+key1: value1
+n1: 145"
 `)
 })
 
