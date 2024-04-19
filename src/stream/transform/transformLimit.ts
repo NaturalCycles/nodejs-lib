@@ -40,10 +40,7 @@ export interface TransformLimitOptions extends TransformOptions {
  */
 export class TransformLimit extends AbortableTransform {}
 
-/**
- * 0 or falsy value means "no limit"
- */
-export function transformLimit<IN>(opt: TransformLimitOptions = {}): TransformTyped<IN, IN> {
+export function transformLimit<IN>(opt: TransformLimitOptions): TransformTyped<IN, IN> {
   const { logger = console, limit, debug } = opt
 
   if (!limit) {
