@@ -40,7 +40,10 @@ export interface TransformMapOptions<IN = any, OUT = IN> {
   /**
    * Number of concurrently pending promises returned by `mapper`.
    *
-   * @default 16 (to match default highWatermark option for objectMode streams)
+   * Default is 32.
+   * It was recently changed up from 16, after some testing that shown that
+   * for simple low-cpu mapper functions 32 produces almost 2x throughput.
+   * For example, in scenarios like streaming a query from Datastore.
    */
   concurrency?: number
 
@@ -117,7 +120,7 @@ export interface TransformMapStatsSummary extends TransformMapStats {
  *
  * Only works in objectMode (due to through2Concurrent).
  *
- * Concurrency defaults to 16.
+ * Concurrency defaults to 32.
  *
  * If an Array is returned by `mapper` - it will be flattened and multiple results will be emitted from it. Tested by Array.isArray().
  */
@@ -126,7 +129,7 @@ export function transformMap<IN = any, OUT = IN>(
   opt: TransformMapOptions<IN, OUT> = {},
 ): TransformTyped<IN, OUT> {
   const {
-    concurrency = 16,
+    concurrency = 32,
     predicate, // we now default to "no predicate" (meaning pass-everything)
     errorMode = ErrorMode.THROW_IMMEDIATELY,
     flattenArrayOutput,
