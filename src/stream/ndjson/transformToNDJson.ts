@@ -34,6 +34,7 @@ export function transformToNDJson<IN = any>(
   return new Transform({
     writableObjectMode: true,
     readableObjectMode: false,
+    readableHighWaterMark: 64 * 1024,
     transform(chunk: IN, _, cb) {
       try {
         if (sortObjects) {

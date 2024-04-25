@@ -35,6 +35,9 @@ export function transformJsonParse<OUT = any>(
   return new Transform({
     writableObjectMode: false,
     readableObjectMode: true,
+    // highWatermark increased, because it's proven to be faster: https://github.com/nodejs/node/pull/52037
+    // todo: it'll be default in Node 22, then we can remove this
+    writableHighWaterMark: 64 * 1024,
     transform(chunk: string, _, cb) {
       try {
         const data = JSON.parse(chunk, reviver)

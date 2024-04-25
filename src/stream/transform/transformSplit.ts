@@ -1,5 +1,8 @@
 import { TransformTyped } from '../stream.model'
 
+// https://github.com/max-mapper/binary-split
+// todo: test its newer version that doesn't have `through2` dependency
+// todo: test writableHighWaterMark of 64k
 const _binarySplit = require('binary-split')
 
 /**
