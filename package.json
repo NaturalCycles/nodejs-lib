@@ -21,7 +21,6 @@
     "ajv": "^8.6.2",
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.0.0",
-    "binary-split": "^1.0.5",
     "chalk": "^4.0.0",
     "debug": "^4.1.1",
     "dotenv": "^16.0.0",

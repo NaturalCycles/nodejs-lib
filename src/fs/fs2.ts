@@ -18,8 +18,13 @@ import type { RmOptions } from 'node:fs'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
+import { createGzip, createUnzip } from 'node:zlib'
 import { _jsonParse } from '@naturalcycles/js-lib'
 import yaml, { DumpOptions } from 'js-yaml'
+import { transformToNDJson } from '../stream/ndjson/transformToNDJson'
+import { ReadableTyped, WritableTyped } from '../stream/stream.model'
+import { transformSplitOnNewline } from '../stream/transform/transformSplit'
+import { requireFileToExist } from '../util/env.util'
 
 /**
  * fs2 conveniently groups filesystem functions together.
@@ -305,6 +310,73 @@ class FS2 {
   readdirAsync = fsp.readdir
   createWriteStream = fs.createWriteStream
   createReadStream = fs.createReadStream
+
+  /*
+  Returns a Readable of [already parsed] NDJSON objects.
+
+  Replaces a list of operations:
+  - requireFileToExist(inputPath)
+  - fs.createReadStream
+  - createUnzip (only if path ends with '.gz')
+  - transformSplitOnNewline
+  - transformJsonParse
+
+  To add a Limit or Offset: just add .take() or .drop(), example:
+
+  _pipeline([
+    fs2.createReadStreamAsNDJSON().take(100),
+    transformX(),
+  ])
+   */
+  createReadStreamAsNDJSON<ROW = any>(inputPath: string): ReadableTyped<ROW> {
+    requireFileToExist(inputPath)
+
+    let stream: ReadableTyped<ROW> = fs
+      .createReadStream(inputPath, {
+        highWaterMark: 64 * 1024, // no observed speedup
+      })
+      .on('error', err => stream.emit('error', err))
+
+    if (inputPath.endsWith('.gz')) {
+      stream = stream.pipe(
+        createUnzip({
+          chunkSize: 64 * 1024, // speedup from ~3200 to 3800 rps!
+        }),
+      )
+    }
+
+    return stream.pipe(transformSplitOnNewline()).map(line => JSON.parse(line))
+    // For some crazy reason .map is much faster than transformJsonParse!
+    // ~5000 vs ~4000 rps !!!
+    // .on('error', err => stream.emit('error', err))
+    // .pipe(transformJsonParse<ROW>())
+  }
+
+  /*
+  Returns a Writable.
+
+  Replaces a list of operations:
+  - transformToNDJson
+  - createGzip (only if path ends with '.gz')
+  - fs.createWriteStream
+   */
+  createWriteStreamAsNDJSON(outputPath: string): WritableTyped<any> {
+    const transform1 = transformToNDJson()
+    let transform = transform1
+    if (outputPath.endsWith('.gz')) {
+      transform = transform.pipe(
+        createGzip({
+          // chunkSize: 64 * 1024, // no observed speedup
+        }),
+      )
+    }
+    transform.pipe(
+      fs.createWriteStream(outputPath, {
+        // highWaterMark: 64 * 1024, // no observed speedup
+      }),
+    )
+    return transform1
+  }
 }
 
 export const fs2 = new FS2()

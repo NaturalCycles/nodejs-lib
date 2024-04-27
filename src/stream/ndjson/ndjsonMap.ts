@@ -1,17 +1,12 @@
-import { createReadStream, createWriteStream } from 'node:fs'
-import { createGzip, createUnzip } from 'node:zlib'
 import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
-  requireFileToExist,
-  transformJsonParse,
   transformLimit,
   transformLogProgress,
   transformMap,
   TransformMapOptions,
-  transformSplit,
-  transformToNDJson,
   _pipeline,
   TransformLogProgressOptions,
+  fs2,
 } from '../..'
 
 export interface NDJSONMapOptions<IN = any, OUT = IN>
@@ -46,24 +41,17 @@ export async function ndjsonMap<IN = any, OUT = any>(
 ): Promise<void> {
   const { inputFilePath, outputFilePath, logEveryOutput = 100_000, limitInput, limitOutput } = opt
 
-  requireFileToExist(inputFilePath)
-
   console.log({
     inputFilePath,
     outputFilePath,
   })
 
-  const transformUnzip = inputFilePath.endsWith('.gz') ? [createUnzip()] : []
-  const transformZip = outputFilePath.endsWith('.gz') ? [createGzip()] : []
-
-  const readable = createReadStream(inputFilePath)
+  const readable = fs2
+    .createReadStreamAsNDJSON(inputFilePath)
+    .take(limitInput || Number.POSITIVE_INFINITY)
 
   await _pipeline([
     readable,
-    ...transformUnzip,
-    transformSplit(), // splits by \n
-    transformJsonParse(),
-    transformLimit({ limit: limitInput, sourceReadable: readable }),
     transformLogProgress({ metric: 'read', ...opt }),
     transformMap(mapper, {
       flattenArrayOutput: true,
@@ -72,8 +60,6 @@ export async function ndjsonMap<IN = any, OUT = any>(
     }),
     transformLimit({ limit: limitOutput, sourceReadable: readable }),
     transformLogProgress({ metric: 'saved', logEvery: logEveryOutput }),
-    transformToNDJson(),
-    ...transformZip,
-    createWriteStream(outputFilePath),
+    fs2.createWriteStreamAsNDJSON(outputFilePath),
   ])
 }
