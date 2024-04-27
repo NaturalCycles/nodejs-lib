@@ -361,6 +361,8 @@ class FS2 {
   - fs.createWriteStream
    */
   createWriteStreamAsNDJSON(outputPath: string): WritableTyped<any> {
+    this.ensureFile(outputPath)
+
     const transform1 = transformToNDJson()
     let transform = transform1
     if (outputPath.endsWith('.gz')) {
