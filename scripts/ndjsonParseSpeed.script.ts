@@ -29,6 +29,6 @@ runScript(async () => {
     }),
     transformLogProgress({ logEvery: 1000, extra: () => ({ keys }) }),
     // writableVoid(),
-    fs2.createWriteStreamAsNDJSON(outputFilePath),
+    ...fs2.createWriteStreamAsNDJSON(outputFilePath),
   ])
 })

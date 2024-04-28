@@ -60,6 +60,6 @@ export async function ndjsonMap<IN = any, OUT = any>(
     }),
     transformLimit({ limit: limitOutput, sourceReadable: readable }),
     transformLogProgress({ metric: 'saved', logEvery: logEveryOutput }),
-    fs2.createWriteStreamAsNDJSON(outputFilePath),
+    ...fs2.createWriteStreamAsNDJSON(outputFilePath),
   ])
 }

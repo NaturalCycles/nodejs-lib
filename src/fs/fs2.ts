@@ -19,10 +19,10 @@ import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
 import { createGzip, createUnzip } from 'node:zlib'
-import { _jsonParse } from '@naturalcycles/js-lib'
+import { _isTruthy, _jsonParse } from '@naturalcycles/js-lib'
 import yaml, { DumpOptions } from 'js-yaml'
 import { transformToNDJson } from '../stream/ndjson/transformToNDJson'
-import { ReadableTyped, WritableTyped } from '../stream/stream.model'
+import { ReadableTyped, TransformTyped } from '../stream/stream.model'
 import { transformSplitOnNewline } from '../stream/transform/transformSplit'
 import { requireFileToExist } from '../util/env.util'
 
@@ -353,31 +353,28 @@ class FS2 {
   }
 
   /*
-  Returns a Writable.
+  Returns an array of Transforms, so that you can ...destructure them at
+  the end of the _pipeline.
 
   Replaces a list of operations:
   - transformToNDJson
   - createGzip (only if path ends with '.gz')
   - fs.createWriteStream
    */
-  createWriteStreamAsNDJSON(outputPath: string): WritableTyped<any> {
+  createWriteStreamAsNDJSON(outputPath: string): TransformTyped<any, any>[] {
     this.ensureFile(outputPath)
 
-    const transform1 = transformToNDJson()
-    let transform = transform1
-    if (outputPath.endsWith('.gz')) {
-      transform = transform.pipe(
-        createGzip({
-          // chunkSize: 64 * 1024, // no observed speedup
-        }),
-      )
-    }
-    transform.pipe(
+    return [
+      transformToNDJson(),
+      outputPath.endsWith('.gz')
+        ? createGzip({
+            // chunkSize: 64 * 1024, // no observed speedup
+          })
+        : undefined,
       fs.createWriteStream(outputPath, {
         // highWaterMark: 64 * 1024, // no observed speedup
       }),
-    )
-    return transform1
+    ].filter(_isTruthy) as TransformTyped<any, any>[]
   }
 }
 
