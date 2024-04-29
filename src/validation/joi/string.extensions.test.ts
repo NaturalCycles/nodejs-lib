@@ -28,10 +28,10 @@ test('dateString min/max today', () => {
   // Today allows +-14 hours gap to account for different timezones
   // testing -1day or +1day is not reliable (cause it can either fit or not fit withing +-14 hours window, so non-deterministic)
   const today = localTimeNow()
-  const todayMinus10hours = today.subtract(10, 'hour')
-  const todayMinus2 = today.subtract(2, 'day')
-  const todayPlus10hours = today.add(10, 'hour')
-  const todayPlus2 = today.add(2, 'day')
+  const todayMinus10hours = today.minus(10, 'hour')
+  const todayMinus2 = today.minus(2, 'day')
+  const todayPlus10hours = today.plus(10, 'hour')
+  const todayPlus2 = today.plus(2, 'day')
 
   testValidation(
     schema,
