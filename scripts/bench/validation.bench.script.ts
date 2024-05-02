@@ -66,7 +66,7 @@ const zodSchema = z.object({
   a: z.array(z.number()),
 })
 
-const items = _range(1).map(id => ({
+const items = _range(100).map(id => ({
   s: `id${id}`,
   n1: id,
   n2: 1,

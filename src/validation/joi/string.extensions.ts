@@ -1,4 +1,4 @@
-import { LocalDate, localTimeNow } from '@naturalcycles/js-lib'
+import { localTimeNow } from '@naturalcycles/js-lib'
 import Joi, { Extension, StringSchema as JoiStringSchema } from 'joi'
 
 export interface StringSchema<TSchema = string> extends JoiStringSchema<TSchema> {
@@ -51,22 +51,21 @@ export function stringExtensions(joi: typeof Joi): Extension {
 
           // Today allows +-14 hours gap to account for different timezones
           if (max === 'today') {
-            max = localTimeNow().plus(14, 'hour').toISODate()
+            max = getTodayStrPlus15()
           }
           if (min === 'today') {
-            min = localTimeNow().minus(14, 'hour').toISODate()
+            min = getTodayStrMinus15()
           }
           // console.log('min/max', min, max)
 
-          const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v)
-          if (!m || m.length <= 1) {
+          const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v)
+          if (!parts || parts.length < 4) {
             err = 'string.dateString'
           } else if (min && v < min) {
             err = 'string.dateStringMin'
           } else if (max && v > max) {
             err = 'string.dateStringMax'
-          } else if (!LocalDate.isValid(v)) {
-            // todo: replace with another regex (from ajv-validators) for speed
+          } else if (!isValidDate(parts)) {
             err = 'string.dateStringCalendarAccuracy'
           }
 
@@ -79,4 +78,49 @@ export function stringExtensions(joi: typeof Joi): Extension {
       },
     },
   }
+}
+
+const DAYS = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+// Based on: https://github.com/ajv-validator
+function isValidDate(parts: string[]): boolean {
+  const year = Number(parts[1])
+  const month = Number(parts[2])
+  const day = Number(parts[3])
+  return (
+    month >= 1 &&
+    month <= 12 &&
+    day >= 1 &&
+    day <= (month === 2 && isLeapYear(year) ? 29 : DAYS[month]!)
+  )
+}
+
+function isLeapYear(year: number): boolean {
+  return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)
+}
+
+let lastCheckedPlus = 0
+let todayStrPlusCached: string
+let lastCheckedMinus = 0
+let todayStrMinusCached: string
+
+function getTodayStrPlus15(): string {
+  const now = Date.now()
+  if (now - lastCheckedPlus < 3_600_000) {
+    // cached for 1 hour
+    return todayStrPlusCached
+  }
+
+  lastCheckedPlus = now
+  return (todayStrPlusCached = localTimeNow().plus(15, 'hour').toISODate())
+}
+
+function getTodayStrMinus15(): string {
+  const now = Date.now()
+  if (now - lastCheckedMinus < 3_600_000) {
+    // cached for 1 hour
+    return todayStrMinusCached
+  }
+
+  lastCheckedMinus = now
+  return (todayStrMinusCached = localTimeNow().plus(-15, 'hour').toISODate())
 }
