@@ -1,4 +1,4 @@
-import { localTimeNow } from '@naturalcycles/js-lib'
+import { localTime } from '@naturalcycles/js-lib'
 import Joi, { Extension, StringSchema as JoiStringSchema } from 'joi'
 
 export interface StringSchema<TSchema = string> extends JoiStringSchema<TSchema> {
@@ -111,7 +111,7 @@ function getTodayStrPlus15(): string {
   }
 
   lastCheckedPlus = now
-  return (todayStrPlusCached = localTimeNow().plus(15, 'hour').toISODate())
+  return (todayStrPlusCached = localTime.now().plus(15, 'hour').toISODate())
 }
 
 function getTodayStrMinus15(): string {
@@ -122,5 +122,5 @@ function getTodayStrMinus15(): string {
   }
 
   lastCheckedMinus = now
-  return (todayStrMinusCached = localTimeNow().plus(-15, 'hour').toISODate())
+  return (todayStrMinusCached = localTime.now().plus(-15, 'hour').toISODate())
 }

@@ -857,9 +857,9 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0":
-  version "14.232.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.232.0.tgz#766305a4cc5854fbb046e58392e7e97a3d94e86b"
-  integrity sha512-DQjnJ/e3fS7eDduYgmZZbdzqOmgQV2+SRkPJDqe6ca54UX6H7ig/SSZMsKoVijOaVYnyYPi02RmKxryhI302Pg==
+  version "14.233.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.233.0.tgz#8782a3f123fc2a1ee7f542fc8f04235c0950c618"
+  integrity sha512-kmEWs7Vh3bjEkbylv3/JWBhFxWx4Kasa51wTabFJHS/8di/noH0ZE16n8aEIvsMRRtXGIiDdQx3Vvq6fjecw0A==
   dependencies:
     tslib "^2.0.0"
     zod "^3.20.2"

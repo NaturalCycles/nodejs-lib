@@ -6,7 +6,7 @@ import {
   CommonLogLevel,
   Fetcher,
   getFetcher,
-  localTimeNow,
+  localTime,
   PQueue,
 } from '@naturalcycles/js-lib'
 import { _inspect, InspectAnyOptions } from '..'
@@ -180,7 +180,7 @@ export class SlackService<CTX = any> {
 }
 
 export function slackDefaultMessagePrefixHook(msg: SlackMessage): string[] {
-  const tokens = [localTimeNow().toPretty()]
+  const tokens = [localTime.now().toPretty()]
   const { ctx } = msg
 
   // AppEngine-specific decoration

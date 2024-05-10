@@ -4,7 +4,7 @@ import {
   _since,
   AnyObject,
   CommonLogger,
-  localTimeNow,
+  localTime,
   SimpleMovingAverage,
   UnixTimestampMillisNumber,
 } from '@naturalcycles/js-lib'
@@ -294,7 +294,7 @@ export class ProgressLogger<T> implements Disposable {
       }
 
       logger.log(
-        `${dimGrey(localTimeNow().toPretty())} ${white(metric)} took ${yellow(
+        `${dimGrey(localTime.now().toPretty())} ${white(metric)} took ${yellow(
           _since(this.started),
         )} so far to process ${yellow(batchedProgress)} rows, ~${yellow(perHour)}/hour`,
       )

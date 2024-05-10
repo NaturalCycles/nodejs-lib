@@ -1,4 +1,4 @@
-import { localTimeNow } from '@naturalcycles/js-lib'
+import { localTime } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { stringSchema } from './joi.shared.schemas'
 
@@ -27,7 +27,7 @@ test('dateString min/max today', () => {
 
   // Today allows +-14 hours gap to account for different timezones
   // testing -1day or +1day is not reliable (cause it can either fit or not fit withing +-14 hours window, so non-deterministic)
-  const today = localTimeNow()
+  const today = localTime.now()
   const todayMinus10hours = today.minus(10, 'hour')
   const todayMinus2 = today.minus(2, 'day')
   const todayPlus10hours = today.plus(10, 'hour')
