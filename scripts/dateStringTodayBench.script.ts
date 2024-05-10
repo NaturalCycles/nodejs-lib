@@ -25,18 +25,15 @@ const entrySchema2 = objectSchema({
 
 runBenchScript({
   fns: {
-    fn1: done => {
+    fn1: () => {
       const _r = entries.map(e => {
         return isValid(e, entrySchema1)
       })
-      done.resolve()
     },
-    fn2: done => {
+    fn2: () => {
       const _r = entries.map(e => {
         return isValid(e, entrySchema2)
       })
-      done.resolve()
     },
   },
-  runs: 2,
 })

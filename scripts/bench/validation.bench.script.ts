@@ -77,27 +77,21 @@ const items = _range(100).map(id => ({
 runScript(async () => {
   await runBench({
     fns: {
-      joi: done => {
+      joi: () => {
         items.forEach(item => {
           validate(item, joiSchema)
         })
-
-        done.resolve()
       },
-      zod: done => {
+      zod: () => {
         items.forEach(item => {
           zodSchema.parse(item)
         })
-
-        done.resolve()
       },
-      ajv: done => {
+      ajv: () => {
         items.forEach(item => {
           ajvSchema.validate(item)
         })
-        done.resolve()
       },
     },
-    runs: 2,
   })
 })

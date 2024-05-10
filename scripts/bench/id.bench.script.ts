@@ -10,30 +10,21 @@ import { nanoid } from '../../src/security/nanoid'
 
 runBenchScript({
   fns: {
-    nanoid: done => {
+    nanoid: () => {
       const a = nanoid()
       const _b = a.repeat(2)
-
-      done.resolve()
     },
-    nanoid16: done => {
+    nanoid16: () => {
       const a = nanoid(16)
       const _b = a.repeat(2)
-
-      done.resolve()
     },
-    stringId: done => {
+    stringId: () => {
       const a = stringId()
       const _b = a.repeat(2)
-
-      done.resolve()
     },
-    stringIdBase62: done => {
+    stringIdBase62: () => {
       const a = stringIdBase62()
       const _b = a.repeat(2)
-
-      done.resolve()
     },
   },
-  runs: 2,
 })
