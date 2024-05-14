@@ -156,11 +156,11 @@ export const utcOffsetSchema = numberSchema
   .max(14 * 60)
   .dividable(15)
 
-const supportedTimezones = new Set(Intl.supportedValuesOf('timeZone'))
-
-export const ianaTimezoneSchema = stringSchema.valid(...supportedTimezones).messages({
-  'any.only': `must be a valid IANA timezone string`,
-})
+export const ianaTimezoneSchema = stringSchema
+  .valid(...Intl.supportedValuesOf('timeZone'))
+  .messages({
+    'any.only': `must be a valid IANA timezone string`,
+  })
 
 export const ipAddressSchema = stringSchema.ip()
 
