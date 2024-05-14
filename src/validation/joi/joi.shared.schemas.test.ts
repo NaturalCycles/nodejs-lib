@@ -20,6 +20,7 @@ import {
   numberEnumValueSchema,
   numberEnumKeySchema,
   dateIntervalStringSchema,
+  ianaTimezoneSchema,
 } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
@@ -162,4 +163,16 @@ test('dateIntervalSchema', () => {
   expect(() =>
     validate('2022-01-01/2022-01-02/2022-01-03', schema),
   ).toThrowErrorMatchingInlineSnapshot(`"must be a DateInterval string"`)
+})
+
+test('ianaTimezoneSchema', () => {
+  const schema = ianaTimezoneSchema
+
+  validate('Europe/London', schema)
+  expect(() => validate(undefined, schema)).toThrowErrorMatchingInlineSnapshot(
+    `""value" is required"`,
+  )
+  expect(() => validate('London', schema)).toThrowErrorMatchingInlineSnapshot(
+    `"must be a valid IANA timezone string"`,
+  )
 })
