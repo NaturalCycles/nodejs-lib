@@ -157,7 +157,8 @@ export const utcOffsetSchema = numberSchema
   .dividable(15)
 
 export const ianaTimezoneSchema = stringSchema
-  .valid(...Intl.supportedValuesOf('timeZone'))
+  // UTC is added to assist unit-testing, which uses UTC by default (not technically a valid Iana timezone identifier)
+  .valid(...Intl.supportedValuesOf('timeZone'), 'UTC')
   .messages({
     'any.only': `must be a valid IANA timezone string`,
   })

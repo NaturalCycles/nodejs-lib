@@ -169,6 +169,7 @@ test('ianaTimezoneSchema', () => {
   const schema = ianaTimezoneSchema
 
   validate('Europe/London', schema)
+  validate('UTC', schema) // to support unit testing
   expect(() => validate(undefined, schema)).toThrowErrorMatchingInlineSnapshot(
     `""value" is required"`,
   )
