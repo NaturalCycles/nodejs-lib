@@ -187,15 +187,9 @@ test.each([
   [{ type: 'string', format: 'countryCode' }, ['se', 'sve']],
   [{ type: 'string', format: 'currency' }, ['sek', 'us']],
   [{ type: 'number', format: 'unixTimestamp' }, [1232342342000, -1]],
-  [
-    { type: 'number', format: 'unixTimestamp2000' },
-    [1232342342000, localTime('1999-01-01').unix()],
-  ],
+  [{ type: 'number', format: 'unixTimestamp2000' }, [1232342342000, localTime('1999-01-01').unix]],
   [{ type: 'number', format: 'unixTimestampMillis' }, [-1]],
-  [
-    { type: 'number', format: 'unixTimestampMillis2000' },
-    [-1, localTime('1999-01-01').unixMillis()],
-  ],
+  [{ type: 'number', format: 'unixTimestampMillis2000' }, [-1, localTime('1999-01-01').unixMillis]],
   [{ type: 'number', format: 'utcOffset' }, [-15 * 60]],
   [{ type: 'number', format: 'utcOffsetHours' }, [-15, 15]],
 ] as [JsonSchema, any[]][])('%s should be invalid', (schema, objects: any[]) => {

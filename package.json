@@ -14,7 +14,7 @@
     "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
   },
   "dependencies": {
-    "@naturalcycles/js-lib": "^14.0.0",
+    "@naturalcycles/js-lib": "^14.244.0",
     "@types/js-yaml": "^4.0.9",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/through2-concurrent": "^2.0.0",

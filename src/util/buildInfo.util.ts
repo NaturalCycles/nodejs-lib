@@ -22,7 +22,7 @@ export interface GenerateBuildInfoOptions {
 
 export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo {
   const now = localTime.orNow(opt.overrideTimestamp)
-  const ts = now.unix()
+  const ts = now.unix
 
   const rev = gitCurrentCommitSha()
   const branchName = gitCurrentBranchName()
