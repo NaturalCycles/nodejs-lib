@@ -1,4 +1,4 @@
-import { setGlobalStringifyFunction } from '@naturalcycles/js-lib'
+import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import type { CommonLogger } from '@naturalcycles/js-lib'
 import { inspectStringifyFn } from '../string/inspect'
 
@@ -59,6 +59,8 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
   void (async () => {
     try {
       await fn()
+
+      await pDelay() // to ensure all async operations are completed
 
       if (DEBUG_RUN_SCRIPT) logger.log(`runScript promise resolved`)
 
