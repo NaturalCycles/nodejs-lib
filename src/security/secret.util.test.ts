@@ -18,12 +18,12 @@ import {
 // order is important, secret.util should be loaded after the mocks
 import {
   getSecretMap,
-  loadSecretsFromEnv,
   loadSecretsFromEncryptedJsonFile,
+  loadSecretsFromEncryptedJsonFileValues,
+  loadSecretsFromEnv,
   secret,
   secretOptional,
   setSecretMap,
-  loadSecretsFromEncryptedJsonFileValues,
 } from './secret.util'
 
 test('secret', async () => {

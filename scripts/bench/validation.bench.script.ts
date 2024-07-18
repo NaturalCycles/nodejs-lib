@@ -5,16 +5,16 @@ yarn tsn bench/validation.bench
  */
 
 import { runBench } from '@naturalcycles/bench-lib'
-import { jsonSchema, _range, z } from '@naturalcycles/js-lib'
+import { _range, jsonSchema, z } from '@naturalcycles/js-lib'
 import {
   AjvSchema,
   arraySchema,
   booleanSchema,
   numberSchema,
   objectSchema,
+  runScript,
   stringSchema,
   validate,
-  runScript,
 } from '../../src'
 
 interface Item {

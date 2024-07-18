@@ -1,4 +1,4 @@
-import { AsyncMapper, _passNothingPredicate, Mapper } from '@naturalcycles/js-lib'
+import { _passNothingPredicate, AsyncMapper, Mapper } from '@naturalcycles/js-lib'
 import { transformMap, TransformMapOptions, transformMapSync } from '../..'
 import { WritableTyped } from '../stream.model'
 

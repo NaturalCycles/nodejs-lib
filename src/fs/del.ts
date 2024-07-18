@@ -1,4 +1,4 @@
-import { pFilter, pMap, _since } from '@naturalcycles/js-lib'
+import { _since, pFilter, pMap } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
 import { fs2, globby } from '../index'
 

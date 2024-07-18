@@ -1,11 +1,11 @@
 import {
-  JsonSchema,
-  JsonSchemaAnyBuilder,
-  JsonSchemaBuilder,
   _filterNullishValues,
   _isObject,
   _substringBefore,
   CommonLogger,
+  JsonSchema,
+  JsonSchemaAnyBuilder,
+  JsonSchemaBuilder,
 } from '@naturalcycles/js-lib'
 import Ajv, { ValidateFunction } from 'ajv'
 import { _inspect, fs2, requireFileToExist } from '../../index'

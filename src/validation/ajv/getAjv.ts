@@ -1,5 +1,5 @@
-import Ajv from 'ajv'
 import type { Options } from 'ajv'
+import Ajv from 'ajv'
 
 const AJV_OPTIONS: Options = {
   removeAdditional: true,

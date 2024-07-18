@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray, _pipelineToArray } from '../../..'
+import { _pipelineToArray, readableFromArray } from '../../..'
 import { testDir } from '../../../test/paths.cnst'
 import { transformMultiThreaded } from './transformMultiThreaded'
 

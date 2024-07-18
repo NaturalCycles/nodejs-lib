@@ -1,4 +1,4 @@
-import { hasColors, grey } from './colors'
+import { grey, hasColors } from './colors'
 
 test('colors', () => {
   console.log(grey('sdf'))

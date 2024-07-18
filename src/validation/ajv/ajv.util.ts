@@ -1,6 +1,6 @@
 import { JsonSchema } from '@naturalcycles/js-lib'
-import { fastGlob, fs2 } from '../..'
 import type { FastGlobOptions } from '../..'
+import { fastGlob, fs2 } from '../..'
 import { AjvSchema, AjvSchemaCfg } from './ajvSchema'
 
 /**

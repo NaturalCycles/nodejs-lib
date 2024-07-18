@@ -1,5 +1,5 @@
 import type { JsonSchema } from '@naturalcycles/js-lib'
-import { jsonSchema, _try, localTime, _deepFreeze } from '@naturalcycles/js-lib'
+import { _deepFreeze, _try, jsonSchema, localTime } from '@naturalcycles/js-lib'
 import { _inspect } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'

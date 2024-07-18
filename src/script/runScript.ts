@@ -1,5 +1,5 @@
-import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import type { CommonLogger } from '@naturalcycles/js-lib'
+import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import { inspectStringifyFn } from '../string/inspect'
 
 export interface RunScriptOptions {

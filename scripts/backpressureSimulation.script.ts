@@ -4,8 +4,8 @@ yarn tsn backpressureSimulation.script.ts
 
  */
 
-import { pDelay, _range } from '@naturalcycles/js-lib'
-import { Debug, readableFromArray, transformLogProgress, writableForEach, _pipeline } from '../src'
+import { _range, pDelay } from '@naturalcycles/js-lib'
+import { _pipeline, Debug, readableFromArray, transformLogProgress, writableForEach } from '../src'
 import { runScript } from '../src/script/runScript'
 
 Debug.enable('*')

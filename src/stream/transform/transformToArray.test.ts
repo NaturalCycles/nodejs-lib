@@ -1,5 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
-import { readableFromArray, _pipeline } from '../..'
+import { _pipeline, readableFromArray } from '../..'
 import { transformMap } from './transformMap'
 import { transformToArray } from './transformToArray'
 

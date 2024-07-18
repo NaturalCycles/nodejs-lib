@@ -1,5 +1,5 @@
 import { Writable } from 'node:stream'
-import { readableCreate, ReadableTyped, _pipeline } from '../..'
+import { _pipeline, readableCreate, ReadableTyped } from '../..'
 import { TransformOptions, WritableTyped } from '../stream.model'
 
 /**

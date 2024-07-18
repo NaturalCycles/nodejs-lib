@@ -1,12 +1,12 @@
 import { AbortableAsyncMapper, ErrorMode } from '@naturalcycles/js-lib'
 import {
+  _pipeline,
+  fs2,
   transformLogProgress,
   TransformLogProgressOptions,
   transformMap,
   TransformMapOptions,
   writableVoid,
-  _pipeline,
-  fs2,
 } from '../..'
 
 export interface NDJSONStreamForEachOptions<IN = any>

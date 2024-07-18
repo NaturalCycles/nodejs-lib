@@ -1,5 +1,5 @@
 import { Readable } from 'node:stream'
-import { AppError, ErrorMode, _range, pTry } from '@naturalcycles/js-lib'
+import { _range, AppError, ErrorMode, pTry } from '@naturalcycles/js-lib'
 import { _pipeline } from '../pipeline/pipeline'
 import { writableVoid } from '../writable/writableVoid'
 import { transformMapSimple } from './transformMapSimple'

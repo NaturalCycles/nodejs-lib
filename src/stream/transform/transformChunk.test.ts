@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
-import { writablePushToArray, _pipeline } from '../..'
+import { _pipeline, writablePushToArray } from '../..'
 import { transformChunk } from './transformChunk'
 
 test('transformBuffer', async () => {

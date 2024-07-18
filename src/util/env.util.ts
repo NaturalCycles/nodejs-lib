@@ -1,6 +1,6 @@
+import 'dotenv/config' // ensure .env is read before requiring keys
 import fs from 'node:fs'
 import type { ValuesOf } from '@naturalcycles/js-lib'
-import 'dotenv/config' // ensure .env is read before requiring keys
 
 /**
  * @example

@@ -1,6 +1,6 @@
 import JoiLib from 'joi'
-import { NumberSchema, numberExtensions } from './number.extensions'
-import { StringSchema, stringExtensions } from './string.extensions'
+import { numberExtensions, NumberSchema } from './number.extensions'
+import { stringExtensions, StringSchema } from './string.extensions'
 
 export interface ExtendedJoi extends JoiLib.Root {
   // eslint-disable-next-line id-blacklist

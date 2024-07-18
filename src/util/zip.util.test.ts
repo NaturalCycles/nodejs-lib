@@ -1,12 +1,12 @@
 import {
+  deflateBuffer,
+  deflateString,
   gunzipBuffer,
   gunzipToString,
   gzipBuffer,
   gzipString,
   inflateBuffer,
   inflateToString,
-  deflateBuffer,
-  deflateString,
 } from './zip.util'
 
 test('deflate/inflate', async () => {
