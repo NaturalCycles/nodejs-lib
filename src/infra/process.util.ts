@@ -77,7 +77,7 @@ class ProcessUtil {
     const startIdle = stats1.idle
     const startTotal = stats1.total
 
-    return new Promise<number>(resolve => {
+    return await new Promise<number>(resolve => {
       setTimeout(() => {
         const stats2 = this.getCPUInfo()
         const endIdle = stats2.idle
