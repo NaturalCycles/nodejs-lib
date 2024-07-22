@@ -170,3 +170,7 @@ export const baseDBEntitySchema: ObjectSchema<BaseDBEntity> = objectSchema<BaseD
   created: unixTimestamp2000Schema.optional(),
   updated: unixTimestamp2000Schema.optional(),
 })
+
+export const macAddressSchema = stringSchema.regex(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/)
+
+export const uuidSchema = stringSchema.uuid()
