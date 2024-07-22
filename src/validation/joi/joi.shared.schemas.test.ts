@@ -9,6 +9,7 @@ import {
   emailSchema,
   ianaTimezoneSchema,
   idSchema,
+  macAddressSchema,
   numberEnumKeySchema,
   numberEnumValueSchema,
   numberSchema,
@@ -21,6 +22,7 @@ import {
   stringSchema,
   stringSchemaTyped,
   urlSchema,
+  uuidSchema,
 } from './joi.shared.schemas'
 import { isValid, validate } from './joi.validation.util'
 
@@ -176,4 +178,43 @@ test('ianaTimezoneSchema', () => {
   expect(() => validate('London', schema)).toThrowErrorMatchingInlineSnapshot(
     `"must be a valid IANA timezone string"`,
   )
+})
+
+describe('macAddressSchema', () => {
+  const macAddresses = [
+    'bb:04:17:db:1f:33',
+    'fc:5f:1d:3f:d3:a2',
+    'ec:f4:72:99:4b:a4',
+    'ae:f1:e2:c5:be:24',
+    '37:d9:72:ee:02:81',
+  ]
+
+  test.each(macAddresses)('valid macAddressSchema: %s', s => {
+    expect(validate(s, macAddressSchema)).toBe(s)
+  })
+
+  const nonMacAddresses = [
+    undefined,
+    null,
+    0,
+    'asdf',
+    'bb:04:17:db:1f:33:',
+    'bb:04:17:db:1f:33:00',
+    'bb:04:17:db:1g',
+  ]
+
+  test.each(nonMacAddresses)('invalid macAddressSchema: %s', s => {
+    expect(() => validate(s, macAddressSchema)).toThrow()
+  })
+})
+
+describe('uuidSchema', () => {
+  test('valid', () => {
+    validate('123e4567-e89b-12d3-a456-426614174000', uuidSchema)
+  })
+
+  test('invalid', () => {
+    expect(() => validate('123e4567-e89b-12d3-a456-4266141740000', uuidSchema)).toThrow()
+    expect(() => validate('123g4567-e89b-12d3-a456-426614174000', uuidSchema)).toThrow()
+  })
 })
