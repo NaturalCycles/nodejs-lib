@@ -46,9 +46,9 @@ export class NDJsonStats {
       `Processed ${name ? boldWhite(name) + ': ' : ''}${dimWhite(this.rows)} rows, ${dimWhite(
         _hb(this.sizeBytes),
       )} in ${dimWhite(_ms(this.tookMillis))}`,
-      `${dimWhite(this.rpsTotal + ' rows/sec')}`,
-      `${dimWhite(_hb(this.avgBytesPerRow) + '/row')}`,
-      `${dimWhite(_hb(this.bpsTotal) + '/sec')}`,
+      dimWhite(this.rpsTotal + ' rows/sec'),
+      dimWhite(_hb(this.avgBytesPerRow) + '/row'),
+      dimWhite(_hb(this.bpsTotal) + '/sec'),
     ].join(', ')
   }
 }
