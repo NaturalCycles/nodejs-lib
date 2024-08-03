@@ -4,7 +4,7 @@ yarn tsn colors.script.ts
 
  */
 
-import { Color, Modifiers } from 'chalk'
+import type { Color, Modifiers } from 'chalk'
 import { chalk } from '../src/colors/colors'
 import { runScript } from '../src/script/runScript'
 
