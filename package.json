@@ -41,7 +41,7 @@
   "devDependencies": {
     "@naturalcycles/bench-lib": "^3.0.0",
     "@naturalcycles/dev-lib": "^15.0.3",
-    "@types/node": "^20.1.0",
+    "@types/node": "^22.1.0",
     "@types/yargs": "^16.0.0",
     "jest": "^29.0.0"
   },
