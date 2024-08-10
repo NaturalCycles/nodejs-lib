@@ -55,7 +55,7 @@ export function transformJsonParse<ROW = any>(
 }
 
 // Based on: https://stackoverflow.com/a/34557997/4919972
-export const bufferReviver: Reviver = (k, v) => {
+export const bufferReviver: Reviver = (_k, v) => {
   if (v !== null && typeof v === 'object' && v.type === 'Buffer' && Array.isArray(v.data)) {
     return Buffer.from(v.data)
   }

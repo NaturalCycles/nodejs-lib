@@ -45,7 +45,7 @@ export interface ReadableTyped<T> extends Readable {
   drop: (limit: number, opt?: ReadableSignalOptions) => ReadableTyped<T>
 }
 
-// eslint-disable-next-line unused-imports/no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: ok
 export interface WritableTyped<T> extends Writable {}
 
 /**
@@ -59,7 +59,7 @@ export type ReadableBinary = Readable
  */
 export type WritableBinary = Writable
 
-// eslint-disable-next-line unused-imports/no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: ok
 export interface TransformTyped<IN, OUT> extends Transform {}
 
 export interface TransformOptions {

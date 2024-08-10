@@ -11,7 +11,7 @@ export function writableLimit<T>(readable: Readable, limit: number): WritableTyp
 
   return new Writable({
     objectMode: true,
-    write(chunk, _, cb) {
+    write(_chunk, _, cb) {
       if (limit === 0) return cb() // no limit, just passthrough
 
       i++

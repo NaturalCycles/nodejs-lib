@@ -92,7 +92,7 @@ export class SlackService<CTX = any> {
     if (msg.kv) {
       ;(msg.attachments ||= []).push({ fields: this.kvToFields(msg.kv) })
 
-      delete msg.kv // to not pass it all the way to Slack Api
+      msg.kv = undefined // to not pass it all the way to Slack Api
     }
 
     let text: string
@@ -135,9 +135,8 @@ export class SlackService<CTX = any> {
         // ignore (unless throwOnError is set)
         if (msg.throwOnError) {
           throw err
-        } else {
-          console.log(err)
         }
+        console.log(err)
       })
   }
 

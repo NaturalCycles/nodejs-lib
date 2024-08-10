@@ -34,7 +34,7 @@ test('transformLogProgress', async () => {
       peakRSS: true,
       logSizes: true,
       logZippedSizes: true,
-      extra: (r, index) => {
+      extra: (_r, index) => {
         // console.log(r, index)
 
         if (index % 10 === 0) return {}

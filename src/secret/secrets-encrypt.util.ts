@@ -31,7 +31,7 @@ export function secretsEncrypt(
         `!**/*.enc`, // excluding already encoded
       ]
   const filenames = fastGlob.sync(patterns)
-  let encFilename
+  let encFilename: string
 
   filenames.forEach(filename => {
     if (jsonMode) {

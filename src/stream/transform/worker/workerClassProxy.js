@@ -1,6 +1,6 @@
 const started = Date.now()
-const { workerData, parentPort } = require('worker_threads')
-const { inspect } = require('util')
+const { workerData, parentPort } = require('node:worker_threads')
+const { inspect } = require('node:util')
 const { workerFile, workerIndex, logEvery = 1000, metric = 'worker' } = workerData || {}
 
 if (!workerFile) {

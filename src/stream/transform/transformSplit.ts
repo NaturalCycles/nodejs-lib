@@ -18,7 +18,7 @@ export function transformSplitOnNewline(): TransformTyped<Buffer, Buffer> {
     readableObjectMode: true,
     writableHighWaterMark: 64 * 1024,
 
-    transform(buf: Buffer, enc, done) {
+    transform(buf: Buffer, _enc, done) {
       let offset = 0
       let lastMatch = 0
       if (buffered) {
@@ -66,7 +66,7 @@ export function transformSplit(separator = '\n'): TransformTyped<Buffer, Buffer>
     readableObjectMode: true,
     writableHighWaterMark: 64 * 1024,
 
-    transform(buf: Buffer, enc, done) {
+    transform(buf: Buffer, _enc, done) {
       let offset = 0
       let lastMatch = 0
       if (buffered) {
@@ -119,7 +119,7 @@ function firstNewlineMatch(buf: Buffer, offset: number): number {
 
 function firstMatch(buf: Buffer, offset: number, matcher: Buffer): number {
   if (offset >= buf.length) return -1
-  let i
+  let i: number
   for (i = offset; i < buf.length; i++) {
     if (buf[i] === matcher[0]) {
       if (matcher.length > 1) {

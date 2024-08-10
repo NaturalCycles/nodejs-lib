@@ -29,13 +29,14 @@ interface AbortObject {
 // has a delay
 // Should listen to `end` event and close itself when 0 receivers
 
+// biome-ignore lint: ok
 function readable(obj: AbortObject) {
   let i = 0
   const readableLimit = 100
 
   return new Readable({
     objectMode: true,
-    async read(size: number) {
+    async read(_size: number) {
       if (obj.aborted) {
         console.log(`read, but aborted=true, emitting null to close the stream`)
         return this.push(null)
@@ -59,11 +60,12 @@ function readable(obj: AbortObject) {
   })
 }
 
+// biome-ignore lint: ok
 function writable() {
   let i = 0
   return new Writable({
     objectMode: true,
-    async write(chunk, _enc, cb) {
+    async write(_chunk, _enc, cb) {
       i++
       console.log(`write called with`, i)
       await pDelay(200)

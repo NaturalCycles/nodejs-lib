@@ -39,6 +39,7 @@
     "yargs": "^17.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@naturalcycles/bench-lib": "^3.0.0",
     "@naturalcycles/dev-lib": "^15.0.3",
     "@types/node": "^22.1.0",

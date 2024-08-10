@@ -37,7 +37,7 @@ export function secretsDecrypt(
   const filenames = fastGlob.sync(patterns)
 
   filenames.forEach(filename => {
-    let plainFilename
+    let plainFilename: string
 
     if (jsonMode) {
       _assert(filename.endsWith('.json'), `${path.basename(filename)} MUST end with '.json'`)

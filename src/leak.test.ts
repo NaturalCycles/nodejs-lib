@@ -3,5 +3,3 @@ test('should not leak', () => {
   require('./script/runScript')
   require('./colors/colors')
 })
-
-export {}

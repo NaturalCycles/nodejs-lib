@@ -14,7 +14,7 @@ Credit to: fs-extra (https://github.com/jprichardson/node-fs-extra)
 
  */
 
-import type { RmOptions } from 'node:fs'
+import type { RmOptions, Stats } from 'node:fs'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import path from 'node:path'
@@ -182,7 +182,7 @@ class FS2 {
   }
 
   ensureFile(filePath: string): void {
-    let stats
+    let stats: Stats | undefined
     try {
       stats = fs.statSync(filePath)
     } catch {}
@@ -197,7 +197,10 @@ class FS2 {
       }
     } catch (err) {
       // If the stat call above failed because the directory doesn't exist, create it
-      if ((err as any)?.code === 'ENOENT') return this.ensureDir(dir)
+      if ((err as any)?.code === 'ENOENT') {
+        this.ensureDir(dir)
+        return
+      }
       throw err
     }
 
@@ -205,7 +208,7 @@ class FS2 {
   }
 
   async ensureFileAsync(filePath: string): Promise<void> {
-    let stats
+    let stats: Stats | undefined
     try {
       stats = await fsp.stat(filePath)
     } catch {}
@@ -236,18 +239,19 @@ class FS2 {
   }
 
   emptyDir(dirPath: string): void {
-    let items
+    let items: string[]
     try {
       items = fs.readdirSync(dirPath)
     } catch {
-      return this.ensureDir(dirPath)
+      this.ensureDir(dirPath)
+      return
     }
 
     items.forEach(item => this.removePath(path.join(dirPath, item)))
   }
 
   async emptyDirAsync(dirPath: string): Promise<void> {
-    let items
+    let items: string[]
     try {
       items = await fsp.readdir(dirPath)
     } catch {
