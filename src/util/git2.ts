@@ -18,7 +18,7 @@ class Git2 {
     return title || preTitle!
   }
 
-  gitHasUncommittedChanges(): boolean {
+  hasUncommittedChanges(): boolean {
     // git diff-index --quiet HEAD -- || echo "untracked"
     try {
       cp.execSync('git diff-index --quiet HEAD --', {
@@ -33,7 +33,7 @@ class Git2 {
   /**
    * Returns true if there were changes
    */
-  gitCommitAll(msg: string): boolean {
+  commitAll(msg: string): boolean {
     // git commit -a -m "style(lint-all): $GIT_MSG" || true
     const cmd = `git commit -a --no-verify -m "${msg}"`
     // const cmd = `git`
@@ -53,7 +53,7 @@ class Git2 {
   /**
    * @returns true if there are not pushed commits.
    */
-  gitIsAhead(): boolean {
+  isAhead(): boolean {
     // ahead=`git rev-list HEAD --not --remotes | wc -l | awk '{print $1}'`
     const cmd = `git rev-list HEAD --not --remotes | wc -l | awk '{print $1}'`
     const stdout = exec2.exec(cmd)
@@ -61,7 +61,7 @@ class Git2 {
     return Number(stdout) > 0
   }
 
-  gitPull(): void {
+  pull(): void {
     const cmd = 'git pull'
     try {
       cp.execSync(cmd, {
@@ -70,11 +70,11 @@ class Git2 {
     } catch {}
   }
 
-  gitPush(): void {
+  push(): void {
     // git push --set-upstream origin $CIRCLE_BRANCH && echo "pushed, exiting" && exit 0
     let cmd = 'git push'
 
-    const branchName = this.gitCurrentBranchName()
+    const branchName = this.getCurrentBranchName()
 
     if (branchName) {
       cmd += ` --set-upstream origin ${branchName}`
@@ -83,20 +83,20 @@ class Git2 {
     exec2.spawn(cmd, { logStart: true })
   }
 
-  gitCurrentCommitSha(full = false): string {
+  getCurrentCommitSha(full = false): string {
     const sha = exec2.exec('git rev-parse HEAD')
     return full ? sha : sha.slice(0, 7)
   }
 
-  gitCurrentCommitTimestamp(): UnixTimestampNumber {
+  getCurrentCommitTimestamp(): UnixTimestampNumber {
     return Number(exec2.exec('git log -1 --format=%ct'))
   }
 
-  gitCurrentBranchName(): string {
+  getCurrentBranchName(): string {
     return exec2.exec('git rev-parse --abbrev-ref HEAD')
   }
 
-  gitCurrentRepoName(): string {
+  getCurrentRepoName(): string {
     const originUrl = exec2.exec('git config --get remote.origin.url')
     return path.basename(originUrl, '.git')
   }

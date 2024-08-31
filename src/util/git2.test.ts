@@ -11,20 +11,20 @@ test('getLastGitCommitMsg', async () => {
 })
 
 test('gitHasUncommittedChanges', async () => {
-  const changes = git2.gitHasUncommittedChanges()
+  const changes = git2.hasUncommittedChanges()
   console.log({ changes })
 })
 
 test('gitCurrentBranchName', async () => {
-  const branchName = git2.gitCurrentBranchName()
+  const branchName = git2.getCurrentBranchName()
   console.log(branchName)
 })
 
 test('gitCurrentRepoName', async () => {
-  git2.gitCurrentRepoName()
+  git2.getCurrentRepoName()
 })
 
 test('gitCurrentCommitTimestamp', async () => {
-  const ts = git2.gitCurrentCommitTimestamp()
+  const ts = git2.getCurrentCommitTimestamp()
   console.log(ts, new Date(ts * 1000))
 })

@@ -19,10 +19,10 @@ export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo
   const now = localTime.orNow(opt.overrideTimestamp)
   const ts = now.unix
 
-  const rev = git2.gitCurrentCommitSha()
-  const branchName = git2.gitCurrentBranchName()
-  const repoName = git2.gitCurrentRepoName()
-  const tsCommit = git2.gitCurrentCommitTimestamp()
+  const rev = git2.getCurrentCommitSha()
+  const branchName = git2.getCurrentBranchName()
+  const repoName = git2.getCurrentRepoName()
+  const tsCommit = git2.getCurrentCommitTimestamp()
 
   const ver = [now.toStringCompact(), repoName, branchName, rev].join('_')
 
