@@ -6,7 +6,7 @@ import {
   NumberOfMilliseconds,
   UnixTimestampMillisNumber,
 } from '@naturalcycles/js-lib'
-import { dimGrey, white } from '../colors/colors'
+import { dimGrey, dimRed, hasColors, white } from '../colors/colors'
 
 /**
  * Set of utility functions to work with Spawn / Exec.
@@ -60,9 +60,12 @@ class Exec2 {
       throwOnNonZeroCode = true,
       cwd,
       env,
+      forceColor = hasColors,
     } = opt
     let stdout = ''
     let stderr = ''
+
+    if (printWhileRunning) console.log('') // 1-line padding before the output
 
     return await new Promise<SpawnOutput>((resolve, reject) => {
       const p = cp.spawn(cmd, opt.args || [], {
@@ -71,6 +74,7 @@ class Exec2 {
         env: {
           ...env,
           ...(opt.passProcessEnv ? process.env : {}),
+          ...(forceColor ? { FORCE_COLOR: '1' } : {}),
         },
       })
 
@@ -94,7 +98,9 @@ class Exec2 {
       })
 
       p.on('close', code => {
-        this.logFinish(cmd, opt, started)
+        if (printWhileRunning) console.log('') // 1-line padding after the output
+        const isSuccessful = !code
+        this.logFinish(cmd, opt, started, isSuccessful)
         const exitCode = code || 0
         const o: SpawnOutput = {
           exitCode,
@@ -125,7 +131,8 @@ class Exec2 {
   spawn(cmd: string, opt: SpawnOptions = {}): void {
     const started = Date.now()
     this.logStart(cmd, opt)
-    const { shell = true, cwd, env } = opt
+    const { shell = true, cwd, env, forceColor = hasColors } = opt
+    console.log('') // 1-line padding before the output
 
     const r = cp.spawnSync(cmd, opt.args, {
       encoding: 'utf8',
@@ -135,10 +142,13 @@ class Exec2 {
       env: {
         ...env,
         ...(opt.passProcessEnv ? process.env : {}),
+        ...(forceColor ? { FORCE_COLOR: '1' } : {}),
       },
     })
 
-    this.logFinish(cmd, opt, started)
+    console.log('') // 1-line padding after the output
+    const isSuccessful = !r.error && !r.status
+    this.logFinish(cmd, opt, started, isSuccessful)
 
     if (r.error) {
       throw r.error
@@ -168,7 +178,7 @@ class Exec2 {
     const { cwd, env, timeout } = opt
 
     try {
-      return cp
+      const s = cp
         .execSync(cmd, {
           encoding: 'utf8',
           // stdio: 'inherit', // no, otherwise we don't get the output returned
@@ -182,6 +192,9 @@ class Exec2 {
           },
         })
         .trim()
+
+      this.logFinish(cmd, opt, started, true)
+      return s
     } catch (err) {
       // Not logging stderr, as it's printed by execSync by default (somehow)
       // stdout is not printed by execSync though, therefor we print it here
@@ -191,9 +204,8 @@ class Exec2 {
       if ((err as any).stdout) {
         process.stdout.write((err as any).stdout)
       }
+      this.logFinish(cmd, opt, started, false)
       throw new Error(`exec exited with code ${(err as any).status}: ${cmd}`)
-    } finally {
-      this.logFinish(cmd, opt, started)
     }
   }
 
@@ -221,14 +233,16 @@ class Exec2 {
     cmd: string,
     opt: SpawnOptions | ExecOptions,
     started: UnixTimestampMillisNumber,
+    isSuccessful: boolean,
   ): void {
-    if (!opt.logFinish && !opt.log) return
+    if (isSuccessful && !opt.logFinish && !opt.log) return
 
     console.log(
       [
         white(opt.name || cmd),
         ...((!opt.name && (opt as SpawnOptions).args) || []),
         dimGrey('took ' + _since(started)),
+        !isSuccessful && dimGrey('and ') + dimRed('failed'),
       ]
         .filter(Boolean)
         .join(' '),
@@ -316,6 +330,11 @@ export interface SpawnOptions {
    * Set to true to pass `process.env` to the spawned process.
    */
   passProcessEnv?: boolean
+  /**
+   * Defaults to "auto detect colors".
+   * Set to false or true to override.
+   */
+  forceColor?: boolean
 }
 
 export interface ExecOptions {

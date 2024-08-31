@@ -22,6 +22,7 @@ const { count: countStr, error } = parseArgs({
 
 const count = Number(countStr)
 
+console.log('very first line')
 console.log({
   count,
   error,

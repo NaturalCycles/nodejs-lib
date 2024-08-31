@@ -8,10 +8,13 @@ import { runScript } from '../src'
 import { exec2 } from '../src/util/exec2'
 
 runScript(async () => {
-  // exec2.spawn({
-  //   cmd: 'node scripts/dot.script.js --error',
-  //   log: true,
-  // })
+  await exec2.spawnAsync('node', {
+    args: ['scripts/dot.script.js', '--error'],
+    log: true,
+    shell: true,
+    // forceColor: false,
+    // passProcessEnv: true,
+  })
 
   // const s = exec2.exec({
   //   cmd: 'node scripts/dot.script.js --error',
@@ -33,8 +36,8 @@ runScript(async () => {
   //   cmd: 'git status',
   //   log: true,
   // })
-  const { stdout } = await exec2.spawnAsync('git status', {
-    log: true,
-  })
-  console.log(stdout)
+  // const { stdout } = await exec2.spawnAsync('git status', {
+  //   log: true,
+  // })
+  // console.log(stdout)
 })
