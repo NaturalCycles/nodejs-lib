@@ -60,6 +60,7 @@ class Exec2 {
       throwOnNonZeroCode = true,
       cwd,
       env,
+      passProcessEnv = true,
       forceColor = hasColors,
     } = opt
     let stdout = ''
@@ -72,9 +73,9 @@ class Exec2 {
         shell,
         cwd,
         env: {
-          ...env,
-          ...(opt.passProcessEnv ? process.env : {}),
+          ...(passProcessEnv ? process.env : {}),
           ...(forceColor ? { FORCE_COLOR: '1' } : {}),
+          ...env,
         },
       })
 
@@ -131,7 +132,7 @@ class Exec2 {
   spawn(cmd: string, opt: SpawnOptions = {}): void {
     const started = Date.now()
     this.logStart(cmd, opt)
-    const { shell = true, cwd, env, forceColor = hasColors } = opt
+    const { shell = true, cwd, env, passProcessEnv = true, forceColor = hasColors } = opt
     console.log('') // 1-line padding before the output
 
     const r = cp.spawnSync(cmd, opt.args, {
@@ -140,9 +141,9 @@ class Exec2 {
       shell,
       cwd,
       env: {
-        ...env,
-        ...(opt.passProcessEnv ? process.env : {}),
+        ...(passProcessEnv ? process.env : {}),
         ...(forceColor ? { FORCE_COLOR: '1' } : {}),
+        ...env,
       },
     })
 
@@ -175,7 +176,7 @@ class Exec2 {
   exec(cmd: string, opt: ExecOptions = {}): string {
     const started = Date.now()
     this.logStart(cmd, opt)
-    const { cwd, env, timeout } = opt
+    const { cwd, env, passProcessEnv = true, timeout } = opt
 
     try {
       const s = cp
@@ -187,8 +188,8 @@ class Exec2 {
           cwd,
           timeout,
           env: {
+            ...(passProcessEnv ? process.env : {}),
             ...env,
-            ...(opt.passProcessEnv ? process.env : {}),
           },
         })
         .trim()
@@ -326,8 +327,8 @@ export interface SpawnOptions {
 
   env?: AnyObject
   /**
-   * Defaults to false for security reasons.
-   * Set to true to pass `process.env` to the spawned process.
+   * Defaults to true.
+   * Set to false to NOT pass `process.env` to the spawned process.
    */
   passProcessEnv?: boolean
   /**
