@@ -68,8 +68,10 @@ class Exec2 {
       const p = cp.spawn(cmd, opt.args || [], {
         shell,
         cwd,
-        env,
-        // ...process.env, // not passing by default for security reasons
+        env: {
+          ...env,
+          ...(opt.passProcessEnv ? process.env : {}),
+        },
       })
 
       p.stdout.on('data', data => {
@@ -130,8 +132,10 @@ class Exec2 {
       stdio: 'inherit',
       shell,
       cwd,
-      env,
-      // ...process.env, // not passing by default for security reasons
+      env: {
+        ...env,
+        ...(opt.passProcessEnv ? process.env : {}),
+      },
     })
 
     this.logFinish(cmd, opt, started)
@@ -172,8 +176,10 @@ class Exec2 {
           // shell: undefined,
           cwd,
           timeout,
-          env,
-          // ...process.env, // not passing by default for security reasons
+          env: {
+            ...env,
+            ...(opt.passProcessEnv ? process.env : {}),
+          },
         })
         .trim()
     } catch (err) {
@@ -218,7 +224,15 @@ class Exec2 {
   ): void {
     if (!opt.logFinish && !opt.log) return
 
-    console.log([white(opt.name || cmd), dimGrey('took ' + _since(started))].join(' '))
+    console.log(
+      [
+        white(opt.name || cmd),
+        ...((!opt.name && (opt as SpawnOptions).args) || []),
+        dimGrey('took ' + _since(started)),
+      ]
+        .filter(Boolean)
+        .join(' '),
+    )
   }
 }
 
@@ -297,6 +311,11 @@ export interface SpawnOptions {
   cwd?: string
 
   env?: AnyObject
+  /**
+   * Defaults to false for security reasons.
+   * Set to true to pass `process.env` to the spawned process.
+   */
+  passProcessEnv?: boolean
 }
 
 export interface ExecOptions {
@@ -323,4 +342,9 @@ export interface ExecOptions {
   timeout?: NumberOfMilliseconds
 
   env?: AnyObject
+  /**
+   * Defaults to false for security reasons.
+   * Set to true to pass `process.env` to the spawned process.
+   */
+  passProcessEnv?: boolean
 }
