@@ -6,12 +6,7 @@ import {
   UnixTimestampNumber,
 } from '@naturalcycles/js-lib'
 import { fs2 } from '../fs/fs2'
-import {
-  gitCurrentBranchName,
-  gitCurrentCommitSha,
-  gitCurrentCommitTimestamp,
-  gitCurrentRepoName,
-} from './git.util'
+import { git2 } from './git2'
 
 export interface GenerateBuildInfoOptions {
   /**
@@ -24,10 +19,10 @@ export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo
   const now = localTime.orNow(opt.overrideTimestamp)
   const ts = now.unix
 
-  const rev = gitCurrentCommitSha()
-  const branchName = gitCurrentBranchName()
-  const repoName = gitCurrentRepoName()
-  const tsCommit = gitCurrentCommitTimestamp()
+  const rev = git2.gitCurrentCommitSha()
+  const branchName = git2.gitCurrentBranchName()
+  const repoName = git2.gitCurrentRepoName()
+  const tsCommit = git2.gitCurrentCommitTimestamp()
 
   const ver = [now.toStringCompact(), repoName, branchName, rev].join('_')
 
