@@ -51,8 +51,6 @@ class Exec2 {
    * log: true
    */
   async spawnAsync(cmd: string, opt: SpawnAsyncOptions = {}): Promise<SpawnOutput> {
-    const started = Date.now()
-    this.logStart(cmd, opt)
     const {
       shell = true,
       printWhileRunning = true,
@@ -63,10 +61,13 @@ class Exec2 {
       passProcessEnv = true,
       forceColor = hasColors,
     } = opt
+    opt.log ??= printWhileRunning // by default log should be true, as we are printing the output
+    const started = Date.now()
+    this.logStart(cmd, opt)
     let stdout = ''
     let stderr = ''
 
-    if (printWhileRunning) console.log('') // 1-line padding before the output
+    // if (printWhileRunning) console.log('') // 1-line padding before the output
 
     return await new Promise<SpawnOutput>((resolve, reject) => {
       const p = cp.spawn(cmd, opt.args || [], {
@@ -99,7 +100,7 @@ class Exec2 {
       })
 
       p.on('close', code => {
-        if (printWhileRunning) console.log('') // 1-line padding after the output
+        // if (printWhileRunning) console.log('') // 1-line padding after the output
         const isSuccessful = !code
         this.logFinish(cmd, opt, started, isSuccessful)
         const exitCode = code || 0
@@ -130,10 +131,11 @@ class Exec2 {
    * log: true
    */
   spawn(cmd: string, opt: SpawnOptions = {}): void {
+    const { shell = true, cwd, env, passProcessEnv = true, forceColor = hasColors } = opt
+    opt.log ??= true // by default log should be true, as we are printing the output
     const started = Date.now()
     this.logStart(cmd, opt)
-    const { shell = true, cwd, env, passProcessEnv = true, forceColor = hasColors } = opt
-    console.log('') // 1-line padding before the output
+    // console.log('') // 1-line padding before the output
 
     const r = cp.spawnSync(cmd, opt.args, {
       encoding: 'utf8',
@@ -147,7 +149,7 @@ class Exec2 {
       },
     })
 
-    console.log('') // 1-line padding after the output
+    // console.log('') // 1-line padding after the output
     const isSuccessful = !r.error && !r.status
     this.logFinish(cmd, opt, started, isSuccessful)
 

@@ -10,7 +10,7 @@ import { exec2 } from '../src/util/exec2'
 runScript(async () => {
   await exec2.spawnAsync('node', {
     args: ['scripts/dot.script.js', '--error'],
-    log: true,
+    // log: true,
     shell: true,
     // forceColor: false,
     // passProcessEnv: true,
