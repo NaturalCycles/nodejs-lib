@@ -62,6 +62,8 @@ class Exec2 {
       forceColor = hasColors,
     } = opt
     opt.log ??= printWhileRunning // by default log should be true, as we are printing the output
+    opt.logStart ??= opt.log
+    opt.logFinish ??= opt.log
     const started = Date.now()
     this.logStart(cmd, opt)
     let stdout = ''
@@ -133,6 +135,8 @@ class Exec2 {
   spawn(cmd: string, opt: SpawnOptions = {}): void {
     const { shell = true, cwd, env, passProcessEnv = true, forceColor = hasColors } = opt
     opt.log ??= true // by default log should be true, as we are printing the output
+    opt.logStart ??= opt.log
+    opt.logFinish ??= opt.log
     const started = Date.now()
     this.logStart(cmd, opt)
     // console.log('') // 1-line padding before the output
@@ -173,12 +177,14 @@ class Exec2 {
    * Defaults:
    *
    * shell: true
-   * log: true
+   * log: false
    */
   exec(cmd: string, opt: ExecOptions = {}): string {
+    const { cwd, env, passProcessEnv = true, timeout } = opt
+    opt.logStart ??= opt.log ?? false
+    opt.logFinish ??= opt.log ?? false
     const started = Date.now()
     this.logStart(cmd, opt)
-    const { cwd, env, passProcessEnv = true, timeout } = opt
 
     try {
       const s = cp
@@ -219,7 +225,7 @@ class Exec2 {
   }
 
   private logStart(cmd: string, opt: SpawnOptions | ExecOptions): void {
-    if (!opt.logStart && !opt.log) return
+    if (!opt.logStart) return
 
     console.log(
       [
@@ -238,7 +244,7 @@ class Exec2 {
     started: UnixTimestampMillisNumber,
     isSuccessful: boolean,
   ): void {
-    if (isSuccessful && !opt.logFinish && !opt.log) return
+    if (isSuccessful && !opt.logFinish) return
 
     console.log(
       [
