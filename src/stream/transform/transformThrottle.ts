@@ -1,6 +1,7 @@
 import { Transform } from 'node:stream'
 import {
   _ms,
+  _since,
   DeferredPromise,
   localTime,
   NumberOfMilliseconds,
@@ -75,7 +76,7 @@ export function transformThrottle<T>(opt: TransformThrottleOptions): TransformTy
         paused = pDefer()
         if (debug) {
           console.log(
-            `${localTime.now().toPretty()} transformThrottle activated: ${count} items passed in ${_ms(interval * 1000)}, will pause for ${_ms(interval * 1000 - (Date.now() - start))}`,
+            `${localTime.now().toPretty()} transformThrottle activated: ${count} items passed in ${_since(start)}, will pause for ${_ms(interval * 1000 - (Date.now() - start))}`,
           )
         }
       }
@@ -89,16 +90,23 @@ export function transformThrottle<T>(opt: TransformThrottleOptions): TransformTy
   })
 
   function onInterval(transform: Transform): void {
-    if (!paused) return
+    if (paused) {
+      if (debug) {
+        console.log(`${localTime.now().toPretty()} transformThrottle resumed`)
+      }
 
-    if (debug) {
-      console.log(`${localTime.now().toPretty()} transformThrottle resumed`)
+      paused.resolve()
+      paused = undefined
+    } else {
+      if (debug) {
+        console.log(
+          `${localTime.now().toPretty()} transformThrottle passed ${count} (of max ${throughput}) items in ${_since(start)}`,
+        )
+      }
     }
 
     count = 0
     start = Date.now()
     timeout = setTimeout(() => onInterval(transform), interval * 1000)
-    paused.resolve()
-    paused = undefined
   }
 }
