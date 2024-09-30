@@ -174,3 +174,6 @@ export const baseDBEntitySchema: ObjectSchema<BaseDBEntity> = objectSchema<BaseD
 export const macAddressSchema = stringSchema.regex(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/)
 
 export const uuidSchema = stringSchema.uuid()
+
+export const DATE_TIME_STRING_REGEX = /d{4}-\d{2}-\d{2}T\d{2}:\d{2}([+-]\d{2}:\d{2})?/
+export const dateTimeStringSchema = stringSchema.regex(DATE_TIME_STRING_REGEX)
