@@ -245,6 +245,9 @@ describe('dateTimeStringSchema', () => {
     '2024/07/25T00:55', // Invalid date separator ("/" instead of "-")
     '2024-07-25T00-55', // Invalid time separator ("-" instead of ":")
     '2024-07-25T00:55Zextra', // Extra characters after a valid datetime
+    'extra2024-07-25T00:55Z', // Extra characters before a valid datetime
+    'Some random string', // Random string
+    '2024 was a good year', // Year with some text
   ]
 
   test.each(invalidDateTimes)('invalid dateTime: %s', s => {
