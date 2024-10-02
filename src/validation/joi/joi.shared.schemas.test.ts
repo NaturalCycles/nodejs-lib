@@ -1,5 +1,5 @@
 import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
-import { BaseDBEntity } from '@naturalcycles/js-lib'
+import { BaseDBEntity, localTime } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import {
   baseDBEntitySchema,
@@ -222,24 +222,25 @@ describe('uuidSchema', () => {
 
 describe('dateTimeStringSchema', () => {
   const validDateTimes = [
-    '2024-09-30T00:55',
-    '2024-09-30T00:55+02:00',
-    '2024-09-30T00:55Z',
+    '2024-07-25',
     '2024-09-30T00:55:12',
     '2024-09-30T00:55:12+02:00',
     '2024-09-30T00:55:12Z',
   ]
 
   test.each(validDateTimes)('valid dateTime: %s', s => {
-    expect(validate(s, dateTimeStringSchema)).toBe(s)
+    expect(isValid(s, dateTimeStringSchema)).toBe(true)
+    expect(localTime.isValid(s)).toBe(true)
   })
 
   const invalidDateTimes = [
     undefined, // Non-string
     null, // Non-string
     '', // Empty string
-    '2024-07-25', // Missing time part
     'T00:55:12Z', // Missing date
+    '2024-09-30T00:55', // Missing timezone
+    '2024-09-30T00:55Z', // Missing seconds
+    '2024-09-30T00:55+02:00', // Missing seconds
     '2024-07-25T0055Z', // Missing colon in time
     '2024-07-25 00:55', // Missing "T" between date and time
     '2024/07/25T00:55', // Invalid date separator ("/" instead of "-")
@@ -251,6 +252,7 @@ describe('dateTimeStringSchema', () => {
   ]
 
   test.each(invalidDateTimes)('invalid dateTime: %s', s => {
-    expect(() => validate(s, dateTimeStringSchema)).toThrow()
+    expect(isValid(s, dateTimeStringSchema)).toBe(false)
+    expect(localTime.isValid(s)).toBe(false)
   })
 })

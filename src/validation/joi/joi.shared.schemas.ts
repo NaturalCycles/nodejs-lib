@@ -30,8 +30,11 @@ export const dateIntervalStringSchema = stringSchema.regex(DATE_INTERVAL_REGEX).
 })
 
 export const DATE_TIME_STRING_REGEX =
-  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})?$/
-export const dateTimeStringSchema = stringSchema.regex(DATE_TIME_STRING_REGEX)
+  /^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})?)?$/
+
+export const dateTimeStringSchema = stringSchema.regex(DATE_TIME_STRING_REGEX).messages({
+  'string.pattern.base': `must be a DateTime string`,
+})
 
 /**
  * Allows all values of a String Enum.
