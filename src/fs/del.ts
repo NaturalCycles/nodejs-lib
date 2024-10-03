@@ -90,7 +90,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   // console.log({ dirnamesSorted })
 
   const deletedDirs: string[] = []
-  for await (const dirpath of dirnamesSorted) {
+  for (const dirpath of dirnamesSorted) {
     if (await isEmptyDir(dirpath)) {
       // console.log(`empty dir: ${dirpath}`)
       await fs2.removePathAsync(dirpath)
