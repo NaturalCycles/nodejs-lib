@@ -1,6 +1,9 @@
+import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
 import { IsoDate, localTime } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { stringSchema } from './joi.shared.schemas'
+import { validate } from './joi.validation.util'
+import { StringSchema } from './string.extensions'
 
 test('dateString', () => {
   const schema = stringSchema.dateString()
@@ -14,6 +17,11 @@ test('dateString', () => {
 
 test('dateString min/max', async () => {
   const schema = stringSchema.dateString('2017-06-21' as IsoDate, '2017-06-23' as IsoDate)
+
+  expectTypeOf(schema).toEqualTypeOf<StringSchema<IsoDate>>()
+
+  const value = validate('2017-06-22' as IsoDate, schema)
+  expectTypeOf(value).toEqualTypeOf<IsoDate>()
 
   testValidation(
     schema,
