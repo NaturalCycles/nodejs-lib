@@ -82,6 +82,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
 }
 
 const DAYS = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
 // Based on: https://github.com/ajv-validator
 function isValidDate(parts: string[]): boolean {
   const year = Number(parts[1])

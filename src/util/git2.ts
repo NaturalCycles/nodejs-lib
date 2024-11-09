@@ -1,6 +1,6 @@
 import cp from 'node:child_process'
 import path from 'node:path'
-import type { UnixTimestampNumber } from '@naturalcycles/js-lib'
+import type { UnixTimestamp } from '@naturalcycles/js-lib'
 import { grey } from '../colors/colors'
 import { exec2 } from './exec2'
 
@@ -88,8 +88,8 @@ class Git2 {
     return full ? sha : sha.slice(0, 7)
   }
 
-  getCurrentCommitTimestamp(): UnixTimestampNumber {
-    return Number(exec2.exec('git log -1 --format=%ct'))
+  getCurrentCommitTimestamp(): UnixTimestamp {
+    return Number(exec2.exec('git log -1 --format=%ct')) as UnixTimestamp
   }
 
   getCurrentBranchName(): string {

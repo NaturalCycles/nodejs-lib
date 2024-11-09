@@ -12,7 +12,7 @@ import {
   Promisable,
   SKIP,
   StringMap,
-  UnixTimestampMillisNumber,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors/colors'
@@ -94,7 +94,7 @@ export interface TransformMapStats {
   countErrors: number
   countIn: number
   countOut: number
-  started: UnixTimestampMillisNumber
+  started: UnixTimestampMillis
 }
 
 export interface TransformMapStatsSummary extends TransformMapStats {
@@ -141,7 +141,7 @@ export function transformMap<IN = any, OUT = IN>(
     logger = console,
   } = opt
 
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
   let index = -1
   let countOut = 0
   let isSettled = false

@@ -4,10 +4,10 @@ import {
   _since,
   DeferredPromise,
   localTime,
-  NumberOfMilliseconds,
   NumberOfSeconds,
   pDefer,
   PositiveInteger,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { TransformTyped } from '../stream.model'
 
@@ -46,7 +46,7 @@ export function transformThrottle<T>(opt: TransformThrottleOptions): TransformTy
   const { throughput, interval, debug } = opt
 
   let count = 0
-  let start: NumberOfMilliseconds
+  let start: UnixTimestampMillis
   let paused: DeferredPromise | undefined
   let timeout: NodeJS.Timeout | undefined
 
@@ -55,7 +55,7 @@ export function transformThrottle<T>(opt: TransformThrottleOptions): TransformTy
     async transform(item: T, _, cb) {
       // console.log('incoming', item, { paused: !!paused, count })
       if (!start) {
-        start = Date.now()
+        start = Date.now() as UnixTimestampMillis
         timeout = setTimeout(() => onInterval(this), interval * 1000)
         if (debug) {
           console.log(`${localTime.now().toPretty()} transformThrottle started with`, {
@@ -106,7 +106,7 @@ export function transformThrottle<T>(opt: TransformThrottleOptions): TransformTy
     }
 
     count = 0
-    start = Date.now()
+    start = Date.now() as UnixTimestampMillis
     timeout = setTimeout(() => onInterval(transform), interval * 1000)
   }
 }

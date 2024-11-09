@@ -4,7 +4,7 @@ import {
   AnyObject,
   AppError,
   NumberOfMilliseconds,
-  UnixTimestampMillisNumber,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { dimGrey, dimRed, hasColors, white } from '../colors/colors'
 
@@ -49,7 +49,7 @@ class Exec2 {
     opt.log ??= true // by default log should be true, as we are printing the output
     opt.logStart ??= opt.log
     opt.logFinish ??= opt.log
-    const started = Date.now()
+    const started = Date.now() as UnixTimestampMillis
     this.logStart(cmd, opt)
 
     const r = cp.spawnSync(cmd, opt.args, {
@@ -93,7 +93,7 @@ class Exec2 {
     const { cwd, env, passProcessEnv = true, timeout } = opt
     opt.logStart ??= opt.log ?? false
     opt.logFinish ??= opt.log ?? false
-    const started = Date.now()
+    const started = Date.now() as UnixTimestampMillis
     this.logStart(cmd, opt)
 
     try {
@@ -146,7 +146,7 @@ class Exec2 {
     opt.log ??= true // by default log should be true, as we are printing the output
     opt.logStart ??= opt.log
     opt.logFinish ??= opt.log
-    const started = Date.now()
+    const started = Date.now() as UnixTimestampMillis
     this.logStart(cmd, opt)
 
     await new Promise<void>((resolve, reject) => {
@@ -205,7 +205,7 @@ class Exec2 {
     opt.log ??= printWhileRunning // by default log should be true, as we are printing the output
     opt.logStart ??= opt.log
     opt.logFinish ??= opt.log
-    const started = Date.now()
+    const started = Date.now() as UnixTimestampMillis
     this.logStart(cmd, opt)
     let stdout = ''
     let stderr = ''
@@ -274,7 +274,7 @@ class Exec2 {
   private logFinish(
     cmd: string,
     opt: SpawnOptions | ExecOptions,
-    started: UnixTimestampMillisNumber,
+    started: UnixTimestampMillis,
     isSuccessful: boolean,
   ): void {
     if (isSuccessful && !opt.logFinish) return

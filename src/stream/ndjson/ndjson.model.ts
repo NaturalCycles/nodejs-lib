@@ -22,6 +22,7 @@ export class NDJsonStats {
   get rpsTotal(): number {
     return Math.round(this.rows / ((this.tookMillis || 1) / 1000))
   }
+
   get bpsTotal(): number {
     return this.sizeBytes === 0 ? 0 : Math.round(this.sizeBytes / ((this.tookMillis || 1) / 1000))
   }

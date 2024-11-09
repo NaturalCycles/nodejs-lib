@@ -6,6 +6,8 @@ import {
   BaseDBEntity,
   NumberEnum,
   StringEnum,
+  UnixTimestamp,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { Joi } from './joi.extensions'
@@ -119,25 +121,31 @@ const TS_2000 = 946684800 // 2000-01-01
 /**
  * Between years 1970 and 2050
  */
-export const unixTimestampSchema = numberSchema.integer().min(0).max(TS_2500)
+export const unixTimestampSchema = numberSchema
+  .integer()
+  .min(0)
+  .max(TS_2500) as NumberSchema<UnixTimestamp>
 /**
  * Between years 2000 and 2050
  */
-export const unixTimestamp2000Schema = numberSchema.integer().min(TS_2000).max(TS_2500)
+export const unixTimestamp2000Schema = numberSchema
+  .integer()
+  .min(TS_2000)
+  .max(TS_2500) as NumberSchema<UnixTimestamp>
 /**
  * Between years 1970 and 2050
  */
 export const unixTimestampMillisSchema = numberSchema
   .integer()
   .min(0)
-  .max(TS_2500 * 1000)
+  .max(TS_2500 * 1000) as NumberSchema<UnixTimestampMillis>
 /**
  * Between years 2000 and 2050
  */
 export const unixTimestampMillis2000Schema = numberSchema
   .integer()
   .min(TS_2000 * 1000)
-  .max(TS_2500 * 1000)
+  .max(TS_2500 * 1000) as NumberSchema<UnixTimestampMillis>
 
 // 2
 export const verSchema = numberSchema.optional().integer().min(1).max(100)

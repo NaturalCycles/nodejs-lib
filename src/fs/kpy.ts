@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { _since } from '@naturalcycles/js-lib'
+import { _since, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
 import { fs2, globby } from '../index'
 
@@ -43,7 +43,7 @@ export interface KpyOptions {
 }
 
 export async function kpy(opt: KpyOptions): Promise<void> {
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
 
   kpyPrepare(opt)
 
@@ -82,7 +82,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 }
 
 export function kpySync(opt: KpyOptions): void {
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
 
   kpyPrepare(opt)
 
@@ -143,7 +143,7 @@ function kpyLogFilenames(opt: KpyOptions, filenames: string[]): void {
   )
 }
 
-function kpyLogResult(opt: KpyOptions, filenames: string[], started: number): void {
+function kpyLogResult(opt: KpyOptions, filenames: string[], started: UnixTimestampMillis): void {
   if (opt.silent || filenames.length === 0) return
 
   console.log(

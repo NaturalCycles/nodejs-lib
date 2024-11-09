@@ -3,7 +3,7 @@ import {
   AnyObject,
   BuildInfo,
   localTime,
-  UnixTimestampNumber,
+  UnixTimestamp,
 } from '@naturalcycles/js-lib'
 import { fs2 } from '../fs/fs2'
 import { git2 } from './git2'
@@ -12,7 +12,7 @@ export interface GenerateBuildInfoOptions {
   /**
    * If set - this timestamp will be used, instead of "current time".
    */
-  overrideTimestamp?: UnixTimestampNumber
+  overrideTimestamp?: UnixTimestamp
 }
 
 export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo {

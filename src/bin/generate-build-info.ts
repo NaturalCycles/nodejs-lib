@@ -2,6 +2,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { UnixTimestamp } from '@naturalcycles/js-lib'
 import yargs from 'yargs'
 import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env'
 import { runScript } from '../script/runScript'
@@ -20,7 +21,7 @@ runScript(async () => {
   }).argv
 
   const buildInfo = generateBuildInfo({
-    overrideTimestamp,
+    overrideTimestamp: overrideTimestamp as UnixTimestamp,
   })
   console.log(buildInfo)
 

@@ -1,4 +1,4 @@
-import { _since, pFilter, pMap } from '@naturalcycles/js-lib'
+import { _since, pFilter, pMap, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
 import { fs2, globby } from '../index'
 
@@ -35,7 +35,7 @@ const DEF_OPT: DelOptions = {
  * @experimental
  */
 export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
 
   // Convert DelSingleOption to DelOptions
   if (typeof _opt === 'string') {
@@ -110,7 +110,7 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 }
 
 export function delSync(_opt: DelOptions | DelSingleOption): void {
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
 
   // Convert DelSingleOption to DelOptions
   if (typeof _opt === 'string') {

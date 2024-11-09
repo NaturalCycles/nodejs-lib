@@ -6,6 +6,7 @@ import {
   Mapper,
   Predicate,
   SKIP,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors/colors'
 import { AbortableTransform } from '../pipeline/pipeline'
@@ -88,7 +89,7 @@ export function transformMapSync<IN = any, OUT = IN>(
     logger = console,
   } = opt
 
-  const started = Date.now()
+  const started = Date.now() as UnixTimestampMillis
   let index = -1
   let countOut = 0
   let isSettled = false

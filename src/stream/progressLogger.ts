@@ -6,7 +6,7 @@ import {
   CommonLogger,
   localTime,
   SimpleMovingAverage,
-  UnixTimestampMillisNumber,
+  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, hasColors, white, yellow } from '../colors/colors'
 import { SizeStack } from './sizeStack'
@@ -185,8 +185,8 @@ export class ProgressLogger<T> implements Disposable {
     logger: CommonLogger
   }
 
-  private started!: UnixTimestampMillisNumber
-  private lastSecondStarted!: UnixTimestampMillisNumber
+  private started!: UnixTimestampMillis
+  private lastSecondStarted!: UnixTimestampMillis
   private sma!: SimpleMovingAverage
   private logEvery10!: number
   private processedLastSecond!: number
@@ -196,8 +196,8 @@ export class ProgressLogger<T> implements Disposable {
   private sizesZipped?: SizeStack
 
   private start(): void {
-    this.started = Date.now()
-    this.lastSecondStarted = Date.now()
+    this.started = Date.now() as UnixTimestampMillis
+    this.lastSecondStarted = Date.now() as UnixTimestampMillis
     this.sma = new SimpleMovingAverage(10)
     this.processedLastSecond = 0
     this.progress = 0
@@ -250,7 +250,7 @@ export class ProgressLogger<T> implements Disposable {
 
     const mem = process.memoryUsage()
 
-    const now = Date.now()
+    const now = Date.now() as UnixTimestampMillis
     const batchedProgress = this.progress * chunkSize
     const lastRPS =
       (this.processedLastSecond * chunkSize) / ((now - this.lastSecondStarted) / 1000) || 0
