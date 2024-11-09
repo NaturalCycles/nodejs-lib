@@ -1009,9 +1009,9 @@
     typescript "^5.0.2"
 
 "@naturalcycles/dev-lib@^15.0.3":
-  version "15.27.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-15.27.1.tgz#8620e279e92f6b76bf01446094bfba1fa4482aa9"
-  integrity sha512-3mov6Hfd7BXpjXhuLi5MZC2bBiLfXNLDkbVsYAvYorx587w9sQMLtI7PvlnI+R370joO+/kAxjJFXIb3RaINCg==
+  version "15.27.2"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-15.27.2.tgz#b69473f2cbf191b44dfb219b1dc728a858876eff"
+  integrity sha512-54o9VExhppDsQ7NxiX+7soxpvg++5grsVgL1pyYGDypeH/xIhaAipLj9z3GALCyRk3ohAa8RkQ0I+FrW59ZVsg==
   dependencies:
     "@biomejs/biome" "^1.8.3"
     "@commitlint/cli" "^19.0.0"
@@ -1047,17 +1047,17 @@
     yargs "^17.0.0"
 
 "@naturalcycles/js-lib@^14.0.0", "@naturalcycles/js-lib@^14.244.0":
-  version "14.260.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.260.0.tgz#1086a684ff4ccd028be053d9fa701d9cd5358dbf"
-  integrity sha512-GfkmD+xAP8GODx2kh++5MErmDMu50S/QAslbtoaKtpWrmFlfaMEtNpYLXLDYGjcj4NJRilbE9hwiM8Rizs5V2g==
+  version "14.261.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-14.261.0.tgz#e85aaa6c68b5efeada4e4cfdcb5c00e5e30a8d3a"
+  integrity sha512-7+jI98zjNcifAkQu8q4UHhXzeclJVIDfoE8GHpwdqjbaT6a9p2KOikvBjMd1SdCH1OTR6ijBPNvax1VS9Jb2qw==
   dependencies:
     tslib "^2.0.0"
     zod "^3.20.2"
 
 "@naturalcycles/nodejs-lib@^13.0.1", "@naturalcycles/nodejs-lib@^13.0.2":
-  version "13.35.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.35.0.tgz#473f7ddfb3432e5a91d803950868c070fcba0e59"
-  integrity sha512-Dwil0k3oDjDBHKeEw6qxEiHUidoFHYlaxiLtUaADeTSa8FwgHKw6PIyax3pYcaITkJ0EQftpDTosTKhOr2UVRw==
+  version "13.36.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.36.0.tgz#cea71bd4e88ba37d28cb4af9a12fd5e0678d4fd0"
+  integrity sha512-v6t2P2HGFhaCFN9iM5Fgvg7qnf7FAK76SatCLGoQtdozyUX7xnPj8xUe35ft2YGvmu1TaWU4UWqRKTJEWGwByA==
   dependencies:
     "@naturalcycles/js-lib" "^14.244.0"
     "@types/js-yaml" "^4.0.9"

@@ -1,5 +1,5 @@
 import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
-import { BaseDBEntity, localTime } from '@naturalcycles/js-lib'
+import { BaseDBEntity, IsoDateTime, localTime } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import {
   baseDBEntitySchema,
@@ -226,7 +226,7 @@ describe('dateTimeStringSchema', () => {
     '2024-09-30T00:55:12',
     '2024-09-30T00:55:12+02:00',
     '2024-09-30T00:55:12Z',
-  ]
+  ] as IsoDateTime[]
 
   test.each(validDateTimes)('valid dateTime: %s', s => {
     expect(isValid(s, dateTimeStringSchema)).toBe(true)
@@ -249,7 +249,7 @@ describe('dateTimeStringSchema', () => {
     'extra2024-07-25T00:55Z', // Extra characters before a valid datetime
     'Some random string', // Random string
     '2024 was a good year', // Year with some text
-  ]
+  ] as IsoDateTime[]
 
   test.each(invalidDateTimes)('invalid dateTime: %s', s => {
     expect(isValid(s, dateTimeStringSchema)).toBe(false)

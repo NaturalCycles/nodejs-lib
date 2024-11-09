@@ -5,7 +5,7 @@ yarn tsn dateStringTodayBench
  */
 
 import { runBenchScript } from '@naturalcycles/bench-lib'
-import { localDate } from '@naturalcycles/js-lib'
+import { IsoDate, localDate } from '@naturalcycles/js-lib'
 import { isValid, objectSchema, stringSchema } from '../src'
 
 const entries = localDate
@@ -15,7 +15,7 @@ const entries = localDate
   }))
 
 const entrySchema1 = objectSchema({
-  date: stringSchema.dateString('2000-01-01', 'today'),
+  date: stringSchema.dateString('2000-01-01' as IsoDate, 'today'),
 })
 
 const entrySchema2 = objectSchema({

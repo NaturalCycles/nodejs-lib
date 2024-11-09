@@ -1,14 +1,14 @@
-import { localTime } from '@naturalcycles/js-lib'
+import { IsoDate, localTime } from '@naturalcycles/js-lib'
 import type Joi from 'joi'
 import { Extension, StringSchema as JoiStringSchema } from 'joi'
 
 export interface StringSchema<TSchema = string> extends JoiStringSchema<TSchema> {
-  dateString: (min?: string, max?: string) => this
+  dateString: (min?: IsoDate | 'today', max?: IsoDate | 'today') => this
 }
 
 export interface JoiDateStringOptions {
-  min?: string
-  max?: string
+  min?: IsoDate | 'today'
+  max?: IsoDate | 'today'
 }
 
 export function stringExtensions(joi: typeof Joi): Extension {
@@ -24,7 +24,7 @@ export function stringExtensions(joi: typeof Joi): Extension {
     },
     rules: {
       dateString: {
-        method(min?: string, max?: string) {
+        method(min?: IsoDate, max?: IsoDate) {
           return this.$_addRule({
             name: 'dateString',
             args: { min, max } satisfies JoiDateStringOptions,
@@ -101,11 +101,11 @@ function isLeapYear(year: number): boolean {
 }
 
 let lastCheckedPlus = 0
-let todayStrPlusCached: string
+let todayStrPlusCached: IsoDate
 let lastCheckedMinus = 0
-let todayStrMinusCached: string
+let todayStrMinusCached: IsoDate
 
-function getTodayStrPlus15(): string {
+function getTodayStrPlus15(): IsoDate {
   const now = Date.now()
   if (now - lastCheckedPlus < 3_600_000) {
     // cached for 1 hour
@@ -116,7 +116,7 @@ function getTodayStrPlus15(): string {
   return (todayStrPlusCached = localTime.now().plus(15, 'hour').toISODate())
 }
 
-function getTodayStrMinus15(): string {
+function getTodayStrMinus15(): IsoDate {
   const now = Date.now()
   if (now - lastCheckedMinus < 3_600_000) {
     // cached for 1 hour

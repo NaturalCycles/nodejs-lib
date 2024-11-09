@@ -1,4 +1,4 @@
-import { localTime } from '@naturalcycles/js-lib'
+import { IsoDate, localTime } from '@naturalcycles/js-lib'
 import { testValidation } from '../../test/validation.test.util'
 import { stringSchema } from './joi.shared.schemas'
 
@@ -13,7 +13,7 @@ test('dateString', () => {
 })
 
 test('dateString min/max', async () => {
-  const schema = stringSchema.dateString('2017-06-21', '2017-06-23')
+  const schema = stringSchema.dateString('2017-06-21' as IsoDate, '2017-06-23' as IsoDate)
 
   testValidation(
     schema,

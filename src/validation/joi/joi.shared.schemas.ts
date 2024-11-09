@@ -4,6 +4,8 @@ import {
   _stringEnumKeys,
   _stringEnumValues,
   BaseDBEntity,
+  IsoDate,
+  IsoDateTime,
   NumberEnum,
   StringEnum,
   UnixTimestamp,
@@ -22,7 +24,7 @@ export const numberSchema = Joi.number()
 export const numberSchemaTyped = <T>(): NumberSchema<T> => Joi.number<T>()
 export const integerSchema = Joi.number().integer()
 export const percentageSchema = Joi.number().integer().min(0).max(100)
-export const dateStringSchema = stringSchema.dateString()
+export const dateStringSchema = stringSchema.dateString() as StringSchema<IsoDate>
 export const binarySchema = Joi.binary()
 export const dateObjectSchema = Joi.object().instance(Date)
 
@@ -36,7 +38,7 @@ export const DATE_TIME_STRING_REGEX =
 
 export const dateTimeStringSchema = stringSchema.regex(DATE_TIME_STRING_REGEX).messages({
   'string.pattern.base': `must be a DateTime string`,
-})
+}) as StringSchema<IsoDateTime>
 
 /**
  * Allows all values of a String Enum.
