@@ -10,6 +10,7 @@ import {
   stringIdBase62,
   stringIdBase64,
   stringIdBase64Url,
+  stringIdNonAmbiguous,
   validate,
 } from '../index'
 
@@ -89,5 +90,26 @@ test('stringIdBase64Url should have no padding', () => {
       const id = stringIdBase64Url(len)
       expect(id).toMatch(base64urlRegex)
     })
+  })
+})
+
+describe('stringIdNonAmbiguous', () => {
+  test('default size', () => {
+    const id = stringIdNonAmbiguous()
+    expect(id.length).toBe(16)
+    expect(id).not.toContain('0')
+    expect(id).not.toContain('O')
+    expect(id).not.toContain('I')
+    expect(id).not.toContain('l')
+  })
+
+  test('custom size', () => {
+    const id = stringIdNonAmbiguous(100)
+    expect(id.length).toBe(100)
+    expect(id).not.toContain('0')
+    expect(id).not.toContain('O')
+    expect(id).not.toContain('1')
+    expect(id).not.toContain('I')
+    expect(id).not.toContain('l')
   })
 })

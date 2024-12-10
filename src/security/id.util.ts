@@ -2,6 +2,7 @@ import crypto from 'node:crypto'
 import {
   ALPHABET_ALPHANUMERIC,
   ALPHABET_ALPHANUMERIC_LOWERCASE,
+  ALPHABET_NONAMBIGUOUS,
   nanoIdCustomAlphabet,
 } from './nanoid'
 
@@ -42,4 +43,14 @@ export function stringIdBase64(size = 16): string {
  */
 export function stringIdBase64Url(size = 16): string {
   return crypto.randomBytes(size * 0.75).toString('base64url')
+}
+
+/**
+ * Generate cryptographically-secure string id with non-ambiguous characters only,
+ * e.g. missing O and 0, I and 1 and l etc.
+ *
+ * Default length is 16.
+ */
+export function stringIdNonAmbiguous(size = 16): string {
+  return stringId(size, ALPHABET_NONAMBIGUOUS)
 }
