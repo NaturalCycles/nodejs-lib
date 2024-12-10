@@ -11,6 +11,7 @@ import { randomFillSync } from 'node:crypto'
 
 type RandomFn = (bytes: number) => Buffer
 
+export const ALPHABET_NONAMBIGUOUS = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ'
 export const ALPHABET_NUMBER = '0123456789'
 export const ALPHABET_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
 export const ALPHABET_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
