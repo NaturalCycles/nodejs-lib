@@ -1,6 +1,6 @@
 import { _since, pFilter, pMap, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
-import { fs2, globby } from '../index'
+import { fs2, fastGlob } from '../index'
 
 export interface DelOptions {
   /**
@@ -57,9 +57,9 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
 
   // 1. glob only files, expand dirs, delete
 
-  const filenames = await globby(patterns, {
+  const filenames = await fastGlob(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true, // todo: test
     onlyFiles: true,
   })
 
@@ -72,9 +72,9 @@ export async function del(_opt: DelOptions | DelSingleOption): Promise<void> {
   await pMap(filenames, filepath => fs2.removePath(filepath), { concurrency })
 
   // 2. glob only dirs, expand, delete only empty!
-  let dirnames = await globby(patterns, {
+  let dirnames = await fastGlob(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true, // todo: test
     onlyDirectories: true,
   })
 
@@ -131,9 +131,9 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
 
   // 1. glob only files, expand dirs, delete
 
-  const filenames = globby.sync(patterns, {
+  const filenames = fastGlob.sync(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true, // todo: test
     onlyFiles: true,
   })
 
@@ -146,9 +146,9 @@ export function delSync(_opt: DelOptions | DelSingleOption): void {
   filenames.forEach(filepath => fs2.removePath(filepath))
 
   // 2. glob only dirs, expand, delete only empty!
-  let dirnames = globby.sync(patterns, {
+  let dirnames = fastGlob.sync(patterns, {
     dot: true,
-    expandDirectories: true,
+    // expandDirectories: true, // todo: test
     onlyDirectories: true,
   })
 

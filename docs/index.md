@@ -40,7 +40,6 @@
 - `/` root
 - `/bin` cli
   - yargs
-  - globby
 - `/script`
   - exports `runScript` lightweight function (0 deps)
 - `/exec`

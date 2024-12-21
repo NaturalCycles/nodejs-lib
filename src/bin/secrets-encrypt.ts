@@ -18,7 +18,7 @@ function getEncryptCLIOptions(): EncryptCLIOptions {
     pattern: {
       type: 'string',
       array: true,
-      desc: 'Globby pattern for secrets. Can be multiple.',
+      desc: 'Glob pattern for secrets. Can be multiple.',
       // demandOption: true,
       default: './secret/**',
     },

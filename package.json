@@ -15,7 +15,6 @@
     "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
     "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
     "kpy-debug": "tsn ./src/bin/kpy.ts node_modules dist",
-    "del-debug": "tsn ./src/bin/del.ts dist --verbose --debug",
     "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "chalk": "^4.0.0",
     "dotenv": "^16.0.0",
     "fast-glob": "^3.2.11",
-    "globby": "^11.0.0",
     "joi": "^17.9.2",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.0",
@@ -45,7 +43,6 @@
     "jest": "^29.0.0"
   },
   "bin": {
-    "del": "dist/bin/del.js",
     "kpy": "dist/bin/kpy.js",
     "json2env": "dist/bin/json2env.js",
     "generate-build-info": "dist/bin/generate-build-info.js",

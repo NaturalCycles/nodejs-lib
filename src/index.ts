@@ -1,8 +1,6 @@
 import Ajv from 'ajv'
 import type { Options as FastGlobOptions } from 'fast-glob'
 import fastGlob from 'fast-glob'
-import type { GlobbyOptions } from 'globby'
-import globby from 'globby'
 import type {
   AlternativesSchema,
   AnySchema,
@@ -20,7 +18,6 @@ export * from './csv/csvReader'
 export * from './csv/csvWriter'
 export * from './csv/transformToCSV'
 export * from './diff/tableDiff'
-export * from './fs/del'
 export * from './fs/fs2'
 export * from './fs/json2env'
 export * from './fs/kpy'
@@ -95,7 +92,6 @@ export type {
   DateSchema,
   FastGlobOptions,
   FunctionSchema,
-  GlobbyOptions,
   ObjectSchema,
   ValidationErrorItem,
   // extended
@@ -103,4 +99,4 @@ export type {
   // StringSchema,
 }
 
-export { Ajv, fastGlob, globby }
+export { Ajv, fastGlob }

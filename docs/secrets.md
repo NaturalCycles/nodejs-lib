@@ -67,7 +67,7 @@ Example: `secret1.json` will become `secret1.json.enc`.
 Options:
 
 - `--pattern` - directory (pattern) to encrypt (default to `./secret`). Can provide many like
-  `--pattern p1 p2` or `--pattern p1 --pattern p2`. Supports `globby` pattern, e.g
+  `--pattern p1 p2` or `--pattern p1 --pattern p2`. Supports "glob" pattern, e.g
   `--pattern ./secret/**/*.txt`.
 - `--encKey` - provide encryption key
 - `--encKeyVar` - read encryption key from env variable with this name (default
