@@ -10,7 +10,8 @@ test('abort pipeline with AbortSignal', async () => {
   // First, without allowGracefulAbort it should throw
   expect(await pExpectedErrorString(runPipeline())).toMatchInlineSnapshot(`
 "AbortError: The operation was aborted
-code: ABORT_ERR"
+code: ABORT_ERR
+Caused by: AbortError: This operation was aborted"
 `)
 
   // Now with allowGracefulAbort
