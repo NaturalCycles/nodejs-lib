@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { _since, UnixTimestampMillis } from '@naturalcycles/js-lib'
+import { _since, localTime, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
 import { fastGlob, fs2 } from '../index'
 
@@ -43,7 +43,7 @@ export interface KpyOptions {
 }
 
 export async function kpy(opt: KpyOptions): Promise<void> {
-  const started = Date.now() as UnixTimestampMillis
+  const started = localTime.nowUnixMillis()
 
   kpyPrepare(opt)
 
@@ -82,7 +82,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 }
 
 export function kpySync(opt: KpyOptions): void {
-  const started = Date.now() as UnixTimestampMillis
+  const started = localTime.nowUnixMillis()
 
   kpyPrepare(opt)
 
@@ -130,6 +130,21 @@ function kpyPrepare(opt: KpyOptions): void {
   }
 
   fs2.ensureDir(opt.outputDir)
+
+  // Expand directories (ex-globby feature), experimental!
+  const extraPatterns: string[] = []
+
+  for (const pattern of opt.inputPatterns) {
+    if (pattern.includes('*')) continue
+    if (fs2.isDirectory(path.resolve(opt.baseDir, pattern))) {
+      extraPatterns.push(`${pattern}/**`)
+    }
+  }
+
+  if (opt.verbose) {
+    console.log({ extraPatterns })
+  }
+  opt.inputPatterns.push(...extraPatterns)
 }
 
 function kpyLogFilenames(opt: KpyOptions, filenames: string[]): void {

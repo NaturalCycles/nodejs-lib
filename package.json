@@ -14,7 +14,9 @@
     "secrets-gen-key-debug": "tsn ./src/bin/secrets-gen-key.ts",
     "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
     "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
-    "kpy-debug": "tsn ./src/bin/kpy.ts node_modules dist",
+    "kpy-debug": "tsn ./src/bin/kpy.ts --verbose scripts tmp/scripts",
+    "kpy-debug2": "tsn ./src/bin/kpy.ts --verbose scripts bench non-ex non-ex/** colors* tmp/scripts",
+    "kpy-debug3": "tsn ./src/bin/kpy.ts --verbose src colors csv stream non-ex non-ex/** tmp/src",
     "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
   },
   "dependencies": {

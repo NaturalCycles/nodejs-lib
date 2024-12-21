@@ -299,6 +299,21 @@ class FS2 {
     await this.removePathAsync(src)
   }
 
+  /**
+   * Returns true if the path is a directory.
+   * Otherwise returns false.
+   * Doesn't throw, returns false instead.
+   */
+  isDirectory(filePath: string): boolean {
+    return (
+      fs2
+        .stat(filePath, {
+          throwIfNoEntry: false,
+        })
+        ?.isDirectory() || false
+    )
+  }
+
   // Re-export the whole fs/fsp, for the edge cases where they are needed
   fs = fs
   fsp = fsp

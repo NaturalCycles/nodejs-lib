@@ -11,11 +11,11 @@ runScript(() => {
   } = yargs.demandCommand(2).options({
     silent: {
       type: 'boolean',
-      descr: 'Suppress all text output', // todo: desc!
+      desc: 'Suppress all text output',
     },
     verbose: {
       type: 'boolean',
-      descr: 'Report progress on every file',
+      desc: 'Report progress on every file',
     },
     overwrite: {
       type: 'boolean',
