@@ -26,7 +26,6 @@
     "ajv-formats": "^3.0.1",
     "ajv-keywords": "^5.0.0",
     "chalk": "^4.0.0",
-    "debug": "^4.1.1",
     "dotenv": "^16.0.0",
     "fast-glob": "^3.2.11",
     "globby": "^11.0.0",

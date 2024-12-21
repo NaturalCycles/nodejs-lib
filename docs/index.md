@@ -12,7 +12,6 @@
 # Features
 
 - Validation (based on Joi)
-- debug (based on debug) with .warn(), .error() levels
 - env.util
 - zip.util
 - id.util (based on nanoid)

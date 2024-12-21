@@ -20,7 +20,6 @@ module.exports = {
             'fs',
             'stream',
             'colors',
-            'debug',
             'exec',
             'secrets',
             'security',
