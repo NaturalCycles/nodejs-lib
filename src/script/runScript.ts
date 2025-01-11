@@ -14,6 +14,12 @@ export interface RunScriptOptions {
    * Default to `console`
    */
   logger?: CommonLogger
+
+  /**
+   * Defaults to true.
+   * Set to false if you already have your handlers elsewhere and don't need them here.
+   */
+  registerUncaughtExceptionHandlers?: boolean
 }
 
 const { DEBUG_RUN_SCRIPT } = process.env
@@ -39,14 +45,16 @@ const { DEBUG_RUN_SCRIPT } = process.env
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
   setGlobalStringifyFunction(inspectStringifyFn)
 
-  const { logger = console, noExit } = opt
+  const { logger = console, noExit, registerUncaughtExceptionHandlers = true } = opt
 
-  process.on('uncaughtException', err => {
-    logger.error('uncaughtException:', err)
-  })
-  process.on('unhandledRejection', err => {
-    logger.error('unhandledRejection:', err)
-  })
+  if (registerUncaughtExceptionHandlers || DEBUG_RUN_SCRIPT) {
+    process.on('uncaughtException', err => {
+      logger.error('runScript uncaughtException:', err)
+    })
+    process.on('unhandledRejection', err => {
+      logger.error('runScript unhandledRejection:', err)
+    })
+  }
 
   if (DEBUG_RUN_SCRIPT) {
     process.on('exit', code => logger.log(`process.exit event, code=${code}`))
