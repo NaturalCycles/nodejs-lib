@@ -13,6 +13,11 @@ export interface GenerateBuildInfoOptions {
    * If set - this timestamp will be used, instead of "current time".
    */
   overrideTimestamp?: UnixTimestamp
+
+  /**
+   * Defaults to currently checked out git branch.
+   */
+  overrideBranchName?: string
 }
 
 export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo {
@@ -20,7 +25,7 @@ export function generateBuildInfo(opt: GenerateBuildInfoOptions = {}): BuildInfo
   const ts = now.unix
 
   const rev = git2.getCurrentCommitSha()
-  const branchName = git2.getCurrentBranchName()
+  const branchName = opt.overrideBranchName || git2.getCurrentBranchName()
   const repoName = git2.getCurrentRepoName()
   const tsCommit = git2.getCurrentCommitTimestamp()
 
