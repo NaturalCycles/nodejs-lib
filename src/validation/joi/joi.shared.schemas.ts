@@ -4,6 +4,7 @@ import {
   _stringEnumKeys,
   _stringEnumValues,
   BaseDBEntity,
+  IANATimezone,
   IsoDateTime,
   NumberEnum,
   StringEnum,
@@ -177,7 +178,7 @@ export const ianaTimezoneSchema = stringSchema
   .valid(...Intl.supportedValuesOf('timeZone'), 'UTC')
   .messages({
     'any.only': `must be a valid IANA timezone string`,
-  })
+  }) as StringSchema<IANATimezone>
 
 export const ipAddressSchema = stringSchema.ip()
 
