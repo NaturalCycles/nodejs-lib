@@ -1,24 +1,26 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
+import { _noop } from '@naturalcycles/js-lib'
+import { beforeEach, test, vi } from 'vitest'
 import { json2env, kpy, kpySync } from '..'
 import { scriptsDir, testDir, tmpDir } from '../test/paths.cnst'
 
 beforeEach(() => {
-  jest.spyOn(fs, 'writeFileSync').mockImplementation()
-  jest.spyOn(fs, 'unlinkSync').mockImplementation()
-  jest.spyOn(fs, 'mkdirSync').mockImplementation()
-  jest.spyOn(fs, 'copyFileSync').mockImplementation()
-  jest.spyOn(fs, 'renameSync').mockImplementation()
-  jest.spyOn(fs, 'rmSync').mockImplementation()
-  // jest.spyOn(fse, 'copySync').mockImplementation()
-  jest.spyOn(fs, 'cpSync').mockImplementation()
-  jest.spyOn(fs, 'rename').mockImplementation()
-  jest.spyOn(fsp, 'rename').mockImplementation()
-  jest.spyOn(fsp, 'mkdir').mockImplementation()
-  jest.spyOn(fsp, 'cp').mockImplementation()
-  jest.spyOn(fsp, 'copyFile').mockImplementation()
-  jest.spyOn(fsp, 'unlink').mockImplementation()
-  jest.spyOn(fsp, 'rm').mockImplementation()
+  vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'unlinkSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'mkdirSync').mockImplementation(_noop as any)
+  vi.spyOn(fs, 'copyFileSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'renameSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'rmSync').mockImplementation(() => {})
+  // vi.spyOn(fse, 'copySync').mockImplementation(() => {})
+  vi.spyOn(fs, 'cpSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'rename').mockImplementation(() => {})
+  vi.spyOn(fsp, 'rename').mockImplementation(_noop as any)
+  vi.spyOn(fsp, 'mkdir').mockImplementation(_noop as any)
+  vi.spyOn(fsp, 'cp').mockImplementation(_noop as any)
+  vi.spyOn(fsp, 'copyFile').mockImplementation(_noop as any)
+  vi.spyOn(fsp, 'unlink').mockImplementation(_noop as any)
+  vi.spyOn(fsp, 'rm').mockImplementation(_noop as any)
 })
 
 const outputDir = `${tmpDir}/debug/kpy`

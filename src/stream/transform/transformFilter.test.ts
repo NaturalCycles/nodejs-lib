@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _pipelineToArray, transformFilter } from '../../index'
 import { transformFilterSync } from './transformFilter'
 

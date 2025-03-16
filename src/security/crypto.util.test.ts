@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { TEST_ENC_KEY } from '../test/test.cnst'
 import {
   decryptObject,
@@ -56,7 +57,6 @@ test('encryptObject, decryptObject', () => {
   const enc = encryptObject(obj1, encKeyBuffer)
   const obj2 = decryptObject(enc, encKeyBuffer)
   expect(obj2).toEqual(obj1)
-  // eslint-disable-next-line jest/prefer-equality-matcher
   expect(obj2 === obj1).toBe(false)
 
   expect(enc).toMatchInlineSnapshot(`

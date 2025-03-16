@@ -1,5 +1,6 @@
 import type { IsoDate, JsonSchema } from '@naturalcycles/js-lib'
 import { _deepFreeze, _try, jsonSchema, localTime } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _inspect } from '../../index'
 import { testDir } from '../../test/paths.cnst'
 import { AjvSchema } from './ajvSchema'
@@ -36,8 +37,8 @@ test('simple', () => {
   const missing = {} as Simple
   expect(schema.isValid(missing)).toBe(false)
   expect(() => schema.validate(missing)).toThrowErrorMatchingInlineSnapshot(`
-    "simple must have required property 's'
-    Input: {}"
+    [AjvValidationError: simple must have required property 's'
+    Input: {}]
   `)
 
   const [err] = _try(() => schema.validate(missing), AjvValidationError)
@@ -63,21 +64,21 @@ test('simple', () => {
   // Object name, id from options
   expect(() => schema.validate(missing, { objectName: 'Simple', objectId: 'id1' }))
     .toThrowErrorMatchingInlineSnapshot(`
-    "Simple.id1 must have required property 's'
-    Input: {}"
-  `)
+      [AjvValidationError: Simple.id1 must have required property 's'
+      Input: {}]
+    `)
 
   // Object name without id from options
   expect(() => schema.validate(missing, { objectName: 'Simple' }))
     .toThrowErrorMatchingInlineSnapshot(`
-    "Simple must have required property 's'
-    Input: {}"
-  `)
+      [AjvValidationError: Simple must have required property 's'
+      Input: {}]
+    `)
 
   // Object id from object
   expect(() => schema.validate({ id: 'id2' } as any)).toThrowErrorMatchingInlineSnapshot(`
-    "simple.id2 must have required property 's'
-    Input: { id: 'id2' }"
+    [AjvValidationError: simple.id2 must have required property 's'
+    Input: { id: 'id2' }]
   `)
 
   // logErrors
@@ -106,9 +107,9 @@ test('TestType', () => {
     s: 's',
   } as TestType
   expect(() => schema.validate(invalid1)).toThrowErrorMatchingInlineSnapshot(`
-    "TestType must have required property 'n'
+    [AjvValidationError: TestType must have required property 'n'
     TestType must have required property 's2'
-    Input: { s: 's' }"
+    Input: { s: 's' }]
   `)
 
   const invalid2 = {
@@ -116,8 +117,8 @@ test('TestType', () => {
     n: null,
   } as TestType
   expect(() => schema.validate(invalid2)).toThrowErrorMatchingInlineSnapshot(`
-    "TestType must have required property 's2'
-    Input: { s: 's', n: null }"
+    [AjvValidationError: TestType must have required property 's2'
+    Input: { s: 's', n: null }]
   `)
 })
 

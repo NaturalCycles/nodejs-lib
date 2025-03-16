@@ -1,4 +1,4 @@
-import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
+import { expectTypeOf, test } from 'vitest'
 import { JoiSchemaObject } from './joi.model'
 import { numberSchema, objectSchema, stringSchema } from './joi.shared.schemas'
 import { getValidationResult, validate } from './joi.validation.util'

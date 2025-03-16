@@ -1,3 +1,4 @@
+import { test } from 'vitest'
 import { requireEnvKeys } from '../index'
 import { SlackService } from './slack.service'
 require('dotenv').config()

@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { requireEnvKeys, requireFileToExist } from '../index'
 
 test('requireEnvKeys', () => {

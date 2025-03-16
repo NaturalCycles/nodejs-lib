@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { pDelay } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import {
   _pipeline,
   ProgressLogItem,

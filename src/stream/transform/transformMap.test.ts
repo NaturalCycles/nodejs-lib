@@ -1,6 +1,7 @@
 import { Readable } from 'node:stream'
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { _range, _stringify, AsyncMapper, ErrorMode, pExpectedError } from '@naturalcycles/js-lib'
+import { beforeAll, expect, test } from 'vitest'
 import {
   _pipeline,
   _pipelineToArray,

@@ -1,5 +1,7 @@
-test('should not leak', () => {
-  require('.')
-  require('./script/runScript')
-  require('./colors/colors')
+import { test } from 'vitest'
+
+test('should not leak', async () => {
+  await import('./index.js')
+  await import('./script/runScript.js')
+  await import('./colors/colors.js')
 })

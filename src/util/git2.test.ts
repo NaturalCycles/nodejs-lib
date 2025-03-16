@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { git2 } from './git2'
 
 test('getLastGitCommitMsg', async () => {

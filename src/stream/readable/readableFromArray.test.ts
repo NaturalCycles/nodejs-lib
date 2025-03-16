@@ -1,4 +1,5 @@
 import { _range, pDelay } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { readableFromArray } from '../../index'
 
 test('readableFromArray', async () => {

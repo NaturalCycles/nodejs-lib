@@ -1,3 +1,4 @@
+import { test } from 'vitest'
 import { grey, hasColors } from './colors'
 
 test('colors', () => {

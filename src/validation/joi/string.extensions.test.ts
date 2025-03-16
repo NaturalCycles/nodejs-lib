@@ -1,5 +1,5 @@
-import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
 import { IsoDate, localTime } from '@naturalcycles/js-lib'
+import { expectTypeOf, test } from 'vitest'
 import { testValidation } from '../../test/validation.test.util'
 import { stringSchema } from './joi.shared.schemas'
 import { validate } from './joi.validation.util'

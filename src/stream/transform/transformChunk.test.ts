@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _pipeline, writablePushToArray } from '../..'
 import { transformChunk } from './transformChunk'
 

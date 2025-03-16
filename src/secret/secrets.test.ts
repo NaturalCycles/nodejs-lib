@@ -1,12 +1,13 @@
 import fs from 'node:fs'
+import { beforeEach, test, vi } from 'vitest'
 import { secretDir } from '../test/paths.cnst'
 import { TEST_ENC_KEY } from '../test/test.cnst'
 import { secretsDecrypt } from './secrets-decrypt.util'
 import { secretsEncrypt } from './secrets-encrypt.util'
 
 beforeEach(() => {
-  jest.spyOn(fs, 'writeFileSync').mockImplementation()
-  jest.spyOn(fs, 'unlinkSync').mockImplementation()
+  vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {})
+  vi.spyOn(fs, 'unlinkSync').mockImplementation(() => {})
 })
 
 const encKeyBuffer = Buffer.from(TEST_ENC_KEY, 'base64')

@@ -1,5 +1,5 @@
-import { expectTypeOf } from '@naturalcycles/dev-lib/dist/testing'
 import { BaseDBEntity, IsoDateTime, localTime } from '@naturalcycles/js-lib'
+import { describe, expect, expectTypeOf, test } from 'vitest'
 import { testValidation } from '../../test/validation.test.util'
 import {
   baseDBEntitySchema,
@@ -152,20 +152,20 @@ test('dateIntervalSchema', () => {
 
   validate('2022-01-01/2022-01-02', schema)
   expect(() => validate(undefined, schema)).toThrowErrorMatchingInlineSnapshot(
-    `""value" is required"`,
+    `[JoiValidationError: "value" is required]`,
   )
   expect(() => validate('2022-01-01', schema)).toThrowErrorMatchingInlineSnapshot(
-    `"must be a DateInterval string"`,
+    `[JoiValidationError: must be a DateInterval string]`,
   )
   expect(() => validate('2022-01-01/2022-01-0', schema)).toThrowErrorMatchingInlineSnapshot(
-    `"must be a DateInterval string"`,
+    `[JoiValidationError: must be a DateInterval string]`,
   )
   expect(() => validate('2022-01-01/2022-01-02/', schema)).toThrowErrorMatchingInlineSnapshot(
-    `"must be a DateInterval string"`,
+    `[JoiValidationError: must be a DateInterval string]`,
   )
   expect(() =>
     validate('2022-01-01/2022-01-02/2022-01-03', schema),
-  ).toThrowErrorMatchingInlineSnapshot(`"must be a DateInterval string"`)
+  ).toThrowErrorMatchingInlineSnapshot(`[JoiValidationError: must be a DateInterval string]`)
 })
 
 test('ianaTimezoneSchema', () => {
@@ -174,10 +174,10 @@ test('ianaTimezoneSchema', () => {
   validate('Europe/London', schema)
   validate('UTC', schema) // to support unit testing
   expect(() => validate(undefined, schema)).toThrowErrorMatchingInlineSnapshot(
-    `""value" is required"`,
+    `[JoiValidationError: "value" is required]`,
   )
   expect(() => validate('London', schema)).toThrowErrorMatchingInlineSnapshot(
-    `"must be a valid IANA timezone string"`,
+    `[JoiValidationError: must be a valid IANA timezone string]`,
   )
 })
 

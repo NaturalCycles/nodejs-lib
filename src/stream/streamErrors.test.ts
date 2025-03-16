@@ -1,5 +1,6 @@
 import { Readable, Transform } from 'node:stream'
 import { _range, ObjectWithId, pExpectedErrorString } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _pipeline, writablePushToArray } from '..'
 
 function errorTransformUnhandled(): Transform {

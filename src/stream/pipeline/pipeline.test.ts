@@ -1,4 +1,5 @@
 import { _range, createAbortableSignal, pExpectedErrorString } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { readableFromArray } from '../readable/readableFromArray'
 import { transformTap } from '../transform/transformTap'
 import { writablePushToArray } from '../writable/writablePushToArray'

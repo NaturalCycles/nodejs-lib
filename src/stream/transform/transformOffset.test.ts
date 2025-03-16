@@ -1,4 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { readableFrom } from '../..'
 import { _pipelineToArray } from '../pipeline/pipeline'
 import { transformOffset } from './transformOffset'

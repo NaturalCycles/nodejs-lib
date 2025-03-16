@@ -15,7 +15,8 @@ export function testValidation(schema: AnySchema, valid: any[], invalid: any[]):
     try {
       validate(v, schema)
       console.log('value', v)
-      fail(`expected to fail on invalid value: ${v}`)
+      // fail('expected to fail on invalid value: ' + v)
+      throw new Error(`expected to fail on invalid value: ${v}`)
     } catch {}
   })
 }

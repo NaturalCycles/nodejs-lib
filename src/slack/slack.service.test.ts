@@ -1,5 +1,6 @@
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { _stringify, commonLoggerNoop, Fetcher, pExpectedError } from '@naturalcycles/js-lib'
+import { beforeEach, expect, test, vi } from 'vitest'
 import { slackDefaultMessagePrefixHook, SlackService } from './slack.service'
 
 let slackService = new SlackService({
@@ -16,7 +17,7 @@ beforeEach(() => {
   lastBody = null
   mockTime()
 
-  jest.spyOn(Fetcher, 'callNativeFetch').mockImplementation(async (url, init) => {
+  vi.spyOn(Fetcher, 'callNativeFetch').mockImplementation(async (url, init) => {
     lastBody = init.body
 
     if (url.includes('error')) {
@@ -75,7 +76,7 @@ test('error', async () => {
   await slackService.log('yo')
 
   // this unmocks Fetcher and lets Slack fail
-  jest.restoreAllMocks()
+  vi.restoreAllMocks()
 
   const err = await pExpectedError(slackService.send({ items: 'yo', throwOnError: true }))
   expect(_stringify(err)).toMatchInlineSnapshot(`

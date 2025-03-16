@@ -1,4 +1,5 @@
 import { _omit } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { fs2 } from '../fs/fs2'
 import { testDir } from '../test/paths.cnst'
 import { numberSchema, objectSchema, stringSchema } from '../validation/joi/joi.shared.schemas'
@@ -57,13 +58,15 @@ test('malformed token', () => {
   const token2 = token1.slice(1)
   const token3 = token1.slice(0, token1.length - 2)
 
-  expect(() => jwtService.verify(token2)).toThrowErrorMatchingInlineSnapshot(`"invalid token"`)
+  expect(() => jwtService.verify(token2)).toThrowErrorMatchingInlineSnapshot(
+    `[JsonWebTokenError: invalid token]`,
+  )
   expect(() => jwtService.verify(token3)).toThrowErrorMatchingInlineSnapshot(
-    `""ES256" signatures must be "64" bytes, saw "63""`,
+    `[TypeError: "ES256" signatures must be "64" bytes, saw "63"]`,
   )
 
   expect(() => jwtService.decode(token2)).toThrowErrorMatchingInlineSnapshot(
-    `"invalid token, decoded value is empty"`,
+    `[AssertionError: invalid token, decoded value is empty]`,
   )
 
   // token3 has corrupted signature, but Decode doesn't use it

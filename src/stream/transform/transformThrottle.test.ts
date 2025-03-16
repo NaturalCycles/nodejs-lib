@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { _range, ObjectWithId } from '@naturalcycles/js-lib'
+import { test } from 'vitest'
 import { _pipeline } from '../pipeline/pipeline'
 import { writableVoid } from '../writable/writableVoid'
 import { transformTap } from './transformTap'

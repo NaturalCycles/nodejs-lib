@@ -1,4 +1,5 @@
 import { _stringify, AnyObject } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { testValidation } from '../../test/validation.test.util'
 import { Joi } from './joi.extensions'
 import {

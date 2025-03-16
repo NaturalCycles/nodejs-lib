@@ -1,4 +1,5 @@
 import { _Memo } from '@naturalcycles/js-lib'
+import { expect, test, vi } from 'vitest'
 import { LRUMemoCache } from './lruMemoCache'
 
 class A {
@@ -16,7 +17,7 @@ class A {
 
 test('memoCache a', () => {
   const a = new A()
-  jest.spyOn(a, 'func').mockImplementation()
+  vi.spyOn(a, 'func').mockImplementation(() => {})
 
   // first call
   let r = a.a(2, 3)

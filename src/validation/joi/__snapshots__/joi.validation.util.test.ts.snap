@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`array items with invalid props 1`] = `
 {
@@ -147,32 +147,32 @@ exports[`long message string 1`] = `
 [1000] "[999].a1" must be a string"
 `;
 
-exports[`should fail on invalid values 1`] = `""value" is required"`;
+exports[`should fail on invalid values 1`] = `[JoiValidationError: "value" is required]`;
 
-exports[`should fail on invalid values 2`] = `""value" must be of type object"`;
+exports[`should fail on invalid values 2`] = `[JoiValidationError: "value" must be of type object]`;
 
-exports[`should fail on invalid values 3`] = `""value" must be of type object"`;
+exports[`should fail on invalid values 3`] = `[JoiValidationError: "value" must be of type object]`;
 
-exports[`should fail on invalid values 4`] = `""value" must be of type object"`;
+exports[`should fail on invalid values 4`] = `[JoiValidationError: "value" must be of type object]`;
 
-exports[`should fail on invalid values 5`] = `""value" must be of type object"`;
+exports[`should fail on invalid values 5`] = `[JoiValidationError: "value" must be of type object]`;
 
-exports[`should fail on invalid values 6`] = `""value" must be of type object"`;
+exports[`should fail on invalid values 6`] = `[JoiValidationError: "value" must be of type object]`;
 
 exports[`should fail on invalid values 7`] = `
-"{
+[JoiValidationError: {
   "a1" [1]: "a"
 }
 
-[1] "a1" length must be at least 2 characters long"
+[1] "a1" length must be at least 2 characters long]
 `;
 
 exports[`should fail on invalid values 8`] = `
-"{
+[JoiValidationError: {
   "a1" [1]: "a12345"
 }
 
-[1] "a1" length must be less than or equal to 5 characters long"
+[1] "a1" length must be less than or equal to 5 characters long]
 `;
 
 exports[`should include id in the error message 1`] = `

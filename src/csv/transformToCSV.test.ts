@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _pipeline } from '../stream/pipeline/pipeline'
 import { writablePushToArray } from '../stream/writable/writablePushToArray'
 import { csvStringParse } from './csvReader'

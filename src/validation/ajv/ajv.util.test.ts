@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { testDir } from '../../test/paths.cnst'
 import { readAjvSchemas, readJsonSchemas } from './ajv.util'
 

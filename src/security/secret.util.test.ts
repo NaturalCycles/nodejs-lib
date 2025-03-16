@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest'
+
 // const originalProcessEnv = process.env
 process.env = {
   A: 'AAA',

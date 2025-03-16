@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import { expect, test } from 'vitest'
 import { testDir } from '../test/paths.cnst'
 import { fs2 } from './fs2'
 

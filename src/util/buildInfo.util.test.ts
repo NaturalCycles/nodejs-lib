@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { generateBuildInfo } from './buildInfo.util'
 
 test('generateBuildInfo', () => {

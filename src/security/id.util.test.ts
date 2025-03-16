@@ -1,4 +1,5 @@
 import { _range } from '@naturalcycles/js-lib'
+import { describe, expect, test } from 'vitest'
 import {
   base62Schema,
   base64Schema,

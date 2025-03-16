@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream'
 import { pDelay } from '@naturalcycles/js-lib'
+import { expect, test } from 'vitest'
 import { _pipeline } from '../pipeline/pipeline'
 import { writablePushToArray } from '../writable/writablePushToArray'
 import { transformLogProgress } from './transformLogProgress'

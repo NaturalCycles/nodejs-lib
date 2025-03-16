@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import {
   base64,
   base64ToBuffer,
