@@ -1,6 +1,6 @@
 /*
 
-yarn tsn bench/validation.bench
+yarn tsx scripts/bench/validation.bench
 
  */
 

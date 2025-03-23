@@ -10,14 +10,14 @@
     "lbt": "dev-lib lbt",
     "docs-serve": "vuepress dev docs",
     "docs-build": "vuepress build docs",
-    "slack-this-debug": "tsn ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
-    "secrets-gen-key-debug": "tsn ./src/bin/secrets-gen-key.ts",
-    "secrets-encrypt-debug": "tsn ./src/bin/secrets-encrypt.ts",
-    "secrets-decrypt-debug": "tsn ./src/bin/secrets-decrypt.ts",
-    "kpy-debug": "tsn ./src/bin/kpy.ts --verbose scripts tmp/scripts",
-    "kpy-debug2": "tsn ./src/bin/kpy.ts --verbose scripts bench non-ex non-ex/** colors* tmp/scripts",
-    "kpy-debug3": "tsn ./src/bin/kpy.ts --verbose src colors csv stream non-ex non-ex/** tmp/src",
-    "json2env-debug": "tsn ./src/bin/json2env.ts ./src/test/someFile.json"
+    "slack-this-debug": "tsx ./src/bin/slack-this.ts --channel test --msg 'Hello slack!'",
+    "secrets-gen-key-debug": "tsx ./src/bin/secrets-gen-key.ts",
+    "secrets-encrypt-debug": "tsx ./src/bin/secrets-encrypt.ts",
+    "secrets-decrypt-debug": "tsx ./src/bin/secrets-decrypt.ts",
+    "kpy-debug": "tsx ./src/bin/kpy.ts --verbose scripts tmp/scripts",
+    "kpy-debug2": "tsx ./src/bin/kpy.ts --verbose scripts bench non-ex non-ex/** colors* tmp/scripts",
+    "kpy-debug3": "tsx ./src/bin/kpy.ts --verbose src colors csv stream non-ex non-ex/** tmp/src",
+    "json2env-debug": "tsx ./src/bin/json2env.ts ./src/test/someFile.json"
   },
   "dependencies": {
     "@naturalcycles/js-lib": "^14",
@@ -43,6 +43,7 @@
     "@types/through2-concurrent": "^2",
     "@types/yargs": "^16",
     "@vitest/coverage-v8": "^3",
+    "tsx": "^4",
     "vitest": "^3"
   },
   "bin": {

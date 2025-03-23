@@ -1,6 +1,6 @@
 /*
 
-yarn tsn dateStringTodayBench
+yarn tsx scripts/dateStringTodayBench
 
  */
 

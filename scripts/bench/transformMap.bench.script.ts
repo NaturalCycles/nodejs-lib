@@ -1,6 +1,6 @@
 /*
 
-yarn tsn bench/transformMap.bench
+yarn tsx scripts/bench/transformMap.bench
 
  */
 

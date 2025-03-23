@@ -1,6 +1,6 @@
 /*
 
-yarn tsn ndjsonForEach.script
+yarn tsx scripts/ndjsonForEach.script
 
  */
 
