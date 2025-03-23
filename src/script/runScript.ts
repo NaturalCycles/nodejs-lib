@@ -1,7 +1,7 @@
 import os from 'node:os'
-import { styleText } from 'node:util'
 import type { CommonLogger } from '@naturalcycles/js-lib'
 import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
+import { dimGrey } from '../colors/colors'
 import { inspectStringifyFn } from '../string/inspect'
 
 export interface RunScriptOptions {
@@ -95,7 +95,7 @@ function logEnvironment(): void {
     platform,
     arch,
     versions: { node },
-    env: { CPU_LIMIT, NODE_OPTIONS = 'not defined' },
+    env: { CPU_LIMIT, NODE_OPTIONS },
   } = process
 
   const cpuLimit = Number(CPU_LIMIT) || undefined
@@ -105,7 +105,7 @@ function logEnvironment(): void {
     dimGrey(
       Object.entries({
         node: `${node} ${platform} ${arch}`,
-        NODE_OPTIONS,
+        NODE_OPTIONS: NODE_OPTIONS || 'not defined',
         cpus,
         availableParallelism,
         cpuLimit,
@@ -124,8 +124,4 @@ function logEnvironment(): void {
       `It looks like you're using "max_old_space_size" syntax with underscores instead of dashes - it's WRONG and doesn't work in environment variables. Strongly advised to rename it to "max-old-space-size"`,
     )
   }
-}
-
-function dimGrey(s: string): string {
-  return styleText(['dim', 'grey'], s)
 }

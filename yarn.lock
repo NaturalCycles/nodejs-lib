@@ -764,9 +764,9 @@
     typescript "^5"
 
 "@naturalcycles/dev-lib@^16":
-  version "16.6.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-16.6.0.tgz#4dd251570162fd565de49cca167f2bafdbeac91e"
-  integrity sha512-QuMaefYzftAWHZQd31jQXELicuGi7CL8IHwKtmpsDEwOwE7DW2lzsf4yH4aOmfAnf+mo4yAaZfkKFyoLpibWcg==
+  version "16.6.3"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-16.6.3.tgz#2b9a21cd93787ab3c1d455c7d0deb2883c7a2c42"
+  integrity sha512-1nkJiVWK5RWtY6GeQPHnr8uIciyE2f+UNuVuQAgJ9OeTQ78lbbyzN9Ulpdmwi/vanUtkBKdyX839U6+WItU0+g==
   dependencies:
     "@biomejs/biome" "^1"
     "@commitlint/cli" "^19"
@@ -778,7 +778,6 @@
     "@naturalcycles/nodejs-lib" "^13"
     "@stylistic/eslint-plugin" "^4"
     "@types/node" "^22"
-    "@types/yargs" "^16"
     eslint "^9"
     eslint-plugin-import-x "^4"
     eslint-plugin-jsdoc "^50"
@@ -795,7 +794,6 @@
     typescript "^5"
     typescript-eslint "^8"
     vue-eslint-parser "^10"
-    yargs "^17"
 
 "@naturalcycles/js-lib@^14":
   version "14.273.0"
@@ -806,13 +804,14 @@
     zod "^3"
 
 "@naturalcycles/nodejs-lib@^13":
-  version "13.41.1"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.41.1.tgz#7a0ed55098f17f354236ac1b7c00fa1d50b3caa8"
-  integrity sha512-13IOltNklcLeeKfst3SaaNzb7uzgO7BPU0y/1ywfoiWzthJ9hWr6jAR26an+4OxoWzyAXq0bhTumIIaR0UUPsA==
+  version "13.43.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.43.0.tgz#7b4331bf68a64c41eb93e3eddd86d556622d713f"
+  integrity sha512-SDuk/KG9hkIv1mnItXTXLmJTE8V31bUiFRSw6Gi6XURj1VY4ClbhDmY/CzAwLfUM96dAtAIp4GhvpiWAMAks/w==
   dependencies:
     "@naturalcycles/js-lib" "^14"
     "@types/js-yaml" "^4"
     "@types/jsonwebtoken" "^9"
+    "@types/yargs" "^16"
     ajv "^8"
     ajv-formats "^3"
     ajv-keywords "^5"
