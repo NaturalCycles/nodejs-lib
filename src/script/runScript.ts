@@ -1,3 +1,5 @@
+import os from 'node:os'
+import { styleText } from 'node:util'
 import type { CommonLogger } from '@naturalcycles/js-lib'
 import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import { inspectStringifyFn } from '../string/inspect'
@@ -43,6 +45,7 @@ const { DEBUG_RUN_SCRIPT } = process.env
  * Set env DEBUG_RUN_SCRIPT for extra debugging.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
+  logEnvironment()
   setGlobalStringifyFunction(inspectStringifyFn)
 
   const { logger = console, noExit, registerUncaughtExceptionHandlers = true } = opt
@@ -85,4 +88,44 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
       clearTimeout(timeout)
     }
   })()
+}
+
+function logEnvironment(): void {
+  const {
+    platform,
+    arch,
+    versions: { node },
+    env: { CPU_LIMIT, NODE_OPTIONS = 'not defined' },
+  } = process
+
+  const cpuLimit = Number(CPU_LIMIT) || undefined
+  const availableParallelism = os.availableParallelism?.()
+  const cpus = os.cpus().length
+  console.log(
+    dimGrey(
+      Object.entries({
+        node: `${node} ${platform} ${arch}`,
+        NODE_OPTIONS,
+        cpus,
+        availableParallelism,
+        cpuLimit,
+      })
+        .map(([k, v]) => `${k}: ${v}`)
+        .join(', '),
+    ),
+  )
+
+  if (!NODE_OPTIONS) {
+    console.warn(
+      `NODE_OPTIONS env variable is not defined. You may run into out-of-memory issues when running memory-intensive scripts. It's recommended to set it to:\n--max-old-space-size=12000`,
+    )
+  } else if (NODE_OPTIONS.includes('max_old')) {
+    console.warn(
+      `It looks like you're using "max_old_space_size" syntax with underscores instead of dashes - it's WRONG and doesn't work in environment variables. Strongly advised to rename it to "max-old-space-size"`,
+    )
+  }
+}
+
+function dimGrey(s: string): string {
+  return styleText(['dim', 'grey'], s)
 }
