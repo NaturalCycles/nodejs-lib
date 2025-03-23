@@ -45,6 +45,7 @@ const { DEBUG_RUN_SCRIPT } = process.env
  * Set env DEBUG_RUN_SCRIPT for extra debugging.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
+  require('dotenv').config()
   logEnvironment()
   setGlobalStringifyFunction(inspectStringifyFn)
 
