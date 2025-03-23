@@ -23,6 +23,7 @@
     "@naturalcycles/js-lib": "^14",
     "@types/js-yaml": "^4",
     "@types/jsonwebtoken": "^9",
+    "@types/yargs": "^16",
     "ajv": "^8",
     "ajv-formats": "^3",
     "ajv-keywords": "^5",
@@ -41,7 +42,6 @@
     "@naturalcycles/dev-lib": "^16",
     "@types/node": "^22",
     "@types/through2-concurrent": "^2",
-    "@types/yargs": "^16",
     "@vitest/coverage-v8": "^3",
     "tsx": "^4",
     "vitest": "^3"

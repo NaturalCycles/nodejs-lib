@@ -82,6 +82,7 @@ export * from './validation/joi/joi.shared.schemas'
 export * from './validation/joi/joi.validation.error'
 export * from './validation/joi/joi.validation.util'
 export type { StringSchema } from './validation/joi/string.extensions'
+export * from './yargs.util'
 
 export type {
   AlternativesSchema,
