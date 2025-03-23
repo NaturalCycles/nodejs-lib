@@ -11,8 +11,9 @@ if (!workerFile) {
 
 try {
   // require('esbuild-register') // alternative
-  require('ts-node/register/transpile-only')
-  require('tsconfig-paths/register')
+  // require('ts-node/register/transpile-only')
+  require('tsx/cjs/api').register() // https://tsx.is/dev-api/register-cjs
+  // require('tsconfig-paths/register')
 } catch {} // require if exists
 
 const { WorkerClass } = require(workerFile)
