@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@naturalcycles/bench-lib": "^3",
-    "@naturalcycles/dev-lib": "^16",
+    "@naturalcycles/dev-lib": "^17",
     "@types/node": "^22",
     "@types/through2-concurrent": "^2",
     "@vitest/coverage-v8": "^3",
