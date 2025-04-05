@@ -1,8 +1,9 @@
 import { Worker } from 'node:worker_threads'
-import { _range, AnyObject, DeferredPromise, pDefer } from '@naturalcycles/js-lib'
+import type { AnyObject, DeferredPromise } from '@naturalcycles/js-lib'
+import { _range, pDefer } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
-import { TransformTyped } from '../../stream.model'
-import { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
+import type { TransformTyped } from '../../stream.model'
+import type { WorkerInput, WorkerOutput } from './transformMultiThreaded.model'
 
 export interface TransformMultiThreadedOptions {
   /**

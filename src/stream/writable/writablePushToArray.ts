@@ -1,5 +1,5 @@
 import { Writable } from 'node:stream'
-import { TransformOptions, WritableTyped } from '../stream.model'
+import type { TransformOptions, WritableTyped } from '../stream.model'
 
 /**
  * Will push all results to `arr`, will emit nothing in the end.

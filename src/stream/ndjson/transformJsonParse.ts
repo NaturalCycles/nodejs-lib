@@ -1,6 +1,6 @@
 import { Transform } from 'node:stream'
-import { Reviver } from '@naturalcycles/js-lib'
-import { TransformTyped } from '../stream.model'
+import type { Reviver } from '@naturalcycles/js-lib'
+import type { TransformTyped } from '../stream.model'
 
 export interface TransformJsonParseOptions {
   /**

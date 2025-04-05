@@ -1,5 +1,7 @@
-import { inspect, InspectOptions } from 'node:util'
-import { _stringify, JsonStringifyFunction, StringifyOptions } from '@naturalcycles/js-lib'
+import type { InspectOptions } from 'node:util'
+import { inspect } from 'node:util'
+import type { JsonStringifyFunction, StringifyOptions } from '@naturalcycles/js-lib'
+import { _stringify } from '@naturalcycles/js-lib'
 
 export interface InspectAnyOptions extends StringifyOptions, InspectOptions {}
 

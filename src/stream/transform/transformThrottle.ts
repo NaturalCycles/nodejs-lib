@@ -1,15 +1,12 @@
 import { Transform } from 'node:stream'
-import {
-  _ms,
-  _since,
+import type {
   DeferredPromise,
-  localTime,
   NumberOfSeconds,
-  pDefer,
   PositiveInteger,
   UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
-import { TransformTyped } from '../stream.model'
+import { _ms, _since, localTime, pDefer } from '@naturalcycles/js-lib'
+import type { TransformTyped } from '../stream.model'
 
 export interface TransformThrottleOptions {
   /**

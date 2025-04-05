@@ -1,4 +1,4 @@
-import { BaseWorkerData } from './transformMultiThreaded.model'
+import type { BaseWorkerData } from './transformMultiThreaded.model'
 
 export interface WorkerClassInterface<
   IN,

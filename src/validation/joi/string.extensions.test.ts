@@ -1,9 +1,10 @@
-import { IsoDate, localTime } from '@naturalcycles/js-lib'
+import type { IsoDate } from '@naturalcycles/js-lib'
+import { localTime } from '@naturalcycles/js-lib'
 import { expectTypeOf, test } from 'vitest'
 import { testValidation } from '../../test/validation.test.util'
 import { stringSchema } from './joi.shared.schemas'
 import { validate } from './joi.validation.util'
-import { StringSchema } from './string.extensions'
+import type { StringSchema } from './string.extensions'
 
 test('dateString', () => {
   const schema = stringSchema.dateString()

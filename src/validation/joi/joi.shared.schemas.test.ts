@@ -1,4 +1,5 @@
-import { BaseDBEntity, IsoDateTime, localTime } from '@naturalcycles/js-lib'
+import type { BaseDBEntity, IsoDateTime } from '@naturalcycles/js-lib'
+import { localTime } from '@naturalcycles/js-lib'
 import { describe, expect, expectTypeOf, test } from 'vitest'
 import { testValidation } from '../../test/validation.test.util'
 import {

@@ -1,10 +1,5 @@
-import {
-  _filterUndefinedValues,
-  AnyObject,
-  BuildInfo,
-  localTime,
-  UnixTimestamp,
-} from '@naturalcycles/js-lib'
+import type { AnyObject, BuildInfo, UnixTimestamp } from '@naturalcycles/js-lib'
+import { _filterUndefinedValues, localTime } from '@naturalcycles/js-lib'
 import { fs2 } from '../fs/fs2'
 import { git2 } from './git2'
 

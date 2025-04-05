@@ -3,7 +3,8 @@
 import * as yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
-import { DecryptCLIOptions, secretsDecrypt } from '../secret/secrets-decrypt.util'
+import type { DecryptCLIOptions } from '../secret/secrets-decrypt.util'
+import { secretsDecrypt } from '../secret/secrets-decrypt.util'
 
 runScript(() => {
   const { dir, file, encKeyBuffer, del, jsonMode } = getDecryptCLIOptions()

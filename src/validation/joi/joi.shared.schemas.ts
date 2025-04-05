@@ -1,8 +1,4 @@
-import {
-  _numberEnumKeys,
-  _numberEnumValues,
-  _stringEnumKeys,
-  _stringEnumValues,
+import type {
   BaseDBEntity,
   IANATimezone,
   IsoDateTime,
@@ -11,10 +7,16 @@ import {
   UnixTimestamp,
   UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
-import { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
+import {
+  _numberEnumKeys,
+  _numberEnumValues,
+  _stringEnumKeys,
+  _stringEnumValues,
+} from '@naturalcycles/js-lib'
+import type { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { Joi } from './joi.extensions'
-import { NumberSchema } from './number.extensions'
-import { StringSchema } from './string.extensions'
+import type { NumberSchema } from './number.extensions'
+import type { StringSchema } from './string.extensions'
 
 export const booleanSchema = Joi.boolean()
 export const booleanDefaultToFalseSchema = Joi.boolean().default(false)

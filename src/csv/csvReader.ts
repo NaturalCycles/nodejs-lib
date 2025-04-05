@@ -1,6 +1,7 @@
 // Inspired by: https://gist.github.com/Jezternz/c8e9fafc2c114e079829974e3764db75
 
-import { _assert, AnyObject } from '@naturalcycles/js-lib'
+import type { AnyObject } from '@naturalcycles/js-lib'
+import { _assert } from '@naturalcycles/js-lib'
 
 export interface CSVReaderConfig {
   /**

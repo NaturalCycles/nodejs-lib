@@ -1,6 +1,7 @@
 import { mockAllKindsOfThings } from '@naturalcycles/dev-lib/dist/testing'
 import { _range } from '@naturalcycles/js-lib'
-import { Assertion, expect, test } from 'vitest'
+import type { Assertion } from 'vitest'
+import { expect, test } from 'vitest'
 import { _inspect } from '../index'
 
 test('_inspect', () => {

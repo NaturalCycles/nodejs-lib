@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model'
 
 /**
  * Transform that does nothing (pass the data through).

@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import { TransformOptions, TransformTyped } from '../stream.model'
+import type { TransformOptions, TransformTyped } from '../stream.model'
 
 export interface TransformChunkOptions extends TransformOptions {
   /**

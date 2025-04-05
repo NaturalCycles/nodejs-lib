@@ -1,6 +1,8 @@
-import { _passNothingPredicate, AsyncMapper, Mapper } from '@naturalcycles/js-lib'
-import { transformMap, TransformMapOptions, transformMapSync } from '../..'
-import { WritableTyped } from '../stream.model'
+import type { AsyncMapper, Mapper } from '@naturalcycles/js-lib'
+import { _passNothingPredicate } from '@naturalcycles/js-lib'
+import type { TransformMapOptions } from '../..'
+import { transformMap, transformMapSync } from '../..'
+import type { WritableTyped } from '../stream.model'
 
 /**
  * Just an alias to transformMap that declares OUT as void.

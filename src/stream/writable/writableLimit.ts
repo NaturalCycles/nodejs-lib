@@ -1,5 +1,6 @@
-import { Readable, Writable } from 'node:stream'
-import { WritableTyped } from '../stream.model'
+import type { Readable } from 'node:stream'
+import { Writable } from 'node:stream'
+import type { WritableTyped } from '../stream.model'
 
 /**
  * Allows to stop the Readable stream after the pipeline has processed X number of rows.

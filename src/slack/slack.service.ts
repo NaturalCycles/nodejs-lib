@@ -1,16 +1,8 @@
-import {
-  _omit,
-  AnyObject,
-  CommonLogger,
-  commonLoggerMinLevel,
-  CommonLogLevel,
-  Fetcher,
-  getFetcher,
-  localTime,
-  PQueue,
-} from '@naturalcycles/js-lib'
-import { _inspect, InspectAnyOptions } from '..'
-import {
+import type { AnyObject, CommonLogger, CommonLogLevel, Fetcher } from '@naturalcycles/js-lib'
+import { _omit, commonLoggerMinLevel, getFetcher, localTime, PQueue } from '@naturalcycles/js-lib'
+import type { InspectAnyOptions } from '..'
+import { _inspect } from '..'
+import type {
   SlackApiBody,
   SlackAttachmentField,
   SlackMessage,

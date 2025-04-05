@@ -1,5 +1,6 @@
-import { Readable, ReadableOptions } from 'node:stream'
-import { ReadableTyped } from '../stream.model'
+import type { ReadableOptions } from 'node:stream'
+import { Readable } from 'node:stream'
+import type { ReadableTyped } from '../stream.model'
 
 /**
  * Convenience function to create a Readable that can be pushed into (similar to RxJS Subject).

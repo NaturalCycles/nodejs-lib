@@ -1,7 +1,8 @@
 import { Transform } from 'node:stream'
-import { AsyncPredicate, Predicate } from '@naturalcycles/js-lib'
-import { TransformOptions, TransformTyped } from '../stream.model'
-import { transformMap, TransformMapOptions } from './transformMap'
+import type { AsyncPredicate, Predicate } from '@naturalcycles/js-lib'
+import type { TransformOptions, TransformTyped } from '../stream.model'
+import type { TransformMapOptions } from './transformMap'
+import { transformMap } from './transformMap'
 
 /**
  * Just a convenience wrapper around `transformMap` that has built-in predicate filtering support.

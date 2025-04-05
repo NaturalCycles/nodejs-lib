@@ -23,7 +23,7 @@ import { _isTruthy, _jsonParse } from '@naturalcycles/js-lib'
 import type { DumpOptions } from 'js-yaml'
 import * as yaml from 'js-yaml'
 import { transformToNDJson } from '../stream/ndjson/transformToNDJson'
-import { ReadableTyped, TransformTyped } from '../stream/stream.model'
+import type { ReadableTyped, TransformTyped } from '../stream/stream.model'
 import { transformSplitOnNewline } from '../stream/transform/transformSplit'
 import { requireFileToExist } from '../util/env.util'
 

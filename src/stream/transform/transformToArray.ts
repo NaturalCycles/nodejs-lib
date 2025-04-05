@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import { TransformOptions, TransformTyped } from '../stream.model'
+import type { TransformOptions, TransformTyped } from '../stream.model'
 
 /**
  * Will collect all stream results in the array (keeping it in memory) and emit in the end as one result.

@@ -1,4 +1,4 @@
-import { MemoCache } from '@naturalcycles/js-lib'
+import type { MemoCache } from '@naturalcycles/js-lib'
 import { LRUCache } from 'lru-cache'
 
 // Partial, to be able to provide default `max`

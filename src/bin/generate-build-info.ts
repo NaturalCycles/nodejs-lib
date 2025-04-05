@@ -2,7 +2,7 @@
 
 import * as fs from 'node:fs'
 import * as path from 'node:path'
-import { UnixTimestamp } from '@naturalcycles/js-lib'
+import type { UnixTimestamp } from '@naturalcycles/js-lib'
 import * as yargs from 'yargs'
 import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env'
 import { runScript } from '../script/runScript'

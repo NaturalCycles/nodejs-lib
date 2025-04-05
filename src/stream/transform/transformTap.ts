@@ -1,6 +1,6 @@
 import { Transform } from 'node:stream'
-import { AsyncMapper, CommonLogger } from '@naturalcycles/js-lib'
-import { TransformOptions, TransformTyped } from '../stream.model'
+import type { AsyncMapper, CommonLogger } from '@naturalcycles/js-lib'
+import type { TransformOptions, TransformTyped } from '../stream.model'
 
 export interface TransformTapOptions extends TransformOptions {
   logger?: CommonLogger

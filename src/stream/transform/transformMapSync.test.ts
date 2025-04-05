@@ -2,7 +2,8 @@ import { Readable } from 'node:stream'
 import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
 import { _range, AppError, ErrorMode, pTry } from '@naturalcycles/js-lib'
 import { beforeAll, expect, test } from 'vitest'
-import { _pipeline, TransformMapStats, writableVoid } from '../..'
+import type { TransformMapStats } from '../..'
+import { _pipeline, writableVoid } from '../..'
 import { transformMapSync } from './transformMapSync'
 
 interface Item {

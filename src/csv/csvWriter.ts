@@ -1,6 +1,7 @@
 // Inspired by: https://github.com/ryu1kn/csv-writer/
 
-import { _assert, AnyObject } from '@naturalcycles/js-lib'
+import type { AnyObject } from '@naturalcycles/js-lib'
+import { _assert } from '@naturalcycles/js-lib'
 
 export interface CSVWriterConfig {
   /**

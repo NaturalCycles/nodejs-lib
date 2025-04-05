@@ -1,4 +1,5 @@
-import { AppError, ErrorData } from '@naturalcycles/js-lib'
+import type { ErrorData } from '@naturalcycles/js-lib'
+import { AppError } from '@naturalcycles/js-lib'
 import type { ErrorObject } from 'ajv'
 
 export interface AjvValidationErrorData extends ErrorData {

@@ -1,6 +1,7 @@
 import { Writable } from 'node:stream'
-import { _pipeline, readableCreate, ReadableTyped } from '../..'
-import { TransformOptions, WritableTyped } from '../stream.model'
+import type { ReadableTyped } from '../..'
+import { _pipeline, readableCreate } from '../..'
+import type { TransformOptions, WritableTyped } from '../stream.model'
 
 /**
  * Allows "forking" a stream inside pipeline into a number of pipeline chains (2 or more).

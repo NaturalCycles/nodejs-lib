@@ -3,7 +3,8 @@ import { expect, test } from 'vitest'
 import { readableFromArray } from '../readable/readableFromArray'
 import { transformTap } from '../transform/transformTap'
 import { writablePushToArray } from '../writable/writablePushToArray'
-import { _pipeline, PipelineOptions } from './pipeline'
+import type { PipelineOptions } from './pipeline'
+import { _pipeline } from './pipeline'
 
 test('abort pipeline with AbortSignal', async () => {
   const data = _range(1, 50).map(n => ({ id: String(n) }))

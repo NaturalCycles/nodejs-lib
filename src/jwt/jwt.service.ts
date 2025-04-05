@@ -1,5 +1,6 @@
-import { _assert, _errorDataAppend, AnyObject, ErrorData, JWTString } from '@naturalcycles/js-lib'
-import { AnySchema } from 'joi'
+import type { AnyObject, ErrorData, JWTString } from '@naturalcycles/js-lib'
+import { _assert, _errorDataAppend } from '@naturalcycles/js-lib'
+import type { AnySchema } from 'joi'
 import type { Algorithm, JwtHeader, SignOptions, VerifyOptions } from 'jsonwebtoken'
 import * as jsonwebtoken from 'jsonwebtoken'
 import { anyObjectSchema } from '../validation/joi/joi.shared.schemas'

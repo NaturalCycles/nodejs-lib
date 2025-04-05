@@ -1,6 +1,9 @@
-import { _passNothingPredicate, AbortableAsyncMapper, Mapper } from '@naturalcycles/js-lib'
-import { _pipeline, ReadableTyped } from '../../index'
-import { transformMap, TransformMapOptions } from '../transform/transformMap'
+import type { AbortableAsyncMapper, Mapper } from '@naturalcycles/js-lib'
+import { _passNothingPredicate } from '@naturalcycles/js-lib'
+import type { ReadableTyped } from '../../index'
+import { _pipeline } from '../../index'
+import type { TransformMapOptions } from '../transform/transformMap'
+import { transformMap } from '../transform/transformMap'
 
 /**
  * Convenience function to do `.forEach` over a Readable.

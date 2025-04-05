@@ -3,7 +3,8 @@
 import * as yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
-import { EncryptCLIOptions, secretsEncrypt } from '../secret/secrets-encrypt.util'
+import type { EncryptCLIOptions } from '../secret/secrets-encrypt.util'
+import { secretsEncrypt } from '../secret/secrets-encrypt.util'
 
 runScript(() => {
   const { pattern, file, encKeyBuffer, del, jsonMode } = getEncryptCLIOptions()

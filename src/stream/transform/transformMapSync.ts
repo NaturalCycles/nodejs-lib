@@ -1,18 +1,10 @@
-import {
-  _anyToError,
-  CommonLogger,
-  END,
-  ErrorMode,
-  Mapper,
-  Predicate,
-  SKIP,
-  UnixTimestampMillis,
-} from '@naturalcycles/js-lib'
+import type { CommonLogger, Mapper, Predicate, UnixTimestampMillis } from '@naturalcycles/js-lib'
+import { _anyToError, END, ErrorMode, SKIP } from '@naturalcycles/js-lib'
 import { yellow } from '../../colors/colors'
 import { AbortableTransform } from '../pipeline/pipeline'
-import { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
-import { TransformMapStats } from './transformMap'
+import type { TransformMapStats } from './transformMap'
 
 export interface TransformMapSyncOptions<IN = any, OUT = IN> {
   /**

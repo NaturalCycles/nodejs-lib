@@ -1,5 +1,5 @@
-import { Readable } from 'node:stream'
-import { CommonLogger } from '@naturalcycles/js-lib'
+import type { Readable } from 'node:stream'
+import type { CommonLogger } from '@naturalcycles/js-lib'
 
 export function pipelineClose(
   name: string,

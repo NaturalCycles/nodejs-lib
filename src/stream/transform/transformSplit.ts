@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model'
 
 // The code below is carefully adopted from: https://github.com/max-mapper/binary-split
 

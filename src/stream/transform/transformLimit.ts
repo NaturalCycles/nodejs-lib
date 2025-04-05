@@ -1,7 +1,7 @@
-import { Readable } from 'node:stream'
-import { CommonLogger } from '@naturalcycles/js-lib'
+import type { Readable } from 'node:stream'
+import type { CommonLogger } from '@naturalcycles/js-lib'
 import { AbortableTransform, transformNoOp } from '../../index'
-import { TransformOptions, TransformTyped } from '../stream.model'
+import type { TransformOptions, TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
 
 export interface TransformLimitOptions extends TransformOptions {

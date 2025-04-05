@@ -1,23 +1,25 @@
+import type {
+  AbortableAsyncMapper,
+  AsyncPredicate,
+  CommonLogger,
+  Promisable,
+  StringMap,
+  UnixTimestampMillis,
+} from '@naturalcycles/js-lib'
 import {
   _anyToError,
   _hc,
   _since,
   _stringify,
-  AbortableAsyncMapper,
-  AsyncPredicate,
-  CommonLogger,
   END,
   ErrorMode,
   pFilter,
-  Promisable,
   SKIP,
-  StringMap,
-  UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import through2Concurrent = require('through2-concurrent')
 import { yellow } from '../../colors/colors'
-import { AbortableTransform } from '../pipeline/pipeline'
-import { TransformTyped } from '../stream.model'
+import type { AbortableTransform } from '../pipeline/pipeline'
+import type { TransformTyped } from '../stream.model'
 import { pipelineClose } from '../stream.util'
 
 export interface TransformMapOptions<IN = any, OUT = IN> {

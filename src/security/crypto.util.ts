@@ -1,5 +1,6 @@
 import * as crypto from 'node:crypto'
-import { _stringMapEntries, Base64String, StringMap } from '@naturalcycles/js-lib'
+import type { Base64String, StringMap } from '@naturalcycles/js-lib'
+import { _stringMapEntries } from '@naturalcycles/js-lib'
 import { md5AsBuffer, sha256AsBuffer } from './hash.util'
 
 const algorithm = 'aes-256-cbc'

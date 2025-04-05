@@ -1,7 +1,7 @@
 import { Transform } from 'node:stream'
 import { _pipeline } from '../pipeline/pipeline'
 import { readableCreate } from '../readable/readableCreate'
-import { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model'
 
 type AnyStream = NodeJS.WritableStream | NodeJS.ReadWriteStream
 

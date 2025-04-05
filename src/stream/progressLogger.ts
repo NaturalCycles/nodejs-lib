@@ -1,16 +1,10 @@
-import { inspect, InspectOptions } from 'node:util'
-import {
-  _mb,
-  _since,
-  AnyObject,
-  CommonLogger,
-  localTime,
-  SimpleMovingAverage,
-  UnixTimestampMillis,
-} from '@naturalcycles/js-lib'
+import type { InspectOptions } from 'node:util'
+import { inspect } from 'node:util'
+import type { AnyObject, CommonLogger, UnixTimestampMillis } from '@naturalcycles/js-lib'
+import { _mb, _since, localTime, SimpleMovingAverage } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, hasColors, white, yellow } from '../colors/colors'
 import { SizeStack } from './sizeStack'
-import { ReadableMapper } from './stream.model'
+import type { ReadableMapper } from './stream.model'
 
 export interface ProgressLoggerCfg<T = any> {
   /**

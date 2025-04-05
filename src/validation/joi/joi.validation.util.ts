@@ -7,8 +7,9 @@
  */
 
 import { _hb, _isObject, _truncateMiddle } from '@naturalcycles/js-lib'
-import { AnySchema, ValidationError, ValidationOptions } from 'joi'
-import { JoiValidationError, JoiValidationErrorData } from './joi.validation.error'
+import type { AnySchema, ValidationError, ValidationOptions } from 'joi'
+import type { JoiValidationErrorData } from './joi.validation.error'
+import { JoiValidationError } from './joi.validation.error'
 
 // todo: consider replacing with Tuple of [error, value]
 export interface JoiValidationResult<T = any> {

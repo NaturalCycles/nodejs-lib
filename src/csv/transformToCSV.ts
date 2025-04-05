@@ -1,7 +1,8 @@
 import { Transform } from 'node:stream'
-import { AnyObject } from '@naturalcycles/js-lib'
-import { TransformTyped } from '../stream/stream.model'
-import { CSVWriter, CSVWriterConfig } from './csvWriter'
+import type { AnyObject } from '@naturalcycles/js-lib'
+import type { TransformTyped } from '../stream/stream.model'
+import type { CSVWriterConfig } from './csvWriter'
+import { CSVWriter } from './csvWriter'
 
 export interface TransformToCSVOptions extends CSVWriterConfig {
   /**

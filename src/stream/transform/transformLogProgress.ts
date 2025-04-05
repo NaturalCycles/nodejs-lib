@@ -1,6 +1,7 @@
 import { Transform } from 'node:stream'
-import { progressLogger, ProgressLoggerCfg } from '../progressLogger'
-import { TransformOptions, TransformTyped } from '../stream.model'
+import type { ProgressLoggerCfg } from '../progressLogger'
+import { progressLogger } from '../progressLogger'
+import type { TransformOptions, TransformTyped } from '../stream.model'
 
 export interface TransformLogProgressOptions<IN = any>
   extends ProgressLoggerCfg<IN>,

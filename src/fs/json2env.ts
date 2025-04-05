@@ -1,5 +1,5 @@
 import * as fs from 'node:fs'
-import { AnyObject } from '@naturalcycles/js-lib'
+import type { AnyObject } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors/colors'
 import { fs2 } from './fs2'
 
