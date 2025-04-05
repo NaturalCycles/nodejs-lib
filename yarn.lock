@@ -745,9 +745,9 @@
     benchmark "^2"
 
 "@naturalcycles/dev-lib@^17":
-  version "17.1.3"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-17.1.3.tgz#5b48439e5e4ab3ad45e540f5761327a0706bf556"
-  integrity sha512-MKsYUk3WKPGv0BiEU78g54/qQj0SKy9Jz9VIvOCAljX3B8K/6pyqdEjHlgZpaoH3diCEr9BFTpP1WXRiytelDA==
+  version "17.2.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-17.2.1.tgz#3d7279c2cfb7f8884cda9c948c348190114ec052"
+  integrity sha512-Pl2D6zJl7YC6siod45zpYwnUCS2DOV9dp6ANb3dzEsUwHrFWWsBaY6vyc94+5unmalwMaDfOpWSgqOWCk9TH4w==
   dependencies:
     "@biomejs/biome" "^1"
     "@commitlint/cli" "^19"
