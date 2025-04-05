@@ -1,5 +1,5 @@
 import fs from 'node:fs'
-import * as path from 'node:path'
+import path from 'node:path'
 import { _assert } from '@naturalcycles/js-lib'
 import { dimGrey, yellow } from '../colors/colors'
 import { fastGlob, fs2 } from '../index'

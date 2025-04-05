@@ -1,7 +1,5 @@
-import * as tty from 'node:tty'
+import tty from 'node:tty'
 import chalk from 'chalk'
-
-export { chalk }
 
 /**
  * Based on: https://github.com/sindresorhus/yoctocolors/pull/5

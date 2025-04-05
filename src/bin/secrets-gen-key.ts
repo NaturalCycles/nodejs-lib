@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { randomBytes } from 'node:crypto'
-import * as yargs from 'yargs'
+import yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
 

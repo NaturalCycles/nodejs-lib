@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as yargs from 'yargs'
+import yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
 import type { EncryptCLIOptions } from '../secret/secrets-encrypt.util'
