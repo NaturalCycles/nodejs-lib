@@ -1,5 +1,5 @@
 import 'dotenv/config' // ensure .env is read before requiring keys
-import fs from 'node:fs'
+import { existsSync } from 'node:fs'
 import type { ValuesOf } from '@naturalcycles/js-lib'
 
 /**
@@ -25,7 +25,7 @@ export function requireEnvKeys<T extends readonly string[]>(
 }
 
 export function requireFileToExist(filePath: string): void {
-  if (!fs.existsSync(filePath)) {
+  if (!existsSync(filePath)) {
     throw new Error(`Required file should exist: ${filePath}`)
   }
 }

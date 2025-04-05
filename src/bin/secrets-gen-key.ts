@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import crypto from 'node:crypto'
-import yargs from 'yargs'
+import { randomBytes } from 'node:crypto'
+import * as yargs from 'yargs'
 import { dimGrey } from '../colors/colors'
 import { runScript } from '../script/runScript'
 
@@ -11,7 +11,7 @@ runScript(() => {
     default: 256,
   }).argv
 
-  const key = crypto.randomBytes(sizeBytes).toString('base64')
+  const key = randomBytes(sizeBytes).toString('base64')
 
   console.log(dimGrey('\nSECRET_ENCRYPTION_KEY:\n'))
   console.log(key, '\n')

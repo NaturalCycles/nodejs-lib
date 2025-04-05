@@ -1,4 +1,4 @@
-import Ajv from 'ajv'
+import * as Ajv from 'ajv'
 import type { Options as FastGlobOptions } from 'fast-glob'
 import fastGlob from 'fast-glob'
 import type {

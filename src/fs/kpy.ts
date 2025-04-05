@@ -1,4 +1,4 @@
-import path from 'node:path'
+import * as path from 'node:path'
 import { _since, localTime, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
 import { fastGlob, fs2 } from '../index'

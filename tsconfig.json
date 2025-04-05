@@ -1,6 +1,9 @@
 {
   "extends": "@naturalcycles/dev-lib/cfg/tsconfig.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    // "esModuleInterop": false, // todo
+    // "allowSyntheticDefaultImports": false, // todo
+  },
   "include": ["src"],
   "exclude": ["**/__exclude"],
 }

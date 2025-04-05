@@ -1,4 +1,4 @@
-import cp from 'node:child_process'
+import { execSync, spawn, spawnSync } from 'node:child_process'
 import {
   _since,
   AnyObject,
@@ -52,7 +52,7 @@ class Exec2 {
     const started = Date.now() as UnixTimestampMillis
     this.logStart(cmd, opt)
 
-    const r = cp.spawnSync(cmd, opt.args, {
+    const r = spawnSync(cmd, opt.args, {
       encoding: 'utf8',
       stdio: 'inherit',
       shell,
@@ -97,20 +97,18 @@ class Exec2 {
     this.logStart(cmd, opt)
 
     try {
-      const s = cp
-        .execSync(cmd, {
-          encoding: 'utf8',
-          // stdio: 'inherit', // no, otherwise we don't get the output returned
-          stdio: undefined,
-          // shell: undefined,
-          cwd,
-          timeout,
-          env: {
-            ...(passProcessEnv ? process.env : {}),
-            ...env,
-          },
-        })
-        .trim()
+      const s = execSync(cmd, {
+        encoding: 'utf8',
+        // stdio: 'inherit', // no, otherwise we don't get the output returned
+        stdio: undefined,
+        // shell: undefined,
+        cwd,
+        timeout,
+        env: {
+          ...(passProcessEnv ? process.env : {}),
+          ...env,
+        },
+      }).trim()
 
       this.logFinish(cmd, opt, started, true)
       return s
@@ -150,7 +148,7 @@ class Exec2 {
     this.logStart(cmd, opt)
 
     await new Promise<void>((resolve, reject) => {
-      const p = cp.spawn(cmd, opt.args || [], {
+      const p = spawn(cmd, opt.args || [], {
         shell,
         cwd,
         stdio: 'inherit',
@@ -211,7 +209,7 @@ class Exec2 {
     let stderr = ''
 
     return await new Promise<SpawnOutput>((resolve, reject) => {
-      const p = cp.spawn(cmd, opt.args || [], {
+      const p = spawn(cmd, opt.args || [], {
         shell,
         cwd,
         env: {

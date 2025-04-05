@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { _assert, _jsonParseIfPossible, Base64String, StringMap } from '@naturalcycles/js-lib'
 import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
 
@@ -54,19 +54,19 @@ export function loadSecretsFromEncryptedJsonFile(
   secretEncryptionKey?: Base64String,
 ): void {
   _assert(
-    fs.existsSync(filePath),
+    existsSync(filePath),
     `loadSecretsFromEncryptedJsonFile() cannot load from path: ${filePath}`,
   )
 
   let secrets: StringMap
 
   if (secretEncryptionKey) {
-    const buf = fs.readFileSync(filePath)
+    const buf = readFileSync(filePath)
     const encKeyBuffer = Buffer.from(secretEncryptionKey, 'base64')
     const plain = decryptRandomIVBuffer(buf, encKeyBuffer).toString('utf8')
     secrets = JSON.parse(plain)
   } else {
-    secrets = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+    secrets = JSON.parse(readFileSync(filePath, 'utf8'))
   }
 
   Object.entries(secrets).forEach(([k, v]) => (secretMap[k.toUpperCase()] = v))
@@ -88,11 +88,11 @@ export function loadSecretsFromEncryptedJsonFileValues(
   secretEncryptionKey?: Base64String,
 ): void {
   _assert(
-    fs.existsSync(filePath),
+    existsSync(filePath),
     `loadSecretsFromEncryptedJsonFileValues() cannot load from path: ${filePath}`,
   )
 
-  let secrets: StringMap = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+  let secrets: StringMap = JSON.parse(readFileSync(filePath, 'utf8'))
 
   if (secretEncryptionKey) {
     const encKeyBuffer = Buffer.from(secretEncryptionKey, 'base64')

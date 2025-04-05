@@ -1,4 +1,4 @@
-import crypto, { BinaryToTextEncoding } from 'node:crypto'
+import { BinaryToTextEncoding, hash as cryptoHash } from 'node:crypto'
 import type { Base64String, Base64UrlString } from '@naturalcycles/js-lib'
 
 export function md5(s: string | Buffer, outputEncoding: BinaryToTextEncoding = 'hex'): string {
@@ -22,14 +22,11 @@ export function hash(
   algorithm: string,
   outputEncoding: BinaryToTextEncoding = 'hex',
 ): string {
-  // https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V20.md#crypto-implement-cryptohash
-  // Note: crypto.hash is Node 20.12+
-  return crypto.hash(algorithm, s, outputEncoding)
+  return cryptoHash(algorithm, s, outputEncoding)
 }
 
 export function hashAsBuffer(s: string | Buffer, algorithm: string): Buffer {
-  // Note: crypto.hash is Node 20.12+
-  return crypto.hash(algorithm, s, 'buffer')
+  return cryptoHash(algorithm, s, 'buffer')
 }
 
 export function base64(s: string | Buffer): Base64String {

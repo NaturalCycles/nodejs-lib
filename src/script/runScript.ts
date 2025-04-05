@@ -1,4 +1,4 @@
-import os from 'node:os'
+import * as os from 'node:os'
 import type { CommonLogger } from '@naturalcycles/js-lib'
 import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors/colors'

@@ -1,4 +1,4 @@
-import os from 'node:os'
+import * as os from 'node:os'
 import { _mb } from '@naturalcycles/js-lib'
 
 export function memoryUsage(): {

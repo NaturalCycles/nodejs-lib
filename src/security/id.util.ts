@@ -1,4 +1,4 @@
-import crypto from 'node:crypto'
+import { randomBytes } from 'node:crypto'
 import {
   ALPHABET_ALPHANUMERIC,
   ALPHABET_ALPHANUMERIC_LOWERCASE,
@@ -30,7 +30,7 @@ export const stringIdBase62: () => string = nanoIdCustomAlphabet(ALPHABET_ALPHAN
  * Dividable by 4 lengths produce ids with no padding `=` characters, which is optimal.
  */
 export function stringIdBase64(size = 16): string {
-  return crypto.randomBytes(size * 0.75).toString('base64')
+  return randomBytes(size * 0.75).toString('base64')
 }
 
 /**
@@ -42,7 +42,7 @@ export function stringIdBase64(size = 16): string {
  * Base64url always produces strings without a padding character `=`, by design.
  */
 export function stringIdBase64Url(size = 16): string {
-  return crypto.randomBytes(size * 0.75).toString('base64url')
+  return randomBytes(size * 0.75).toString('base64url')
 }
 
 /**

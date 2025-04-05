@@ -1,5 +1,5 @@
-import cp from 'node:child_process'
-import path from 'node:path'
+import { execSync } from 'node:child_process'
+import { basename } from 'node:path'
 import type { UnixTimestamp } from '@naturalcycles/js-lib'
 import { grey } from '../colors/colors'
 import { exec2 } from './exec2'
@@ -21,7 +21,7 @@ class Git2 {
   hasUncommittedChanges(): boolean {
     // git diff-index --quiet HEAD -- || echo "untracked"
     try {
-      cp.execSync('git diff-index --quiet HEAD --', {
+      execSync('git diff-index --quiet HEAD --', {
         encoding: 'utf8',
       })
       return false
@@ -41,7 +41,7 @@ class Git2 {
     console.log(grey(cmd))
 
     try {
-      cp.execSync(cmd, {
+      execSync(cmd, {
         stdio: 'inherit',
       })
       return true
@@ -64,7 +64,7 @@ class Git2 {
   pull(): void {
     const cmd = 'git pull'
     try {
-      cp.execSync(cmd, {
+      execSync(cmd, {
         stdio: 'inherit',
       })
     } catch {}
@@ -98,7 +98,7 @@ class Git2 {
 
   getCurrentRepoName(): string {
     const originUrl = exec2.exec('git config --get remote.origin.url')
-    return path.basename(originUrl, '.git')
+    return basename(originUrl, '.git')
   }
 }
 
