@@ -1,11 +1,12 @@
 /*
 
-yarn tsx scripts/bench/validation.bench
+yarn tsx scripts/bench/validation.bench.script.ts
 
  */
 
 import { runBench } from '@naturalcycles/bench-lib'
-import { _range, jsonSchema, z } from '@naturalcycles/js-lib'
+import { _range, jsonSchema } from '@naturalcycles/js-lib'
+import { z } from '@naturalcycles/js-lib/dist/zod/index.js'
 import {
   AjvSchema,
   arraySchema,
