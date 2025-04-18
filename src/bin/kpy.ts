@@ -1,40 +1,42 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs'
 import { kpySync } from '../fs/kpy.js'
 import { runScript } from '../script/runScript.js'
+import { _yargs } from '../yargs.util.js'
 
 runScript(() => {
   const {
     _: [baseDir, ...inputPatterns],
     ...opt
-  } = yargs.demandCommand(2).options({
-    silent: {
-      type: 'boolean',
-      desc: 'Suppress all text output',
-    },
-    verbose: {
-      type: 'boolean',
-      desc: 'Report progress on every file',
-    },
-    overwrite: {
-      type: 'boolean',
-      default: true,
-    },
-    dotfiles: {
-      type: 'boolean',
-    },
-    flat: {
-      type: 'boolean',
-    },
-    dry: {
-      type: 'boolean',
-    },
-    move: {
-      type: 'boolean',
-      descr: 'Move files instead of copy',
-    },
-  }).argv
+  } = _yargs()
+    .demandCommand(2)
+    .options({
+      silent: {
+        type: 'boolean',
+        desc: 'Suppress all text output',
+      },
+      verbose: {
+        type: 'boolean',
+        desc: 'Report progress on every file',
+      },
+      overwrite: {
+        type: 'boolean',
+        default: true,
+      },
+      dotfiles: {
+        type: 'boolean',
+      },
+      flat: {
+        type: 'boolean',
+      },
+      dry: {
+        type: 'boolean',
+      },
+      move: {
+        type: 'boolean',
+        descr: 'Move files instead of copy',
+      },
+    }).argv
 
   const outputDir = inputPatterns.pop() as string
 

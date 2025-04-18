@@ -3,13 +3,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { UnixTimestamp } from '@naturalcycles/js-lib'
-import yargs from 'yargs'
 import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env.js'
 import { runScript } from '../script/runScript.js'
 import { generateBuildInfo } from '../util/buildInfo.util.js'
+import { _yargs } from '../yargs.util.js'
 
 runScript(async () => {
-  const { dir, overrideTimestamp } = yargs.options({
+  const { dir, overrideTimestamp } = _yargs().options({
     dir: {
       type: 'string',
       desc: 'Output directory',

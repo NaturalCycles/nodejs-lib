@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs'
-import { SlackService } from '../index.js'
+import { _yargs, SlackService } from '../index.js'
 import { runScript } from '../script/runScript.js'
 
 runScript(async () => {
@@ -11,7 +10,7 @@ runScript(async () => {
     username,
     emoji,
     webhook: webhookUrl,
-  } = yargs.options({
+  } = _yargs().options({
     channel: {
       type: 'string',
       demandOption: true,
