@@ -1,6 +1,6 @@
 import { Transform } from 'node:stream'
 import { _sortObjectDeep } from '@naturalcycles/js-lib'
-import type { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model.js'
 
 export interface TransformToNDJsonOptions {
   /**

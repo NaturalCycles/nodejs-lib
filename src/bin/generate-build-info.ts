@@ -4,9 +4,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import type { UnixTimestamp } from '@naturalcycles/js-lib'
 import yargs from 'yargs'
-import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env'
-import { runScript } from '../script/runScript'
-import { generateBuildInfo } from '../util/buildInfo.util'
+import { appendToBashEnv, appendToGithubEnv, appendToGithubOutput } from '../fs/json2env.js'
+import { runScript } from '../script/runScript.js'
+import { generateBuildInfo } from '../util/buildInfo.util.js'
 
 runScript(async () => {
   const { dir, overrideTimestamp } = yargs.options({

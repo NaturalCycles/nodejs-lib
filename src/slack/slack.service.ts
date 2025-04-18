@@ -1,13 +1,13 @@
 import type { AnyObject, CommonLogger, CommonLogLevel, Fetcher } from '@naturalcycles/js-lib'
 import { _omit, commonLoggerMinLevel, getFetcher, localTime, PQueue } from '@naturalcycles/js-lib'
-import type { InspectAnyOptions } from '..'
-import { _inspect } from '..'
+import type { InspectAnyOptions } from '../index.js'
+import { _inspect } from '../index.js'
 import type {
   SlackApiBody,
   SlackAttachmentField,
   SlackMessage,
   SlackServiceCfg,
-} from './slack.service.model'
+} from './slack.service.model.js'
 
 const GAE = !!process.env['GAE_INSTANCE']
 

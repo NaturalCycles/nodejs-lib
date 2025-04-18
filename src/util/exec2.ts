@@ -1,7 +1,7 @@
 import { execSync, spawn, spawnSync } from 'node:child_process'
 import type { AnyObject, NumberOfMilliseconds, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { _since, AppError } from '@naturalcycles/js-lib'
-import { dimGrey, dimRed, hasColors, white } from '../colors/colors'
+import { dimGrey, dimRed, hasColors, white } from '../colors/colors.js'
 
 /**
  * Set of utility functions to work with Spawn / Exec.

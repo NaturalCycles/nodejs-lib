@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
-import type { JoiSchemaObject } from './joi.model'
-import { numberSchema, objectSchema, stringSchema } from './joi.shared.schemas'
-import { getValidationResult, validate } from './joi.validation.util'
+import type { JoiSchemaObject } from './joi.model.js'
+import { numberSchema, objectSchema, stringSchema } from './joi.shared.schemas.js'
+import { getValidationResult, validate } from './joi.validation.util.js'
 
 interface ItemBM {
   id?: string

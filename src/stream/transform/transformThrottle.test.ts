@@ -2,10 +2,10 @@ import { Readable } from 'node:stream'
 import type { ObjectWithId } from '@naturalcycles/js-lib'
 import { _range } from '@naturalcycles/js-lib'
 import { test } from 'vitest'
-import { _pipeline } from '../pipeline/pipeline'
-import { writableVoid } from '../writable/writableVoid'
-import { transformTap } from './transformTap'
-import { transformThrottle } from './transformThrottle'
+import { _pipeline } from '../pipeline/pipeline.js'
+import { writableVoid } from '../writable/writableVoid.js'
+import { transformTap } from './transformTap.js'
+import { transformThrottle } from './transformThrottle.js'
 
 test('transformThrottle', async () => {
   await _pipeline([

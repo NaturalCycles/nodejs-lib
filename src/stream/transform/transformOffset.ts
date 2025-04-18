@@ -1,6 +1,6 @@
 import { Transform } from 'node:stream'
-import { transformNoOp } from '../../index'
-import type { TransformOptions, TransformTyped } from '../stream.model'
+import { transformNoOp } from '../../index.js'
+import type { TransformOptions, TransformTyped } from '../stream.model.js'
 
 export interface TransformOffsetOptions extends TransformOptions {
   /**

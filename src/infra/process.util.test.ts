@@ -1,6 +1,6 @@
 import { pDelay } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { memoryUsage, memoryUsageFull, processSharedUtil } from './process.util'
+import { memoryUsage, memoryUsageFull, processSharedUtil } from './process.util.js'
 
 test('cpuInfo', async () => {
   const c = processSharedUtil.cpuInfo()

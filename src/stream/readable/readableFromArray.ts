@@ -2,7 +2,7 @@ import type { ReadableOptions } from 'node:stream'
 import { Readable } from 'node:stream'
 import type { AbortableAsyncMapper } from '@naturalcycles/js-lib'
 import { _passthroughMapper } from '@naturalcycles/js-lib'
-import type { ReadableTyped } from '../stream.model'
+import type { ReadableTyped } from '../stream.model.js'
 
 /**
  * Create Readable from Array.

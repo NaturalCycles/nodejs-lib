@@ -1,8 +1,8 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _pipelineToArray, transformFilter } from '../../index'
-import { transformFilterSync } from './transformFilter'
+import { _pipelineToArray, transformFilter } from '../../index.js'
+import { transformFilterSync } from './transformFilter.js'
 
 test('transformFilter', async () => {
   const items = _range(5)

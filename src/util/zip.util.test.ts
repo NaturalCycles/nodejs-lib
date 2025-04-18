@@ -8,7 +8,7 @@ import {
   gzipString,
   inflateBuffer,
   inflateToString,
-} from './zip.util'
+} from './zip.util.js'
 
 test('deflate/inflate', async () => {
   const s = 'abcd1234$%^'

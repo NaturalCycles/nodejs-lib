@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import yargs from 'yargs'
-import { SlackService } from '..'
-import { runScript } from '../script/runScript'
+import { SlackService } from '../index.js'
+import { runScript } from '../script/runScript.js'
 
 runScript(async () => {
   const {

@@ -5,8 +5,8 @@ node scripts/dot.script.js --count 3
 
  */
 
-const { parseArgs } = require('node:util')
-const { pDelay } = require('@naturalcycles/js-lib')
+import { parseArgs } from 'node:util'
+import { pDelay } from '@naturalcycles/js-lib'
 const { count: countStr, error } = parseArgs({
   options: {
     count: {

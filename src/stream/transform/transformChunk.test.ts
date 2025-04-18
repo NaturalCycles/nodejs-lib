@@ -1,8 +1,8 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _pipeline, writablePushToArray } from '../..'
-import { transformChunk } from './transformChunk'
+import { _pipeline, writablePushToArray } from '../../index.js'
+import { transformChunk } from './transformChunk.js'
 
 test('transformBuffer', async () => {
   const data = _range(1, 6).map(n => ({ id: String(n) }))

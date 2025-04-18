@@ -5,8 +5,13 @@ yarn tsx scripts/backpressureSimulation.script.ts
  */
 
 import { _range, pDelay } from '@naturalcycles/js-lib'
-import { _pipeline, readableFromArray, transformLogProgress, writableForEach } from '../src'
-import { runScript } from '../src/script/runScript'
+import {
+  _pipeline,
+  readableFromArray,
+  transformLogProgress,
+  writableForEach,
+} from '../src/index.js'
+import { runScript } from '../src/script/runScript.js'
 
 interface Item {
   id: string

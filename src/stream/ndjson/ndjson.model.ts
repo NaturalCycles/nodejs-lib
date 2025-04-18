@@ -1,5 +1,5 @@
 import { _hb, _ms } from '@naturalcycles/js-lib'
-import { boldWhite, dimWhite } from '../../colors/colors'
+import { boldWhite, dimWhite } from '../../colors/colors.js'
 
 export class NDJsonStats {
   static create(o: Partial<NDJsonStats> = {}): NDJsonStats {

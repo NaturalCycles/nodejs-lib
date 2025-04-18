@@ -22,10 +22,10 @@ import { createGzip, createUnzip } from 'node:zlib'
 import { _isTruthy, _jsonParse } from '@naturalcycles/js-lib'
 import type { DumpOptions } from 'js-yaml'
 import yaml from 'js-yaml'
-import { transformToNDJson } from '../stream/ndjson/transformToNDJson'
-import type { ReadableTyped, TransformTyped } from '../stream/stream.model'
-import { transformSplitOnNewline } from '../stream/transform/transformSplit'
-import { requireFileToExist } from '../util/env.util'
+import { transformToNDJson } from '../stream/ndjson/transformToNDJson.js'
+import type { ReadableTyped, TransformTyped } from '../stream/stream.model.js'
+import { transformSplitOnNewline } from '../stream/transform/transformSplit.js'
+import { requireFileToExist } from '../util/env.util.js'
 
 /**
  * fs2 conveniently groups filesystem functions together.

@@ -1,10 +1,10 @@
 import type { IsoDate, JsonSchema } from '@naturalcycles/js-lib'
 import { _deepFreeze, _try, jsonSchema, localTime } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _inspect } from '../../index'
-import { testDir } from '../../test/paths.cnst'
-import { AjvSchema } from './ajvSchema'
-import { AjvValidationError } from './ajvValidationError'
+import { _inspect } from '../../index.js'
+import { testDir } from '../../test/paths.cnst.js'
+import { AjvSchema } from './ajvSchema.js'
+import { AjvValidationError } from './ajvValidationError.js'
 
 interface Simple {
   s: string

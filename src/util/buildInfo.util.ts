@@ -1,7 +1,7 @@
 import type { AnyObject, BuildInfo, UnixTimestamp } from '@naturalcycles/js-lib'
 import { _filterUndefinedValues, localTime } from '@naturalcycles/js-lib'
-import { fs2 } from '../fs/fs2'
-import { git2 } from './git2'
+import { fs2 } from '../fs/fs2.js'
+import { git2 } from './git2.js'
 
 export interface GenerateBuildInfoOptions {
   /**

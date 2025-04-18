@@ -1,9 +1,9 @@
 import { _omit } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { fs2 } from '../fs/fs2'
-import { testDir } from '../test/paths.cnst'
-import { numberSchema, objectSchema, stringSchema } from '../validation/joi/joi.shared.schemas'
-import { JWTService } from './jwt.service'
+import { fs2 } from '../fs/fs2.js'
+import { testDir } from '../test/paths.cnst.js'
+import { numberSchema, objectSchema, stringSchema } from '../validation/joi/joi.shared.schemas.js'
+import { JWTService } from './jwt.service.js'
 
 const jwtService = new JWTService({
   privateKey: fs2.readText(`${testDir}/demoPrivateKey.pem`),

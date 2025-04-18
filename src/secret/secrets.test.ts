@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import { beforeEach, test, vi } from 'vitest'
-import { secretDir } from '../test/paths.cnst'
-import { TEST_ENC_KEY } from '../test/test.cnst'
-import { secretsDecrypt } from './secrets-decrypt.util'
-import { secretsEncrypt } from './secrets-encrypt.util'
+import { secretDir } from '../test/paths.cnst.js'
+import { TEST_ENC_KEY } from '../test/test.cnst.js'
+import { secretsDecrypt } from './secrets-decrypt.util.js'
+import { secretsEncrypt } from './secrets-encrypt.util.js'
 
 beforeEach(() => {
   vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {})

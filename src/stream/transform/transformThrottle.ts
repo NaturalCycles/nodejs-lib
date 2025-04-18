@@ -6,7 +6,7 @@ import type {
   UnixTimestampMillis,
 } from '@naturalcycles/js-lib'
 import { _ms, _since, localTime, pDefer } from '@naturalcycles/js-lib'
-import type { TransformTyped } from '../stream.model'
+import type { TransformTyped } from '../stream.model.js'
 
 export interface TransformThrottleOptions {
   /**

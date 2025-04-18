@@ -1,9 +1,9 @@
 import { Readable } from 'node:stream'
 import { _range, AppError, ErrorMode, pTry } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _pipeline } from '../pipeline/pipeline'
-import { writableVoid } from '../writable/writableVoid'
-import { transformMapSimple } from './transformMapSimple'
+import { _pipeline } from '../pipeline/pipeline.js'
+import { writableVoid } from '../writable/writableVoid.js'
+import { transformMapSimple } from './transformMapSimple.js'
 
 test('transformMapSimple', async () => {
   const data = _range(1, 4).map(String)

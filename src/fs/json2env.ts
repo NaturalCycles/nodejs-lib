@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import type { AnyObject } from '@naturalcycles/js-lib'
-import { dimGrey } from '../colors/colors'
-import { fs2 } from './fs2'
+import { dimGrey } from '../colors/colors.js'
+import { fs2 } from './fs2.js'
 
 export interface Json2EnvOptions {
   jsonPath: string

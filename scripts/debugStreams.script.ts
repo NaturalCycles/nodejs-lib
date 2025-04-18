@@ -17,7 +17,7 @@ import {
   transformMap,
   transformSplit,
   writableVoid,
-} from '../src'
+} from '../src/index.js'
 
 /* eslint-disable */
 

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import type { Base64String, StringMap } from '@naturalcycles/js-lib'
 import { _assert, _jsonParseIfPossible } from '@naturalcycles/js-lib'
-import { decryptObject, decryptRandomIVBuffer } from './crypto.util'
+import { decryptObject, decryptRandomIVBuffer } from './crypto.util.js'
 
 let loaded = false
 
@@ -14,7 +14,7 @@ const secretMap: StringMap = {}
  * Does NOT delete previous secrets from secretMap.
  */
 export function loadSecretsFromEnv(): void {
-  require('dotenv').config() // ensure .env is loaded
+  // require('dotenv').config() // ensure .env is loaded
 
   const secrets: StringMap = {}
   Object.keys(process.env)

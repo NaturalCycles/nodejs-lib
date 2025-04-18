@@ -16,11 +16,11 @@ import {
   pFilter,
   SKIP,
 } from '@naturalcycles/js-lib'
-import through2Concurrent = require('through2-concurrent')
-import { yellow } from '../../colors/colors'
-import type { AbortableTransform } from '../pipeline/pipeline'
-import type { TransformTyped } from '../stream.model'
-import { pipelineClose } from '../stream.util'
+import through2Concurrent from 'through2-concurrent'
+import { yellow } from '../../colors/colors.js'
+import type { AbortableTransform } from '../pipeline/pipeline.js'
+import type { TransformTyped } from '../stream.model.js'
+import { pipelineClose } from '../stream.util.js'
 
 export interface TransformMapOptions<IN = any, OUT = IN> {
   /**

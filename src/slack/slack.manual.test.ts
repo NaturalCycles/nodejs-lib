@@ -1,7 +1,7 @@
+import 'dotenv/config'
 import { test } from 'vitest'
-import { requireEnvKeys } from '../index'
-import { SlackService } from './slack.service'
-require('dotenv').config()
+import { requireEnvKeys } from '../index.js'
+import { SlackService } from './slack.service.js'
 
 const { SLACK_WEBHOOK_URL } = requireEnvKeys('SLACK_WEBHOOK_URL')
 

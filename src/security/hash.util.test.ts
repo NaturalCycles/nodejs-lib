@@ -9,7 +9,7 @@ import {
   sha256,
   sha256AsBuffer,
   stringToBase64,
-} from './hash.util'
+} from './hash.util.js'
 
 test('md5', () => {
   const plain = 'hello!@#123'

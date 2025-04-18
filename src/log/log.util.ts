@@ -1,5 +1,5 @@
 import { commonLoggerCreate } from '@naturalcycles/js-lib'
-import { _inspect } from '../index'
+import { _inspect } from '../index.js'
 
 /**
  * CommonLogger that logs to process.stdout directly (bypassing console.log).

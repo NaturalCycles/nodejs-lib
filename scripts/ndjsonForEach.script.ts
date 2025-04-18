@@ -4,9 +4,9 @@ yarn tsx scripts/ndjsonForEach.script
 
  */
 
-import { ndjsonStreamForEach } from '../src'
-import { runScript } from '../src/script/runScript'
-import { tmpDir } from '../src/test/paths.cnst'
+import { ndjsonStreamForEach } from '../src/index.js'
+import { runScript } from '../src/script/runScript.js'
+import { tmpDir } from '../src/test/paths.cnst.js'
 
 runScript(async () => {
   // File needs to be created first, see ndjsonMap.script.ts

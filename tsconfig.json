@@ -2,8 +2,7 @@
   "extends": "@naturalcycles/dev-lib/cfg/tsconfig.json",
   "compilerOptions": {
     // "erasableSyntaxOnly": true,
-    // "esModuleInterop": false, // todo
-    // "allowSyntheticDefaultImports": false, // todo
+    "verbatimModuleSyntax": true,
   },
   "include": ["src"],
   "exclude": ["**/__exclude"],

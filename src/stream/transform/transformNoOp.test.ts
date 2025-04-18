@@ -1,10 +1,10 @@
 import { Readable } from 'node:stream'
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _pipeline } from '../pipeline/pipeline'
-import { writableVoid } from '../writable/writableVoid'
-import { transformMapSimple } from './transformMapSimple'
-import { transformNoOp } from './transformNoOp'
+import { _pipeline } from '../pipeline/pipeline.js'
+import { writableVoid } from '../writable/writableVoid.js'
+import { transformMapSimple } from './transformMapSimple.js'
+import { transformNoOp } from './transformNoOp.js'
 
 test('transformNoOp', async () => {
   const data = _range(1, 4).map(String)

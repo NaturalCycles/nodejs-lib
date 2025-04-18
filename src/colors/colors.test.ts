@@ -1,5 +1,5 @@
 import { test } from 'vitest'
-import { grey, hasColors } from './colors'
+import { grey, hasColors } from './colors.js'
 
 test('colors', () => {
   console.log(grey('sdf'))

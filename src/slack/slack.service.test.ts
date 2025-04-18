@@ -1,7 +1,7 @@
-import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
+import { mockTime } from '@naturalcycles/dev-lib/dist/testing/time.js'
 import { _stringify, commonLoggerNoop, Fetcher, pExpectedError } from '@naturalcycles/js-lib'
 import { beforeEach, expect, test, vi } from 'vitest'
-import { slackDefaultMessagePrefixHook, SlackService } from './slack.service'
+import { slackDefaultMessagePrefixHook, SlackService } from './slack.service.js'
 
 let slackService = new SlackService({
   webhookUrl: 'https://dummyhook.com',

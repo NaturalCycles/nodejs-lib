@@ -1,7 +1,7 @@
 import { _noop, _stringify, pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import { expect, test, vi } from 'vitest'
-import { inspectStringifyFn } from '../string/inspect'
-import { runScript } from './runScript'
+import { inspectStringifyFn } from '../string/inspect.js'
+import { runScript } from './runScript.js'
 
 const detectLeaks = process.argv.some(a => a.includes('detectLeaks'))
 

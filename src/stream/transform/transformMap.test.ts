@@ -1,16 +1,16 @@
 import { Readable } from 'node:stream'
-import { mockTime } from '@naturalcycles/dev-lib/dist/testing'
+import { mockTime } from '@naturalcycles/dev-lib/dist/testing/time.js'
 import type { AsyncMapper } from '@naturalcycles/js-lib'
 import { _range, _stringify, ErrorMode, pExpectedError } from '@naturalcycles/js-lib'
 import { beforeAll, expect, test } from 'vitest'
-import type { TransformMapStats } from '../../index'
+import type { TransformMapStats } from '../../index.js'
 import {
   _pipeline,
   _pipelineToArray,
   readableFromArray,
   transformMap,
   transformMapStatsSummary,
-} from '../../index'
+} from '../../index.js'
 
 beforeAll(() => {
   mockTime()

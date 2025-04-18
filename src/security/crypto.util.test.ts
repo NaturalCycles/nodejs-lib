@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { TEST_ENC_KEY } from '../test/test.cnst'
+import { TEST_ENC_KEY } from '../test/test.cnst.js'
 import {
   decryptObject,
   decryptRandomIVBuffer,
@@ -8,7 +8,7 @@ import {
   encryptRandomIVBuffer,
   encryptString,
   timingSafeStringEqual,
-} from './crypto.util'
+} from './crypto.util.js'
 
 const encKeyBuffer = Buffer.from(TEST_ENC_KEY, 'base64')
 

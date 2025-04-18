@@ -4,23 +4,14 @@ yarn tsx scripts/colors.script.ts
 
  */
 
-import type { Color, Modifiers } from 'chalk'
+import type { ColorName, ModifierName } from 'chalk'
 import chalk from 'chalk'
-import { runScript } from '../src/script/runScript'
+import { runScript } from '../src/script/runScript.js'
 
 const s = 'Hello World! 1 2 3 4 5ms'
 
-const colors: (typeof Color)[] = [
-  'white',
-  'grey',
-  'yellow',
-  'green',
-  'red',
-  'blue',
-  'magenta',
-  'cyan',
-]
-const modifiers: (typeof Modifiers)[] = ['dim', null as any, 'bold', 'inverse']
+const colors: ColorName[] = ['white', 'grey', 'yellow', 'green', 'red', 'blue', 'magenta', 'cyan']
+const modifiers: ModifierName[] = ['dim', null as any, 'bold', 'inverse']
 
 runScript(async () => {
   colors.forEach(color => {

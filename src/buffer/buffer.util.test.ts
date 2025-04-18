@@ -1,6 +1,6 @@
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _chunkBuffer } from './buffer.util'
+import { _chunkBuffer } from './buffer.util.js'
 
 test('_chunkBuffer', () => {
   const buf = Buffer.from(_range(1, 11))

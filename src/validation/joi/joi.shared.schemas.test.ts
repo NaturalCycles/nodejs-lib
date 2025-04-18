@@ -1,7 +1,7 @@
 import type { BaseDBEntity, IsoDateTime } from '@naturalcycles/js-lib'
 import { localTime } from '@naturalcycles/js-lib'
 import { describe, expect, expectTypeOf, test } from 'vitest'
-import { testValidation } from '../../test/validation.test.util'
+import { testValidation } from '../../test/validation.test.util.js'
 import {
   baseDBEntitySchema,
   binarySchema,
@@ -25,8 +25,8 @@ import {
   stringSchemaTyped,
   urlSchema,
   uuidSchema,
-} from './joi.shared.schemas'
-import { isValid, validate } from './joi.validation.util'
+} from './joi.shared.schemas.js'
+import { isValid, validate } from './joi.validation.util.js'
 
 test('semVerSchema', () => {
   testValidation(

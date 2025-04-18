@@ -1,8 +1,8 @@
-import { mockAllKindsOfThings } from '@naturalcycles/dev-lib/dist/testing'
+import { mockAllKindsOfThings } from '@naturalcycles/dev-lib/dist/testing/mockAllKindsOfThings.js'
 import { _range } from '@naturalcycles/js-lib'
 import type { Assertion } from 'vitest'
 import { expect, test } from 'vitest'
-import { _inspect } from '../index'
+import { _inspect } from '../index.js'
 
 test('_inspect', () => {
   expectResults(v => _inspect(v), mockAllKindsOfThings()).toMatchSnapshot()

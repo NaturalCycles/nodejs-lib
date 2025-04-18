@@ -4,8 +4,8 @@ yarn tsx scripts/exec2.script.ts
 
  */
 
-import { runScript } from '../src'
-import { exec2 } from '../src/util/exec2'
+import { runScript } from '../src/index.js'
+import { exec2 } from '../src/util/exec2.js'
 
 runScript(async () => {
   await exec2.spawnAsync('node', {

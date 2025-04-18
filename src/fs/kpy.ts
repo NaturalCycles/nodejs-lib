@@ -1,8 +1,8 @@
 import path from 'node:path'
 import type { UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { _since, localTime } from '@naturalcycles/js-lib'
-import { boldWhite, dimGrey, grey, yellow } from '../colors/colors'
-import { fastGlob, fs2 } from '../index'
+import { boldWhite, dimGrey, grey, yellow } from '../colors/colors.js'
+import { fastGlob, fs2 } from '../index.js'
 
 /**
  * Everything defaults to `undefined`.

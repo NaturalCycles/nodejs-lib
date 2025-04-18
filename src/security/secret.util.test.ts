@@ -16,7 +16,7 @@ import {
   secretsJsonEncPath,
   secretsJsonPath,
   TEST_ENC_KEY,
-} from '../test/test.cnst'
+} from '../test/test.cnst.js'
 // order is important, secret.util should be loaded after the mocks
 import {
   getSecretMap,
@@ -26,7 +26,7 @@ import {
   secret,
   secretOptional,
   setSecretMap,
-} from './secret.util'
+} from './secret.util.js'
 
 test('secret', async () => {
   expect(() => secret('SECRET_A')).toThrow('not loaded')

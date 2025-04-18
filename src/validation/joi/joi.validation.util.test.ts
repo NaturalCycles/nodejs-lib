@@ -1,8 +1,8 @@
 import type { AnyObject } from '@naturalcycles/js-lib'
 import { _stringify } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { testValidation } from '../../test/validation.test.util'
-import { Joi } from './joi.extensions'
+import { testValidation } from '../../test/validation.test.util.js'
+import { Joi } from './joi.extensions.js'
 import {
   arraySchema,
   booleanDefaultToFalseSchema,
@@ -12,15 +12,15 @@ import {
   numberSchema,
   objectSchema,
   stringSchema,
-} from './joi.shared.schemas'
-import { JoiValidationError } from './joi.validation.error'
+} from './joi.shared.schemas.js'
+import { JoiValidationError } from './joi.validation.error.js'
 import {
   convert,
   getValidationResult,
   isValid,
   undefinedIfInvalid,
   validate,
-} from './joi.validation.util'
+} from './joi.validation.util.js'
 
 class Obj1 {
   a1!: string

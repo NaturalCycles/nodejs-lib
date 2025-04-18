@@ -1,6 +1,6 @@
 import { _Memo } from '@naturalcycles/js-lib'
 import { expect, test, vi } from 'vitest'
-import { LRUMemoCache } from './lruMemoCache'
+import { LRUMemoCache } from './lruMemoCache.js'
 
 class A {
   func(n: number): void {

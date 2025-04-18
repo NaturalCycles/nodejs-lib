@@ -1,4 +1,4 @@
-import { testDir } from './paths.cnst'
+import { testDir } from './paths.cnst.js'
 
 // ./secret/*.enc are encrypted with this. To test decryption
 export const TEST_ENC_KEY =

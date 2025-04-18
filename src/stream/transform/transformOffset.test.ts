@@ -1,8 +1,8 @@
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { readableFrom } from '../..'
-import { _pipelineToArray } from '../pipeline/pipeline'
-import { transformOffset } from './transformOffset'
+import { readableFrom } from '../../index.js'
+import { _pipelineToArray } from '../pipeline/pipeline.js'
+import { transformOffset } from './transformOffset.js'
 
 test('transformOffset', async () => {
   const data = _range(1, 30).map(n => ({ id: String(n) }))

@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs'
-import { dimGrey } from '../colors/colors'
-import { runScript } from '../script/runScript'
-import type { DecryptCLIOptions } from '../secret/secrets-decrypt.util'
-import { secretsDecrypt } from '../secret/secrets-decrypt.util'
+import 'dotenv/config'
+import { dimGrey } from '../colors/colors.js'
+import { runScript } from '../script/runScript.js'
+import type { DecryptCLIOptions } from '../secret/secrets-decrypt.util.js'
+import { secretsDecrypt } from '../secret/secrets-decrypt.util.js'
+import { _yargs } from '../yargs.util.js'
 
 runScript(() => {
   const { dir, file, encKeyBuffer, del, jsonMode } = getDecryptCLIOptions()
@@ -13,9 +14,7 @@ runScript(() => {
 })
 
 function getDecryptCLIOptions(): DecryptCLIOptions {
-  require('dotenv').config()
-
-  let { dir, file, encKey, encKeyVar, del, jsonMode } = yargs.options({
+  let { dir, file, encKey, encKeyVar, del, jsonMode } = _yargs().options({
     dir: {
       type: 'array',
       desc: 'Directory with secrets. Can be many',

@@ -1,5 +1,6 @@
 {
   "name": "@naturalcycles/nodejs-lib",
+  "type": "module",
   "version": "12.47.1",
   "scripts": {
     "prepare": "husky",
@@ -27,7 +28,7 @@
     "ajv": "^8",
     "ajv-formats": "^3",
     "ajv-keywords": "^5",
-    "chalk": "^4",
+    "chalk": "^5",
     "dotenv": "^16",
     "fast-glob": "^3",
     "joi": "^17",
@@ -38,8 +39,8 @@
     "yargs": "^17"
   },
   "devDependencies": {
-    "@naturalcycles/bench-lib": "^3",
-    "@naturalcycles/dev-lib": "^17",
+    "@naturalcycles/bench-lib": "^4",
+    "@naturalcycles/dev-lib": "^18",
     "@types/node": "^22",
     "@types/through2-concurrent": "^2",
     "@vitest/coverage-v8": "^3",

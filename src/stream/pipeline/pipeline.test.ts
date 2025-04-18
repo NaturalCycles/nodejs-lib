@@ -1,10 +1,10 @@
 import { _range, createAbortableSignal, pExpectedErrorString } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { readableFromArray } from '../readable/readableFromArray'
-import { transformTap } from '../transform/transformTap'
-import { writablePushToArray } from '../writable/writablePushToArray'
-import type { PipelineOptions } from './pipeline'
-import { _pipeline } from './pipeline'
+import { readableFromArray } from '../readable/readableFromArray.js'
+import { transformTap } from '../transform/transformTap.js'
+import { writablePushToArray } from '../writable/writablePushToArray.js'
+import type { PipelineOptions } from './pipeline.js'
+import { _pipeline } from './pipeline.js'
 
 test('abort pipeline with AbortSignal', async () => {
   const data = _range(1, 50).map(n => ({ id: String(n) }))

@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { bufferReviver } from './transformJsonParse'
+import { bufferReviver } from './transformJsonParse.js'
 
 test.todo('transformJsonParse')
 

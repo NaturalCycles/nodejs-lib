@@ -2,9 +2,9 @@ import type { InspectOptions } from 'node:util'
 import { inspect } from 'node:util'
 import type { AnyObject, CommonLogger, UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { _mb, _since, localTime, SimpleMovingAverage } from '@naturalcycles/js-lib'
-import { boldWhite, dimGrey, hasColors, white, yellow } from '../colors/colors'
-import { SizeStack } from './sizeStack'
-import type { ReadableMapper } from './stream.model'
+import { boldWhite, dimGrey, hasColors, white, yellow } from '../colors/colors.js'
+import { SizeStack } from './sizeStack.js'
+import type { ReadableMapper } from './stream.model.js'
 
 export interface ProgressLoggerCfg<T = any> {
   /**

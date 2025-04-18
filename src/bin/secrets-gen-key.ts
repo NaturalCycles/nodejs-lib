@@ -2,8 +2,8 @@
 
 import { randomBytes } from 'node:crypto'
 import yargs from 'yargs'
-import { dimGrey } from '../colors/colors'
-import { runScript } from '../script/runScript'
+import { dimGrey } from '../colors/colors.js'
+import { runScript } from '../script/runScript.js'
 
 runScript(() => {
   const { sizeBytes } = yargs.option('sizeBytes', {

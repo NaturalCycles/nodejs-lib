@@ -5,11 +5,10 @@ import {
   _substringBefore,
   JsonSchemaAnyBuilder,
 } from '@naturalcycles/js-lib'
-import type { ValidateFunction } from 'ajv'
-import type Ajv from 'ajv'
-import { _inspect, fs2, requireFileToExist } from '../../index'
-import { AjvValidationError } from './ajvValidationError'
-import { getAjv } from './getAjv'
+import type { Ajv, ValidateFunction } from 'ajv'
+import { _inspect, fs2, requireFileToExist } from '../../index.js'
+import { AjvValidationError } from './ajvValidationError.js'
+import { getAjv } from './getAjv.js'
 
 export interface AjvValidationOptions {
   objectName?: string

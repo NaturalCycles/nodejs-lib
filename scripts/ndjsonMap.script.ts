@@ -6,9 +6,9 @@ yarn tsx scripts/ndjsonMap.script
 
 import fs, { createWriteStream } from 'node:fs'
 import { _range } from '@naturalcycles/js-lib'
-import { _pipeline, ndjsonMap, readableFromArray, transformToNDJson } from '../src'
-import { runScript } from '../src/script/runScript'
-import { tmpDir } from '../src/test/paths.cnst'
+import { _pipeline, ndjsonMap, readableFromArray, transformToNDJson } from '../src/index.js'
+import { runScript } from '../src/script/runScript.js'
+import { tmpDir } from '../src/test/paths.cnst.js'
 
 runScript(async () => {
   const inputFilePath = `${tmpDir}/ndjsonMapIn.ndjson`

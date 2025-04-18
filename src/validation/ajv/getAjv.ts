@@ -1,5 +1,7 @@
 import type { Options } from 'ajv'
-import Ajv from 'ajv'
+import { Ajv } from 'ajv'
+import ajvFormats from 'ajv-formats'
+import ajvKeywords from 'ajv-keywords'
 
 const AJV_OPTIONS: Options = {
   removeAdditional: true,
@@ -27,10 +29,12 @@ export function getAjv(opt?: Options): Ajv {
 
   // Adds ajv "formats"
   // https://ajv.js.org/guide/formats.html
-  require('ajv-formats')(ajv)
+  // @ts-expect-error types are wrong
+  ajvFormats(ajv)
 
   // https://ajv.js.org/packages/ajv-keywords.html
-  require('ajv-keywords')(ajv, [
+  // @ts-expect-error types are wrong
+  ajvKeywords(ajv, [
     'transform', // trim, toLowerCase, etc.
     'uniqueItemProperties',
     'instanceof',

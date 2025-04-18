@@ -5,8 +5,8 @@ yarn tsx scripts/bench/id.bench
  */
 
 import { runBenchScript } from '@naturalcycles/bench-lib'
-import { stringId, stringIdBase62 } from '../../src'
-import { nanoid } from '../../src/security/nanoid'
+import { stringId, stringIdBase62 } from '../../src/index.js'
+import { nanoid } from '../../src/security/nanoid.js'
 
 runBenchScript({
   fns: {

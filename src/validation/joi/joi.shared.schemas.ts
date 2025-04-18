@@ -14,9 +14,9 @@ import {
   _stringEnumValues,
 } from '@naturalcycles/js-lib'
 import type { AlternativesSchema, AnySchema, ArraySchema, ObjectSchema } from 'joi'
-import { Joi } from './joi.extensions'
-import type { NumberSchema } from './number.extensions'
-import type { StringSchema } from './string.extensions'
+import { Joi } from './joi.extensions.js'
+import type { NumberSchema } from './number.extensions.js'
+import type { StringSchema } from './string.extensions.js'
 
 export const booleanSchema = Joi.boolean()
 export const booleanDefaultToFalseSchema = Joi.boolean().default(false)

@@ -4,7 +4,7 @@ import {
   ALPHABET_ALPHANUMERIC_LOWERCASE,
   ALPHABET_NONAMBIGUOUS,
   nanoIdCustomAlphabet,
-} from './nanoid'
+} from './nanoid.js'
 
 /**
  * Generate cryptographically-secure string id.

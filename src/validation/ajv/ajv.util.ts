@@ -1,8 +1,8 @@
 import type { JsonSchema } from '@naturalcycles/js-lib'
-import type { FastGlobOptions } from '../..'
-import { fastGlob, fs2 } from '../..'
-import type { AjvSchemaCfg } from './ajvSchema'
-import { AjvSchema } from './ajvSchema'
+import type { FastGlobOptions } from '../../index.js'
+import { fastGlob, fs2 } from '../../index.js'
+import type { AjvSchemaCfg } from './ajvSchema.js'
+import { AjvSchema } from './ajvSchema.js'
 
 /**
  * Does fs.readFileSync + JSON.parse for ALL files matching the passed `glob` pattern.

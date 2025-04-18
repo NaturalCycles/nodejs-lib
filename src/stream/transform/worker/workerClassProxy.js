@@ -1,6 +1,6 @@
 const started = Date.now()
-const { workerData, parentPort } = require('node:worker_threads')
-const { inspect } = require('node:util')
+import { workerData, parentPort } from 'node:worker_threads'
+import { inspect } from 'node:util'
 const { workerFile, workerIndex, logEvery = 1000, metric = 'worker' } = workerData || {}
 
 if (!workerFile) {
@@ -12,11 +12,13 @@ if (!workerFile) {
 try {
   // require('esbuild-register') // alternative
   // require('ts-node/register/transpile-only')
-  require('tsx/cjs/api').register() // https://tsx.is/dev-api/register-cjs
+  // require('tsx/cjs/api').register() // https://tsx.is/dev-api/register-cjs
+  const { register } = await import('tsx/esm/api')
+  register() // https://tsx.is/dev-api/register-esm
   // require('tsconfig-paths/register')
 } catch {} // require if exists
 
-const { WorkerClass } = require(workerFile)
+const { WorkerClass } = await import(workerFile)
 const worker = new WorkerClass(workerData)
 
 console.log(`${metric}#${workerIndex} loaded in ${Date.now() - started} ms`)

@@ -1,4 +1,4 @@
-import type { ReadableTyped } from '../stream.model'
+import type { ReadableTyped } from '../stream.model.js'
 
 /**
  * Convenience function to read the whole Readable stream into Array (in-memory)

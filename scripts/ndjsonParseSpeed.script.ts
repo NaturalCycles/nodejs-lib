@@ -11,7 +11,7 @@ import {
   runScript,
   transformLogProgress,
   transformMap,
-} from '../src'
+} from '../src/index.js'
 
 const { SNAPSHOTS_DIR, SNAPSHOT_ID } = requireEnvKeys('SNAPSHOTS_DIR', 'SNAPSHOT_ID')
 

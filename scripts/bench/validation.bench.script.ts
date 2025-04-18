@@ -16,7 +16,7 @@ import {
   runScript,
   stringSchema,
   validate,
-} from '../../src'
+} from '../../src/index.js'
 
 interface Item {
   s: string

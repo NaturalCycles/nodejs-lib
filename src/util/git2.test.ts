@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { git2 } from './git2'
+import { git2 } from './git2.js'
 
 test('getLastGitCommitMsg', async () => {
   const msg = git2.getLastGitCommitMsg()

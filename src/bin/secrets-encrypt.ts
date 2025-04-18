@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs'
-import { dimGrey } from '../colors/colors'
-import { runScript } from '../script/runScript'
-import type { EncryptCLIOptions } from '../secret/secrets-encrypt.util'
-import { secretsEncrypt } from '../secret/secrets-encrypt.util'
+import 'dotenv/config'
+import { dimGrey } from '../colors/colors.js'
+import { runScript } from '../script/runScript.js'
+import type { EncryptCLIOptions } from '../secret/secrets-encrypt.util.js'
+import { secretsEncrypt } from '../secret/secrets-encrypt.util.js'
+import { _yargs } from '../yargs.util.js'
 
 runScript(() => {
   const { pattern, file, encKeyBuffer, del, jsonMode } = getEncryptCLIOptions()
@@ -13,9 +14,7 @@ runScript(() => {
 })
 
 function getEncryptCLIOptions(): EncryptCLIOptions {
-  require('dotenv').config()
-
-  let { pattern, file, encKey, encKeyVar, del, jsonMode } = yargs.options({
+  let { pattern, file, encKey, encKeyVar, del, jsonMode } = _yargs().options({
     pattern: {
       type: 'string',
       array: true,

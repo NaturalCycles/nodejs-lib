@@ -13,7 +13,7 @@ import {
   stringIdBase64Url,
   stringIdNonAmbiguous,
   validate,
-} from '../index'
+} from '../index.js'
 
 const stringIdRegex = /^[a-z0-9]*$/
 const base62regex = /^[a-zA-Z0-9]*$/

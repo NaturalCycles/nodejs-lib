@@ -1,4 +1,5 @@
 import yargs from 'yargs'
+// @ts-expect-error yargs types disagree with runtime
 import { hideBin } from 'yargs/helpers'
 
 /**

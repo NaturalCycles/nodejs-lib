@@ -1,6 +1,6 @@
 import { test } from 'vitest'
-import { testValidation } from '../../test/validation.test.util'
-import { Joi } from './joi.extensions'
+import { testValidation } from '../../test/validation.test.util.js'
+import { Joi } from './joi.extensions.js'
 
 test('dividable', () => {
   const schema = Joi.number().dividable(15)

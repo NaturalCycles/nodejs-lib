@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { generateBuildInfo } from './buildInfo.util'
+import { generateBuildInfo } from './buildInfo.util.js'
 
 test('generateBuildInfo', () => {
   let buildInfo = generateBuildInfo()

@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { _assert } from '@naturalcycles/js-lib'
-import { dimGrey, yellow } from '../colors/colors'
-import { fastGlob, fs2 } from '../index'
-import { decryptObject, decryptRandomIVBuffer } from '../security/crypto.util'
+import { dimGrey, yellow } from '../colors/colors.js'
+import { fastGlob, fs2 } from '../index.js'
+import { decryptObject, decryptRandomIVBuffer } from '../security/crypto.util.js'
 
 export interface DecryptCLIOptions {
   dir: string[]

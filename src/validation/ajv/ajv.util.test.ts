@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { testDir } from '../../test/paths.cnst'
-import { readAjvSchemas, readJsonSchemas } from './ajv.util'
+import { testDir } from '../../test/paths.cnst.js'
+import { readAjvSchemas, readJsonSchemas } from './ajv.util.js'
 
 const schemaDir = `${testDir}/schema`
 

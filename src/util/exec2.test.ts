@@ -1,6 +1,6 @@
 import { _expectedErrorString, _stringify, pExpectedError } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { exec2, SpawnError } from './exec2'
+import { exec2, SpawnError } from './exec2.js'
 
 test('spawn ok', () => {
   exec2.spawn('git status')

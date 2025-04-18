@@ -1,8 +1,8 @@
 import { _range } from '@naturalcycles/js-lib'
 import { expect, test } from 'vitest'
-import { _pipelineToArray, readableFromArray } from '../../..'
-import { testDir } from '../../../test/paths.cnst'
-import { transformMultiThreaded } from './transformMultiThreaded'
+import { _pipelineToArray, readableFromArray } from '../../../index.js'
+import { testDir } from '../../../test/paths.cnst.js'
+import { transformMultiThreaded } from './transformMultiThreaded.js'
 
 test('transformMultiThreaded', async () => {
   const items = _range(1, 12).map(i => ({ id: i }))
