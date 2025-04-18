@@ -728,27 +728,27 @@
     "@tybys/wasm-util" "^0.9.0"
 
 "@naturalcycles/bench-lib@^4":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/bench-lib/-/bench-lib-4.0.0.tgz#abbfe1a3f1086962da1c4b0be8fec1137a6992bc"
-  integrity sha512-aLl2ir6prVE9XYuewLwFp0pr+SuHnITBvK6+0fyZQisz4/rwwnQKHEjrnc3kM+eUItFMhA4yia11m7VzQo81ig==
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/bench-lib/-/bench-lib-4.0.1.tgz#928f02a398c21bf4d9d87e2570a08f41d9d04a15"
+  integrity sha512-Yo8ME0mgnaHA8rMrJHmcvEhJTNF0x2ZouUlN3eRT7bJK3ce+10qscYb4txeRi4OGvKyqPT3r2gq8xP8YpghFYQ==
   dependencies:
-    "@naturalcycles/js-lib" "^14"
-    "@naturalcycles/nodejs-lib" "^13"
+    "@naturalcycles/js-lib" "^15"
+    "@naturalcycles/nodejs-lib" "^14"
     autocannon "^8"
     benchmark "^2"
 
 "@naturalcycles/dev-lib@^18":
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-18.0.0.tgz#ba4843abb02c691de8e4a0f2530ab8775075e21e"
-  integrity sha512-QzQU51MdXI/T060p0r/KjSQCJntH0ODz86YZ/snk2TYjSCeQMgcYWn58ebpHQpDt2uIH8Z7ItjFTjhObAB/F9A==
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/dev-lib/-/dev-lib-18.0.1.tgz#efa781525e11bc71ffac71d58c51a3c8fca5a963"
+  integrity sha512-RzAbdaZpTpNsTwrWbXjRD4yxKAw0+16+XYjkzaoopq/AsBagVgU7Re+14zfd5drhScY+GNCPANGEzXa6ccLCwA==
   dependencies:
     "@biomejs/biome" "^1"
     "@commitlint/cli" "^19"
     "@commitlint/config-conventional" "^19"
     "@eslint/js" "^9"
     "@inquirer/prompts" "^7"
-    "@naturalcycles/js-lib" "^14"
-    "@naturalcycles/nodejs-lib" "^13"
+    "@naturalcycles/js-lib" "^15"
+    "@naturalcycles/nodejs-lib" "^14"
     "@stylistic/eslint-plugin" "^4"
     "@types/node" "^22"
     eslint "^9"
@@ -776,10 +776,18 @@
     tslib "^2"
     zod "^3"
 
-"@naturalcycles/nodejs-lib@^13":
-  version "13.45.4"
-  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-13.45.4.tgz#c323db2e194ff9dc04b2b7042a8a4ade2aafe40b"
-  integrity sha512-WGTrqLIYWknn3HFsoae9loD9pEgRLmVqVL/nQBmMEGgl6GhXYRc4dNvTilv1G8LpsdL/Jr6rr920/FCe/KQz0A==
+"@naturalcycles/js-lib@^15":
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/js-lib/-/js-lib-15.0.0.tgz#bdd0e3177d0808f5f40373f5516a8c29bbb50028"
+  integrity sha512-98i9nNyXn3M6fUtJFxI+mqvOUg6Z0fm9klzwkFlZzYGFLp5Hrf1lNNrEIz6G87f7bOuNkb7a/IGO2ipgzx+jrw==
+  dependencies:
+    tslib "^2"
+    zod "^3"
+
+"@naturalcycles/nodejs-lib@^14":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@naturalcycles/nodejs-lib/-/nodejs-lib-14.0.0.tgz#99ab6c5a2f07f9b0a07285bc1ac0848a267b5cf1"
+  integrity sha512-EV/5aNpqozBuhoI4RMo57c9b5EQA2nHAcs0jOY+x0ZA2FZED0Df3/p5UE18oLt0VLfT5P0yFC3fpFmF3BMUY8A==
   dependencies:
     "@naturalcycles/js-lib" "^14"
     "@types/js-yaml" "^4"
@@ -788,7 +796,7 @@
     ajv "^8"
     ajv-formats "^3"
     ajv-keywords "^5"
-    chalk "^4"
+    chalk "^5"
     dotenv "^16"
     fast-glob "^3"
     joi "^17"
@@ -1537,7 +1545,7 @@ chai@^5.2.0:
     loupe "^3.1.0"
     pathval "^2.0.0"
 
-chalk@^4, chalk@^4.0.0, chalk@^4.1.0:
+chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
