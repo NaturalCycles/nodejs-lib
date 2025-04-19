@@ -22,10 +22,10 @@ const base64urlRegex = /^[a-zA-Z0-9-_]*$/
 
 test('stringId', () => {
   const id = stringId()
-  expect(id.length).toBe(16)
+  expect(id).toHaveLength(16)
   expect(id.toLowerCase()).toBe(id)
 
-  expect(stringId(32).length).toBe(32)
+  expect(stringId(32)).toHaveLength(32)
 
   _range(100).forEach(() => {
     expect(stringId()).toMatch(stringIdRegex)
@@ -34,7 +34,7 @@ test('stringId', () => {
 
 test('stringIdBase62', () => {
   const id = stringIdBase62()
-  expect(id.length).toBe(16)
+  expect(id).toHaveLength(16)
   expect(id).not.toContain('=')
   expect(id).not.toContain('-')
   expect(id).not.toContain('_')
@@ -51,10 +51,10 @@ test('stringIdBase62', () => {
 
 test('stringIdBase64', () => {
   const id = stringIdBase64()
-  expect(id.length).toBe(16) // default
+  expect(id).toHaveLength(16) // default
 
   const id2 = stringIdBase64Url()
-  expect(id2.length).toBe(16) // default
+  expect(id2).toHaveLength(16) // default
 
   const lengths = [4, 8, 12, 16, 32]
 
@@ -62,7 +62,7 @@ test('stringIdBase64', () => {
     _range(100).forEach(() => {
       const id = stringIdBase64(len)
       // console.log(id, id.length)
-      expect(id.length).toBe(len)
+      expect(id).toHaveLength(len)
       expect(id).toMatch(base64regex)
       validate(id, base64Schema)
       if (len >= 8) {
@@ -71,7 +71,7 @@ test('stringIdBase64', () => {
 
       const id2 = stringIdBase64Url(len)
       // console.log(id2, id2.length)
-      expect(id2.length).toBe(len)
+      expect(id2).toHaveLength(len)
       expect(id2).toMatch(base64urlRegex)
       validate(id2, base64UrlSchema)
 
@@ -97,7 +97,7 @@ test('stringIdBase64Url should have no padding', () => {
 describe('stringIdNonAmbiguous', () => {
   test('default size', () => {
     const id = stringIdNonAmbiguous()
-    expect(id.length).toBe(16)
+    expect(id).toHaveLength(16)
     expect(id).not.toContain('0')
     expect(id).not.toContain('O')
     expect(id).not.toContain('I')
@@ -106,7 +106,7 @@ describe('stringIdNonAmbiguous', () => {
 
   test('custom size', () => {
     const id = stringIdNonAmbiguous(100)
-    expect(id.length).toBe(100)
+    expect(id).toHaveLength(100)
     expect(id).not.toContain('0')
     expect(id).not.toContain('O')
     expect(id).not.toContain('1')

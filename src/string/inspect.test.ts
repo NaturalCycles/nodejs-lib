@@ -14,5 +14,6 @@ test('_inspect maxLen', () => {
 })
 
 function expectResults(fn: (...args: any[]) => any, values: any[]): Assertion {
+  // eslint-disable-next-line vitest/valid-expect
   return expect(new Map(values.map(v => [v, fn(v)])))
 }

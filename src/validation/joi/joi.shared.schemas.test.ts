@@ -26,6 +26,7 @@ import {
   urlSchema,
   uuidSchema,
 } from './joi.shared.schemas.js'
+import { JoiValidationError } from './joi.validation.error.js'
 import { isValid, validate } from './joi.validation.util.js'
 
 test('semVerSchema', () => {
@@ -40,10 +41,10 @@ test('urlSchema', () => {
   const schema = urlSchema()
   const schemaAllowHttp = urlSchema(['https', 'http'])
 
-  expect(() => validate('abc', schema)).toThrow()
+  expect(() => validate('abc', schema)).toThrow(JoiValidationError)
 
   validate('https://example.com', schema)
-  expect(() => validate('http://example.com', schema)).toThrow()
+  expect(() => validate('http://example.com', schema)).toThrow(JoiValidationError)
 
   validate('https://example.com', schemaAllowHttp)
   validate('http://example.com', schemaAllowHttp)
@@ -206,7 +207,7 @@ describe('macAddressSchema', () => {
   ]
 
   test.each(nonMacAddresses)('invalid macAddressSchema: %s', s => {
-    expect(() => validate(s, macAddressSchema)).toThrow()
+    expect(() => validate(s, macAddressSchema)).toThrow(JoiValidationError)
   })
 })
 
@@ -216,8 +217,12 @@ describe('uuidSchema', () => {
   })
 
   test('invalid', () => {
-    expect(() => validate('123e4567-e89b-12d3-a456-4266141740000', uuidSchema)).toThrow()
-    expect(() => validate('123g4567-e89b-12d3-a456-426614174000', uuidSchema)).toThrow()
+    expect(() => validate('123e4567-e89b-12d3-a456-4266141740000', uuidSchema)).toThrow(
+      JoiValidationError,
+    )
+    expect(() => validate('123g4567-e89b-12d3-a456-426614174000', uuidSchema)).toThrow(
+      JoiValidationError,
+    )
   })
 })
 

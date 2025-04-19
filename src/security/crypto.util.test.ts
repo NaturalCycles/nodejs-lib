@@ -13,7 +13,7 @@ import {
 const encKeyBuffer = Buffer.from(TEST_ENC_KEY, 'base64')
 
 test('testEncKeySize', () => {
-  expect(encKeyBuffer.length).toBe(256)
+  expect(encKeyBuffer).toHaveLength(256)
 })
 
 test('encryptBuffer, decryptBuffer', () => {

@@ -80,7 +80,7 @@ test('should trim strings by default', async () => {
   const v2 = validate(v, obj1Schema)
 
   expect(v2.a1).toBe('sdf')
-  expect(v === v2).toBeFalsy() // object should be cloned
+  expect(v === v2).toBe(false) // object should be cloned
 })
 
 test('should strip unknown keys', async () => {
@@ -264,9 +264,9 @@ test('should convert null to undefined and strip', () => {
   expect(validate(undefined, numberSchema.optional())).toBeUndefined()
 
   // null is invalid
-  expect(isValid(null, numberSchema.optional())).toBeFalsy()
-  expect(isValid(null, integerSchema.optional())).toBeFalsy()
-  expect(isValid(null, arraySchema().optional())).toBeFalsy()
+  expect(isValid(null, numberSchema.optional())).toBe(false)
+  expect(isValid(null, integerSchema.optional())).toBe(false)
+  expect(isValid(null, arraySchema().optional())).toBe(false)
 
   // this is how to make null valid
   const numberPermissiveSchema = numberSchema.empty(null).optional()

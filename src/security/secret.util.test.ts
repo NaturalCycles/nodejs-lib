@@ -45,7 +45,7 @@ test('secret', async () => {
   })
 
   expect(secretOptional('N')).toBeUndefined()
-  expect(() => secret('N')).toThrow()
+  expect(() => secret('N')).toThrowErrorMatchingInlineSnapshot(`[Error: secret(N) not found!]`)
   expect(secret('SECRET_A')).toBe('VALUE A')
   expect(secret('secret_a')).toBe('VALUE A')
   expect(secret('seCrEt_a')).toBe('VALUE A')
