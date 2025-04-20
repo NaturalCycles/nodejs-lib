@@ -6,7 +6,9 @@ import {
   JsonSchemaAnyBuilder,
 } from '@naturalcycles/js-lib'
 import type { Ajv, ValidateFunction } from 'ajv'
-import { _inspect, fs2, requireFileToExist } from '../../index.js'
+import { fs2 } from '../../fs/fs2.js'
+import { _inspect } from '../../string/inspect.js'
+import { requireFileToExist } from '../../util/env.util.js'
 import { AjvValidationError } from './ajvValidationError.js'
 import { getAjv } from './getAjv.js'
 

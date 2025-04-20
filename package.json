@@ -30,12 +30,12 @@
     "ajv-keywords": "^5",
     "chalk": "^5",
     "dotenv": "^16",
-    "fast-glob": "^3",
     "joi": "^17",
     "js-yaml": "^4",
     "jsonwebtoken": "^9",
     "lru-cache": "^11",
     "through2-concurrent": "^2",
+    "tinyglobby": "^0.2",
     "yargs": "^17"
   },
   "devDependencies": {

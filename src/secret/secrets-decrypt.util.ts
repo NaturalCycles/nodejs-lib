@@ -1,8 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { _assert } from '@naturalcycles/js-lib'
+import { globSync } from 'tinyglobby'
 import { dimGrey, yellow } from '../colors/colors.js'
-import { fastGlob, fs2 } from '../index.js'
+import { fs2 } from '../fs/fs2.js'
 import { decryptObject, decryptRandomIVBuffer } from '../security/crypto.util.js'
 
 export interface DecryptCLIOptions {
@@ -34,7 +35,7 @@ export function secretsDecrypt(
   // If `file` is provided - only this one file is used
   const patterns = file ? [file] : dir.map(d => `${d}/**/*.enc`)
 
-  const filenames = fastGlob.sync(patterns)
+  const filenames = globSync(patterns)
 
   filenames.forEach(filename => {
     let plainFilename: string

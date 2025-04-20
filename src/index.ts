@@ -1,6 +1,5 @@
 import Ajv from 'ajv'
-import type { Options as FastGlobOptions } from 'fast-glob'
-import fastGlob from 'fast-glob'
+export { glob, globSync } from 'tinyglobby'
 import type {
   AlternativesSchema,
   AnySchema,
@@ -91,7 +90,6 @@ export type {
   BinarySchema,
   BooleanSchema,
   DateSchema,
-  FastGlobOptions,
   FunctionSchema,
   ObjectSchema,
   ValidationErrorItem,
@@ -100,4 +98,4 @@ export type {
   // StringSchema,
 }
 
-export { Ajv, fastGlob }
+export { Ajv }

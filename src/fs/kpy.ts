@@ -1,8 +1,9 @@
 import path from 'node:path'
 import type { UnixTimestampMillis } from '@naturalcycles/js-lib'
 import { _since, localTime } from '@naturalcycles/js-lib'
+import { glob, globSync } from 'tinyglobby'
 import { boldWhite, dimGrey, grey, yellow } from '../colors/colors.js'
-import { fastGlob, fs2 } from '../index.js'
+import { fs2 } from './fs2.js'
 
 /**
  * Everything defaults to `undefined`.
@@ -48,7 +49,7 @@ export async function kpy(opt: KpyOptions): Promise<void> {
 
   kpyPrepare(opt)
 
-  const filenames = await fastGlob(opt.inputPatterns!, {
+  const filenames = await glob(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })
@@ -87,7 +88,7 @@ export function kpySync(opt: KpyOptions): void {
 
   kpyPrepare(opt)
 
-  const filenames = fastGlob.sync(opt.inputPatterns!, {
+  const filenames = globSync(opt.inputPatterns!, {
     cwd: opt.baseDir,
     dot: opt.dotfiles,
   })

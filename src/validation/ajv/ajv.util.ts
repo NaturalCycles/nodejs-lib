@@ -1,6 +1,7 @@
 import type { JsonSchema } from '@naturalcycles/js-lib'
-import type { FastGlobOptions } from '../../index.js'
-import { fastGlob, fs2 } from '../../index.js'
+import type { GlobOptions } from 'tinyglobby'
+import { globSync } from 'tinyglobby'
+import { fs2 } from '../../fs/fs2.js'
 import type { AjvSchemaCfg } from './ajvSchema.js'
 import { AjvSchema } from './ajvSchema.js'
 
@@ -12,8 +13,11 @@ import { AjvSchema } from './ajvSchema.js'
  *
  * @experimental
  */
-export function readJsonSchemas(patterns: string | string[], opt?: FastGlobOptions): JsonSchema[] {
-  return fastGlob.sync(patterns, opt).map(fileName => fs2.readJson(fileName))
+export function readJsonSchemas(
+  patterns: string | string[],
+  opt?: Omit<GlobOptions, 'patterns'>,
+): JsonSchema[] {
+  return globSync(patterns, opt).map(fileName => fs2.readJson(fileName))
 }
 
 /**
