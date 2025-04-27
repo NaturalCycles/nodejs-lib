@@ -1,14 +1,9 @@
-import { dirname } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { Worker } from 'node:worker_threads'
 import type { AnyObject, DeferredPromise } from '@naturalcycles/js-lib'
 import { _range, pDefer } from '@naturalcycles/js-lib'
 import through2Concurrent from 'through2-concurrent'
 import type { TransformTyped } from '../../stream.model.js'
 import type { WorkerInput, WorkerOutput } from './transformMultiThreaded.model.js'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 export interface TransformMultiThreadedOptions {
   /**
@@ -37,7 +32,7 @@ export interface TransformMultiThreadedOptions {
   workerData?: AnyObject
 }
 
-const workerProxyFilePath = `${__dirname}/workerClassProxy.js`
+const workerProxyFilePath = `${import.meta.dirname}/workerClassProxy.js`
 
 /**
  * Spawns a pool of Workers (threads).
