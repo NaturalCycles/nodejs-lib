@@ -113,7 +113,7 @@ function checkAndlogEnvironment(): void {
         '\n' +
         formatObject({
           NODE_OPTIONS: NODE_OPTIONS || 'not defined',
-          TZ,
+          TZ: TZ || 'not defined',
         }),
     ),
   )
@@ -128,17 +128,17 @@ function checkAndlogEnvironment(): void {
     )
   }
 
-  if (!TZ) {
-    console.error(
-      [
-        '!!! TZ environment variable is required to be set, but was not set.',
-        'The runScript will exit and not continue further because of that,',
-        'please ensure the TZ variable and try again.',
-        'If you are running locally, you can add TZ=UTC to the local .env file.',
-      ].join('\n'),
-    )
-    process.exit(1)
-  }
+  // if (!TZ) {
+  //   console.error(
+  //     [
+  //       '!!! TZ environment variable is required to be set, but was not set.',
+  //       'The runScript will exit and not continue further because of that,',
+  //       'please ensure the TZ variable and try again.',
+  //       'If you are running locally, you can add TZ=UTC to the local .env file.',
+  //     ].join('\n'),
+  //   )
+  //   process.exit(1)
+  // }
 }
 
 function formatObject(obj: AnyObject): string {
