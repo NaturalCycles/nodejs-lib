@@ -8,7 +8,6 @@ import {
 import type { Ajv, ValidateFunction } from 'ajv'
 import { fs2 } from '../../fs/fs2.js'
 import { _inspect } from '../../string/inspect.js'
-import { requireFileToExist } from '../../util/env.util.js'
 import { AjvValidationError } from './ajvValidationError.js'
 import { getAjv } from './getAjv.js'
 
@@ -133,7 +132,7 @@ export class AjvSchema<T = unknown> {
     filePath: string,
     cfg: Partial<AjvSchemaCfg> = {},
   ): AjvSchema<T> {
-    requireFileToExist(filePath)
+    fs2.requireFileToExist(filePath)
     const schema = fs2.readJson<JsonSchema<T>>(filePath)
     return new AjvSchema<T>(schema, cfg)
   }

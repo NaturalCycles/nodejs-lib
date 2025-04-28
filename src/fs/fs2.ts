@@ -25,7 +25,6 @@ import yaml from 'js-yaml'
 import { transformToNDJson } from '../stream/ndjson/transformToNDJson.js'
 import type { ReadableTyped, TransformTyped } from '../stream/stream.model.js'
 import { transformSplitOnNewline } from '../stream/transform/transformSplit.js'
-import { requireFileToExist } from '../util/env.util.js'
 
 /**
  * fs2 conveniently groups filesystem functions together.
@@ -165,6 +164,12 @@ class FS2 {
       return true
     } catch {
       return false
+    }
+  }
+
+  requireFileToExist(filePath: string): void {
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Required file should exist: ${filePath}`)
     }
   }
 
@@ -350,7 +355,7 @@ class FS2 {
   ])
    */
   createReadStreamAsNDJSON<ROW = any>(inputPath: string): ReadableTyped<ROW> {
-    requireFileToExist(inputPath)
+    this.requireFileToExist(inputPath)
 
     let stream: ReadableTyped<ROW> = fs
       .createReadStream(inputPath, {

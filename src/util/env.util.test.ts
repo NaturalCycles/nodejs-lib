@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { requireEnvKeys, requireFileToExist } from '../index.js'
+import { fs2, requireEnvKeys } from '../index.js'
 import { srcDir } from '../test/paths.cnst.js'
 
 test('requireEnvKeys', () => {
@@ -26,7 +26,7 @@ test('requireEnvKeys', () => {
 
 test('requireFileToExist', async () => {
   // should not throw
-  requireFileToExist(`${srcDir}/util/env.util.ts`)
+  fs2.requireFileToExist(`${srcDir}/util/env.util.ts`)
 
-  expect(() => requireFileToExist(`${srcDir}/util/non-existing`)).toThrow(`should exist`)
+  expect(() => fs2.requireFileToExist(`${srcDir}/util/non-existing`)).toThrow(`should exist`)
 })
