@@ -1,5 +1,6 @@
+import 'dotenv/config'
 import os from 'node:os'
-import type { CommonLogger } from '@naturalcycles/js-lib'
+import type { AnyObject, CommonLogger } from '@naturalcycles/js-lib'
 import { pDelay, setGlobalStringifyFunction } from '@naturalcycles/js-lib'
 import { dimGrey } from '../colors/colors.js'
 import { inspectStringifyFn } from '../string/inspect.js'
@@ -45,7 +46,7 @@ const { DEBUG_RUN_SCRIPT } = process.env
  * Set env DEBUG_RUN_SCRIPT for extra debugging.
  */
 export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {}): void {
-  logEnvironment()
+  checkAndlogEnvironment()
   setGlobalStringifyFunction(inspectStringifyFn)
 
   const { logger = console, noExit, registerUncaughtExceptionHandlers = true } = opt
@@ -68,8 +69,6 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
   const timeout = setTimeout(() => {}, 10000000)
 
   void (async () => {
-    await import('dotenv/config')
-
     try {
       await fn()
 
@@ -92,12 +91,12 @@ export function runScript(fn: (...args: any[]) => any, opt: RunScriptOptions = {
   })()
 }
 
-function logEnvironment(): void {
+function checkAndlogEnvironment(): void {
   const {
     platform,
     arch,
     versions: { node },
-    env: { CPU_LIMIT, NODE_OPTIONS },
+    env: { CPU_LIMIT, NODE_OPTIONS, TZ },
   } = process
 
   const cpuLimit = Number(CPU_LIMIT) || undefined
@@ -105,15 +104,17 @@ function logEnvironment(): void {
   const cpus = os.cpus().length
   console.log(
     dimGrey(
-      Object.entries({
+      formatObject({
         node: `${node} ${platform} ${arch}`,
-        NODE_OPTIONS: NODE_OPTIONS || 'not defined',
         cpus,
         availableParallelism,
         cpuLimit,
-      })
-        .map(([k, v]) => `${k}: ${v}`)
-        .join(', '),
+      }) +
+        '\n' +
+        formatObject({
+          NODE_OPTIONS: NODE_OPTIONS || 'not defined',
+          TZ,
+        }),
     ),
   )
 
@@ -126,4 +127,22 @@ function logEnvironment(): void {
       `It looks like you're using "max_old_space_size" syntax with underscores instead of dashes - it's WRONG and doesn't work in environment variables. Strongly advised to rename it to "max-old-space-size"`,
     )
   }
+
+  if (!TZ) {
+    console.error(
+      [
+        '!!! TZ environment variable is required to be set, but was not set.',
+        'The runScript will exit and not continue further because of that,',
+        'please ensure the TZ variable and try again.',
+        'If you are running locally, you can add TZ=UTC to the local .env file.',
+      ].join('\n'),
+    )
+    process.exit(1)
+  }
+}
+
+function formatObject(obj: AnyObject): string {
+  return Object.entries(obj)
+    .map(([k, v]) => `${k}: ${v}`)
+    .join(', ')
 }
